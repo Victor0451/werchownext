@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegistrarUsuario = ({
+const LoginUsuario = ({
   handleChange,
   handleSubmit,
   handleBlur,
@@ -12,12 +12,16 @@ const RegistrarUsuario = ({
   error,
 }) => {
   return (
-    <div className="container">
-      <h1>Registro de Usuarios</h1>
-
-      <form className=" mt-4 border p-2" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="form-group col-md-6">
+    <div className="container ">
+      <form
+        className=" container mt-4 border p-5 col-md-6 "
+        onSubmit={handleSubmit}
+      >
+        <h1 className="mb-4">
+          <u>Login</u>
+        </h1>
+        <div className="row  ">
+          <div className="form-group col-md-12">
             <label>Usuario</label>
             <input
               type="text"
@@ -35,7 +39,7 @@ const RegistrarUsuario = ({
             )}
           </div>
 
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-12">
             <label>Contraseña</label>
             <input
               type="password"
@@ -53,47 +57,11 @@ const RegistrarUsuario = ({
             )}
           </div>
 
-          <div className="form-group col-md-6">
-            <label>Nombre</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Nombre"
-              name="nombre"
-              value={nombre}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errores.nombre && (
-              <div className="mt-2 form-group  alert alert-danger">
-                {errores.nombre}
-              </div>
-            )}
-          </div>
-
-          <div className="form-group col-md-6">
-            <label>Apellido</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Apellido"
-              name="apellido"
-              value={apellido}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errores.apellido && (
-              <div className="mt-2 form-group  alert alert-danger">
-                {errores.apellido}
-              </div>
-            )}
-          </div>
-
           <div className="col-md-12">
             <input
               type="submit"
               className="btn btn-primary  btn-block mt-4"
-              value="Registrar"
+              value="Ingresar"
             />
 
             {error && (
@@ -107,5 +75,4 @@ const RegistrarUsuario = ({
     </div>
   );
 };
-
-export default RegistrarUsuario;
+export default LoginUsuario;

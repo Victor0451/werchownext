@@ -1,13 +1,5 @@
-export default function validarRegistro(valores) {
+export default function validarIniciarSession(valores) {
   let errores = {};
-
-  if (!valores.nombre) {
-    errores.nombre = "El nombre es obligatorio";
-  }
-
-  if (!valores.apellido) {
-    errores.apellido = "El apellido es obligatorio";
-  }
 
   if (!valores.usuario) {
     errores.usuario = "El usuario es obligatorio";
