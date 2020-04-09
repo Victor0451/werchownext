@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
+import jsCookie from "js-cookie";
 
-function useAutenticacion(usuario) {
+function useAutenticacion() {
   const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
 
   useEffect(() => {
-    const unsuscribe = () => {
-      if (usuario.length > 0) {
-        guardarUsuarioAutenticado(usuario);
-      } else {
-        guardarUsuarioAutenticado(null);
-      }
-    };
-
-    return () => unsuscribe();
-  }, []);
+    let usuario = jsCookie.get("usuario");
+    if (usuario) {
+      guardarUsuarioAutenticado(usuario);
+    } else {
+      guardarUsuarioAutenticado(null);
+    }
+  }, [usuarioAutenticado]);
 
   return usuarioAutenticado;
 }

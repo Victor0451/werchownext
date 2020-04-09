@@ -3,6 +3,7 @@ import Layout from "../components/layout/Layout";
 import LoginUsuario from "../components/auth/LoginUsuario";
 import axios from "axios";
 import Router from "next/router";
+import jsCookie from "js-cookie";
 
 // Validaciones
 import useValidacion from "../hooks/useValidacion";
@@ -43,13 +44,16 @@ const Login = () => {
       await axios
         .post("http://190.231.32.232:5002/api/sgi/auth/auth", body, config)
         .then((res) => {
-          sessionStorage.setItem("usuario", res.data.user.usuario);
-          sessionStorage.setItem("token", res.data.token);
+          const usuario = res.data.user;
+
+          jsCookie.set("token", res.data.token);
+          jsCookie.set("usuario", usuario);
         });
 
       Router.push("/");
     } catch (error) {
-      //console.log(error.response.data, error.response.status, "LOGIN_FAIL");
+      console.log(error.response.data, error.response.status, "LOGIN_FAIL");
+      guardarError(error.response.data.msg);
     }
   }
 
