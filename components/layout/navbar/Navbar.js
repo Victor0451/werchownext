@@ -25,7 +25,11 @@ const Navbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {userData && userData.perfil === 1 ? <Adimn /> : <GuestLinks />}
+      {userData && userData.perfil === 1 ? (
+        <Adimn />
+      ) : !userData ? (
+        <GuestLinks />
+      ) : null}
     </nav>
   );
 };

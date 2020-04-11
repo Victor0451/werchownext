@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
 import RegistrarUsuario from "../components/auth/RegistrarUsuario";
 import axios from "axios";
 import Router from "next/router";
+import RedirectToLogin from "../components/auth/RedirectToLogin";
 
 // Validaciones
 import useValidacion from "../hooks/useValidacion";
 import validarRegistro from "../validacion/validarRegistro";
+import userContext from "../context/UserContext";
 
 const STATE_INICIAL = {
   usuario: "",
@@ -60,19 +62,25 @@ const Registro = () => {
     }
   }
 
+  const user = useContext(userContext);
+
   return (
     <Layout>
-      <RegistrarUsuario
-        nombre={nombre}
-        apellido={apellido}
-        usuario={usuario}
-        contrasena={contrasena}
-        errores={errores}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleBlur={handleBlur}
-        error={error}
-      />
+      {!user.usuario ? (
+        <RedirectToLogin />
+      ) : (
+        <RegistrarUsuario
+          nombre={nombre}
+          apellido={apellido}
+          usuario={usuario}
+          contrasena={contrasena}
+          errores={errores}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleBlur={handleBlur}
+          error={error}
+        />
+      )}
     </Layout>
   );
 };

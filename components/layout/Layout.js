@@ -87,7 +87,6 @@ const Layout = (props) => {
           }
         `}
       </style>
-      ;
     </div>
   );
 };
