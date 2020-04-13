@@ -1,69 +1,71 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+
 
 
 export default class Recuperadoras extends Component {
-    render() {
-        return (
-            <li className="nav-item dropdown ">
-            <Link
-              to="#"
-              role="button"
-              data-toggle="dropdown"
-              className="nav-link dropdown-toggle"
-            >
-              Campañas
-            </Link>
+  render() {
+    return (
+      <ul className="navbar-nav">
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Campañas
+            </a>
 
-            <ul className="dropdown-menu">
-              <li>
-                <Link to="/campanacaso" className="dropdown-item text-dark">
-                  Casos Asignados
-                </Link>
-              </li>
+          <ul className="dropdown-menu">
+            <li>
+              <a href="/campanas" className="dropdown-item text-dark">
+                Casos Asignados
+                </a>
+            </li>
 
-              <hr />
+            <hr />
 
-              <li className="dropdown-submenu">
-                <Link
-                  to="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  className="  dropdown-toggle dropdown-item text-dark"
-                >
-                  Tareas Autoprogramadas
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link
-                      to="/campanas/volverallamar"
-                      className="dropdown-item text-dark"
-                    >
-                      Padron "Volver a LLamar"
-                    </Link>
-                  </li>
-                  <hr />
-                  <li>
-                    <Link
-                      to="/campanas/credixa"
-                      className="dropdown-item text-dark"
-                    >
-                      Padron "Credixa"
-                    </Link>
-                  </li>
-                  <hr />
-                  <li>
-                    <Link
-                      to="/campanas/compromisopago"
-                      className="dropdown-item text-dark"
-                    >
-                      Padron "Compromiso de Pago"
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        )
-    }
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Tareas Autoprogramadas
+                </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/campanas/volverallamar"
+                    className="dropdown-item text-dark"
+                  >
+                    Padron "Volver a LLamar"
+                    </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/campanas/credixa"
+                    className="dropdown-item text-dark"
+                  >
+                    Padron "Credixa"
+                    </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/campanas/compromisopago"
+                    className="dropdown-item text-dark"
+                  >
+                    Padron "Compromiso de Pago"
+                    </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li >
+      </ul>
+    )
+  }
 }

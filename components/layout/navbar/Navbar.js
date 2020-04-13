@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import GuestLinks from "./GuestLinks";
 import Adimn from "./Adimn";
+import Recuperadoras from './Recuperadoras'
 
 const Navbar = () => {
   const { usuario } = useContext(UserContext);
@@ -10,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a href={"/"} className="navbar-brand">
+      <a href={"/home"} className="navbar-brand">
         Werchow{" "}
       </a>
       <button
@@ -27,6 +28,8 @@ const Navbar = () => {
 
       {userData && userData.perfil === 1 ? (
         <Adimn />
+      ) : userData && userData.perfil === 2 ? (
+        <Recuperadoras />
       ) : !userData ? (
         <GuestLinks />
       ) : null}
