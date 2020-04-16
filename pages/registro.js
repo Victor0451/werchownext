@@ -4,6 +4,7 @@ import RegistrarUsuario from "../components/auth/RegistrarUsuario";
 import axios from "axios";
 import Router from "next/router";
 import RedirectToLogin from "../components/auth/RedirectToLogin";
+import jsCookie from "js-cookie";
 
 // Validaciones
 import useValidacion from "../hooks/useValidacion";
@@ -62,11 +63,11 @@ const Registro = () => {
     }
   }
 
-  const user = useContext(userContext);
+  let token = jsCookie.get("token");
 
   return (
     <Layout>
-      {!user.usuario ? (
+      {!token ? (
         <RedirectToLogin />
       ) : (
         <RegistrarUsuario

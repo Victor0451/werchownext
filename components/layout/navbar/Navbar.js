@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import GuestLinks from "./GuestLinks";
-import Adimn from "./Adimn";
-import Recuperadoras from './Recuperadoras'
+import AuthLinks from "./AuthLinks";
 
 const Navbar = () => {
   const { usuario } = useContext(UserContext);
@@ -26,10 +25,8 @@ const Navbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {userData && userData.perfil === 1 ? (
-        <Adimn />
-      ) : userData && userData.perfil === 2 ? (
-        <Recuperadoras />
+      {userData ? (
+        <AuthLinks userData={userData} />
       ) : !userData ? (
         <GuestLinks />
       ) : null}

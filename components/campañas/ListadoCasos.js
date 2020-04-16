@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
-import FormAcciones from './FormAcciones';
-import moment from 'moment-timezone'
-import axios from 'axios'
-import toastr from 'toastr'
-import { Router } from 'next/router';
+import FormAcciones from "./FormAcciones";
+import Notificacion from "./Notificacion";
+import moment from "moment-timezone";
+import axios from "axios";
+import toastr from "toastr";
 
-
-
-
-const ListadoCasos = ({ campana, operador }) => {
+const ListadoCasos = ({ campana, operador, modal }) => {
   let fechaaccionRef = React.createRef();
   let fechaaccionnuevaRef = React.createRef();
   let obsRef = React.createRef();
@@ -18,73 +15,83 @@ const ListadoCasos = ({ campana, operador }) => {
   let contratoRef = React.createRef();
   let idcasoRef = React.createRef();
 
-  let casos = Object.values(campana)
+  let casos = Object.values(campana);
 
-  const [caso, guardarCaso] = useState({})
+  const [caso, guardarCaso] = useState({});
   const [accion, guardarAccion] = useState({});
   const [nuevaaccion, guardarNuevaAccion] = useState({});
+  const [gestion, guardarGestion] = useState({});
 
-
-  const selcaso = index => {
-    campana
+  const selcaso = (index) => {
+    campana;
     const caso = campana[index];
     guardarCaso(caso);
 
+    getGestionCaso(caso.idcaso);
   };
-
 
   const handleChange = (value, flag) => {
     if (flag === "accion") {
-      const accion = value.value
-      guardarAccion(accion)
+      const accion = value.value;
+      guardarAccion(accion);
     } else if (flag === "nuevaaccion") {
-      const nuevaaccion = value.value
-      guardarNuevaAccion(nuevaaccion)
+      const nuevaaccion = value.value;
+      guardarNuevaAccion(nuevaaccion);
     }
   };
 
+  const getGestionCaso = async (id) => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/getgestioncaso/${id}`)
+      .then((res) => {
+        console.log(res);
+        const gestion = res.data[0];
+        guardarGestion(gestion);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const cerrarCaso = async (id) => {
-
-    await axios.put(
-      `http://190.231.32.232:5002/api/sgi/campanas/cerrarcaso/${id}`
-    ).then((res) => {
-      console.log(res);
-
-    }).catch((error => {
-      console.log(error);
-    }))
-  }
+    await axios
+      .put(`http://190.231.32.232:5002/api/sgi/campanas/cerrarcaso/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const gestionCaso = async (datos) => {
-    await axios.post(
-      `http://190.231.32.232:5002/api/sgi/campanas/gestioncaso`,
-      datos
-    ).then((res) => {
-      console.log(res);
-      toastr.success("Se registro la accion con exito", "ANTENCION")
-    }).catch((error => {
-      console.log(error);
-      toastr.error("Ocurrio un problema con el registro", "ANTENCION")
-
-    }))
-  }
+    await axios
+      .post(`http://190.231.32.232:5002/api/sgi/campanas/gestioncaso`, datos)
+      .then((res) => {
+        console.log(res);
+        toastr.success("Se registro la accion con exito", "ANTENCION");
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("Ocurrio un problema con el registro", "ANTENCION");
+      });
+  };
 
   const updateAccion = async (id) => {
-    await axios.put(
-      `http://190.231.32.232:5002/api/sgi/campanas/updateaccion/${id}`
-    ).then((res) => {
-      console.log(res);
-    }).catch((error => {
-      console.log(error);
-    }))
-  }
+    await axios
+      .put(`http://190.231.32.232:5002/api/sgi/campanas/updateaccion/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
-  const obtenerDatos = e => {
+  const obtenerDatos = (e) => {
     e.preventDefault();
 
-    let fecha = moment().format("YYYY-MM-DD")
+    let fecha = moment().format("YYYY-MM-DD");
 
     let fechanuevaaccion = "";
 
@@ -96,7 +103,7 @@ const ListadoCasos = ({ campana, operador }) => {
       nuevaaccion,
       fechaaccion: fecha,
       observacion: obsRef.current.value,
-      contrato: contratoRef.current.value
+      contrato: contratoRef.current.value,
     };
 
     if (datos.accion >= 1 && datos.accion <= 6) {
@@ -104,15 +111,17 @@ const ListadoCasos = ({ campana, operador }) => {
       datos.fechanuevaaccion = fecha;
     }
     if (datos.accion === 7) {
-      datos.nuevaaccion = nuevaaccion
+      datos.nuevaaccion = nuevaaccion;
 
       if (datos.nuevaaccion === 11) datos.nuevaaccion = "SE ENVIA COBRADOR";
 
       if (datos.nuevaaccion === 12) datos.nuevaaccion = "PASA POR OFICINA";
 
-      if (datos.nuevaaccion === 16) datos.nuevaaccion = "PASA POR OFICINA Y PAGA CON DEBITO";
+      if (datos.nuevaaccion === 16)
+        datos.nuevaaccion = "PASA POR OFICINA Y PAGA CON DEBITO";
 
-      if (datos.nuevaaccion === 17) datos.nuevaaccion = "PASA POR OFICINA Y PAGA CON CREDITO";
+      if (datos.nuevaaccion === 17)
+        datos.nuevaaccion = "PASA POR OFICINA Y PAGA CON CREDITO";
 
       datos.fechanuevaaccion = fechaaccionnuevaRef.current.value;
     }
@@ -178,12 +187,10 @@ const ListadoCasos = ({ campana, operador }) => {
     console.log(datos);
 
     setTimeout(() => {
-      window.location.reload()
+      window.location.reload();
     }, 1000);
   };
-
-
-
+  let fechahoy = moment().format("DD/MM/YYYY");
   return (
     <div className="mt-4">
       <ReactTable
@@ -197,34 +204,35 @@ const ListadoCasos = ({ campana, operador }) => {
               {
                 Header: "Contrato",
                 id: "contrato",
-                accessor: d => d.contrato,
+                accessor: (d) => d.contrato,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["contrato"] }),
-                filterAll: true
+                filterAll: true,
               },
               {
                 Header: "Apellido",
                 id: "apellido",
-                accessor: d => d.apellido,
+                accessor: (d) => d.apellido,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["apellido"] }),
-                filterAll: true
+                filterAll: true,
               },
               {
                 Header: "Nombre",
                 id: "nombre",
-                accessor: d => d.nombre,
+                accessor: (d) => d.nombre,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["nombre"] }),
-                filterAll: true
+                filterAll: true,
               },
+
               {
                 Header: "DNI",
                 id: "dni",
-                accessor: d => d.dni,
+                accessor: (d) => d.dni,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["dni"] }),
-                filterAll: true
+                filterAll: true,
               },
               // {
               //     Header: "Calle",
@@ -261,53 +269,95 @@ const ListadoCasos = ({ campana, operador }) => {
               {
                 Header: "Cuota",
                 id: "cuota",
-                accessor: d => d.cuota,
+                accessor: (d) => d.cuota,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["cuota"] }),
-                filterAll: true
+                filterAll: true,
               },
               {
                 Header: "Mes",
                 id: "mes",
-                accessor: d => d.mes,
+                accessor: (d) => d.mes,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["mes"] }),
-                filterAll: true
+                filterAll: true,
               },
               {
                 Header: "Año",
                 id: "ano",
-                accessor: d => d.ano,
+                accessor: (d) => d.ano,
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["ano"] }),
-                filterAll: true
+                filterAll: true,
               },
+              {
+                getProps: (state, rowInfo) => {
+                  if (rowInfo && rowInfo.row.fechanuevaaccion) {
+                    return {
+                      style: {
+                        background:
+                          rowInfo.row.fechanuevaaccion < fechahoy
+                            ? "red"
+                            : rowInfo.row.fechanuevaaccion > fechahoy
+                            ? "green"
+                            : rowInfo.row.fechanuevaaccion === fechahoy
+                            ? "yellow"
+                            : null,
+                      },
+                    };
+                  } else {
+                    return { hidden: true };
+                  }
+                },
+
+                Header: "Fecha Accion",
+                id: "fechanuevaaccion",
+                accessor: (d) => d.fechanuevaaccion,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, {
+                    keys: ["fechanuevaaccion"],
+                  }),
+                filterAll: true,
+              },
+
               {
                 Header: "Acciones",
 
-                Cell: row => (
+                Cell: (row) => (
                   <div>
-                    <a
-                      href={"#"}
-                      className="btn btn-primary"
-                      data-toggle="modal"
-                      data-target=".bd-example-modal-lgfmn"
-                      onClick={() => selcaso(row.index)}
-                    >
-                      Acciones
-                                      </a>
+                    {modal === "lgnoti" ? (
+                      <a
+                        href={"#"}
+                        className="btn btn-warning"
+                        data-toggle="modal"
+                        data-target={`.bd-example-modal-xl${modal}`}
+                        onClick={() => selcaso(row.index)}
+                      >
+                        Generar Notificacion
+                      </a>
+                    ) : (
+                      <a
+                        href={"#"}
+                        className="btn btn-primary"
+                        data-toggle="modal"
+                        data-target={`.bd-example-modal-${modal}`}
+                        onClick={() => selcaso(row.index)}
+                      >
+                        Acciones
+                      </a>
+                    )}
                   </div>
-                )
-              }
-            ]
-          }
+                ),
+              },
+            ],
+          },
         ]}
         defaultPageSize={10}
         className="-striped -highlight"
       />
 
       <div
-        className="modal fade bd-example-modal-lgfmn"
+        className={`modal fade bd-example-modal-${modal}`}
         role="dialog"
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
@@ -317,7 +367,7 @@ const ListadoCasos = ({ campana, operador }) => {
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLongTitle">
                 Registrar Accion
-                </h5>
+              </h5>
               <button
                 type="button"
                 className="close"
@@ -329,6 +379,7 @@ const ListadoCasos = ({ campana, operador }) => {
             </div>
             <div className="modal-body">
               <FormAcciones
+                gestion={gestion}
                 caso={caso}
                 accion={accion}
                 fechaaccionRef={fechaaccionRef}
@@ -348,7 +399,7 @@ const ListadoCasos = ({ campana, operador }) => {
                 data-dismiss="modal"
               >
                 Cancelar
-                </button>
+              </button>
               <button
                 type="button"
                 className="btn btn-primary"
@@ -356,8 +407,21 @@ const ListadoCasos = ({ campana, operador }) => {
                 data-dismiss="modal"
               >
                 Registrar
-                </button>
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`modal fade bd-example-modal-xl${modal}`}
+        role="dialog"
+        aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content p-2">
+            <Notificacion caso={caso} />
           </div>
         </div>
       </div>

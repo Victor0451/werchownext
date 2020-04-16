@@ -1,0 +1,111 @@
+import React from "react";
+import ReactToPrint from "react-to-print";
+
+const Notificacion = ({ caso }) => {
+  let componentRef = React.createRef();
+
+  return (
+    <div>
+      <div
+        className="container border border-dark p-4 "
+        id="solicitud"
+        ref={(el) => (componentRef = el)}
+      >
+        <div className="row  mt-4 mb-4 p-2">
+          <div className="col-md-6 d-flex justify-content-start mt-4">
+            <img
+              className="werchowlogo"
+              src="/img/logo.png"
+              alt="werchowlogo"
+            />
+          </div>
+
+          <div className="col-md-6 d-flex justify-content-end mt-4">
+            San Salvador de Jujuy, ______________________{" "}
+          </div>
+
+          <div className="row col-md-12 mt-4">
+            <div className="col-md-6 mt-2">
+              <strong>
+                <u>Sr/A. Afiliado: {""}</u>
+              </strong>
+              {caso.apellido}, {caso.nombre}
+            </div>
+
+            <div className="col-md-6 mt-2 d-flex justify-content-end">
+              <strong>
+                <u>Legajo: </u>
+              </strong>{" "}
+              {caso.contrato}
+            </div>
+
+            <div className="col-md-12 mt-2 d-flex justify-content-start">
+              <strong>
+                <u>Domicilio: {""}</u>
+              </strong>
+              {caso.calle} N° {caso.nro_calle} - B° {caso.barrio} -{" "}
+              {caso.localidad}
+            </div>
+
+            <div className="col-md-12 mt-2 d-flex justify-content-start ">
+              <strong>
+                <u>Telefono - Celular: {""}</u>
+              </strong>
+              {caso.telefono} - {caso.movil}
+            </div>
+            <p className="text-justify mt-2 p-2">
+              Por medio de la presente se le informa que se encuentra con los
+              servicios de seperlios atrasados. Por este motivo lo invitamos a
+              concurrir a nuestras oficinas, ubicadas en la calle Lavalle 123,
+              para regularizar su situación. Si al momento de recibir esta nota
+              ud ya abono las cuotas pendientes, rogamos que nos disculpe. Sin
+              otro particular y a la espera de solucionar este inconveniente,
+              nos despedimos atentamente.
+            </p>
+
+            <div className="col-md-12 mt-2">
+              <strong>Departamento de Cobranza</strong>
+            </div>
+            <div className="col-md-12 mt-2">
+              <strong>
+                <u>Tel.</u>: 388-4225555
+              </strong>
+            </div>
+            <div className="col-md-12 mt-2 mb-4">
+              <strong>
+                <u>Celulares</u>: 388-4301465 - 388-4176871 (Whatsapp)
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="jumbotron">
+        <div className="mt-4 p-4 border">
+          <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+          <div className="row d-flex justify-content-center">
+            <ReactToPrint
+              trigger={() => (
+                <a href="#" className="btn btn-primary">
+                  imprimir{" "}
+                </a>
+              )}
+              content={() => componentRef}
+            />
+
+            <a
+              href="#"
+              className="btn btn-secondary ml-1"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              Cerrar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Notificacion;

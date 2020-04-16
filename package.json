@@ -21,6 +21,7 @@
     "react-dom": "16.13.1",
     "react-select": "^3.0.8",
     "react-table": "^6.11.5",
+    "react-to-print": "^2.6.3",
     "toastr": "^2.1.4"
   }
 }

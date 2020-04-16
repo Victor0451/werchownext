@@ -1,15 +1,16 @@
-import React from 'react';
-import GestionCampanas from '../components/campañas/GestionCampanas'
-import Layout from '../components/layout/Layout';
+import React from "react";
+import GestionCampanas from "../components/campañas/GestionCampanas";
+import Layout from "../components/layout/Layout";
+import RedirectToLogin from "../components/auth/RedirectToLogin";
+import jsCookie from "js-cookie";
 
 function campanas(props) {
-    return (
-        <div>
-            <Layout>
-                <GestionCampanas />
-            </Layout>
-        </div>
-    );
+  let token = jsCookie.get("token");
+  return (
+    <div>
+      <Layout>{!token ? <RedirectToLogin /> : <GestionCampanas />}</Layout>
+    </div>
+  );
 }
 
 export default campanas;
