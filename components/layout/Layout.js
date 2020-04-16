@@ -1,11 +1,11 @@
 import React from "react";
 
-import Navbar from "./navbar/Navbar";
+import Navbar from "../navbar/Navbar";
 import Head from "next/head";
 
 const Layout = (props) => {
   return (
-    <div className="container mt-2">
+    <div className="">
       <Head>
         {/* <link
           rel="stylesheet"

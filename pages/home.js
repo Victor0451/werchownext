@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import BuscarSocio from "../components/buscar/BuscarSocio";
 import RedirectToLogin from "../components/auth/RedirectToLogin";
+import Noticias from '../components/noticias/Noticias'
 import jsCookie from "js-cookie";
 import axios from "axios";
 
@@ -62,17 +63,21 @@ const home = () => {
       {!token ? (
         <RedirectToLogin />
       ) : (
-        <BuscarSocio
-          socio={socio}
-          errores={errores}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleBlur={handleBlur}
-          error={error}
-          socioGest={socioGest}
-          socioRes={socioRes}
-        />
-      )}
+          <div>
+            <Noticias />
+            <BuscarSocio
+              socio={socio}
+              errores={errores}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              handleBlur={handleBlur}
+              error={error}
+              socioGest={socioGest}
+              socioRes={socioRes}
+            />
+          </div>
+
+        )}
     </Layout>
   );
 };

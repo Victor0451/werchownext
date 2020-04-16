@@ -202,7 +202,7 @@ const Adimn = () => {
           Noticias{" "}
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="/noticia" className="dropdown-item text-dark">
+          <a href="/nueva_noticia" className="dropdown-item text-dark">
             Ingresar Noticia
           </a>
         </div>
@@ -315,7 +315,7 @@ const Adimn = () => {
           </a>
         </div>
       </li>
-      </ul>
+    </ul>
   );
 };
 
