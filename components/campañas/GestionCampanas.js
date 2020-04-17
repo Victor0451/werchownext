@@ -206,12 +206,18 @@ const GestionCampanas = () => {
                   <div className="card-header">ATRASADOS</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos:</h5>
-                    <a
-                      className="btn btn-primary"
-                      href={`/gestioncaso/AtrasadosM`}
+                    <Link
+                      href={{
+                        pathname: "gestioncaso/[campana]",
+                        query: {
+                          camp: "Atrasados",
+                          empresa: "mutual",
+                          operador: operadorNom,
+                        },
+                      }}
                     >
-                      Abrir Campaña
-                    </a>
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -221,12 +227,18 @@ const GestionCampanas = () => {
                   <div className="card-header">RECUPERACIONES</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos</h5>
-                    <a
-                      className="btn btn-primary"
-                      href={`/gestioncaso/RecuperacionM`}
+                    <Link
+                      href={{
+                        pathname: "gestioncaso/[campana]",
+                        query: {
+                          camp: "Recuperacion",
+                          empresa: "mutual",
+                          operador: operadorNom,
+                        },
+                      }}
                     >
-                      Abrir Campaña
-                    </a>
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -236,12 +248,18 @@ const GestionCampanas = () => {
                   <div className="card-header">REINCIDENTES</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos</h5>
-                    <a
-                      className="btn btn-primary"
-                      href={`/gestioncaso/ReincidenciaM`}
+                    <Link
+                      href={{
+                        pathname: "gestioncaso/[campana]",
+                        query: {
+                          camp: "Reincidente",
+                          empresa: "mutual",
+                          operador: operadorNom,
+                        },
+                      }}
                     >
-                      Abrir Campaña
-                    </a>
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -251,12 +269,18 @@ const GestionCampanas = () => {
                   <div className="card-header">BLANQUEOS</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos:</h5>
-                    <a
-                      className="btn btn-primary"
-                      href={`/gestioncaso/BlanqueoM`}
+                    <Link
+                      href={{
+                        pathname: "gestioncaso/[campana]",
+                        query: {
+                          camp: "Blanqueo",
+                          empresa: "mutual",
+                          operador: operadorNom,
+                        },
+                      }}
                     >
-                      Abrir Campaña
-                    </a>
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
                   </div>
                 </div>
               </div>

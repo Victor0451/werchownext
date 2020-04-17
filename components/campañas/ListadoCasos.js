@@ -190,7 +190,7 @@ const ListadoCasos = ({ campana, operador, modal }) => {
       window.location.reload();
     }, 1000);
   };
-  let fechahoy = moment().format("DD/MM/YYYY");
+  let fechahoy = moment().format("YYYY-MM-DD");
   return (
     <div className="mt-4">
       <ReactTable
