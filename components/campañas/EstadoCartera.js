@@ -1,6 +1,20 @@
 import React from 'react';
 
-const EstadoCartera = ({ buscarAT, buscarATM }) => {
+const EstadoCartera = ({
+    buscarAT,
+    buscarATM,
+    buscarRec,
+    buscarRecM,
+    buscarRein,
+    buscarReinM,
+    buscarBlan,
+    buscarBlanM,
+    buscarAux,
+    buscarPoli,
+    array
+}) => {
+
+
     return (
         <div className="container">
             <h1 className="mt-4 mb-4 text-center">
@@ -18,9 +32,7 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                         aria-selected="true"
                     >
                         Atrasados {""}
-                        <span className="badge badge-pill badge-dark text-white">
 
-                        </span>
                     </a>
                     <a
                         className="nav-item nav-link"
@@ -32,9 +44,7 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                         aria-selected="false"
                     >
                         Recuperaciones {""}
-                        <span className="badge badge-pill badge-dark text-white">
 
-                        </span>
                     </a>
                     <a
                         className="nav-item nav-link"
@@ -116,7 +126,7 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                                 onClick={buscarAT}
                             >
                                 Buscar
-                </button>
+                             </button>
                         </div>
                     </div>
 
@@ -130,7 +140,7 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                                 onClick={buscarATM}
                             >
                                 Buscar
-                </button>
+                           </button>
                         </div>
                     </div>
 
@@ -143,20 +153,39 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                     role="tabpanel"
                     aria-labelledby="nav-profile-tab"
                 >
+
                     <div className="jumbotron row mt-4">
                         <div className="col-md-6">
-                            <h2>Buscar Cartera Morosa</h2>
+                            <h2>Buscar Cartera 1001 - WERCHOW</h2>
                         </div>
                         <div className="col-md-6">
                             <button
                                 className="btn btn-secondary btn-block"
-                            //   onClick={this.recDelMes}
+                                onClick={buscarRec}
                             >
                                 Buscar
-                </button>
+                             </button>
                         </div>
+                        {array.length > 0 ? (
+                            <span className="badge badge-pill badge-dark text-white">
+                                {array.length}
+                            </span>
+                        ) : null}
                     </div>
 
+                    <div className="jumbotron row mt-4">
+                        <div className="col-md-6">
+                            <h2>Buscar Cartera 1001 - MUTUAL</h2>
+                        </div>
+                        <div className="col-md-6">
+                            <button
+                                className="btn btn-secondary btn-block"
+                                onClick={buscarRecM}
+                            >
+                                Buscar
+                           </button>
+                        </div>
+                    </div>
 
                 </div>
                 <div
@@ -167,15 +196,29 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                 >
                     <div className="jumbotron row mt-4">
                         <div className="col-md-6">
-                            <h2>Buscar Cartera Morosa</h2>
+                            <h2>Buscar Cartera Reincidente - WERCHOW</h2>
                         </div>
                         <div className="col-md-6">
                             <button
                                 className="btn btn-secondary btn-block"
-                            // onClick={this.reinDelMes}
+                                onClick={buscarRein}
                             >
                                 Buscar
-                </button>
+                             </button>
+                        </div>
+                    </div>
+
+                    <div className="jumbotron row mt-4">
+                        <div className="col-md-6">
+                            <h2>Buscar Cartera Reincidente - MUTUAL</h2>
+                        </div>
+                        <div className="col-md-6">
+                            <button
+                                className="btn btn-secondary btn-block"
+                                onClick={buscarReinM}
+                            >
+                                Buscar
+                           </button>
                         </div>
                     </div>
 
@@ -190,15 +233,29 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                 >
                     <div className="jumbotron row mt-4">
                         <div className="col-md-6">
-                            <h2>Buscar Cartera para Blanqueo</h2>
+                            <h2>Buscar Cartera a Blanquear - WERCHOW</h2>
                         </div>
                         <div className="col-md-6">
                             <button
                                 className="btn btn-secondary btn-block"
-                            //  onClick={this.blanDelMes}
+                                onClick={buscarBlan}
                             >
                                 Buscar
-                </button>
+                             </button>
+                        </div>
+                    </div>
+
+                    <div className="jumbotron row mt-4">
+                        <div className="col-md-6">
+                            <h2>Buscar Cartera a Blanquear - MUTUAL</h2>
+                        </div>
+                        <div className="col-md-6">
+                            <button
+                                className="btn btn-secondary btn-block"
+                                onClick={buscarBlanM}
+                            >
+                                Buscar
+                           </button>
                         </div>
                     </div>
 
@@ -212,15 +269,15 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                 >
                     <div className="jumbotron row mt-4">
                         <div className="col-md-6">
-                            <h2>Buscar Cartera para Policias</h2>
+                            <h2>Buscar Cartera Policia - WERCHOW</h2>
                         </div>
                         <div className="col-md-6">
                             <button
                                 className="btn btn-secondary btn-block"
-                            //onClick={this.polisDelMes}
+                                onClick={buscarPoli}
                             >
                                 Buscar
-                </button>
+                             </button>
                         </div>
                     </div>
 
@@ -235,17 +292,31 @@ const EstadoCartera = ({ buscarAT, buscarATM }) => {
                 >
                     <div className="jumbotron row mt-4">
                         <div className="col-md-6">
-                            <h2>Buscar Cartera para campaña auxiliar</h2>
+                            <h2>Buscar Cartera Auxiliar - WERCHOW</h2>
                         </div>
                         <div className="col-md-6">
                             <button
                                 className="btn btn-secondary btn-block"
-                            //  onClick={this.auxDelMes}
+                                onClick={buscarAux}
                             >
                                 Buscar
-                </button>
+                             </button>
                         </div>
                     </div>
+
+                    {/* <div className="jumbotron row mt-4">
+                        <div className="col-md-6">
+                            <h2>Buscar Cartera Auxiliar - MUTUAL</h2>
+                        </div>
+                        <div className="col-md-6">
+                            <button
+                                className="btn btn-secondary btn-block"
+                                onClick={buscarATM}
+                            >
+                                Buscar
+                           </button>
+                        </div>
+                    </div> */}
 
                 </div>
             </div>
