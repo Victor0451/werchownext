@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment-timezone";
 import ListadoCampana from "./ListadoCampana";
-import BotonCamp from './BotonCamp'
-import toastr from 'toastr'
-import axios from 'axios'
+import BotonCamp from "./BotonCamp";
+import toastr from "toastr";
+import axios from "axios";
 
 const AsignarCampana = ({
   CasaCentralMG,
@@ -14,25 +14,21 @@ const AsignarCampana = ({
   campana,
   empresa,
 }) => {
-
-
   const subirCamp = async (caso) => {
-    await axios.post(
-      `http://190.231.32.232:5002/api/sgi/campanas/crearcamp`,
-      caso
-    ).then((res => {
-      console.log(res);
-      toastr.success(`${res.status}`, "ATENCION")
-    })).catch((error => {
-      console.log(error);
-      toastr.error(`${error}`, "ATENCION")
-
-    }))
-  }
+    await axios
+      .post(`http://190.231.32.232:5002/api/sgi/campanas/crearcamp`, caso)
+      .then((res) => {
+        console.log(res);
+        toastr.success(`${res.status}`, "ATENCION");
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error(`${error}`, "ATENCION");
+      });
+  };
 
   const crearCampana = (array, idcamp) => {
-
-    let fecha = moment().format('YYYY-MM-DD')
+    let fecha = moment().format("YYYY-MM-DD");
 
     if (array.length === 0) {
       toastr.warning("No hay casos para asignar", "Atencion");
@@ -57,35 +53,40 @@ const AsignarCampana = ({
           cuota: array[i].IMPORTE,
           cuotasadeudadas: 1,
           montoadeudado: array[i].IMPORTE * 3,
-          estadocaso: true
+          estadocaso: true,
         };
         console.log(caso);
-        subirCamp(caso)
-
       }
+      subirCamp(caso);
     }
-
-
-  }
+  };
 
   return (
     <div className="container border border-dark p-2 mt-4">
-
-      <div className="mt-4 mb-4 alert alert-info text-dark text-center"><strong><h3><u> El total de la Cartera {campana} de {empresa} a asignar es</u>: {""}
-        {CasaCentralMG.length +
-          CasaCentralGG.length +
-          perico.length +
-          palpala.length +
-          sanPedro.length}
-      </h3>
-      </strong>
+      <div className="mt-4 mb-4 alert alert-info text-dark text-center">
+        <strong>
+          <h3>
+            <u>
+              {" "}
+              El total de la Cartera {campana} de {empresa} a asignar es
+            </u>
+            : {""}
+            {CasaCentralMG.length +
+              CasaCentralGG.length +
+              perico.length +
+              palpala.length +
+              sanPedro.length}
+          </h3>
+        </strong>
       </div>
 
       <div className="mt-4">
         <div className="d-flex justify-content-between">
           <h3>
             Campaña {campana} - {empresa}: Casa Central Magia Galian{" "}
-            <span className="badge badge-pill badge-dark text-white">{CasaCentralMG.length}</span>
+            <span className="badge badge-pill badge-dark text-white">
+              {CasaCentralMG.length}
+            </span>
           </h3>
 
           {JSON.parse(empresa) === "W" ? (
@@ -187,7 +188,9 @@ const AsignarCampana = ({
         <div className="d-flex justify-content-between">
           <h3>
             Campaña {campana} - {empresa}: Casa Central Gisela Gimenez{" "}
-            <span className="badge badge-pill badge-dark text-white">{CasaCentralGG.length}</span>
+            <span className="badge badge-pill badge-dark text-white">
+              {CasaCentralGG.length}
+            </span>
           </h3>
 
           {JSON.parse(empresa) === "W" ? (
@@ -289,7 +292,9 @@ const AsignarCampana = ({
         <div className="d-flex justify-content-between">
           <h3>
             Campaña {campana} - {empresa}: Perico - Vanesa Gorosito{" "}
-            <span className="badge badge-pill badge-dark text-white">{perico.length}</span>
+            <span className="badge badge-pill badge-dark text-white">
+              {perico.length}
+            </span>
           </h3>
           {JSON.parse(empresa) === "W" ? (
             <>
@@ -390,7 +395,9 @@ const AsignarCampana = ({
         <div className="d-flex justify-content-between">
           <h3>
             Campaña {campana} - {empresa}: Palpala - Marisa Carrizo{" "}
-            <span className="badge badge-pill badge-dark text-white">{palpala.length}</span>
+            <span className="badge badge-pill badge-dark text-white">
+              {palpala.length}
+            </span>
           </h3>
 
           {JSON.parse(empresa) === "W" ? (
@@ -492,7 +499,9 @@ const AsignarCampana = ({
         <div className="d-flex justify-content-between">
           <h3>
             Campaña {campana} - {empresa}: San Pedro - Silvia Juarez{" "}
-            <span className="badge badge-pill badge-dark text-white">{sanPedro.length}</span>
+            <span className="badge badge-pill badge-dark text-white">
+              {sanPedro.length}
+            </span>
           </h3>
 
           {JSON.parse(empresa) === "W" ? (

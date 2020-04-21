@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
-import UserContext from "../../context/UserContext";
+import React, { useState, useEffect } from "react";
 import GuestLinks from "./GuestLinks";
 import AuthLinks from "./AuthLinks";
+import jsCookies from "js-cookie";
 
 const Navbar = () => {
-  const { usuario } = useContext(UserContext);
+  const [userData, guardarUsuario] = useState({});
 
-  let userData = JSON.parse(usuario);
+  useEffect(() => {
+    let usuario = jsCookies.get("usuario");
+
+    if (usuario) {
+      let userData = JSON.parse(usuario);
+      guardarUsuario(userData);
+    } else {
+    }
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,11 +33,7 @@ const Navbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {userData ? (
-        <AuthLinks userData={userData} />
-      ) : !userData ? (
-        <GuestLinks />
-      ) : null}
+      {userData.id ? <AuthLinks userData={userData} /> : <GuestLinks />}
     </nav>
   );
 };

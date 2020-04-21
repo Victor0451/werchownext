@@ -129,28 +129,10 @@ const Adimn = () => {
           Campañas
         </a>
         <ul className="dropdown-menu">
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
+          <li>
+            <a href="/estadosocio" className="dropdown-item text-dark">
               Asignar Campañas
             </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="/estadosocioW" className="dropdown-item text-dark">
-                  Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/estadosocioM" className="dropdown-item text-dark">
-                  Mutual
-                </a>
-              </li>
-            </ul>
           </li>
 
           <hr />
