@@ -47,24 +47,48 @@ export const efecsucursal = (array1, array2, array3, array4, array5) => {
 };
 
 export const efecsucursalm = (array1, array2, array3) => {
+
   if (array1) {
-        let total =
-          parseInt(array1.total) + parseInt(array2.total) + parseInt(array3.total);
-        let cobrado =
-          parseInt(array1.cobrado) +
-          parseInt(array2.cobrado) +
-          parseInt(array3.cobrado);
-        let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
-        let resultado = efectividad.toFixed(2);
-        if (resultado === "NaN") {
-          resultado = 0.0;
-          return resultado;
-        } else {
-          return resultado;
-        }
-      }
-  
+
+    let total =
+      parseInt(array1.total) + parseInt(array2.total) + parseInt(array3.total);
+    let cobrado =
+      parseInt(array1.cobrado) +
+      parseInt(array2.cobrado) +
+      parseInt(array3.cobrado);
+    let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
+    let resultado = efectividad.toFixed(2);
+    if (resultado === "NaN") {
+      resultado = 0.0;
+      return resultado;
+    } else {
+      return resultado;
+    }
+  }
+
 };
+
+export const efecsucursalmsp = (array1, array2) => {
+
+  if (array1) {
+
+    let total =
+      parseInt(array1.total) + parseInt(array2.total)
+    let cobrado =
+      parseInt(array1.cobrado) +
+      parseInt(array2.cobrado)
+
+    let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
+    let resultado = efectividad.toFixed(2);
+    if (resultado === "NaN") {
+      resultado = 0.0;
+      return resultado;
+    } else {
+      return resultado;
+    }
+  }
+}
+
 
 export const efecempresa = (
   pericoCOB,
@@ -130,7 +154,7 @@ export const efecempresam = (
   let palpala = parseInt(efecsucursalm(palpalaCOBM, palpalaOFM, palpalaTARM));
   let perico = parseInt(efecsucursalm(pericoCOBM, pericoOFM, pericoTARM));
   let sanPedro = parseInt(
-    efecsucursalm(sanPedroCOBM, sanPedroOFM, sanPedroTARM)
+    efecsucursalmsp(sanPedroCOBM, sanPedroOFM)
   );
 
   let CasaCentral = parseInt(

@@ -6,10 +6,15 @@ import Resumen from "../../components/cobranza/Resumen";
 import axios from "axios";
 import ResumenWerchow from "../../components/cobranza/ResumenWerchow";
 import ResumenMutual from "../../components/cobranza/ResumenMutual";
+import ReactToPrint from "react-to-print";
 
 const resumen = () => {
+
+  let componentRef = React.createRef()
+
   const [mes, guardarMes] = useState(null);
   const [ano, guardarAno] = useState(null);
+  const [cargando, guardarCargando] = useState(false)
 
   const [resofi, guardarResofi] = useState(null);
   const [resofim, guardarResofim] = useState(null);
@@ -90,6 +95,8 @@ const resumen = () => {
   };
 
   const segmentarArrayOFM = (array) => {
+
+
     if (array[0].zona) {
       if (array[0].zona) {
         let CasaCentralOFM = array[0];
@@ -153,6 +160,7 @@ const resumen = () => {
   };
 
   const segmentarArrayTAR = (array) => {
+
     if (array[0].sucursal) {
       if (array[3].sucursal) {
         let CasaCentralTAR = array[3];
@@ -174,7 +182,7 @@ const resumen = () => {
   };
 
   const segmentarArrayTARM = (array) => {
-    console.log(array);
+
     if (array[0].sucursal) {
       if (array[0].sucursal) {
         let palpalaTARM = array[0];
@@ -182,7 +190,7 @@ const resumen = () => {
       }
       if (array[2].sucursal) {
         let CasaCentralTARM = array[2];
-        guardarPericoTARM(CasaCentralTARM);
+        guardarCCTARM(CasaCentralTARM);
       }
       if (array[1].sucursal) {
         let pericoTARM = array[1];
@@ -192,6 +200,9 @@ const resumen = () => {
   };
 
   const buscarNumeros = async () => {
+    let cargando = true
+    guardarCargando(cargando)
+
     await axios
       .get(`http://190.231.32.232:5002/api/sgi/efectividadw/resofi`, {
         params: {
@@ -281,6 +292,7 @@ const resumen = () => {
       })
       .then((res) => {
         let restarM = res.data;
+        console.log("api tjtj", restarM);
         guardarRestarm(restarM);
         segmentarArrayTARM(restarM);
       })
@@ -410,66 +422,93 @@ const resumen = () => {
   };
 
   let token = jsCookie.get("token");
-
   return (
     <div>
       <Layout>
         {!token ? (
           <RedirectToLogin />
         ) : (
-          <>
-            <Resumen
-              buscarNumeros={buscarNumeros}
-              handleChange={handleChange}
-            />
-            {CasaCentralOF === null ? null : (
-              <div>
-                <ResumenWerchow
-                  pericoCOB={pericoCOB}
-                  pericoOF={pericoOF}
-                  pericoBAN={pericoBAN}
-                  pericoTAR={pericoTAR}
-                  pericoPOL={pericoPOL}
-                  palpalaCOB={palpalaCOB}
-                  palpalaOF={palpalaOF}
-                  palpalaBAN={palpalaBAN}
-                  palpalaTAR={palpalaTAR}
-                  palpalaPOL={palpalaPOL}
-                  sanPedroCOB={sanPedroCOB}
-                  sanPedroOF={sanPedroOF}
-                  sanPedroBAN={sanPedroBAN}
-                  sanPedroTAR={sanPedroTAR}
-                  sanPedroPOL={sanPedroPOL}
-                  CasaCentralCOB={CasaCentralCOB}
-                  CasaCentralOF={CasaCentralOF}
-                  CasaCentralBAN={CasaCentralBAN}
-                  CasaCentralTAR={CasaCentralTAR}
-                  CasaCentralPOL={CasaCentralPOL}
-                />
+            <>
+              <Resumen
+                buscarNumeros={buscarNumeros}
+                handleChange={handleChange}
+              />
+              {cargando === false ? null :
+                (<div className="container mt-4 mb-4 border border-dark p-2">
+                  <div ref={(el) => (componentRef = el)}>
 
-                <hr />
 
-                <ResumenMutual
-                  pericoCOBM={pericoCOBM}
-                  pericoOFM={pericoOFM}
-                  pericoTARM={pericoTARM}
-                  palpalaCOBM={palpalaCOBM}
-                  palpalaOFM={palpalaOFM}
-                  palpalaTARM={palpalaTARM}
-                  sanPedroCOBM={sanPedroCOBM}
-                  sanPedroOFM={sanPedroOFM}
-                  sanPedroTARM={sanPedroTARM}
-                  CasaCentralCOBM={CasaCentralCOBM}
-                  CasaCentralOFM={CasaCentralOFM}
-                  CasaCentralTARM={CasaCentralTARM}
-                />
-              </div>
-            )}
-          </>
-        )}
+                    <h2><strong><u>Efectividad De Cobranza Werchow y Mutual Periodo: {mes}/{ano}</u></strong></h2>
+
+                    <ResumenWerchow
+
+                      pericoCOB={pericoCOB}
+                      pericoOF={pericoOF}
+                      pericoBAN={pericoBAN}
+                      pericoTAR={pericoTAR}
+                      pericoPOL={pericoPOL}
+                      palpalaCOB={palpalaCOB}
+                      palpalaOF={palpalaOF}
+                      palpalaBAN={palpalaBAN}
+                      palpalaTAR={palpalaTAR}
+                      palpalaPOL={palpalaPOL}
+                      sanPedroCOB={sanPedroCOB}
+                      sanPedroOF={sanPedroOF}
+                      sanPedroBAN={sanPedroBAN}
+                      sanPedroTAR={sanPedroTAR}
+                      sanPedroPOL={sanPedroPOL}
+                      CasaCentralCOB={CasaCentralCOB}
+                      CasaCentralOF={CasaCentralOF}
+                      CasaCentralBAN={CasaCentralBAN}
+                      CasaCentralTAR={CasaCentralTAR}
+                      CasaCentralPOL={CasaCentralPOL}
+                    />
+
+                    <hr />
+
+                    <ResumenMutual
+
+                      pericoCOBM={pericoCOBM}
+                      pericoOFM={pericoOFM}
+                      pericoTARM={pericoTARM}
+                      palpalaCOBM={palpalaCOBM}
+                      palpalaOFM={palpalaOFM}
+                      palpalaTARM={palpalaTARM}
+                      sanPedroCOBM={sanPedroCOBM}
+                      sanPedroOFM={sanPedroOFM}
+                      sanPedroTARM={sanPedroTARM}
+                      CasaCentralCOBM={CasaCentralCOBM}
+                      CasaCentralOFM={CasaCentralOFM}
+                      CasaCentralTARM={CasaCentralTARM}
+                    />
+                  </div>
+
+                  <div className="jumbotron">
+                    <div className="mt-4 p-4 border">
+                      <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+                      <div className="row d-flex justify-content-center">
+                        <ReactToPrint
+                          trigger={() => (
+                            <a href="#" className="btn btn-primary">
+                              imprimir{" "}
+                            </a>
+                          )}
+                          content={() => componentRef}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                )}
+            </>
+          )}
       </Layout>
     </div>
   );
 };
 
 export default resumen;
+
+
+
