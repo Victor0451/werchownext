@@ -164,7 +164,6 @@ const resultado_campana = () => {
       toastr.warning("Debes seleccionar un operador!!", "ATENCION");
     } else {
       estadisticasW(operador, empresa);
-      console.log(operador, empresa);
     }
   };
 

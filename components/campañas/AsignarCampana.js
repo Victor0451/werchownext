@@ -56,8 +56,8 @@ const AsignarCampana = ({
           estadocaso: true,
         };
         console.log(caso);
+        subirCamp(caso);
       }
-      subirCamp(caso);
     }
   };
 

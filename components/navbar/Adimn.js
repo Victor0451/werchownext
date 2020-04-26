@@ -148,20 +148,14 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/campanas/cerrar" className="dropdown-item text-dark">
-                  Cerrar Campañas Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/campanas/cerrarm" className="dropdown-item text-dark">
-                  Cerrar Campañas Mutual
+                <a href="/cerrar_campana" className="dropdown-item text-dark">
+                  Cerrar Campañas Activas
                 </a>
               </li>
               <hr />
               <li>
                 <a
-                  href="/campanas/resultados"
+                  href="/resultado_campana"
                   className="dropdown-item text-dark"
                 >
                   Resultados Campañas Activas
