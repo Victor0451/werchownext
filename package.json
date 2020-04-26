@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+<<<<<<< HEAD
     "start": "next start -p $PORT "
+=======
+    "start": "next start -p $PORT"
+>>>>>>> 4e97398f0f4e866dbd7585c2e4866616e112db22
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
