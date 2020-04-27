@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import BarrasAcostadas from "../layout/graficos/BarrasAcostadas";
 import Torta from "../layout/graficos/Torta";
 import Barras from "../layout/graficos/Barra";
@@ -18,11 +18,11 @@ const DatosCampana = ({
   casossinaccion,
   operador,
 }) => {
-  let componentRef = React.createRef();
+  let componentRef = useRef();
   return (
     <div>
       <hr className="border border-dark mt-4 mb-4" />
-      <div ref={(el) => (componentRef = el)}>
+      <div className="print-estadistica" ref={componentRef}>
         <div className="row mt-4 mb-4">
           <h1>
             <strong>
@@ -141,7 +141,7 @@ const DatosCampana = ({
                   imprimir{" "}
                 </a>
               )}
-              content={() => componentRef}
+              content={() => componentRef.current}
             />
           </div>
         </div>

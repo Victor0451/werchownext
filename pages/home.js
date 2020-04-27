@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import BuscarSocio from "../components/buscar/BuscarSocio";
 import RedirectToLogin from "../components/auth/RedirectToLogin";
-import Noticias from '../components/noticias/Noticias'
+import Noticias from "../components/noticias/Noticias";
 import jsCookie from "js-cookie";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ const STATE_INICIAL = {
 
 const home = () => {
   const [error, guardarError] = useState(false);
+  const [sindato, guardarSindato] = useState(null);
   const [socioRes, guardarSocio] = useState(null);
   const [socioGest, guardarGestion] = useState(null);
 
@@ -37,8 +38,12 @@ const home = () => {
         .get(`http://190.231.32.232:5002/api/sgi/campanas/buscarcaso/${socio}`)
 
         .then((res) => {
-          const socioRes = res.data;
-          guardarSocio(socioRes);
+          if (res.data === null) {
+            guardarSindato("El socio no esta en campaña");
+          } else {
+            const socioRes = res.data;
+            guardarSocio(socioRes);
+          }
         });
 
       await axios
@@ -63,21 +68,26 @@ const home = () => {
       {!token ? (
         <RedirectToLogin />
       ) : (
-          <div>
-            <Noticias />
-            <BuscarSocio
-              socio={socio}
-              errores={errores}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              handleBlur={handleBlur}
-              error={error}
-              socioGest={socioGest}
-              socioRes={socioRes}
-            />
-          </div>
+        <div>
+          <Noticias />
+          <BuscarSocio
+            socio={socio}
+            errores={errores}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleBlur={handleBlur}
+            error={error}
+            socioGest={socioGest}
+            socioRes={socioRes}
+          />
 
-        )}
+          {sindato === null ? null : (
+            <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
+              <strong>{sindato}</strong>
+            </div>
+          )}
+        </div>
+      )}
     </Layout>
   );
 };
