@@ -80,7 +80,10 @@ const Adimn = () => {
         </a>
         <ul className="dropdown-menu">
           <li>
-            <a href="/prestamos/nuevo" className="dropdown-item text-dark">
+            <a
+              href="/prestamos/nuevoprestamo"
+              className="dropdown-item text-dark"
+            >
               Nuevo Prestamo
             </a>
           </li>
@@ -130,7 +133,7 @@ const Adimn = () => {
         </a>
         <ul className="dropdown-menu">
           <li>
-            <a href="/estadosocio" className="dropdown-item text-dark">
+            <a href="/campanas/estadosocio" className="dropdown-item text-dark">
               Asignar Campañas
             </a>
           </li>
@@ -148,14 +151,17 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/cerrar_campana" className="dropdown-item text-dark">
+                <a
+                  href="/campanas/cerrar_campana"
+                  className="dropdown-item text-dark"
+                >
                   Cerrar Campañas Activas
                 </a>
               </li>
               <hr />
               <li>
                 <a
-                  href="/resultado_campana"
+                  href="/campanas/resultado_campana"
                   className="dropdown-item text-dark"
                 >
                   Resultados Campañas Activas
@@ -178,7 +184,7 @@ const Adimn = () => {
           Noticias{" "}
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="/nueva_noticia" className="dropdown-item text-dark">
+          <a href="/noticias/nueva_noticia" className="dropdown-item text-dark">
             Ingresar Noticia
           </a>
         </div>

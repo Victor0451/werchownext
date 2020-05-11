@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import NuevaNoticia from "../components/noticias/NuevaNoticia";
-import Layout from "../components/layout/Layout";
-import RedirectToLogin from "../components/auth/RedirectToLogin";
+import NuevaNoticia from "../../components/noticias/NuevaNoticia";
+import Layout from "../../components/layout/Layout";
+import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import moment from "moment-timezone";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 
 // Validaciones
-import useValidacion from "../hooks/useValidacion";
-import validarNoticia from "../validacion/validarNoticia";
+import useValidacion from "../../hooks/useValidacion";
+import validarNoticia from "../../validacion/validarNoticia";
 
 const STATE_INICIAL = {
   noticia: "",

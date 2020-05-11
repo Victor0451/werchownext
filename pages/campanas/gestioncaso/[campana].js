@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import GestionCaso from "../../components/campañas/GestionCaso";
-import Layout from "../../components/layout/Layout";
+import GestionCaso from "../../../components/campañas/GestionCaso";
+import Layout from "../../../components/layout/Layout";
 import axios from "axios";
 
 const campana = (porps) => {

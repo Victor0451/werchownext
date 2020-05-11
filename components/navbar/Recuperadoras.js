@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-
-
+import React, { Component } from "react";
 
 export default class Recuperadoras extends Component {
   render() {
@@ -14,16 +12,16 @@ export default class Recuperadoras extends Component {
             className="nav-link dropdown-toggle"
           >
             Campañas
-            </a>
+          </a>
 
           <ul className="dropdown-menu">
             <li>
-              <a href="/campanas" className="dropdown-item text-dark">
+              <a href="/campanas/campanas" className="dropdown-item text-dark">
                 Casos Asignados
-                </a>
+              </a>
             </li>
 
-            <hr />
+            {/* <hr />
 
             <li className="dropdown-submenu">
               <a
@@ -62,10 +60,10 @@ export default class Recuperadoras extends Component {
                     </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
-        </li >
+        </li>
       </ul>
-    )
+    );
   }
 }

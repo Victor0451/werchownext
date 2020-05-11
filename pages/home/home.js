@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import Layout from "../components/layout/Layout";
-import BuscarSocio from "../components/buscar/BuscarSocio";
-import RedirectToLogin from "../components/auth/RedirectToLogin";
-import Noticias from "../components/noticias/Noticias";
+import Layout from "../../components/layout/Layout";
+import BuscarSocio from "../../components/buscar/BuscarSocio";
+import RedirectToLogin from "../../components/auth/RedirectToLogin";
+import Noticias from "../../components/noticias/Noticias";
 import jsCookie from "js-cookie";
 import axios from "axios";
 
 // Validaciones
-import useValidacion from "../hooks/useValidacion";
-import validarBuscarSocio from "../validacion/validarBuscarSocio";
+import useValidacion from "../../hooks/useValidacion";
+import validarBuscarSocio from "../../validacion/validarBuscarSocio";
 
 const STATE_INICIAL = {
   socio: "",

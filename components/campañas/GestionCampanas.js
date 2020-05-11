@@ -75,7 +75,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos:</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Atrasados",
                           empresa: "werchow",
@@ -96,7 +96,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Recuperacion",
                           empresa: "werchow",
@@ -117,7 +117,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Reincidente",
                           empresa: "werchow",
@@ -138,7 +138,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos:</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Blanqueo",
                           empresa: "werchow",
@@ -157,12 +157,18 @@ const GestionCampanas = () => {
                   <div className="card-header">POLICIAS</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos:</h5>
-                    <a
-                      className="btn btn-primary"
-                      href={`/gestioncaso/Policia`}
+                    <Link
+                      href={{
+                        pathname: "/campanas/gestioncaso/[campana]",
+                        query: {
+                          camp: "Policia",
+                          empresa: "werchow",
+                          operador: operadorNom,
+                        },
+                      }}
                     >
-                      Abrir Campaña
-                    </a>
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -176,7 +182,7 @@ const GestionCampanas = () => {
                     </h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Recordatorio",
                           empresa: "werchow",
@@ -208,7 +214,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos:</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Atrasados",
                           empresa: "mutual",
@@ -229,7 +235,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Recuperacion",
                           empresa: "mutual",
@@ -250,7 +256,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Reincidente",
                           empresa: "mutual",
@@ -271,7 +277,7 @@ const GestionCampanas = () => {
                     <h5 className="card-title">Listado de casos:</h5>
                     <Link
                       href={{
-                        pathname: "gestioncaso/[campana]",
+                        pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Blanqueo",
                           empresa: "mutual",

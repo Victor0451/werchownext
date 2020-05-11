@@ -1,7 +1,7 @@
 import React from "react";
-import GestionCampanas from "../components/campañas/GestionCampanas";
-import Layout from "../components/layout/Layout";
-import RedirectToLogin from "../components/auth/RedirectToLogin";
+import GestionCampanas from "../../components/campañas/GestionCampanas";
+import Layout from "../../components/layout/Layout";
+import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 
 function campanas(props) {

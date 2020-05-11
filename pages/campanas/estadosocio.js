@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Layout from "../components/layout/Layout";
-import EstadoCartera from "../components/campañas/EstadoCartera";
-import AsignarCampana from "../components/campañas/AsignarCampana";
+import Layout from "../../components/layout/Layout";
+import EstadoCartera from "../../components/campañas/EstadoCartera";
+import AsignarCampana from "../../components/campañas/AsignarCampana";
 import axios from "axios";
 import toastr from 'toastr'
 

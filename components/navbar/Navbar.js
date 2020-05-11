@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a href={"/home"} className="navbar-brand">
+      <a href={"/home/home"} className="navbar-brand">
         Werchow{" "}
       </a>
       <button

@@ -49,7 +49,7 @@ const Login = () => {
           jsCookie.set("usuario", usuario);
         });
 
-      Router.push("/home");
+      Router.push("/home/home");
     } catch (error) {
       console.log(error.response.data, error.response.status, "LOGIN_FAIL");
       guardarError(error.response.data.msg);

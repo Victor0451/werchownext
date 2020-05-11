@@ -47,9 +47,7 @@ export const efecsucursal = (array1, array2, array3, array4, array5) => {
 };
 
 export const efecsucursalm = (array1, array2, array3) => {
-
   if (array1) {
-
     let total =
       parseInt(array1.total) + parseInt(array2.total) + parseInt(array3.total);
     let cobrado =
@@ -65,18 +63,12 @@ export const efecsucursalm = (array1, array2, array3) => {
       return resultado;
     }
   }
-
 };
 
 export const efecsucursalmsp = (array1, array2) => {
-
   if (array1) {
-
-    let total =
-      parseInt(array1.total) + parseInt(array2.total)
-    let cobrado =
-      parseInt(array1.cobrado) +
-      parseInt(array2.cobrado)
+    let total = parseInt(array1.total) + parseInt(array2.total);
+    let cobrado = parseInt(array1.cobrado) + parseInt(array2.cobrado);
 
     let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
     let resultado = efectividad.toFixed(2);
@@ -87,8 +79,7 @@ export const efecsucursalmsp = (array1, array2) => {
       return resultado;
     }
   }
-}
-
+};
 
 export const efecempresa = (
   pericoCOB,
@@ -112,27 +103,38 @@ export const efecempresa = (
   CasaCentralTAR,
   CasaCentralPOL
 ) => {
-  let palpala = parseInt(
-    efecsucursal(palpalaCOB, palpalaOF, palpalaTAR, palpalaBAN, palpalaPOL)
-  );
-  let perico = parseInt(
-    efecsucursal(pericoCOB, pericoOF, pericoTAR, pericoBAN, pericoPOL)
-  );
-  let sanPedro = parseInt(
-    efecsucursal(sanPedroCOB, sanPedroOF, sanPedroTAR, sanPedroBAN, sanPedroPOL)
-  );
+  let palpala =
+    parseInt(
+      efecsucursal(palpalaCOB, palpalaOF, palpalaTAR, palpalaBAN, palpalaPOL)
+    ) / 100;
+  let perico =
+    parseInt(
+      efecsucursal(pericoCOB, pericoOF, pericoTAR, pericoBAN, pericoPOL)
+    ) / 100;
+  let sanPedro =
+    parseInt(
+      efecsucursal(
+        sanPedroCOB,
+        sanPedroOF,
+        sanPedroTAR,
+        sanPedroBAN,
+        sanPedroPOL
+      )
+    ) / 100;
 
-  let CasaCentral = parseInt(
-    efecsucursal(
-      CasaCentralCOB,
-      CasaCentralOF,
-      CasaCentralTAR,
-      CasaCentralBAN,
-      CasaCentralPOL
-    )
-  );
+  let CasaCentral =
+    parseInt(
+      efecsucursal(
+        CasaCentralCOB,
+        CasaCentralOF,
+        CasaCentralTAR,
+        CasaCentralBAN,
+        CasaCentralPOL
+      )
+    ) / 100;
 
-  let efectividad = (palpala + perico + sanPedro + CasaCentral) / 4;
+  let efectividad =
+    parseFloat((palpala + perico + sanPedro + CasaCentral) / 4) * 100;
   let resultado = efectividad.toFixed(2);
   return resultado;
 };
@@ -153,9 +155,7 @@ export const efecempresam = (
 ) => {
   let palpala = parseInt(efecsucursalm(palpalaCOBM, palpalaOFM, palpalaTARM));
   let perico = parseInt(efecsucursalm(pericoCOBM, pericoOFM, pericoTARM));
-  let sanPedro = parseInt(
-    efecsucursalmsp(sanPedroCOBM, sanPedroOFM)
-  );
+  let sanPedro = parseInt(efecsucursalmsp(sanPedroCOBM, sanPedroOFM));
 
   let CasaCentral = parseInt(
     efecsucursalm(CasaCentralCOBM, CasaCentralOFM, CasaCentralTARM)

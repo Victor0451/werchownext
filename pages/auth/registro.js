@@ -1,15 +1,15 @@
 import React, { useState, useContext } from "react";
-import Layout from "../components/layout/Layout";
-import RegistrarUsuario from "../components/auth/RegistrarUsuario";
+import Layout from "../../components/layout/Layout";
+import RegistrarUsuario from "../../components/auth/RegistrarUsuario";
 import axios from "axios";
 import Router from "next/router";
-import RedirectToLogin from "../components/auth/RedirectToLogin";
+import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 
 // Validaciones
-import useValidacion from "../hooks/useValidacion";
-import validarRegistro from "../validacion/validarRegistro";
-import userContext from "../context/UserContext";
+import useValidacion from "../../hooks/useValidacion";
+import validarRegistro from "../../validacion/validarRegistro";
+import userContext from "../../context/UserContext";
 
 const STATE_INICIAL = {
   usuario: "",

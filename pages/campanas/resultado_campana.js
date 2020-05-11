@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Layout from "../components/layout/Layout";
-import RedirectToLogin from "../components/auth/RedirectToLogin";
+import Layout from "../../components/layout/Layout";
+import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
-import Resultados from "../components/campañas/Resultados";
+import Resultados from "../../components/campañas/Resultados";
 import toastr from "toastr";
 import axios from "axios";
 
