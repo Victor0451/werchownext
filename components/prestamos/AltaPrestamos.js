@@ -44,9 +44,11 @@ const AltaPrestamos = ({
         `http://190.231.32.232:5002/api/sgi/prestamos/prestamosactivos/${contrato}`
       )
       .then((res) => {
-        const prestamos = res.data;
-        guardarPrestamos(prestamos);
-        console.log(prestamos);
+        if (res.data.length !== 0) {
+          const prestamos = res.data;
+          guardarPrestamos(prestamos);
+          console.log(res.data.length);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -113,8 +115,7 @@ const AltaPrestamos = ({
             <input
               type="text"
               className="form-control"
-              value={user.usuario}
-              ref={operadorRef}
+              defaultValue={user.usuario}
               readOnly
             />
           </div>
@@ -129,7 +130,8 @@ const AltaPrestamos = ({
             <input
               type="text"
               className="form-control"
-              value={user.codigo}
+              defaultValue={user.codigo}
+              ref={operadorRef}
               readOnly
             />
           </div>
@@ -144,7 +146,7 @@ const AltaPrestamos = ({
             <input
               type="text"
               className="form-control"
-              value={fecha}
+              defaultValue={fecha}
               readOnly
             />
           </div>
@@ -172,7 +174,7 @@ const AltaPrestamos = ({
               className="form-control"
               placeholder="Ficha"
               name="contrato"
-              value={contrato}
+              defaultValue={contrato}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -196,18 +198,21 @@ const AltaPrestamos = ({
           {prestamos !== null ? (
             <>
               <hr className="mt-4 mb-4" />
-              <h2 className="mt-4 mb-4">
-                <strong>
-                  <u>Prestamos Activos</u>
-                </strong>
-              </h2>
-              <ListadoPrestamosAct prestamos={prestamos} />
 
-              <div className="mt-4 mb-4 alert alert-warning border border-dark text-uppercase ">
-                <strong>
-                  {" "}
-                  El afiliado ya tiene prestamos activos, pedir autorizacion
-                </strong>
+              <div className="border border-dark p-2 mt-4 mb-4">
+                <div className="mt-4 mb-4 alert alert-warning border border-dark text-uppercase text-center">
+                  <strong>
+                    {" "}
+                    ATENCION, El afiliado ya tiene prestamos activos
+                  </strong>
+                </div>
+
+                <h2 className="mt-4 mb-4">
+                  <strong>
+                    <u>Prestamos Activos</u>
+                  </strong>
+                </h2>
+                <ListadoPrestamosAct prestamos={prestamos} />
               </div>
             </>
           ) : null}

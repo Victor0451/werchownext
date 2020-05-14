@@ -643,7 +643,10 @@ const Layout = (props) => {
 
           @media print {
             body {
-               -webkit-print-color-adjust: exact;
+               -size: 1in 1in;
+               margin: 50pt 40pt 50pt;
+               size: A4;
+               -webkit-print-color-adjust: exact; 
             }
          }
          
@@ -663,7 +666,16 @@ const Layout = (props) => {
 
         }
 
-          
+        .print-caratula{
+          size: A4;
+          size: 1in 1in;
+          margin: 20pt 20pt 20pt;
+          -webkit-print-color-adjust: exact;  
+        }
+
+        .logerr{
+          width: 600px;
+        }          
           }
         `}
       </style>

@@ -63,6 +63,38 @@ export default class Recuperadoras extends Component {
             </li> */}
           </ul>
         </li>
+
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Prestamos
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                href="/prestamos/nuevoprestamo"
+                className="dropdown-item text-dark"
+              >
+                Nuevo Prestamo
+              </a>
+            </li>
+
+            <hr />
+
+            <li>
+              <a
+                href="/prestamos/imprimircaratula"
+                className="dropdown-item text-dark"
+              >
+                Imprimir Caratula
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
     );
   }

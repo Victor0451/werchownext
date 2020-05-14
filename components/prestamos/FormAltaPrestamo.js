@@ -66,7 +66,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.CONTRATO}
+                defaultValue={ficha.CONTRATO}
                 readOnly
               />
             </div>
@@ -81,7 +81,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.NRO_DOC}
+                defaultValue={ficha.NRO_DOC}
                 readOnly
               />
             </div>
@@ -96,7 +96,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.APELLIDOS}
+                defaultValue={ficha.APELLIDOS}
                 readOnly
               />
             </div>
@@ -111,7 +111,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.NOMBRES}
+                defaultValue={ficha.NOMBRES}
                 readOnly
               />
             </div>
@@ -126,7 +126,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.CALLE}
+                defaultValue={ficha.CALLE}
                 readOnly
               />
             </div>
@@ -141,7 +141,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.NRO_CALLE}
+                defaultValue={ficha.NRO_CALLE}
                 readOnly
               />
             </div>
@@ -156,7 +156,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.BARRIO}
+                defaultValue={ficha.BARRIO}
                 readOnly
               />
             </div>
@@ -171,7 +171,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.LOCALIDAD}
+                defaultValue={ficha.LOCALIDAD}
                 readOnly
               />
             </div>
@@ -186,7 +186,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.TELEFONO}
+                defaultValue={ficha.TELEFONO}
                 readOnly
               />
             </div>
@@ -201,7 +201,7 @@ const FormAltaPrestamo = ({
               <input
                 type="text"
                 className="form-control"
-                value={ficha.MOVIL}
+                defaultValue={ficha.MOVIL}
                 readOnly
               />
             </div>
@@ -264,7 +264,7 @@ const FormAltaPrestamo = ({
                 <input
                   type="text"
                   className="form-control"
-                  value={capital}
+                  defaultValue={capital}
                   readOnly
                 />
               </div>
@@ -279,7 +279,7 @@ const FormAltaPrestamo = ({
                 <input
                   type="text"
                   className="form-control"
-                  value={cuotas}
+                  defaultValue={cuotas}
                   readOnly
                 />
               </div>
@@ -294,7 +294,7 @@ const FormAltaPrestamo = ({
                 <input
                   type="text"
                   className="form-control"
-                  value={cuoprest}
+                  defaultValue={cuoprest}
                   ref={valcuotaRef}
                   readOnly
                 />
@@ -310,7 +310,7 @@ const FormAltaPrestamo = ({
                 <input
                   type="text"
                   className="form-control"
-                  value={capadev}
+                  defaultValue={capadev}
                   readOnly
                 />
               </div>
@@ -326,7 +326,7 @@ const FormAltaPrestamo = ({
                   type="text"
                   className="form-control"
                   name="legajo"
-                  value={legajo}
+                  defaultValue={legajo}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -348,7 +348,7 @@ const FormAltaPrestamo = ({
                   type="text"
                   className="form-control"
                   name="neto"
-                  value={neto}
+                  defaultValue={neto}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -370,7 +370,7 @@ const FormAltaPrestamo = ({
                   type="text"
                   className="form-control"
                   name="anti"
-                  value={anti}
+                  defaultValue={anti}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -391,7 +391,9 @@ const FormAltaPrestamo = ({
                 <RenovaSelect
                   options={renovaprest}
                   placeholder={"Renovacion"}
-                  onChange={(value) => handleChanges(value, "renova")}
+                  onChange={(defaultValue) =>
+                    handleChanges(defaultValue, "renova")
+                  }
                 />
                 {renoverror !== null ? (
                   <div className="mt-2 form-group  alert alert-danger">

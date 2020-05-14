@@ -13,7 +13,7 @@ const Adimn = () => {
           Informes
         </a>
         <ul className="dropdown-menu">
-          <li className="dropdown-submenu">
+          {/* <li className="dropdown-submenu">
             <a
               href="#"
               role="button"
@@ -35,7 +35,7 @@ const Adimn = () => {
                 </a>
               </li>
             </ul>
-          </li>
+          </li> */}
 
           <li className="dropdown-submenu">
             <a
@@ -47,7 +47,7 @@ const Adimn = () => {
               Cobranza
             </a>
             <ul className="dropdown-menu">
-              <li>
+              {/* <li>
                 <a href="/cobranza/werchow" className="dropdown-item text-dark">
                   Cobranza Werchow
                 </a>
@@ -58,7 +58,7 @@ const Adimn = () => {
                   Cobranza Mutual
                 </a>
               </li>
-              <hr />
+              <hr /> */}
               <li>
                 <a href="/cobranza/resumen" className="dropdown-item text-dark">
                   Resumen Efectividad de Cobranza
@@ -91,15 +91,10 @@ const Adimn = () => {
           <hr />
 
           <li>
-            <a href="/prestamos/listado" className="dropdown-item text-dark">
-              Listado de Prestamos
-            </a>
-          </li>
-
-          <hr />
-
-          <li>
-            <a href="/prestamos/informes" className="dropdown-item text-dark">
+            <a
+              href="/prestamos/informeprestamos"
+              className="dropdown-item text-dark"
+            >
               Reportes
             </a>
           </li>
@@ -107,7 +102,10 @@ const Adimn = () => {
           <hr />
 
           <li>
-            <a href="/prestamos/aprobar" className="dropdown-item text-dark">
+            <a
+              href="/prestamos/aprobarprestamos"
+              className="dropdown-item text-dark"
+            >
               Aprobacion de Prestamos
             </a>
           </li>
@@ -115,7 +113,10 @@ const Adimn = () => {
           <hr />
 
           <li>
-            <a href="/prestamos/imprimir" className="dropdown-item text-dark">
+            <a
+              href="/prestamos/imprimircaratula"
+              className="dropdown-item text-dark"
+            >
               Imprimir Caratula
             </a>
           </li>

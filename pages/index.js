@@ -56,6 +56,12 @@ const Login = () => {
     }
   }
 
+  let token = jsCookie.get("token");
+
+  if (token) {
+    Router.push("/home/home");
+  }
+
   return (
     <Layout>
       <LoginUsuario

@@ -4,6 +4,7 @@ import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import AltaPrestamos from "../../components/prestamos/AltaPrestamos";
 import jsCookie from "js-cookie";
 import axios from "axios";
+import toastr from "toastr";
 import moment from "moment-timezone";
 
 // Validaciones
@@ -78,7 +79,7 @@ const nuevoprestamo = () => {
 
       let porcentaje = Math.floor(prestamo.neto * 30) / 100;
 
-      if (porcentaje > cuoprest) {
+      if (porcentaje > prestamo.valcuota) {
         toastr.success(
           "El 30% del sueldo neto supera al valor de la cuota del prestamo",
           "Atencion"
@@ -90,12 +91,17 @@ const nuevoprestamo = () => {
         );
       }
 
-      //   await axios.post(
-      //     `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
-      //     prestamo
-      //   ).then(res =>{
-
-      //   }).catch(error =>{})
+      await axios
+        .post(
+          `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
+          prestamo
+        )
+        .then((res) => {
+          console.log(res.status);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
@@ -107,7 +113,7 @@ const nuevoprestamo = () => {
       {!token ? (
         <RedirectToLogin />
       ) : (
-        <div>
+        <>
           <AltaPrestamos
             usuario={usuario}
             contrato={contrato}
@@ -129,7 +135,7 @@ const nuevoprestamo = () => {
             operadorRef={operadorRef}
             renoverror={renoverror}
           />
-        </div>
+        </>
       )}
     </Layout>
   );
