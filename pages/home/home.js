@@ -9,12 +9,21 @@ import axios from "axios";
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
 import validarBuscarSocio from "../../validacion/validarBuscarSocio";
+import Router from "next/router";
 
 const STATE_INICIAL = {
   socio: "",
 };
 
 const home = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   const [error, guardarError] = useState(false);
   const [sindato, guardarSindato] = useState(null);
   const [socioRes, guardarSocio] = useState(null);
@@ -61,33 +70,27 @@ const home = () => {
     }
   }
 
-  let token = jsCookie.get("token");
-
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <div>
-          <Noticias />
-          <BuscarSocio
-            socio={socio}
-            errores={errores}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            handleBlur={handleBlur}
-            error={error}
-            socioGest={socioGest}
-            socioRes={socioRes}
-          />
+      <div>
+        <Noticias />
+        <BuscarSocio
+          socio={socio}
+          errores={errores}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleBlur={handleBlur}
+          error={error}
+          socioGest={socioGest}
+          socioRes={socioRes}
+        />
 
-          {sindato === null ? null : (
-            <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
-              <strong>{sindato}</strong>
-            </div>
-          )}
-        </div>
-      )}
+        {sindato === null ? null : (
+          <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
+            <strong>{sindato}</strong>
+          </div>
+        )}
+      </div>
     </Layout>
   );
 };

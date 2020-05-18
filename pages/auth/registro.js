@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
 import RegistrarUsuario from "../../components/auth/RegistrarUsuario";
 import axios from "axios";
 import Router from "next/router";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 
 // Validaciones
@@ -19,6 +18,14 @@ const STATE_INICIAL = {
 };
 
 const Registro = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   const [error, guardarError] = useState(false);
 
   const {
@@ -63,25 +70,19 @@ const Registro = () => {
     }
   }
 
-  let token = jsCookie.get("token");
-
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <RegistrarUsuario
-          nombre={nombre}
-          apellido={apellido}
-          usuario={usuario}
-          contrasena={contrasena}
-          errores={errores}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleBlur={handleBlur}
-          error={error}
-        />
-      )}
+      <RegistrarUsuario
+        nombre={nombre}
+        apellido={apellido}
+        usuario={usuario}
+        contrasena={contrasena}
+        errores={errores}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleBlur={handleBlur}
+        error={error}
+      />
     </Layout>
   );
 };

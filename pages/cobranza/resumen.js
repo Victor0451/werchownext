@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 import Resumen from "../../components/cobranza/Resumen";
 import axios from "axios";
@@ -9,8 +8,18 @@ import ResumenMutual from "../../components/cobranza/ResumenMutual";
 import ReactToPrint from "react-to-print";
 import moment from "moment-timezone";
 import toastr from "toastr";
+import Router from "next/router";
+
 
 const resumen = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   let componentRef = useRef();
 
   const [mes, guardarMes] = useState(null);
@@ -429,103 +438,93 @@ const resumen = () => {
     }
   };
 
-  let token = jsCookie.get("token");
   return (
     <div>
       <Layout>
-        {!token ? (
-          <RedirectToLogin />
-        ) : (
-          <>
-            <Resumen
-              buscarNumeros={buscarNumeros}
-              handleChange={handleChange}
-            />
+        <>
+          <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} />
 
-            {sindato === null ? null : (
-              <div className="container mt-4 mb-4 border border-dark p-2">
-                {sindato === true ? (
-                  <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
-                    <strong>
-                      No hay datos generados aun. Intente mas tarde
-                    </strong>
+          {sindato === null ? null : (
+            <div className="container mt-4 mb-4 border border-dark p-2">
+              {sindato === true ? (
+                <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
+                  <strong>No hay datos generados aun. Intente mas tarde</strong>
+                </div>
+              ) : (
+                <>
+                  <div className="print-efect" ref={componentRef}>
+                    <h2>
+                      <strong>
+                        <u>
+                          Efectividad De Cobranza Werchow y Mutual Periodo:{" "}
+                          {mes}/{ano}
+                        </u>
+                      </strong>
+                    </h2>
+
+                    <ResumenWerchow
+                      pericoCOB={pericoCOB}
+                      pericoOF={pericoOF}
+                      pericoBAN={pericoBAN}
+                      pericoTAR={pericoTAR}
+                      pericoPOL={pericoPOL}
+                      palpalaCOB={palpalaCOB}
+                      palpalaOF={palpalaOF}
+                      palpalaBAN={palpalaBAN}
+                      palpalaTAR={palpalaTAR}
+                      palpalaPOL={palpalaPOL}
+                      sanPedroCOB={sanPedroCOB}
+                      sanPedroOF={sanPedroOF}
+                      sanPedroBAN={sanPedroBAN}
+                      sanPedroTAR={sanPedroTAR}
+                      sanPedroPOL={sanPedroPOL}
+                      CasaCentralCOB={CasaCentralCOB}
+                      CasaCentralOF={CasaCentralOF}
+                      CasaCentralBAN={CasaCentralBAN}
+                      CasaCentralTAR={CasaCentralTAR}
+                      CasaCentralPOL={CasaCentralPOL}
+                    />
+
+                    <hr />
+
+                    <ResumenMutual
+                      pericoCOBM={pericoCOBM}
+                      pericoOFM={pericoOFM}
+                      pericoTARM={pericoTARM}
+                      palpalaCOBM={palpalaCOBM}
+                      palpalaOFM={palpalaOFM}
+                      palpalaTARM={palpalaTARM}
+                      sanPedroCOBM={sanPedroCOBM}
+                      sanPedroOFM={sanPedroOFM}
+                      sanPedroTARM={sanPedroTARM}
+                      CasaCentralCOBM={CasaCentralCOBM}
+                      CasaCentralOFM={CasaCentralOFM}
+                      CasaCentralTARM={CasaCentralTARM}
+                    />
                   </div>
-                ) : (
-                  <>
-                    <div className="print-efect" ref={componentRef}>
-                      <h2>
-                        <strong>
-                          <u>
-                            Efectividad De Cobranza Werchow y Mutual Periodo:{" "}
-                            {mes}/{ano}
-                          </u>
-                        </strong>
-                      </h2>
 
-                      <ResumenWerchow
-                        pericoCOB={pericoCOB}
-                        pericoOF={pericoOF}
-                        pericoBAN={pericoBAN}
-                        pericoTAR={pericoTAR}
-                        pericoPOL={pericoPOL}
-                        palpalaCOB={palpalaCOB}
-                        palpalaOF={palpalaOF}
-                        palpalaBAN={palpalaBAN}
-                        palpalaTAR={palpalaTAR}
-                        palpalaPOL={palpalaPOL}
-                        sanPedroCOB={sanPedroCOB}
-                        sanPedroOF={sanPedroOF}
-                        sanPedroBAN={sanPedroBAN}
-                        sanPedroTAR={sanPedroTAR}
-                        sanPedroPOL={sanPedroPOL}
-                        CasaCentralCOB={CasaCentralCOB}
-                        CasaCentralOF={CasaCentralOF}
-                        CasaCentralBAN={CasaCentralBAN}
-                        CasaCentralTAR={CasaCentralTAR}
-                        CasaCentralPOL={CasaCentralPOL}
-                      />
-
-                      <hr />
-
-                      <ResumenMutual
-                        pericoCOBM={pericoCOBM}
-                        pericoOFM={pericoOFM}
-                        pericoTARM={pericoTARM}
-                        palpalaCOBM={palpalaCOBM}
-                        palpalaOFM={palpalaOFM}
-                        palpalaTARM={palpalaTARM}
-                        sanPedroCOBM={sanPedroCOBM}
-                        sanPedroOFM={sanPedroOFM}
-                        sanPedroTARM={sanPedroTARM}
-                        CasaCentralCOBM={CasaCentralCOBM}
-                        CasaCentralOFM={CasaCentralOFM}
-                        CasaCentralTARM={CasaCentralTARM}
-                      />
-                    </div>
-
-                    <div className="jumbotron">
-                      <div className="mt-4 p-4 border">
-                        <h3 className="text-center mb-4 font-weight-bold">
-                          Opciones
-                        </h3>
-                        <div className="row d-flex justify-content-center">
-                          <ReactToPrint
-                            trigger={() => (
-                              <a href="#" className="btn btn-primary">
-                                imprimir{" "}
-                              </a>
-                            )}
-                            content={() => componentRef.current}
-                          />
-                        </div>
+                  <div className="jumbotron">
+                    <div className="mt-4 p-4 border">
+                      <h3 className="text-center mb-4 font-weight-bold">
+                        Opciones
+                      </h3>
+                      <div className="row d-flex justify-content-center">
+                        <ReactToPrint
+                          trigger={() => (
+                            <a href="#" className="btn btn-primary">
+                              imprimir{" "}
+                            </a>
+                          )}
+                          content={() => componentRef.current}
+                        />
                       </div>
                     </div>
-                  </>
-                )}
-              </div>
-            )}
-          </>
-        )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </>
       </Layout>
     </div>
   );

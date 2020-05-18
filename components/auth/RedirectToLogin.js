@@ -2,8 +2,8 @@ import React from "react";
 
 const RedirectToLogin = () => {
   return (
-    <div className="container ">
-      <div className=" border border-dark p-4 mt-4 mb-4 ">
+    <div className="container d-flex justify-content-center">
+      <div className=" border border-dark p-4 mt-4 mb-4 jumbotron ">
         <h1 className="text-center">
           <strong>
             <u>
@@ -12,7 +12,13 @@ const RedirectToLogin = () => {
           </strong>
         </h1>
 
-        <img src="/img/logerr.jpeg" className="logerr p-4"></img>
+        <div className="d-flex justify-content-center">
+          <img
+            src="/img/logerr.jpeg"
+            className="logerr mt-4 mb-4 border border-dark 
+        "
+          />
+        </div>
 
         <div className="mt-4 mb-4 d-flex justify-content-center">
           <a href="/" className="btn btn-primary">

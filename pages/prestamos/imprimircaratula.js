@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import ImprimirCaratulas from "../../components/prestamos/ImprimirCaratula";
 import jsCookie from "js-cookie";
+import Router from "next/router";
 import axios from "axios";
 
 const imprimircaratula = () => {
@@ -62,42 +62,42 @@ const imprimircaratula = () => {
   };
 
   useEffect(() => {
-    if (usuario) {
-      let user = JSON.parse(usuario);
-      let id = user.codigo;
+    if (!token) {
+      Router.push("/redirect");
+    } else if (token) {
+      if (usuario) {
+        let user = JSON.parse(usuario);
+        let id = user.codigo;
 
-      prestamosPorCodigo(id);
+        prestamosPorCodigo(id);
+      }
     }
   }, []);
 
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <>
-          {prestamos ? (
-            <ImprimirCaratulas
-              prestamos={prestamos}
-              capitalprest={capitalprest}
-              cuotas={cuotas}
-              intereses={intereses}
-              cantprest={cantprest}
-              capconint={capconint}
-            />
-          ) : (
-            <>
-              <div className="container">
-                <hr className="mt-4 mb-4" />
-                <div className=" mt-4 alert alert-primary text-center text-uppercase">
-                  <strong> No tienes prestamos para imprimir caratula</strong>
-                </div>
-                <hr className="mt-4 mb-4" />
+      <>
+        {prestamos ? (
+          <ImprimirCaratulas
+            prestamos={prestamos}
+            capitalprest={capitalprest}
+            cuotas={cuotas}
+            intereses={intereses}
+            cantprest={cantprest}
+            capconint={capconint}
+          />
+        ) : (
+          <>
+            <div className="container">
+              <hr className="mt-4 mb-4" />
+              <div className=" mt-4 alert alert-primary text-center text-uppercase">
+                <strong> No tienes prestamos para imprimir caratula</strong>
               </div>
-            </>
-          )}
-        </>
-      )}
+              <hr className="mt-4 mb-4" />
+            </div>
+          </>
+        )}
+      </>
     </Layout>
   );
 };

@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
 import EstadoCartera from "../../components/campañas/EstadoCartera";
 import AsignarCampana from "../../components/campañas/AsignarCampana";
 import axios from "axios";
-import toastr from 'toastr'
+import toastr from "toastr";
+import JsCookie from "js-cookie";
+import Router from "next/router";
 
 const estadosocio = () => {
+  let token = JsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   const [campana, guardarCampana] = useState({});
   const [empresa, guardarEmpresa] = useState({});
   const [array, guardarArray] = useState({});
@@ -63,19 +73,18 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
   const buscarRec = async () => {
-    await axios.get(
-      `http://190.231.32.232:5002/api/sgi/campanas/recW`
-    )
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/recW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -88,20 +97,18 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
-
   const buscarRein = async () => {
-    await axios.get(
-      `http://190.231.32.232:5002/api/sgi/campanas/reinW`
-    )
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/reinW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -114,20 +121,18 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
-
   const buscarBlan = async () => {
-    await axios.get(
-      `http://190.231.32.232:5002/api/sgi/campanas/blanW`
-    )
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/blanW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -140,19 +145,18 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
   const buscarAux = async () => {
-    await axios.get(
-      `http://190.231.32.232:5002/api/sgi/campanas/AuxW`
-    )
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/AuxW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -165,21 +169,19 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
   const buscarPoli = async () => {
-    await axios.get(
-      `http://190.231.32.232:5002/api/sgi/campanas/PoliW`
-    )
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/campanas/PoliW`)
       .then((res) => {
-
         if (res.data[0].length > 0) {
           const array = res.data[0];
           guardarArray(array);
@@ -191,19 +193,16 @@ const estadosocio = () => {
           const empresa = "W";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
-
-
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
   // CAMPAÑAS DE MUTUAL
-
 
   const buscarATM = async () => {
     await axios
@@ -220,12 +219,12 @@ const estadosocio = () => {
           const empresa = "M";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
@@ -244,12 +243,12 @@ const estadosocio = () => {
           const empresa = "M";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
@@ -268,12 +267,12 @@ const estadosocio = () => {
           const empresa = "M";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
@@ -292,18 +291,16 @@ const estadosocio = () => {
           const empresa = "M";
           guardarEmpresa(empresa);
         } else if (res.data[0].length === 0) {
-          toastr.warning("No se encuentran casos para asignar", "ATENCION")
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
         }
       })
       .catch((error) => {
         console.log(error);
-        toastr.error("La tabla no fue creada", "ATENCION")
+        toastr.error("La tabla no fue creada", "ATENCION");
       });
   };
 
-
   return (
-
     <Layout>
       <EstadoCartera
         array={array}
@@ -329,18 +326,15 @@ const estadosocio = () => {
           empresa={JSON.stringify(empresa)}
           campana={JSON.stringify(campana)}
         />
-
       ) : (
-          <div className="container">
-            <div className=" alert alert-info text-dark text-center">
-              <h3>
-                <u>
-                  Busca si existen casos disponibles para asignar
-              </u>
-              </h3>
-            </div>
+        <div className="container">
+          <div className=" alert alert-info text-dark text-center">
+            <h3>
+              <u>Busca si existen casos disponibles para asignar</u>
+            </h3>
           </div>
-        )}
+        </div>
+      )}
     </Layout>
   );
 };

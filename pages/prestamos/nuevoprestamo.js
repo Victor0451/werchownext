@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import AltaPrestamos from "../../components/prestamos/AltaPrestamos";
 import jsCookie from "js-cookie";
+import Router from "next/router";
 import axios from "axios";
 import toastr from "toastr";
 import moment from "moment-timezone";
@@ -21,6 +21,14 @@ const STATE_INICIAL = {
 };
 
 const nuevoprestamo = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   let valcuotaRef = React.createRef();
   let operadorRef = React.createRef();
 
@@ -105,14 +113,11 @@ const nuevoprestamo = () => {
     }
   }
 
-  let token = jsCookie.get("token");
   let usuario = jsCookie.get("usuario");
 
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
+      {!token ? null : (
         <>
           <AltaPrestamos
             usuario={usuario}

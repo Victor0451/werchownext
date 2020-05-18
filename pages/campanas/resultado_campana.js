@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 import Resultados from "../../components/campañas/Resultados";
 import toastr from "toastr";
 import axios from "axios";
+import Router from "next/router";
+
 
 const resultado_campana = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   const [operador, guardarOperador] = useState(null);
   const [llamin, guardarLlamin] = useState(null);
   const [compago, guardarCompago] = useState(null);
@@ -167,30 +176,24 @@ const resultado_campana = () => {
     }
   };
 
-  let token = jsCookie.get("token");
-
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <Resultados
-          obtenerEstadistica={obtenerEstadistica}
-          handleChange={handleChange}
-          llamin={llamin}
-          compago={compago}
-          nopaga={nopaga}
-          cuotadia={cuotadia}
-          notificacion={notificacion}
-          carteraroja={carteraroja}
-          sociofallecido={sociofallecido}
-          casosabiertos={casosabiertos}
-          casoscerrados={casoscerrados}
-          casosconaccion={casosconaccion}
-          casossinaccion={casossinaccion}
-          operador={operador}
-        />
-      )}
+      <Resultados
+        obtenerEstadistica={obtenerEstadistica}
+        handleChange={handleChange}
+        llamin={llamin}
+        compago={compago}
+        nopaga={nopaga}
+        cuotadia={cuotadia}
+        notificacion={notificacion}
+        carteraroja={carteraroja}
+        sociofallecido={sociofallecido}
+        casosabiertos={casosabiertos}
+        casoscerrados={casoscerrados}
+        casosconaccion={casosconaccion}
+        casossinaccion={casossinaccion}
+        operador={operador}
+      />
     </Layout>
   );
 };

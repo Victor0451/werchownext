@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import ReactToPrint from "react-to-print";
 import Layout from "../../components/layout/Layout";
+import Router from "next/router";
+import JsCookie from "js-cookie";
 
 const caratula = () => {
   let componentRef = React.createRef();
@@ -44,9 +46,15 @@ const caratula = () => {
       });
   };
 
+  let token = JsCookie.get("token");
+
   useEffect(() => {
-    if (id) {
-      prestamoPorId(id);
+    if (!token) {
+      Router.push("/redirect");
+    } else if (token) {
+      if (id) {
+        prestamoPorId(id);
+      }
     }
   }, []);
 

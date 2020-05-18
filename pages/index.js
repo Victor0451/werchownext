@@ -47,6 +47,7 @@ const Login = () => {
 
           jsCookie.set("token", res.data.token);
           jsCookie.set("usuario", usuario);
+          
         });
 
       Router.push("/home/home");

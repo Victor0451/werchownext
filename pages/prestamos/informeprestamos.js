@@ -1,16 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import InformePrestamos from "../../components/prestamos/InformePrestamos";
 import TablaPrestamos from "../../components/prestamos/TablaPrestamos";
 import TablaInformes from "../../components/prestamos/TablaInformes";
 import jsCookie from "js-cookie";
+import Router from "next/router";
 import axios from "axios";
 import ReactToPrint from "react-to-print";
 import toastr from "toastr";
 import moment from "moment-timezone";
 
 const informeprestamos = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   let componentRef = useRef();
   let desdeRef = React.createRef();
   let hastaRef = React.createRef();
@@ -283,76 +291,68 @@ const informeprestamos = () => {
     }
   };
 
-  let token = jsCookie.get("token");
-
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <>
-          <InformePrestamos
-            desdeRef={desdeRef}
-            hastaRef={hastaRef}
-            buscarPrestamos={buscarPrestamos}
-            error={error}
-          />
+      <>
+        <InformePrestamos
+          desdeRef={desdeRef}
+          hastaRef={hastaRef}
+          buscarPrestamos={buscarPrestamos}
+          error={error}
+        />
 
-          {prestamos ? (
-            <div>
-              <div ref={componentRef}>
-                <TablaPrestamos
-                  data={prestamos}
-                  capitalprest={capitalprest}
-                  cuotas={cuotas}
-                  intereses={intereses}
-                  cantprest={cantprest}
-                  capconint={capconint}
-                />
+        {prestamos ? (
+          <div>
+            <div ref={componentRef}>
+              <TablaPrestamos
+                data={prestamos}
+                capitalprest={capitalprest}
+                cuotas={cuotas}
+                intereses={intereses}
+                cantprest={cantprest}
+                capconint={capconint}
+              />
 
-                <TablaInformes
-                  atejerina={atejerina}
-                  mgalian={mgalian}
-                  ggimenez={ggimenez}
-                  vgorosito={vgorosito}
-                  mcarrizo={mcarrizo}
-                  sjuarez={sjuarez}
-                  totalprestamos={totalprestamos}
-                  totalcapital={totalcapital}
-                  totalinteres={totalinteres}
-                  totalcapconint={totalcapconint}
-                  totalprestamosest={totalprestamosest}
-                  totalcapitalest={totalcapitalest}
-                  totalinteresest={totalinteresest}
-                  totalcapconintest={totalcapconintest}
-                  aprobado={aprobado}
-                  pendiente={pendiente}
-                  cancelado={cancelado}
-                  rechazado={rechazado}
-                />
-              </div>
+              <TablaInformes
+                atejerina={atejerina}
+                mgalian={mgalian}
+                ggimenez={ggimenez}
+                vgorosito={vgorosito}
+                mcarrizo={mcarrizo}
+                sjuarez={sjuarez}
+                totalprestamos={totalprestamos}
+                totalcapital={totalcapital}
+                totalinteres={totalinteres}
+                totalcapconint={totalcapconint}
+                totalprestamosest={totalprestamosest}
+                totalcapitalest={totalcapitalest}
+                totalinteresest={totalinteresest}
+                totalcapconintest={totalcapconintest}
+                aprobado={aprobado}
+                pendiente={pendiente}
+                cancelado={cancelado}
+                rechazado={rechazado}
+              />
+            </div>
 
-              <div className="jumbotron container">
-                <div className="mt-4 p-4 border">
-                  <h3 className="text-center mb-4 font-weight-bold">
-                    Opciones
-                  </h3>
-                  <div className="row d-flex justify-content-center">
-                    <ReactToPrint
-                      trigger={() => (
-                        <a href="#" className="btn btn-primary">
-                          imprimir{" "}
-                        </a>
-                      )}
-                      content={() => componentRef.current}
-                    />
-                  </div>
+            <div className="jumbotron container">
+              <div className="mt-4 p-4 border">
+                <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+                <div className="row d-flex justify-content-center">
+                  <ReactToPrint
+                    trigger={() => (
+                      <a href="#" className="btn btn-primary">
+                        imprimir{" "}
+                      </a>
+                    )}
+                    content={() => componentRef.current}
+                  />
                 </div>
               </div>
             </div>
-          ) : null}
-        </>
-      )}
+          </div>
+        ) : null}
+      </>
     </Layout>
   );
 };

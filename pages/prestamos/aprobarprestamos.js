@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
+import Router from "next/router";
 import TablaPrestamosPendientes from "../../components/prestamos/TablaPrestamosPrendientes";
 import jsCookie from "js-cookie";
 import axios from "axios";
@@ -58,40 +58,40 @@ const aprobarprestamos = () => {
     guardarCapitalprest(capitalprest);
   };
 
-  useEffect(() => {
-    prestamosPendientes();
-  }, []);
-
   let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    } else if (token) {
+      prestamosPendientes();
+    }
+  }, []);
 
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <>
-          {prestamospen ? (
-            <TablaPrestamosPendientes
-              data={prestamospen}
-              capitalprest={capitalprest}
-              cuotas={cuotas}
-              intereses={intereses}
-              cantprest={cantprest}
-              capconint={capconint}
-            />
-          ) : (
-            <>
-              <div className="container">
-                <hr className="mt-4 mb-4" />
-                <div className=" mt-4 alert alert-primary text-center text-uppercase">
-                  <strong> No hay prestamos pendientes de aprobacion</strong>
-                </div>
-                <hr className="mt-4 mb-4" />
+      <>
+        {prestamospen ? (
+          <TablaPrestamosPendientes
+            data={prestamospen}
+            capitalprest={capitalprest}
+            cuotas={cuotas}
+            intereses={intereses}
+            cantprest={cantprest}
+            capconint={capconint}
+          />
+        ) : (
+          <>
+            <div className="container">
+              <hr className="mt-4 mb-4" />
+              <div className=" mt-4 alert alert-primary text-center text-uppercase">
+                <strong> No hay prestamos pendientes de aprobacion</strong>
               </div>
-            </>
-          )}
-        </>
-      )}
+              <hr className="mt-4 mb-4" />
+            </div>
+          </>
+        )}
+      </>
     </Layout>
   );
 };

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NuevaNoticia from "../../components/noticias/NuevaNoticia";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import moment from "moment-timezone";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
+import Router from "next/router";
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -16,6 +16,14 @@ const STATE_INICIAL = {
 };
 
 const nueva_noticia = () => {
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   const operadorRef = React.createRef();
   const fechaRef = React.createRef();
 
@@ -51,13 +59,10 @@ const nueva_noticia = () => {
   }
 
   let today = moment().format("DD/MM/YYYY HH:mm:ss");
-  let token = jsCookie.get("token");
   let usuario = jsCookie.get("usuario");
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
+      {!token ? null : (
         <div>
           <NuevaNoticia
             errores={errores}

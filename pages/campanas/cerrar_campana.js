@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
-import RedirectToLogin from "../../components/auth/RedirectToLogin";
 import jsCookie from "js-cookie";
 import axios from "axios";
 import CampanaActivas from "../../components/campañas/CampanasActivas";
+import Router from "next/router";
+
 
 const cerrar_campana = () => {
   const [campanas, guardarCampanas] = useState(null);
@@ -20,27 +21,27 @@ const cerrar_campana = () => {
       });
   };
 
-  useEffect(() => {
-    campanasActivas();
-  }, []);
-
   let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    } else if (token) {
+      campanasActivas();
+    }
+  }, []);
 
   return (
     <Layout>
-      {!token ? (
-        <RedirectToLogin />
-      ) : (
-        <>
-          {campanas === null ? (
-            <div className="alert alert-info border text-center text-dark">
-              No hay campañas activas
-            </div>
-          ) : (
-            <CampanaActivas campanas={campanas} />
-          )}
-        </>
-      )}
+      <>
+        {campanas === null ? (
+          <div className="alert alert-info border text-center text-dark">
+            No hay campañas activas
+          </div>
+        ) : (
+          <CampanaActivas campanas={campanas} />
+        )}
+      </>
     </Layout>
   );
 };
