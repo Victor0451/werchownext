@@ -14,11 +14,11 @@ const BuscarSocio = ({
 }) => {
   return (
     <div className="container">
-      <div className="mt-4 p-3 border border-dark jumbotron">
+      <div className="mt-4 p-4 border border-dark alert alert-primary">
         <h2 className="mt-2">
           <u>Buscar Socio</u>
         </h2>
-        <form className=" mt-4 border p-2" onSubmit={handleSubmit}>
+        <form className=" mt-4 border border-dark p-2" onSubmit={handleSubmit}>
           <div className="row">
             <div className="form-group col-md-6">
               <label>Buscar Socio</label>
@@ -54,7 +54,7 @@ const BuscarSocio = ({
 
       {socioRes ? (
         <div
-          className="text-center mt-4 jumbotron border border-dark"
+          className="text-center mt-4 alert alert-dark border border-dark"
           id="alert"
         >
           <hr />
@@ -66,6 +66,7 @@ const BuscarSocio = ({
               <h3>Ultimas Gestiones</h3>
 
               <Gestiones socioGest={socioGest} />
+
               <hr />
             </div>
           ) : null}

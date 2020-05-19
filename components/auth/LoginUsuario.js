@@ -14,7 +14,7 @@ const LoginUsuario = ({
   return (
     <div className="container ">
       <form
-        className=" container mt-4 border border-dark p-5 col-md-6 jumbotron "
+        className=" container mt-4 border border-dark p-5 col-md-6 alert alert-primary "
         onSubmit={handleSubmit}
       >
         <h1 className="mb-4">

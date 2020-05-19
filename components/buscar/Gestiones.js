@@ -8,7 +8,7 @@ const Gestiones = ({ socioGest }) => {
     );
 
   return (
-    <table className="table table-responsive">
+    <table className="table table-responsive border border-dark">
       <thead className="thead-dark">
         <tr>
           <th scope="col">CONTRATO</th>

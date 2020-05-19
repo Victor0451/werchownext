@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GestionCampanas from "../../components/campañas/GestionCampanas";
 import Layout from "../../components/layout/Layout";
 import Router from "next/router";
-
 
 import jsCookie from "js-cookie";
 

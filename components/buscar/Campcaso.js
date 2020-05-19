@@ -2,7 +2,7 @@ import React from "react";
 
 const Campcaso = ({ socioRes }) => {
   return (
-    <div className=" alert alert-success mt-4">
+    <div className=" alert alert-success border border-dark mt-4">
       {socioRes.idcampana === 1
         ? `El socio ${socioRes.contrato} pertenece a la campaña de RECUPERACION WERCHOW de MARIA GALIAN`
         : socioRes.idcampana === 2
