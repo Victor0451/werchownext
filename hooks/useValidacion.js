@@ -4,6 +4,7 @@ const useValidacion = (stateInicial, validar, fn) => {
   const [valores, guardarValores] = useState(stateInicial);
   const [errores, guardarErrores] = useState({});
   const [submitForm, guardarSubmitForm] = useState(false);
+  const [errmsg, guardarErrmsg] = useState(null);
 
   useEffect(() => {
     if (submitForm) {
@@ -13,6 +14,7 @@ const useValidacion = (stateInicial, validar, fn) => {
         fn(); //FN =  funcion que se ejecuta en el componente
       }
       guardarSubmitForm(false);
+      guardarErrmsg("Para registrar, debe llenar los campos obligatorios");
     }
   }, [errores]);
 
@@ -41,6 +43,7 @@ const useValidacion = (stateInicial, validar, fn) => {
   };
 
   return {
+    errmsg,
     valores,
     errores,
     submitForm,

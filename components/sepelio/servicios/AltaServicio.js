@@ -26,17 +26,55 @@ const AltaServicio = ({
   // DETALLES SERVICIO
   caparRef,
   avisoRef,
+  tipoAvisoRef,
   autoDueloRef,
+  tipoAutoDuelRef,
   placaRef,
   carrozaFuRef,
+  tipoCarrozaFuRef,
   salaRef,
+  tipoSalaRef,
   tramitesRef,
+  tipoTramitesRef,
   cochePortaRef,
-  adicionalRef,
+  tipoCochePortaRef,
+  retiroCuerpoRef,
+  tipoRetiroCuerpoRef,
+  trasladoRef,
+  tipoTrasladoRef,
+  observacionRef,
   // DETALLES ATAUD
   tipoAtaudRef,
   caracteristicaAtaudRef,
-
+  descriart,
+  codigo,
+  caracteristicas,
+  // VALIDACION
+  errores,
+  handleChange,
+  handleSubmit,
+  handleBlur,
+  fechafallecimiento,
+  lugarfallecimiento,
+  tiposervicio,
+  casamortuaria,
+  fechainhumacion,
+  horainhumacion,
+  cementerio,
+  tiporetirocuerpo,
+  tipotraslado,
+  tipotramites,
+  tipoaviso,
+  tipocarrozzafu,
+  tipoportacor,
+  tipoautoduel,
+  tiposalavel,
+  errmsg,
+  empresa,
+  dni,
+  apellido,
+  nombre,
+  edad,
 }) => {
   let contratoRef = React.createRef();
 
@@ -167,19 +205,125 @@ const AltaServicio = ({
           // DETALLES SERVICIO
           caparRef={caparRef}
           avisoRef={avisoRef}
+          tipoAvisoRef={tipoAvisoRef}
           autoDueloRef={autoDueloRef}
+          tipoAutoDuelRef={tipoAutoDuelRef}
           placaRef={placaRef}
           carrozaFuRef={carrozaFuRef}
+          tipoCarrozaFuRef={tipoCarrozaFuRef}
           salaRef={salaRef}
+          tipoSalaRef={tipoSalaRef}
           tramitesRef={tramitesRef}
+          tipoTramitesRef={tipoTramitesRef}
           cochePortaRef={cochePortaRef}
-          adicionalRef={adicionalRef}
+          tipoCochePortaRef={tipoCochePortaRef}
+          retiroCuerpoRef={retiroCuerpoRef}
+          tipoRetiroCuerpoRef={tipoRetiroCuerpoRef}
+          trasladoRef={trasladoRef}
+          tipoTrasladoRef={tipoTrasladoRef}
+          observacionRef={observacionRef}
           // DETALLES ATAUD
           tipoAtaudRef={tipoAtaudRef}
           caracteristicaAtaudRef={caracteristicaAtaudRef}
+          descriart={descriart}
+          codigo={codigo}
+          caracteristicas={caracteristicas}
+          // VALIDACION
+          errores={errores}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleBlur={handleBlur}
+          fechafallecimiento={fechafallecimiento}
+          lugarfallecimiento={lugarfallecimiento}
+          tiposervicio={tiposervicio}
+          casamortuaria={casamortuaria}
+          fechainhumacion={fechainhumacion}
+          horainhumacion={horainhumacion}
+          cementerio={cementerio}
+          tiporetirocuerpo={tiporetirocuerpo}
+          tipotraslado={tipotraslado}
+          tipotramites={tipotramites}
+          tipoaviso={tipoaviso}
+          tipocarrozzafu={tipocarrozzafu}
+          tipoportacor={tipoportacor}
+          tipoautoduel={tipoautoduel}
+          tiposalavel={tiposalavel}
+          errmsg={errmsg}
         />
       ) : particular !== null ? (
-        <FormAltaServicioPart />
+        <FormAltaServicioPart
+          ficha={ficha}
+          selcaso={selcaso}
+          nuevoServicio={nuevoServicio}
+          // DETALLES EXTINTO
+          empresaRef={empresaRef}
+          dniRef={dniRef}
+          apellidoRef={apellidoRef}
+          nombreRef={nombreRef}
+          edadRef={edadRef}
+          calleRef={calleRef}
+          numeroRef={numeroRef}
+          barrioRef={barrioRef}
+          fechaFallecimientoRef={fechaFallecimientoRef}
+          lugarFallecimientoRef={lugarFallecimientoRef}
+          tipoServicioRef={tipoServicioRef}
+          casaMortuariaRef={casaMortuariaRef}
+          fechaInumacionRef={fechaInumacionRef}
+          horaInumacionRef={horaInumacionRef}
+          cementerioRef={cementerioRef}
+          // DETALLES SERVICIO
+          caparRef={caparRef}
+          avisoRef={avisoRef}
+          tipoAvisoRef={tipoAvisoRef}
+          autoDueloRef={autoDueloRef}
+          tipoAutoDuelRef={tipoAutoDuelRef}
+          placaRef={placaRef}
+          carrozaFuRef={carrozaFuRef}
+          tipoCarrozaFuRef={tipoCarrozaFuRef}
+          salaRef={salaRef}
+          tipoSalaRef={tipoSalaRef}
+          tramitesRef={tramitesRef}
+          tipoTramitesRef={tipoTramitesRef}
+          cochePortaRef={cochePortaRef}
+          tipoCochePortaRef={tipoCochePortaRef}
+          retiroCuerpoRef={retiroCuerpoRef}
+          tipoRetiroCuerpoRef={tipoRetiroCuerpoRef}
+          trasladoRef={trasladoRef}
+          tipoTrasladoRef={tipoTrasladoRef}
+          observacionRef={observacionRef}
+          // DETALLES ATAUD
+          tipoAtaudRef={tipoAtaudRef}
+          caracteristicaAtaudRef={caracteristicaAtaudRef}
+          descriart={descriart}
+          codigo={codigo}
+          caracteristicas={caracteristicas}
+          // VALIDACION
+          errores={errores}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleBlur={handleBlur}
+          fechafallecimiento={fechafallecimiento}
+          lugarfallecimiento={lugarfallecimiento}
+          tiposervicio={tiposervicio}
+          casamortuaria={casamortuaria}
+          fechainhumacion={fechainhumacion}
+          horainhumacion={horainhumacion}
+          cementerio={cementerio}
+          tiporetirocuerpo={tiporetirocuerpo}
+          tipotraslado={tipotraslado}
+          tipotramites={tipotramites}
+          tipoaviso={tipoaviso}
+          tipocarrozzafu={tipocarrozzafu}
+          tipoportacor={tipoportacor}
+          tipoautoduel={tipoautoduel}
+          tiposalavel={tiposalavel}
+          errmsg={errmsg}
+          empresa={empresa}
+          dni={dni}
+          apellido={apellido}
+          nombre={nombre}
+          edad={edad}
+        />
       ) : null}
     </div>
   );

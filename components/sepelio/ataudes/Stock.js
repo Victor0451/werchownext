@@ -102,30 +102,30 @@ const Stock = ({ selcaso }) => {
                 filterAll: true,
               },
 
-              {
-                Header: "Precio",
-                id: "PRECIO_ART",
-                accessor: (d) => d.PRECIO_ART,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["PRECIO_ART"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Fecha de Alta",
-                id: "FECHA_ALTA",
-                accessor: (d) => d.FECHA_ALTA,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["FECHA_ALTA"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Fecha de Baja",
-                id: "FECHA_BAJA",
-                accessor: (d) => d.FECHA_BAJA,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["FECHA_BAJA"] }),
-                filterAll: true,
-              },
+              // {
+              //   Header: "Precio",
+              //   id: "PRECIO_ART",
+              //   accessor: (d) => d.PRECIO_ART,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, { keys: ["PRECIO_ART"] }),
+              //   filterAll: true,
+              // },
+              // {
+              //   Header: "Fecha de Alta",
+              //   id: "FECHA_ALTA",
+              //   accessor: (d) => d.FECHA_ALTA,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, { keys: ["FECHA_ALTA"] }),
+              //   filterAll: true,
+              // },
+              // {
+              //   Header: "Fecha de Baja",
+              //   id: "FECHA_BAJA",
+              //   accessor: (d) => d.FECHA_BAJA,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, { keys: ["FECHA_BAJA"] }),
+              //   filterAll: true,
+              // },
               {
                 Header: "Fecha de Actualizacion de Stock",
                 id: "FECHA_UPDATE_STOCK",
@@ -136,16 +136,16 @@ const Stock = ({ selcaso }) => {
                   }),
                 filterAll: true,
               },
-              {
-                Header: "Operador",
-                id: "NOMB_OPER",
-                accessor: (d) => d.NOMB_OPER,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, {
-                    keys: ["NOMB_OPER"],
-                  }),
-                filterAll: true,
-              },
+              // {
+              //   Header: "Operador",
+              //   id: "NOMB_OPER",
+              //   accessor: (d) => d.NOMB_OPER,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, {
+              //       keys: ["NOMB_OPER"],
+              //     }),
+              //   filterAll: true,
+              // },
               {
                 Header: "Acciones",
 
@@ -157,8 +157,9 @@ const Stock = ({ selcaso }) => {
                       data-toggle="modal"
                       data-target=".bd-example-modal-lgfmn"
                       onClick={() => selcaso(row)}
+                      data-dismiss="modal"
                     >
-                      Acciones
+                      Seleccionar
                     </button>
                   </div>
                 ),

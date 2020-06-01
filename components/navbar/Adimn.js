@@ -208,24 +208,24 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
-              Caja
+              Servicios
             </a>
             <ul className="dropdown-menu">
               <li>
                 <a
-                  href="/sepelio/nuevacaja"
+                  href="/sepelio/servicios/nuevo"
                   className="dropdown-item text-dark"
                 >
-                  Ingresar Caja
+                  Ingresar Servicio
                 </a>
               </li>
               <hr />
               <li>
                 <a
-                  href="/sepelio/listadocajas"
+                  href="/sepelio/servicios/listado"
                   className="dropdown-item text-dark"
                 >
-                  Listado Cajas Sepelio
+                  Listado De Servicios
                 </a>
               </li>
             </ul>
