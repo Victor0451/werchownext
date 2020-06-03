@@ -1,6 +1,21 @@
 export default function validarAltaServicio(valores) {
   let errores = {};
 
+  if (!valores.empresa) {
+    errores.empresa = "Este campo es obligatorio";
+  }
+  if (!valores.dni) {
+    errores.dni = "Este campo es obligatorio";
+  }
+  if (!valores.nombre) {
+    errores.nombre = "Este campo es obligatorio";
+  }
+  if (!valores.apellido) {
+    errores.apellido = "Este campo es obligatorio";
+  }
+  if (!valores.edad) {
+    errores.edad = "Este campo es obligatorio";
+  }
   if (!valores.fechafallecimiento) {
     errores.fechafallecimiento = "La fecha de fallecimiento es obligatorio";
   }
@@ -28,6 +43,5 @@ export default function validarAltaServicio(valores) {
     errores.cementerio = "Este campo es obligatorio";
   }
 
-  
   return errores;
 }

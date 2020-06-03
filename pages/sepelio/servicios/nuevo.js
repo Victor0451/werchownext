@@ -5,28 +5,6 @@ import Router from "next/router";
 import axios from "axios";
 import AltaServicio from "../../../components/sepelio/servicios/AltaServicio";
 
-// Validaciones
-import useValidacion from "../../../hooks/useValidacion";
-import validarAltaServicio from "../../../validacion/validarAltaServicio";
-
-const STATE_INICIAL = {
-  fechafallecimiento: "",
-  lugarfallecimiento: "",
-  tiposervicio: "",
-  casamortuaria: "",
-  fechainhumacion: "",
-  horainhumacion: "",
-  cementerio: "",
-  tiporetirocuerpo: "",
-  tipotraslado: "",
-  tipotramites: "",
-  tipoaviso: "",
-  tipocarrozzafu: "",
-  tipoportacor: "",
-  tipoautoduel: "",
-  tiposalavel: "",
-};
-
 const nuevo = () => {
   // DETALLES EXTINTO
   let empresaRef = React.createRef();
@@ -106,101 +84,10 @@ const nuevo = () => {
 
   // };
 
-  const {
-    errmsg,
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarAltaServicio, nuevoServicio);
-
-  const {
-    empresa,
-    dni,
-    apellido,
-    nombre,
-    edad,
-    fechafallecimiento,
-    lugarfallecimiento,
-    tiposervicio,
-    casamortuaria,
-    fechainhumacion,
-    horainhumacion,
-    cementerio,
-    tiporetirocuerpo,
-    tipotraslado,
-    tipotramites,
-    tipoaviso,
-    tipocarrozzafu,
-    tipoportacor,
-    tipoautoduel,
-    tiposalavel,
-  } = valores;
-
-  async function nuevoServicio(e) {
-    e.preventDefault();
-    try {
-      const servicio = {
-        empresa: empresaRef.current.value,
-        dni: dniRef.current.value,
-        apellido: apellidoRef.current.value,
-        nombre: nombreRef.current.value,
-        edad: edadRef.current.value,
-        calle: calleRef.current.value,
-        numero: numeroRef.current.value,
-        barrio: barrioRef.current.value,
-        fecha_fallecimiento: fechaFallecimientoRef.current.value,
-        lugar_fallecimiento: lugarFallecimientoRef.current.value,
-        tipo_servicio: tipoServicioRef.current.value,
-        casa_mortuaria: casaMortuariaRef.current.value,
-        fecha_inhumacion: fechaInumacionRef.current.value,
-        hora_inhumacion: horaInumacionRef.current.value,
-        cementerio: cementerioRef.current.value,
-        retirocuerpo: retiroCuerpoRef.current.checked,
-        tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
-        traslado: trasladoRef.current.checked,
-        tipotraslado: tipoTrasladoRef.current.value,
-        capar: caparRef.current.checked,
-        placa: placaRef.current.checked,
-        tramites: tramitesRef.current.checked,
-        tipotramites: tipoTramitesRef.current.value,
-        aviso: avisoRef.current.checked,
-        tipoaviso: tipoAvisoRef.current.value,
-        carroza: carrozaFuRef.current.checked,
-        tipocarroza: tipoCarrozaFuRef.current.value,
-        portacorona: cochePortaRef.current.checked,
-        tipococheporta: tipoCochePortaRef.current.value,
-        autoduelo: autoDueloRef.current.checked,
-        tipoautoduel: tipoAutoDuelRef.current.value,
-        salavel: salaRef.current.checked,
-        tiposalavel: tipoSalaRef.current.value,
-        ataud: tipoAtaudRef.current.value,
-        carasteristicas: caracteristicaAtaudRef.current.value,
-        observacion: observacionRef.current.value,
-      };
-
-      await axios
-        .post(
-          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-          servicio
-        )
-        .then((res) => {
-          console.log("todo ok", res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <Layout>
       <AltaServicio
         selcaso={selcaso}
-        nuevoServicio={nuevoServicio}
         // DETALLES EXTINTO
         empresaRef={empresaRef}
         dniRef={dniRef}
@@ -243,32 +130,6 @@ const nuevo = () => {
         descriart={descriart}
         codigo={codigo}
         caracteristicas={caracteristicas}
-        // VALIDACION
-        errores={errores}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleBlur={handleBlur}
-        fechafallecimiento={fechafallecimiento}
-        lugarfallecimiento={lugarfallecimiento}
-        tiposervicio={tiposervicio}
-        casamortuaria={casamortuaria}
-        fechainhumacion={fechainhumacion}
-        horainhumacion={horainhumacion}
-        cementerio={cementerio}
-        tiporetirocuerpo={tiporetirocuerpo}
-        tipotraslado={tipotraslado}
-        tipotramites={tipotramites}
-        tipoaviso={tipoaviso}
-        tipocarrozzafu={tipocarrozzafu}
-        tipoportacor={tipoportacor}
-        tipoautoduel={tipoautoduel}
-        tiposalavel={tiposalavel}
-        errmsg={errmsg}
-        empresa={empresa}
-        dni={dni}
-        apellido={apellido}
-        nombre={nombre}
-        edad={edad}
       />
     </Layout>
   );

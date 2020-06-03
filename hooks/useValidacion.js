@@ -14,7 +14,6 @@ const useValidacion = (stateInicial, validar, fn) => {
         fn(); //FN =  funcion que se ejecuta en el componente
       }
       guardarSubmitForm(false);
-      guardarErrmsg("Para registrar, debe llenar los campos obligatorios");
     }
   }, [errores]);
 

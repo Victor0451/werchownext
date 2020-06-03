@@ -49,32 +49,6 @@ const AltaServicio = ({
   descriart,
   codigo,
   caracteristicas,
-  // VALIDACION
-  errores,
-  handleChange,
-  handleSubmit,
-  handleBlur,
-  fechafallecimiento,
-  lugarfallecimiento,
-  tiposervicio,
-  casamortuaria,
-  fechainhumacion,
-  horainhumacion,
-  cementerio,
-  tiporetirocuerpo,
-  tipotraslado,
-  tipotramites,
-  tipoaviso,
-  tipocarrozzafu,
-  tipoportacor,
-  tipoautoduel,
-  tiposalavel,
-  errmsg,
-  empresa,
-  dni,
-  apellido,
-  nombre,
-  edad,
 }) => {
   let contratoRef = React.createRef();
 
@@ -185,7 +159,6 @@ const AltaServicio = ({
         <FormAltaServicio
           ficha={ficha}
           selcaso={selcaso}
-          nuevoServicio={nuevoServicio}
           // DETALLES EXTINTO
           empresaRef={empresaRef}
           dniRef={dniRef}
@@ -228,33 +201,11 @@ const AltaServicio = ({
           descriart={descriart}
           codigo={codigo}
           caracteristicas={caracteristicas}
-          // VALIDACION
-          errores={errores}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleBlur={handleBlur}
-          fechafallecimiento={fechafallecimiento}
-          lugarfallecimiento={lugarfallecimiento}
-          tiposervicio={tiposervicio}
-          casamortuaria={casamortuaria}
-          fechainhumacion={fechainhumacion}
-          horainhumacion={horainhumacion}
-          cementerio={cementerio}
-          tiporetirocuerpo={tiporetirocuerpo}
-          tipotraslado={tipotraslado}
-          tipotramites={tipotramites}
-          tipoaviso={tipoaviso}
-          tipocarrozzafu={tipocarrozzafu}
-          tipoportacor={tipoportacor}
-          tipoautoduel={tipoautoduel}
-          tiposalavel={tiposalavel}
-          errmsg={errmsg}
         />
       ) : particular !== null ? (
         <FormAltaServicioPart
           ficha={ficha}
           selcaso={selcaso}
-          nuevoServicio={nuevoServicio}
           // DETALLES EXTINTO
           empresaRef={empresaRef}
           dniRef={dniRef}
@@ -297,32 +248,6 @@ const AltaServicio = ({
           descriart={descriart}
           codigo={codigo}
           caracteristicas={caracteristicas}
-          // VALIDACION
-          errores={errores}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleBlur={handleBlur}
-          fechafallecimiento={fechafallecimiento}
-          lugarfallecimiento={lugarfallecimiento}
-          tiposervicio={tiposervicio}
-          casamortuaria={casamortuaria}
-          fechainhumacion={fechainhumacion}
-          horainhumacion={horainhumacion}
-          cementerio={cementerio}
-          tiporetirocuerpo={tiporetirocuerpo}
-          tipotraslado={tipotraslado}
-          tipotramites={tipotramites}
-          tipoaviso={tipoaviso}
-          tipocarrozzafu={tipocarrozzafu}
-          tipoportacor={tipoportacor}
-          tipoautoduel={tipoautoduel}
-          tiposalavel={tiposalavel}
-          errmsg={errmsg}
-          empresa={empresa}
-          dni={dni}
-          apellido={apellido}
-          nombre={nombre}
-          edad={edad}
         />
       ) : null}
     </div>

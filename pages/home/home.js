@@ -12,6 +12,8 @@ import Router from "next/router";
 
 const STATE_INICIAL = {
   socio: "",
+  dni: "",
+  apellido: "",
 };
 
 const home = () => {
@@ -24,9 +26,10 @@ const home = () => {
   }, []);
 
   const [error, guardarError] = useState(false);
-  const [sindato, guardarSindato] = useState(null);
+
   const [socioRes, guardarSocio] = useState(null);
   const [socioGest, guardarGestion] = useState(null);
+  const [listSocio, guardarListSocio] = useState(null);
 
   const {
     valores,
@@ -36,36 +39,82 @@ const home = () => {
     handleBlur,
   } = useValidacion(STATE_INICIAL, validarBuscarSocio, buscarSocio);
 
-  const { socio } = valores;
+  const { socio, dni, apellido } = valores;
 
   async function buscarSocio() {
     try {
       //Req body
 
-      await axios
-        .get(`http://190.231.32.232:5002/api/sgi/campanas/buscarcaso/${socio}`)
+      guardarSocio(null);
+      guardarGestion(null);
+      guardarListSocio(null);
 
-        .then((res) => {
-          if (res.data === null) {
-            guardarSindato("El socio no esta en campaña");
-          } else {
-            const socioRes = res.data;
-            guardarSocio(socioRes);
-          }
-        });
+      if (socio) {
+        await axios
+          .get(
+            `http://190.231.32.232:5002/api/sgi/campanas/buscarcaso/${socio}`
+          )
 
-      await axios
-        .get(
-          `http://190.231.32.232:5002/api/sgi/campanas/buscargestioncaso/${socio}`
-        )
+          .then((res) => {
+            if (res.data === null) {
+              guardarSindato("El socio no esta en campaña");
+            } else {
+              const socioRes = res.data;
+              guardarSocio(socioRes);
+            }
+          });
 
-        .then((res) => {
-          const socioGest = res.data;
-          guardarGestion(socioGest);
-        });
+        await axios
+          .get(
+            `http://190.231.32.232:5002/api/sgi/campanas/buscargestioncaso/${socio}`
+          )
+
+          .then((res) => {
+            const socioGest = res.data;
+            guardarGestion(socioGest);
+          });
+      } else if (dni) {
+        await axios
+          .get(
+            `http://190.231.32.232:5002/api/sgi/campanas/buscarcasodni/${dni}`
+          )
+
+          .then((res) => {
+            if (res.data === null) {
+              guardarSindato("El socio no esta en campaña");
+            } else {
+              const socioRes = res.data;
+              console.log(socioRes);
+              guardarSocio(socioRes);
+
+              axios
+                .get(
+                  `http://190.231.32.232:5002/api/sgi/campanas/buscargestioncaso/${socioRes.contrato}`
+                )
+
+                .then((res) => {
+                  const socioGest = res.data;
+                  guardarGestion(socioGest);
+                });
+            }
+          });
+      } else if (apellido) {
+        await axios
+          .get(
+            `http://190.231.32.232:5002/api/sgi/campanas/buscarcasoapellido/${apellido}`
+          )
+
+          .then((res) => {
+            if (res.data === null) {
+              guardarSindato("El socio no esta en campaña");
+            } else {
+              const listSocios = res.data;
+              guardarListSocio(listSocios);
+            }
+          });
+      }
     } catch (error) {
-      console.log(error.response.data, error.response.status);
-      guardarError(error.response.data.msg);
+      console.log(error);
     }
   }
 
@@ -75,6 +124,8 @@ const home = () => {
         <Noticias />
         <BuscarSocio
           socio={socio}
+          dni={dni}
+          apellido={apellido}
           errores={errores}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
@@ -82,13 +133,8 @@ const home = () => {
           error={error}
           socioGest={socioGest}
           socioRes={socioRes}
+          listSocio={listSocio}
         />
-
-        {sindato === null ? null : (
-          <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
-            <strong>{sindato}</strong>
-          </div>
-        )}
       </div>
     </Layout>
   );

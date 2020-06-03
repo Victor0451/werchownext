@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 import Stock from "../../../components/sepelio/ataudes/Stock";
+import axios from 'axios'
+
+// Validaciones
+import useValidacion from "../../../hooks/useValidacion";
+import validarAltaServicio from "../../../validacion/validarAltaServicio";
+
+const STATE_INICIAL = {
+  fechafallecimiento: "",
+  lugarfallecimiento: "",
+  tiposervicio: "",
+  casamortuaria: "",
+  fechainhumacion: "",
+  horainhumacion: "",
+  cementerio: "",
+};
 
 const FormAltaServicio = ({
   ficha,
@@ -47,28 +62,6 @@ const FormAltaServicio = ({
   descriart,
   codigo,
   caracteristicas,
-
-  // VALIDACION
-  errores,
-  handleChange,
-  handleSubmit,
-  handleBlur,
-  fechafallecimiento,
-  lugarfallecimiento,
-  tiposervicio,
-  casamortuaria,
-  fechainhumacion,
-  horainhumacion,
-  cementerio,
-  tiporetirocuerpo,
-  tipotraslado,
-  tipotramites,
-  tipoaviso,
-  tipocarrozzafu,
-  tipoportacor,
-  tipoautoduel,
-  tiposalavel,
-  errmsg,
 }) => {
   const [tramite, guardarTramite] = useState(null);
   const [valuetra, guardarValueTra] = useState(null);
@@ -142,6 +135,86 @@ const FormAltaServicio = ({
       guardarValueAdicional(valueadicional);
     }
   };
+
+  const {
+    errmsg,
+    valores,
+    errores,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+  } = useValidacion(STATE_INICIAL, validarAltaServicio, nuevoServicio);
+
+  const {
+    fechafallecimiento,
+    lugarfallecimiento,
+    tiposervicio,
+    casamortuaria,
+    fechainhumacion,
+    horainhumacion,
+    cementerio,
+    tiporetirocuerpo,
+  } = valores;
+
+  async function nuevoServicio() {
+    
+    try {
+      const servicio = {
+        empresa: empresaRef.current.value,
+        dni: dniRef.current.value,
+        apellido: apellidoRef.current.value,
+        nombre: nombreRef.current.value,
+        edad: edadRef.current.value,
+        calle: calleRef.current.value,
+        numero: numeroRef.current.value,
+        barrio: barrioRef.current.value,
+        fecha_fallecimiento: fechaFallecimientoRef.current.value,
+        lugar_fallecimiento: lugarFallecimientoRef.current.value,
+        tipo_servicio: tipoServicioRef.current.value,
+        casa_mortuaria: casaMortuariaRef.current.value,
+        fecha_inhumacion: fechaInumacionRef.current.value,
+        hora_inhumacion: horaInumacionRef.current.value,
+        cementerio: cementerioRef.current.value,
+        retirocuerpo: retiroCuerpoRef.current.checked,
+        tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
+        traslado: trasladoRef.current.checked,
+        tipotraslado: tipoTrasladoRef.current.value,
+        capar: caparRef.current.checked,
+        placa: placaRef.current.checked,
+        tramites: tramitesRef.current.checked,
+        tipotramites: tipoTramitesRef.current.value,
+        aviso: avisoRef.current.checked,
+        tipoaviso: tipoAvisoRef.current.value,
+        carroza: carrozaFuRef.current.checked,
+        tipocarroza: tipoCarrozaFuRef.current.value,
+        portacorona: cochePortaRef.current.checked,
+        tipococheporta: tipoCochePortaRef.current.value,
+        autoduelo: autoDueloRef.current.checked,
+        tipoautoduel: tipoAutoDuelRef.current.value,
+        salavel: salaRef.current.checked,
+        tiposalavel: tipoSalaRef.current.value,
+        ataud: tipoAtaudRef.current.value,
+        carasteristicas: caracteristicaAtaudRef.current.value,
+        observacion: observacionRef.current.value,
+      };
+
+      await axios
+        .post(
+          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+          servicio
+        )
+        .then((res) => {
+          console.log("todo ok", res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(errores);
 
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">
@@ -579,15 +652,7 @@ const FormAltaServicio = ({
                         placeholder="Lugar"
                         name="lugar"
                         ref={tipoTrasladoRef}
-                        defaultValue={tipotraslado}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipotraslado && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipotraslado}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -667,15 +732,7 @@ const FormAltaServicio = ({
                         placeholder="Seccion"
                         name="seccion"
                         ref={tipoTramitesRef}
-                        defaultValue={tipotramites}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipotramites && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipotramites}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -724,15 +781,7 @@ const FormAltaServicio = ({
                         placeholder="Aviso"
                         name="aviso"
                         ref={tipoAvisoRef}
-                        defaultValue={tipoaviso}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipoaviso && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoaviso}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -781,15 +830,7 @@ const FormAltaServicio = ({
                         placeholder="Carroza"
                         name="carroza"
                         ref={tipoCarrozaFuRef}
-                        defaultValue={tipocarrozzafu}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipocarrozzafu && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipocarrozzafu}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -838,15 +879,7 @@ const FormAltaServicio = ({
                         placeholder="Portacorona"
                         name="portacorona"
                         ref={tipoCochePortaRef}
-                        defaultValue={tipoportacor}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipoportacor && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoportacor}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -895,15 +928,7 @@ const FormAltaServicio = ({
                         placeholder="Auto Para Duelo"
                         name="autoduel"
                         ref={tipoAutoDuelRef}
-                        defaultValue={tipoautoduel}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tipoautoduel && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoautoduel}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input
@@ -952,15 +977,7 @@ const FormAltaServicio = ({
                         placeholder="Sala Velatoria"
                         name="salavel"
                         ref={tipoSalaRef}
-                        defaultValue={tiposalavel}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      {errores.tiposalavel && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tiposalavel}
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <input

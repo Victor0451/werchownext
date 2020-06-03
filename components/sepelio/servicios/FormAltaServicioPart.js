@@ -1,5 +1,25 @@
 import React, { useState } from "react";
 import Stock from "../../../components/sepelio/ataudes/Stock";
+import axios from "axios";
+
+// Validaciones
+import useValidacion from "../../../hooks/useValidacion";
+import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
+
+const STATE_INICIAL = {
+  empresa: "",
+  dni: "",
+  apellido: "",
+  nombre: "",
+  edad: "",
+  fechafallecimiento: "",
+  lugarfallecimiento: "",
+  tiposervicio: "",
+  casamortuaria: "",
+  fechainhumacion: "",
+  horainhumacion: "",
+  cementerio: "",
+};
 
 const FormAltaServicioPart = ({
   selcaso,
@@ -46,33 +66,6 @@ const FormAltaServicioPart = ({
   descriart,
   codigo,
   caracteristicas,
-
-  // VALIDACION
-  errores,
-  handleChange,
-  handleSubmit,
-  handleBlur,
-  fechafallecimiento,
-  lugarfallecimiento,
-  tiposervicio,
-  casamortuaria,
-  fechainhumacion,
-  horainhumacion,
-  cementerio,
-  tiporetirocuerpo,
-  tipotraslado,
-  tipotramites,
-  tipoaviso,
-  tipocarrozzafu,
-  tipoportacor,
-  tipoautoduel,
-  tiposalavel,
-  errmsg,
-  empresa,
-  dni,
-  apellido,
-  nombre,
-  edad,
 }) => {
   const [tramite, guardarTramite] = useState(null);
   const [valuetra, guardarValueTra] = useState(null);
@@ -147,6 +140,89 @@ const FormAltaServicioPart = ({
     }
   };
 
+  const {
+    errmsg,
+    valores,
+    errores,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+  } = useValidacion(STATE_INICIAL, validarAltaServicioPart, nuevoServicio);
+
+  const {
+    empresa,
+    dni,
+    nombre,
+    apellido,
+    edad,
+    fechafallecimiento,
+    lugarfallecimiento,
+    tiposervicio,
+    casamortuaria,
+    fechainhumacion,
+    horainhumacion,
+    cementerio,
+    tiporetirocuerpo,
+  } = valores;
+
+  async function nuevoServicio() {
+    try {
+      const servicio = {
+        empresa: empresaRef.current.value,
+        dni: dniRef.current.value,
+        apellido: apellidoRef.current.value,
+        nombre: nombreRef.current.value,
+        edad: edadRef.current.value,
+        calle: calleRef.current.value,
+        numero: numeroRef.current.value,
+        barrio: barrioRef.current.value,
+        fecha_fallecimiento: fechaFallecimientoRef.current.value,
+        lugar_fallecimiento: lugarFallecimientoRef.current.value,
+        tipo_servicio: tipoServicioRef.current.value,
+        casa_mortuaria: casaMortuariaRef.current.value,
+        fecha_inhumacion: fechaInumacionRef.current.value,
+        hora_inhumacion: horaInumacionRef.current.value,
+        cementerio: cementerioRef.current.value,
+        retirocuerpo: retiroCuerpoRef.current.checked,
+        tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
+        traslado: trasladoRef.current.checked,
+        tipotraslado: tipoTrasladoRef.current.value,
+        capar: caparRef.current.checked,
+        placa: placaRef.current.checked,
+        tramites: tramitesRef.current.checked,
+        tipotramites: tipoTramitesRef.current.value,
+        aviso: avisoRef.current.checked,
+        tipoaviso: tipoAvisoRef.current.value,
+        carroza: carrozaFuRef.current.checked,
+        tipocarroza: tipoCarrozaFuRef.current.value,
+        portacorona: cochePortaRef.current.checked,
+        tipococheporta: tipoCochePortaRef.current.value,
+        autoduelo: autoDueloRef.current.checked,
+        tipoautoduel: tipoAutoDuelRef.current.value,
+        salavel: salaRef.current.checked,
+        tiposalavel: tipoSalaRef.current.value,
+        ataud: tipoAtaudRef.current.value,
+        carasteristicas: caracteristicaAtaudRef.current.value,
+        observacion: observacionRef.current.value,
+      };
+
+      await axios
+        .post(
+          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+          servicio
+        )
+        .then((res) => {
+          console.log("todo ok", res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(errores);
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>
@@ -173,7 +249,7 @@ const FormAltaServicioPart = ({
                 type="text"
                 className="form-control"
                 placeholder="Empresa"
-                name="responsable"
+                name="empresa"
                 ref={empresaRef}
                 defaultValue={empresa}
                 onChange={handleChange}
@@ -263,7 +339,7 @@ const FormAltaServicioPart = ({
                 type="text"
                 className="form-control"
                 placeholder="Edad"
-                name="responsable"
+                name="edad"
                 ref={edadRef}
                 defaultValue={edad}
                 onChange={handleChange}
@@ -328,7 +404,7 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="date"
                 className="form-control"
                 placeholder="Fecha de Fallecimiento"
                 ref={fechaFallecimientoRef}
