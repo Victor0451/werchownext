@@ -83,7 +83,7 @@ const AsignarCampana = ({
       <div className="mt-4">
         <div className="d-flex justify-content-between">
           <h3>
-            Campaña {campana} - {empresa}: Casa Central Magia Galian{" "}
+            Campaña {campana} - {empresa}: Casa Central Maria Galian{" "}
             <span className="badge badge-pill badge-dark text-white">
               {CasaCentralMG.length}
             </span>

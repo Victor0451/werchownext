@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Stock from "../../../components/sepelio/ataudes/Stock";
-import axios from 'axios'
+import axios from "axios";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -9,7 +9,6 @@ import validarAltaServicio from "../../../validacion/validarAltaServicio";
 const STATE_INICIAL = {
   fechafallecimiento: "",
   lugarfallecimiento: "",
-  tiposervicio: "",
   casamortuaria: "",
   fechainhumacion: "",
   horainhumacion: "",
@@ -148,7 +147,6 @@ const FormAltaServicio = ({
   const {
     fechafallecimiento,
     lugarfallecimiento,
-    tiposervicio,
     casamortuaria,
     fechainhumacion,
     horainhumacion,
@@ -157,7 +155,6 @@ const FormAltaServicio = ({
   } = valores;
 
   async function nuevoServicio() {
-    
     try {
       const servicio = {
         empresa: empresaRef.current.value,
@@ -214,7 +211,7 @@ const FormAltaServicio = ({
     }
   }
 
-  console.log(errores);
+  let tiposervicio = `Servicio Asosiado Al Plan ${ficha.PLAN}`;
 
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">

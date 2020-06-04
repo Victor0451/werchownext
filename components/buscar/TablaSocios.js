@@ -51,7 +51,7 @@ const TablaSocios = ({ listSocio }) => {
           : idcampana === 22
           ? ` AUXILIAR WERCHOW de MARIA GALIAN`
           : idcampana === 23
-          ? `El socio ${contrato} pertenece a la campaña AUXILIAR de GISELA GIMENEZ`
+          ? ` AUXILIAR de GISELA GIMENEZ`
           : idcampana === 24
           ? ` AUXILIAR de MARISA CARRIZO`
           : idcampana === 25
@@ -117,23 +117,23 @@ const TablaSocios = ({ listSocio }) => {
           : idcampana === 56
           ? ` ATRASADOS WERCHOW de CAJA (PBANDUR)`
           : idcampana === 57
-          ? ` RECUPERACION WERCHOW de VFIDAO`
+          ? ` RECUPERACION WERCHOW de VALERIA FIDAO`
           : idcampana === 58
-          ? ` ATRASADOS WERCHOW de VFIDAO`
+          ? ` ATRASADOS WERCHOW de VALERIA FIDAO`
           : idcampana === 27
           ? ` ATRASADOS WERCHOW de CAJA (CVALDA)`
           : idcampana === 61
-          ? ` POLICIAS WERCHOW de VFIDAO`
+          ? ` POLICIAS WERCHOW de VALERIA FIDAO`
           : idcampana === 59
-          ? ` REINCIDENTES WERCHOW de VFIDAO`
+          ? ` REINCIDENTES WERCHOW de VALERIA FIDAO`
           : idcampana === 60
-          ? ` BLANQUEO WERCHOW de VFIDAO`
+          ? ` BLANQUEO WERCHOW de VALERIA FIDAO`
           : idcampana === 62
-          ? ` AUXILIAR WERCHOW de VFIDAO`
+          ? ` AUXILIAR WERCHOW de VALERIA FIDAO`
           : idcampana === 63
-          ? ` RECUPERACION MUTUAL de VFIDAO`
+          ? ` RECUPERACION MUTUAL de VALERIA FIDAO`
           : idcampana === 64
-          ? ` ATRASADOS MUTUAL de VFIDAO`
+          ? ` ATRASADOS MUTUAL de VALERIA FIDAO`
           : idcampana === 65
           ? ` REINCIDENTES MUTUAL de VFIDAO`
           : idcampana === 66

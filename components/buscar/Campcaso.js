@@ -114,27 +114,27 @@ const Campcaso = ({ socioRes }) => {
         : socioRes.idcampana === 56
         ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS WERCHOW de CAJA (PBANDUR)`
         : socioRes.idcampana === 57
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de RECUPERACION WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de RECUPERACION WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 58
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 27
         ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS WERCHOW de CAJA (CVALDA)`
         : socioRes.idcampana === 61
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 59
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de REINCIDENTES WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de REINCIDENTES WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 60
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de BLANQUEO WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de BLANQUEO WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 62
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de AUXILIAR WERCHOW de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de AUXILIAR WERCHOW de VALERIA FIDAO`
         : socioRes.idcampana === 63
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de RECUPERACION MUTUAL de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de RECUPERACION MUTUAL de VALERIA FIDAO`
         : socioRes.idcampana === 64
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS MUTUAL de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS MUTUAL de VALERIA FIDAO`
         : socioRes.idcampana === 65
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de REINCIDENTES MUTUAL de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de REINCIDENTES MUTUAL de VALERIA FIDAO`
         : socioRes.idcampana === 66
-        ? `El socio ${socioRes.contrato} pertenece a la campaña de BLANQUEO MUTUAL de VFIDAO`
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de BLANQUEO MUTUAL de VALERIA FIDAO`
         : null}
     </div>
   );

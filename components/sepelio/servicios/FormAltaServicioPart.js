@@ -157,7 +157,6 @@ const FormAltaServicioPart = ({
     edad,
     fechafallecimiento,
     lugarfallecimiento,
-    tiposervicio,
     casamortuaria,
     fechainhumacion,
     horainhumacion,
@@ -222,7 +221,8 @@ const FormAltaServicioPart = ({
     }
   }
 
-  console.log(errores);
+  let tiposervicio = `Servicio Particular`;
+
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>

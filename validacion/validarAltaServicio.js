@@ -8,10 +8,6 @@ export default function validarAltaServicio(valores) {
     errores.lugarfallecimiento = "El lugar de fallecimiento es obligatorio";
   }
 
-  if (!valores.tiposervicio) {
-    errores.tiposervicio = "El tipo de servicio es obligatorio";
-  }
-
   if (!valores.casamortuaria) {
     errores.casamortuaria = "La casa mortuaria es obligatorio";
   }
@@ -28,6 +24,5 @@ export default function validarAltaServicio(valores) {
     errores.cementerio = "Este campo es obligatorio";
   }
 
-  
   return errores;
 }
