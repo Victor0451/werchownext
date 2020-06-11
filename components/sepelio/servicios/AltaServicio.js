@@ -43,12 +43,17 @@ const AltaServicio = ({
   trasladoRef,
   tipoTrasladoRef,
   observacionRef,
+  cremacionRef,
   // DETALLES ATAUD
   tipoAtaudRef,
   caracteristicaAtaudRef,
   descriart,
   codigo,
   caracteristicas,
+  uso,
+  usoAtaudRef,
+  // PRECIO SERV
+  precioserv,
 }) => {
   let contratoRef = React.createRef();
 
@@ -242,12 +247,17 @@ const AltaServicio = ({
           trasladoRef={trasladoRef}
           tipoTrasladoRef={tipoTrasladoRef}
           observacionRef={observacionRef}
+          cremacionRef={cremacionRef}
           // DETALLES ATAUD
           tipoAtaudRef={tipoAtaudRef}
           caracteristicaAtaudRef={caracteristicaAtaudRef}
           descriart={descriart}
           codigo={codigo}
           caracteristicas={caracteristicas}
+          uso={uso}
+          usoAtaudRef={usoAtaudRef}
+          //PRECIO SERV
+          precioserv={precioserv}
         />
       ) : null}
     </div>

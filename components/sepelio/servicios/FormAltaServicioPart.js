@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import Stock from "../../../components/sepelio/ataudes/Stock";
 import axios from "axios";
+import toastr from "toastr";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -47,6 +49,10 @@ const FormAltaServicioPart = ({
   autoDueloRef,
   tipoAutoDuelRef,
   placaRef,
+  tipotraslado,
+  tipoaviso,
+  tipocarrozzafu,
+  tipoportacor,
   carrozaFuRef,
   tipoCarrozaFuRef,
   salaRef,
@@ -60,13 +66,22 @@ const FormAltaServicioPart = ({
   trasladoRef,
   tipoTrasladoRef,
   observacionRef,
+  cremacionRef,
+  tipotramites,
   // DETALLES ATAUD
   tipoAtaudRef,
   caracteristicaAtaudRef,
   descriart,
   codigo,
   caracteristicas,
+  uso,
+  usoAtaudRef,
+  // PRECIO SERV
+  precioserv,
 }) => {
+  const descuento1Ref = React.createRef();
+  const descuento2Ref = React.createRef();
+
   const [tramite, guardarTramite] = useState(null);
   const [valuetra, guardarValueTra] = useState(null);
 
@@ -90,6 +105,14 @@ const FormAltaServicioPart = ({
 
   const [salavel, guardarSalaVel] = useState(null);
   const [valuesalavel, guardarValueSalaVel] = useState(null);
+
+  const [cremacion, guardarCremacion] = useState(false);
+
+  const [descuento1, guardarDescuento1] = useState(null);
+
+  const [descuento2, guardarDescuento2] = useState(null);
+
+  const [errmsg1, guardarErrmsg] = useState(null);
 
   const handleChecked = (e) => {
     if (e.target.name === "tramite") {
@@ -137,6 +160,15 @@ const FormAltaServicioPart = ({
       guardarAdicional(adicional);
       const valueadicional = e.target.value;
       guardarValueAdicional(valueadicional);
+    } else if (e.target.name === "cremacion") {
+      const cremacion = e.target.value;
+      guardarCremacion(cremacion);
+    } else if (e.target.name === "descuento1") {
+      const descuento1 = e.target.value;
+      guardarDescuento1(descuento1);
+    } else if (e.target.name === "descuento2") {
+      const descuento2 = e.target.value;
+      guardarDescuento2(descuento2);
     }
   };
 
@@ -165,7 +197,20 @@ const FormAltaServicioPart = ({
   } = valores;
 
   async function nuevoServicio() {
-    try {
+    // confirmAlert({
+    //   title: "Atencion",
+    //   message: "Desea Registrar El Servicio",
+    //   buttons: [
+    //     {
+    //       label: "Si",
+    //       onClick: () => {
+    if (descuento1 === true && descuento2 === true) {
+      const errmsg1 = "Solo Puedes Seleccionar Un Descuento";
+      guardarErrmsg(errmsg1);
+    } else if (tipoAtaudRef.current.value === "") {
+      const errmsg1 = "Debes Selecciona Un Ataud";
+      guardarErrmsg(errmsg1);
+    } else {
       const servicio = {
         empresa: empresaRef.current.value,
         dni: dniRef.current.value,
@@ -203,7 +248,34 @@ const FormAltaServicioPart = ({
         ataud: tipoAtaudRef.current.value,
         carasteristicas: caracteristicaAtaudRef.current.value,
         observacion: observacionRef.current.value,
+        precio: "",
+        descuento: "",
+        estado: "",
       };
+
+      if (descuento1 === true && cremacion === false) {
+        servicio.precio = precioserv.contado;
+        servicio.descuento = precioserv.descuento1;
+        servicio.estado = 1;
+      } else if (descuento1 === true && cremacion === true) {
+        servicio.precio = precioserv.contado_cremacion;
+        servicio.descuento = precioserv.descuento1_cremacion;
+        servicio.estado = 1;
+      } else if (descuento2 === true && cremacion === false) {
+        servicio.precio = precioserv.contado;
+        servicio.descuento = precioserv.descuento2;
+        servicio.estado = 0;
+      } else if (descuento2 === true && cremacion === true) {
+        servicio.precio = precioserv.contado_cremacion;
+        servicio.descuento = precioserv.descuento2_cremacion;
+        servicio.estado = 0;
+      } else if (cremacion === true) {
+        servicio.precio = precioserv.contado_cremacion;
+      } else if (cremacion === false) {
+        servicio.precio = precioserv.contado;
+      }
+
+      console.log(servicio);
 
       await axios
         .post(
@@ -211,13 +283,11 @@ const FormAltaServicioPart = ({
           servicio
         )
         .then((res) => {
-          console.log("todo ok", res);
+          console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -1123,12 +1193,54 @@ const FormAltaServicioPart = ({
                 defaultValue={caracteristicas}
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+
+            <div className="col-md-4 mt-2 mb-4">
+              <label>
+                <strong>
+                  <u>Uso</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Uso"
+                name="uso"
+                ref={usoAtaudRef}
+                defaultValue={uso}
+              />
+            </div>
+
+            <div className="form-group col-md-4  border border-dark  p-4 ">
+              <div className="custom-control custom-checkbox ">
+                <input
+                  type="checkbox"
+                  id="cremacion"
+                  name="cremacion"
+                  className="custom-control-input"
+                  ref={cremacionRef}
+                  onChange={(e) => {
+                    handleChecked({
+                      target: {
+                        name: e.target.name,
+                        value: e.target.checked,
+                      },
+                    });
+                  }}
+                />
+                <label className="custom-control-label" htmlFor="cremacion">
+                  <strong>
+                    <u> Incluir Cremacion</u>
+                  </strong>
+                </label>
+              </div>
+            </div>
+
+            <div className="col-md-8 mt-4 mb-4">
               <button
                 type="button"
                 className="btn btn-primary btn-block"
                 data-toggle="modal"
-                data-target=".bd-example-modal-lg"
+                data-target=".bd-example-modal-xl"
               >
                 Ver Stock
               </button>
@@ -1138,9 +1250,186 @@ const FormAltaServicioPart = ({
 
         <hr className="mt-4 mb-4" />
 
+        {precioserv ? (
+          <>
+            {cremacion === true ? (
+              <>
+                <div className="border border-dark p-4">
+                  <h2 className="mt-4 mb-4">
+                    <strong>
+                      <u>Precio Con Cremacion</u>
+                    </strong>
+                  </h2>
+
+                  <div className="alert alert-info border border-dark text-center text-uppercase font-weight-bold">
+                    El Precio Final Del Servicio Sera: ${" "}
+                    {precioserv.contado_cremacion}
+                  </div>
+
+                  <hr className="mt-4 mb-4" />
+
+                  <h2 className="mt-4 mb-4">
+                    <strong>
+                      <u>Descuentos Disponibles</u>
+                    </strong>
+                  </h2>
+                  <div className=" border border-dark  text-uppercase font-weight-bold p-4">
+                    <h4 className="mt-4 mb-4">
+                      <strong>
+                        <u>Los Descuentos Disponibles Son:</u>
+                      </strong>
+                    </h4>
+                    <div className="form-group col-md-12 ">
+                      <div className="custom-control custom-checkbox ">
+                        <input
+                          type="checkbox"
+                          id="descuento1"
+                          name="descuento1"
+                          className="custom-control-input"
+                          //ref={cremacionRef}
+                          onChange={(e) => {
+                            handleChecked({
+                              target: {
+                                name: e.target.name,
+                                value: e.target.checked,
+                              },
+                            });
+                          }}
+                        />
+
+                        <label
+                          className="custom-control-label"
+                          htmlFor="descuento1"
+                        >
+                          1- $ {precioserv.descuento1_cremacion}
+                        </label>
+                      </div>
+                    </div>
+                    <div className="form-group col-md-12 ">
+                      <div className="custom-control custom-checkbox ">
+                        <input
+                          type="checkbox"
+                          id="descuento2"
+                          name="descuento2"
+                          className="custom-control-input"
+                          // ref={cremacionRef}
+                          onChange={(e) => {
+                            handleChecked({
+                              target: {
+                                name: e.target.name,
+                                value: e.target.checked,
+                              },
+                            });
+                          }}
+                        />
+                        <label
+                          className="custom-control-label"
+                          htmlFor="descuento2"
+                        >
+                          2- $ {precioserv.descuento2_cremacion} (UNICAMENTE CON
+                          AUTORIZACION){" "}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : cremacion === false ? (
+              <>
+                <div className="border border-dark p-4">
+                  <h2 className="mt-4 mb-4">
+                    <strong>
+                      <u>Precio Sin Cremacion</u>
+                    </strong>
+                  </h2>
+
+                  <div className="alert alert-info border border-dark text-center text-uppercase font-weight-bold">
+                    El Precio Final Del Servicio Sera: $ {precioserv.contado}
+                  </div>
+
+                  <hr className="mt-4 mb-4" />
+
+                  <h2 className="mt-4 mb-4">
+                    <strong>
+                      <u>Descuentos Disponibles</u>
+                    </strong>
+                  </h2>
+                  <div className=" border border-dark  text-uppercase font-weight-bold p-4">
+                    <h4 className="mt-4 mb-4">
+                      <strong>
+                        <u>Los Descuentos Disponibles Son:</u>
+                      </strong>
+                    </h4>
+                    <div className="form-group col-md-12 ">
+                      <div className="custom-control custom-checkbox ">
+                        <input
+                          type="checkbox"
+                          id="descuento1"
+                          name="descuento1"
+                          className="custom-control-input"
+                          //ref={cremacionRef}
+                          onChange={(e) => {
+                            handleChecked({
+                              target: {
+                                name: e.target.name,
+                                value: e.target.checked,
+                              },
+                            });
+                          }}
+                        />
+
+                        <label
+                          className="custom-control-label"
+                          htmlFor="descuento1"
+                        >
+                          1- $ {precioserv.descuento1}
+                        </label>
+                      </div>
+                    </div>
+                    <div className="form-group col-md-12 ">
+                      <div className="custom-control custom-checkbox ">
+                        <input
+                          type="checkbox"
+                          id="descuento2"
+                          name="descuento2"
+                          className="custom-control-input"
+                          // ref={cremacionRef}
+                          onChange={(e) => {
+                            handleChecked({
+                              target: {
+                                name: e.target.name,
+                                value: e.target.checked,
+                              },
+                            });
+                          }}
+                        />
+                        <label
+                          className="custom-control-label"
+                          htmlFor="descuento2"
+                        >
+                          2- $ {precioserv.descuento2} (UNICAMENTE CON
+                          AUTORIZACION){" "}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : null}
+          </>
+        ) : null}
+
+        <hr className="mt-4 mb-4" />
+
         {errmsg && (
           <div className="alert alert-danger text-center p-2 mt-4 mb-4">
             {errmsg}
+          </div>
+        )}
+
+        {errmsg1 && (
+          <div className="alert alert-danger text-center p-2 mt-4 mb-4">
+            {errmsg1}
           </div>
         )}
 
@@ -1150,12 +1439,12 @@ const FormAltaServicioPart = ({
       </form>
 
       <div
-        className="modal fade bd-example-modal-lg"
+        className="modal fade bd-example-modal-xl"
         role="dialog"
         aria-labelledby="myLargeModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg">
+        <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Stock de Ataudes</h5>
@@ -1178,9 +1467,6 @@ const FormAltaServicioPart = ({
                 data-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
               </button>
             </div>
           </div>

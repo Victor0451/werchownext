@@ -41,111 +41,58 @@ const Stock = ({ selcaso }) => {
             Header: "STOCK DE ATAUDES",
             columns: [
               {
-                Header: "Cod. Articulo",
-                id: "COD_ART",
-                accessor: (d) => d.COD_ART,
+                Header: "Ataud",
+                id: "nombre",
+                accessor: (d) => d.nombre,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["COD_ART"] }),
+                  matchSorter(rows, filter.value, { keys: ["nombre"] }),
                 filterAll: true,
               },
               {
-                Header: "Descripcion",
-                id: "DESCRI_ART",
-                accessor: (d) => d.DESCRI_ART,
+                Header: "Medidas",
+                id: "medidas",
+                accessor: (d) => d.medidas,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["DESCRI_ART"] }),
+                  matchSorter(rows, filter.value, { keys: ["medidas"] }),
                 filterAll: true,
               },
 
               {
-                Header: "Tamaño",
-                id: "TAMA_LARGO",
-                accessor: (d) => d.TAMA_LARGO,
+                Header: "Uso",
+                id: "uso",
+                accessor: (d) => d.uso,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["TAMA_LARGO"] }),
+                  matchSorter(rows, filter.value, { keys: ["uso"] }),
                 filterAll: true,
               },
 
               {
-                Header: "Stock ACT",
-                id: "STOCK_ACT",
-                accessor: (d) => d.STOCK_ACT,
+                Header: "Fabricante",
+                id: "fabricante",
+                accessor: (d) => d.fabricante,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["STOCK_ACT"] }),
+                  matchSorter(rows, filter.value, { keys: ["fabricante"] }),
                 filterAll: true,
               },
 
               {
-                Header: "Stock SRL",
-                id: "STOCK_SRL",
-                accessor: (d) => d.STOCK_SRL,
+                Header: "Stock",
+                id: "stock",
+                accessor: (d) => d.stock,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["STOCK_SRL"] }),
+                  matchSorter(rows, filter.value, { keys: ["stock"] }),
                 filterAll: true,
               },
 
               {
-                Header: "Caracteristica",
-                id: "CARACT",
-                accessor: (d) => d.CARACT,
+                Header: "Estado",
+                id: "estado",
+                accessor: (d) => d.estado,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["CARACT"] }),
+                  matchSorter(rows, filter.value, { keys: ["estado"] }),
                 filterAll: true,
               },
 
-              {
-                Header: "Modelos",
-                id: "MODELOS",
-                accessor: (d) => d.MODELOS,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["MODELOS"] }),
-                filterAll: true,
-              },
-
-              // {
-              //   Header: "Precio",
-              //   id: "PRECIO_ART",
-              //   accessor: (d) => d.PRECIO_ART,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, { keys: ["PRECIO_ART"] }),
-              //   filterAll: true,
-              // },
-              // {
-              //   Header: "Fecha de Alta",
-              //   id: "FECHA_ALTA",
-              //   accessor: (d) => d.FECHA_ALTA,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, { keys: ["FECHA_ALTA"] }),
-              //   filterAll: true,
-              // },
-              // {
-              //   Header: "Fecha de Baja",
-              //   id: "FECHA_BAJA",
-              //   accessor: (d) => d.FECHA_BAJA,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, { keys: ["FECHA_BAJA"] }),
-              //   filterAll: true,
-              // },
-              {
-                Header: "Fecha de Actualizacion de Stock",
-                id: "FECHA_UPDATE_STOCK",
-                accessor: (d) => d.FECHA_UPDATE_STOCK,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, {
-                    keys: ["FECHA_UPDATE_STOCK"],
-                  }),
-                filterAll: true,
-              },
-              // {
-              //   Header: "Operador",
-              //   id: "NOMB_OPER",
-              //   accessor: (d) => d.NOMB_OPER,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, {
-              //       keys: ["NOMB_OPER"],
-              //     }),
-              //   filterAll: true,
-              // },
               {
                 Header: "Acciones",
 

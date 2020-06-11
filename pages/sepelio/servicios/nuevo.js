@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import JsCookie from "js-cookie";
 import Layout from "../../../components/layout/Layout";
 import Router from "next/router";
-import axios from "axios";
 import AltaServicio from "../../../components/sepelio/servicios/AltaServicio";
+import axios from "axios";
 
 const nuevo = () => {
   // DETALLES EXTINTO
@@ -43,14 +43,18 @@ const nuevo = () => {
   let retiroCuerpoRef = React.createRef();
   let tipoRetiroCuerpoRef = React.createRef();
   let observacionRef = React.createRef();
+  let cremacionRef = React.createRef();
 
   // DETALLES ATAUD
   let tipoAtaudRef = React.createRef();
   let caracteristicaAtaudRef = React.createRef();
+  let usoAtaudRef = React.createRef();
 
   const [descriart, guardarDescriArt] = useState(null);
   const [codigo, guardarCodigo] = useState(null);
   const [caracteristicas, guardarCaracteristica] = useState(null);
+  const [uso, guardarUso] = useState(null);
+  const [precioserv, guardarPrecioServ] = useState(null);
 
   let token = JsCookie.get("token");
 
@@ -60,29 +64,36 @@ const nuevo = () => {
     }
   }, []);
 
-  const selcaso = (index) => {
-    let descriart = index.original.DESCRI_ART;
-    guardarDescriArt(descriart);
+  const precioServicio = async (codigo) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/servicio/precioservicio/${codigo}`
+      )
 
-    let codigo = index.original.CODIGO;
-    guardarCodigo(codigo);
-
-    let caracteristicas = index.original.CARACT;
-    guardarCaracteristica(caracteristicas);
+      .then((res) => {
+        const precioserv = res.data;
+        guardarPrecioServ(precioserv);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  // const handleBlur = (e) => {
-  //   console.log(e);
-  //   if (e.target.value === "") {
-  //     const errores = "Este Campo es Obligatorio";
-  //     guardarErrores(errores);
-  //     console.log("vacio perro");
-  //   } else if (e.target.value !== "") {
-  //     const errores = null;
-  //     guardarErrores(errores);
-  //   }
+  const selcaso = (index) => {
+    let descriart = index.original.nombre;
+    guardarDescriArt(descriart);
 
-  // };
+    let codigo = index.original.codigo;
+    guardarCodigo(codigo);
+
+    let caracteristicas = index.original.medidas;
+    guardarCaracteristica(caracteristicas);
+
+    let uso = index.original.uso;
+    guardarUso(uso);
+
+    precioServicio(codigo);
+  };
 
   return (
     <Layout>
@@ -124,12 +135,17 @@ const nuevo = () => {
         trasladoRef={trasladoRef}
         tipoTrasladoRef={tipoTrasladoRef}
         observacionRef={observacionRef}
+        cremacionRef={cremacionRef}
         // DETALLES ATAUD
         tipoAtaudRef={tipoAtaudRef}
         caracteristicaAtaudRef={caracteristicaAtaudRef}
         descriart={descriart}
         codigo={codigo}
         caracteristicas={caracteristicas}
+        uso={uso}
+        usoAtaudRef={usoAtaudRef}
+        //PRECIO
+        precioserv={precioserv}
       />
     </Layout>
   );
