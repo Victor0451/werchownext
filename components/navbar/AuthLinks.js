@@ -1,6 +1,7 @@
 import React from "react";
 import Adimn from "./Adimn";
 import Recuperadoras from "./Recuperadoras";
+import Gerencia from "./Gerencia";
 import Logout from "./Logout";
 
 const AuthLinks = ({ userData }) => {
@@ -14,6 +15,8 @@ const AuthLinks = ({ userData }) => {
           <Adimn />
         ) : userData.perfil === 2 ? (
           <Recuperadoras />
+        ) : userData.perfil === 3 ? (
+          <Gerencia />
         ) : null}
       </div>
       <span className="badge badge-light text-uppercase mr-2 ">

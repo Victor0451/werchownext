@@ -3,6 +3,7 @@ import { confirmAlert } from "react-confirm-alert";
 import Stock from "../../../components/sepelio/ataudes/Stock";
 import axios from "axios";
 import toastr from "toastr";
+import Router from "next/router";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -68,6 +69,8 @@ const FormAltaServicioPart = ({
   observacionRef,
   cremacionRef,
   tipotramites,
+  tipoautoduel,
+  tiposalavel,
   // DETALLES ATAUD
   tipoAtaudRef,
   caracteristicaAtaudRef,
@@ -79,9 +82,6 @@ const FormAltaServicioPart = ({
   // PRECIO SERV
   precioserv,
 }) => {
-  const descuento1Ref = React.createRef();
-  const descuento2Ref = React.createRef();
-
   const [tramite, guardarTramite] = useState(null);
   const [valuetra, guardarValueTra] = useState(null);
 
@@ -172,6 +172,20 @@ const FormAltaServicioPart = ({
     }
   };
 
+  const postServicio = async (servicio) => {
+    await axios
+      .post(
+        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+        servicio
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const {
     errmsg,
     valores,
@@ -196,99 +210,103 @@ const FormAltaServicioPart = ({
     tiporetirocuerpo,
   } = valores;
 
-  async function nuevoServicio() {
-    // confirmAlert({
-    //   title: "Atencion",
-    //   message: "Desea Registrar El Servicio",
-    //   buttons: [
-    //     {
-    //       label: "Si",
-    //       onClick: () => {
-    if (descuento1 === true && descuento2 === true) {
-      const errmsg1 = "Solo Puedes Seleccionar Un Descuento";
-      guardarErrmsg(errmsg1);
-    } else if (tipoAtaudRef.current.value === "") {
-      const errmsg1 = "Debes Selecciona Un Ataud";
-      guardarErrmsg(errmsg1);
-    } else {
-      const servicio = {
-        empresa: empresaRef.current.value,
-        dni: dniRef.current.value,
-        apellido: apellidoRef.current.value,
-        nombre: nombreRef.current.value,
-        edad: edadRef.current.value,
-        calle: calleRef.current.value,
-        numero: numeroRef.current.value,
-        barrio: barrioRef.current.value,
-        fecha_fallecimiento: fechaFallecimientoRef.current.value,
-        lugar_fallecimiento: lugarFallecimientoRef.current.value,
-        tipo_servicio: tipoServicioRef.current.value,
-        casa_mortuaria: casaMortuariaRef.current.value,
-        fecha_inhumacion: fechaInumacionRef.current.value,
-        hora_inhumacion: horaInumacionRef.current.value,
-        cementerio: cementerioRef.current.value,
-        retirocuerpo: retiroCuerpoRef.current.checked,
-        tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
-        traslado: trasladoRef.current.checked,
-        tipotraslado: tipoTrasladoRef.current.value,
-        capar: caparRef.current.checked,
-        placa: placaRef.current.checked,
-        tramites: tramitesRef.current.checked,
-        tipotramites: tipoTramitesRef.current.value,
-        aviso: avisoRef.current.checked,
-        tipoaviso: tipoAvisoRef.current.value,
-        carroza: carrozaFuRef.current.checked,
-        tipocarroza: tipoCarrozaFuRef.current.value,
-        portacorona: cochePortaRef.current.checked,
-        tipococheporta: tipoCochePortaRef.current.value,
-        autoduelo: autoDueloRef.current.checked,
-        tipoautoduel: tipoAutoDuelRef.current.value,
-        salavel: salaRef.current.checked,
-        tiposalavel: tipoSalaRef.current.value,
-        ataud: tipoAtaudRef.current.value,
-        carasteristicas: caracteristicaAtaudRef.current.value,
-        observacion: observacionRef.current.value,
-        precio: "",
-        descuento: "",
-        estado: "",
-      };
+  function nuevoServicio() {
+    confirmAlert({
+      title: "Atencion",
+      message: "Desea agregar otro locatario",
+      buttons: [
+        {
+          label: "Si",
+          onClick: () => {
+            if (descuento1 === true && descuento2 === true) {
+              const errmsg1 = "Solo Puedes Seleccionar Un Descuento";
+              guardarErrmsg(errmsg1);
+            } else if (tipoAtaudRef.current.value === "") {
+              const errmsg1 = "Debes Selecciona Un Ataud";
+              guardarErrmsg(errmsg1);
+            } else {
+              const servicio = {
+                empresa: empresaRef.current.value,
+                dni: dniRef.current.value,
+                apellido: apellidoRef.current.value,
+                nombre: nombreRef.current.value,
+                edad: edadRef.current.value,
+                calle: calleRef.current.value,
+                numero: numeroRef.current.value,
+                barrio: barrioRef.current.value,
+                fecha_fallecimiento: fechaFallecimientoRef.current.value,
+                lugar_fallecimiento: lugarFallecimientoRef.current.value,
+                tipo_servicio: tipoServicioRef.current.value,
+                casa_mortuaria: casaMortuariaRef.current.value,
+                fecha_inhumacion: fechaInumacionRef.current.value,
+                hora_inhumacion: horaInumacionRef.current.value,
+                cementerio: cementerioRef.current.value,
+                retirocuerpo: retiroCuerpoRef.current.checked,
+                tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
+                traslado: trasladoRef.current.checked,
+                tipotraslado: tipoTrasladoRef.current.value,
+                capar: caparRef.current.checked,
+                placa: placaRef.current.checked,
+                tramites: tramitesRef.current.checked,
+                tipotramites: tipoTramitesRef.current.value,
+                aviso: avisoRef.current.checked,
+                tipoaviso: tipoAvisoRef.current.value,
+                carroza: carrozaFuRef.current.checked,
+                tipocarroza: tipoCarrozaFuRef.current.value,
+                portacorona: cochePortaRef.current.checked,
+                tipococheporta: tipoCochePortaRef.current.value,
+                autoduelo: autoDueloRef.current.checked,
+                tipoautoduel: tipoAutoDuelRef.current.value,
+                salavel: salaRef.current.checked,
+                tiposalavel: tipoSalaRef.current.value,
+                ataud: tipoAtaudRef.current.value,
+                caracteristicas: caracteristicas,
+                cremacion: cremacionRef.current.checked,
+                uso: uso,
+                observacion: observacionRef.current.value,
+                precio: "",
+                descuento: "",
+                estado: "",
+              };
 
-      if (descuento1 === true && cremacion === false) {
-        servicio.precio = precioserv.contado;
-        servicio.descuento = precioserv.descuento1;
-        servicio.estado = 1;
-      } else if (descuento1 === true && cremacion === true) {
-        servicio.precio = precioserv.contado_cremacion;
-        servicio.descuento = precioserv.descuento1_cremacion;
-        servicio.estado = 1;
-      } else if (descuento2 === true && cremacion === false) {
-        servicio.precio = precioserv.contado;
-        servicio.descuento = precioserv.descuento2;
-        servicio.estado = 0;
-      } else if (descuento2 === true && cremacion === true) {
-        servicio.precio = precioserv.contado_cremacion;
-        servicio.descuento = precioserv.descuento2_cremacion;
-        servicio.estado = 0;
-      } else if (cremacion === true) {
-        servicio.precio = precioserv.contado_cremacion;
-      } else if (cremacion === false) {
-        servicio.precio = precioserv.contado;
-      }
+              if (descuento1 === true && cremacion === false) {
+                servicio.precio = precioserv.contado;
+                servicio.descuento = precioserv.descuento1;
+                servicio.estado = 1;
+              } else if (descuento1 === true && cremacion === true) {
+                servicio.precio = precioserv.contado_cremacion;
+                servicio.descuento = precioserv.descuento1_cremacion;
+                servicio.estado = 1;
+              } else if (descuento2 === true && cremacion === false) {
+                servicio.precio = precioserv.contado;
+                servicio.descuento = precioserv.descuento2;
+                servicio.estado = 0;
+              } else if (descuento2 === true && cremacion === true) {
+                servicio.precio = precioserv.contado_cremacion;
+                servicio.descuento = precioserv.descuento2_cremacion;
+                servicio.estado = 0;
+              } else if (cremacion === true) {
+                servicio.precio = precioserv.contado_cremacion;
+              } else if (cremacion === false) {
+                servicio.precio = precioserv.contado;
+              }
+              postServicio(servicio);
+            }
 
-      console.log(servicio);
+            toastr.success("El Servicio Se Registro Con Exito", "ATENCION");
 
-      await axios
-        .post(
-          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-          servicio
-        )
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+            setInterval(() => {
+              Router.push("/sepelio/servicios/listado");
+            }, 500);
+          },
+        },
+
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
   }
 
   let tiposervicio = `Servicio Particular`;
@@ -339,7 +357,7 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="DNI"
                 name="dni"
@@ -406,7 +424,7 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Edad"
                 name="edad"
@@ -444,7 +462,7 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Numero"
                 name="responsable"

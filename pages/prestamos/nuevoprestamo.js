@@ -62,7 +62,7 @@ const nuevoprestamo = () => {
   const { contrato, capadev, legajo, neto, anti } = valores;
 
   async function altaPrestamo() {
-    let fecha = moment().format("DD/MM/YYYY");
+    let fecha = moment().format("YYYY/MM/DD");
 
     const prestamo = {
       fechacarga: fecha,
@@ -92,11 +92,17 @@ const nuevoprestamo = () => {
           "El 30% del sueldo neto supera al valor de la cuota del prestamo",
           "Atencion"
         );
+        setTimeout(() => {
+          Router.push("/prestamos/imprimircaratula");
+        }, 500);
       } else {
         toastr.error(
           "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
           "Atencion"
         );
+        setTimeout(() => {
+          Router.push("/prestamos/imprimircaratula");
+        }, 500);
       }
 
       await axios

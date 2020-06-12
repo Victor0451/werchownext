@@ -1,7 +1,7 @@
 /* WERCHOW && MUTUAL LOGO */
 .werchowlogo {
-  width: 150px;
-  height: 25px;
+  width: 160px;
+  height: 40px;
 }
 
 .mutuallogo {
@@ -129,6 +129,13 @@
   size: A4;
   size: 1in 1in;
   margin: 20pt 20pt 20pt;
+  -webkit-print-color-adjust: exact;
+}
+
+.print-notrehab {
+  size: A4;
+  size: 1in 1in;
+  /* margin: 5pt 5pt 5pt; */
   -webkit-print-color-adjust: exact;
 }
 
