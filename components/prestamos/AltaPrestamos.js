@@ -97,102 +97,102 @@ const AltaPrestamos = ({
 
   return (
     <div className="container">
-      <h2 className="mt-4 mb-4">
-        <strong>
-          <u>Alta de Prestamos: Datos del Operador</u>
-        </strong>
-      </h2>
+      <div className=" mt-4 border border-dark alert alert-primary p-4">
+        <h2 className=" mb-4">
+          <strong>
+            <u>Alta de Prestamos: Datos del Operador</u>
+          </strong>
+        </h2>
+        <div className="d-flex justify-content-between">
+          <div className="row mt-2 mb-2">
+            <div className="form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Operador: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={user.usuario}
+                readOnly
+              />
+            </div>
 
-      <div className="d-flex justify-content-between border border-dark p-2">
-        <div className="row mt-2 mb-2">
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Operador: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={user.usuario}
-              readOnly
-            />
-          </div>
+            <div className="form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Codigo: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={user.codigo}
+                ref={operadorRef}
+                readOnly
+              />
+            </div>
 
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Codigo: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={user.codigo}
-              ref={operadorRef}
-              readOnly
-            />
-          </div>
-
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Fecha: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={fecha}
-              readOnly
-            />
+            <div className="form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Fecha: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={fecha}
+                readOnly
+              />
+            </div>
           </div>
         </div>
+
+        <hr className="mt-4 mb-4" />
+
+        <h2 className="mt-4 mb-4">
+          <strong>
+            <u>Ingrese N° de Ficha</u>
+          </strong>
+        </h2>
+        <form className="mt-4 border border-dark p-2" onSubmit={buscarTitular}>
+          <div className="row mb-4">
+            <div className="form-group col-md-6">
+              <label>
+                <strong>
+                  {" "}
+                  <u> N° de Ficha: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ficha"
+                name="contrato"
+                defaultValue={contrato}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.contrato && (
+                <div className="mt-2 form-group  alert alert-danger">
+                  {errores.contrato}
+                </div>
+              )}
+            </div>
+
+            <div className="form-group col-md-6 mt-4">
+              <button type="submit" className="btn btn-block btn-primary">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-
-      <hr className="mt-4 mb-4" />
-
-      <h2 className="mt-4 mb-4">
-        <strong>
-          <u>Ingrese N° de Ficha</u>
-        </strong>
-      </h2>
-      <form className="mt-4 border border-dark p-2" onSubmit={buscarTitular}>
-        <div className="row mb-4">
-          <div className="form-group col-md-6">
-            <label>
-              <strong>
-                {" "}
-                <u> N° de Ficha: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Ficha"
-              name="contrato"
-              defaultValue={contrato}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errores.contrato && (
-              <div className="mt-2 form-group  alert alert-danger">
-                {errores.contrato}
-              </div>
-            )}
-          </div>
-
-          <div className="form-group col-md-6 mt-4">
-            <button type="submit" className="btn btn-block btn-primary">
-              Buscar
-            </button>
-          </div>
-        </div>
-      </form>
-
       {ficha !== null ? (
         <>
           {prestamos !== null ? (

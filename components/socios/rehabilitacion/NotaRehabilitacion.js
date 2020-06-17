@@ -1,36 +1,64 @@
 import React from "react";
+import moment from "moment-timezone";
 
-const NotaRehabilitacion = ({ ficha, fecha }) => {
+const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa }) => {
   return (
     <div className=" p-1">
       <div className="border border-dark p-4">
         <div className="row   mb-4 p-2">
-          <div className="col-md-6 d-flex justify-content-start mt-4">
-            <img
-              className="werchowlogo"
-              src="/img/logo.png"
-              alt="werchowlogo"
-            />
-          </div>
+          {empresa === "W" ? (
+            <div className="col-md-6 d-flex justify-content-start">
+              <img
+                className="werchowlogo"
+                src="/img/logo.png"
+                alt="werchowlogo"
+              />
+            </div>
+          ) : empresa === "M" ? (
+            <div className="col-md-6 d-flex justify-content-start">
+              <img
+                className="mutuallogo"
+                src="/img/logom.jpg"
+                alt="mutuallogo"
+              />
+            </div>
+          ) : null}
 
           <div className="col-md-6 d-flex justify-content-end mt-4">
-            San Salvador de Jujuy, <u>{fecha}</u>
+            <font size="4">
+              San Salvador de Jujuy, <u>{fecha}</u>
+            </font>
           </div>
 
           <div className="row  mt-4">
             <div className="col-md-12 mt-2">
-              <strong>
-                <u>Sr/A. Afiliado</u>: {""}
-              </strong>
-              {ficha.APELLIDOS}, {ficha.NOMBRES}
+              <font size="4">
+                <strong>
+                  <u>Sr/A. Afiliado</u>: {""}
+                </strong>
+                {ficha.APELLIDOS}, {ficha.NOMBRES}
+              </font>
             </div>
 
             <div className="col-md-12 mt-2 ">
-              <strong>
-                <u>Legajo</u>:
-              </strong>{" "}
-              {ficha.CONTRATO}
+              <font size="4">
+                <strong>
+                  <u>Legajo</u>:
+                </strong>{" "}
+                {ficha.CONTRATO}
+              </font>
             </div>
+
+            <h3 className="col-md-12 mt-2 ">
+              <font size="4" className="badge badge-info">
+                <strong>
+                  <u>Nueva Vigencia De Sepelio</u>:
+                </strong>{" "}
+                {vigencia ? (
+                  <strong>{moment(vigencia).format("DD/MM/YYYY")}</strong>
+                ) : null}
+              </font>
+            </h3>
           </div>
 
           <div className="row d-flex justify-content-center col-md-12 mt-4 mb-4">
@@ -40,7 +68,7 @@ const NotaRehabilitacion = ({ ficha, fecha }) => {
           </div>
 
           <p className="text-justify mt-2 p-2">
-            <font size="4">
+            <font size="5">
               Por la presente solicito la reafiliación a la Empresa Werchow
               Servicios Sociales S.R.L., a los efectos de poder efectivizar el
               pago de las cuotas de la cual me encuentro en mora por cuanto su

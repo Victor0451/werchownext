@@ -123,31 +123,27 @@ const nuevoprestamo = () => {
 
   return (
     <Layout>
-      {!token ? null : (
-        <>
-          <AltaPrestamos
-            usuario={usuario}
-            contrato={contrato}
-            capital={capital}
-            capadev={capadev}
-            legajo={legajo}
-            neto={neto}
-            anti={anti}
-            errores={errores}
-            handleChange={handleChange}
-            handleChanges={handleChanges}
-            capital={capital}
-            cuotas={cuotas}
-            renovapres={renovapres}
-            handleSubmit={handleSubmit}
-            handleBlur={handleBlur}
-            error={error}
-            valcuotaRef={valcuotaRef}
-            operadorRef={operadorRef}
-            renoverror={renoverror}
-          />
-        </>
-      )}
+      <AltaPrestamos
+        usuario={usuario}
+        contrato={contrato}
+        capital={capital}
+        capadev={capadev}
+        legajo={legajo}
+        neto={neto}
+        anti={anti}
+        errores={errores}
+        handleChange={handleChange}
+        handleChanges={handleChanges}
+        capital={capital}
+        cuotas={cuotas}
+        renovapres={renovapres}
+        handleSubmit={handleSubmit}
+        handleBlur={handleBlur}
+        error={error}
+        valcuotaRef={valcuotaRef}
+        operadorRef={operadorRef}
+        renoverror={renoverror}
+      />
     </Layout>
   );
 };

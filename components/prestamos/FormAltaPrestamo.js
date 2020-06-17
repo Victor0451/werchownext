@@ -44,10 +44,8 @@ const FormAltaPrestamo = ({
   let mesf = moment().add(cuotas, "months").format("MM/YYYY");
 
   return (
-    <div>
-      <hr className="mt-4 mb-4" />
-
-      <h2 className="mt-4 mb-4">
+    <div className="alert alert-primary border border-dark p-4">
+      <h2 className="mb-4">
         <strong>
           <u>Informacion Del Afiliado</u>
         </strong>

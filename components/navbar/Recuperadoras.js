@@ -95,6 +95,45 @@ export default class Recuperadoras extends Component {
             </li>
           </ul>
         </li>
+
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Socios
+          </a>
+          <ul className="dropdown-menu">
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Notificaciones
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/socios/rehabilitacion/rehabilitacion"
+                    className="dropdown-item text-dark"
+                  >
+                    Rehabilitacion
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li>
+              <a href="/socios/ficha/ficha" className="dropdown-item text-dark">
+                Buscar Ficha
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
     );
   }
