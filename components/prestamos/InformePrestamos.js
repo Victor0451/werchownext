@@ -2,8 +2,8 @@ import React from "react";
 
 const InformePrestamos = ({ desdeRef, hastaRef, buscarPrestamos, error }) => {
   return (
-    <div className="container">
-      <h2 className="mt-4 mb-4">
+    <div className="container mt-4 border border-dark alert alert-primary p-4">
+      <h2 className=" mb-4">
         <strong>
           <u>Reportes de Prestamos</u>
         </strong>

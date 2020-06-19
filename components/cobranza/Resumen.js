@@ -5,8 +5,8 @@ import AnoSelect from "react-select";
 
 const Resumen = ({ buscarNumeros, handleChange }) => {
   return (
-    <div className="container">
-      <h2 className="mt-4 mb-4 ">
+    <div className="container mt-4 alert alert-primary border border-dark p-4">
+      <h2 className=" mb-4 ">
         <strong>
           <u>Seleccione El Periodo De La Cobranza</u>
         </strong>

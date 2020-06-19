@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
-import axios from "axios";
-import ficha from "../../../pages/socios/ficha/ficha";
 
 const Pagos = ({ pagos }) => {
   if (!pagos) return <Spinner />;

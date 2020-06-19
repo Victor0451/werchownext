@@ -335,8 +335,10 @@ const informeprestamos = () => {
               />
             </div>
 
-            <div className="jumbotron container">
-              <div className="mt-4 p-4 border">
+            <div className="container">
+              <hr className="mt-4 mb-4" />
+
+              <div className=" alert alert-primary border border-dark p-4">
                 <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
                 <div className="row d-flex justify-content-center">
                   <ReactToPrint

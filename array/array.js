@@ -422,6 +422,7 @@ export const operadoressep = [
 export const operadorescamp = [
   { value: "mgalian", label: "Maria Galian" },
   { value: "ggimenez", label: "Gisela Gimenez" },
+  { value: "vfidao", label: "Valeria Fidao" },
   { value: "mcarrizo", label: "Marisa Carrizo" },
   { value: "vgorosito", label: "Vanesa Gorosito" },
   { value: "sjuarez", label: "Silvia Juarez" },
@@ -460,4 +461,19 @@ export const estadopres = [
   { value: "APROBADO", label: "APROBADO" },
   { value: "CANCELADO", label: "CANCELADO" },
   { value: "RECHAZADO", label: "RECHAZADO" },
+];
+
+export const estadocartera = [
+  { value: 1, label: "Atrasados 1000" },
+  { value: 2, label: "Atrasados Tarjetas" },
+  { value: 3, label: "Baches Banco" },
+  { value: 4, label: "Morosos 1001" },
+  { value: 5, label: "Morosos Tarjetas" },
+];
+
+export const zona = [
+  { value: 1, label: "Oficina Casa Central" },
+  { value: 3, label: "Oficina Palpala" },
+  { value: 5, label: "Oficina Perico" },
+  { value: 60, label: "Oficina San Pedro" },
 ];

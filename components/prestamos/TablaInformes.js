@@ -23,7 +23,7 @@ const TablaInformes = ({
   return (
     <div className="container">
       <hr className="mt-4 mb-4" />
-      <div className="mt-4 mb-4">
+      <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
         <h2 className="mt-4 mb-4">
           <strong>
             <u>Prestamos Aprobados Realizados por Operador</u>
@@ -189,7 +189,7 @@ const TablaInformes = ({
 
       <hr className="mt-4 mb-4" />
 
-      <div className="mt-4 mb-4">
+      <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
         <h2 className="mt-4 mb-4">
           <strong>
             <u>Prestamos Segun Estado</u>

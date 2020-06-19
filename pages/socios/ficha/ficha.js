@@ -3,8 +3,9 @@ import Layout from "../../../components/layout/Layout";
 import SocioFicha from "../../../components/socios/ficha/SocioFicha";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import axios from "axios";
-import JsCookie from "js-cookie";
+import jsCookie from "js-cookie";
 import Pagos from "../../../components/socios/ficha/Pagos";
+import Router from "next/router";
 
 const ficha = () => {
   let contratoRef = React.createRef();
@@ -142,7 +143,14 @@ const ficha = () => {
     }
   };
 
-  console.log(pagos);
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    }
+  }, []);
+
   return (
     <Layout>
       <SocioFicha

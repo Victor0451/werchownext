@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import BarrasAcostadas from "../layout/graficos/BarrasAcostadas";
 import Torta from "../layout/graficos/Torta";
 import Barras from "../layout/graficos/Barra";
-import ReactToPrint from "react-to-print";
 
 const DatosCampana = ({
   llamin,
@@ -18,11 +17,9 @@ const DatosCampana = ({
   casossinaccion,
   operador,
 }) => {
-  let componentRef = useRef();
   return (
-    <div>
-      <hr className="border border-dark mt-4 mb-4" />
-      <div className="print-estadistica" ref={componentRef}>
+    <div className="border border-dark p-4">
+      <div >
         <div className="row mt-4 mb-4">
           <h1>
             <strong>
@@ -131,21 +128,7 @@ const DatosCampana = ({
         </div>
       </div>
 
-      <div className="jumbotron">
-        <div className="mt-4 p-4 border">
-          <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
-          <div className="row d-flex justify-content-center">
-            <ReactToPrint
-              trigger={() => (
-                <a href="#" className="btn btn-primary">
-                  imprimir{" "}
-                </a>
-              )}
-              content={() => componentRef.current}
-            />
-          </div>
-        </div>
-      </div>
+     
     </div>
   );
 };

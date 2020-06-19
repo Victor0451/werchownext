@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import Resultados from "../../components/campañas/Resultados";
+
 import toastr from "toastr";
 import axios from "axios";
 import Router from "next/router";
-
 
 const resultado_campana = () => {
   let token = jsCookie.get("token");

@@ -10,7 +10,6 @@ import moment from "moment-timezone";
 import toastr from "toastr";
 import Router from "next/router";
 
-
 const resumen = () => {
   let token = jsCookie.get("token");
 
@@ -503,10 +502,12 @@ const resumen = () => {
                     />
                   </div>
 
-                  <div className="jumbotron">
-                    <div className="mt-4 p-4 border">
+                  <div className="container">
+                    <hr className="mt-4 mb-4" />
+
+                    <div className="alert alert-primary border border-dark p-4">
                       <h3 className="text-center mb-4 font-weight-bold">
-                        Opciones
+                        <u>Opciones</u>
                       </h3>
                       <div className="row d-flex justify-content-center">
                         <ReactToPrint

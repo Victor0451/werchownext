@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "babel-plugin-emotion": "^10.0.33",
     "chart.js": "^2.9.3",
+    "fs": "^0.0.1-security",
     "js-cookie": "^2.2.1",
     "match-sorter": "^4.1.0",
     "moment-timezone": "^0.5.31",
@@ -20,10 +21,12 @@
     "react-chartjs-2": "^2.9.0",
     "react-confirm-alert": "^2.6.1",
     "react-dom": "16.13.1",
+    "react-export-excel": "^0.5.3",
     "react-select": "^3.0.8",
     "react-table": "^6.11.5",
     "react-to-print": "^2.7.0",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "xlsx": "^0.16.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

@@ -13,42 +13,45 @@ const TablaPrestamos = ({
 }) => {
   return (
     <div className="mt-4 container">
-      <hr />
+      <hr className="mt-4 mb-4" />
 
-      <h2 className="mt-4 mb-4">
-        <strong>
-          <u>Resumen</u>
-        </strong>
-      </h2>
-
-      <div className="row jumbotron d-fex justify-content-between border border-dark p-2">
-        <div className="col-md-4">
+      <div className="alert alert-primary border border-dark p-4">
+        <h2 className="mb-4">
           <strong>
-            <u>Cantidad de Prestamos</u>: {cantprest}
+            <u>Resumen</u>
           </strong>
-        </div>
+        </h2>
 
-        <div className="col-md-4">
-          <strong>
-            <u>Capital Prestado</u>: {capitalprest}
-          </strong>
-        </div>
+        <div className="row jumbotron d-fex justify-content-between border border-dark p-2">
+          <div className="col-md-4">
+            <strong>
+              <u>Cantidad de Prestamos</u>: {cantprest}
+            </strong>
+          </div>
 
-        <div className="col-md-4">
-          <strong>
-            <u>Intereses Generados</u>: {intereses}
-          </strong>
-        </div>
+          <div className="col-md-4">
+            <strong>
+              <u>Capital Prestado</u>: {capitalprest}
+            </strong>
+          </div>
 
-        <div className="col-md-4 mt-4">
-          <strong>
-            <u>Capital Con Intereses</u>: {capconint}
-          </strong>
+          <div className="col-md-4">
+            <strong>
+              <u>Intereses Generados</u>: {intereses}
+            </strong>
+          </div>
+
+          <div className="col-md-4 mt-4">
+            <strong>
+              <u>Capital Con Intereses</u>: {capconint}
+            </strong>
+          </div>
         </div>
       </div>
-      <hr />
 
-      <div className="border border-dark p-2">
+      <hr className="mt-4 mb-4"/>
+
+      <div className="border border-dark p-4">
         <ReactTable
           data={data}
           filterable
