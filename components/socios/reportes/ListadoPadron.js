@@ -7,8 +7,19 @@ const ListadoPadron = ({ padron, cartera, zona }) => {
   const [tipocartera, guardarTipoCartera] = useState(null);
   const [sucursal, guardarSucursal] = useState(null);
 
+  const morosidad = (padron) => {
+
+    let total = 0;
+
+    for (let i = 0; i < padron.length; i++) {
+      total += padron[i].IMPORTE
+    }
+
+    return total;
+  }
+
   const idPadron = () => {
-    console.log(zona);
+
     if (cartera === 1) {
       guardarTipoCartera("Atrasado 1000");
     } else if (cartera === 2) {
@@ -37,7 +48,7 @@ const ListadoPadron = ({ padron, cartera, zona }) => {
   }, []);
 
   if (!padron) return <Spinner />;
-  console.log(padron);
+
   return (
     <div className="container mt-4 border border-dark ">
       <h2 className="mt-4 mb-4">
@@ -48,6 +59,14 @@ const ListadoPadron = ({ padron, cartera, zona }) => {
         </strong>
       </h2>
       <div className="border border-dark p-2">
+
+        <div className="mt-4 mb-4 alert alert-info text-center text-uppercase">
+          <div className="d-flex justify-content-between">
+            <div className="col-md-6"><u>Total de Socios</u>: {padron.length}</div>
+            <div className="col-md-6"><u>Morosidad</u>:$ {morosidad(padron)}</div>
+          </div>
+        </div>
+
         <ReactTable
           data={padron}
           filterable
