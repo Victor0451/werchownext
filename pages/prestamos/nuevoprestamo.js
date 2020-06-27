@@ -39,6 +39,10 @@ const nuevoprestamo = () => {
   const [renovapres, guardarRenovaprest] = useState(null);
 
   const handleChanges = (value, flag) => {
+    // guardarCapital(null);
+    // guardarCuotas(null);
+    // guardarRenovaprest(null);
+
     if (flag === "cuotas") {
       const cuotas = value.value;
       guardarCuotas(cuotas);
@@ -79,44 +83,46 @@ const nuevoprestamo = () => {
       estado: "PENDIENTE",
     };
 
-    if (prestamo.renova === null) {
-      const renoverror = "Debes indicar si es renovacion o no";
-      guardarRenoverror(renoverror);
-    } else {
-      guardarRenoverror(null);
+    console.log(prestamo);
 
-      let porcentaje = Math.floor(prestamo.neto * 30) / 100;
+    // if (prestamo.renova === null) {
+    //   const renoverror = "Debes indicar si es renovacion o no";
+    //   guardarRenoverror(renoverror);
+    // } else {
+    //   guardarRenoverror(null);
 
-      if (porcentaje > prestamo.valcuota) {
-        toastr.success(
-          "El 30% del sueldo neto supera al valor de la cuota del prestamo",
-          "Atencion"
-        );
-        setTimeout(() => {
-          Router.push("/prestamos/imprimircaratula");
-        }, 500);
-      } else {
-        toastr.error(
-          "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
-          "Atencion"
-        );
-        setTimeout(() => {
-          Router.push("/prestamos/imprimircaratula");
-        }, 500);
-      }
+    //   let porcentaje = Math.floor(prestamo.neto * 30) / 100;
 
-      await axios
-        .post(
-          `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
-          prestamo
-        )
-        .then((res) => {
-          console.log(res.status);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    //   if (porcentaje > prestamo.valcuota) {
+    //     toastr.success(
+    //       "El 30% del sueldo neto supera al valor de la cuota del prestamo",
+    //       "Atencion"
+    //     );
+    //     setTimeout(() => {
+    //       Router.push("/prestamos/imprimircaratula");
+    //     }, 500);
+    //   } else {
+    //     toastr.error(
+    //       "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
+    //       "Atencion"
+    //     );
+    //     setTimeout(() => {
+    //       Router.push("/prestamos/imprimircaratula");
+    //     }, 500);
+    //   }
+
+    //   await axios
+    //     .post(
+    //       `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
+    //       prestamo
+    //     )
+    //     .then((res) => {
+    //       console.log(res.status);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
   }
 
   let usuario = jsCookie.get("usuario");
@@ -134,7 +140,6 @@ const nuevoprestamo = () => {
         errores={errores}
         handleChange={handleChange}
         handleChanges={handleChanges}
-        capital={capital}
         cuotas={cuotas}
         renovapres={renovapres}
         handleSubmit={handleSubmit}

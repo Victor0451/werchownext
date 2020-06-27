@@ -23,12 +23,17 @@ const FormAltaPrestamo = ({
 }) => {
   const [cuoprest, guardarCuoprest] = useState(null);
   const [capadev, guardarCapadev] = useState(null);
+  const [flag, guardarFlag] = useState(false);
 
-  const calculoPrestamo = (e) => {
-    e.preventDefault();
+  const calculoPrestamo = (capital, cuotas) => {
+    //e.preventDefault();
+
+    guardarFlag(false);
 
     let principal = parseInt(capital);
-    let interest = 120 / 100 / 12;
+    console.log(principal);
+
+    let interest = 130 / 100 / 12;
     let payments = parseInt(cuotas);
     let x = Math.pow(1 + interest, payments);
     let monthly = ((principal * x * interest) / (x - 1)).toFixed(0);
@@ -38,6 +43,8 @@ const FormAltaPrestamo = ({
     let capadev = monthly * payments;
 
     guardarCapadev(capadev);
+
+    guardarFlag(true);
   };
 
   let mesi = moment().add(1, "months").format("MM/YYYY");
@@ -233,7 +240,9 @@ const FormAltaPrestamo = ({
           <div className="col-md-4 ">
             <button
               className="btn btn-primary btn-block "
-              onClick={calculoPrestamo}
+              onClick={() => calculoPrestamo(capital, cuotas)}
+              data-toggle="modal"
+              data-target="#exampleModal"
             >
               {" "}
               Calcular Cuota
@@ -241,190 +250,222 @@ const FormAltaPrestamo = ({
           </div>
         </div>
 
-        {cuoprest !== null ? (
-          <div className="mt-4 mb-4">
-            <hr className="mt-4 mb-4" />
-
-            <h2 className="mt-4 mb-4">
-              <strong>
-                <u>Informacion Del Prestamo Solicitado</u>
-              </strong>
-            </h2>
-
-            <div className="row d-flex mt-4 mb-4 border border-dark">
-              <div className="form-group col-md-3">
-                <label>
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-xl p-2">
+            <div className="modal-content border border-dark ">
+              <div className="modal-header alert alert-primary">
+                <h2 className="mt-4 mb-4">
                   <strong>
-                    {" "}
-                    <u> Capital Solicitado: </u>
+                    <u>Informacion Del Prestamo Solicitado</u>
                   </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  defaultValue={capital}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> N° de Cuotas: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  defaultValue={cuotas}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Cuota Mensual: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  defaultValue={cuoprest}
-                  ref={valcuotaRef}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Capital A Devolver: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  defaultValue={capadev}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Legajo: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="legajo"
-                  defaultValue={legajo}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errores.legajo && (
-                  <div className="mt-2 form-group  alert alert-danger">
-                    {errores.legajo}
-                  </div>
-                )}
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Sueldo Neto: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="neto"
-                  defaultValue={neto}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errores.neto && (
-                  <div className="mt-2 form-group  alert alert-danger">
-                    {errores.neto}
-                  </div>
-                )}
-              </div>
-
-              <div className="form-group col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Atigüedad: </u>
-                  </strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="anti"
-                  defaultValue={anti}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errores.anti && (
-                  <div className="mt-2 form-group  alert alert-danger">
-                    {errores.anti}
-                  </div>
-                )}
-              </div>
-
-              <div className="col-md-3">
-                <label>
-                  <strong>
-                    {" "}
-                    <u> Ronovacion: </u>
-                  </strong>
-                </label>
-                <RenovaSelect
-                  options={renovaprest}
-                  placeholder={"Renovacion"}
-                  onChange={(defaultValue) =>
-                    handleChanges(defaultValue, "renova")
-                  }
-                />
-                {renoverror !== null ? (
-                  <div className="mt-2 form-group  alert alert-danger">
-                    {renoverror}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="form-group col-md-12">
+                </h2>
                 <button
-                  className="btn btn-primary btn-block"
-                  //onClick={this.cargarPrestamos}
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
                 >
-                  Cargar Prestamo
+                  <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            </div>
+              <div className="modal-body ">
+                {flag === true ? (
+                  <div className=" mb-4 p-4">
+                    <div className="row d-flex mt-4 mb-4 border border-dark">
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Capital Solicitado: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={capital}
+                          readOnly
+                        />
+                      </div>
 
-            <div className="row mt-2 d-flex justify-content-center alert alert-info text-center">
-              {" "}
-              EL PRESTAMO EMPEZARA A DEBITARSE EN{"   "}
-              <strong>
-                {" "}
-                <u> {mesi} </u>{" "}
-              </strong>{" "}
-              Y FINALIZARIA EN{" "}
-              <strong>
-                {" "}
-                <u> {mesf} </u>{" "}
-              </strong>{" "}
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> N° de Cuotas: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={cuotas}
+                          readOnly
+                        />
+                      </div>
+
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Cuota Mensual: </u>
+                          </strong>
+                        </label>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={cuoprest}
+                          readOnly
+                          ref={valcuotaRef}
+                        />
+                      </div>
+
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Capital A Devolver: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={capadev}
+                          readOnly
+                        />
+                      </div>
+
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Legajo: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="legajo"
+                          defaultValue={legajo}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errores.legajo && (
+                          <div className="mt-2 form-group  alert alert-danger">
+                            {errores.legajo}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Sueldo Neto: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="neto"
+                          defaultValue={neto}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errores.neto && (
+                          <div className="mt-2 form-group  alert alert-danger">
+                            {errores.neto}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="form-group col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Atigüedad: </u>
+                          </strong>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="anti"
+                          defaultValue={anti}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errores.anti && (
+                          <div className="mt-2 form-group  alert alert-danger">
+                            {errores.anti}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="col-md-3">
+                        <label>
+                          <strong>
+                            {" "}
+                            <u> Ronovacion: </u>
+                          </strong>
+                        </label>
+                        <RenovaSelect
+                          options={renovaprest}
+                          placeholder={"Renovacion"}
+                          onChange={(defaultValue) =>
+                            handleChanges(defaultValue, "renova")
+                          }
+                        />
+                        {renoverror !== null ? (
+                          <div className="mt-2 form-group  alert alert-danger">
+                            {renoverror}
+                          </div>
+                        ) : null}
+                      </div>
+
+                      <div className="form-group col-md-12">
+                        <button
+                          className="btn btn-primary btn-block"
+                          //onClick={this.cargarPrestamos}
+                        >
+                          Cargar Prestamo
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="row mt-2 d-flex justify-content-center alert alert-info text-center">
+                      {" "}
+                      EL PRESTAMO EMPEZARA A DEBITARSE EN{"   "}
+                      <strong>
+                        {" "}
+                        <u> {mesi} </u>{" "}
+                      </strong>{" "}
+                      Y FINALIZARIA EN{" "}
+                      <strong>
+                        {" "}
+                        <u> {mesf} </u>{" "}
+                      </strong>{" "}
+                    </div>
+                  </div>
+                ) : flag === false ? null : null}
+              </div>
             </div>
           </div>
-        ) : null}
+        </div>
+        {/* <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-primary"
+            data-dismiss="modal"
+          >
+            Cerrar
+          </button>
+        </div> */}
       </form>
     </div>
   );

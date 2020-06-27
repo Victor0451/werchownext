@@ -270,7 +270,7 @@ const estadopadron = () => {
             <div className="mt-4 p-4 border">
               <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
               <div className="row d-flex justify-content-center">
-                <ExportarPadron padron={padron} />
+                <ExportarPadron padron={padron} cartera={cartera} zona={zona} />
               </div>
             </div>
           </div>

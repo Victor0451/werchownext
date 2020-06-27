@@ -38,6 +38,28 @@ export const meses = [
   { value: 12, label: "DICIEMBRE" },
 ];
 
+export const mesventas = [
+  { value: "ENERO", label: "ENERO" },
+  { value: "FEBRERO", label: "FEBRERO" },
+  { value: "MARZO", label: "MARZO" },
+  { value: "ABRIL", label: "ABRIL" },
+  { value: "MAYO", label: "MAYO" },
+  { value: "JUNIO", label: "JUNIO" },
+  { value: "JULIO", label: "JULIO" },
+  { value: "AGOSTO", label: "AGOSTO" },
+  { value: "SEPTIEMBRE", label: "SEPTIEMBRE" },
+  { value: "OCTUBRE", label: "OCTUBRE" },
+  { value: "NOVIEMBRE", label: "NOVIEMBRE" },
+  { value: "DICIEMBRE", label: "DICIEMBRE" },
+];
+
+export const anosventas = [
+  { value: 2017, label: "2017" },
+  { value: 2018, label: "2018" },
+  { value: 2019, label: "2019" },
+  { value: 2020, label: "2020" },
+];
+
 export const anos = [{ value: 2020, label: "2020" }];
 
 export const conceptossep = [
