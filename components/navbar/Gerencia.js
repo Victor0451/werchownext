@@ -282,7 +282,7 @@ export default class Gerencia extends Component {
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    href="/ventas/consultaventas"
+                    href="/ventas/consulta"
                     className="dropdown-item text-dark"
                   >
                     Ventas por periodo

@@ -260,16 +260,7 @@ const Adimn = () => {
                 >
                   Ventas por periodo
                 </a>
-              </li>
-              <hr />
-              <li>
-                {/* <a
-                            href="/sepelio/listadocajas"
-                            className="dropdown-item text-dark"
-                          >
-                            Listado Cajas Sepelio
-                          </a> */}
-              </li>
+              </li>            
             </ul>
           </li>
         </ul>
