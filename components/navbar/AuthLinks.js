@@ -3,6 +3,7 @@ import Adimn from "./Adimn";
 import Recuperadoras from "./Recuperadoras";
 import Gerencia from "./Gerencia";
 import Logout from "./Logout";
+import Ventas from "./Ventas";
 
 const AuthLinks = ({ userData }) => {
   return (
@@ -17,6 +18,8 @@ const AuthLinks = ({ userData }) => {
           <Recuperadoras />
         ) : userData.perfil === 3 ? (
           <Gerencia />
+        ) : userData.perfil === 5 ? (
+          <Ventas />
         ) : null}
       </div>
       <span className="badge badge-light text-uppercase mr-2 ">

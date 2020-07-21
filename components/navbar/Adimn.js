@@ -254,13 +254,10 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a
-                  href="/ventas/consulta"
-                  className="dropdown-item text-dark"
-                >
+                <a href="/ventas/consulta" className="dropdown-item text-dark">
                   Ventas por periodo
                 </a>
-              </li>            
+              </li>
             </ul>
           </li>
         </ul>
@@ -276,6 +273,27 @@ const Adimn = () => {
           Socios
         </a>
         <ul className="dropdown-menu">
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Club Werchow
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/socios/clubwerchow/solicitudes"
+                  className="dropdown-item text-dark"
+                >
+                  Solicitudes
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
           <li className="dropdown-submenu">
             <a
               href="#"
