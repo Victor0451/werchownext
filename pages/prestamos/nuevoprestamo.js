@@ -85,44 +85,44 @@ const nuevoprestamo = () => {
 
     console.log(prestamo);
 
-    // if (prestamo.renova === null) {
-    //   const renoverror = "Debes indicar si es renovacion o no";
-    //   guardarRenoverror(renoverror);
-    // } else {
-    //   guardarRenoverror(null);
+    if (prestamo.renova === null) {
+      const renoverror = "Debes indicar si es renovacion o no";
+      guardarRenoverror(renoverror);
+    } else {
+      guardarRenoverror(null);
 
-    //   let porcentaje = Math.floor(prestamo.neto * 30) / 100;
+      let porcentaje = Math.floor(prestamo.neto * 30) / 100;
 
-    //   if (porcentaje > prestamo.valcuota) {
-    //     toastr.success(
-    //       "El 30% del sueldo neto supera al valor de la cuota del prestamo",
-    //       "Atencion"
-    //     );
-    //     setTimeout(() => {
-    //       Router.push("/prestamos/imprimircaratula");
-    //     }, 500);
-    //   } else {
-    //     toastr.error(
-    //       "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
-    //       "Atencion"
-    //     );
-    //     setTimeout(() => {
-    //       Router.push("/prestamos/imprimircaratula");
-    //     }, 500);
-    //   }
+      if (porcentaje > prestamo.valcuota) {
+        toastr.success(
+          "El 30% del sueldo neto supera al valor de la cuota del prestamo",
+          "Atencion"
+        );
+        setTimeout(() => {
+          Router.push("/prestamos/imprimircaratula");
+        }, 500);
+      } else {
+        toastr.error(
+          "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
+          "Atencion"
+        );
+        setTimeout(() => {
+          Router.push("/prestamos/imprimircaratula");
+        }, 500);
+      }
 
-    //   await axios
-    //     .post(
-    //       `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
-    //       prestamo
-    //     )
-    //     .then((res) => {
-    //       console.log(res.status);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
+      await axios
+        .post(
+          `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
+          prestamo
+        )
+        .then((res) => {
+          console.log(res.status);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   let usuario = jsCookie.get("usuario");

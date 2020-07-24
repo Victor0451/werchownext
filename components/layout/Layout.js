@@ -29,7 +29,9 @@ const Layout = (props) => {
         />
         <title>WERCHOW - SGI</title>
       </Head>
+
       <Navbar />
+
       <main>{props.children}</main>
       <script
         src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

@@ -301,6 +301,27 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Legajo Virtual
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/socios/legajovirtual/subirarchivo"
+                  className="dropdown-item text-dark"
+                >
+                  Subir Archivos
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Notificaciones
             </a>
             <ul className="dropdown-menu">

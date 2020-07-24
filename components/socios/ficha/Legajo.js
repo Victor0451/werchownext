@@ -3,7 +3,7 @@ import React from "react";
 const Legajo = ({ ficha }) => {
   if (!ficha)
     return (
-      <div className="mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
         EL SOCIO NO EXISTE O ESTA DADO DE BAJA
       </div>
     );

@@ -3,7 +3,14 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 
 const Pagos = ({ pagos }) => {
-  if (!pagos) return null;
+  if (!pagos)
+    return (
+      <div className="container">
+        <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
+          EL SOCIO NO REGISTRA PAGOS
+        </div>
+      </div>
+    );
 
   return (
     <div className="container mt-4 border border-dark ">

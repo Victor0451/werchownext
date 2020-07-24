@@ -11,6 +11,28 @@
 
 /* MENU Y SUB MENU */
 
+.navbar {
+  text-transform: uppercase;
+  font-weight: 20px;
+  font-size: 0.7rem;
+  height: 20px;
+
+  /* background: rgba(3, 36, 66, 0.685) !important; */
+}
+
+.navbar-brand img {
+  height: 2rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff !important;
+  padding-top: 0.8rem;
+}
+
+li {
+  width: 4.2rem;
+}
+
 .dropdown-submenu {
   position: relative;
 }
