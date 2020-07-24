@@ -99,16 +99,15 @@ const nuevoprestamo = () => {
           "Atencion"
         );
         setTimeout(() => {
-          Router.push("/prestamos/imprimircaratula");
+          // Router.push("/prestamos/imprimircaratula");
+          window.location.replace("/prestamos/imprimircaratula");
         }, 500);
       } else {
         toastr.error(
           "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
           "Atencion"
         );
-        setTimeout(() => {
-          Router.push("/prestamos/imprimircaratula");
-        }, 500);
+        window.location.replace("/prestamos/imprimircaratula");
       }
 
       await axios
