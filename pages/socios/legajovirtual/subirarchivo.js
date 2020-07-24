@@ -8,7 +8,6 @@ import FormSubirArchivo from "../../../components/socios/legajoVirtual/FormSubir
 import BuscarSocio from "../../../components/socios/legajoVirtual/BuscarSocio";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import Pagos from "../../../components/socios/ficha/Pagos";
-import PromiseFtp from "promise-ftp";
 
 const subirarchivo = () => {
   let contratoRef = React.createRef();
