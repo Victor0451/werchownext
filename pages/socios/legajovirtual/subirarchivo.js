@@ -8,6 +8,7 @@ import FormSubirArchivo from "../../../components/socios/legajoVirtual/FormSubir
 import BuscarSocio from "../../../components/socios/legajoVirtual/BuscarSocio";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import Pagos from "../../../components/socios/ficha/Pagos";
+import LegajoArchivos from "../../../components/socios/legajoVirtual/LegajoArchivos";
 
 const subirarchivo = () => {
   let contratoRef = React.createRef();
@@ -16,10 +17,12 @@ const subirarchivo = () => {
   const [pagos, guardarPagos] = useState(null);
   const [contrato, guardarContrato] = useState(null);
 
+  const [empresa, guardarEmpresa] = useState(null);
+
   const [errores, guardarErrores] = useState(null);
   const [ficha, guardarFicha] = useState(null);
 
-  const [prueba, guardarPrueba] = useState(null);
+  const [archivos, guardarArchivos] = useState(null);
 
   let token = jsCookie.get("token");
   useEffect(() => {
@@ -27,6 +30,34 @@ const subirarchivo = () => {
       Router.push("/redirect");
     }
   }, []);
+
+  const traerArchivos = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/archivos/legajovirtual/listaarchivos/${contrato}`
+      )
+      .then((res) => {
+        let archivos = res.data;
+        guardarArchivos(archivos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerArchivosM = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/archivos/legajovirtualm/listaarchivos/${contrato}`
+      )
+      .then((res) => {
+        let archivos = res.data;
+        guardarArchivos(archivos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const traerPagos = async (contrato) => {
     await axios
@@ -111,6 +142,8 @@ const subirarchivo = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivos(ficha.CONTRATO);
+          guardarEmpresa("W");
         })
         .catch((error) => {
           console.log(error);
@@ -151,6 +184,8 @@ const subirarchivo = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivosM(contrato);
+          guardarEmpresa("M");
         })
         .catch((error) => {
           console.log(error);
@@ -190,7 +225,10 @@ const subirarchivo = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivos(ficha.CONTRATO);
+          guardarEmpresa("W");
         })
+
         .catch((error) => {
           console.log(error);
         });
@@ -232,6 +270,8 @@ const subirarchivo = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivosM(ficha.CONTRATO);
+          guardarEmpresa("M");
         })
         .catch((error) => {
           console.log(error);
@@ -256,8 +296,6 @@ const subirarchivo = () => {
         ficha={ficha}
       />
 
-      <img src="http://190.231.32.232:5002/api/archivos/legajovirtual/archivo" />
-
       {ficha !== null ? (
         <div className="container mt-4 alert alert-primary border border-dark p-4">
           <h2 className=" mb-4">
@@ -274,7 +312,11 @@ const subirarchivo = () => {
 
           <hr className="container mt-4 mb-4" />
 
-          <FormSubirArchivo contrato={contrato} />
+          <LegajoArchivos archivos={archivos} empresa={empresa} />
+
+          <hr className="container mt-4 mb-4" />
+
+          <FormSubirArchivo contrato={contrato} empresa={empresa} />
         </div>
       ) : null}
     </Layout>
