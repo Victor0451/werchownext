@@ -81,6 +81,7 @@ const nuevoprestamo = () => {
       valcuota: valcuotaRef.current.value,
       neto,
       estado: "PENDIENTE",
+      codptmleg: `${contrato}-${moment().format("YYYY-MM-DD")}`,
     };
 
     console.log(prestamo);

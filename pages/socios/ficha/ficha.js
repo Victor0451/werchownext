@@ -16,9 +16,38 @@ const ficha = () => {
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [flag, guardarFlag] = useState(null);
-
+  const [archivos, guardarArchivos] = useState(null);
+  const [empresa, guardarEmpresa] = useState(null);
 
   const [errores, guardarErrores] = useState(null);
+
+  const traerArchivos = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/archivos/legajovirtual/listaarchivos/${contrato}`
+      )
+      .then((res) => {
+        let archivos = res.data;
+        guardarArchivos(archivos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerArchivosM = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/archivos/legajovirtualm/listaarchivos/${contrato}`
+      )
+      .then((res) => {
+        let archivos = res.data;
+        guardarArchivos(archivos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const traerPagos = async (contrato) => {
     await axios
@@ -103,6 +132,8 @@ const ficha = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivos(ficha.CONTRATO);
+          guardarEmpresa("W");
         })
         .catch((error) => {
           console.log(error);
@@ -143,6 +174,8 @@ const ficha = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivosM(ficha.CONTRATO);
+          guardarEmpresa("M");
         })
         .catch((error) => {
           console.log(error);
@@ -182,6 +215,8 @@ const ficha = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivos(ficha.CONTRATO);
+          guardarEmpresa("W");
         })
         .catch((error) => {
           console.log(error);
@@ -223,6 +258,8 @@ const ficha = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivosM(ficha.CONTRATO);
+          guardarEmpresa("M");
         })
         .catch((error) => {
           console.log(error);
@@ -233,84 +270,83 @@ const ficha = () => {
     }
   };
 
-  const buscarTitularApellido = async (e) => {
-    e.preventDefault();
+  // const buscarTitularApellido = async (e) => {
+  //   e.preventDefault();
 
-    guardarListado(null);
-    guardarErrores(null);
-    guardarPagos(null);
-    guardarFlag('W')
+  //   guardarListado(null);
+  //   guardarErrores(null);
+  //   guardarPagos(null);
+  //   guardarFlag("W");
 
-    if (apellidoRef.current.value !== "") {
-      let apellido = apellidoRef.current.value;
+  //   if (apellidoRef.current.value !== "") {
+  //     let apellido = apellidoRef.current.value;
 
-      await axios
-        .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titularapellido/${apellido}`
-        )
-        .then((res) => {
-          let listado = res.data[0];
-          console.log(listado);
-          guardarListado(listado);
+  //     await axios
+  //       .get(
+  //         `http://190.231.32.232:5002/api/werchow/maestro/titularapellido/${apellido}`
+  //       )
+  //       .then((res) => {
+  //         let listado = res.data[0];
+  //         console.log(listado);
+  //         guardarListado(listado);
 
-          if (listado === "undefined") {
-            toastr.error("VERIFICA EL APELLIDO DEL SOCIO...", "ATENCION");
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (contratoRef.current.value === "") {
-      const errores = "Debes Ingresar Un Numero De Contrato";
-      guardarErrores(errores);
-    }
-  };
+  //         if (listado === "undefined") {
+  //           toastr.error("VERIFICA EL APELLIDO DEL SOCIO...", "ATENCION");
+  //           const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+  //           guardarErrores(errores);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else if (contratoRef.current.value === "") {
+  //     const errores = "Debes Ingresar Un Numero De Contrato";
+  //     guardarErrores(errores);
+  //   }
+  // };
 
-  const buscarTitularApellidoM = async (e, flag) => {
-    e.preventDefault();
+  // const buscarTitularApellidoM = async (e, flag) => {
+  //   e.preventDefault();
 
-    guardarFicha(null);
-    guardarErrores(null);
-    guardarPagos(null);
+  //   guardarFicha(null);
+  //   guardarErrores(null);
+  //   guardarPagos(null);
 
-    guardarFlag(flag)
+  //   guardarFlag(flag);
 
+  //   if (dniRef.current.value !== "") {
+  //     let dni = dniRef.current.value;
 
-    if (dniRef.current.value !== "") {
-      let dni = dniRef.current.value;
+  //     await axios
+  //       .get(
+  //         `http://190.231.32.232:5002/api/werchow/maestro/titulardnim/${dni}`
+  //       )
+  //       .then((res) => {
+  //         let ficha = res.data[0][0];
+  //         guardarFicha(ficha);
+  //         console.log(ficha);
 
-      await axios
-        .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titulardnim/${dni}`
-        )
-        .then((res) => {
-          let ficha = res.data[0][0];
-          guardarFicha(ficha);
-          console.log(ficha);
-
-          if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
-            traerPagos(ficha.CONTRATO);
-          } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
-            traerPagosBco(ficha.CONTRATO);
-          } else if (ficha === "undefined") {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (contratoRef.current.value === "") {
-      const errores = "Debes Ingresar Un Numero De Contrato";
-      guardarErrores(errores);
-    }
-  };
+  //         if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
+  //           traerPagos(ficha.CONTRATO);
+  //         } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
+  //           traerPagosBco(ficha.CONTRATO);
+  //         } else if (ficha === "undefined") {
+  //           toastr.error(
+  //             "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+  //             "ATENCION"
+  //           );
+  //           const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+  //           guardarErrores(errores);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else if (contratoRef.current.value === "") {
+  //     const errores = "Debes Ingresar Un Numero De Contrato";
+  //     guardarErrores(errores);
+  //   }
+  // };
 
   let token = jsCookie.get("token");
 
@@ -331,12 +367,13 @@ const ficha = () => {
         buscarTitularM={buscarTitularM}
         buscarTitularDni={buscarTitularDni}
         buscarTitularDniM={buscarTitularDniM}
-        buscarTitularApellido={buscarTitularApellido}
         errores={errores}
         ficha={ficha}
         pagos={pagos}
         listado={listado}
         flag={flag}
+        empresa={empresa}
+        archivos={archivos}
       />
     </Layout>
   );

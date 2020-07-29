@@ -12,7 +12,6 @@ const TablaPrestamosCaratula = ({
   cantprest,
   capconint,
 }) => {
-
   return (
     <div className="mt-4 mb-4">
       <hr />
@@ -69,6 +68,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_ficha"] }),
                   filterAll: true,
+                  width: 100,
                 },
                 {
                   Header: "Renovacion",
@@ -77,6 +77,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_renov"] }),
                   filterAll: true,
+                  width: 100,
                 },
                 {
                   Header: "Capital Prestado",
@@ -85,14 +86,16 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_prestamo"] }),
                   filterAll: true,
+                  width: 100,
                 },
                 {
-                  Header: "N° de Cuotas",
+                  Header: "Cuotas",
                   id: "ptm_cuotas",
                   accessor: (d) => d.ptm_cuotas,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_cuotas"] }),
                   filterAll: true,
+                  width: 100,
                 },
                 {
                   Header: "Cuota Mensual",
@@ -101,6 +104,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_valcuota"] }),
                   filterAll: true,
+                  width: 100,
                 },
 
                 {
@@ -110,6 +114,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_estado"] }),
                   filterAll: true,
+                  width: 100,
                 },
                 {
                   Header: "Operador",
@@ -128,8 +133,50 @@ const TablaPrestamosCaratula = ({
                           },
                         }}
                       >
-                        <button className="btn btn-primary">
-                          Imprimir Caratula
+                        <button
+                          className="btn btn-primary mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Imprimir Caratula"
+                        >
+                          <i className="fa fa-print" aria-hidden="true"></i>
+                        </button>
+                      </Link>
+                      <Link
+                        href={{
+                          pathname: "/prestamos/legajovirtual/legajo",
+                          query: {
+                            id: `${row.original.ptm_ficha}-${row.original.ptm_fechasol}`,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-warning mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Legajo Virtual"
+                        >
+                          <i
+                            className="fa fa-folder-open"
+                            aria-hidden="true"
+                          ></i>
+                        </button>
+                      </Link>
+                      <Link
+                        href={{
+                          pathname: "/prestamos/legajovirtual/subirarchivos",
+                          query: {
+                            ficha: row.original.ptm_ficha,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-info mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Subir Archivos"
+                        >
+                          <i className="fa fa-upload" aria-hidden="true"></i>
                         </button>
                       </Link>
                     </div>

@@ -5,6 +5,7 @@ import CuotasSelect from "react-select";
 import moment from "moment-timezone";
 
 import { capitalaprest, cuotasprest, renovaprest } from "../../array/array";
+import FormSubirArchivo from "./legajovirtual/FormSubirArchivo";
 
 const FormAltaPrestamo = ({
   ficha,
@@ -427,6 +428,10 @@ const FormAltaPrestamo = ({
                           </div>
                         ) : null}
                       </div>
+
+                      <hr />
+                      <FormSubirArchivo contrato={ficha.CONTRATO} />
+                      <hr />
 
                       <div className="form-group col-md-12">
                         <button

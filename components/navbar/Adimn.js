@@ -89,6 +89,36 @@ const Adimn = () => {
           </li>
 
           <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Legajo Virtual Prestamos
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/prestamos/imprimircaratula"
+                  className="dropdown-item text-dark"
+                >
+                  Subir Archivos
+                </a>
+              </li>
+              {/* <hr />
+              <li>
+                <a
+                  href="/prestamos/legajovirtual/legajo"
+                  className="dropdown-item text-dark"
+                >
+                  Buscar Ficha
+                </a>
+              </li> */}
+            </ul>
+          </li>
+          <hr />
 
           <li>
             <a
@@ -312,6 +342,15 @@ const Adimn = () => {
                   Subir Archivos
                 </a>
               </li>
+              <hr />
+              <li>
+                <a
+                  href="/socios/ficha/ficha"
+                  className="dropdown-item text-dark"
+                >
+                  Buscar Ficha
+                </a>
+              </li>
             </ul>
           </li>
           <hr />
@@ -336,13 +375,7 @@ const Adimn = () => {
             </ul>
           </li>
           <hr />
-          <li>
-            <a href="/socios/ficha/ficha" className="dropdown-item text-dark">
-              Buscar Ficha
-            </a>
-          </li>
 
-          <hr />
           <li>
             <a
               href="/socios/reportes/estadopadron"

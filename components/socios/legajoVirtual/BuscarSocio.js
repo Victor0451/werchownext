@@ -12,6 +12,11 @@ const BuscarSocio = ({
 }) => {
   return (
     <div className="container">
+      <h1 className="mt-4 mb-4">
+        <strong>
+          <u>Subir Archivos Al Legajo Virtual</u>
+        </strong>
+      </h1>
       <div className="mt-4 border border-dark p-4 alert alert-primary">
         <form>
           <h2 className=" mb-4">
