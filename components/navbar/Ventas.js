@@ -72,6 +72,15 @@ export default class Ventas extends Component {
                 Reportes
               </a>
             </li>
+            <hr />
+            <li>
+              <a
+                href="/socios/cumpleanos/cumpleanos"
+                className="dropdown-item text-dark"
+              >
+                Cumpleañeros
+              </a>
+            </li>
           </ul>
         </li>
 
