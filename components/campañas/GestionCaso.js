@@ -15,7 +15,11 @@ const GestionCaso = ({
   return (
     <div className="container">
       <h1 className="mt-4 mb-4">
-        <u> Gestion Casos de {camp}</u>
+        <u>
+          {" "}
+          Gestion Casos de {camp} - Casos asignados:{" "}
+          {campanaOp.length + campanaOpTrab.length + campanaOpNoti.length}
+        </u>
       </h1>
 
       <nav>

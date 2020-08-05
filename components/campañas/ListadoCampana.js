@@ -6,6 +6,7 @@ const ListadoCampana = ({ listado }) => {
 
   return (
     <div className="container mt-4">
+     
       <ReactTable
         data={data}
         filterable
