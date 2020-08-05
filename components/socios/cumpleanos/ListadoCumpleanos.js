@@ -5,12 +5,17 @@ import matchSorter from "match-sorter";
 import ReactTable from "react-table";
 import Spinner from "../../layout/Spinner";
 
-const ListadoCumpleanos = ({ data }) => {
+const ListadoCumpleanos = ({ data, fecha }) => {
   if (!data) return <Spinner />;
 
   return (
-    <div className="mt-4 container">
-      <div className="border border-dark p-4">
+    <div className="mt-4 container p-4 border border-dark alert alert-primary">
+      <h5 className=" mb-4">
+        <strong>
+          <u>Socios que cumplen años el {fecha}</u>: {data.length}
+        </strong>
+      </h5>
+      <div className="border border-dark mt-4 list">
         <ReactTable
           data={data}
           filterable

@@ -1,7 +1,5 @@
 /* WERCHOW && MUTUAL LOGO */
 
-
-
 .werchowlogo {
   width: 160px;
   height: 40px;
@@ -10,6 +8,10 @@
 .mutuallogo {
   width: 185px;
   height: 70px;
+}
+
+.list {
+  background: white;
 }
 
 /* MENU Y SUB MENU */
