@@ -60,6 +60,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_fechasol"] }),
                   filterAll: true,
+                  width: 150,
                 },
                 {
                   Header: "Contrato",
@@ -123,6 +124,33 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_op"] }),
                   filterAll: true,
+                  width: 120,
+                  Cell: (row) => (
+                    <div>
+                      {row.original.ptm_op === 4 ? (
+                        <div>Maria Galian</div>
+                      ) : row.original.ptm_op === 97 ? (
+                        <div>Gisela Gimenez</div>
+                      ) : row.original.ptm_op === 8 ? (
+                        <div>Vanesa Gorosito</div>
+                      ) : row.original.ptm_op === 7 ? (
+                        <div>Marisa Carrizo</div>
+                      ) : row.original.ptm_op === 77 ? (
+                        <div>Silvia Juarez</div>
+                      ) : row.original.ptm_op === 3 ? (
+                        <div>Alejandra Tejerina</div>
+                      ) : null}
+                    </div>
+                  ),
+                },
+                {
+                  Header: "Aciones",
+                  id: "ptm_op",
+                  accessor: (d) => d.ptm_op,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["ptm_op"] }),
+                  filterAll: true,
+                  width: 200,
                   Cell: (row) => (
                     <div>
                       <Link

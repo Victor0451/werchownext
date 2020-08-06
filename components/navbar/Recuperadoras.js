@@ -90,7 +90,7 @@ export default class Recuperadoras extends Component {
                 href="/prestamos/imprimircaratula"
                 className="dropdown-item text-dark"
               >
-                Imprimir Caratula
+                Listado Prestamos Del Mes
               </a>
             </li>
           </ul>
