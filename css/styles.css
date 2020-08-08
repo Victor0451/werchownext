@@ -181,3 +181,13 @@
     2.5
   ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
+@media (max-width: 580px) {
+  .navbar {
+    text-transform: uppercase;
+    font-weight: 20px;
+    font-size: 0.7rem;
+    height: 100%;
+    /* background: rgba(3, 36, 66, 0.685) !important; */
+  }
+}

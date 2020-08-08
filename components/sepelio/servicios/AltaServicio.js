@@ -8,6 +8,7 @@ const AltaServicio = ({
   selcaso,
   nuevoServicio,
   // DETALLES EXTINTO
+
   empresaRef,
   dniRef,
   apellidoRef,
@@ -57,6 +58,7 @@ const AltaServicio = ({
 }) => {
   let contratoRef = React.createRef();
 
+  const [empresa, guardarEmpresa] = useState(null);
   const [error, guardarError] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [particular, guardarParticular] = useState(null);
@@ -64,6 +66,7 @@ const AltaServicio = ({
   const buscarTitular = async (e) => {
     e.preventDefault();
 
+    guardarEmpresa("Werchow");
     let contrato = contratoRef.current.value;
     console.log(contrato);
     if (contrato !== "") {
@@ -76,10 +79,26 @@ const AltaServicio = ({
             let ficha = res.data;
             guardarFicha(ficha);
           } else if (!res.data) {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
+            axios
+              .get(
+                `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadh/${contrato}`
+              )
+              .then((res) => {
+                if (res.data) {
+                  let ficha = res.data;
+                  guardarFicha(ficha);
+                } else if (!res.data) {
+                  toastr.error(
+                    "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+                    "ATENCION"
+                  );
+                }
+                let ficha = res.data;
+                guardarFicha(ficha);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }
         })
         .catch((error) => {
@@ -101,7 +120,7 @@ const AltaServicio = ({
       <div className="alert alert-primary border border-dark mt-4 p-4">
         <h2 className="mt-4 mb-4">
           <strong>
-            <u>Ingrese N° de Ficha</u>
+            <u>Ingrese N° de Documento del Fallecido </u>
           </strong>
         </h2>
         <form className="mt-4 border border-dark p-2" onSubmit={buscarTitular}>
@@ -110,7 +129,7 @@ const AltaServicio = ({
               <label>
                 <strong>
                   {" "}
-                  <u> N° de Ficha: </u>
+                  <u> N° de Documento: </u>
                 </strong>
               </label>
               <input
@@ -165,100 +184,15 @@ const AltaServicio = ({
           ficha={ficha}
           selcaso={selcaso}
           // DETALLES EXTINTO
+          empresa={empresa}
           empresaRef={empresaRef}
           dniRef={dniRef}
           apellidoRef={apellidoRef}
           nombreRef={nombreRef}
           edadRef={edadRef}
-          calleRef={calleRef}
-          numeroRef={numeroRef}
-          barrioRef={barrioRef}
-          fechaFallecimientoRef={fechaFallecimientoRef}
-          lugarFallecimientoRef={lugarFallecimientoRef}
-          tipoServicioRef={tipoServicioRef}
-          casaMortuariaRef={casaMortuariaRef}
-          fechaInumacionRef={fechaInumacionRef}
-          horaInumacionRef={horaInumacionRef}
-          cementerioRef={cementerioRef}
-          // DETALLES SERVICIO
-          caparRef={caparRef}
-          avisoRef={avisoRef}
-          tipoAvisoRef={tipoAvisoRef}
-          autoDueloRef={autoDueloRef}
-          tipoAutoDuelRef={tipoAutoDuelRef}
-          placaRef={placaRef}
-          carrozaFuRef={carrozaFuRef}
-          tipoCarrozaFuRef={tipoCarrozaFuRef}
-          salaRef={salaRef}
-          tipoSalaRef={tipoSalaRef}
-          tramitesRef={tramitesRef}
-          tipoTramitesRef={tipoTramitesRef}
-          cochePortaRef={cochePortaRef}
-          tipoCochePortaRef={tipoCochePortaRef}
-          retiroCuerpoRef={retiroCuerpoRef}
-          tipoRetiroCuerpoRef={tipoRetiroCuerpoRef}
-          trasladoRef={trasladoRef}
-          tipoTrasladoRef={tipoTrasladoRef}
-          observacionRef={observacionRef}
-          // DETALLES ATAUD
-          tipoAtaudRef={tipoAtaudRef}
-          caracteristicaAtaudRef={caracteristicaAtaudRef}
-          descriart={descriart}
-          codigo={codigo}
-          caracteristicas={caracteristicas}
         />
       ) : particular !== null ? (
-        <FormAltaServicioPart
-          ficha={ficha}
-          selcaso={selcaso}
-          // DETALLES EXTINTO
-          empresaRef={empresaRef}
-          dniRef={dniRef}
-          apellidoRef={apellidoRef}
-          nombreRef={nombreRef}
-          edadRef={edadRef}
-          calleRef={calleRef}
-          numeroRef={numeroRef}
-          barrioRef={barrioRef}
-          fechaFallecimientoRef={fechaFallecimientoRef}
-          lugarFallecimientoRef={lugarFallecimientoRef}
-          tipoServicioRef={tipoServicioRef}
-          casaMortuariaRef={casaMortuariaRef}
-          fechaInumacionRef={fechaInumacionRef}
-          horaInumacionRef={horaInumacionRef}
-          cementerioRef={cementerioRef}
-          // DETALLES SERVICIO
-          caparRef={caparRef}
-          avisoRef={avisoRef}
-          tipoAvisoRef={tipoAvisoRef}
-          autoDueloRef={autoDueloRef}
-          tipoAutoDuelRef={tipoAutoDuelRef}
-          placaRef={placaRef}
-          carrozaFuRef={carrozaFuRef}
-          tipoCarrozaFuRef={tipoCarrozaFuRef}
-          salaRef={salaRef}
-          tipoSalaRef={tipoSalaRef}
-          tramitesRef={tramitesRef}
-          tipoTramitesRef={tipoTramitesRef}
-          cochePortaRef={cochePortaRef}
-          tipoCochePortaRef={tipoCochePortaRef}
-          retiroCuerpoRef={retiroCuerpoRef}
-          tipoRetiroCuerpoRef={tipoRetiroCuerpoRef}
-          trasladoRef={trasladoRef}
-          tipoTrasladoRef={tipoTrasladoRef}
-          observacionRef={observacionRef}
-          cremacionRef={cremacionRef}
-          // DETALLES ATAUD
-          tipoAtaudRef={tipoAtaudRef}
-          caracteristicaAtaudRef={caracteristicaAtaudRef}
-          descriart={descriart}
-          codigo={codigo}
-          caracteristicas={caracteristicas}
-          uso={uso}
-          usoAtaudRef={usoAtaudRef}
-          //PRECIO SERV
-          precioserv={precioserv}
-        />
+        <FormAltaServicioPart />
       ) : null}
     </div>
   );

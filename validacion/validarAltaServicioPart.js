@@ -1,9 +1,7 @@
 export default function validarAltaServicio(valores) {
   let errores = {};
 
-  if (!valores.empresa) {
-    errores.empresa = "Este campo es obligatorio";
-  }
+
   if (!valores.dni) {
     errores.dni = "Este campo es obligatorio";
   }

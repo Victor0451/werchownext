@@ -1,193 +1,43 @@
-import React, { useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
-import Stock from "../../../components/sepelio/ataudes/Stock";
+import React from "react";
 import axios from "axios";
-import toastr from "toastr";
-import Router from "next/router";
+import moment from "moment";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
+import toastr from "toastr";
 
 const STATE_INICIAL = {
-  empresa: "",
-  dni: "",
-  apellido: "",
   nombre: "",
+  apellido: "",
+  dni: "",
   edad: "",
   fechafallecimiento: "",
   lugarfallecimiento: "",
-  tiposervicio: "",
   casamortuaria: "",
   fechainhumacion: "",
   horainhumacion: "",
   cementerio: "",
+  altura: "",
+  peso: "",
+  motivo: "",
+  retiro: "",
+  solicitado: "",
+  parentesco: "",
 };
 
 const FormAltaServicioPart = ({
-  selcaso,
+  ficha,
   nuevoServicio,
   // DETALLES EXTINTO
+  empresa,
   empresaRef,
   dniRef,
   apellidoRef,
   nombreRef,
   edadRef,
-  calleRef,
-  numeroRef,
-  barrioRef,
-  fechaFallecimientoRef,
-  lugarFallecimientoRef,
-  tipoServicioRef,
-  casaMortuariaRef,
-  fechaInumacionRef,
-  horaInumacionRef,
-  cementerioRef,
-  // DETALLES SERVICIO
-  caparRef,
-  avisoRef,
-  tipoAvisoRef,
-  autoDueloRef,
-  tipoAutoDuelRef,
-  placaRef,
-  tipotraslado,
-  tipoaviso,
-  tipocarrozzafu,
-  tipoportacor,
-  carrozaFuRef,
-  tipoCarrozaFuRef,
-  salaRef,
-  tipoSalaRef,
-  tramitesRef,
-  tipoTramitesRef,
-  cochePortaRef,
-  tipoCochePortaRef,
-  retiroCuerpoRef,
-  tipoRetiroCuerpoRef,
-  trasladoRef,
-  tipoTrasladoRef,
-  observacionRef,
-  cremacionRef,
-  tipotramites,
-  tipoautoduel,
-  tiposalavel,
-  // DETALLES ATAUD
-  tipoAtaudRef,
-  caracteristicaAtaudRef,
-  descriart,
-  codigo,
-  caracteristicas,
-  uso,
-  usoAtaudRef,
-  // PRECIO SERV
-  precioserv,
 }) => {
-  const [tramite, guardarTramite] = useState(null);
-  const [valuetra, guardarValueTra] = useState(null);
-
-  const [retirocuerpo, guardarRetirocuerpo] = useState(null);
-  const [valueretcuerp, guardarValueRetCuerpo] = useState(null);
-
-  const [traslado, guardarTraslado] = useState(null);
-  const [valuetras, guardarValueTras] = useState(null);
-
-  const [avsep, guardaraAvSep] = useState(null);
-  const [valueavsep, guardarValueAvSep] = useState(null);
-
-  const [carrofu, guardaraCarroFu] = useState(null);
-  const [valuecarrofu, guardarValueCarroFu] = useState(null);
-
-  const [portacor, guardaraPortaCor] = useState(null);
-  const [valueportacor, guardarValuePortaCor] = useState(null);
-
-  const [autoduel, guardarAutoDuel] = useState(null);
-  const [valueautoduel, guardarValueAutoDuel] = useState(null);
-
-  const [salavel, guardarSalaVel] = useState(null);
-  const [valuesalavel, guardarValueSalaVel] = useState(null);
-
-  const [cremacion, guardarCremacion] = useState(false);
-
-  const [descuento1, guardarDescuento1] = useState(null);
-
-  const [descuento2, guardarDescuento2] = useState(null);
-
-  const [errmsg1, guardarErrmsg] = useState(null);
-
-  const handleChecked = (e) => {
-    if (e.target.name === "tramite") {
-      const tramite = e.target.name;
-      guardarTramite(tramite);
-      const valuetra = e.target.value;
-      guardarValueTra(valuetra);
-    } else if (e.target.name === "avsep") {
-      const avsep = e.target.name;
-      guardaraAvSep(avsep);
-      const valueavsep = e.target.value;
-      guardarValueAvSep(valueavsep);
-    } else if (e.target.name === "retirocuerpo") {
-      const retirocuerpo = e.target.name;
-      guardarRetirocuerpo(retirocuerpo);
-      const valueretcuerp = e.target.value;
-      guardarValueRetCuerpo(valueretcuerp);
-    } else if (e.target.name === "traslado") {
-      const traslado = e.target.name;
-      guardarTraslado(traslado);
-      const valuetras = e.target.value;
-      guardarValueTras(valuetras);
-    } else if (e.target.name === "carrofu") {
-      const carrofu = e.target.name;
-      guardaraCarroFu(carrofu);
-      const valuecarrofu = e.target.value;
-      guardarValueCarroFu(valuecarrofu);
-    } else if (e.target.name === "portacor") {
-      const portacor = e.target.name;
-      guardaraPortaCor(portacor);
-      const valueportacor = e.target.value;
-      guardarValuePortaCor(valueportacor);
-    } else if (e.target.name === "autoduel") {
-      const autoduel = e.target.name;
-      guardarAutoDuel(autoduel);
-      const valueautoduel = e.target.value;
-      guardarValueAutoDuel(valueautoduel);
-    } else if (e.target.name === "salavel") {
-      const salavel = e.target.name;
-      guardarSalaVel(salavel);
-      const valuesalavel = e.target.value;
-      guardarValueSalaVel(valuesalavel);
-    } else if (e.target.name === "adicional") {
-      const adicional = e.target.name;
-      guardarAdicional(adicional);
-      const valueadicional = e.target.value;
-      guardarValueAdicional(valueadicional);
-    } else if (e.target.name === "cremacion") {
-      const cremacion = e.target.value;
-      guardarCremacion(cremacion);
-    } else if (e.target.name === "descuento1") {
-      const descuento1 = e.target.value;
-      guardarDescuento1(descuento1);
-    } else if (e.target.name === "descuento2") {
-      const descuento2 = e.target.value;
-      guardarDescuento2(descuento2);
-    }
-  };
-
-  const postServicio = async (servicio) => {
-    await axios
-      .post(
-        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-        servicio
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const {
-    errmsg,
     valores,
     errores,
     handleChange,
@@ -196,10 +46,9 @@ const FormAltaServicioPart = ({
   } = useValidacion(STATE_INICIAL, validarAltaServicioPart, nuevoServicio);
 
   const {
-    empresa,
-    dni,
     nombre,
     apellido,
+    dni,
     edad,
     fechafallecimiento,
     lugarfallecimiento,
@@ -207,112 +56,63 @@ const FormAltaServicioPart = ({
     fechainhumacion,
     horainhumacion,
     cementerio,
-    tiporetirocuerpo,
+    altura,
+    peso,
+    motivo,
+    retiro,
+    solicitado,
+    parentesco,
   } = valores;
 
-  function nuevoServicio() {
-    confirmAlert({
-      title: "Atencion",
-      message: "Desea agregar otro locatario",
-      buttons: [
-        {
-          label: "Si",
-          onClick: () => {
-            if (descuento1 === true && descuento2 === true) {
-              const errmsg1 = "Solo Puedes Seleccionar Un Descuento";
-              guardarErrmsg(errmsg1);
-            } else if (tipoAtaudRef.current.value === "") {
-              const errmsg1 = "Debes Selecciona Un Ataud";
-              guardarErrmsg(errmsg1);
-            } else {
-              const servicio = {
-                empresa: empresaRef.current.value,
-                dni: dniRef.current.value,
-                apellido: apellidoRef.current.value,
-                nombre: nombreRef.current.value,
-                edad: edadRef.current.value,
-                calle: calleRef.current.value,
-                numero: numeroRef.current.value,
-                barrio: barrioRef.current.value,
-                fecha_fallecimiento: fechaFallecimientoRef.current.value,
-                lugar_fallecimiento: lugarFallecimientoRef.current.value,
-                tipo_servicio: tipoServicioRef.current.value,
-                casa_mortuaria: casaMortuariaRef.current.value,
-                fecha_inhumacion: fechaInumacionRef.current.value,
-                hora_inhumacion: horaInumacionRef.current.value,
-                cementerio: cementerioRef.current.value,
-                retirocuerpo: retiroCuerpoRef.current.checked,
-                tiporetirocuerpo: tipoRetiroCuerpoRef.current.value,
-                traslado: trasladoRef.current.checked,
-                tipotraslado: tipoTrasladoRef.current.value,
-                capar: caparRef.current.checked,
-                placa: placaRef.current.checked,
-                tramites: tramitesRef.current.checked,
-                tipotramites: tipoTramitesRef.current.value,
-                aviso: avisoRef.current.checked,
-                tipoaviso: tipoAvisoRef.current.value,
-                carroza: carrozaFuRef.current.checked,
-                tipocarroza: tipoCarrozaFuRef.current.value,
-                portacorona: cochePortaRef.current.checked,
-                tipococheporta: tipoCochePortaRef.current.value,
-                autoduelo: autoDueloRef.current.checked,
-                tipoautoduel: tipoAutoDuelRef.current.value,
-                salavel: salaRef.current.checked,
-                tiposalavel: tipoSalaRef.current.value,
-                ataud: tipoAtaudRef.current.value,
-                caracteristicas: caracteristicas,
-                cremacion: cremacionRef.current.checked,
-                uso: uso,
-                observacion: observacionRef.current.value,
-                precio: "",
-                descuento: "",
-                estado: "",
-              };
+  async function nuevoServicio() {
+    const servicio = {
+      contrato: 0,
+      empresa: "Werchow",
+      dni: dni,
+      apellido: apellido,
+      nombre: nombre,
+      edad: edad,
+      fecha_fallecimiento: fechafallecimiento,
+      lugar_fallecimiento: lugarfallecimiento,
+      tipo_servicio: tiposervicio,
+      casa_mortuaria: casamortuaria,
+      fecha_inhumacion: fechainhumacion,
+      hora_inhumacion: horainhumacion,
+      cementerio: cementerio,
+      altura: altura,
+      peso: peso,
+      motivo: motivo,
+      retiro: retiro,
+      solicitado: solicitado,
+      parentesco: parentesco,
+      fecha_recepcion: moment().format("YYYY-MM-DD HH:mm:ss"),
+      sucursal: "Casa Central",
+      estado: 1,
+    };
 
-              if (descuento1 === true && cremacion === false) {
-                servicio.precio = precioserv.contado;
-                servicio.descuento = precioserv.descuento1;
-                servicio.estado = 1;
-              } else if (descuento1 === true && cremacion === true) {
-                servicio.precio = precioserv.contado_cremacion;
-                servicio.descuento = precioserv.descuento1_cremacion;
-                servicio.estado = 1;
-              } else if (descuento2 === true && cremacion === false) {
-                servicio.precio = precioserv.contado;
-                servicio.descuento = precioserv.descuento2;
-                servicio.estado = 0;
-              } else if (descuento2 === true && cremacion === true) {
-                servicio.precio = precioserv.contado_cremacion;
-                servicio.descuento = precioserv.descuento2_cremacion;
-                servicio.estado = 0;
-              } else if (cremacion === true) {
-                servicio.precio = precioserv.contado_cremacion;
-              } else if (cremacion === false) {
-                servicio.precio = precioserv.contado;
-              }
-              postServicio(servicio);
-            }
+    console.log(servicio);
 
-            toastr.success("El Servicio Se Registro Con Exito", "ATENCION");
-
-            setInterval(() => {
-              Router.push("/sepelio/servicios/listado");
-            }, 500);
-          },
-        },
-
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
-    });
+    await axios
+      .post(
+        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+        servicio
+      )
+      .then((res) => {
+        if ((res.status = 200)) {
+          toastr.success("Servicio cargado con exito", "ATENCION");
+          console.log(res.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   let tiposervicio = `Servicio Particular`;
+  let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
-    <div className="mt-4 alert alert-primary border border-dark p-4">
+    <div className="alert alert-primary border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>
         <h1 className="mt-4 mb-4">
           <strong>
@@ -321,11 +121,31 @@ const FormAltaServicioPart = ({
         </h1>
 
         <div className=" border border-dark p-4">
-          <h2 className="mt-4 mb-4">
-            <strong>
-              <u>Datos del Extinto</u>
-            </strong>
-          </h2>
+          <div className="d-flex justify-content-between">
+            <h2 className="mt-4 mb-4 col-8">
+              <strong>
+                <u>Datos del Extinto</u>
+              </strong>
+            </h2>
+            <div className="mt-4 mb-4 col-4">
+              <label>
+                <strong>
+                  <u>Fecha de Recepcion</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Empresa"
+                name="responsable"
+                defaultValue={fecha}
+                readOnly
+              />
+            </div>
+          </div>
+
+          <hr className="mt-4 mb-4" />
+
           <div className="row">
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -337,17 +157,11 @@ const FormAltaServicioPart = ({
                 type="text"
                 className="form-control"
                 placeholder="Empresa"
-                name="empresa"
+                name="responsable"
+                defaultValue="Werchow"
                 ref={empresaRef}
-                defaultValue={empresa}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                readOnly
               />
-              {errores.empresa && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.empresa}
-                </div>
-              )}
             </div>
 
             <div className="form-group col-md-4 mt-4 mb-4">
@@ -357,11 +171,10 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
                 placeholder="DNI"
                 name="dni"
-                ref={dniRef}
                 defaultValue={dni}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -383,7 +196,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="Apellido"
                 name="apellido"
-                ref={apellidoRef}
                 defaultValue={apellido}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -406,7 +218,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="Nombre"
                 name="nombre"
-                ref={nombreRef}
                 defaultValue={nombre}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -424,11 +235,10 @@ const FormAltaServicioPart = ({
                 </strong>
               </label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
                 placeholder="Edad"
                 name="edad"
-                ref={edadRef}
                 defaultValue={edad}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -443,51 +253,6 @@ const FormAltaServicioPart = ({
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
-                  <u>Calle</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Calle"
-                name="responsable"
-                ref={calleRef}
-              />
-            </div>
-
-            <div className="col-md-4 mt-4 mb-4">
-              <label>
-                <strong>
-                  <u>Numero</u>
-                </strong>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Numero"
-                name="responsable"
-                ref={numeroRef}
-              />
-            </div>
-
-            <div className="col-md-4 mt-4 mb-4">
-              <label>
-                <strong>
-                  <u>Barrio</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Barrio"
-                name="responsable"
-                ref={barrioRef}
-              />
-            </div>
-
-            <div className="col-md-4 mt-4 mb-4">
-              <label>
-                <strong>
                   <u>Fecha de Fallecimiento</u>
                 </strong>
               </label>
@@ -495,7 +260,6 @@ const FormAltaServicioPart = ({
                 type="date"
                 className="form-control"
                 placeholder="Fecha de Fallecimiento"
-                ref={fechaFallecimientoRef}
                 name="fechafallecimiento"
                 defaultValue={fechafallecimiento}
                 onChange={handleChange}
@@ -518,8 +282,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="Lugar de Fallecimiento"
                 name="lugarfallecimiento"
-                ref={lugarFallecimientoRef}
-                name="lugarfallecimiento"
                 defaultValue={lugarfallecimiento}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -527,6 +289,50 @@ const FormAltaServicioPart = ({
               {errores.lugarfallecimiento && (
                 <div className="alert alert-danger text-center p-2 mt-2">
                   {errores.lugarfallecimiento}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Altura</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Altura"
+                name="altura"
+                value={altura}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.altura && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.altura}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Peso</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Peso"
+                name="peso"
+                value={peso}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.peso && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.peso}
                 </div>
               )}
             </div>
@@ -552,7 +358,6 @@ const FormAltaServicioPart = ({
                 type="text"
                 className="form-control"
                 placeholder="Tipo de Servicio"
-                ref={tipoServicioRef}
                 name="tiposervicio"
                 defaultValue={tiposervicio}
                 onChange={handleChange}
@@ -567,6 +372,48 @@ const FormAltaServicioPart = ({
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
+                  <u>Motivo</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Motivo"
+                name="motivo"
+                value={motivo}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.motivo && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.motivo}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Retiro Del Extinto</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Retiro Extinto"
+                name="retiro"
+                value={retiro}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.retiro && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.retiro}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
                   <u>Casa Mortuaria</u>
                 </strong>
               </label>
@@ -574,8 +421,6 @@ const FormAltaServicioPart = ({
                 type="text"
                 className="form-control"
                 placeholder="Casa Mortuaria"
-                name="casamortuaria"
-                ref={casaMortuariaRef}
                 name="casamortuaria"
                 defaultValue={casamortuaria}
                 onChange={handleChange}
@@ -599,7 +444,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="Fecha de Inumacion"
                 name="fechainhumacion"
-                ref={fechaInumacionRef}
                 defaultValue={fechainhumacion}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -621,7 +465,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="hora de Inumacion"
                 name="horainhumacion"
-                ref={horaInumacionRef}
                 defaultValue={horainhumacion}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -644,7 +487,6 @@ const FormAltaServicioPart = ({
                 className="form-control"
                 placeholder="Cementerio"
                 name="cementerio"
-                ref={cementerioRef}
                 defaultValue={cementerio}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -655,841 +497,60 @@ const FormAltaServicioPart = ({
                 </div>
               )}
             </div>
-            <div className="col">
-              {/* <Select
-              // options={forma}
-              placeholder={"Lugar"}
-              //onChange={value => handleChange(value, "PRODUCTOR")}
-            /> */}
-            </div>
-          </div>
-
-          <hr className="mt-4 mb-4" />
-
-          <div className="row  p-4">
-            <fieldset>
-              <h2 className="mb-4">
-                <strong>
-                  <u>Gastos del Servicio</u>
-                </strong>
-              </h2>
-
-              <div className="row mt-4 border border-dark p-4">
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="retirocuerpo"
-                      name="retirocuerpo"
-                      className="custom-control-input"
-                      ref={retiroCuerpoRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="retirocuerpo"
-                    >
-                      Retiro de Cuerpo
-                    </label>
-                  </div>
-                  {retirocuerpo && valueretcuerp === true ? (
-                    <div className="mt-2 mb-4">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Lugar"
-                        name="lugar"
-                        ref={tipoRetiroCuerpoRef}
-                        defaultValue={tiporetirocuerpo}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tiporetirocuerpo && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tiporetirocuerpo}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="mt-2 mb-4">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Lugar"
-                        name="lugar"
-                        defaultValue="NO"
-                        hidden
-                        ref={tipoRetiroCuerpoRef}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="traslado"
-                      name="traslado"
-                      className="custom-control-input"
-                      ref={trasladoRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="traslado">
-                      Traslado
-                    </label>
-                  </div>
-                  {traslado && valuetras === true ? (
-                    <div className="mt-2 mb-4">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Lugar"
-                        name="lugar"
-                        ref={tipoTrasladoRef}
-                        defaultValue={tipotraslado}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipotraslado && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipotraslado}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Lugar"
-                      name="lugar"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoTrasladoRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="capar"
-                      name="capar"
-                      className="custom-control-input"
-                      ref={caparRef}
-                    />
-                    <label className="custom-control-label" htmlFor="capar">
-                      Capilla Ardiente En Domicilio
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-group col-md-4 border p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="placa"
-                      name="placa"
-                      className="custom-control-input"
-                      ref={placaRef}
-                    />
-                    <label className="custom-control-label" htmlFor="placa">
-                      Graba Placa
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="tramite"
-                      name="tramite"
-                      className="custom-control-input"
-                      ref={tramitesRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                      defaultChecked={false}
-                    />
-                    <label className="custom-control-label" htmlFor="tramite">
-                      Tramites
-                    </label>
-                  </div>
-                  {tramite && valuetra === true ? (
-                    <div className="mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Seccion:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Seccion"
-                        name="seccion"
-                        ref={tipoTramitesRef}
-                        defaultValue={tipotramites}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipotramites && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipotramites}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Seccion"
-                      name="seccion"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoTramitesRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="avsep"
-                      name="avsep"
-                      className="custom-control-input"
-                      ref={avisoRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="avsep">
-                      Aviso De Sepelio
-                    </label>
-                  </div>
-                  {avsep && valueavsep === true ? (
-                    <div className=" mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Aviso:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Aviso"
-                        name="aviso"
-                        ref={tipoAvisoRef}
-                        defaultValue={tipoaviso}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipoaviso && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoaviso}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Aviso"
-                      name="aviso"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoAvisoRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="carrofu"
-                      name="carrofu"
-                      className="custom-control-input"
-                      ref={carrozaFuRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="carrofu">
-                      Carroza Funebre
-                    </label>
-                  </div>
-                  {carrofu && valuecarrofu === true ? (
-                    <div className=" mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Carroza:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Carroza"
-                        name="carroza"
-                        ref={tipoCarrozaFuRef}
-                        defaultValue={tipocarrozzafu}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipocarrozzafu && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipocarrozzafu}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Carroza"
-                      name="carroza"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoCarrozaFuRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="portacor"
-                      name="portacor"
-                      className="custom-control-input"
-                      ref={cochePortaRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="portacor">
-                      Coche Portacoronas
-                    </label>
-                  </div>
-                  {portacor && valueportacor === true ? (
-                    <div className=" mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Portacorona:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Portacorona"
-                        name="portacorona"
-                        ref={tipoCochePortaRef}
-                        defaultValue={tipoportacor}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipoportacor && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoportacor}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Portacorona"
-                      name="portacorona"
-                      ref={tipoCochePortaRef}
-                      hidden
-                      defaultValue="NO"
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="autoduel"
-                      name="autoduel"
-                      className="custom-control-input"
-                      ref={autoDueloRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="autoduel">
-                      Automoviles Para Duelo
-                    </label>
-                  </div>
-                  {autoduel && valueautoduel === true ? (
-                    <div className=" mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Auto Para Duelo:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Auto Para Duelo"
-                        name="autoduel"
-                        ref={tipoAutoDuelRef}
-                        defaultValue={tipoautoduel}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tipoautoduel && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tipoautoduel}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Auto Para Duelo"
-                      name="autoduel"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoAutoDuelRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group col-md-4 border  p-2">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="salavel"
-                      name="salavel"
-                      className="custom-control-input"
-                      ref={salaRef}
-                      onChange={(e) => {
-                        handleChecked({
-                          target: {
-                            name: e.target.name,
-                            value: e.target.checked,
-                          },
-                        });
-                      }}
-                    />
-                    <label className="custom-control-label" htmlFor="salavel">
-                      Sala Velatoria
-                    </label>
-                  </div>
-                  {salavel && valuesalavel === true ? (
-                    <div className=" mt-2 mb-4">
-                      <label>
-                        <strong>
-                          <u>Sala Velatoria:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Sala Velatoria"
-                        name="salavel"
-                        ref={tipoSalaRef}
-                        defaultValue={tiposalavel}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errores.tiposalavel && (
-                        <div className="alert alert-danger text-center p-2 mt-2">
-                          {errores.tiposalavel}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Sala Velatoria"
-                      name="salavel"
-                      hidden
-                      defaultValue="NO"
-                      ref={tipoSalaRef}
-                    />
-                  )}
-                </div>
-
-                <div className="form-group mt-4 col-md-12">
-                  <label>Observaciones</label>
-                  <textarea
-                    className="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                    ref={observacionRef}
-                  />
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-
-        <hr className="mt-4 mb-4" />
-
-        <div className="border border-dark p-4">
-          <h2 className="mt-4 mb-4">
-            <strong>
-              <u>Ataud</u>
-            </strong>
-          </h2>
-          <div className="row mt-4">
-            <div className="col-md-4 mt-2 mb-4">
+            <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
-                  <u>Tipo de Ataud</u>
+                  <u>Solicitado Por:</u>
                 </strong>
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Tipo"
-                name="tipo"
-                ref={tipoAtaudRef}
-                defaultValue={descriart}
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={solicitado}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {errores.solicitado && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.solicitado}
+                </div>
+              )}
             </div>
-
-            <div className="col-md-4 mt-2 mb-4">
+            <div className="form-group col-md-4 mt-4">
               <label>
                 <strong>
-                  <u>Caracteristicas</u>
+                  {" "}
+                  <u> Parentesco: </u>
                 </strong>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Caracteristica"
-                name="caracteristica"
-                ref={caracteristicaAtaudRef}
-                defaultValue={caracteristicas}
-              />
-            </div>
-
-            <div className="col-md-4 mt-2 mb-4">
-              <label>
-                <strong>
-                  <u>Uso</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Uso"
-                name="uso"
-                ref={usoAtaudRef}
-                defaultValue={uso}
-              />
-            </div>
-
-            <div className="form-group col-md-4  border border-dark  p-4 ">
-              <div className="custom-control custom-checkbox ">
-                <input
-                  type="checkbox"
-                  id="cremacion"
-                  name="cremacion"
-                  className="custom-control-input"
-                  ref={cremacionRef}
-                  onChange={(e) => {
-                    handleChecked({
-                      target: {
-                        name: e.target.name,
-                        value: e.target.checked,
-                      },
-                    });
-                  }}
-                />
-                <label className="custom-control-label" htmlFor="cremacion">
-                  <strong>
-                    <u> Incluir Cremacion</u>
-                  </strong>
-                </label>
-              </div>
-            </div>
-
-            <div className="col-md-8 mt-4 mb-4">
-              <button
-                type="button"
-                className="btn btn-primary btn-block"
-                data-toggle="modal"
-                data-target=".bd-example-modal-xl"
+              <select
+                className="custom-select"
+                name="parentesco"
+                defaultValue={parentesco}
+                onChange={handleChange}
+                onBlur={handleBlur}
               >
-                Ver Stock
-              </button>
+                <option selected value="no">
+                  Elige una Opcion
+                </option>
+                <option value="conyugue">Cónyugue</option>
+                <option value="hijo/a">Hijo/a</option>
+                <option value="otro">Otro</option>
+              </select>
+              {errores.parentesco && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.parentesco}
+                </div>
+              )}
             </div>
           </div>
         </div>
-
-        <hr className="mt-4 mb-4" />
-
-        {precioserv ? (
-          <>
-            {cremacion === true ? (
-              <>
-                <div className="border border-dark p-4">
-                  <h2 className="mt-4 mb-4">
-                    <strong>
-                      <u>Precio Con Cremacion</u>
-                    </strong>
-                  </h2>
-
-                  <div className="alert alert-info border border-dark text-center text-uppercase font-weight-bold">
-                    El Precio Final Del Servicio Sera: ${" "}
-                    {precioserv.contado_cremacion}
-                  </div>
-
-                  <hr className="mt-4 mb-4" />
-
-                  <h2 className="mt-4 mb-4">
-                    <strong>
-                      <u>Descuentos Disponibles</u>
-                    </strong>
-                  </h2>
-                  <div className=" border border-dark  text-uppercase font-weight-bold p-4">
-                    <h4 className="mt-4 mb-4">
-                      <strong>
-                        <u>Los Descuentos Disponibles Son:</u>
-                      </strong>
-                    </h4>
-                    <div className="form-group col-md-12 ">
-                      <div className="custom-control custom-checkbox ">
-                        <input
-                          type="checkbox"
-                          id="descuento1"
-                          name="descuento1"
-                          className="custom-control-input"
-                          //ref={cremacionRef}
-                          onChange={(e) => {
-                            handleChecked({
-                              target: {
-                                name: e.target.name,
-                                value: e.target.checked,
-                              },
-                            });
-                          }}
-                        />
-
-                        <label
-                          className="custom-control-label"
-                          htmlFor="descuento1"
-                        >
-                          1- $ {precioserv.descuento1_cremacion}
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form-group col-md-12 ">
-                      <div className="custom-control custom-checkbox ">
-                        <input
-                          type="checkbox"
-                          id="descuento2"
-                          name="descuento2"
-                          className="custom-control-input"
-                          // ref={cremacionRef}
-                          onChange={(e) => {
-                            handleChecked({
-                              target: {
-                                name: e.target.name,
-                                value: e.target.checked,
-                              },
-                            });
-                          }}
-                        />
-                        <label
-                          className="custom-control-label"
-                          htmlFor="descuento2"
-                        >
-                          2- $ {precioserv.descuento2_cremacion} (UNICAMENTE CON
-                          AUTORIZACION){" "}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : cremacion === false ? (
-              <>
-                <div className="border border-dark p-4">
-                  <h2 className="mt-4 mb-4">
-                    <strong>
-                      <u>Precio Sin Cremacion</u>
-                    </strong>
-                  </h2>
-
-                  <div className="alert alert-info border border-dark text-center text-uppercase font-weight-bold">
-                    El Precio Final Del Servicio Sera: $ {precioserv.contado}
-                  </div>
-
-                  <hr className="mt-4 mb-4" />
-
-                  <h2 className="mt-4 mb-4">
-                    <strong>
-                      <u>Descuentos Disponibles</u>
-                    </strong>
-                  </h2>
-                  <div className=" border border-dark  text-uppercase font-weight-bold p-4">
-                    <h4 className="mt-4 mb-4">
-                      <strong>
-                        <u>Los Descuentos Disponibles Son:</u>
-                      </strong>
-                    </h4>
-                    <div className="form-group col-md-12 ">
-                      <div className="custom-control custom-checkbox ">
-                        <input
-                          type="checkbox"
-                          id="descuento1"
-                          name="descuento1"
-                          className="custom-control-input"
-                          //ref={cremacionRef}
-                          onChange={(e) => {
-                            handleChecked({
-                              target: {
-                                name: e.target.name,
-                                value: e.target.checked,
-                              },
-                            });
-                          }}
-                        />
-
-                        <label
-                          className="custom-control-label"
-                          htmlFor="descuento1"
-                        >
-                          1- $ {precioserv.descuento1}
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form-group col-md-12 ">
-                      <div className="custom-control custom-checkbox ">
-                        <input
-                          type="checkbox"
-                          id="descuento2"
-                          name="descuento2"
-                          className="custom-control-input"
-                          // ref={cremacionRef}
-                          onChange={(e) => {
-                            handleChecked({
-                              target: {
-                                name: e.target.name,
-                                value: e.target.checked,
-                              },
-                            });
-                          }}
-                        />
-                        <label
-                          className="custom-control-label"
-                          htmlFor="descuento2"
-                        >
-                          2- $ {precioserv.descuento2} (UNICAMENTE CON
-                          AUTORIZACION){" "}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : null}
-          </>
-        ) : null}
-
-        <hr className="mt-4 mb-4" />
-
-        {errmsg && (
-          <div className="alert alert-danger text-center p-2 mt-4 mb-4">
-            {errmsg}
-          </div>
-        )}
-
-        {errmsg1 && (
-          <div className="alert alert-danger text-center p-2 mt-4 mb-4">
-            {errmsg1}
-          </div>
-        )}
-
         <button type="submit" className="btn btn-primary btn-block mt-4">
           Registrar
         </button>
       </form>
-
-      <div
-        className="modal fade bd-example-modal-xl"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Stock de Ataudes</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <Stock selcaso={selcaso} />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

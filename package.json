@@ -16,6 +16,7 @@
     "fs": "^0.0.1-security",
     "js-cookie": "^2.2.1",
     "match-sorter": "^4.2.0",
+    "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "net": "^1.0.2",
     "next": "9.3.4",
