@@ -8,6 +8,8 @@ import LegajoArchivos from "../../../components/prestamos/legajovirtual/LegajoAr
 
 const legajo = () => {
   const [archivos, guardarArchivos] = useState(null);
+  const [prestamo, guardarPrestamo] = useState(null);
+  const [ficha, guardarFicha] = useState(null);
 
   let token = jsCookie.get("token");
   const router = useRouter();
@@ -17,8 +19,22 @@ const legajo = () => {
       Router.push("/redirect");
     } else {
       traerAchivos(router.query.id);
+      traerPrestamo(router.query.idprest);
+      traerSocio(router.query.contrato);
     }
   }, []);
+
+  const traerPrestamo = async (id) => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sgi/prestamos/prestamosporid/${id}`)
+      .then((res) => {
+        let prestamo = res.data;
+        guardarPrestamo(prestamo);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const traerAchivos = async (id) => {
     await axios
@@ -28,15 +44,35 @@ const legajo = () => {
       .then((res) => {
         let archivos = res.data;
         guardarArchivos(archivos);
-        console.log(archivos);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const traerSocio = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sgi/prestamos/consultarficha/${contrato}`
+      )
+      .then((res) => {
+        let ficha = res.data;
+        guardarFicha(ficha);
+        console.log(ficha);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Layout>
-      <LegajoArchivos archivos={archivos} id={router.query.id} />
+      <LegajoArchivos
+        archivos={archivos}
+        id={router.query.id}
+        ficha={ficha}
+        prestamo={prestamo}
+      />
     </Layout>
   );
 };

@@ -133,17 +133,6 @@ const Adimn = () => {
 
           <li>
             <a
-              href="/prestamos/aprobarprestamos"
-              className="dropdown-item text-dark"
-            >
-              Aprobacion de Prestamos
-            </a>
-          </li>
-
-          <hr />
-
-          <li>
-            <a
               href="/prestamos/imprimircaratula"
               className="dropdown-item text-dark"
             >
