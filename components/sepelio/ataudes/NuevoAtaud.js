@@ -1,6 +1,21 @@
 import React from "react";
+import moment from "moment";
 
-const NuevoAtaud = () => {
+const NuevoAtaud = ({
+  usuario,
+  errores,
+  handleChange,
+  handleSubmit,
+  handleBlur,
+  nombre,
+  tipo,
+  medidas,
+  uso,
+  fabricante,
+  fecha_alta,
+  stock,
+  observaciones,
+}) => {
   return (
     <div className="container mt-4 border border-dark p-4 alert alert-primary">
       <h2 className="mb-4">
@@ -9,7 +24,7 @@ const NuevoAtaud = () => {
         </strong>
       </h2>
 
-      <form className="border border-dark p-4">
+      <form className="border border-dark p-4" onSubmit={handleSubmit}>
         <div className="row">
           <div className="form-group col-md-4">
             <label>
@@ -21,9 +36,16 @@ const NuevoAtaud = () => {
             <input
               type="text"
               className="form-control"
-              //ref={}
-              readOnly
+              name="nombre"
+              value={nombre}
+              onBlur={handleBlur}
+              onChange={handleChange}
             />
+            {errores.nombre && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.nombre}
+              </div>
+            )}
           </div>
 
           <div className="form-group col-md-4">
@@ -33,7 +55,13 @@ const NuevoAtaud = () => {
                 <u> Tipo: </u>
               </strong>
             </label>
-            <select className="custom-select">
+            <select
+              className="custom-select"
+              name="tipo"
+              value={tipo}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            >
               <option selected>Elige una Opcion</option>
               <option value="BOVEDA">Boveda</option>
               <option value="BOVEDILLA">Bovedilla</option>
@@ -46,6 +74,11 @@ const NuevoAtaud = () => {
               <option value="ECOLOGICOS">Ecologicos</option>
               <option value="RECUPERADOS">Recuperados</option>
             </select>
+            {errores.tipo && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.tipo}
+              </div>
+            )}
           </div>
 
           <div className="form-group col-md-4">
@@ -58,9 +91,16 @@ const NuevoAtaud = () => {
             <input
               type="text"
               className="form-control"
-              //ref={}
-              readOnly
+              name="medidas"
+              value={medidas}
+              onBlur={handleBlur}
+              onChange={handleChange}
             />
+            {errores.medidas && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.medidas}
+              </div>
+            )}
           </div>
 
           <div className="form-group col-md-4">
@@ -70,11 +110,22 @@ const NuevoAtaud = () => {
                 <u> Uso: </u>
               </strong>
             </label>
-            <select className="custom-select">
+            <select
+              className="custom-select"
+              name="uso"
+              value={uso}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            >
               <option selected>Elige una Opcion</option>
               <option value="TIERRA">Tierra</option>
               <option value="NICHO">Nicho</option>
             </select>
+            {errores.uso && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.uso}
+              </div>
+            )}
           </div>
 
           <div className="form-group col-md-4">
@@ -84,15 +135,25 @@ const NuevoAtaud = () => {
                 <u> Fabricante: </u>
               </strong>
             </label>
-            <input
-              type="text"
-              className="form-control"
-              //ref={}
-              readOnly
-            />
+            <select
+              className="custom-select"
+              name="fabricante"
+              value={fabricante}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            >
+              <option selected>Elige una Opcion</option>
+              <option value="ANSARDI">Ansardi</option>
+              <option value="HECCAR">Heccar</option>
+            </select>
+            {errores.fabricante && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.fabricante}
+              </div>
+            )}
           </div>
 
-          <div className="form-group col-md-4">
+          {/* <div className="form-group col-md-4">
             <label>
               <strong>
                 {" "}
@@ -105,7 +166,7 @@ const NuevoAtaud = () => {
               //ref={}
               readOnly
             />
-          </div>
+          </div> */}
 
           <div className="form-group col-md-4">
             <label>
@@ -117,23 +178,7 @@ const NuevoAtaud = () => {
             <input
               type="text"
               className="form-control"
-              //ref={}
-              readOnly
-            />
-          </div>
-
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Uso: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              //ref={}
-              readOnly
+              defaultValue={moment().format("DD/MM/YYYY")}
             />
           </div>
 
@@ -147,7 +192,29 @@ const NuevoAtaud = () => {
             <input
               type="text"
               className="form-control"
-              //ref={}
+              name="stock"
+              value={stock}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+            {errores.stock && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.stock}
+              </div>
+            )}
+          </div>
+
+          <div className="form-group col-md-4">
+            <label>
+              <strong>
+                {" "}
+                <u> Operador: </u>
+              </strong>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={usuario}
               readOnly
             />
           </div>
@@ -162,9 +229,22 @@ const NuevoAtaud = () => {
             <textarea
               rows="3"
               className="form-control"
-              //ref={}
-              readOnly
+              name="observaciones"
+              value={observaciones}
+              onBlur={handleBlur}
+              onChange={handleChange}
             />
+            {errores.observaciones && (
+              <div className="mt-2 form-group  alert alert-danger">
+                {errores.observaciones}
+              </div>
+            )}
+          </div>
+
+          <div className="form-group col-md-12">
+            <button type="submit" className="btn btn-primary btn-block">
+              Registrar
+            </button>
           </div>
         </div>
       </form>

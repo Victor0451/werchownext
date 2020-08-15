@@ -66,22 +66,11 @@ const nuevo = () => {
     <Layout>
       <AltaServicio
         selcaso={selcaso}
-        // DETALLES EXTINTO
         empresaRef={empresaRef}
         dniRef={dniRef}
         apellidoRef={apellidoRef}
         nombreRef={nombreRef}
         edadRef={edadRef}
-        calleRef={calleRef}
-        numeroRef={numeroRef}
-        barrioRef={barrioRef}
-        fechaFallecimientoRef={fechaFallecimientoRef}
-        lugarFallecimientoRef={lugarFallecimientoRef}
-        tipoServicioRef={tipoServicioRef}
-        casaMortuariaRef={casaMortuariaRef}
-        fechaInumacionRef={fechaInumacionRef}
-        horaInumacionRef={horaInumacionRef}
-        cementerioRef={cementerioRef}
       />
     </Layout>
   );

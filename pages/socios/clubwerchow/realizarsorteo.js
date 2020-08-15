@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/Layout";
-import jsCookie from "js-cookie";
 import axios from "axios";
-import FormGastos from "../../../components/sepelio/servicios/FormGastosServ";
-import FormGastosServ from "../../../components/sepelio/servicios/FormGastosServ";
+import jsCookie from "js-cookie";
+import Router from "next/router";
+import toastr from "toastr";
+import GenerarGanadores from "../../../components/socios/clubwerchow/GenerarGanadores";
 
-const gastos = () => {
+const realizarsorteo = () => {
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -14,11 +15,13 @@ const gastos = () => {
     }
   }, []);
 
+
+
   return (
     <Layout>
-      <FormGastosServ />
+      <GenerarGanadores />
     </Layout>
   );
 };
 
-export default gastos;
+export default realizarsorteo;

@@ -2,6 +2,7 @@ import React from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
+import Link from "next/link";
 
 const ListadoServicios = ({ listado }) => {
   //let casos = Object.values(listado);
@@ -99,13 +100,23 @@ const ListadoServicios = ({ listado }) => {
 
                 Cell: (row) => (
                   <div>
-                    <a
-                      href={"#"}
-                      className="btn btn-primary"
-                      onClick={() => selcaso(row)}
+                    <Link
+                      href={{
+                        pathname: "/sepelio/servicios/impresion",
+                        query: {
+                          id: row.original.dni,
+                        },
+                      }}
                     >
-                      Acciones
-                    </a>
+                      <button
+                        className="btn btn-primary mr-1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Imprimir Solicitud"
+                      >
+                        <i className="fa fa-print" aria-hidden="true"></i>
+                      </button>
+                    </Link>
                   </div>
                 ),
               },

@@ -6,55 +6,11 @@ import axios from "axios";
 
 const AltaServicio = ({
   selcaso,
-  nuevoServicio,
-  // DETALLES EXTINTO
-
   empresaRef,
   dniRef,
   apellidoRef,
   nombreRef,
   edadRef,
-  calleRef,
-  numeroRef,
-  barrioRef,
-  fechaFallecimientoRef,
-  lugarFallecimientoRef,
-  tipoServicioRef,
-  casaMortuariaRef,
-  fechaInumacionRef,
-  horaInumacionRef,
-  cementerioRef,
-  // DETALLES SERVICIO
-  caparRef,
-  avisoRef,
-  tipoAvisoRef,
-  autoDueloRef,
-  tipoAutoDuelRef,
-  placaRef,
-  carrozaFuRef,
-  tipoCarrozaFuRef,
-  salaRef,
-  tipoSalaRef,
-  tramitesRef,
-  tipoTramitesRef,
-  cochePortaRef,
-  tipoCochePortaRef,
-  retiroCuerpoRef,
-  tipoRetiroCuerpoRef,
-  trasladoRef,
-  tipoTrasladoRef,
-  observacionRef,
-  cremacionRef,
-  // DETALLES ATAUD
-  tipoAtaudRef,
-  caracteristicaAtaudRef,
-  descriart,
-  codigo,
-  caracteristicas,
-  uso,
-  usoAtaudRef,
-  // PRECIO SERV
-  precioserv,
 }) => {
   let contratoRef = React.createRef();
 
@@ -183,7 +139,6 @@ const AltaServicio = ({
         <FormAltaServicio
           ficha={ficha}
           selcaso={selcaso}
-          // DETALLES EXTINTO
           empresa={empresa}
           empresaRef={empresaRef}
           dniRef={dniRef}

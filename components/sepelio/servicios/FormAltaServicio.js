@@ -6,6 +6,7 @@ import moment from "moment";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicio from "../../../validacion/validarAltaServicio";
 import toastr from "toastr";
+import Router from "next/router";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -92,6 +93,11 @@ const FormAltaServicio = ({
       .then((res) => {
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
+
+          Router.push({
+            pathname: "/sepelio/servicios/impresion",
+            query: { id: servicio.dni },
+          });
         }
       })
       .catch((error) => {

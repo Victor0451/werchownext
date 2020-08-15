@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/Layout";
-import jsCookie from "js-cookie";
 import axios from "axios";
-import FormGastos from "../../../components/sepelio/servicios/FormGastosServ";
-import FormGastosServ from "../../../components/sepelio/servicios/FormGastosServ";
+import jsCookie from "js-cookie";
+import Router from "next/router";
+import Stock from "../../../components/sepelio/ataudes/Stock";
+import moment from "moment";
+import toastr from "toastr";
 
-const gastos = () => {
+const stock = () => {
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -16,9 +18,9 @@ const gastos = () => {
 
   return (
     <Layout>
-      <FormGastosServ />
+      <Stock />
     </Layout>
   );
 };
 
-export default gastos;
+export default stock;
