@@ -10,22 +10,22 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
     return <Spinner />;
   }
 
-  const [flag, guardarFlag] = useState(false);
+  const [archi, guardarArchi] = useState(null);
 
   const eliminarArchivos = async (id, flag) => {
     console.log(id);
-    // await axios
-    //   .delete(
-    //     `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
-    //   )
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       toastr.success("El archivo se elimino", "ATENCION");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    await axios
+      .delete(
+        `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          toastr.success("El archivo se elimino", "ATENCION");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     guardarFlag(true);
   };
@@ -333,6 +333,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
                   className="archivos p-4 "
                   data-toggle="modal"
                   data-target="#exampleModal"
+                  onClick={() => guardarArchi(archivo.archivo)}
                 />
 
                 <br />
@@ -351,51 +352,50 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
                   </button>
                 </div>
               </div>
-
-              {/* MODAL IMAGEN AMPLIA */}
-
-              <div
-                className="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog modal-lg">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">
-                        <u>{archivo.archivo}</u>
-                      </h5>
-                      <button
-                        type="button"
-                        className="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      <img
-                        src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
-                        classNameName="archimodal p-4 "
-                      />
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           ))}
+        </div>
+      </div>
+      {/* MODAL IMAGEN AMPLIA */}
+
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                <u>{archi}</u>
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body d-flex justify-content-center">
+              <img
+                src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archi}`}
+                classNameName="archimodal p-4  "
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
