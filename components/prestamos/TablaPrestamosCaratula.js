@@ -13,6 +13,7 @@ const TablaPrestamosCaratula = ({
   intereses,
   cantprest,
   capconint,
+  codigo,
 }) => {
   const aprobarPrestamos = async (row) => {
     const id = row.original.ptm_id;
@@ -186,12 +187,15 @@ const TablaPrestamosCaratula = ({
                   width: 260,
                   Cell: (row) => (
                     <div>
-                      <button
-                        className="btn btn-success mr-1"
-                        onClick={() => aprobarPrestamos(row)}
-                      >
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                      </button>
+                      {codigo === 1 ? (
+                        <button
+                          className="btn btn-success mr-1"
+                          onClick={() => aprobarPrestamos(row)}
+                        >
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                      ) : null}
+
                       <Link
                         href={{
                           pathname: "/prestamos/caratula",

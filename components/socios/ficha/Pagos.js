@@ -13,13 +13,13 @@ const Pagos = ({ pagos }) => {
     );
 
   return (
-    <div className="container mt-4 border border-dark ">
+    <div className="container border border-dark alert alert-primary ">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>Pagos Realizados</u>
         </strong>
       </h2>
-      <div className="border border-dark p-2">
+      <div className="border border-dark p-2 list">
         <ReactTable
           data={pagos}
           filterable
@@ -43,11 +43,11 @@ const Pagos = ({ pagos }) => {
                 },
 
                 {
-                  Header: "Contrato",
-                  id: "CONTRATO",
-                  accessor: (d) => d.CONTRATO,
+                  Header: "Importe",
+                  id: "IMPORTE",
+                  accessor: (d) => d.IMPORTE,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["CONTRATO"] }),
+                    matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
                   filterAll: true,
                   width: 200,
                 },
@@ -61,7 +61,7 @@ const Pagos = ({ pagos }) => {
                   width: 200,
                 },
                 {
-                  Header: "AÑO",
+                  Header: "Año",
                   id: "ANO",
                   accessor: (d) => d.ANO,
                   filterMethod: (filter, rows) =>

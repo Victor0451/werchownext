@@ -7,6 +7,7 @@ import axios from "axios";
 
 const imprimircaratula = () => {
   const [prestamos, guardarPrestamos] = useState(null);
+  const [user, guardarUser] = useState(null);
 
   const [capitalprest, guardarCapitalprest] = useState(null);
   const [intereses, guardarIntereses] = useState(null);
@@ -67,6 +68,7 @@ const imprimircaratula = () => {
     } else if (token) {
       if (usuario) {
         let user = JSON.parse(usuario);
+        guardarUser(user);
         let id = user.codigo;
 
         prestamosPorCodigo(id);
@@ -85,6 +87,7 @@ const imprimircaratula = () => {
             intereses={intereses}
             cantprest={cantprest}
             capconint={capconint}
+            codigo={user.codigo}
           />
         ) : (
           <>

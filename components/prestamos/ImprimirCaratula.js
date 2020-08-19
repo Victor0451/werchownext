@@ -8,6 +8,7 @@ const ImprimirCaratula = ({
   intereses,
   cantprest,
   capconint,
+  codigo,
 }) => {
   console.log(prestamos);
   return (
@@ -25,6 +26,7 @@ const ImprimirCaratula = ({
         intereses={intereses}
         cantprest={cantprest}
         capconint={capconint}
+        codigo={codigo}
       />
     </div>
   );

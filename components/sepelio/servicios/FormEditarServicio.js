@@ -1,0 +1,580 @@
+import React from "react";
+import axios from "axios";
+import moment from "moment";
+
+// Validaciones
+import useValidacion from "../../../hooks/useValidacion";
+import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
+import toastr from "toastr";
+import Router from "next/router";
+import Spinner from "../../layout/Spinner";
+
+const STATE_INICIAL = {
+  empresa: "",
+  dni: "",
+  apellido: "",
+  nombre: "",
+  edad: "",
+  fechafallecimiento: "",
+  lugarfallecimiento: "",
+  casamortuaria: "",
+  fechainhumacion: "",
+  horainhumacion: "",
+  cementerio: "",
+  altura: "",
+  peso: "",
+  motivo: "",
+  retiro: "",
+  solicitado: "",
+  parentesco: "",
+};
+
+const FormEditarServicio = ({ servicio }) => {
+  if (!servicio) return <Spinner />;
+
+  let contratoRef = React.createRef();
+  let empresaRef = React.createRef();
+  let dniRef = React.createRef();
+  let apellidoRef = React.createRef();
+  let nombreRef = React.createRef();
+  let edadRef = React.createRef();
+  let fechafallecimientoRef = React.createRef();
+  let lugarfallecimientoRef = React.createRef();
+  let casamortuariaRef = React.createRef();
+  let fechainhumacionRef = React.createRef();
+  let horainhumacionRef = React.createRef();
+  let cementerioRef = React.createRef();
+  let alturaRef = React.createRef();
+  let pesoRef = React.createRef();
+  let motivoRef = React.createRef();
+  let retiroRef = React.createRef();
+  let solicitadoRef = React.createRef();
+  let parentescoRef = React.createRef();
+
+  const {
+    valores,
+    errores,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+  } = useValidacion(STATE_INICIAL, validarAltaServicioPart, editarServicio);
+
+  const {
+    empresa,
+    dni,
+    apellido,
+    nombre,
+    edad,
+    fechafallecimiento,
+    lugarfallecimiento,
+    casamortuaria,
+    fechainhumacion,
+    horainhumacion,
+    cementerio,
+    altura,
+    peso,
+    motivo,
+    retiro,
+    solicitado,
+    parentesco,
+  } = valores;
+
+  async function editarServicio() {
+    const servicio = {
+      contrato: ficha.CONTRATO,
+      empresa: empresaRef.current.value,
+      dni: dniRef.current.value,
+      apellido: apellidoRef.current.value,
+      nombre: nombreRef.current.value,
+      edad: edadRef.current.value,
+      fecha_fallecimiento: fechafallecimiento,
+      lugar_fallecimiento: lugarfallecimiento,
+      tipo_servicio: tiposervicio,
+      casa_mortuaria: casamortuaria,
+      fecha_inhumacion: fechainhumacion,
+      hora_inhumacion: horainhumacion,
+      cementerio: cementerio,
+      altura: altura,
+      peso: peso,
+      motivo: motivo,
+      retiro: retiro,
+      solicitado: solicitado,
+      parentesco: parentesco,
+      fecha_recepcion: moment().format("YYYY-MM-DD HH:mm:ss"),
+      sucursal: ficha.SUCURSAL,
+      estado: 1,
+    };
+
+    console.log(servicio);
+
+    await axios
+      .post(
+        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+        servicio
+      )
+      .then((res) => {
+        if ((res.status = 200)) {
+          toastr.success("Servicio cargado con exito", "ATENCION");
+
+          Router.push({
+            pathname: "/sepelio/servicios/impresion",
+            query: { id: servicio.dni },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
+
+  return (
+    <div className="alert alert-primary border border-dark p-4">
+      <form className=" p-4" onSubmit={handleSubmit}>
+        <h1 className="mt-4 mb-4">
+          <strong>
+            <u>Formulario De Solicitud De Servicio</u>
+          </strong>
+        </h1>
+
+        <div className=" border border-dark p-4">
+          <div className="d-flex justify-content-between">
+            <h2 className="mt-4 mb-4 col-8">
+              <strong>
+                <u>Datos del Extinto</u>
+              </strong>
+            </h2>
+            <div className="mt-4 mb-4 col-4">
+              <label>
+                <strong>
+                  <u>Fecha de Recepcion</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Empresa"
+                name="responsable"
+                defaultValue={servicio.fecha_recepcion}
+                readOnly
+              />
+            </div>
+          </div>
+
+          <hr className="mt-4 mb-4" />
+
+          <div className="row">
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Empresa</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Empresa"
+                name="responsable"
+                defaultValue={servicio.empresa}
+                ref={empresaRef}
+                readOnly
+              />
+            </div>
+
+            <div className="form-group col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>N° Socio</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Contrato"
+                name="contrato"
+                ref={contratoRef}
+                defaultValue={servicio.contrato}
+                readOnly
+              />
+            </div>
+
+            <div className="form-group col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>DNI</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="DNI"
+                name="dni"
+                defaultValue={servicio.dni}
+                ref={dniRef}
+                onBlur={handleBlur}
+              />
+              {errores.dni && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.dni}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Apellido</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Apellido"
+                name="apellido"
+                defaultValue={servicio.apellido}
+                ref={apellidoRef}
+                onBlur={handleBlur}
+              />
+              {errores.apellido && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.apellido}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Nombre</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nombre"
+                name="nombre"
+                defaultValue={servicio.nombre}
+                ref={nombreRef}
+                onBlur={handleBlur}
+              />
+              {errores.nombre && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.nombre}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Edad</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Edad"
+                name="responsable"
+                defaultValue={servicio.edad}
+                ref={edadRef}
+                onBlur={handleBlur}
+              />
+              {errores.edad && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.edad}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Fecha de Fallecimiento</u>
+                </strong>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Fecha de Fallecimiento"
+                name="fechafallecimiento"
+                defaultValue={servicio.fecha_fallecimiento}
+                onBlur={handleBlur}
+              />
+              {errores.fechafallecimiento && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.fechafallecimiento}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Lugar de Fallecimiento</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Lugar de Fallecimiento"
+                name="lugarfallecimiento"
+                defaultValue={servicio.lugar_fallecimiento}
+                onBlur={handleBlur}
+              />
+              {errores.lugarfallecimiento && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.lugarfallecimiento}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Altura</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Altura"
+                name="altura"
+                value={servicio.altura}
+                onBlur={handleBlur}
+              />
+              {errores.altura && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.altura}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Peso</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Peso"
+                name="peso"
+                value={servicio.peso}
+                onBlur={handleBlur}
+              />
+              {errores.peso && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.peso}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <hr className="mt-4 mb-4" />
+
+        <div className="border border-dark p-4">
+          <h2 className="mt-4 mb-4">
+            <strong>
+              <u>Detalles del Servicio</u>
+            </strong>
+          </h2>
+          <div className="row mt-4">
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Tipo de Servicio</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Tipo de Servicio"
+                name="tiposervicio"
+                defaultValue={servicio.tipo_servicio}
+                onBlur={handleBlur}
+              />
+              {errores.tiposervicio && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.tiposervicio}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Motivo</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Motivo"
+                name="motivo"
+                value={servicio.motivo}
+                onBlur={handleBlur}
+              />
+              {errores.motivo && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.motivo}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Retiro Del Extinto</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Retiro Extinto"
+                name="retiro"
+                value={servicio.retiro}
+                onBlur={handleBlur}
+              />
+              {errores.retiro && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.retiro}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Casa Mortuaria</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Casa Mortuaria"
+                name="casamortuaria"
+                defaultValue={servicio.casa_mortuaria}
+                onBlur={handleBlur}
+              />
+              {errores.casamortuaria && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.casamortuaria}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Fecha de Inumacion</u>
+                </strong>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Fecha de Inumacion"
+                name="fechainhumacion"
+                defaultValue={servicio.fecha_inhumacion}
+                onBlur={handleBlur}
+              />
+              {errores.fechainhumacion && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.fechainhumacion}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Hora de Inumacion</u>
+                </strong>
+              </label>
+              <input
+                type="time"
+                className="form-control"
+                placeholder="hora de Inumacion"
+                name="horainhumacion"
+                defaultValue={servicio.hora_inhumacion}
+                onBlur={handleBlur}
+              />
+              {errores.horainhumacion && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.horainhumacion}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Cementerio</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Cementerio"
+                name="cementerio"
+                defaultValue={servicio.cementerio}
+                onBlur={handleBlur}
+              />
+              {errores.cementerio && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.cementerio}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Solicitado Por:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={servicio.solicitado}
+                onBlur={handleBlur}
+              />
+              {errores.solicitado && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.solicitado}
+                </div>
+              )}
+            </div>
+            <div className="form-group col-md-4 mt-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Parentesco: </u>
+                </strong>
+              </label>
+              <select
+                className="custom-select"
+                name="parentesco"
+                defaultValue={servicio.parentesco}
+                onBlur={handleBlur}
+              >
+                <option selected value="no">
+                  Elige una Opcion
+                </option>
+                <option value="conyugue">Cónyugue</option>
+                <option value="hijo/a">Hijo/a</option>
+                <option value="otro">Otro</option>
+              </select>
+              {errores.parentesco && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.parentesco}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <button type="submit" className="btn btn-primary btn-block mt-4">
+          Registrar
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default FormEditarServicio;

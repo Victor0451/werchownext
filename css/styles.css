@@ -15,7 +15,12 @@
 }
 
 input:read-only {
-  background: white !important;
+  background: rgb(151, 148, 148) !important;
+  color: black !important;
+}
+
+input {
+  background:white !important;
   color: black !important;
 }
 
@@ -193,6 +198,10 @@ input:read-only {
   margin: 0 auto;
   align-items: center !important;
   justify-items: center !important;
+}
+.conform {
+  font-size: 1.2em !important; /* 40px/16=2.5em */
+  font-weight: bold !important;
 }
 
 @media (max-width: 580px) {

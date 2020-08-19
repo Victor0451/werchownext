@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ImpresionSolicitudServicio from "../../../components/sepelio/servicios/ImpresionSolicitudServicio";
+import ConformidadServicio from "../../../components/sepelio/servicios/ConformidadServicio";
 
 const impresion = () => {
   const [servicio, guardarServicio] = useState(null);
@@ -50,6 +51,10 @@ const impresion = () => {
       <div>
         <div id="solicitud" className="print-solserv">
           <ImpresionSolicitudServicio servicio={servicio} />
+          <br />
+          <br />
+          <br />
+          <ConformidadServicio />
         </div>
 
         <div className="container alert alert-primary mt-4">
