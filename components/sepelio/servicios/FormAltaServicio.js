@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import Pagos from "../../socios/ficha/Pagos";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -25,6 +26,7 @@ const STATE_INICIAL = {
 
 const FormAltaServicio = ({
   ficha,
+  pagos,
   nuevoServicio,
   // DETALLES EXTINTO
   empresa,
@@ -34,6 +36,10 @@ const FormAltaServicio = ({
   nombreRef,
   edadRef,
 }) => {
+  let dninuevotitRef = React.createRef();
+
+  const [error, guardarError] = useState(null);
+
   const {
     valores,
     errores,
@@ -56,6 +62,27 @@ const FormAltaServicio = ({
     solicitado,
     parentesco,
   } = valores;
+
+  const postServicio = async (servicio) => {
+    await axios
+      .post(
+        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+        servicio
+      )
+      .then((res) => {
+        if ((res.status = 200)) {
+          toastr.success("Servicio cargado con exito", "ATENCION");
+          console.log(res.data);
+          Router.push({
+            pathname: "/sepelio/servicios/impresion",
+            query: { id: servicio.dni },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   async function nuevoServicio() {
     const servicio = {
@@ -81,28 +108,25 @@ const FormAltaServicio = ({
       fecha_recepcion: moment().format("YYYY-MM-DD HH:mm:ss"),
       sucursal: ficha.SUCURSAL,
       estado: 1,
+      dni_nuevotitular: "",
     };
 
-    console.log(servicio);
+    if (ficha.GRUPO) {
+      if (dninuevotitRef.current.value === "") {
+        guardarError("Debes ingresar el dni del nuevo titular");
+      } else if (dninuevotitRef.current.value.length > 8) {
+        guardarError("El numero de dni debe ser de un maximo de 8 digitos");
+      } else {
+        servicio.dni_nuevotitular = dninuevotitRef.current.value;
+        postServicio(servicio);
+        console.log(servicio);
+      }
+    } else if (!ficha.GRUPO) {
+      postServicio(servicio);
+      console.log(servicio);
+    }
 
-    await axios
-      .post(
-        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-        servicio
-      )
-      .then((res) => {
-        if ((res.status = 200)) {
-          toastr.success("Servicio cargado con exito", "ATENCION");
-
-          Router.push({
-            pathname: "/sepelio/servicios/impresion",
-            query: { id: servicio.dni },
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log();
   }
 
   let tiposervicio = `Servicio Asosiado Al Plan ${ficha.PLAN}`;
@@ -110,8 +134,24 @@ const FormAltaServicio = ({
 
   return (
     <div className="alert alert-primary border border-dark p-4">
-      <form className=" p-4" onSubmit={handleSubmit}>
-        <h1 className="mt-4 mb-4">
+      <div className="container row border border-dark p-4 d-flex justify-content-center">
+        <button
+          className="btn btn-info btn-sm col-5 mr-1"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Ver Pagos
+        </button>
+        <a
+          href="/sepelio/servicios/nuevo"
+          className="btn btn-danger btn-sm col-5 mr1"
+        >
+          Cancelar
+        </a>
+      </div>
+
+      <form className=" border border-dark mt-4 p-4" onSubmit={handleSubmit}>
+        <h1 className="mt-4 mb-4 text-center">
           <strong>
             <u>Formulario De Solicitud De Servicio</u>
           </strong>
@@ -355,6 +395,7 @@ const FormAltaServicio = ({
                 defaultValue={tiposervicio}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                readOnly
               />
               {errores.tiposervicio && (
                 <div className="alert alert-danger text-center p-2 mt-2">
@@ -373,7 +414,7 @@ const FormAltaServicio = ({
                 className="form-control"
                 placeholder="Motivo"
                 name="motivo"
-                value={motivo}
+                defaultValue={motivo}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -394,7 +435,7 @@ const FormAltaServicio = ({
                 className="form-control"
                 placeholder="Retiro Extinto"
                 name="retiro"
-                value={retiro}
+                defaultValue={retiro}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -540,10 +581,84 @@ const FormAltaServicio = ({
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary btn-block mt-4">
-          Registrar
-        </button>
+
+        {ficha.GRUPO ? (
+          <div>
+            <hr className="mt-4 mb-4" />
+            <div className="row d-flex justify-content-between mt-4 mb-4 border border-dark p-4">
+              <h4 className="mt-2">
+                <strong>
+                  <u>Ingresa el DNI del Nuevo Titular</u>
+                </strong>
+              </h4>
+              <input
+                type="number"
+                maxLength="8"
+                className="form-control col-5"
+                placeholder="Dni"
+                name="nuevotitular"
+                ref={dninuevotitRef}
+              />
+            </div>
+            {error && (
+              <div className="alert alert-danger text-center p-2 mt-2">
+                {error}
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        <div className="container row  p-4 d-flex justify-content-center">
+          <button type="submit" className="btn btn-primary col-5 mr-1">
+            Registrar
+          </button>
+          <a
+            href="/sepelio/servicios/nuevo"
+            className="btn btn-danger  col-5 mr1"
+          >
+            Cancelar
+          </a>
+        </div>
       </form>
+
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Pagos del Afililado
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <Pagos pagos={pagos} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

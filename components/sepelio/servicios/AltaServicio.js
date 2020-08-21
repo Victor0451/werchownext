@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import FormAltaServicio from "./FormAltaServicio";
 import FormAltaServicioPart from "./FormAltaServicioPart";
-import Pagos from "../../socios/ficha/Pagos";
 import toastr from "toastr";
 import axios from "axios";
+import $ from "jquery";
 
 const AltaServicio = ({
   selcaso,
@@ -185,141 +185,102 @@ const AltaServicio = ({
 
   return (
     <div className="container">
-      <div className="alert alert-primary border border-dark mt-4 p-4">
-        <h2 className="mt-4 mb-4">
-          <strong>
-            <u>Ingrese N° de Documento del Fallecido </u>
-          </strong>
-        </h2>
-        <form className="mt-4 border border-dark p-2">
-          <div className="row mb-4">
-            <div className="form-group col-md-6">
-              <label>
-                <strong>
-                  {" "}
-                  <u> N° de Documento: </u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Ficha"
-                name="contrato"
-                ref={contratoRef}
-              />
-              {error && (
-                <div className="mt-2 form-group  alert alert-danger">
-                  {error}
-                </div>
-              )}
-            </div>
-
-            <div className="form-group col-md-6 mt-4">
-              <button
-                type="submit"
-                className="btn col-md-5 btn-primary mr-4"
-                data-toggle="modal"
-                data-target="#exampleModal"
-                onClick={buscarTitular}
-              >
-                Werchow
-              </button>
-              <button
-                type="submit"
-                className="btn col-md-5 btn-primary"
-                data-toggle="modal"
-                data-target="#exampleModal"
-                onClick={buscarTitularM}
-              >
-                Mutual
-              </button>
-            </div>
-          </div>
-        </form>
-
-        <hr className="mt-4 mb-4" />
-
+      {ficha !== null ? (
+        <div className="mt-4">
+          <FormAltaServicio
+            pagos={pagos}
+            ficha={ficha}
+            selcaso={selcaso}
+            empresa={empresa}
+            empresaRef={empresaRef}
+            dniRef={dniRef}
+            apellidoRef={apellidoRef}
+            nombreRef={nombreRef}
+            edadRef={edadRef}
+          />
+        </div>
+      ) : particular !== null ? (
+        <FormAltaServicioPart />
+      ) : (
         <div className="alert alert-primary border border-dark mt-4 p-4">
-          <div className="row">
-            <div className="col-md-6">
-              <h2 className="mt-4 mb-4">
-                <strong>
-                  <u>Ingresar Servicio Particular</u>
-                </strong>
-              </h2>
-            </div>
+          <h2 className="mt-4 mb-4">
+            <strong>
+              <u>Ingrese N° de Documento del Fallecido </u>
+            </strong>
+          </h2>
+          <form className="mt-4 border border-dark p-2">
+            <div className="row mb-4">
+              <div className="form-group col-md-6">
+                <label>
+                  <strong>
+                    {" "}
+                    <u> N° de Documento: </u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Ficha"
+                  name="contrato"
+                  ref={contratoRef}
+                />
+                {error && (
+                  <div className="mt-2 form-group  alert alert-danger">
+                    {error}
+                  </div>
+                )}
+              </div>
 
-            <div className="col-md-6 mt-4">
-              <button
-                type="reset"
-                className="btn btn-block btn-primary"
-                onClick={servicioParticular}
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                Registrar
-              </button>
+              <div className="form-group col-md-6 mt-4">
+                <button
+                  type="submit"
+                  className="btn col-md-5 btn-primary mr-4"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  onClick={buscarTitular}
+                >
+                  Werchow
+                </button>
+                <button
+                  type="submit"
+                  className="btn col-md-5 btn-primary"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  onClick={buscarTitularM}
+                >
+                  Mutual
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <hr className="mt-4 mb-4" />
+
+          <div className="alert alert-primary border border-dark mt-4 p-4">
+            <div className="row">
+              <div className="col-md-6">
+                <h2 className="mt-4 mb-4">
+                  <strong>
+                    <u>Ingresar Servicio Particular</u>
+                  </strong>
+                </h2>
+              </div>
+
+              <div className="col-md-6 mt-4">
+                <button
+                  type="reset"
+                  className="btn btn-block btn-primary"
+                  onClick={servicioParticular}
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Registrar
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div
-        className="modal  fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5>
-                <strong>
-                  <u>Carga del Servicio</u>
-                </strong>
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {ficha !== null ? (
-                <>
-                  <Pagos pagos={pagos} />
-
-                  <FormAltaServicio
-                    ficha={ficha}
-                    selcaso={selcaso}
-                    empresa={empresa}
-                    empresaRef={empresaRef}
-                    dniRef={dniRef}
-                    apellidoRef={apellidoRef}
-                    nombreRef={nombreRef}
-                    edadRef={edadRef}
-                  />
-                </>
-              ) : particular !== null ? (
-                <FormAltaServicioPart />
-              ) : null}
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

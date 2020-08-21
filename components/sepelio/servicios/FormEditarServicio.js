@@ -1,33 +1,9 @@
 import React from "react";
 import axios from "axios";
 import moment from "moment";
-
-// Validaciones
-import useValidacion from "../../../hooks/useValidacion";
-import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
 import toastr from "toastr";
 import Router from "next/router";
 import Spinner from "../../layout/Spinner";
-
-const STATE_INICIAL = {
-  empresa: "",
-  dni: "",
-  apellido: "",
-  nombre: "",
-  edad: "",
-  fechafallecimiento: "",
-  lugarfallecimiento: "",
-  casamortuaria: "",
-  fechainhumacion: "",
-  horainhumacion: "",
-  cementerio: "",
-  altura: "",
-  peso: "",
-  motivo: "",
-  retiro: "",
-  solicitado: "",
-  parentesco: "",
-};
 
 const FormEditarServicio = ({ servicio }) => {
   if (!servicio) return <Spinner />;
@@ -51,70 +27,44 @@ const FormEditarServicio = ({ servicio }) => {
   let solicitadoRef = React.createRef();
   let parentescoRef = React.createRef();
 
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarAltaServicioPart, editarServicio);
+  const editarServicio = async (e) => {
+    e.preventDefault();
 
-  const {
-    empresa,
-    dni,
-    apellido,
-    nombre,
-    edad,
-    fechafallecimiento,
-    lugarfallecimiento,
-    casamortuaria,
-    fechainhumacion,
-    horainhumacion,
-    cementerio,
-    altura,
-    peso,
-    motivo,
-    retiro,
-    solicitado,
-    parentesco,
-  } = valores;
-
-  async function editarServicio() {
-    const servicio = {
-      contrato: ficha.CONTRATO,
+    const editServicio = {
+      contrato: servicio.contrato,
       empresa: empresaRef.current.value,
       dni: dniRef.current.value,
       apellido: apellidoRef.current.value,
       nombre: nombreRef.current.value,
       edad: edadRef.current.value,
-      fecha_fallecimiento: fechafallecimiento,
-      lugar_fallecimiento: lugarfallecimiento,
-      tipo_servicio: tiposervicio,
-      casa_mortuaria: casamortuaria,
-      fecha_inhumacion: fechainhumacion,
-      hora_inhumacion: horainhumacion,
-      cementerio: cementerio,
-      altura: altura,
-      peso: peso,
-      motivo: motivo,
-      retiro: retiro,
-      solicitado: solicitado,
-      parentesco: parentesco,
-      fecha_recepcion: moment().format("YYYY-MM-DD HH:mm:ss"),
-      sucursal: ficha.SUCURSAL,
+      fecha_fallecimiento: fechafallecimientoRef.current.value,
+      lugar_fallecimiento: lugarfallecimientoRef.current.value,
+      tipo_servicio: servicio.tipo_servicio,
+      casa_mortuaria: casamortuariaRef.current.value,
+      fecha_inhumacion: fechainhumacionRef.current.value,
+      hora_inhumacion: horainhumacionRef.current.value,
+      cementerio: cementerioRef.current.value,
+      altura: alturaRef.current.value,
+      peso: pesoRef.current.value,
+      motivo: motivoRef.current.value,
+      retiro: retiroRef.current.value,
+      solicitado: solicitadoRef.current.value,
+      parentesco: parentescoRef.current.value,
+      fecha_recepcion: servicio.fecha_recepcion,
+      sucursal: servicio.sucursal,
       estado: 1,
     };
 
-    console.log(servicio);
+    console.log(editServicio);
 
     await axios
-      .post(
-        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-        servicio
+      .put(
+        `http://190.231.32.232:5002/api/sepelio/servicio/editarservicio/${servicio.idservicio}`,
+        editServicio
       )
       .then((res) => {
         if ((res.status = 200)) {
-          toastr.success("Servicio cargado con exito", "ATENCION");
+          toastr.success("Servicio editado con exito", "ATENCION");
 
           Router.push({
             pathname: "/sepelio/servicios/impresion",
@@ -125,13 +75,11 @@ const FormEditarServicio = ({ servicio }) => {
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
+  };
 
   return (
-    <div className="alert alert-primary border border-dark p-4">
-      <form className=" p-4" onSubmit={handleSubmit}>
+    <div className="container mt-4 alert alert-primary border border-dark p-4">
+      <form className=" p-4" onSubmit={editarServicio}>
         <h1 className="mt-4 mb-4">
           <strong>
             <u>Formulario De Solicitud De Servicio</u>
@@ -212,13 +160,7 @@ const FormEditarServicio = ({ servicio }) => {
                 name="dni"
                 defaultValue={servicio.dni}
                 ref={dniRef}
-                onBlur={handleBlur}
               />
-              {errores.dni && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.dni}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -233,13 +175,7 @@ const FormEditarServicio = ({ servicio }) => {
                 name="apellido"
                 defaultValue={servicio.apellido}
                 ref={apellidoRef}
-                onBlur={handleBlur}
               />
-              {errores.apellido && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.apellido}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -255,13 +191,7 @@ const FormEditarServicio = ({ servicio }) => {
                 name="nombre"
                 defaultValue={servicio.nombre}
                 ref={nombreRef}
-                onBlur={handleBlur}
               />
-              {errores.nombre && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.nombre}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -276,13 +206,7 @@ const FormEditarServicio = ({ servicio }) => {
                 name="responsable"
                 defaultValue={servicio.edad}
                 ref={edadRef}
-                onBlur={handleBlur}
               />
-              {errores.edad && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.edad}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -297,13 +221,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Fecha de Fallecimiento"
                 name="fechafallecimiento"
                 defaultValue={servicio.fecha_fallecimiento}
-                onBlur={handleBlur}
+                ref={fechafallecimientoRef}
               />
-              {errores.fechafallecimiento && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.fechafallecimiento}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -317,13 +236,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Lugar de Fallecimiento"
                 name="lugarfallecimiento"
                 defaultValue={servicio.lugar_fallecimiento}
-                onBlur={handleBlur}
+                ref={lugarfallecimientoRef}
               />
-              {errores.lugarfallecimiento && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.lugarfallecimiento}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -338,13 +252,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Altura"
                 name="altura"
                 value={servicio.altura}
-                onBlur={handleBlur}
+                ref={alturaRef}
               />
-              {errores.altura && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.altura}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -358,14 +267,9 @@ const FormEditarServicio = ({ servicio }) => {
                 className="form-control"
                 placeholder="Peso"
                 name="peso"
-                value={servicio.peso}
-                onBlur={handleBlur}
+                defaultValue={servicio.peso}
+                ref={pesoRef}
               />
-              {errores.peso && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.peso}
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -391,13 +295,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Tipo de Servicio"
                 name="tiposervicio"
                 defaultValue={servicio.tipo_servicio}
-                onBlur={handleBlur}
+                readOnly
               />
-              {errores.tiposervicio && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.tiposervicio}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -410,14 +309,9 @@ const FormEditarServicio = ({ servicio }) => {
                 className="form-control"
                 placeholder="Motivo"
                 name="motivo"
-                value={servicio.motivo}
-                onBlur={handleBlur}
+                defaultValue={servicio.motivo}
+                ref={motivoRef}
               />
-              {errores.motivo && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.motivo}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -430,14 +324,9 @@ const FormEditarServicio = ({ servicio }) => {
                 className="form-control"
                 placeholder="Retiro Extinto"
                 name="retiro"
-                value={servicio.retiro}
-                onBlur={handleBlur}
+                defaultValue={servicio.retiro}
+                ref={retiroRef}
               />
-              {errores.retiro && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.retiro}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -451,13 +340,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Casa Mortuaria"
                 name="casamortuaria"
                 defaultValue={servicio.casa_mortuaria}
-                onBlur={handleBlur}
+                ref={casamortuariaRef}
               />
-              {errores.casamortuaria && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.casamortuaria}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -472,13 +356,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Fecha de Inumacion"
                 name="fechainhumacion"
                 defaultValue={servicio.fecha_inhumacion}
-                onBlur={handleBlur}
+                ref={fechainhumacionRef}
               />
-              {errores.fechainhumacion && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.fechainhumacion}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -492,13 +371,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="hora de Inumacion"
                 name="horainhumacion"
                 defaultValue={servicio.hora_inhumacion}
-                onBlur={handleBlur}
+                ref={horainhumacionRef}
               />
-              {errores.horainhumacion && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.horainhumacion}
-                </div>
-              )}
             </div>
 
             <div className="col-md-4 mt-4 mb-4">
@@ -513,13 +387,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Cementerio"
                 name="cementerio"
                 defaultValue={servicio.cementerio}
-                onBlur={handleBlur}
+                ref={cementerioRef}
               />
-              {errores.cementerio && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.cementerio}
-                </div>
-              )}
             </div>
             <div className="col-md-4 mt-4 mb-4">
               <label>
@@ -533,13 +402,8 @@ const FormEditarServicio = ({ servicio }) => {
                 placeholder="Solicitado Por"
                 name="solicitado"
                 defaultValue={servicio.solicitado}
-                onBlur={handleBlur}
+                ref={solicitadoRef}
               />
-              {errores.solicitado && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.solicitado}
-                </div>
-              )}
             </div>
             <div className="form-group col-md-4 mt-4">
               <label>
@@ -552,7 +416,7 @@ const FormEditarServicio = ({ servicio }) => {
                 className="custom-select"
                 name="parentesco"
                 defaultValue={servicio.parentesco}
-                onBlur={handleBlur}
+                ref={parentescoRef}
               >
                 <option selected value="no">
                   Elige una Opcion
@@ -561,17 +425,23 @@ const FormEditarServicio = ({ servicio }) => {
                 <option value="hijo/a">Hijo/a</option>
                 <option value="otro">Otro</option>
               </select>
-              {errores.parentesco && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.parentesco}
-                </div>
-              )}
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary btn-block mt-4">
-          Registrar
-        </button>
+        <div className="row d-flex justify-content-center">
+          <button
+            type="submit"
+            className="btn btn-primary btn-block mt-4 col-5 mr-1"
+          >
+            Registrar
+          </button>
+          <a
+            href="/sepelio/servicios/listado"
+            className="btn btn-danger btn-block border border-dark mt-4 col-5"
+          >
+            Cancelar
+          </a>
+        </div>
       </form>
     </div>
   );

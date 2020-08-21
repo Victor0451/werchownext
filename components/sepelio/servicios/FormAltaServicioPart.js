@@ -100,7 +100,11 @@ const FormAltaServicioPart = ({
       .then((res) => {
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
-          console.log(res.data);
+
+          Router.push({
+            pathname: "/sepelio/servicios/impresion",
+            query: { id: servicio.dni },
+          });
         }
       })
       .catch((error) => {
@@ -112,14 +116,23 @@ const FormAltaServicioPart = ({
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
-    <div className="alert alert-primary border border-dark p-4">
+    <div className="mt-4 alert alert-primary border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>
-        <h1 className="mt-4 mb-4">
-          <strong>
-            <u>Formulario De Solicitud De Servicio</u>
-          </strong>
-        </h1>
-
+        <div className="d-flex justify-content-between">
+          <h1 className=" mb-4">
+            <strong>
+              <u>Formulario De Solicitud De Servicio</u>
+            </strong>
+          </h1>
+          <div>
+            <a
+              href="/sepelio/servicios/nuevo"
+              className="btn btn-danger   mr-1"
+            >
+              Cancelar
+            </a>
+          </div>
+        </div>
         <div className=" border border-dark p-4">
           <div className="d-flex justify-content-between">
             <h2 className="mt-4 mb-4 col-8">
@@ -362,6 +375,7 @@ const FormAltaServicioPart = ({
                 defaultValue={tiposervicio}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                readOnly
               />
               {errores.tiposervicio && (
                 <div className="alert alert-danger text-center p-2 mt-2">
@@ -547,9 +561,17 @@ const FormAltaServicioPart = ({
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary btn-block mt-4">
-          Registrar
-        </button>
+        <div className="container row  p-4 d-flex justify-content-center">
+          <button type="submit" className="btn btn-primary col-5 mr-1">
+            Registrar
+          </button>
+          <a
+            href="/sepelio/servicios/nuevo"
+            className="btn btn-danger  col-5 mr1"
+          >
+            Cancelar
+          </a>
+        </div>
       </form>
     </div>
   );
