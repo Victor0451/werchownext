@@ -68,7 +68,7 @@ const AltaPrestamos = ({
         )
         .then((res) => {
           let ficha = res.data;
-          if (res.data.GRUPO === 6) {
+          if (res.data.GRUPO === 6 || res.data.GRUPO === 5006) {
             guardarficha(ficha);
 
             prestamosActivos(contrato);
