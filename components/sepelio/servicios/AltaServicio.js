@@ -12,6 +12,7 @@ const AltaServicio = ({
   apellidoRef,
   nombreRef,
   edadRef,
+  usuario,
 }) => {
   let contratoRef = React.createRef();
 
@@ -237,10 +238,11 @@ const AltaServicio = ({
             apellidoRef={apellidoRef}
             nombreRef={nombreRef}
             edadRef={edadRef}
+            usuario={usuario}
           />
         </div>
       ) : particular !== null ? (
-        <FormAltaServicioPart />
+        <FormAltaServicioPart usuario={usuario} />
       ) : (
         <div className="alert alert-primary border border-dark mt-4 p-4 text-center text-uppercase">
           {errexiste && (

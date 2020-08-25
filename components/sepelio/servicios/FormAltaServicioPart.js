@@ -27,7 +27,7 @@ const STATE_INICIAL = {
   parentesco: "",
 };
 
-const FormAltaServicioPart = ({ nuevoServicio, empresaRef }) => {
+const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const motivoRef = React.createRef();
 
   const [show, guardarShow] = useState(true);
@@ -84,6 +84,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef }) => {
       fecha_recepcion: moment().format("YYYY-MM-DD HH:mm:ss"),
       sucursal: "Casa Central",
       estado: 1,
+      operador: usuario,
     };
 
     if (motivoRef.current.value === "") {
@@ -128,6 +129,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef }) => {
       }, 200);
     }
   };
+
+  console.log(usuario);
 
   let tiposervicio = `Servicio Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");

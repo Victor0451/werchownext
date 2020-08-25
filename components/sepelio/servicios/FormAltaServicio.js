@@ -35,6 +35,7 @@ const FormAltaServicio = ({
   apellidoRef,
   nombreRef,
   edadRef,
+  usuario,
 }) => {
   let dninuevotitRef = React.createRef();
   let motivoRef = React.createRef();
@@ -115,6 +116,7 @@ const FormAltaServicio = ({
       sucursal: ficha.SUCURSAL,
       estado: 1,
       dni_nuevotitular: "",
+      operador: usuario,
     };
 
     if (ficha.GRUPO) {
@@ -126,14 +128,14 @@ const FormAltaServicio = ({
         guardarErrMotiv("Debes ingresar una Causa de muerte");
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
-        //postServicio(servicio);
+        postServicio(servicio);
         console.log(servicio);
       }
     } else if (!ficha.GRUPO) {
       if (motivoRef.current.value === "") {
         guardarErrMotiv("Debes ingresar una Causa de muerte");
       } else {
-        // postServicio(servicio);
+        postServicio(servicio);
         console.log(servicio);
       }
     }
