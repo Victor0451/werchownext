@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 
@@ -6,6 +6,7 @@ import moment from "moment";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
 import toastr from "toastr";
+import Router from "next/router";
 
 const STATE_INICIAL = {
   nombre: "",
@@ -26,17 +27,12 @@ const STATE_INICIAL = {
   parentesco: "",
 };
 
-const FormAltaServicioPart = ({
-  ficha,
-  nuevoServicio,
-  // DETALLES EXTINTO
-  empresa,
-  empresaRef,
-  dniRef,
-  apellidoRef,
-  nombreRef,
-  edadRef,
-}) => {
+const FormAltaServicioPart = ({ nuevoServicio, empresaRef }) => {
+  const motivoRef = React.createRef();
+
+  const [show, guardarShow] = useState(true);
+  const [errmotiv, guardarErrMotiv] = useState(null);
+
   const {
     valores,
     errores,
@@ -81,7 +77,7 @@ const FormAltaServicioPart = ({
       cementerio: cementerio,
       altura: altura,
       peso: peso,
-      motivo: motivo,
+      motivo: motivoRef.current.value,
       retiro: retiro,
       solicitado: solicitado,
       parentesco: parentesco,
@@ -90,31 +86,51 @@ const FormAltaServicioPart = ({
       estado: 1,
     };
 
-    console.log(servicio);
+    if (motivoRef.current.value === "") {
+      guardarErrMotiv("Debes ingresar una Causa de muerte");
+    } else {
+      console.log(servicio);
 
-    await axios
-      .post(
-        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
-        servicio
-      )
-      .then((res) => {
-        if ((res.status = 200)) {
-          toastr.success("Servicio cargado con exito", "ATENCION");
+      await axios
+        .post(
+          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+          servicio
+        )
+        .then((res) => {
+          if ((res.status = 200)) {
+            toastr.success("Servicio cargado con exito", "ATENCION");
 
-          Router.push({
-            pathname: "/sepelio/servicios/impresion",
-            query: { id: servicio.dni },
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+            Router.push({
+              pathname: "/sepelio/servicios/impresion",
+              query: { id: servicio.dni },
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
+
+  const causamuerte = (flag) => {
+    guardarShow(true);
+
+    console.log(flag);
+    if (flag === "covid") {
+      setTimeout(() => {
+        document.getElementById("motivo").value = "COVID 19";
+        document.getElementById("motivo").readOnly = true;
+      }, 200);
+    } else if (flag === "otro") {
+      setTimeout(() => {
+        document.getElementById("motivo").readOnly = false;
+        document.getElementById("motivo").value = "";
+      }, 200);
+    }
+  };
 
   let tiposervicio = `Servicio Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
-
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>
@@ -383,27 +399,67 @@ const FormAltaServicioPart = ({
                 </div>
               )}
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+
+            <div className="col-md-2 mt-4 mb-4">
               <label>
                 <strong>
                   <u>Motivo</u>
                 </strong>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Motivo"
-                name="motivo"
-                value={motivo}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errores.motivo && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.motivo}
-                </div>
-              )}
+              <br />
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="covid"
+                  value="option1"
+                  onClick={() => causamuerte("covid")}
+                />
+                <label className="form-check-label" for="covid">
+                  COVID 19
+                </label>
+              </div>
+
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="otro"
+                  value="option1"
+                  onClick={() => causamuerte("otro")}
+                  defaultChecked={true}
+                />
+                <label className="form-check-label" for="otro">
+                  Otro
+                </label>
+              </div>
             </div>
+
+            {show === true ? (
+              <div className="col-md-6 mt-4 mb-4">
+                <label>
+                  <strong>
+                    <u>Detalle Causa de Muerte</u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Motivo"
+                  name="motivo"
+                  id="motivo"
+                  ref={motivoRef}
+                />
+                {errmotiv && (
+                  <div className="alert alert-danger text-center p-2 mt-2">
+                    {errmotiv}
+                  </div>
+                )}
+              </div>
+            ) : null}
+
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>

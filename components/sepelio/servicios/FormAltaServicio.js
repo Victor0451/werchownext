@@ -37,6 +37,10 @@ const FormAltaServicio = ({
   edadRef,
 }) => {
   let dninuevotitRef = React.createRef();
+  let motivoRef = React.createRef();
+
+  const [show, guardarShow] = useState(true);
+  const [errmotiv, guardarErrMotiv] = useState(null);
 
   const [error, guardarError] = useState(null);
 
@@ -85,6 +89,8 @@ const FormAltaServicio = ({
   };
 
   async function nuevoServicio() {
+    guardarErrMotiv(null);
+
     const servicio = {
       contrato: ficha.CONTRATO,
       empresa: empresaRef.current.value,
@@ -101,7 +107,7 @@ const FormAltaServicio = ({
       cementerio: cementerio,
       altura: altura,
       peso: peso,
-      motivo: motivo,
+      motivo: motivoRef.current.value,
       retiro: retiro,
       solicitado: solicitado,
       parentesco: parentesco,
@@ -116,18 +122,39 @@ const FormAltaServicio = ({
         guardarError("Debes ingresar el dni del nuevo titular");
       } else if (dninuevotitRef.current.value.length > 8) {
         guardarError("El numero de dni debe ser de un maximo de 8 digitos");
+      } else if (motivoRef.current.value === "") {
+        guardarErrMotiv("Debes ingresar una Causa de muerte");
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
-        postServicio(servicio);
+        //postServicio(servicio);
         console.log(servicio);
       }
     } else if (!ficha.GRUPO) {
-      postServicio(servicio);
-      console.log(servicio);
+      if (motivoRef.current.value === "") {
+        guardarErrMotiv("Debes ingresar una Causa de muerte");
+      } else {
+        // postServicio(servicio);
+        console.log(servicio);
+      }
     }
-
-    console.log();
   }
+
+  const causamuerte = (flag) => {
+    guardarShow(true);
+
+    console.log(flag);
+    if (flag === "covid") {
+      setTimeout(() => {
+        document.getElementById("motivo").value = "COVID 19";
+        document.getElementById("motivo").readOnly = true;
+      }, 200);
+    } else if (flag === "otro") {
+      setTimeout(() => {
+        document.getElementById("motivo").readOnly = false;
+        document.getElementById("motivo").value = "";
+      }, 200);
+    }
+  };
 
   let tiposervicio = `Servicio Asosiado Al Plan ${ficha.PLAN}`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
@@ -403,27 +430,65 @@ const FormAltaServicio = ({
                 </div>
               )}
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-2 mt-4 mb-4">
               <label>
                 <strong>
                   <u>Motivo</u>
                 </strong>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Motivo"
-                name="motivo"
-                defaultValue={motivo}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errores.motivo && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.motivo}
-                </div>
-              )}
+              <br />
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="covid"
+                  value="option1"
+                  onClick={() => causamuerte("covid")}
+                />
+                <label className="form-check-label" for="covid">
+                  COVID 19
+                </label>
+              </div>
+
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="otro"
+                  value="option1"
+                  onClick={() => causamuerte("otro")}
+                  defaultChecked={true}
+                />
+                <label className="form-check-label" for="otro">
+                  Otro
+                </label>
+              </div>
             </div>
+
+            {show === true ? (
+              <div className="col-md-6 mt-4 mb-4">
+                <label>
+                  <strong>
+                    <u>Detalle Causa de Muerte</u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Motivo"
+                  name="motivo"
+                  id="motivo"
+                  ref={motivoRef}
+                />
+                {errmotiv && (
+                  <div className="alert alert-danger text-center p-2 mt-2">
+                    {errmotiv}
+                  </div>
+                )}
+              </div>
+            ) : null}
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>

@@ -19,9 +19,6 @@ export default function validarAltaServicio(valores) {
     errores.casamortuaria = "La casa mortuaria es obligatorio";
   }
 
-  if (!valores.motivo) {
-    errores.motivo = "EL motivo es obligatorio";
-  }
   if (!valores.retiro) {
     errores.retiro = "El retiro es obligatorio";
   }

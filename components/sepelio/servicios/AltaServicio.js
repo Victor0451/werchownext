@@ -16,6 +16,7 @@ const AltaServicio = ({
   let contratoRef = React.createRef();
 
   const [empresa, guardarEmpresa] = useState(null);
+  const [errexiste, guadarErrexiste] = useState(null);
   const [error, guardarError] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
@@ -33,17 +34,21 @@ const AltaServicio = ({
     if (contrato !== "") {
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sepelio/servicio/consultarficha/${contrato}`
+          `http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${contrato}`
         )
         .then((res) => {
           if (res.data) {
-            let ficha = res.data;
-            guardarFicha(ficha);
-            traerPagos(ficha.CONTRATO);
-          } else if (!res.data) {
+            toastr.warning(
+              "EL DNI INGRESADO PERTENECE A UN SERVICIO YA CARGADO",
+              "ATENCION"
+            );
+            guadarErrexiste(
+              "EL DNI INGRESADO PERTENECE A UN SERVICIO YA CARGADO"
+            );
+          } else {
             axios
               .get(
-                `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadh/${contrato}`
+                `http://190.231.32.232:5002/api/sepelio/servicio/consultarficha/${contrato}`
               )
               .then((res) => {
                 if (res.data) {
@@ -51,13 +56,28 @@ const AltaServicio = ({
                   guardarFicha(ficha);
                   traerPagos(ficha.CONTRATO);
                 } else if (!res.data) {
-                  toastr.error(
-                    "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-                    "ATENCION"
-                  );
+                  axios
+                    .get(
+                      `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadh/${contrato}`
+                    )
+                    .then((res) => {
+                      if (res.data) {
+                        let ficha = res.data;
+                        guardarFicha(ficha);
+                        traerPagos(ficha.CONTRATO);
+                      } else if (!res.data) {
+                        toastr.error(
+                          "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+                          "ATENCION"
+                        );
+                      }
+                      let ficha = res.data;
+                      guardarFicha(ficha);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
                 }
-                let ficha = res.data;
-                guardarFicha(ficha);
               })
               .catch((error) => {
                 console.log(error);
@@ -78,6 +98,7 @@ const AltaServicio = ({
 
     guardarFicha(null);
     guardarPagos(null);
+    guadarErrexiste(null);
 
     guardarEmpresa("Mutual");
     let contrato = contratoRef.current.value;
@@ -85,17 +106,21 @@ const AltaServicio = ({
     if (contrato !== "") {
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sepelio/servicio/consultarficham/${contrato}`
+          `http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${contrato}`
         )
         .then((res) => {
           if (res.data) {
-            let ficha = res.data;
-            guardarFicha(ficha);
-            traerPagosM(ficha.CONTRATO);
-          } else if (!res.data) {
+            toastr.warning(
+              "EL DNI INGRESADO PERTENECE A UN SERVICIO YA CARGADO",
+              "ATENCION"
+            );
+            guadarErrexiste(
+              "EL DNI INGRESADO PERTENECE A UN SERVICIO YA CARGADO"
+            );
+          } else {
             axios
               .get(
-                `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadhm/${contrato}`
+                `http://190.231.32.232:5002/api/sepelio/servicio/consultarficham/${contrato}`
               )
               .then((res) => {
                 if (res.data) {
@@ -103,13 +128,28 @@ const AltaServicio = ({
                   guardarFicha(ficha);
                   traerPagosM(ficha.CONTRATO);
                 } else if (!res.data) {
-                  toastr.error(
-                    "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-                    "ATENCION"
-                  );
+                  axios
+                    .get(
+                      `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadhm/${contrato}`
+                    )
+                    .then((res) => {
+                      if (res.data) {
+                        let ficha = res.data;
+                        guardarFicha(ficha);
+                        traerPagosM(ficha.CONTRATO);
+                      } else if (!res.data) {
+                        toastr.error(
+                          "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+                          "ATENCION"
+                        );
+                      }
+                      let ficha = res.data;
+                      guardarFicha(ficha);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
                 }
-                let ficha = res.data;
-                guardarFicha(ficha);
               })
               .catch((error) => {
                 console.log(error);
@@ -202,7 +242,12 @@ const AltaServicio = ({
       ) : particular !== null ? (
         <FormAltaServicioPart />
       ) : (
-        <div className="alert alert-primary border border-dark mt-4 p-4">
+        <div className="alert alert-primary border border-dark mt-4 p-4 text-center text-uppercase">
+          {errexiste && (
+            <div className="mt-2 form-group  alert alert-warning">
+              {errexiste}
+            </div>
+          )}
           <h2 className="mt-4 mb-4">
             <strong>
               <u>Ingrese N° de Documento del Fallecido </u>
