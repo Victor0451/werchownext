@@ -4,6 +4,7 @@ import RegistrarUsuario from "../../components/auth/RegistrarUsuario";
 import axios from "axios";
 import Router from "next/router";
 import jsCookie from "js-cookie";
+import toastr from "toastr";
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -62,8 +63,8 @@ const Registro = () => {
         body,
         config
       );
-      console.log("Usuario creado exitosamente");
-      Router.push("/");
+
+      toastr.success("Usuario creado exitosamente", "ATENCION");
     } catch (error) {
       console.log(error.response.data, error.response.status, "REGISTER_FAIL");
       guardarError(error.response.data.msg);

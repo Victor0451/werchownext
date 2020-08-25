@@ -4,8 +4,10 @@ import Recuperadoras from "./Recuperadoras";
 import Gerencia from "./Gerencia";
 import Logout from "./Logout";
 import Ventas from "./Ventas";
+import Sepelio from "./Sepelio";
 
 const AuthLinks = ({ userData }) => {
+  console.log(userData.perfil);
   return (
     <>
       <div
@@ -20,6 +22,8 @@ const AuthLinks = ({ userData }) => {
           <Gerencia />
         ) : userData.perfil === 5 ? (
           <Ventas />
+        ) : userData.perfil === 4 ? (
+          <Sepelio />
         ) : null}
       </div>
       <span className="badge badge-light text-uppercase mr-2 ">

@@ -427,13 +427,13 @@ const Adimn = () => {
           Usuarios{" "}
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="/register" className="dropdown-item text-dark">
+          <a href="/auth/registro" className="dropdown-item text-dark">
             Registrar Usuario
           </a>
 
           <hr />
 
-          <a href="/edit" className="dropdown-item text-dark">
+          <a href="/auth/editar" className="dropdown-item text-dark">
             Modificacion de Usuario
           </a>
         </div>
