@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import Stock from "../ataudes/Stock";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -29,9 +30,11 @@ const STATE_INICIAL = {
 
 const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const motivoRef = React.createRef();
+  let idataudRef = React.createRef();
 
   const [show, guardarShow] = useState(true);
   const [errmotiv, guardarErrMotiv] = useState(null);
+  const [erridataud, guardarErrIdAtaud] = useState(null);
 
   const {
     valores,
@@ -85,10 +88,13 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       sucursal: "Casa Central",
       estado: 1,
       operador: usuario,
+      idataud: idataudRef.current.value,
     };
 
     if (motivoRef.current.value === "") {
       guardarErrMotiv("Debes ingresar una Causa de muerte");
+    } else if (idataudRef.current.value === "") {
+      guardarErrIdAtaud("Debes seleccionar un ataud");
     } else {
       console.log(servicio);
 
@@ -130,7 +136,13 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     }
   };
 
-  console.log(usuario);
+  const selcasofrm = (row) => {
+    console.log(row);
+
+    document.getElementById("ataud").value = `${row.original.nombre}`;
+    document.getElementById("idataud").value = `${row.original.idataud}`;
+    document.getElementById("uso").value = `${row.original.uso}`;
+  };
 
   let tiposervicio = `Servicio Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
@@ -620,6 +632,80 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             </div>
           </div>
         </div>
+        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+          <h2 className="mt-2">
+            <strong>
+              <u>Ataud</u>
+            </strong>
+          </h2>
+
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Codigo:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Codigo"
+                name="idataud"
+                id="idataud"
+                ref={idataudRef}
+                readOnly
+              />
+              {erridataud && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {erridataud}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Ataud:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ataud"
+                name="ataud"
+                id="ataud"
+                readOnly
+              />
+            </div>
+
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Uso:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Uso"
+                name="uso"
+                id="uso"
+                readOnly
+              />
+            </div>
+
+            <div className=" col-md-4 mt-4 mb-4">
+              <button
+                className="mt-4 btn btn-primary btn-block"
+                data-toggle="modal"
+                data-target="#stockataud"
+              >
+                Stock
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div className="container row  p-4 d-flex justify-content-center">
           <button type="submit" className="btn btn-primary col-5 mr-1">
             Registrar
@@ -632,6 +718,45 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
           </a>
         </div>
       </form>
+
+      <div
+        className="modal fade"
+        id="stockataud"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Stock Ataudes
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <Stock selcasofrm={selcasofrm} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

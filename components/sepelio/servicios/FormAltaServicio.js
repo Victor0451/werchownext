@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import Pagos from "../../socios/ficha/Pagos";
+import Stock from "../ataudes/Stock";
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -39,9 +40,11 @@ const FormAltaServicio = ({
 }) => {
   let dninuevotitRef = React.createRef();
   let motivoRef = React.createRef();
+  let idataudRef = React.createRef();
 
   const [show, guardarShow] = useState(true);
   const [errmotiv, guardarErrMotiv] = useState(null);
+  const [erridataud, guardarErrIdAtaud] = useState(null);
 
   const [error, guardarError] = useState(null);
 
@@ -117,6 +120,7 @@ const FormAltaServicio = ({
       estado: 1,
       dni_nuevotitular: "",
       operador: usuario,
+      idataud: idataudRef.current.value,
     };
 
     if (ficha.GRUPO) {
@@ -126,6 +130,8 @@ const FormAltaServicio = ({
         guardarError("El numero de dni debe ser de un maximo de 8 digitos");
       } else if (motivoRef.current.value === "") {
         guardarErrMotiv("Debes ingresar una Causa de muerte");
+      } else if (idataudRef.current.value === "") {
+        guardarErrIdAtaud("Debes seleccionar un ataud");
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
         postServicio(servicio);
@@ -134,6 +140,8 @@ const FormAltaServicio = ({
     } else if (!ficha.GRUPO) {
       if (motivoRef.current.value === "") {
         guardarErrMotiv("Debes ingresar una Causa de muerte");
+      } else if (idataudRef.current.value === "") {
+        guardarErrIdAtaud("Debes seleccionar un ataud");
       } else {
         postServicio(servicio);
         console.log(servicio);
@@ -156,6 +164,14 @@ const FormAltaServicio = ({
         document.getElementById("motivo").value = "";
       }, 200);
     }
+  };
+
+  const selcasofrm = (row) => {
+    console.log(row);
+
+    document.getElementById("ataud").value = `${row.original.nombre}`;
+    document.getElementById("idataud").value = `${row.original.idataud}`;
+    document.getElementById("uso").value = `${row.original.uso}`;
   };
 
   let tiposervicio = `Servicio Asosiado Al Plan ${ficha.PLAN}`;
@@ -649,6 +665,80 @@ const FormAltaServicio = ({
           </div>
         </div>
 
+        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+          <h2 className="mt-2">
+            <strong>
+              <u>Ataud</u>
+            </strong>
+          </h2>
+
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Codigo:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Codigo"
+                name="idataud"
+                id="idataud"
+                ref={idataudRef}
+                readOnly
+              />
+              {erridataud && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {erridataud}
+                </div>
+              )}
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Ataud:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ataud"
+                name="ataud"
+                id="ataud"
+                readOnly
+              />
+            </div>
+
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Uso:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Uso"
+                name="uso"
+                id="uso"
+                readOnly
+              />
+            </div>
+
+            <div className=" col-md-4 mt-4 mb-4">
+              <button
+                className="mt-4 btn btn-primary btn-block"
+                data-toggle="modal"
+                data-target="#stockataud"
+              >
+                Stock
+              </button>
+            </div>
+          </div>
+        </div>
+
         {ficha.GRUPO ? (
           <div>
             <hr className="mt-4 mb-4" />
@@ -713,6 +803,45 @@ const FormAltaServicio = ({
             </div>
             <div className="modal-body">
               <Pagos pagos={pagos} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="stockataud"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Stock Ataudes
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <Stock selcasofrm={selcasofrm} />
             </div>
             <div className="modal-footer">
               <button

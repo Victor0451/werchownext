@@ -8,13 +8,6 @@ export default function validarAltaServicio(valores) {
     errores.lugarfallecimiento = "El lugar de fallecimiento es obligatorio";
   }
 
-  if (!valores.altura) {
-    errores.altura = "La altura es obligatorio";
-  }
-  if (!valores.peso) {
-    errores.peso = "El peso es obligatorio";
-  }
-
   if (!valores.casamortuaria) {
     errores.casamortuaria = "La casa mortuaria es obligatorio";
   }

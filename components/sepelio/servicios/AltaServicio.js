@@ -3,10 +3,8 @@ import FormAltaServicio from "./FormAltaServicio";
 import FormAltaServicioPart from "./FormAltaServicioPart";
 import toastr from "toastr";
 import axios from "axios";
-import $ from "jquery";
 
 const AltaServicio = ({
-  selcaso,
   empresaRef,
   dniRef,
   apellidoRef,
@@ -231,7 +229,6 @@ const AltaServicio = ({
           <FormAltaServicio
             pagos={pagos}
             ficha={ficha}
-            selcaso={selcaso}
             empresa={empresa}
             empresaRef={empresaRef}
             dniRef={dniRef}

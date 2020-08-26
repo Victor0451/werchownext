@@ -85,7 +85,7 @@ const ConformidadServicio = () => {
             indemnización alguna.
           </p>
 
-          <div className=" p-4">
+          <div className="">
             <div className="row d-flex justify-content-between p-2">
               <div className="col-4 text-center mt-4">
                 <br />

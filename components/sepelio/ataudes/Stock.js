@@ -5,7 +5,7 @@ import axios from "axios";
 // Import React Table
 import ReactTable from "react-table";
 
-const Stock = ({ selcaso }) => {
+const Stock = ({ selcaso, selcasofrm }) => {
   const [ataudes, guardarAtaudes] = useState(null);
 
   const mostrarAtaudes = async () => {
@@ -119,36 +119,68 @@ const Stock = ({ selcaso }) => {
 
                   Cell: (row) => (
                     <div>
-                      <button
-                        type="button"
-                        className="btn btn-info mr-1"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Actualizar Stock"
-                        onClick={() => selcaso(row)}
-                      >
-                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-warning mr-1"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Actualizar Datos"
-                        onClick={() => selcaso(row)}
-                      >
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger mr-1"
-                        data-toggle="tooltip modal"
-                        data-placement="top"
-                        title="Dar de Baja"
-                        onClick={() => selcaso(row)}
-                      >
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                      </button>
+                      {selcasofrm ? (
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-sm mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Actualizar Stock"
+                          onClick={() => selcasofrm(row)}
+                          data-dismiss="modal"
+                        >
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        </button>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            className="btn btn-info btn-sm mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Actualizar Stock"
+                            onClick={() => selcaso(row)}
+                          >
+                            <i
+                              class="fa fa-pencil-square"
+                              aria-hidden="true"
+                            ></i>
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-info btn-sm mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Actualizar Stock"
+                            onClick={() => selcaso(row)}
+                          >
+                            <i
+                              class="fa fa-pencil-square"
+                              aria-hidden="true"
+                            ></i>
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-warning btn-sm mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Actualizar Datos"
+                            onClick={() => selcaso(row)}
+                          >
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger btn-sm mr-1"
+                            data-toggle="tooltip modal"
+                            data-placement="top"
+                            title="Dar de Baja"
+                            onClick={() => selcaso(row)}
+                          >
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </button>
+                        </>
+                      )}
                     </div>
                   ),
                 },

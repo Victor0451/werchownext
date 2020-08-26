@@ -20,7 +20,7 @@ input:read-only {
 }
 
 input {
-  background:white !important;
+  background: white !important;
   color: black !important;
 }
 
@@ -202,6 +202,7 @@ input {
 .conform {
   font-size: 1.2em !important; /* 40px/16=2.5em */
   font-weight: bold !important;
+  line-height: 30px !important;
 }
 
 @media (max-width: 580px) {

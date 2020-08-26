@@ -69,15 +69,6 @@ export default class Sepelio extends Component {
                     Ingresar Servicio
                   </a>
                 </li>
-                {/* <hr />
-                <li>
-                  <a
-                    href="/sepelio/servicios/gastos"
-                    className="dropdown-item text-dark"
-                  >
-                    Ingresar Gastos
-                  </a>
-                </li>
                 <hr />
                 <li>
                   <a
@@ -87,6 +78,16 @@ export default class Sepelio extends Component {
                     Listado De Servicios
                   </a>
                 </li>
+                {/* <hr />
+                <li>
+                  <a
+                    href="/sepelio/servicios/gastos"
+                    className="dropdown-item text-dark"
+                  >
+                    Ingresar Gastos
+                  </a>
+                </li>
+               
               </ul>
             </li>
             <hr />

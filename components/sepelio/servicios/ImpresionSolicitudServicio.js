@@ -2,14 +2,14 @@ import React from "react";
 import Spinner from "../../layout/Spinner";
 import moment from "moment";
 
-const ImpresionSolicitudServicio = ({ servicio }) => {
-  if (!servicio) return <Spinner />;
+const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
+  if (!servicio || !ataud) return <Spinner />;
 
   return (
-    <div className="container mt-4 ">
+    <div className="container  mt-4">
       <div className=" border border-dark p-4">
         <div className="row d-felx justify-content-between p-2">
-          <h1 className="  text-center">
+          <h1 className="  mb-4 text-center">
             <strong>
               <u>Solicitud De Servicio</u>
             </strong>
@@ -38,10 +38,10 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
             </div>
           </div>
 
-          <hr className="mt-4 mb-4" />
+          <hr className="" />
 
-          <div className="row">
-            <div className="col-md-4 mt-4 mb-4">
+          <div className="row mt-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Empresa</u>
@@ -57,7 +57,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="form-group col-md-4 mt-4 mb-4">
+            <div className="form-group col-md-4 mt-2">
               <label>
                 <strong>
                   <u>N° Socio</u>
@@ -73,7 +73,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="form-group col-md-4 mt-4 mb-4">
+            <div className="form-group col-md-4 mt-2">
               <label>
                 <strong>
                   <u>DNI</u>
@@ -88,7 +88,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Apellido</u>
@@ -104,7 +104,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Nombre</u>
@@ -119,7 +119,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Edad</u>
@@ -135,7 +135,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Fecha de Fallecimiento</u>
@@ -152,7 +152,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Lugar de Fallecimiento</u>
@@ -168,7 +168,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Altura</u>
@@ -184,7 +184,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Peso</u>
@@ -202,16 +202,16 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
           </div>
         </div>
 
-        <hr className="mt-4 mb-4" />
+        <hr />
 
         <div className="alert alert-primary border border-dark p-4">
-          <h2 className="mt-4 mb-4">
+          <h2 className="">
             <strong>
               <u>Detalles del Servicio</u>
             </strong>
           </h2>
           <div className="row mt-4">
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Tipo de Servicio</u>
@@ -226,7 +226,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Motivo</u>
@@ -241,7 +241,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Retiro Del Extinto</u>
@@ -256,7 +256,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Casa Mortuaria</u>
@@ -272,7 +272,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Fecha de Inumacion</u>
@@ -289,7 +289,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Hora de Inumacion</u>
@@ -305,7 +305,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
               />
             </div>
 
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Cementerio</u>
@@ -320,7 +320,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="col-md-4 mt-4 mb-4">
+            <div className="col-md-4 mt-2">
               <label>
                 <strong>
                   <u>Solicitado Por:</u>
@@ -335,7 +335,7 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
                 readOnly
               />
             </div>
-            <div className="form-group col-md-4 mt-4">
+            <div className="form-group col-md-4 mt-2">
               <label>
                 <strong>
                   {" "}
@@ -353,20 +353,87 @@ const ImpresionSolicitudServicio = ({ servicio }) => {
             </div>
           </div>
         </div>
+        <hr />
+        <div className="alert alert-primary border border-dark p-4">
+          <h2 className=" ">
+            <strong>
+              <u>Detalles del ataud</u>
+            </strong>
+          </h2>
 
+          <div className="row mt-4 d-flex justify-content-center">
+            <div className="form-group col-md-6 ">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Ataud: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={ataud.nombre}
+                readOnly
+              />
+            </div>
+
+            <div className="form-group col-md-2 ">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Tipo: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={ataud.tipo}
+                readOnly
+              />
+            </div>
+
+            <div className="form-group col-md-2 ">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Uso: </u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={ataud.uso}
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
+        <hr />
         <div className="alert alert-primary border border-dark p-4">
           <div className="row d-flex justify-content-between p-2">
-            <div className="col-4 text-center mt-4">
+            <div className="col-4 text-center ">
+              <br />
+              <br />
               <br />
               <p>-----------------------------</p>
               <label>Firma</label>
             </div>
-            <div className="col-4 text-center mt-4">
+            <div className="col-4 text-center ">
+              <br />
+              <br />
               <br />
               <p>-----------------------------</p>
               <label>Aclaracion</label>
             </div>
-            <div className="col-4 text-center mt-4">
+            <div className="col-4 text-center ">
+              <br />
+              <br />
               <br />
               <p>-----------------------------</p>
               <label>N° de documento</label>

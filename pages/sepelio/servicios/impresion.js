@@ -8,6 +8,7 @@ import ConformidadServicio from "../../../components/sepelio/servicios/Conformid
 
 const impresion = () => {
   const [servicio, guardarServicio] = useState(null);
+  const [ataud, guardarAtaud] = useState(null);
 
   let token = jsCookie.get("token");
   const router = useRouter();
@@ -28,7 +29,21 @@ const impresion = () => {
       .then((res) => {
         const servicio = res.data;
         guardarServicio(servicio);
-        console.log(servicio);
+
+        if (res.data) {
+          traerAtaud(res.data.idataud);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerAtaud = async (idataud) => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/ataud/${idataud}`)
+      .then((res) => {
+        guardarAtaud(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -50,10 +65,11 @@ const impresion = () => {
     <Layout>
       <div>
         <div id="solicitud" className="print-solserv">
-          <ImpresionSolicitudServicio servicio={servicio} />
+          <ImpresionSolicitudServicio servicio={servicio} ataud={ataud} />
           <br />
           <br />
           <br />
+
           <ConformidadServicio />
         </div>
 

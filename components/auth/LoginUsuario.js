@@ -58,11 +58,9 @@ const LoginUsuario = ({
           </div>
 
           <div className="col-md-12">
-            <input
-              type="submit"
-              className="btn btn-primary  btn-block mt-4"
-              value="Ingresar"
-            />
+            <button type="submit" className="btn btn-primary btn-block mt-4">
+              Ingresar
+            </button>
 
             {error && (
               <div className="mt-2 form-group text-center alert alert-danger">

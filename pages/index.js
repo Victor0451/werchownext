@@ -44,13 +44,16 @@ const Login = () => {
         .post("http://190.231.32.232:5002/api/sgi/auth/auth", body, config)
         .then((res) => {
           const usuario = res.data.user;
-
+          console.log(usuario);
           jsCookie.set("token", res.data.token);
           jsCookie.set("usuario", usuario);
-          
-        });
 
-      Router.push("/home/home");
+          if (usuario.perfil === 4) {
+            Router.push("/socios/ficha/ficha");
+          } else {
+            Router.push("/home/home");
+          }
+        });
     } catch (error) {
       console.log(error.response.data, error.response.status, "LOGIN_FAIL");
       guardarError(error.response.data.msg);
