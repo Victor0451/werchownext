@@ -30,7 +30,7 @@ const ListadoServicios = ({ listado }) => {
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["idservicio"] }),
                   filterAll: true,
-                  width: 50,
+                  width: 30,
                 },
                 {
                   Header: "Empresa",
@@ -48,7 +48,7 @@ const ListadoServicios = ({ listado }) => {
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["apellido"] }),
                   filterAll: true,
-                  width: 150,
+                  width: 110,
                 },
                 {
                   Header: "Nombre",
@@ -59,7 +59,17 @@ const ListadoServicios = ({ listado }) => {
                   filterAll: true,
                   width: 200,
                 },
-
+                {
+                  Header: "Causa de Muerte",
+                  id: "motivo",
+                  accessor: (d) => d.motivo,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["motivo"],
+                    }),
+                  filterAll: true,
+                  width: 250,
+                },
                 {
                   Header: "Tipo Servicio",
                   id: "tipo_servicio",
@@ -72,24 +82,24 @@ const ListadoServicios = ({ listado }) => {
                   width: 250,
                 },
 
-                {
-                  Header: "Estado",
-                  id: "estado",
-                  accessor: (d) => d.estado,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["estado"] }),
-                  filterAll: true,
-                  width: 100,
-                  Cell: (row) => (
-                    <div>
-                      {row.original.estado === 1 ? (
-                        <div>Aprobado</div>
-                      ) : row.original.estado === 0 ? (
-                        <div>Cancelado</div>
-                      ) : null}
-                    </div>
-                  ),
-                },
+                // {
+                //   Header: "Estado",
+                //   id: "estado",
+                //   accessor: (d) => d.estado,
+                //   filterMethod: (filter, rows) =>
+                //     matchSorter(rows, filter.value, { keys: ["estado"] }),
+                //   filterAll: true,
+                //   width: 100,
+                //   Cell: (row) => (
+                //     <div>
+                //       {row.original.estado === 1 ? (
+                //         <div>Aprobado</div>
+                //       ) : row.original.estado === 0 ? (
+                //         <div>Cancelado</div>
+                //       ) : null}
+                //     </div>
+                //   ),
+                // },
                 {
                   Header: "Acciones",
 
@@ -122,7 +132,7 @@ const ListadoServicios = ({ listado }) => {
                         }}
                       >
                         <button
-                          className="btn btn-sm btn-warning mr-1"
+                          className="btn btn-sm btn-secondary border mr-1"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Editar Servicio"
@@ -133,7 +143,27 @@ const ListadoServicios = ({ listado }) => {
                           ></i>
                         </button>
                       </Link>
-
+                      <Link
+                        href={{
+                          pathname: "/prestamos/legajovirtual/legajo",
+                          query: {
+                            id: `${row.original.dni}`,
+                            codigo: `${row.original.idservicio}-${row.original.dni}`,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-warning btn-sm mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Legajo Virtual"
+                        >
+                          <i
+                            className="fa fa-folder-open"
+                            aria-hidden="true"
+                          ></i>
+                        </button>
+                      </Link>
                       <Link
                         href={{
                           pathname: "/sepelio/servicios/impresion",

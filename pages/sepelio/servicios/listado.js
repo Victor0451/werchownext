@@ -16,6 +16,7 @@ const listado = () => {
       .then((res) => {
         const listado = res.data;
         guardarListado(listado);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -32,7 +33,7 @@ const listado = () => {
 
   return (
     <Layout>
-      <ListadoServicios listado={listado} />
+      <ListadoServicios listado={listado} />{" "}
     </Layout>
   );
 };

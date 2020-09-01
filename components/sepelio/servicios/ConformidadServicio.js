@@ -21,50 +21,31 @@ const ConformidadServicio = () => {
           </p>
           <p className="text-justify mt-4">
             1- El horario de Inhumación fijado, se refiere al horario de llegada
-            al Cementerio y/o Crematorio (si correspondiere de acuerdo al Plan).{" "}
-          </p>
-          <p className="text-justify mt-4">
+            al Cementerio y/o Crematorio (si correspondiere de acuerdo al Plan).
             2- Los Automóviles de Duelo serán ofrecidos siempre que en la
             Localidad donde se brinde el servicio haya disponibilidad de
-            remises, taxis o servicios de transporte alternativos.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            3- En las Localidades donde los coches de duelo no puedan llegar por
-            razones de distancias geográficas la empresa dispondrá de remises,
-            taxis o servicios de transporte alternativos. La empresa no enviara
-            autos de duelo a zonas semi urbanas, rural o de difícil acceso para
-            el transporte de vehículos, para lo cual dispondrá de una camioneta
-            tanto para la instalación como para el servicio de inhumación.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            4- Los Trámites serán realizados por el personal de la empresa,
+            remises, taxis o servicios de transporte alternativos. 3- En las
+            Localidades donde los coches de duelo no puedan llegar por razones
+            de distancias geográficas la empresa dispondrá de remises, taxis o
+            servicios de transporte alternativos. La empresa no enviara autos de
+            duelo a zonas semi urbanas, rural o de difícil acceso para el
+            transporte de vehículos, para lo cual dispondrá de una camioneta
+            tanto para la instalación como para el servicio de inhumación. 4-
+            Los Trámites serán realizados por el personal de la empresa,
             acompañado por un familiar. Excepto en el interior donde la empresa
-            no tenga sucursales.{" "}
-          </p>
-
-          <p className="text-justify mt-4">
-            5- Las modificaciones que se hicieren unilateralmente por parte de
-            los deudos sin previo acuerdo con La Empresa liberarán a ésta de
-            toda responsabilidad alguna en cuanto a su cumplimiento.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            6- El lapso de espera de los vehículos durante la inhumación no
-            superará los 40 minutos; caso contrario La Empresa cobrará por la
-            misma un valor equivalente al alquiler de un automóvil.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            7- El responsable es el único responsable de cobrar el gasto luto
-            del plan queda excluido el subsidio de contención familiar que tiene
-            beneficiarios designados por el titular.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            8- El responsable es el único interlocutor para efectuar consultas o
+            no tenga sucursales. 5- Las modificaciones que se hicieren
+            unilateralmente por parte de los deudos sin previo acuerdo con La
+            Empresa liberarán a ésta de toda responsabilidad alguna en cuanto a
+            su cumplimiento. 6- El lapso de espera de los vehículos durante la
+            inhumación no superará los 40 minutos; caso contrario La Empresa
+            cobrará por la misma un valor equivalente al alquiler de un
+            automóvil. 7- El responsable es el único responsable de cobrar el
+            gasto luto del plan queda excluido el subsidio de contención
+            familiar que tiene beneficiarios designados por el titular. 8- El
+            responsable es el único interlocutor para efectuar consultas o
             cambios en el servicio, siempre que las mismas estén a tiempo de
-            realizarse.{" "}
-          </p>
-          <p className="text-justify mt-4">
-            9- COVID 19 SERVICIOS FUNEBRES: De acuerdo con los nuevos
-            acontecimientos en relación con el CORONAVIRUS COVID 19, y en
+            realizarse. 9- COVID 19 SERVICIOS FUNEBRES: De acuerdo con los
+            nuevos acontecimientos en relación con el CORONAVIRUS COVID 19, y en
             especial por lo dispuesto por el Decreto de Necesidad y Urgencia
             nro. 297/2020, emitido por el Poder Ejecutivo Nacional en el marco
             de la emergencia sanitaria declarada en todo el país, se destaca que
@@ -76,13 +57,11 @@ const ConformidadServicio = () => {
             personas. La empresa también estará a las normativas Provinciales
             vigentes al momento de prestar el servicio convenido. Estas medidas
             es al fin de preservar de preservar la salud pública y evitar
-            sanciones por incumplimiento a la restricción ordenada.
-          </p>
-          <p className="text-justify mt-4">
-            10- El responsable manifiesta su total conformidad para que el
-            Servicio de Sepelio se efectúe de acuerdo al detalle precedente,
-            renunciando a cualquier reclamo ulterior judicial y extrajudicial o
-            indemnización alguna.
+            sanciones por incumplimiento a la restricción ordenada. 10- El
+            responsable manifiesta su total conformidad para que el Servicio de
+            Sepelio se efectúe de acuerdo al detalle precedente, renunciando a
+            cualquier reclamo ulterior judicial y extrajudicial o indemnización
+            alguna.
           </p>
 
           <div className="">

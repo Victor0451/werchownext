@@ -34,7 +34,8 @@ const imprimircaratula = () => {
       capitalprest += parseInt(listado[i].ptm_prestamo);
       intereses += listado[i].ptm_valcuota;
       cuotas += listado[i].ptm_cuotas;
-      capconint += listado[i].ptm_valcuota * listado[i].ptm_cuotas;
+      capconint +=
+        parseInt(listado[i].ptm_valcuota) * parseInt(listado[i].ptm_cuotas);
     }
 
     guardarCantprest(cantprest);

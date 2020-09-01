@@ -35,5 +35,17 @@ export default function validarAltaServicio(valores) {
     errores.cementerio = "Este campo es obligatorio";
   }
 
+  if (!valores.dni_solicitante) {
+    errores.dni_solicitante = "El DNI del solicitante es obligatorio";
+  }
+
+  if (!valores.altura) {
+    errores.altura = "La altura es obligatorio";
+  }
+
+  if (!valores.peso) {
+    errores.peso = "El peso es obligatorio";
+  }
+
   return errores;
 }

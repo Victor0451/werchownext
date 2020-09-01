@@ -23,6 +23,7 @@ const STATE_INICIAL = {
   retiro: "",
   solicitado: "",
   parentesco: "",
+  dni_solicitante: "",
 };
 
 const FormAltaServicio = ({
@@ -69,6 +70,7 @@ const FormAltaServicio = ({
     retiro,
     solicitado,
     parentesco,
+    dni_solicitante,
   } = valores;
 
   const postServicio = async (servicio) => {
@@ -121,6 +123,7 @@ const FormAltaServicio = ({
       dni_nuevotitular: "",
       operador: usuario,
       idataud: idataudRef.current.value,
+      dni_solicitante: dni_solicitante,
     };
 
     if (ficha.GRUPO) {
@@ -166,6 +169,20 @@ const FormAltaServicio = ({
     }
   };
 
+  const noDni = () => {
+    if (document.getElementById("nodni").checked === true) {
+      setTimeout(() => {
+        document.getElementById("nuevotitular").value = 11111111;
+        document.getElementById("nuevotitular").readOnly = true;
+      }, 200);
+    } else {
+      setTimeout(() => {
+        document.getElementById("nuevotitular").value = "";
+        document.getElementById("nuevotitular").readOnly = false;
+      }, 200);
+    }
+  };
+
   const selcasofrm = (row) => {
     console.log(row);
 
@@ -174,7 +191,7 @@ const FormAltaServicio = ({
     document.getElementById("uso").value = `${row.original.uso}`;
   };
 
-  let tiposervicio = `Servicio Asosiado Al Plan ${ficha.PLAN}`;
+  let tiposervicio = `Servicio Asociado Al Plan ${ficha.PLAN}`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
@@ -614,6 +631,19 @@ const FormAltaServicio = ({
                 </div>
               )}
             </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div className=" mt-4 mb-4 border border-dark p-4">
+          <h2 className="mt-2">
+            <strong>
+              <u>Datos del Solicitante</u>
+            </strong>
+          </h2>
+
+          <div className="row">
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
@@ -632,6 +662,28 @@ const FormAltaServicio = ({
               {errores.solicitado && (
                 <div className="alert alert-danger text-center p-2 mt-2">
                   {errores.solicitado}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>DNI del Solicitante:</u>
+                </strong>
+              </label>
+              <input
+                type="number"
+                maxLength="8"
+                className="form-control"
+                placeholder="DNI del Solicitante"
+                name="dni_solicitante"
+                defaultValue={dni_solicitante}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.dni_solicitante && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.dni_solicitante}
                 </div>
               )}
             </div>
@@ -664,6 +716,8 @@ const FormAltaServicio = ({
             </div>
           </div>
         </div>
+
+        <hr />
 
         <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
           <h2 className="mt-2">
@@ -754,8 +808,21 @@ const FormAltaServicio = ({
                 className="form-control col-5"
                 placeholder="Dni"
                 name="nuevotitular"
+                id="nuevotitular"
                 ref={dninuevotitRef}
               />
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="checkbox"
+                  name="nodni"
+                  id="nodni"
+                  onClick={() => noDni()}
+                />
+                <label className="form-check-label" for="nodni">
+                  Es novell y/o no tiene adherentes o estan dados de baja.
+                </label>
+              </div>
             </div>
             {error && (
               <div className="alert alert-danger text-center p-2 mt-2">

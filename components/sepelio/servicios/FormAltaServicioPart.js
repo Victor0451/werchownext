@@ -26,6 +26,7 @@ const STATE_INICIAL = {
   retiro: "",
   solicitado: "",
   parentesco: "",
+  dni_solicitante: "",
 };
 
 const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
@@ -61,6 +62,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     retiro,
     solicitado,
     parentesco,
+    dni_solicitante,
   } = valores;
 
   async function nuevoServicio() {
@@ -89,6 +91,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       estado: 1,
       operador: usuario,
       idataud: idataudRef.current.value,
+      dni_solicitante: dni_solicitante,
     };
 
     if (motivoRef.current.value === "") {
@@ -582,6 +585,18 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+
+        <hr />
+        <div className=" mt-4 mb-4 border border-dark p-4">
+          <h2 className="mt-2">
+            <strong>
+              <u>Datos del Solicitante</u>
+            </strong>
+          </h2>
+
+          <div className="row">
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
@@ -600,6 +615,28 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
               {errores.solicitado && (
                 <div className="alert alert-danger text-center p-2 mt-2">
                   {errores.solicitado}
+                </div>
+              )}
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>DNI del Solicitante:</u>
+                </strong>
+              </label>
+              <input
+                type="number"
+                maxLength="8"
+                className="form-control"
+                placeholder="DNI del Solicitante"
+                name="dni_solicitante"
+                defaultValue={dni_solicitante}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.dni_solicitante && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.dni_solicitante}
                 </div>
               )}
             </div>
@@ -632,6 +669,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             </div>
           </div>
         </div>
+        <hr />
+
         <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
           <h2 className="mt-2">
             <strong>
