@@ -32,15 +32,15 @@ const ListadoServicios = ({ listado }) => {
                   filterAll: true,
                   width: 30,
                 },
-                {
-                  Header: "Empresa",
-                  id: "empresa",
-                  accessor: (d) => d.empresa,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["empresa"] }),
-                  filterAll: true,
-                  width: 100,
-                },
+                // {
+                //   Header: "Empresa",
+                //   id: "empresa",
+                //   accessor: (d) => d.empresa,
+                //   filterMethod: (filter, rows) =>
+                //     matchSorter(rows, filter.value, { keys: ["empresa"] }),
+                //   filterAll: true,
+                //   width: 100,
+                // },
                 {
                   Header: "Apellido",
                   id: "apellido",
@@ -60,6 +60,15 @@ const ListadoServicios = ({ listado }) => {
                   width: 200,
                 },
                 {
+                  Header: "DNI",
+                  id: "dni",
+                  accessor: (d) => d.dni,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["dni"] }),
+                  filterAll: true,
+                  width: 85,
+                },
+                {
                   Header: "Causa de Muerte",
                   id: "motivo",
                   accessor: (d) => d.motivo,
@@ -68,7 +77,7 @@ const ListadoServicios = ({ listado }) => {
                       keys: ["motivo"],
                     }),
                   filterAll: true,
-                  width: 250,
+                  width: 200,
                 },
                 {
                   Header: "Tipo Servicio",
@@ -79,7 +88,7 @@ const ListadoServicios = ({ listado }) => {
                       keys: ["tipo_servicio"],
                     }),
                   filterAll: true,
-                  width: 250,
+                  width: 220,
                 },
 
                 // {
@@ -145,7 +154,7 @@ const ListadoServicios = ({ listado }) => {
                       </Link>
                       <Link
                         href={{
-                          pathname: "/prestamos/legajovirtual/legajo",
+                          pathname: "/sepelio/servicios/legajovirtual/legajo",
                           query: {
                             id: `${row.original.dni}`,
                             codigo: `${row.original.idservicio}-${row.original.dni}`,
@@ -162,6 +171,23 @@ const ListadoServicios = ({ listado }) => {
                             className="fa fa-folder-open"
                             aria-hidden="true"
                           ></i>
+                        </button>
+                      </Link>
+                      <Link
+                        href={{
+                          pathname: "/sepelio/servicios/legajovirtual/subirarchivos",
+                          query: {
+                            id: row.original.dni,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-sm btn-success mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Subir Archivos"
+                        >
+                          <i className="fa fa-upload" aria-hidden="true"></i>
                         </button>
                       </Link>
                       <Link

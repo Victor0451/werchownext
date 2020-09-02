@@ -335,7 +335,7 @@ const FormAltaServicio = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Edad"
                 name="responsable"

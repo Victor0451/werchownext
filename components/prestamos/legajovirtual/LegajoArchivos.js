@@ -320,13 +320,13 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
           Haciendo click en la imagen, se vizualiza en tamaño real
         </div>
 
-        <div className=" row  row d-flex justify-content-center text-center  text-dark  p-4">
+        <div className=" row  row d-flex justify-content-center text-center  text-dark   p-4">
           {archivos.map((archivo, index) => (
             <div key={index} className=" mt-4">
-              <div className="col-md-6">
-                <strong>
+              <div className="col-md-12 border border-dark p-4 mr-1">
+                {/* <strong>
                   <u>{archivo.archivo}</u>
-                </strong>
+                </strong> */}
 
                 <img
                   src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
@@ -365,7 +365,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg">
+        <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
