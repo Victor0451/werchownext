@@ -3,17 +3,29 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
 import Link from "next/link";
+import moment from 'moment'
 
-const ListadoServicios = ({ listado }) => {
+const ListadoServicios = ({ listado, desde, hasta }) => {
   if (!listado) return <Spinner />;
 
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
-      <h2 className="mb-4">
-        <strong>
-          <u>Listado De Servicios</u>
-        </strong>
-      </h2>
+
+      <h2><strong><u>Listado De Servicios:</u> desde: {moment(desde).format('DD/MM/YYYY')} hasta: {moment(hasta).format('DD/MM/YYYY')}</strong></h2>
+
+      <div className="row mt-4 mb-4 border border-dark p-4">
+        <div className="col-md-6">
+          <h4 className="">
+            <strong>
+              <u>Total de servicios:</u> {listado.length}
+            </strong>
+          </h4>
+        </div>
+        <div className="col-md-6">
+          <a href="/sepelio/servicios/listado" className="btn btn-sm btn-block btn-danger">Seleccionar otro periodo</a>
+        </div>
+      </div>
+
       <div className="list border border-dark ">
         <ReactTable
           data={listado}
@@ -80,12 +92,12 @@ const ListadoServicios = ({ listado }) => {
                   width: 200,
                 },
                 {
-                  Header: "Tipo Servicio",
-                  id: "tipo_servicio",
-                  accessor: (d) => d.tipo_servicio,
+                  Header: "Fecha de Fallecimiento",
+                  id: "fecha_fallecimiento",
+                  accessor: (d) => d.fecha_fallecimiento,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, {
-                      keys: ["tipo_servicio"],
+                      keys: ["fecha_fallecimiento"],
                     }),
                   filterAll: true,
                   width: 220,
