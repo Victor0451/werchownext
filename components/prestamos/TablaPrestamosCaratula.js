@@ -59,7 +59,7 @@ const TablaPrestamosCaratula = ({
     <div className="mt-4 mb-4">
       <hr />
 
-      <div className=" jumbotron d-fex justify-content-between alert alert-primary border border-dark p-4">
+      <div className=" d-fex justify-content-between alert alert-secondary text-dark border border-dark p-4">
         <h4 className="mb-4 ">
           <strong>
             <u>Resumen:</u>
@@ -94,7 +94,7 @@ const TablaPrestamosCaratula = ({
 
       <hr className="mt-4 mb-4" />
 
-      <div className="mt-4 mb-4 border border-dark">
+      <div className="mt-4 mb-4 border border-dark list">
         <ReactTable
           data={data}
           filterable

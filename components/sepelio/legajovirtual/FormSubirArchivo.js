@@ -28,7 +28,7 @@ const FormSubirArchivo = ({ contrato }) => {
 
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/uploadfichalegajo/${contrato}`,
+          `http://190.231.32.232:5002/api/archivos/legajovirtualservicios/uploadfichalegajo/${contrato}`,
           upload
         )
         .then((res) => {
@@ -45,7 +45,7 @@ const FormSubirArchivo = ({ contrato }) => {
     <div className="container mt-4">
       <h1>
         <strong>
-          <u>Crear Legajo Virtual Del Prestamo</u>
+          <u>Crear Legajo Virtual</u>
         </strong>
       </h1>
 
@@ -57,7 +57,7 @@ const FormSubirArchivo = ({ contrato }) => {
             </strong>
           </h2>
           <a
-            href="/prestamos/imprimircaratula"
+            href="/sepelio/servicios/listado"
             className="btn btn-danger text-white"
           >
             Volver Al Listado

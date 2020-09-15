@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../../components/layout/Layout";
+import Layout from "../../../../components/layout/Layout";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router, { useRouter } from "next/router";
 import toastr from "toastr";
-import LegajoServicio from "../../../components/sepelio/legajovirtual/LegajoServicio";
+import LegajoServicio from "../../../../components/sepelio/legajovirtual/LegajoServicio";
 
 const legajo = () => {
   const [archivos, guardarArchivos] = useState(null);
@@ -19,13 +19,13 @@ const legajo = () => {
     } else {
       traerAchivos(router.query.id);
       traerServicio(router.query.id);
-      traerSocio(router.query.contrato);
+
     }
   }, []);
 
   const traerServicio = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/servicio/impservicio/${id}`)
+      .get(`http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         guardarServicio(res.data);
       })

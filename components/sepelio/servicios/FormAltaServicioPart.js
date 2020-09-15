@@ -282,7 +282,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Edad"
                 name="edad"

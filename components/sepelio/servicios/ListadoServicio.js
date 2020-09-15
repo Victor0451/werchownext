@@ -3,17 +3,29 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
 import Link from "next/link";
+import moment from 'moment'
 
-const ListadoServicios = ({ listado }) => {
+const ListadoServicios = ({ listado, desde, hasta }) => {
   if (!listado) return <Spinner />;
 
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
-      <h2 className="mb-4">
-        <strong>
-          <u>Listado De Servicios</u>
-        </strong>
-      </h2>
+
+      <h2><strong><u>Listado De Servicios:</u> desde: {moment(desde).format('DD/MM/YYYY')} hasta: {moment(hasta).format('DD/MM/YYYY')}</strong></h2>
+
+      <div className="row mt-4 mb-4 border border-dark p-4">
+        <div className="col-md-6">
+          <h4 className="">
+            <strong>
+              <u>Total de servicios:</u> {listado.length}
+            </strong>
+          </h4>
+        </div>
+        <div className="col-md-6">
+          <a href="/sepelio/servicios/listado" className="btn btn-sm btn-block btn-danger">Seleccionar otro periodo</a>
+        </div>
+      </div>
+
       <div className="list border border-dark ">
         <ReactTable
           data={listado}
@@ -32,15 +44,15 @@ const ListadoServicios = ({ listado }) => {
                   filterAll: true,
                   width: 30,
                 },
-                {
-                  Header: "Empresa",
-                  id: "empresa",
-                  accessor: (d) => d.empresa,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["empresa"] }),
-                  filterAll: true,
-                  width: 100,
-                },
+                // {
+                //   Header: "Empresa",
+                //   id: "empresa",
+                //   accessor: (d) => d.empresa,
+                //   filterMethod: (filter, rows) =>
+                //     matchSorter(rows, filter.value, { keys: ["empresa"] }),
+                //   filterAll: true,
+                //   width: 100,
+                // },
                 {
                   Header: "Apellido",
                   id: "apellido",
@@ -60,6 +72,15 @@ const ListadoServicios = ({ listado }) => {
                   width: 200,
                 },
                 {
+                  Header: "DNI",
+                  id: "dni",
+                  accessor: (d) => d.dni,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["dni"] }),
+                  filterAll: true,
+                  width: 85,
+                },
+                {
                   Header: "Causa de Muerte",
                   id: "motivo",
                   accessor: (d) => d.motivo,
@@ -68,18 +89,18 @@ const ListadoServicios = ({ listado }) => {
                       keys: ["motivo"],
                     }),
                   filterAll: true,
-                  width: 250,
+                  width: 200,
                 },
                 {
-                  Header: "Tipo Servicio",
-                  id: "tipo_servicio",
-                  accessor: (d) => d.tipo_servicio,
+                  Header: "Fecha de Fallecimiento",
+                  id: "fecha_fallecimiento",
+                  accessor: (d) => d.fecha_fallecimiento,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, {
-                      keys: ["tipo_servicio"],
+                      keys: ["fecha_fallecimiento"],
                     }),
                   filterAll: true,
-                  width: 250,
+                  width: 220,
                 },
 
                 // {
@@ -145,7 +166,7 @@ const ListadoServicios = ({ listado }) => {
                       </Link>
                       <Link
                         href={{
-                          pathname: "/prestamos/legajovirtual/legajo",
+                          pathname: "/sepelio/servicios/legajovirtual/legajo",
                           query: {
                             id: `${row.original.dni}`,
                             codigo: `${row.original.idservicio}-${row.original.dni}`,
@@ -162,6 +183,23 @@ const ListadoServicios = ({ listado }) => {
                             className="fa fa-folder-open"
                             aria-hidden="true"
                           ></i>
+                        </button>
+                      </Link>
+                      <Link
+                        href={{
+                          pathname: "/sepelio/servicios/legajovirtual/subirarchivos",
+                          query: {
+                            id: row.original.dni,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-sm btn-success mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Subir Archivos"
+                        >
+                          <i className="fa fa-upload" aria-hidden="true"></i>
                         </button>
                       </Link>
                       <Link
