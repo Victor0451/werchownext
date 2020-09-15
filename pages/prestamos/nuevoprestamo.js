@@ -31,6 +31,8 @@ const nuevoprestamo = () => {
 
   let valcuotaRef = React.createRef();
   let operadorRef = React.createRef();
+  let nombreRef = React.createRef();
+  let apellidoRef = React.createRef();
 
   const [error, guardarError] = useState(false);
   const [renoverror, guardarRenoverror] = useState(null);
@@ -82,6 +84,7 @@ const nuevoprestamo = () => {
       neto,
       estado: "PENDIENTE",
       codptmleg: `${contrato}-${moment().format("YYYY-MM-DD")}`,
+      ptm_afi: `${apellidoRef.current.value}, ${nombreRef.current.value}`,
     };
 
     console.log(prestamo);
@@ -148,6 +151,8 @@ const nuevoprestamo = () => {
         valcuotaRef={valcuotaRef}
         operadorRef={operadorRef}
         renoverror={renoverror}
+        nombreRef={nombreRef}
+        apellidoRef={apellidoRef}
       />
     </Layout>
   );

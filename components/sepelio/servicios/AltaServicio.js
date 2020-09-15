@@ -18,8 +18,36 @@ const AltaServicio = ({
   const [errexiste, guadarErrexiste] = useState(null);
   const [error, guardarError] = useState(null);
   const [ficha, guardarFicha] = useState(null);
+  const [adhs, guardarAdhs] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [particular, guardarParticular] = useState(null);
+  const [grupo, guardarGrupo] = useState(null);
+
+  const adherentesTit = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/servicio/adherentestit/${contrato}`
+      )
+      .then((res) => {
+        guardarAdhs(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const adherentesTitMut = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/servicio/adherentestitm/${contrato}`
+      )
+      .then((res) => {
+        guardarAdhs(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const buscarTitular = async (e) => {
     e.preventDefault();
@@ -29,7 +57,7 @@ const AltaServicio = ({
 
     guardarEmpresa("Werchow");
     let contrato = contratoRef.current.value;
-    console.log(contrato);
+
     if (contrato !== "") {
       await axios
         .get(
@@ -54,6 +82,8 @@ const AltaServicio = ({
                   let ficha = res.data;
                   guardarFicha(ficha);
                   traerPagos(ficha.CONTRATO);
+                  adherentesTit(ficha.CONTRATO);
+                  traerGrupo(ficha.GRUPO);
                 } else if (!res.data) {
                   axios
                     .get(
@@ -101,7 +131,7 @@ const AltaServicio = ({
 
     guardarEmpresa("Mutual");
     let contrato = contratoRef.current.value;
-    console.log(contrato);
+
     if (contrato !== "") {
       await axios
         .get(
@@ -126,6 +156,8 @@ const AltaServicio = ({
                   let ficha = res.data;
                   guardarFicha(ficha);
                   traerPagosM(ficha.CONTRATO);
+                  adherentesTitMut(ficha.CONTRATO);
+                  traerGrupo(ficha.GRUPO);
                 } else if (!res.data) {
                   axios
                     .get(
@@ -177,7 +209,7 @@ const AltaServicio = ({
             let pagobco = res.data;
 
             let allpagos = pagos.concat(pagobco);
-            console.log(allpagos);
+
             guardarPagos(allpagos);
           })
           .catch((error) => {
@@ -205,12 +237,23 @@ const AltaServicio = ({
             let pagobco = res.data;
 
             let allpagos = pagos.concat(pagobco);
-            console.log(allpagos);
+
             guardarPagos(allpagos);
           })
           .catch((error) => {
             console.log(error);
           });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerGrupo = async (grupo) => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/servicio/grupo/${grupo}`)
+      .then((res) => {
+        guardarGrupo(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -236,6 +279,8 @@ const AltaServicio = ({
             nombreRef={nombreRef}
             edadRef={edadRef}
             usuario={usuario}
+            adhs={adhs}
+            grupo={grupo}
           />
         </div>
       ) : particular !== null ? (

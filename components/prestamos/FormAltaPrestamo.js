@@ -21,6 +21,8 @@ const FormAltaPrestamo = ({
   capital,
   cuotas,
   renoverror,
+  nombreRef,
+  apellidoRef,
 }) => {
   const [cuoprest, guardarCuoprest] = useState(null);
   const [capadev, guardarCapadev] = useState(null);
@@ -103,6 +105,7 @@ const FormAltaPrestamo = ({
                 type="text"
                 className="form-control"
                 defaultValue={ficha.APELLIDOS}
+                ref={apellidoRef}
                 readOnly
               />
             </div>
@@ -118,6 +121,7 @@ const FormAltaPrestamo = ({
                 type="text"
                 className="form-control"
                 defaultValue={ficha.NOMBRES}
+                ref={nombreRef}
                 readOnly
               />
             </div>

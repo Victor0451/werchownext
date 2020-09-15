@@ -25,6 +25,8 @@ const AltaPrestamos = ({
   cuotas,
   renovapres,
   renoverror,
+  nombreRef,
+  apellidoRef,
 }) => {
   const [user, guardarUser] = useState({});
   const [ficha, guardarficha] = useState(null);
@@ -233,6 +235,8 @@ const AltaPrestamos = ({
             cuotas={cuotas}
             renovapres={renovapres}
             renoverror={renoverror}
+            nombreRef={nombreRef}
+            apellidoRef={apellidoRef}
           />
         </>
       ) : nopoli !== null ? (

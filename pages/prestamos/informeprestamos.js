@@ -204,10 +204,11 @@ const informeprestamos = () => {
 
     for (let i = 0; i < listado.length; i++) {
       capitalprest += parseInt(listado[i].ptm_prestamo);
-      intereses += listado[i].ptm_valcuota;
       cuotas += listado[i].ptm_cuotas;
       capconint += listado[i].ptm_valcuota * listado[i].ptm_cuotas;
     }
+
+    intereses = capconint - capitalprest;
 
     guardarCantprest(cantprest);
     guardarIntereses(intereses);

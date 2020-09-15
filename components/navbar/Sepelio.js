@@ -78,6 +78,15 @@ export default class Sepelio extends Component {
                     Listado De Servicios
                   </a>
                 </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/servicios/listadohistorico"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado De Serv Historicos
+                  </a>
+                </li>
                 {/* <hr />
                 <li>
                   <a

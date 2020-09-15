@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import matchSorter from "match-sorter";
 import Link from "next/link";
 import axios from "axios";
@@ -15,6 +15,8 @@ const TablaPrestamosCaratula = ({
   capconint,
   codigo,
 }) => {
+  const [afi, guardarAfi] = useState(null);
+
   const aprobarPrestamos = async (row) => {
     const id = row.original.ptm_id;
 
@@ -33,6 +35,20 @@ const TablaPrestamosCaratula = ({
             Router.reload();
           }, 1000);
         }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const afiliado = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sgi/prestamos/aprobarprestamo/${contrato}`
+      )
+      .then((res) => {
+        let afi = res.data.APELLIDOS;
+        return afi;
       })
       .catch((error) => {
         console.log(error);
@@ -94,7 +110,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_fechasol"] }),
                   filterAll: true,
-                  width: 150,
+                  width: 110,
                 },
                 {
                   Header: "Contrato",
@@ -103,7 +119,16 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_ficha"] }),
                   filterAll: true,
-                  width: 100,
+                  width: 80,
+                },
+                {
+                  Header: "Afiliado",
+                  id: "ptm_afi",
+                  accessor: (d) => d.ptm_afi,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["ptm_afi"] }),
+                  filterAll: true,
+                  width: 200,
                 },
                 {
                   Header: "Renovacion",
@@ -112,16 +137,16 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_renov"] }),
                   filterAll: true,
-                  width: 100,
+                  width: 60,
                 },
                 {
-                  Header: "Capital Prestado",
+                  Header: "Prestamo",
                   id: "ptm_prestamo",
                   accessor: (d) => d.ptm_prestamo,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_prestamo"] }),
                   filterAll: true,
-                  width: 100,
+                  width: 90,
                 },
                 {
                   Header: "Cuotas",
@@ -139,7 +164,7 @@ const TablaPrestamosCaratula = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_valcuota"] }),
                   filterAll: true,
-                  width: 85,
+                  width: 80,
                 },
 
                 {
@@ -191,7 +216,7 @@ const TablaPrestamosCaratula = ({
                     <div>
                       {codigo === 1 ? (
                         <button
-                          className="btn btn-success mr-1"
+                          className="btn btn-success btn-sm mr-1"
                           onClick={() => aprobarPrestamos(row)}
                         >
                           <i class="fa fa-check" aria-hidden="true"></i>
@@ -207,7 +232,7 @@ const TablaPrestamosCaratula = ({
                         }}
                       >
                         <button
-                          className="btn btn-primary mr-1"
+                          className="btn btn-primary btn-sm mr-1"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Imprimir Caratula"
@@ -226,7 +251,7 @@ const TablaPrestamosCaratula = ({
                         }}
                       >
                         <button
-                          className="btn btn-warning mr-1"
+                          className="btn btn-warning btn-sm mr-1"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Legajo Virtual"
@@ -246,7 +271,7 @@ const TablaPrestamosCaratula = ({
                         }}
                       >
                         <button
-                          className="btn btn-info mr-1"
+                          className="btn btn-info btn-sm mr-1"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Subir Archivos"

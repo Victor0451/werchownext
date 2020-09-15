@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import Pagos from "../../socios/ficha/Pagos";
@@ -9,6 +9,7 @@ import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicio from "../../../validacion/validarAltaServicio";
 import toastr from "toastr";
 import Router from "next/router";
+import ListadoAdherentes from "./ListadoAdherentes";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -38,6 +39,8 @@ const FormAltaServicio = ({
   nombreRef,
   edadRef,
   usuario,
+  adhs,
+  grupo,
 }) => {
   let dninuevotitRef = React.createRef();
   let motivoRef = React.createRef();
@@ -46,7 +49,6 @@ const FormAltaServicio = ({
   const [show, guardarShow] = useState(true);
   const [errmotiv, guardarErrMotiv] = useState(null);
   const [erridataud, guardarErrIdAtaud] = useState(null);
-
   const [error, guardarError] = useState(null);
 
   const {
@@ -126,7 +128,7 @@ const FormAltaServicio = ({
       dni_solicitante: dni_solicitante,
     };
 
-    if (ficha.GRUPO) {
+    if (ficha.GRUPO && ficha.PLAN !== "P") {
       if (dninuevotitRef.current.value === "") {
         guardarError("Debes ingresar el dni del nuevo titular");
       } else if (dninuevotitRef.current.value.length > 8) {
@@ -137,6 +139,16 @@ const FormAltaServicio = ({
         guardarErrIdAtaud("Debes seleccionar un ataud");
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
+        postServicio(servicio);
+        console.log(servicio);
+      }
+    } else if (ficha.GRUPO && ficha.PLAN === "P") {
+      if (motivoRef.current.value === "") {
+        guardarErrMotiv("Debes ingresar una Causa de muerte");
+      } else if (idataudRef.current.value === "") {
+        guardarErrIdAtaud("Debes seleccionar un ataud");
+      } else {
+        servicio.dni_nuevotitular = 11111111;
         postServicio(servicio);
         console.log(servicio);
       }
@@ -170,17 +182,9 @@ const FormAltaServicio = ({
   };
 
   const noDni = () => {
-    if (document.getElementById("nodni").checked === true) {
-      setTimeout(() => {
-        document.getElementById("nuevotitular").value = 11111111;
-        document.getElementById("nuevotitular").readOnly = true;
-      }, 200);
-    } else {
-      setTimeout(() => {
-        document.getElementById("nuevotitular").value = "";
-        document.getElementById("nuevotitular").readOnly = false;
-      }, 200);
-    }
+    document.getElementById("nuevotitular").value = 11111111;
+    document.getElementById("nuevotitular").readOnly = true;
+    document.getElementById("adh").value = "SIN ADHERENTES";
   };
 
   const selcasofrm = (row) => {
@@ -191,12 +195,41 @@ const FormAltaServicio = ({
     document.getElementById("uso").value = `${row.original.uso}`;
   };
 
+  const selAdh = (row) => {
+    console.log(row);
+
+    document.getElementById(
+      "adh"
+    ).value = `${row.original.APELLIDOS}, ${row.original.NOMBRES} `;
+    document.getElementById("nuevotitular").value = `${row.original.NRO_DOC}`;
+  };
+
   let tiposervicio = `Servicio Asociado Al Plan ${ficha.PLAN}`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
     <div className="alert alert-primary border border-dark p-4">
-      <div className="container row border border-dark p-4 d-flex justify-content-center">
+      {grupo ? (
+        <div className="">
+          {grupo.CODIGO === 1001 ||
+          grupo.CODIGO === 3444 ||
+          grupo.CODIGO === 3666 ||
+          grupo.CODIGO === 3777 ||
+          grupo.CODIGO === 3888 ||
+          grupo.CODIGO === 3999 ||
+          grupo.CODIGO === 4004 ? (
+            <div className="alert alert-danger border border-dark text-center text-uppercase">
+              El afiliado esta en estado de morosidad!!!. GRUPO: {grupo.CODIGO}{" "}
+              - {grupo.DESCRIP}
+            </div>
+          ) : (
+            <div className="alert alert-info border border-dark text-center text-uppercase">
+              GRUPO: {grupo.CODIGO} - {grupo.DESCRIP}
+            </div>
+          )}
+        </div>
+      ) : null}
+      <div className="row border border-dark p-4 d-flex justify-content-center">
         <button
           className="btn btn-info btn-sm col-5 mr-1"
           data-toggle="modal"
@@ -795,35 +828,65 @@ const FormAltaServicio = ({
 
         {ficha.GRUPO ? (
           <div>
-            <hr className="mt-4 mb-4" />
-            <div className="row d-flex justify-content-between mt-4 mb-4 border border-dark p-4">
-              <h4 className="mt-2">
-                <strong>
-                  <u>Ingresa el DNI del Nuevo Titular</u>
-                </strong>
-              </h4>
-              <input
-                type="number"
-                maxLength="8"
-                className="form-control col-5"
-                placeholder="Dni"
-                name="nuevotitular"
-                id="nuevotitular"
-                ref={dninuevotitRef}
-              />
-              <div className="form-check ">
-                <input
-                  className="form-check-input "
-                  type="checkbox"
-                  name="nodni"
-                  id="nodni"
-                  onClick={() => noDni()}
-                />
-                <label className="form-check-label" for="nodni">
-                  Es novell y/o no tiene adherentes o estan dados de baja.
-                </label>
+            {ficha.PLAN === "P" ? (
+              <div className="border border-dark alert alert-info text-center text-uppercase">
+                la ficha pertenece a un plan novell
               </div>
-            </div>
+            ) : (
+              <>
+                <hr className="mt-4 mb-4" />
+                <div className="row d-flex justify-content-between mt-4 mb-4 border border-dark p-4">
+                  <div className="col-md-4">
+                    <button
+                      className="btn btn-block btn-primary"
+                      data-toggle="modal"
+                      data-target="#adhs"
+                    >
+                      Seleccionar Nuevo Titular
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control mr-1 col-4"
+                    placeholder="Adherente"
+                    name="nuevotitular"
+                    id="adh"
+                    readOnly
+                  />
+                  <input
+                    type="number"
+                    maxLength="8"
+                    className="form-control col-3"
+                    placeholder="Dni"
+                    name="nuevotitular"
+                    id="nuevotitular"
+                    ref={dninuevotitRef}
+                    readOnly
+                  />
+                  <div className="mt-4 form-check ">
+                    {/* <input
+                      className="form-check-input "
+                      type="checkbox"
+                      name="nodni"
+                      id="nodni"
+                      onClick={() => noDni()}
+                    />
+                    <label className="form-check-label" for="nodni">
+                      Todos los Adherentes de la ficha estan de baja o no posee
+                      Adherentes
+                    </label> */}
+                    <button
+                      className="btn btn-info btn-block"
+                      onClick={() => noDni()}
+                    >
+                      Todos los Adherentes de la ficha estan de baja o no posee
+                      Adherentes
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+
             {error && (
               <div className="alert alert-danger text-center p-2 mt-2">
                 {error}
@@ -909,6 +972,45 @@ const FormAltaServicio = ({
             </div>
             <div className="modal-body">
               <Stock selcasofrm={selcasofrm} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="adhs"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Listados de Adherentes
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <ListadoAdherentes listado={adhs} selAdh={selAdh} />
             </div>
             <div className="modal-footer">
               <button
