@@ -63,7 +63,7 @@ const ListadoPadron = ({ ventas, mes, ano }) => {
                       keys: ["prod_afiliado"],
                     }),
                   filterAll: true,
-                  width: 100,
+                  width: 90,
                 },
                 {
                   Header: "Apellido",
@@ -118,6 +118,15 @@ const ListadoPadron = ({ ventas, mes, ano }) => {
                   accessor: (d) => d.prod_monto,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["prod_monto"] }),
+                  filterAll: true,
+                  width: 50,
+                },
+                {
+                  Header: "Estado",
+                  id: "prod_estado",
+                  accessor: (d) => d.prod_estado,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["prod_estado"] }),
                   filterAll: true,
                   width: 100,
                 },

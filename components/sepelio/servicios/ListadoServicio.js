@@ -3,15 +3,20 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
 import Link from "next/link";
-import moment from 'moment'
+import moment from "moment";
 
 const ListadoServicios = ({ listado, desde, hasta }) => {
   if (!listado) return <Spinner />;
 
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
-
-      <h2><strong><u>Listado De Servicios:</u> desde: {moment(desde).format('DD/MM/YYYY')} hasta: {moment(hasta).format('DD/MM/YYYY')}</strong></h2>
+      <h2>
+        <strong>
+          <u>Listado De Servicios:</u> desde:{" "}
+          {moment(desde).format("DD/MM/YYYY")} hasta:{" "}
+          {moment(hasta).format("DD/MM/YYYY")}
+        </strong>
+      </h2>
 
       <div className="row mt-4 mb-4 border border-dark p-4">
         <div className="col-md-6">
@@ -22,7 +27,12 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
           </h4>
         </div>
         <div className="col-md-6">
-          <a href="/sepelio/servicios/listado" className="btn btn-sm btn-block btn-danger">Seleccionar otro periodo</a>
+          <a
+            href="/sepelio/servicios/listado"
+            className="btn btn-sm btn-block btn-danger"
+          >
+            Seleccionar otro periodo
+          </a>
         </div>
       </div>
 
@@ -35,24 +45,21 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
             {
               Header: "Listado De Servicios",
               columns: [
-                {
-                  Header: "ID",
-                  id: "idservicio",
-                  accessor: (d) => d.idservicio,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["idservicio"] }),
-                  filterAll: true,
-                  width: 30,
-                },
                 // {
-                //   Header: "Empresa",
-                //   id: "empresa",
-                //   accessor: (d) => d.empresa,
+                //   Header: "ID",
+                //   id: "idservicio",
+                //   accessor: (d) => d.idservicio,
                 //   filterMethod: (filter, rows) =>
-                //     matchSorter(rows, filter.value, { keys: ["empresa"] }),
+                //     matchSorter(rows, filter.value, { keys: ["idservicio"] }),
                 //   filterAll: true,
-                //   width: 100,
+                //   width: 30,
                 // },
+                {
+                  Header: "#",
+                  filterAll: false,
+                  width: 20,
+                  Cell: (row) => <div>{row.index}</div>,
+                },
                 {
                   Header: "Apellido",
                   id: "apellido",
@@ -92,6 +99,18 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                   width: 200,
                 },
                 {
+                  Header: "Servicio",
+                  id: "tipo_servicio",
+                  accessor: (d) => d.tipo_servicio,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["tipo_servicio"],
+                    }),
+                  filterAll: true,
+                  width: 150,
+                },
+
+                {
                   Header: "Fecha de Fallecimiento",
                   id: "fecha_fallecimiento",
                   accessor: (d) => d.fecha_fallecimiento,
@@ -100,7 +119,7 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                       keys: ["fecha_fallecimiento"],
                     }),
                   filterAll: true,
-                  width: 220,
+                  width: 105,
                 },
 
                 // {
@@ -159,7 +178,7 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                           title="Editar Servicio"
                         >
                           <i
-                            class="fa fa-pencil-square-o"
+                            className="fa fa-pencil-square-o"
                             aria-hidden="true"
                           ></i>
                         </button>
@@ -187,7 +206,8 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                       </Link>
                       <Link
                         href={{
-                          pathname: "/sepelio/servicios/legajovirtual/subirarchivos",
+                          pathname:
+                            "/sepelio/servicios/legajovirtual/subirarchivos",
                           query: {
                             id: row.original.dni,
                           },
@@ -204,9 +224,10 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                       </Link>
                       <Link
                         href={{
-                          pathname: "/sepelio/servicios/impresion",
+                          pathname: "/sepelio/servicios/gastos/gastos",
                           query: {
                             id: row.original.dni,
+                            idservicio: row.original.idservicio,
                           },
                         }}
                       >

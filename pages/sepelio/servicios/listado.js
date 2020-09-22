@@ -4,36 +4,34 @@ import ListadoServicios from "../../../components/sepelio/servicios/ListadoServi
 import jsCookie from "js-cookie";
 import axios from "axios";
 import PeriodoServicios from "../../../components/sepelio/servicios/PeriodoServicios";
-import moment from 'moment'
+import moment from "moment";
 
 const listado = () => {
-  let desdeRef = React.createRef()
-  let hastaRef = React.createRef()
+  let desdeRef = React.createRef();
+  let hastaRef = React.createRef();
 
   const [listado, guardarListado] = useState(null);
-  const [error, guardarError] = useState(null)
-  const [desde, guardarDesde] = useState(null)
-  const [hasta, guardarHasta] = useState(null)
-
-
+  const [error, guardarError] = useState(null);
+  const [desde, guardarDesde] = useState(null);
+  const [hasta, guardarHasta] = useState(null);
 
   let token = jsCookie.get("token");
 
   const buscarServicios = async () => {
-    guardarError(null)
+    guardarError(null);
 
-    let desde = moment(desdeRef.current.value).format('YYYY-MM-DD')
-    let hasta = moment(hastaRef.current.value).format('YYYY-MM-DD')
-    if (desde === '' || hasta === '') {
-      guardarError("Los campos desde y hasta no pueden estar vacios")
+    let desde = moment(desdeRef.current.value).format("YYYY-MM-DD");
+    let hasta = moment(hastaRef.current.value).format("YYYY-MM-DD");
+    if (desde === "" || hasta === "") {
+      guardarError("Los campos desde y hasta no pueden estar vacios");
     } else if (desde > hasta) {
-      guardarError(`La fecha "desde" no puede ser mayor a la fecha "hasta" `)
-
+      guardarError(`La fecha "desde" no puede ser mayor a la fecha "hasta" `);
     } else {
-      guardarDesde(desde)
-      guardarHasta(hasta)
+      guardarDesde(desde);
+      guardarHasta(hasta);
       await axios
-        .get(`http://190.231.32.232:5002/api/sepelio/servicio/listadoservicios`,
+        .get(
+          `http://190.231.32.232:5002/api/sepelio/servicio/listadoservicios`,
           {
             params: {
               desde: desde,
@@ -51,8 +49,18 @@ const listado = () => {
           console.log(error);
         });
     }
+  };
 
-
+  const todoLosServicios = async () => {
+    console.log("toy");
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/servicio/todoslosservicios`)
+      .then((res) => {
+        guardarListado(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -63,16 +71,18 @@ const listado = () => {
 
   return (
     <Layout>
-      {
-        listado === null ? (
-          <PeriodoServicios desdeRef={desdeRef} hastaRef={hastaRef} buscarServicios={buscarServicios} error={error} />
-        ) : (
-            <ListadoServicios listado={listado} desde={desde} hasta={hasta} />
-
-          )
-      }
+      {listado === null ? (
+        <PeriodoServicios
+          desdeRef={desdeRef}
+          hastaRef={hastaRef}
+          buscarServicios={buscarServicios}
+          todoLosServicios={todoLosServicios}
+          error={error}
+        />
+      ) : (
+        <ListadoServicios listado={listado} desde={desde} hasta={hasta} />
+      )}
     </Layout>
-
   );
 };
 

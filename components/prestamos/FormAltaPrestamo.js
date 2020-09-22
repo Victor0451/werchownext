@@ -283,7 +283,7 @@ const FormAltaPrestamo = ({
               <div className="modal-body ">
                 {flag === true ? (
                   <div className=" mb-4 p-4">
-                    <div className="row d-flex mt-4 mb-4 border border-dark">
+                    <div className="row d-flex alert alert-primary border border-dark p-4">
                       <div className="form-group col-md-3">
                         <label>
                           <strong>
@@ -354,7 +354,7 @@ const FormAltaPrestamo = ({
                           </strong>
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           name="legajo"
                           defaultValue={legajo}
@@ -376,7 +376,7 @@ const FormAltaPrestamo = ({
                           </strong>
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           name="neto"
                           defaultValue={neto}
@@ -398,7 +398,7 @@ const FormAltaPrestamo = ({
                           </strong>
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           name="anti"
                           defaultValue={anti}

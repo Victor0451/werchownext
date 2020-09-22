@@ -10,6 +10,11 @@
   height: 70px;
 }
 
+.faccontainer {
+  padding: 4rem !important;
+  width: 100%;
+}
+
 .list {
   background: white;
 }

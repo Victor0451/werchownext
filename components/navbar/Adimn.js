@@ -241,10 +241,10 @@ const Adimn = () => {
               <hr />
               <li>
                 <a
-                  href="/sepelio/servicios/gastos"
+                  href="/sepelio/servicios/liquidacion/liquidacion"
                   className="dropdown-item text-dark"
                 >
-                  Ingresar Gastos
+                  Liquidar Servicio
                 </a>
               </li>
               <hr />
