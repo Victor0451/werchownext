@@ -8,7 +8,7 @@ import toastr from "toastr";
 // Validaciones
 import useValidacion from "../../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../../validacion/validarGastoServicio";
-import ListadoServicioGastos from "../../../../components/sepelio/servicios/ListadoServicioGastos";
+import ListadoServicioGastos from "../../../../components/sepelio/servicios/gastos/ListadoServicioGastos";
 
 const STATE_INICIAL = {
   fecha: "",
