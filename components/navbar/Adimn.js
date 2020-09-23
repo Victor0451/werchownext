@@ -265,6 +265,15 @@ const Adimn = () => {
                   Listado De Serv Historicos
                 </a>
               </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/servicios/administracion/administracion"
+                  className="dropdown-item text-dark"
+                >
+                  Administracion
+                </a>
+              </li>
             </ul>
           </li>
           <hr />

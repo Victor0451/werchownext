@@ -32,7 +32,7 @@ const ListadoPadron = ({ ventas, mes, ano }) => {
               <u>Total de Ventas</u>: {ventas.length}
             </div>
             <div className="col-md-6">
-              <u>Morosidad</u>:$ {totalVentas(ventas)}
+              <u>Ingresos Por Ventas</u>:$ {totalVentas(ventas)}
             </div>
           </div>
         </div>
