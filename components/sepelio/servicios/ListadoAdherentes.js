@@ -54,7 +54,7 @@ const ListadoAdherentes = ({ listado, selAdh }) => {
 
                   Cell: (row) => (
                     <div>
-                      {row.original.BAJA !== null ? (
+                      {row.original.BAJA === null ? (
                         <button
                           className="btn btn-sm btn-primary mr-1"
                           title="Seleccionar"
