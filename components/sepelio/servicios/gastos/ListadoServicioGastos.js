@@ -82,6 +82,18 @@ const ListadoServicioGastos = ({ listado }) => {
                 },
 
                 {
+                  Header: "Operador",
+                  id: "operador",
+                  accessor: (d) => d.operador,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["operador"],
+                    }),
+                  filterAll: true,
+                  width: 100,
+                },
+
+                {
                   Header: "Acciones",
 
                   Cell: (row) => (

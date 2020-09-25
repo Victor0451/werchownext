@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../../components/layout/Layout";
 import jsCookie from "js-cookie";
-import FormLiquidarServicio from "../../../../components/sepelio/servicios/liquidacion/FormLiquidarServicio";
+import axios from "axios";
+
+import ListadoServicios from "../../../../components/sepelio/servicios/liquidacion/ListadoServicio";
 
 const liquidacion = () => {
+  const [servicio, guardarServicio] = useState(null);
+  const [servliq, guardarServliq] = useState(null);
+  const [gastos, guardarGastos] = useState(null);
+
   let token = jsCookie.get("token");
 
-  const traerSolicitud = async (id) => {
+  const serviciosALiquidar = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/servicioliquidacion/serviciosaliquidar`
+      )
       .then((res) => {
-        const servicio = res.data;
+        const servicio = res.data[0];
         guardarServicio(servicio);
       })
       .catch((error) => {
@@ -18,7 +26,7 @@ const liquidacion = () => {
       });
   };
 
-  const traerGastos = async (id) => {
+  const traerGastos = async (id, servliq) => {
     await axios
       .get(
         `http://190.231.32.232:5002/api/sepelio/serviciogastos/listadogastos/${id}`
@@ -26,6 +34,7 @@ const liquidacion = () => {
       .then((res) => {
         if (res.data) {
           guardarGastos(res.data);
+          guardarServliq(servliq);
         }
       })
       .catch((error) => {
@@ -42,18 +51,23 @@ const liquidacion = () => {
 
     return total;
   };
-  
+
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
     }
+    serviciosALiquidar();
   }, []);
-
-
 
   return (
     <Layout>
-      <FormLiquidarServicio />
+      <ListadoServicios
+        listado={servicio}
+        gastos={gastos}
+        traerGastos={traerGastos}
+        servliq={servliq}
+      />
     </Layout>
   );
 };

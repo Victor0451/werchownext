@@ -12,7 +12,7 @@ const useValidacion = (stateInicial, validar, fn) => {
 
       if (noErrores) {
         fn(); //FN =  funcion que se ejecuta en el componente
-        guardarValores(stateInicial);
+       // guardarValores(stateInicial);
       }
       guardarSubmitForm(false);
     }

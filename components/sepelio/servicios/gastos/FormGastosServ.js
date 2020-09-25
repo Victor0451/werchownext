@@ -17,6 +17,26 @@ const FormGastosServ = ({
 }) => {
   if (!servicio) return <Spinner />;
 
+  const handleImport = () => {
+    let select = document.getElementById("tipogasto");
+    let importe = document.getElementById("importe");
+
+    if (
+      select.value === "Instalacion" ||
+      select.value === "Conduccion" ||
+      select.value === "Limpieza sala" ||
+      select.value === "Guardia oficina" ||
+      select.value === "Viaje interior" ||
+      select.value === "Atencion sala"
+    ) {
+      importe.value = 0;
+      importe.readOnly = true;
+    } else {
+      importe.value = "";
+      importe.readOnly = false;
+    }
+  };
+
   return (
     <div className="container mt-4">
       <div className="alert alert-primary border border-dark  p-4">
@@ -98,6 +118,7 @@ const FormGastosServ = ({
               </label>
               <select
                 className="custom-select"
+                id="tipogasto"
                 name="tipogasto"
                 defaultValue={tipogasto}
                 onChange={handleChange}
@@ -119,8 +140,11 @@ const FormGastosServ = ({
                 <option value="Formol">Formol</option>
                 <option value="Movilidad">Movilidad</option>
                 <option value="Coffee">Coffee</option>
-                <option value="Auto 1">Auto 1</option>
-                <option value="Auto 2">Auto 2</option>
+                <option value="Conduccion">Conduccion Autos</option>
+                <option value="Limpieza sala">Limpieza de Sala</option>
+                <option value="Guardia oficina">Guardia en Oficina</option>
+                <option value="Viaje interior">Viaje al Interior</option>
+                <option value="Atencion sala">Atencion en Sala</option>
               </select>
               {errores.tipogasto && (
                 <div className="alert alert-danger text-center p-2 mt-2">
@@ -134,11 +158,12 @@ const FormGastosServ = ({
               <input
                 type="number"
                 className="form-control"
-                id="exampleFormControlTextarea1"
+                id="importe"
                 name="importe"
                 defaultValue={importe}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                onFocus={handleImport}
               />
               {errores.importe && (
                 <div className="alert alert-danger text-center p-2 mt-2">
@@ -166,10 +191,10 @@ const FormGastosServ = ({
                 </option>
                 <option value="agareca">agareca</option>
                 <option value="juro">juro</option>
-                <option value="smurov">muro</option>
+                <option value="muro">muro</option>
                 <option value="mquiroz">mquiroz</option>
                 <option value="jzamorano">jzamorano</option>
-                <option value="changarin">changarin</option>
+                <option value="auxiliar">auxiliar</option>
               </select>
               {errores.operador && (
                 <div className="alert alert-danger text-center p-2 mt-2">

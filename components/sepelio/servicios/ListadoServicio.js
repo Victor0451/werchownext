@@ -237,7 +237,7 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                           data-placement="top"
                           title="Cargar Gastos"
                         >
-                          <i class="fa fa-money" aria-hidden="true"></i>
+                          <i className="fa fa-money" aria-hidden="true"></i>
                         </button>
                       </Link>
                     </div>
