@@ -14,12 +14,15 @@ const EstadoCartera = ({
   array,
 }) => {
   return (
-    <div className="container">
-      <h1 className="mt-4 mb-4 ">
-        <u>Analisis De Cartera Segun Estado</u>
-      </h1>
+    <div className="container  mt-4  alert alert-primary border border-dark p-4">
+      <h2 className="mt-4 mb-4 ">
+        <strong>
+          {" "}
+          <u>Analisis De Cartera Segun Estado</u>{" "}
+        </strong>
+      </h2>
       <nav>
-        <div className="nav nav-tabs mt-4" id="nav-tab" role="tablist">
+        <div className=" nav nav-tabs mt-4" id="nav-tab" role="tablist">
           <a
             className="nav-item nav-link active"
             id="nav-home-tab"
@@ -104,29 +107,31 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-home-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Atrasada - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Atrasada - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
-              <button
-                className="btn btn-secondary btn-block"
-                onClick={buscarAT}
-              >
+              <button className="btn btn-primary btn-block" onClick={buscarAT}>
                 Buscar
               </button>
             </div>
           </div>
 
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Atrasada - MUTUAL</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Atrasada - MUTUAL</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
-              <button
-                className="btn btn-secondary btn-block"
-                onClick={buscarATM}
-              >
+              <button className="btn btn-primary btn-block" onClick={buscarATM}>
                 Buscar
               </button>
             </div>
@@ -140,15 +145,16 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera 1001 - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera 1001 - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
-              <button
-                className="btn btn-secondary btn-block"
-                onClick={buscarRec}
-              >
+              <button className="btn btn-primary btn-block" onClick={buscarRec}>
                 Buscar
               </button>
             </div>
@@ -159,13 +165,17 @@ const EstadoCartera = ({
             ) : null}
           </div>
 
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera 1001 - MUTUAL</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera 1001 - MUTUAL</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarRecM}
               >
                 Buscar
@@ -179,13 +189,17 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-contact-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Reincidente - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Reincidente - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarRein}
               >
                 Buscar
@@ -193,13 +207,17 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Reincidente - MUTUAL</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Reincidente - Mutual</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarReinM}
               >
                 Buscar
@@ -214,13 +232,17 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-blanqueo-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera a Blanquear - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Blanqueo - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarBlan}
               >
                 Buscar
@@ -228,13 +250,17 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera a Blanquear - MUTUAL</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Blanqueo - MUTUAL</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarBlanM}
               >
                 Buscar
@@ -248,13 +274,17 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-poli-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Policia - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Policia - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
               <button
-                className="btn btn-secondary btn-block"
+                className="btn btn-primary btn-block"
                 onClick={buscarPoli}
               >
                 Buscar
@@ -269,27 +299,28 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-aux-tab"
         >
-          <div className="jumbotron row mt-4">
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
             <div className="col-md-6">
-              <h2>Buscar Cartera Auxiliar - WERCHOW</h2>
+              <h4>
+                <strong>
+                  <u>Buscar Cartera Auxiliar - WERCHOW</u>
+                </strong>
+              </h4>
             </div>
             <div className="col-md-6">
-              <button
-                className="btn btn-secondary btn-block"
-                onClick={buscarAux}
-              >
+              <button className="btn btn-primary btn-block" onClick={buscarAux}>
                 Buscar
               </button>
             </div>
           </div>
 
-          {/* <div className="jumbotron row mt-4">
+          {/* <div className="border border-dark alert alert-primary p-4 row mt-4">
                         <div className="col-md-6">
                             <h2>Buscar Cartera Auxiliar - MUTUAL</h2>
                         </div>
                         <div className="col-md-6">
                             <button
-                                className="btn btn-secondary btn-block"
+                                className="btn btn-primary btn-block"
                                 onClick={buscarATM}
                             >
                                 Buscar

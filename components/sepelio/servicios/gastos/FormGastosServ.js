@@ -14,6 +14,7 @@ const FormGastosServ = ({
   handleChange,
   handleSubmit,
   handleBlur,
+  importeRef,
 }) => {
   if (!servicio) return <Spinner />;
 
@@ -164,6 +165,7 @@ const FormGastosServ = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onFocus={handleImport}
+                ref={importeRef}
               />
               {errores.importe && (
                 <div className="alert alert-danger text-center p-2 mt-2">

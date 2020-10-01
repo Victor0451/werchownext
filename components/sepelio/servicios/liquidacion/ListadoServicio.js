@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
@@ -6,9 +6,42 @@ import FormLiquidarServicio from "./FormLiquidarServicio";
 import Link from "next/link";
 import moment from "moment";
 
-const ListadoServicios = ({ listado, gastos, traerGastos, servliq }) => {
+const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop }) => {
   if (!listado) return <Spinner />;
 
+  const [totgast, guardarTotGast] = useState(null);
+  const [sueldo, guardarSueldo] = useState(null);
+  const [totliq, guardarTotLiq] = useState(null);
+
+  const total = (array) => {
+    let total = 0;
+
+    if (array) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].importe) {
+          total += array[i].importe;
+          guardarTotGast(total);
+        } else if (array[i].liquidacion) {
+          total += array[i].liquidacion;
+          guardarTotLiq(total);
+        }
+      }
+      return total;
+    }
+  };
+
+  const liquidarServicio = async () => {
+    const liquidacion = {
+      idservicio: listado[0].idservicio,
+      total_gasto: total(gastos),
+      total_sueldo: total(liqop),
+      total_liquidacion: total(gastos) + total(liqop),
+    };
+
+    console.log(liquidacion);
+  };
+
+  console.log();
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
       <h2 className=" mb-4">
@@ -143,7 +176,12 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq }) => {
               </button>
             </div>
             <div className="modal-body">
-              <FormLiquidarServicio gastos={gastos} servicio={servliq} />
+              <FormLiquidarServicio
+                gastos={gastos}
+                servicio={servliq}
+                liqop={liqop}
+                total={total}
+              />
             </div>
             <div className="modal-footer">
               <button
@@ -153,7 +191,11 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq }) => {
               >
                 Cancelar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={liquidarServicio}
+              >
                 Liquidar
               </button>
             </div>

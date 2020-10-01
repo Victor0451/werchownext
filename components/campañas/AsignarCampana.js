@@ -8,6 +8,7 @@ import axios from "axios";
 const AsignarCampana = ({
   CasaCentralMG,
   CasaCentralGG,
+  CasaCentralVF,
   perico,
   palpala,
   sanPedro,
@@ -63,9 +64,9 @@ const AsignarCampana = ({
 
   return (
     <div className="container border border-dark p-2 mt-4">
-      <div className="mt-4 mb-4 alert alert-info text-dark text-center">
+      <div className="mt-4 mb-4 border border-dark alert alert-primary text-dark text-center">
         <strong>
-          <h3>
+          <h4>
             <u>
               {" "}
               El total de la Cartera {campana} de {empresa} a asignar es
@@ -73,21 +74,26 @@ const AsignarCampana = ({
             : {""}
             {CasaCentralMG.length +
               CasaCentralGG.length +
+              CasaCentralVF.length +
               perico.length +
               palpala.length +
               sanPedro.length}
-          </h3>
+          </h4>
         </strong>
       </div>
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between">
-          <h3>
-            Campaña {campana} - {empresa}: Casa Central Maria Galian{" "}
-            <span className="badge badge-pill badge-dark text-white">
-              {CasaCentralMG.length}
-            </span>
-          </h3>
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: Casa Central Maria Galian{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {CasaCentralMG.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
 
           {JSON.parse(empresa) === "W" ? (
             <>
@@ -185,13 +191,17 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between">
-          <h3>
-            Campaña {campana} - {empresa}: Casa Central Gisela Gimenez{" "}
-            <span className="badge badge-pill badge-dark text-white">
-              {CasaCentralGG.length}
-            </span>
-          </h3>
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: Casa Central Gisela Gimenez{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {CasaCentralGG.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
 
           {JSON.parse(empresa) === "W" ? (
             <>
@@ -289,13 +299,126 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between">
-          <h3>
-            Campaña {campana} - {empresa}: Perico - Vanesa Gorosito{" "}
-            <span className="badge badge-pill badge-dark text-white">
-              {perico.length}
-            </span>
-          </h3>
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: Casa Central Valeria Fidao{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {CasaCentralVF.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
+
+          {JSON.parse(empresa) === "W" ? (
+            <>
+              {campana === '"Atrasados"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"At"}
+                  emp={"Werchow"}
+                  id={58}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Recuperacion"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Rec"}
+                  emp={"Werchow"}
+                  id={57}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Reincidente"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Rein"}
+                  emp={"Werchow"}
+                  id={59}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Policia"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Poli"}
+                  emp={"Werchow"}
+                  id={61}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Blanqueo"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Blan"}
+                  emp={"Werchow"}
+                  id={60}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Auxiliar"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Aux"}
+                  emp={"Werchow"}
+                  id={62}
+                  fn={crearCampana}
+                />
+              ) : null}
+            </>
+          ) : JSON.parse(empresa) === "M" ? (
+            <>
+              {campana === '"Atrasados"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"At"}
+                  emp={"Mutual"}
+                  id={64}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Recuperacion"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Rec"}
+                  emp={"Mutual"}
+                  id={63}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Reincidente"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Rein"}
+                  emp={"Werchow"}
+                  id={65}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Blanqueo"' ? (
+                <BotonCamp
+                  array={CasaCentralVF}
+                  camp={"Blan"}
+                  emp={"Mutual"}
+                  id={66}
+                  fn={crearCampana}
+                />
+              ) : null}
+            </>
+          ) : null}
+        </div>
+        <ListadoCampana listado={CasaCentralVF} />
+      </div>
+
+      <hr className="mt-4 mb-4 border border-dark" />
+
+      <div className="mt-4">
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: Perico - Vanesa Gorosito{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {perico.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
+
           {JSON.parse(empresa) === "W" ? (
             <>
               {campana === '"Atrasados"' ? (
@@ -392,13 +515,17 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between">
-          <h3>
-            Campaña {campana} - {empresa}: Palpala - Marisa Carrizo{" "}
-            <span className="badge badge-pill badge-dark text-white">
-              {palpala.length}
-            </span>
-          </h3>
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: Palpala - Marisa Carrizo{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {palpala.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
 
           {JSON.parse(empresa) === "W" ? (
             <>
@@ -496,13 +623,17 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between">
-          <h3>
-            Campaña {campana} - {empresa}: San Pedro - Silvia Juarez{" "}
-            <span className="badge badge-pill badge-dark text-white">
-              {sanPedro.length}
-            </span>
-          </h3>
+        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+          <h4>
+            <strong>
+              <u>
+                Campaña {campana} - {empresa}: San Pedro - Silvia Juarez{" "}
+                <span className="badge badge-pill badge-dark text-white">
+                  {sanPedro.length}
+                </span>
+              </u>
+            </strong>
+          </h4>
 
           {JSON.parse(empresa) === "W" ? (
             <>

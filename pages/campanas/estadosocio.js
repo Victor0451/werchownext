@@ -25,6 +25,7 @@ const estadosocio = () => {
   const [sanPedro, guardarSanPedro] = useState({});
   const [CasaCentralMG, guardarCCMG] = useState({});
   const [CasaCentralGG, guardarCCGG] = useState({});
+  const [CasaCentralVF, guardarCCVF] = useState({});
 
   const segmentacion = (array) => {
     let perico = array.filter((at) => {
@@ -43,17 +44,28 @@ const estadosocio = () => {
       return at.SUCURSAL === "W";
     });
 
-    let CCmitad = Math.floor(CasaCentral.length / 2);
+    // let CCmitad = Math.floor(CasaCentral.length / 2);
 
-    let CasaCentralGG = CasaCentral.slice(0, CCmitad);
+    // let CasaCentralGG = CasaCentral.slice(0, CCmitad);
 
-    let CasaCentralMG = CasaCentral.slice(CCmitad, CasaCentral.length);
+    // let CasaCentralMG = CasaCentral.slice(CCmitad, CasaCentral.length);
+
+    let CCparte1 = Math.floor(CasaCentral.length / 3);
+
+    let CCparte2 = CCparte1 * 2;
+
+    let CasaCentralGG = CasaCentral.slice(0, CCparte1);
+
+    let CasaCentralMG = CasaCentral.slice(CCparte1, CCparte2);
+
+    let CasaCentralVF = CasaCentral.slice(CCparte2, CasaCentral.length);
 
     guardarPerico(perico);
     guardarPalpala(palpala);
     guardarSanPedro(sanPedro);
     guardarCCMG(CasaCentralMG);
     guardarCCGG(CasaCentralGG);
+    guardarCCVF(CasaCentralVF);
   };
 
   // CAMPAÑAS DE WERCHOW
@@ -320,6 +332,7 @@ const estadosocio = () => {
         <AsignarCampana
           CasaCentralMG={CasaCentralMG}
           CasaCentralGG={CasaCentralGG}
+          CasaCentralVF={CasaCentralVF}
           perico={perico}
           palpala={palpala}
           sanPedro={sanPedro}
@@ -328,7 +341,7 @@ const estadosocio = () => {
         />
       ) : (
         <div className="container">
-          <div className=" alert alert-info text-dark text-center">
+          <div className=" mt-4 border border-dark alert alert-info text-dark text-center p-4">
             <h3>
               <u>Busca si existen casos disponibles para asignar</u>
             </h3>

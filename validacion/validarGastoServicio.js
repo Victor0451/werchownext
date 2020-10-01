@@ -16,9 +16,9 @@ export default function validarGastoServicio(valores) {
     errores.tipogasto = "El tipo de gasto es obligatorio";
   }
 
-  if (!valores.importe) {
-    errores.importe = "El importe es obligatorio";
-  }
+  // if (!valores.importe) {
+  //   errores.importe = "El importe es obligatorio";
+  // }
 
   if (!valores.operador) {
     errores.operador = "El operador es obligatorio";

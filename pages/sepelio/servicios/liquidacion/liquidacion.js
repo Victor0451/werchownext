@@ -9,6 +9,7 @@ const liquidacion = () => {
   const [servicio, guardarServicio] = useState(null);
   const [servliq, guardarServliq] = useState(null);
   const [gastos, guardarGastos] = useState(null);
+  const [liqop, guardarLiqOp] = useState(null);
 
   let token = jsCookie.get("token");
 
@@ -40,16 +41,23 @@ const liquidacion = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    liquidarOperador(id);
   };
 
-  const calcularGastos = (array) => {
-    let total = 0;
-
-    for (let i = 0; i < array.length; i++) {
-      total += parseFloat(array[i].importe);
-    }
-
-    return total;
+  const liquidarOperador = async (id) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/servicioliquidacion/liquidacionoperador/${id}`
+      )
+      .then((res) => {
+        if (res.data) {
+          guardarLiqOp(res.data[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -67,6 +75,7 @@ const liquidacion = () => {
         gastos={gastos}
         traerGastos={traerGastos}
         servliq={servliq}
+        liqop={liqop}
       />
     </Layout>
   );

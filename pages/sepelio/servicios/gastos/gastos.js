@@ -21,6 +21,8 @@ const STATE_INICIAL = {
 };
 
 const gastos = () => {
+  let importeRef = React.createRef();
+
   const [servicio, guardarServicio] = useState(null);
   const [gastos, guardarGastos] = useState(null);
 
@@ -102,7 +104,7 @@ const gastos = () => {
       hs_inicio: hsinicio,
       hs_fin: hsfin,
       tipo_gasto: tipogasto,
-      importe: importe,
+      importe: importeRef.current.value,
       operador: operador,
       observaciones: observaciones,
     };
@@ -243,6 +245,7 @@ const gastos = () => {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handleBlur={handleBlur}
+                importeRef={importeRef}
               />
             </div>
             <div className="modal-footer">

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import FormAcciones from "./FormAcciones";
 import Notificacion from "./Notificacion";
+
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
@@ -190,6 +192,7 @@ const ListadoCasos = ({ campana, operador, modal }) => {
       window.location.reload();
     }, 1000);
   };
+
   let fechahoy = moment().format("YYYY-MM-DD");
   return (
     <div className="mt-4">
@@ -208,6 +211,7 @@ const ListadoCasos = ({ campana, operador, modal }) => {
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["contrato"] }),
                 filterAll: true,
+                width: 80,
               },
               {
                 Header: "Apellido",
@@ -233,31 +237,32 @@ const ListadoCasos = ({ campana, operador, modal }) => {
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["dni"] }),
                 filterAll: true,
+                width: 100,
               },
-              // {
-              //     Header: "Calle",
-              //     id: "calle",
-              //     accessor: d => d.calle,
-              //     filterMethod: (filter, rows) =>
-              //         matchSorter(rows, filter.value, { keys: ["calle"] }),
-              //     filterAll: true
-              // },
-              // {
-              //     Header: "N°",
-              //     id: "nro_calle",
-              //     accessor: d => d.nro_calle,
-              //     filterMethod: (filter, rows) =>
-              //         matchSorter(rows, filter.value, { keys: ["nro_calle"] }),
-              //     filterAll: true
-              // },
-              // {
-              //     Header: "Barrio",
-              //     id: "barrio",
-              //     accessor: d => d.barrio,
-              //     filterMethod: (filter, rows) =>
-              //         matchSorter(rows, filter.value, { keys: ["barrio"] }),
-              //     filterAll: true
-              // },
+              {
+                Header: "Calle",
+                id: "calle",
+                accessor: (d) => d.calle,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["calle"] }),
+                filterAll: true,
+              },
+              {
+                Header: "N°",
+                id: "nro_calle",
+                accessor: (d) => d.nro_calle,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["nro_calle"] }),
+                filterAll: true,
+              },
+              {
+                Header: "Barrio",
+                id: "barrio",
+                accessor: (d) => d.barrio,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["barrio"] }),
+                filterAll: true,
+              },
               // {
               //     Header: "Localidad",
               //     id: "localidad",
@@ -274,51 +279,51 @@ const ListadoCasos = ({ campana, operador, modal }) => {
                   matchSorter(rows, filter.value, { keys: ["cuota"] }),
                 filterAll: true,
               },
-              {
-                Header: "Mes",
-                id: "mes",
-                accessor: (d) => d.mes,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["mes"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Año",
-                id: "ano",
-                accessor: (d) => d.ano,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["ano"] }),
-                filterAll: true,
-              },
-              {
-                getProps: (state, rowInfo) => {
-                  if (rowInfo && rowInfo.row.fechanuevaaccion) {
-                    return {
-                      style: {
-                        background:
-                          rowInfo.row.fechanuevaaccion < fechahoy
-                            ? "red"
-                            : rowInfo.row.fechanuevaaccion > fechahoy
-                            ? "green"
-                            : rowInfo.row.fechanuevaaccion === fechahoy
-                            ? "yellow"
-                            : null,
-                      },
-                    };
-                  } else {
-                    return { hidden: true };
-                  }
-                },
+              // {
+              //   Header: "Mes",
+              //   id: "mes",
+              //   accessor: (d) => d.mes,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, { keys: ["mes"] }),
+              //   filterAll: true,
+              // },
+              // {
+              //   Header: "Año",
+              //   id: "ano",
+              //   accessor: (d) => d.ano,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, { keys: ["ano"] }),
+              //   filterAll: true,
+              // },
+              // {
+              //   getProps: (state, rowInfo) => {
+              //     if (rowInfo && rowInfo.row.fechanuevaaccion) {
+              //       return {
+              //         style: {
+              //           background:
+              //             rowInfo.row.fechanuevaaccion < fechahoy
+              //               ? "red"
+              //               : rowInfo.row.fechanuevaaccion > fechahoy
+              //               ? "green"
+              //               : rowInfo.row.fechanuevaaccion === fechahoy
+              //               ? "yellow"
+              //               : null,
+              //         },
+              //       };
+              //     } else {
+              //       return { hidden: true };
+              //     }
+              //   },
 
-                Header: "Fecha Accion",
-                id: "fechanuevaaccion",
-                accessor: (d) => d.fechanuevaaccion,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, {
-                    keys: ["fechanuevaaccion"],
-                  }),
-                filterAll: true,
-              },
+              //   Header: "Fecha Accion",
+              //   id: "fechanuevaaccion",
+              //   accessor: (d) => d.fechanuevaaccion,
+              //   filterMethod: (filter, rows) =>
+              //     matchSorter(rows, filter.value, {
+              //       keys: ["fechanuevaaccion"],
+              //     }),
+              //   filterAll: true,
+              // },
 
               {
                 Header: "Acciones",
@@ -336,15 +341,26 @@ const ListadoCasos = ({ campana, operador, modal }) => {
                         Generar Notificacion
                       </a>
                     ) : (
-                      <a
-                        href={"#"}
-                        className="btn btn-primary"
-                        data-toggle="modal"
-                        data-target={`.bd-example-modal-${modal}`}
-                        onClick={() => selcaso(row.index)}
-                      >
-                        Acciones
-                      </a>
+                      <>
+                        <a
+                          href={"#"}
+                          className="btn btn-primary btn-sm mr-1"
+                          data-toggle="modal"
+                          data-target={`.bd-example-modal-${modal}`}
+                          onClick={() => selcaso(row.index)}
+                        >
+                          <i className="fa fa-book" aria-hidden="true"></i>
+                        </a>
+                        <a
+                          href={"#"}
+                          className="btn btn-warning btn-sm"
+                          data-toggle="modal"
+                          data-target={`.bd-example-modal-xl${modal}`}
+                          onClick={() => selcaso(row.index)}
+                        >
+                          <i className="fa fa-envelope" aria-hidden="true"></i>
+                        </a>
+                      </>
                     )}
                   </div>
                 ),
