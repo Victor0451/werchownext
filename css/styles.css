@@ -40,6 +40,11 @@ input {
   /* background: rgba(3, 36, 66, 0.685) !important; */
 }
 
+.ruleta:active {
+  -webkit-transform: rotate(6000deg);
+  -webkit-transition: -webkit-transform 5s ease-out;
+}
+
 .navbar-brand img {
   height: 2rem;
 }
