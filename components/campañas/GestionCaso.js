@@ -1,6 +1,6 @@
 import React from "react";
 import ListadoCaso from "./ListadoCasos";
-import moment from 'moment'
+import moment from "moment";
 
 const GestionCaso = ({
   campanaOp,
@@ -8,6 +8,7 @@ const GestionCaso = ({
   campanaOpNoti,
   operador,
   camp,
+  userData,
 }) => {
   let modaltrab = "lgtrab";
   let modalnuevo = "lgnuevo";
@@ -73,12 +74,13 @@ const GestionCaso = ({
               No Tienes Casos Asignados
             </div>
           ) : (
-              <ListadoCaso
-                campana={campanaOp}
-                operador={operador}
-                modal={modalnuevo}
-              />
-            )}
+            <ListadoCaso
+              campana={campanaOp}
+              operador={operador}
+              modal={modalnuevo}
+              userData={userData}
+            />
+          )}
         </div>
         <div
           className="tab-pane fade"
@@ -91,12 +93,13 @@ const GestionCaso = ({
               No Tienes Casos Trabajados
             </div>
           ) : (
-              <ListadoCaso
-                campana={campanaOpTrab}
-                operador={operador}
-                modal={modaltrab}
-              />
-            )}
+            <ListadoCaso
+              campana={campanaOpTrab}
+              operador={operador}
+              modal={modaltrab}
+              userData={userData}
+            />
+          )}
         </div>
 
         <div
@@ -110,12 +113,13 @@ const GestionCaso = ({
               No Tienes Casos Notificados
             </div>
           ) : (
-              <ListadoCaso
-                campana={campanaOpNoti}
-                operador={operador}
-                modal={modalnoti}
-              />
-            )}
+            <ListadoCaso
+              campana={campanaOpNoti}
+              operador={operador}
+              modal={modalnoti}
+              userData={userData}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ import Ventas from "./Ventas";
 import Sepelio from "./Sepelio";
 
 const AuthLinks = ({ userData }) => {
-  console.log(userData.perfil);
   return (
     <>
       <div

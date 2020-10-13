@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactToPrint from "react-to-print";
 
-const Notificacion = ({ caso }) => {
+const Notificacion = ({ caso, userData }) => {
   let componentRef = React.createRef();
+
+  if (!userData) return <div>cargando..</div>;
+
+  const op = (op) => {
+    if (userData === "mgalian") {
+      return "Galian Maria - 388-54301465";
+    } else if (userData === "vfidao") {
+      return "Fidao Valeria - 388-54176523";
+    } else if (userData === "ggimenez") {
+      return "Gimenez Gisela - 388-54176871";
+    } else if (userData === "vgorosito") {
+      return "Gorosito Vanesa - 388-4300910";
+    } else if (userData === "mcarriso") {
+      return "Carriso Marisa - 388-4174570";
+    } else if (userData === "sjuarez") {
+      return "Juarez Silvia - 3888-569842";
+    }
+  };
 
   return (
     <div>
@@ -73,7 +91,7 @@ const Notificacion = ({ caso }) => {
             </div>
             <div className="col-md-12 mt-2 mb-4">
               <strong>
-                <u>Celulares</u>: 388-4301465 - 388-4176871 (Whatsapp)
+                <u>Operador</u>: {op(userData)}
               </strong>
             </div>
           </div>

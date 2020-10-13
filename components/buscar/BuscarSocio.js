@@ -20,7 +20,7 @@ const BuscarSocio = ({
     <div className="container">
       <div className="mt-4 p-4 border border-dark alert alert-primary">
         <h2 className="mt-2">
-          <u>Buscar Socio</u>
+          <u>Buscar Socio En Campañas</u>
         </h2>
         <form className=" mt-4 border border-dark p-2" onSubmit={handleSubmit}>
           <div className="row">

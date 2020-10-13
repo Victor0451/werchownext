@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import GestionCaso from "../../../components/campañas/GestionCaso";
 import Layout from "../../../components/layout/Layout";
+import jsCookies from "js-cookie";
 import axios from "axios";
 
 const campana = (porps) => {
   const [campanaOp, guardarCampana] = useState({});
   const [campanaOpTrab, guardarCampanaTrab] = useState({});
   const [campanaOpNoti, guardarCampanaNoti] = useState({});
+
+  const [userData, guardarUsuario] = useState(null);
 
   const router = useRouter();
   const {
@@ -59,11 +62,19 @@ const campana = (porps) => {
       });
   };
 
+  let usuario = jsCookies.get("usuario");
+
+  console.log(userData);
+
   useEffect(() => {
     if (camp) {
       nuevosCasos();
       casosTrabajados();
       casosNotificados();
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+      }
     } else {
       console.log("error");
     }
@@ -76,7 +87,8 @@ const campana = (porps) => {
         campanaOpTrab={campanaOpTrab}
         campanaOpNoti={campanaOpNoti}
         operador={operador}
-        camp={camp} 
+        camp={camp}
+        userData={userData}
       />
     </Layout>
   );

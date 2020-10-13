@@ -9,7 +9,7 @@ import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
 
-const ListadoCasos = ({ campana, operador, modal }) => {
+const ListadoCasos = ({ campana, operador, modal, userData }) => {
   let fechaaccionRef = React.createRef();
   let fechaaccionnuevaRef = React.createRef();
   let obsRef = React.createRef();
@@ -437,7 +437,7 @@ const ListadoCasos = ({ campana, operador, modal }) => {
       >
         <div className="modal-dialog modal-xl">
           <div className="modal-content p-2">
-            <Notificacion caso={caso} />
+            <Notificacion caso={caso} userData={userData} />
           </div>
         </div>
       </div>
