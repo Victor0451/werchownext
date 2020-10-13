@@ -622,7 +622,7 @@ const AltaNovell = ({
             className="form-control"
             type="date"
             name="fechanacben"
-            value={fechanacben}
+            value={fecnacben}
             onBlur={handleBlur}
             onChange={handleChange}
           />

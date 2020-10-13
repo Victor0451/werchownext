@@ -64,7 +64,7 @@ const campana = (porps) => {
 
   let usuario = jsCookies.get("usuario");
 
-  console.log(userData);
+  
 
   useEffect(() => {
     if (camp) {
