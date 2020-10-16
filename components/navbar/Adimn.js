@@ -76,7 +76,7 @@ const Adimn = () => {
           data-toggle="dropdown"
           className="nav-link dropdown-toggle"
         >
-          Prestamos
+          Sub. Cont. Familiar
         </a>
         <ul className="dropdown-menu">
           <li>
@@ -84,7 +84,7 @@ const Adimn = () => {
               href="/prestamos/nuevoprestamo"
               className="dropdown-item text-dark"
             >
-              Nuevo Prestamo
+              Nuevo Subsidio
             </a>
           </li>
 
@@ -96,7 +96,7 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
-              Legajo Virtual Prestamos
+              Legajo Virtual Subsidio
             </a>
             <ul className="dropdown-menu">
               <li>
@@ -136,7 +136,7 @@ const Adimn = () => {
               href="/prestamos/imprimircaratula"
               className="dropdown-item text-dark"
             >
-              Listado Prestamos Del Mes
+              Listado Subsidios Del Mes
             </a>
           </li>
         </ul>

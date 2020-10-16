@@ -1,40 +1,14 @@
 import React, { useState } from "react";
 import toastr from "toastr";
+import axios from "axios";
 import Ruleta from "../../layout/Ruleta";
+import moment from "moment";
 
-
-
-const socio = [
-  5009189,
-  5009189,
-  6625707,
-  11663603,
-  12007644,
-  14061478,
-  16364625,
-  22188623,
-  22820657,
-  23820379,
-  30399341,
-  30766146,
-  32380646,
-  33236296,
-  33256599,
-  34022631,
-  36720371,
-  93005287,
-  95150912,
-];
-
-const GenerarGanadores = () => {
+const GenerarGanadores = ({ socio }) => {
   const [ganador, guardarGanador] = useState([]);
   const [selec, guardarSelec] = useState(null);
+  const [premio, guardarPremio] = useState(0);
 
-  
-  const padronParticipante = async () => {
-
-  }
-  
   const buscarGanador = (e) => {
     e.preventDefault();
 
@@ -45,6 +19,15 @@ const GenerarGanadores = () => {
       const seleccion = socio[rand];
 
       guardarSelec(seleccion);
+
+      if (premio === 0) {
+        regGanador(seleccion, 1);
+        guardarPremio(1);
+      } else if (premio > 0) {
+        let nuprem = premio + 1;
+        guardarPremio(nuprem);
+        regGanador(seleccion, nuprem);
+      }
 
       guardarGanador([...ganador, seleccion]);
 
@@ -58,6 +41,23 @@ const GenerarGanadores = () => {
     }
   };
 
+  const regGanador = async (seleccion, premio) => {
+    const winner = {
+      ganador: seleccion,
+      premio: premio,
+      fecha: moment().format("YYYY-MM-DD"),
+    };
+
+    axios
+      .post("http://192.168.1.102:5002/api/clubwerchow/socios/ganador", winner)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="container mt-4">
       <div className="row border border-dark alert alert-primary p-4">
@@ -68,13 +68,19 @@ const GenerarGanadores = () => {
             </strong>
           </h2>
 
-          <p>
-            Para poder participar de los sorteos del Club Werchow entra en: {""}
-            <a href="https://clubwerchow.com" target="_blank">
-              https://clubwerchow.com
-            </a>
-          </p>
+          <h6 className="mb-4">
+            <strong>
+              <p>
+                Para poder participar de los sorteos del Club Werchow entra en:{" "}
+                {""}
+                <a href="https://clubwerchow.com" target="_blank">
+                  https://clubwerchow.com
+                </a>
+              </p>
+            </strong>
+          </h6>
 
+          <br />
           <div className="row">
             <div className="col-6">
               <Ruleta fn={buscarGanador} />
@@ -88,10 +94,11 @@ const GenerarGanadores = () => {
                   </div>
                 </>
               ) : null}
+              <img src="/img/premios.jpg" className="premios " />
             </div>
           </div>
-
-          <div className="row">
+          <br />
+          <div className="row mt-4">
             <div className=" mt-4 mb-4 col-md-6">
               <h6>Participantes</h6>
               <div className="card">
@@ -109,7 +116,10 @@ const GenerarGanadores = () => {
                 {ganador !== null ? (
                   <div>
                     {ganador.map((ganador, index) => (
-                      <div key={index}>{ganador}</div>
+                      <div key={index}>
+                        {" "}
+                        {index + 1} - {ganador}
+                      </div>
                     ))}
                   </div>
                 ) : null}

@@ -5,6 +5,12 @@
   height: 40px;
 }
 
+.premios {
+  width: 95% !important;
+  height: 95% !important;
+  position: absolute !important;
+}
+
 .mutuallogo {
   width: 185px;
   height: 70px;
@@ -211,6 +217,12 @@ input {
 }
 .conform {
   font-size: 1.2em !important; /* 40px/16=2.5em */
+  font-weight: bold !important;
+  line-height: 30px !important;
+}
+
+.conformnovell {
+  font-size: 1em !important; /* 40px/16=2.5em */
   font-weight: bold !important;
   line-height: 30px !important;
 }

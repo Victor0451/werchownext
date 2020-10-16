@@ -266,8 +266,9 @@ const AltaNovell = ({
           </label>
           <input
             className="form-control"
-            type="text"
+            type="number"
             placeholder="DNI"
+            maxLength="8"
             name="dnisol"
             value={dnisol}
             onBlur={handleBlur}
@@ -318,9 +319,9 @@ const AltaNovell = ({
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          {errores.fechanacsol && (
+          {errores.fecnacsol && (
             <div className="alert alert-danger text-center p-2 mt-2">
-              {errores.fechanacsol}
+              {errores.fecnacsol}
             </div>
           )}
         </div>
@@ -357,7 +358,7 @@ const AltaNovell = ({
           </label>
           <input
             className="form-control"
-            type="text"
+            type="number"
             placeholder="N°"
             name="domnumsol"
             value={domnumsol}
@@ -574,8 +575,9 @@ const AltaNovell = ({
           </label>
           <input
             className="form-control"
-            type="text"
+            type="number    "
             placeholder="DNI"
+            maxLength="8"
             name="dniben"
             value={dniben}
             onBlur={handleBlur}
@@ -621,14 +623,14 @@ const AltaNovell = ({
           <input
             className="form-control"
             type="date"
-            name="fechanacben"
+            name="fecnacben"
             value={fecnacben}
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          {errores.fechanacben && (
+          {errores.fecanacben && (
             <div className="alert alert-danger text-center p-2 mt-2">
-              {errores.fechanacben}
+              {errores.fecanacben}
             </div>
           )}
         </div>
@@ -665,7 +667,7 @@ const AltaNovell = ({
           </label>
           <input
             className="form-control"
-            type="text"
+            type="number"
             placeholder="N°"
             name="domnumben"
             value={domnumben}

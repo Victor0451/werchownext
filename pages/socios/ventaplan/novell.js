@@ -44,11 +44,19 @@ const STATE_INICIAL = {
 };
 
 const novell = () => {
+  const [userData, guardarUsuario] = useState(null);
+
   let token = jsCookie.get("token");
+  let usuario = jsCookie.get("usuario");
 
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+      }
     }
   }, []);
 
@@ -130,9 +138,22 @@ const novell = () => {
       codpostal_ben: codpostalben,
       telefono_ben: telefonoben,
       movil_ben: movilben,
+      operador: userData,
     };
 
     console.log(novell);
+
+    await axios
+      .post(
+        `http://192.168.1.102:5002/api/sgi/socios/nuevonovell`,
+        novell
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

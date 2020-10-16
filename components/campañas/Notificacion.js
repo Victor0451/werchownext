@@ -10,7 +10,7 @@ const Notificacion = ({ caso, userData }) => {
     if (userData === "mgalian") {
       return "Galian Maria - 388-54301465";
     } else if (userData === "vfidao") {
-      return "Fidao Valeria - 388-54176523";
+      return "Fidao Valeria - 388-4176523";
     } else if (userData === "ggimenez") {
       return "Gimenez Gisela - 388-54176871";
     } else if (userData === "vgorosito") {
