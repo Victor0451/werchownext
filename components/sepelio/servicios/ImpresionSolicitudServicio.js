@@ -320,6 +320,39 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
                 readOnly
               />
             </div>
+            {servicio.cremacion === 1 ? (
+              <div className="col-md-4 mt-2">
+                <label>
+                  <strong>
+                    <u>Cremacion</u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Cremacion"
+                  name="cremacion"
+                  defaultValue="SI"
+                  readOnly
+                />
+              </div>
+            ) : servicio.cremacion === 0 ? (
+              <div className="col-md-4 mt-2">
+                <label>
+                  <strong>
+                    <u>Cementerio</u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Cremacion"
+                  name="cremacion"
+                  defaultValue="NO"
+                  readOnly
+                />
+              </div>
+            ) : null}
             <div className="col-md-4 mt-2">
               <label>
                 <strong>

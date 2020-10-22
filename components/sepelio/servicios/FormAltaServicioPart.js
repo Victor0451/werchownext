@@ -36,6 +36,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const [show, guardarShow] = useState(true);
   const [errmotiv, guardarErrMotiv] = useState(null);
   const [erridataud, guardarErrIdAtaud] = useState(null);
+  const [crem, guardarCrem] = useState(0);
 
   const {
     valores,
@@ -92,6 +93,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       operador: usuario,
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
+      cremacion: crem,
     };
 
     if (motivoRef.current.value === "") {
@@ -121,6 +123,14 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
         });
     }
   }
+
+  const cremacion = (flag) => {
+    if (flag === "si") {
+      guardarCrem(1);
+    } else if (flag === "no") {
+      guardarCrem(0);
+    }
+  };
 
   const causamuerte = (flag) => {
     guardarShow(true);
@@ -585,7 +595,42 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
                 </div>
               )}
             </div>
-          </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Cremacion</u>
+                </strong>
+              </label>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="cremsi"
+                  value="option1"
+                  onClick={() => cremacion("si")}
+                />
+                <label className="form-check-label" for="cremsi">
+                  Si
+                </label>
+              </div>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="exampleRadios"
+                  id="cremno"
+                  value="option1"
+                  onClick={() => cremacion("no")}
+                  defaultChecked={true}
+                />
+                <label className="form-check-label" for="cremno">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>{" "}
         </div>
 
         <hr />
