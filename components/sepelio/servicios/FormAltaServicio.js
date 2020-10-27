@@ -10,6 +10,7 @@ import validarAltaServicio from "../../../validacion/validarAltaServicio";
 import toastr from "toastr";
 import Router from "next/router";
 import ListadoAdherentes from "./ListadoAdherentes";
+import ListadoParcelas from "./ListadoParcelas";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -45,11 +46,13 @@ const FormAltaServicio = ({
   let dninuevotitRef = React.createRef();
   let motivoRef = React.createRef();
   let idataudRef = React.createRef();
+  let idparcelaRef = React.createRef();
 
   const [show, guardarShow] = useState(true);
   const [errmotiv, guardarErrMotiv] = useState(null);
   const [erridataud, guardarErrIdAtaud] = useState(null);
   const [error, guardarError] = useState(null);
+  const [parcela, guardarParcela] = useState(null);
   const [crem, guardarCrem] = useState(0);
 
   const {
@@ -85,11 +88,30 @@ const FormAltaServicio = ({
       .then((res) => {
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
+
           console.log(res.data);
-          Router.push({
-            pathname: "/sepelio/servicios/impresion",
-            query: { id: servicio.dni },
-          });
+          if (parcela) {
+            Router.push({
+              pathname: "/sepelio/servicios/impresion",
+
+              query: {
+                id: servicio.dni,
+                dni_extinto: servicio.dni,
+                ficha: servicio.contrato,
+                fecha: servicio.fecha_recepcion,
+                asignada: 1,
+                idparcela: parcela.idparcela,
+              },
+            });
+          } else if (!parcela) {
+            Router.push({
+              pathname: "/sepelio/servicios/impresion",
+
+              query: {
+                id: servicio.dni,
+              },
+            });
+          }
         }
       })
       .catch((error) => {
@@ -142,6 +164,7 @@ const FormAltaServicio = ({
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
         postServicio(servicio);
+
         console.log(servicio);
       }
     } else if (ficha.GRUPO && ficha.PLAN === "P") {
@@ -152,6 +175,7 @@ const FormAltaServicio = ({
       } else {
         servicio.dni_nuevotitular = 11111111;
         postServicio(servicio);
+
         console.log(servicio);
       }
     } else if (!ficha.GRUPO) {
@@ -159,7 +183,7 @@ const FormAltaServicio = ({
         guardarErrMotiv("Debes ingresar una Causa de muerte");
       } else if (idataudRef.current.value === "") {
         guardarErrIdAtaud("Debes seleccionar un ataud");
-      } else {
+      } else if (idataudRef.current.value !== "") {
         postServicio(servicio);
         console.log(servicio);
       }
@@ -197,17 +221,21 @@ const FormAltaServicio = ({
     document.getElementById("adh").value = "SIN ADHERENTES";
   };
 
-  const selcasofrm = (row) => {
-    console.log(row);
+  const selcasoparcela = (row) => {
+    guardarParcela(row.original);
 
+    document.getElementById("parcela").value = `${row.original.parcela}`;
+    document.getElementById("mza").value = `${row.original.mza}`;
+    document.getElementById("lote").value = `${row.original.lote}`;
+  };
+
+  const selcasofrm = (row) => {
     document.getElementById("ataud").value = `${row.original.nombre}`;
     document.getElementById("idataud").value = `${row.original.idataud}`;
     document.getElementById("uso").value = `${row.original.uso}`;
   };
 
   const selAdh = (row) => {
-    console.log(row);
-
     document.getElementById(
       "adh"
     ).value = `${row.original.APELLIDOS}, ${row.original.NOMBRES} `;
@@ -519,8 +547,8 @@ const FormAltaServicio = ({
                 <input
                   className="form-check-input "
                   type="radio"
-                  name="exampleRadios"
                   id="covid"
+                  name="motivo"
                   value="option1"
                   onClick={() => causamuerte("covid")}
                 />
@@ -533,8 +561,8 @@ const FormAltaServicio = ({
                 <input
                   className="form-check-input "
                   type="radio"
-                  name="exampleRadios"
                   id="otro"
+                  name="motivo"
                   value="option1"
                   onClick={() => causamuerte("otro")}
                   defaultChecked={true}
@@ -684,8 +712,8 @@ const FormAltaServicio = ({
                 <input
                   className="form-check-input "
                   type="radio"
-                  name="exampleRadios"
                   id="cremsi"
+                  name="cremacion"
                   value="option1"
                   onClick={() => cremacion("si")}
                 />
@@ -697,7 +725,7 @@ const FormAltaServicio = ({
                 <input
                   className="form-check-input "
                   type="radio"
-                  name="exampleRadios"
+                  name="cremacion"
                   id="cremno"
                   value="option1"
                   onClick={() => cremacion("no")}
@@ -870,6 +898,76 @@ const FormAltaServicio = ({
           </div>
         </div>
 
+        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+          <h2 className="mt-2">
+            <strong>
+              <u>Parcela</u>
+            </strong>
+          </h2>
+
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Parcela:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Parcela"
+                name="parcela"
+                id="parcela"
+                ref={idparcelaRef}
+                readOnly
+              />
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Manzana:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Manzana"
+                name="mza"
+                id="mza"
+                readOnly
+              />
+            </div>
+
+            <div className="col-md-2 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Lote:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Lote"
+                name="lote"
+                id="lote"
+                readOnly
+              />
+            </div>
+
+            <div className=" col-md-4 mt-4 mb-4">
+              <button
+                type="button"
+                className="mt-4 btn btn-primary btn-block"
+                data-toggle="modal"
+                data-target="#stockparcela"
+              >
+                Stock
+              </button>
+            </div>
+          </div>
+        </div>
+
         {ficha.GRUPO ? (
           <div>
             {ficha.PLAN === "P" ? (
@@ -1016,6 +1114,45 @@ const FormAltaServicio = ({
             </div>
             <div className="modal-body">
               <Stock selcasofrm={selcasofrm} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="stockparcela"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Stock Parcelas
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <ListadoParcelas selcasoparcela={selcasoparcela} />
             </div>
             <div className="modal-footer">
               <button

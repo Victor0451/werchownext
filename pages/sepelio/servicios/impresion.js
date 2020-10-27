@@ -8,6 +8,7 @@ import ConformidadServicio from "../../../components/sepelio/servicios/Conformid
 
 const impresion = () => {
   const [servicio, guardarServicio] = useState(null);
+  const [idparcela, guardarIdParcela] = useState(null);
   const [ataud, guardarAtaud] = useState(null);
 
   let token = jsCookie.get("token");
@@ -20,6 +21,7 @@ const impresion = () => {
       const id = router.query.id;
 
       traerSolicitud(id);
+      putParcela();
     }
   }, []);
 
@@ -32,6 +34,21 @@ const impresion = () => {
 
         if (res.data) {
           traerAtaud(res.data.idataud);
+          traerIdparcela(router.query.id, servicio.idservicio);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerIdparcela = async (id, idservicio) => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/parcelas/traerid/${id}`)
+      .then((res) => {
+        if (res.data.idparcela) {
+          guardarIdParcela(res.data.idparcela);
+          putId(idservicio, res.data.idparcela);
         }
       })
       .catch((error) => {
@@ -59,6 +76,52 @@ const impresion = () => {
     window.print();
 
     document.body.innerHTML = contenidoOrg;
+  };
+
+  const putId = async (idservicio, idparcela) => {
+    const ides = {
+      idparcela: idparcela,
+      idservicio: idservicio,
+    };
+
+    await axios
+      .put(`http://190.231.32.232:5002/api/sepelio/parcelas/putid`, ides)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios
+      .put(`http://190.231.32.232:5002/api/sepelio/parcelas/putidserv`, ides)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const putParcela = async () => {
+    const parcelaAsig = {
+      dni_extinto: router.query.dni_extinto,
+      ficha: router.query.ficha,
+      fecha: router.query.fecha,
+      asignada: router.query.asignada,
+    };
+
+    await axios
+      .put(
+        `http://190.231.32.232:5002/api/sepelio/parcelas/asignarparcela/${router.query.idparcela}`,
+        parcelaAsig
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
