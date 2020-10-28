@@ -157,7 +157,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     document.getElementById("uso").value = `${row.original.uso}`;
   };
 
-  let tiposervicio = `Servicio Particular`;
+  let tiposervicio = `Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
   return (
     <div className="mt-4 alert alert-primary border border-dark p-4">

@@ -242,7 +242,7 @@ const FormAltaServicio = ({
     document.getElementById("nuevotitular").value = `${row.original.NRO_DOC}`;
   };
 
-  let tiposervicio = `Servicio Asociado Al Plan ${ficha.PLAN}`;
+  let tiposervicio = `Plan ${ficha.PLAN}`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
