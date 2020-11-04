@@ -54,6 +54,7 @@ const FormAltaServicio = ({
   const [error, guardarError] = useState(null);
   const [parcela, guardarParcela] = useState(null);
   const [crem, guardarCrem] = useState(0);
+  const [stock, guardarStock] = useState(null);
 
   const {
     valores,
@@ -119,6 +120,26 @@ const FormAltaServicio = ({
       });
   };
 
+  const updateStockAtaud = async (idataud, stock) => {
+    let nustock = stock - 1;
+
+    await axios
+      .put(
+        `http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/:${idataud}`,
+        {
+          data: {
+            nustock: nustock,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   async function nuevoServicio() {
     guardarErrMotiv(null);
 
@@ -164,7 +185,7 @@ const FormAltaServicio = ({
       } else {
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
         postServicio(servicio);
-
+        updateStockAtaud(servicio.idataud, stock);
         console.log(servicio);
       }
     } else if (ficha.GRUPO && ficha.PLAN === "P") {
@@ -175,7 +196,7 @@ const FormAltaServicio = ({
       } else {
         servicio.dni_nuevotitular = 11111111;
         postServicio(servicio);
-
+        updateStockAtaud(servicio.idataud, stock);
         console.log(servicio);
       }
     } else if (!ficha.GRUPO) {
@@ -185,6 +206,7 @@ const FormAltaServicio = ({
         guardarErrIdAtaud("Debes seleccionar un ataud");
       } else if (idataudRef.current.value !== "") {
         postServicio(servicio);
+        updateStockAtaud(servicio.idataud, stock);
         console.log(servicio);
       }
     }
@@ -233,6 +255,7 @@ const FormAltaServicio = ({
     document.getElementById("ataud").value = `${row.original.nombre}`;
     document.getElementById("idataud").value = `${row.original.idataud}`;
     document.getElementById("uso").value = `${row.original.uso}`;
+    guardarStock(row.original.stock);
   };
 
   const selAdh = (row) => {

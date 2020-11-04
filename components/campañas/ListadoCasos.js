@@ -231,15 +231,6 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
               },
 
               {
-                Header: "DNI",
-                id: "dni",
-                accessor: (d) => d.dni,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["dni"] }),
-                filterAll: true,
-                width: 100,
-              },
-              {
                 Header: "Calle",
                 id: "calle",
                 accessor: (d) => d.calle,
@@ -254,6 +245,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["nro_calle"] }),
                 filterAll: true,
+                width: 50,
               },
               {
                 Header: "Barrio",
@@ -263,14 +255,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                   matchSorter(rows, filter.value, { keys: ["barrio"] }),
                 filterAll: true,
               },
-              // {
-              //     Header: "Localidad",
-              //     id: "localidad",
-              //     accessor: d => d.localidad,
-              //     filterMethod: (filter, rows) =>
-              //         matchSorter(rows, filter.value, { keys: ["localidad"] }),
-              //     filterAll: true
-              // },
+
               {
                 Header: "Cuota",
                 id: "cuota",
@@ -278,52 +263,29 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                 filterMethod: (filter, rows) =>
                   matchSorter(rows, filter.value, { keys: ["cuota"] }),
                 filterAll: true,
+                width: 60,
               },
-              // {
-              //   Header: "Mes",
-              //   id: "mes",
-              //   accessor: (d) => d.mes,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, { keys: ["mes"] }),
-              //   filterAll: true,
-              // },
-              // {
-              //   Header: "Año",
-              //   id: "ano",
-              //   accessor: (d) => d.ano,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, { keys: ["ano"] }),
-              //   filterAll: true,
-              // },
-              // {
-              //   getProps: (state, rowInfo) => {
-              //     if (rowInfo && rowInfo.row.fechanuevaaccion) {
-              //       return {
-              //         style: {
-              //           background:
-              //             rowInfo.row.fechanuevaaccion < fechahoy
-              //               ? "red"
-              //               : rowInfo.row.fechanuevaaccion > fechahoy
-              //               ? "green"
-              //               : rowInfo.row.fechanuevaaccion === fechahoy
-              //               ? "yellow"
-              //               : null,
-              //         },
-              //       };
-              //     } else {
-              //       return { hidden: true };
-              //     }
-              //   },
 
-              //   Header: "Fecha Accion",
-              //   id: "fechanuevaaccion",
-              //   accessor: (d) => d.fechanuevaaccion,
-              //   filterMethod: (filter, rows) =>
-              //     matchSorter(rows, filter.value, {
-              //       keys: ["fechanuevaaccion"],
-              //     }),
-              //   filterAll: true,
-              // },
+              {
+                Header: "Deuda",
+                id: "cuotasadeudadas",
+                accessor: (d) => d.cuotasadeudadas,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, {
+                    keys: ["cuotasadeudadas"],
+                  }),
+                filterAll: true,
+                width: 60,
+              },
+              {
+                Header: "Deuda Total",
+                id: "montoadeudado",
+                accessor: (d) => d.montoadeudado,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["montoadeudado"] }),
+                filterAll: true,
+                width: 100,
+              },
 
               {
                 Header: "Acciones",
