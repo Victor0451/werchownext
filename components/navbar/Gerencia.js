@@ -91,51 +91,111 @@ export default class Gerencia extends Component {
                 Resultado Campañas Activas
               </a>
             </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Datos En Campo
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/campanas/datos/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Cargar
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/campanas/datos/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado De Datos
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
 
         <li className="nav-item dropdown ">
-          <a
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            className="nav-link dropdown-toggle"
-          >
-            Prestamos
-          </a>
-          <ul className="dropdown-menu">
-            <li>
-              <a
-                href="/prestamos/nuevoprestamo"
-                className="dropdown-item text-dark"
-              >
-                Nuevo Prestamo
-              </a>
-            </li>
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
+          Sub. Cont. Familiar
+        </a>
+        <ul className="dropdown-menu">
+          <li>
+            <a
+              href="/prestamos/nuevoprestamo"
+              className="dropdown-item text-dark"
+            >
+              Nuevo Sub. Cont. Familiar
+            </a>
+          </li>
 
-            <hr />
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Legajo Virtual Sub. Cont. Familiar
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/prestamos/imprimircaratula"
+                  className="dropdown-item text-dark"
+                >
+                  Subir Archivos
+                </a>
+              </li>
+              {/* <hr />
+              <li>
+                <a
+                  href="/prestamos/legajovirtual/legajo"
+                  className="dropdown-item text-dark"
+                >
+                  Buscar Ficha
+                </a>
+              </li> */}
+            </ul>
+          </li>
+          <hr />
 
-            <li>
-              <a
-                href="/prestamos/informeprestamos"
-                className="dropdown-item text-dark"
-              >
-                Reportes
-              </a>
-            </li>
+          <li>
+            <a
+              href="/prestamos/informeprestamos"
+              className="dropdown-item text-dark"
+            >
+              Reportes
+            </a>
+          </li>
 
-            <hr />
+          <hr />
 
-            <li>
-              <a
-                href="/prestamos/imprimircaratula"
-                className="dropdown-item text-dark"
-              >
-                Listado Prestamos Del Mes
-              </a>
-            </li>
-          </ul>
-        </li>
+          <li>
+            <a
+              href="/prestamos/imprimircaratula"
+              className="dropdown-item text-dark"
+            >
+              Listado Sub. Cont. Familiar Del Mes
+            </a>
+          </li>
+        </ul>
+      </li>
 
         <li className="nav-item dropdown">
           <a
@@ -196,14 +256,14 @@ export default class Gerencia extends Component {
                   </a>
                 </li>
                 <hr />
-              <li>
-                <a
-                  href="/sepelio/servicios/listadohistorico"
-                  className="dropdown-item text-dark"
-                >
-                  Listado De Serv Historicos
-                </a>
-              </li>
+                <li>
+                  <a
+                    href="/sepelio/servicios/listadohistorico"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado De Serv Historicos
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>

@@ -15,7 +15,7 @@ const ImprimirCaratula = ({
     <div className="container mt-4 alert alert-primary border border-dark p-4">
       <h2 className=" mb-4">
         <strong>
-          <u>Prestamos Realizados</u>
+          <u>Sub. Cont. Familiar Realizados</u>
         </strong>
       </h2>
 

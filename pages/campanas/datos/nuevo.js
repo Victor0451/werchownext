@@ -83,12 +83,12 @@ const nuevo = () => {
       }
     }
 
-    console.log(dato);
-
     axios
       .post("http://190.231.32.232:5002/api/sgi/datos/altadato", dato)
       .then((res) => {
-        console.log(res);
+        if ((res.status = 200)) {
+          toastr.success("Dato cargado correctamente", "ATENCION");
+        }
       })
       .catch((error) => {
         console.log(error);

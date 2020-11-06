@@ -222,7 +222,7 @@ const FormAltaPrestamo = ({
 
         <h2 className="mt-4 mb-4">
           <strong>
-            <u>Opciones del Prestamo</u>
+            <u>Opciones del Sub. Cont. Familiar</u>
           </strong>
         </h2>
 
@@ -268,7 +268,7 @@ const FormAltaPrestamo = ({
               <div className="modal-header alert alert-primary">
                 <h2 className="mt-4 mb-4">
                   <strong>
-                    <u>Informacion Del Prestamo Solicitado</u>
+                    <u>Informacion Del Sub. Cont. Familiar Solicitado</u>
                   </strong>
                 </h2>
                 <button
@@ -442,14 +442,14 @@ const FormAltaPrestamo = ({
                           className="btn btn-primary btn-block"
                           //onClick={this.cargarPrestamos}
                         >
-                          Cargar Prestamo
+                          Cargar Sub. Cont. Familiar
                         </button>
                       </div>
                     </div>
 
-                    <div className="row mt-2 d-flex justify-content-center alert alert-info text-center">
+                    <div className="row mt-2 d-flex justify-content-center alert alert-info text-center text-uppercase">
                       {" "}
-                      EL PRESTAMO EMPEZARA A DEBITARSE EN{"   "}
+                      EL Sub. Cont. Familiar EMPEZARA A DEBITARSE EN{"   "}
                       <strong>
                         {" "}
                         <u> {mesi} </u>{" "}

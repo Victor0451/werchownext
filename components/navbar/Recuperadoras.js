@@ -20,9 +20,7 @@ export default class Recuperadoras extends Component {
                 Casos Asignados
               </a>
             </li>
-
-            {/* <hr />
-
+            <hr />
             <li className="dropdown-submenu">
               <a
                 href="#"
@@ -30,37 +28,28 @@ export default class Recuperadoras extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
-                Tareas Autoprogramadas
-                </a>
+                Datos En Campo
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    href="/campanas/volverallamar"
+                    href="/campanas/datos/nuevo"
                     className="dropdown-item text-dark"
                   >
-                    Padron "Volver a LLamar"
-                    </a>
+                    Cargar
+                  </a>
                 </li>
                 <hr />
                 <li>
                   <a
-                    href="/campanas/credixa"
+                    href="/campanas/datos/listado"
                     className="dropdown-item text-dark"
                   >
-                    Padron "Credixa"
-                    </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href="/campanas/compromisopago"
-                    className="dropdown-item text-dark"
-                  >
-                    Padron "Compromiso de Pago"
-                    </a>
+                    Listado De Datos
+                  </a>
                 </li>
               </ul>
-            </li> */}
+            </li>
           </ul>
         </li>
 
@@ -71,7 +60,7 @@ export default class Recuperadoras extends Component {
             data-toggle="dropdown"
             className="nav-link dropdown-toggle"
           >
-            Prestamos
+            Sub. Cont. Familiar
           </a>
           <ul className="dropdown-menu">
             <li>
@@ -79,7 +68,7 @@ export default class Recuperadoras extends Component {
                 href="/prestamos/nuevoprestamo"
                 className="dropdown-item text-dark"
               >
-                Nuevo Prestamo
+                Nuevo Sub. Cont. Familiar
               </a>
             </li>
 
@@ -90,7 +79,7 @@ export default class Recuperadoras extends Component {
                 href="/prestamos/imprimircaratula"
                 className="dropdown-item text-dark"
               >
-                Listado Prestamos Del Mes
+                Listado Sub. Cont. Familiar
               </a>
             </li>
           </ul>

@@ -5,7 +5,7 @@ const InformePrestamos = ({ desdeRef, hastaRef, buscarPrestamos, error }) => {
     <div className="container mt-4 border border-dark alert alert-primary p-4">
       <h2 className=" mb-4">
         <strong>
-          <u>Reportes de Prestamos</u>
+          <u>Reportes de Sub. Cont. Familiar</u>
         </strong>
       </h2>
 

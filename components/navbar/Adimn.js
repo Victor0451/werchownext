@@ -84,7 +84,7 @@ const Adimn = () => {
               href="/prestamos/nuevoprestamo"
               className="dropdown-item text-dark"
             >
-              Nuevo Subsidio
+              Nuevo Sub. Cont. Familiar
             </a>
           </li>
 
@@ -96,7 +96,7 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
-              Legajo Virtual Subsidio
+              Legajo Virtual Sub. Cont. Familiar
             </a>
             <ul className="dropdown-menu">
               <li>
@@ -136,7 +136,7 @@ const Adimn = () => {
               href="/prestamos/imprimircaratula"
               className="dropdown-item text-dark"
             >
-              Listado Subsidios Del Mes
+              Listado Sub. Cont. Familiar Del Mes
             </a>
           </li>
         </ul>
@@ -157,9 +157,7 @@ const Adimn = () => {
               Asignar Campañas
             </a>
           </li>
-
           <hr />
-
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -185,6 +183,66 @@ const Adimn = () => {
                   className="dropdown-item text-dark"
                 >
                   Resultados Campañas Activas
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Opciones
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/campanas/cerrar_campana"
+                  className="dropdown-item text-dark"
+                >
+                  Cerrar Campañas Activas
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/campanas/resultado_campana"
+                  className="dropdown-item text-dark"
+                >
+                  Resultados Campañas Activas
+                </a>
+              </li>
+            </ul>
+          </li>{" "}
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Datos En Campo
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/campanas/datos/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Cargar
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/campanas/datos/listado"
+                  className="dropdown-item text-dark"
+                >
+                  Listado De Datos
                 </a>
               </li>
             </ul>

@@ -45,7 +45,7 @@ const FormSubirArchivo = ({ contrato }) => {
     <div className="container mt-4">
       <h1>
         <strong>
-          <u>Crear Legajo Virtual Del Prestamo</u>
+          <u>Crear Legajo Virtual Del Sub. Cont. Familiar</u>
         </strong>
       </h1>
 

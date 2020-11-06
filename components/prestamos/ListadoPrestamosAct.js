@@ -31,7 +31,7 @@ const ListadoPrestamosAct = ({ prestamos }) => {
         defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
         columns={[
           {
-            Header: "Prestamos Activos",
+            Header: "Sub. Cont. Familiar Activos",
             columns: [
               {
                 Header: "Fecha de Solicitud",

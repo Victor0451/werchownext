@@ -102,7 +102,7 @@ const AltaPrestamos = ({
       <div className=" mt-4 border border-dark alert alert-primary p-4">
         <h2 className=" mb-4">
           <strong>
-            <u>Alta de Prestamos: Datos del Operador</u>
+            <u>Alta de Sub. Cont. Familiar: Datos del Operador</u>
           </strong>
         </h2>
         <div className="d-flex justify-content-between">

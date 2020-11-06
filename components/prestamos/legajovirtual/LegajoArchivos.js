@@ -211,7 +211,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
       <form className="border border-dark p-4 mt-4">
         <h2 className="mb-4">
           <strong>
-            <u>Informacion Del Prestamo</u>
+            <u>Informacion Del Sub. Cont. Familiar</u>
           </strong>
         </h2>
 
