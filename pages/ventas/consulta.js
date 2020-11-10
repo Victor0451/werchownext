@@ -11,6 +11,9 @@ const consulta = () => {
   const [ano, guardarAno] = useState(null);
 
   const [ventas, guardarVentas] = useState(null);
+  const [ventasase, guardarVentasAse] = useState(null);
+  const [ventaspago, guardarVentasPago] = useState(null);
+
   const [errores, guardarErrores] = useState(null);
   const [spinner, guardarSpinner] = useState(null);
 
@@ -26,7 +29,10 @@ const consulta = () => {
 
   const buscarVentas = async () => {
     guardarVentas(null);
+    guardarVentasAse(null);
+    guardarVentasPago(null);
     guardarSpinner(false);
+
     if (mes === null || ano === null) {
       guardarErrores("Debe ingresar un mes y un año");
     } else {
@@ -42,11 +48,52 @@ const consulta = () => {
           guardarSpinner(false);
           const ventas = res.data[0];
           guardarVentas(ventas);
+
+          buscarVentasXAse();
+          buscarVentasXMedPago();
         })
         .catch((error) => {
           console.log(error);
         });
     }
+  };
+
+  const buscarVentasXAse = async () => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/ventas/consultas/consultaventasporasesor`,
+        {
+          params: {
+            mes: mes,
+            ano: ano,
+          },
+        }
+      )
+      .then((res) => {
+        guardarVentasAse(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const buscarVentasXMedPago = async () => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/ventas/consultas/consultaventasmediopago`,
+        {
+          params: {
+            mes: mes,
+            ano: ano,
+          },
+        }
+      )
+      .then((res) => {
+        guardarVentasPago(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -59,13 +106,19 @@ const consulta = () => {
       />
       {spinner === false && ventas !== null ? (
         <>
-          <ListadoVentas ventas={ventas} mes={mes} ano={ano} />
+          <ListadoVentas
+            ventas={ventas}
+            mes={mes}
+            ano={ano}
+            ventasase={ventasase}
+            ventaspago={ventaspago}
+          />
 
           <div className="container alert alert-primary mt-4">
             <div className="mt-4 p-4 border">
               <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
               <div className="row d-flex justify-content-center">
-                <ExportarVentas padron={ventas}  />
+                <ExportarVentas padron={ventas} />
               </div>
             </div>
           </div>
