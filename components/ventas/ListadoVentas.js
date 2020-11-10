@@ -6,11 +6,15 @@ import Spinner from "../../components/layout/Spinner";
 const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
   if (ventas === null) return <Spinner />;
 
+  console.log(ventas);
+
   const totalVentas = (ventas) => {
     let total = 0;
 
     for (let i = 0; i < ventas.length; i++) {
-      total += ventas[i].prod_monto;
+      if (ventas[i].prod_plan != "NOVELL") {
+        total += ventas[i].prod_monto;
+      }
     }
 
     return total;
@@ -125,7 +129,7 @@ const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
                     filterAll: true,
                     width: 50,
                   },
-             
+
                   {
                     Header: "Contrato",
                     id: "prod_afiliado",
