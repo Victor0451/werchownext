@@ -5,6 +5,8 @@ import ListadoVentas from "../../components/ventas/ListadoVentas";
 import ExportarVentas from "../../components/ventas/ExportarVentas";
 import axios from "axios";
 import Spinner from "../../components/layout/Spinner";
+import jsCookie from "js-cookie";
+import Router from "next/router";
 
 const consulta = () => {
   const [mes, guardarMes] = useState(null);
@@ -95,6 +97,20 @@ const consulta = () => {
         console.log(error);
       });
   };
+
+  let token = jsCookie.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      Router.push("/redirect");
+    } else {
+      if (Router.query.id) {
+        let id = Router.query.id;
+        console.log(id);
+        traerNovell(id);
+      }
+    }
+  }, []);
 
   return (
     <Layout>

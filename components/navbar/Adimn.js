@@ -385,6 +385,54 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Solicitudes
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/ventas/solicitudes/ingresogenesis"
+                  className="dropdown-item text-dark"
+                >
+                  Ingreso Genesis
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/ventas/solicitudes/condicionesgenesis"
+                  className="dropdown-item text-dark"
+                >
+                  Condiciones Genesis
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/ventas/solicitudes/prestadores"
+                  className="dropdown-item text-dark"
+                >
+                  Prestadores
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/ventas/solicitudes/prestadoresdorso"
+                  className="dropdown-item text-dark"
+                >
+                  Prestadores Dorso
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
 

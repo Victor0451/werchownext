@@ -5,6 +5,18 @@
   height: 40px;
 }
 
+.solic {
+  width: 100% !important;
+  height: 100% !important ;
+}
+
+/* @media print  {
+  @page {
+    size: auto;
+    size: 287mm 210mm;
+  }
+} */
+
 .premios {
   width: 95% !important;
   height: 95% !important;
