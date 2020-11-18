@@ -3,6 +3,7 @@ import matchSorter from "match-sorter";
 
 // Import React Table
 import ReactTable from "react-table";
+import ExportarPadron from "../prestamos/ExportarPadron";
 
 const TablaPrestamos = ({
   data,
@@ -10,6 +11,8 @@ const TablaPrestamos = ({
   intereses,
   cantprest,
   capconint,
+  desde,
+  hasta,
 }) => {
   return (
     <div className="mt-4 container">
@@ -49,7 +52,7 @@ const TablaPrestamos = ({
         </div>
       </div>
 
-      <hr className="mt-4 mb-4"/>
+      <hr />
 
       <div className="border border-dark p-4">
         <ReactTable
@@ -74,6 +77,14 @@ const TablaPrestamos = ({
                   accessor: (d) => d.ptm_ficha,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["ptm_ficha"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "Afiliado",
+                  id: "ptm_afi",
+                  accessor: (d) => d.ptm_afi,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["ptm_afi"] }),
                   filterAll: true,
                 },
                 {
@@ -138,6 +149,8 @@ const TablaPrestamos = ({
                         <div>Silvia Juarez</div>
                       ) : row.original.ptm_op === 3 ? (
                         <div>Alejandra Tejerina</div>
+                      ) : row.original.ptm_op === 118 ? (
+                        <div>Valeria Fidao</div>
                       ) : null}
                     </div>
                   ),
@@ -148,6 +161,10 @@ const TablaPrestamos = ({
           defaultPageSize={10}
           className="-striped -highlight"
         />
+      </div>
+      <hr className="mt-4 mb-4" />
+      <div className="col-md-12 mt-4 d-flex justify-content-end">
+        <ExportarPadron padron={data} desde={desde} hasta={hasta} />
       </div>
     </div>
   );

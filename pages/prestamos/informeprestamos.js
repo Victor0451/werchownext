@@ -56,6 +56,9 @@ const informeprestamos = () => {
   const [capconint, guardarCapconint] = useState(null);
   const [cantprest, guardarCantprest] = useState(null);
 
+  const [desde, guardarDesde] = useState(null);
+  const [hasta, guardarHasta] = useState(null);
+
   const divisionArraryOperador = (prestporop) => {
     let totalprestamos = 0;
     let totalcapital = 0;
@@ -226,6 +229,8 @@ const informeprestamos = () => {
     guardarAtejerina(null);
     guardarSjuarez(null);
     guardarGgimenez(null);
+    guardarDesde(null);
+    guardarHasta(null);
 
     let desde = desdeRef.current.value;
     let hasta = hastaRef.current.value;
@@ -239,6 +244,9 @@ const informeprestamos = () => {
 
       guardarError(error);
     } else {
+      guardarDesde(desdeRef.current.value);
+      guardarHasta(hastaRef.current.value);
+
       await axios
         .get(`http://190.231.32.232:5002/api/sgi/prestamos/listadoprestamos2`, {
           params: {
@@ -312,6 +320,8 @@ const informeprestamos = () => {
                 intereses={intereses}
                 cantprest={cantprest}
                 capconint={capconint}
+                desde={desde}
+                hasta={hasta}
               />
 
               <TablaInformes

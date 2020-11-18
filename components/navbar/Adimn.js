@@ -13,30 +13,6 @@ const Adimn = () => {
           Informes
         </a>
         <ul className="dropdown-menu">
-          {/* <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Mora
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="/mora/werchow" className="dropdown-item text-dark">
-                  Mora Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/mora/mutual" className="dropdown-item text-dark">
-                  Mora Mutual
-                </a>
-              </li>
-            </ul>
-          </li> */}
-
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -62,6 +38,15 @@ const Adimn = () => {
               <li>
                 <a href="/cobranza/resumen" className="dropdown-item text-dark">
                   Resumen Efectividad de Cobranza
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/cobranza/administracion"
+                  className="dropdown-item text-dark"
+                >
+                  Administracion
                 </a>
               </li>
             </ul>
