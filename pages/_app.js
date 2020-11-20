@@ -4,6 +4,7 @@ import UserContext from "../context/UserContext";
 import "../css/styles.css";
 import "react-table/react-table.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const MyApp = (props) => {
   const { Component, pageProps } = props;

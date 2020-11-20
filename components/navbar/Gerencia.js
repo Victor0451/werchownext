@@ -14,30 +14,6 @@ export default class Gerencia extends Component {
             Informes
           </a>
           <ul className="dropdown-menu">
-            {/* <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Mora
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="/mora/werchow" className="dropdown-item text-dark">
-                  Mora Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/mora/mutual" className="dropdown-item text-dark">
-                  Mora Mutual
-                </a>
-              </li>
-            </ul>
-          </li> */}
-
             <li className="dropdown-submenu">
               <a
                 href="#"
@@ -48,18 +24,6 @@ export default class Gerencia extends Component {
                 Cobranza
               </a>
               <ul className="dropdown-menu">
-                {/* <li>
-                <a href="/cobranza/werchow" className="dropdown-item text-dark">
-                  Cobranza Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/cobranza/mutual" className="dropdown-item text-dark">
-                  Cobranza Mutual
-                </a>
-              </li>
-              <hr /> */}
                 <li>
                   <a
                     href="/cobranza/resumen"
@@ -72,6 +36,27 @@ export default class Gerencia extends Component {
             </li>
           </ul>
         </li>
+
+        <li className="nav-item dropdown ">
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
+          Calendario
+        </a>
+        <ul className="dropdown-menu">
+          <li>
+            <a
+              href="/calendario/calendario"
+              className="dropdown-item text-dark"
+            >
+              Dias Festivos
+            </a>
+          </li>
+        </ul>
+      </li>
 
         <li className="nav-item dropdown ">
           <a
@@ -125,44 +110,44 @@ export default class Gerencia extends Component {
         </li>
 
         <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Sub. Cont. Familiar
-        </a>
-        <ul className="dropdown-menu">
-          <li>
-            <a
-              href="/prestamos/nuevoprestamo"
-              className="dropdown-item text-dark"
-            >
-              Nuevo Sub. Cont. Familiar
-            </a>
-          </li>
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Sub. Cont. Familiar
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                href="/prestamos/nuevoprestamo"
+                className="dropdown-item text-dark"
+              >
+                Nuevo Sub. Cont. Familiar
+              </a>
+            </li>
 
-          <hr />
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Legajo Virtual Sub. Cont. Familiar
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/prestamos/imprimircaratula"
-                  className="dropdown-item text-dark"
-                >
-                  Subir Archivos
-                </a>
-              </li>
-              {/* <hr />
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Legajo Virtual Sub. Cont. Familiar
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/prestamos/imprimircaratula"
+                    className="dropdown-item text-dark"
+                  >
+                    Subir Archivos
+                  </a>
+                </li>
+                {/* <hr />
               <li>
                 <a
                   href="/prestamos/legajovirtual/legajo"
@@ -171,31 +156,31 @@ export default class Gerencia extends Component {
                   Buscar Ficha
                 </a>
               </li> */}
-            </ul>
-          </li>
-          <hr />
+              </ul>
+            </li>
+            <hr />
 
-          <li>
-            <a
-              href="/prestamos/informeprestamos"
-              className="dropdown-item text-dark"
-            >
-              Reportes
-            </a>
-          </li>
+            <li>
+              <a
+                href="/prestamos/informeprestamos"
+                className="dropdown-item text-dark"
+              >
+                Reportes
+              </a>
+            </li>
 
-          <hr />
+            <hr />
 
-          <li>
-            <a
-              href="/prestamos/imprimircaratula"
-              className="dropdown-item text-dark"
-            >
-              Listado Sub. Cont. Familiar Del Mes
-            </a>
-          </li>
-        </ul>
-      </li>
+            <li>
+              <a
+                href="/prestamos/imprimircaratula"
+                className="dropdown-item text-dark"
+              >
+                Listado Sub. Cont. Familiar Del Mes
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li className="nav-item dropdown">
           <a

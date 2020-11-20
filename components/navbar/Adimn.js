@@ -23,18 +23,6 @@ const Adimn = () => {
               Cobranza
             </a>
             <ul className="dropdown-menu">
-              {/* <li>
-                <a href="/cobranza/werchow" className="dropdown-item text-dark">
-                  Cobranza Werchow
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/cobranza/mutual" className="dropdown-item text-dark">
-                  Cobranza Mutual
-                </a>
-              </li>
-              <hr /> */}
               <li>
                 <a href="/cobranza/resumen" className="dropdown-item text-dark">
                   Resumen Efectividad de Cobranza
@@ -50,6 +38,27 @@ const Adimn = () => {
                 </a>
               </li>
             </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li className="nav-item dropdown ">
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
+          Calendario
+        </a>
+        <ul className="dropdown-menu">
+          <li>
+            <a
+              href="/calendario/calendario"
+              className="dropdown-item text-dark"
+            >
+              Dias Festivos
+            </a>
           </li>
         </ul>
       </li>
