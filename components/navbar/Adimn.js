@@ -181,36 +181,7 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
-          <hr />
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Opciones
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/campanas/cerrar_campana"
-                  className="dropdown-item text-dark"
-                >
-                  Cerrar Campañas Activas
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/campanas/resultado_campana"
-                  className="dropdown-item text-dark"
-                >
-                  Resultados Campañas Activas
-                </a>
-              </li>
-            </ul>
-          </li>{" "}
+
           <hr />
           <li className="dropdown-submenu">
             <a
@@ -482,19 +453,19 @@ const Adimn = () => {
             <ul className="dropdown-menu">
               <li>
                 <a
-                  href="/socios/legajovirtual/subirarchivo"
+                  href="/socios/ficha/ficha"
                   className="dropdown-item text-dark"
                 >
-                  Subir Archivos
+                  Buscar Ficha
                 </a>
               </li>
               <hr />
               <li>
                 <a
-                  href="/socios/ficha/ficha"
+                  href="/socios/legajovirtual/subirarchivo"
                   className="dropdown-item text-dark"
                 >
-                  Buscar Ficha
+                  Subir Archivos
                 </a>
               </li>
             </ul>

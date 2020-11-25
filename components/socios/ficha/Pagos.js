@@ -1,6 +1,7 @@
 import React from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
+import moment from "moment";
 
 const Pagos = ({ pagos }) => {
   if (!pagos)
@@ -75,9 +76,13 @@ const Pagos = ({ pagos }) => {
                   Cell: (row) => (
                     <div>
                       {row.original.DIA_PAG ? (
-                        <div>{row.original.DIA_PAG}</div>
+                        <div>
+                          {moment(row.original.DIA_PAG).format("DD/MM/YYYY")}
+                        </div>
                       ) : row.original.DIA_PAGO ? (
-                        <div>{row.original.DIA_PAGO}</div>
+                        <div>
+                          {moment(row.original.DIA_PAGO).format("DD/MM/YYYY")}
+                        </div>
                       ) : null}
                     </div>
                   ),

@@ -18,7 +18,7 @@ const BuscarSocio = ({
 }) => {
   return (
     <div className="container">
-      <div className="mt-4 p-4 border border-dark alert alert-primary">
+      <div className=" p-4 border border-dark alert alert-primary">
         <h2 className="mt-2">
           <u>Buscar Socio En Campañas</u>
         </h2>

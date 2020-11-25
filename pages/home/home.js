@@ -9,6 +9,7 @@ import axios from "axios";
 import useValidacion from "../../hooks/useValidacion";
 import validarBuscarSocio from "../../validacion/validarBuscarSocio";
 import Router from "next/router";
+import AccesosRapidos from "../../components/home/AccesosRapidos";
 
 const STATE_INICIAL = {
   socio: "",
@@ -122,6 +123,7 @@ const home = () => {
     <Layout>
       <div>
         <Noticias />
+        <AccesosRapidos />
         <BuscarSocio
           socio={socio}
           dni={dni}

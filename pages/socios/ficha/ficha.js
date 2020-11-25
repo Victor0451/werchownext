@@ -13,6 +13,7 @@ const ficha = () => {
   let apellidoRef = React.createRef();
 
   const [listado, guardarListado] = useState(null);
+  const [adhs, guardarAdhs] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [flag, guardarFlag] = useState(null);
@@ -101,12 +102,39 @@ const ficha = () => {
       });
   };
 
+  const traerAdhs = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/werchow/adherent/adherentestit/${contrato}`
+      )
+      .then((res) => {
+        guardarAdhs(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerAdhsM = async (contrato) => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/mutual/adherent/adherentestit/${contrato}`
+      )
+      .then((res) => {
+        guardarAdhs(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const buscarTitular = async (e) => {
     e.preventDefault();
 
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
+    guardarAdhs(null);
 
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
@@ -133,6 +161,7 @@ const ficha = () => {
             guardarErrores(errores);
           }
           traerArchivos(ficha.CONTRATO);
+          traerAdhs(ficha.CONTRATO);
           guardarEmpresa("W");
         })
         .catch((error) => {
@@ -150,6 +179,7 @@ const ficha = () => {
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
+    guardarAdhs(null);
 
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
@@ -176,6 +206,7 @@ const ficha = () => {
           }
           traerArchivosM(ficha.CONTRATO);
           guardarEmpresa("M");
+          traerAdhsM(ficha.CONTRATO);
         })
         .catch((error) => {
           console.log(error);
@@ -270,8 +301,6 @@ const ficha = () => {
     }
   };
 
- 
-
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -298,6 +327,7 @@ const ficha = () => {
         flag={flag}
         empresa={empresa}
         archivos={archivos}
+        adhs={adhs}
       />
     </Layout>
   );

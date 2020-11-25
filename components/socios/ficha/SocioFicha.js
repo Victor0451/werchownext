@@ -2,6 +2,7 @@ import React from "react";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import Pagos from "../../../components/socios/ficha/Pagos";
 import LegajoArchivos from "../legajoVirtual/LegajoArchivos";
+import Adherentes from "./Adherentes";
 
 const SocioFicha = ({
   buscarTitular,
@@ -16,9 +17,10 @@ const SocioFicha = ({
   pagos,
   empresa,
   archivos,
+  adhs,
 }) => {
   return (
-    <div className="container">
+    <div className="container border border-dark alert alert-primary mt-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Legajo Virtual</u>
@@ -183,7 +185,9 @@ const SocioFicha = ({
                   <Pagos pagos={pagos} />
 
                   <hr className="mt-4 mb-4" />
+                  <Adherentes adhs={adhs} />
 
+                  <hr className="mt-4 mb-4" />
                   <LegajoArchivos archivos={archivos} empresa={empresa} />
                 </div>
               </div>
