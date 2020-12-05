@@ -3,6 +3,7 @@ import Layout from "../../../components/layout/Layout";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
+import toastr from "toastr";
 import moment from "moment";
 import AltaNovell from "../../../components/socios/ventaplan/novell/AltaNovell";
 import useValidacion from "../../../hooks/useValidacion";
@@ -144,12 +145,11 @@ const novell = () => {
     console.log(novell);
 
     await axios
-      .post(
-        `http://192.168.1.102:5002/api/sgi/socios/nuevonovell`,
-        novell
-      )
+      .post(`http://192.168.1.102:5002/api/sgi/socios/nuevonovell`, novell)
       .then((res) => {
         console.log(res);
+        toastr.success("El novell se cargo correctamente", "ATENCION");
+        window.location.replace("/socios/ventaplan/listadonovell");
       })
       .catch((error) => {
         console.log(error);

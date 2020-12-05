@@ -38,25 +38,25 @@ export default class Gerencia extends Component {
         </li>
 
         <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Calendario
-        </a>
-        <ul className="dropdown-menu">
-          <li>
-            <a
-              href="/calendario/calendario"
-              className="dropdown-item text-dark"
-            >
-              Dias Festivos
-            </a>
-          </li>
-        </ul>
-      </li>
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Calendario
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                href="/calendario/calendario"
+                className="dropdown-item text-dark"
+              >
+                Dias Festivos
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li className="nav-item dropdown ">
           <a
@@ -285,7 +285,36 @@ export default class Gerencia extends Component {
               </ul>
             </li>
             <hr />
-
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Venta de Novells
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/socios/ventaplan/novell"
+                    className="dropdown-item text-dark"
+                  >
+                    Venta
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/socios/ventaplan/listadonovell"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
             <li className="dropdown-submenu">
               <a
                 href="#"

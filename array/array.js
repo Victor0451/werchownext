@@ -486,7 +486,8 @@ export const estadopres = [
 ];
 
 export const estadocartera = [
-  { value: 1, label: "Atrasados 1000" },
+  { value: 0, label: "Atrasados 1000 Cobrador" },
+  { value: 1, label: "Atrasados 1000 Oficina" },
   { value: 2, label: "Atrasados Tarjetas" },
   { value: 3, label: "Baches Banco" },
   { value: 4, label: "Morosos 1001" },

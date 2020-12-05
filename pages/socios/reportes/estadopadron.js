@@ -51,8 +51,22 @@ const estadopadron = () => {
         sucursal: "",
       };
 
+      //   AT COBRADORES
+      if (cartera === 0 && zona === 1) {
+        parametros.grupo = 1000;
+        parametros.flag = "W";
+      } else if (cartera === 0 && zona === 3) {
+        parametros.grupo = 1000;
+        parametros.flag = "L";
+      } else if (cartera === 0 && zona === 5) {
+        parametros.grupo = 1000;
+        parametros.flag = "R";
+      } else if (cartera === 0 && zona === 60) {
+        parametros.grupo = 1000;
+        parametros.flag = "P";
+      }
       //   AT
-      if (cartera === 1) {
+      else if (cartera === 1) {
         parametros.grupo = 1000;
         parametros.flag = 1;
         // AT TJT
@@ -154,8 +168,23 @@ const estadopadron = () => {
         sucursal: "",
       };
 
+      //   AT COBRADORES
+      if (cartera === 0 && zona === 1) {
+        parametros.grupo = 1000;
+        parametros.flag = "W";
+      } else if (cartera === 0 && zona === 3) {
+        parametros.grupo = 1000;
+        parametros.flag = "L";
+      } else if (cartera === 0 && zona === 5) {
+        parametros.grupo = 1000;
+        parametros.flag = "R";
+      } else if (cartera === 0 && zona === 60) {
+        parametros.grupo = 1000;
+        parametros.flag = "P";
+      }
+
       //   AT
-      if (cartera === 1) {
+      else if (cartera === 1) {
         parametros.grupo = 1000;
         parametros.flag = 1;
         // AT TJT
