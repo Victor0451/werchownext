@@ -1,6 +1,11 @@
 import React from "react";
-import Spinner from '../layout/Spinner'
-import { efecempresa, efecmediopago, efecsucursal } from "./funciones";
+import Spinner from "../layout/Spinner";
+import {
+  efecempresa,
+  efecmediopago,
+  efecsucursal,
+  efecsubtotal,
+} from "./funciones";
 
 const ResumenWerchow = ({
   pericoCOB,
@@ -24,43 +29,49 @@ const ResumenWerchow = ({
   CasaCentralTAR,
   CasaCentralPOL,
 }) => {
-  if (!CasaCentralPOL) return <div className="container"> <Spinner /> </div>
+  if (!CasaCentralPOL)
+    return (
+      <div className="container">
+        {" "}
+        <Spinner />{" "}
+      </div>
+    );
   else if (CasaCentralPOL)
     return (
       <table className="container table border border-dark text-center mt-4">
         <thead className="thead-dark">
           <th className="border border-dark border-bottom" colspan="8">
             WERCHOW
-        </th>
+          </th>
           <tr>
             <th className="border border-dark" scope="col">
               SUCURSAL
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               COBRADORES
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               OFICINA
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               TARJETAS
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               BANCO
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               POLICIAS
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               EFECTIVIDAD TOTAL
-          </th>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               PALPALA
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(palpalaCOB, 1)} %</strong>
             </td>
@@ -86,15 +97,15 @@ const ResumenWerchow = ({
                   palpalaBAN,
                   palpalaPOL
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
           </tr>
 
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               PERICO
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(pericoCOB, 1)} %</strong>
             </td>
@@ -119,14 +130,14 @@ const ResumenWerchow = ({
                   pericoBAN,
                   pericoPOL
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
           </tr>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               SAN PEDRO
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(sanPedroCOB, 1)} %</strong>
             </td>
@@ -151,14 +162,14 @@ const ResumenWerchow = ({
                   sanPedroBAN,
                   sanPedroPOL
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
           </tr>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               SAN SALVADOR
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(CasaCentralCOB, 1)} %</strong>
             </td>
@@ -183,9 +194,65 @@ const ResumenWerchow = ({
                   CasaCentralBAN,
                   CasaCentralPOL
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
+          </tr>
+          <tr>
+            <td className="border border-dark">
+              <strong>SUBTOTAL</strong>
+            </td>
+
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaCOB,
+                  sanPedroCOB,
+                  pericoCOB,
+                  CasaCentralCOB
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(palpalaOF, sanPedroOF, pericoOF, CasaCentralOF)} %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaTAR,
+                  sanPedroTAR,
+                  pericoTAR,
+                  CasaCentralTAR
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaBAN,
+                  sanPedroBAN,
+                  pericoBAN,
+                  CasaCentralBAN
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaPOL,
+                  sanPedroPOL,
+                  pericoPOL,
+                  CasaCentralPOL
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">------</td>
           </tr>
           <tr>
             <td className="border border-dark" colspan="6">
@@ -216,8 +283,8 @@ const ResumenWerchow = ({
                   CasaCentralTAR,
                   CasaCentralPOL
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
           </tr>
         </tbody>

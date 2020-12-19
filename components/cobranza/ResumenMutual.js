@@ -1,6 +1,13 @@
 import React from "react";
-import Spinner from '../layout/Spinner'
-import { efecempresam, efecmediopago, efecsucursalm, efecsucursalmsp } from "./funciones";
+import Spinner from "../layout/Spinner";
+import {
+  efecempresam,
+  efecmediopago,
+  efecsucursalm,
+  efecsucursalmsp,
+  efecsubtotal,
+  efecsubtotalTJTM,
+} from "./funciones";
 
 const ResumenMutual = ({
   pericoCOBM,
@@ -16,44 +23,49 @@ const ResumenMutual = ({
   CasaCentralOFM,
   CasaCentralTARM,
 }) => {
-
-  if (!CasaCentralTARM) return <div className="container"> <Spinner /> </div>
+  if (!CasaCentralTARM)
+    return (
+      <div className="container">
+        {" "}
+        <Spinner />{" "}
+      </div>
+    );
   else if (CasaCentralTARM)
     return (
       <table className="container table border border-dark text-center mt-2">
         <thead className="thead-dark">
           <th className="border border-dark border-bottom" colspan="8">
             MUTUAL
-        </th>
+          </th>
           <tr>
             <th className="border border-dark" scope="col">
               SUCURSAL
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               COBRADORES
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               OFICINA
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               TARJETAS
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               BANCO
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               POLICIAS
-          </th>
+            </th>
             <th className="border border-dark" scope="col">
               EFECTIVIDAD TOTAL
-          </th>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               PALPALA
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(palpalaCOBM)} %</strong>
             </td>
@@ -68,13 +80,13 @@ const ResumenMutual = ({
             <td className="border border-dark">
               <strong>
                 {efecsucursalm(palpalaCOBM, palpalaOFM, palpalaTARM)} %
-            </strong>
+              </strong>
             </td>
           </tr>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               PERICO
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(pericoCOBM)} %</strong>
             </td>
@@ -89,14 +101,14 @@ const ResumenMutual = ({
             <td className="border border-dark">
               <strong>
                 {efecsucursalm(pericoCOBM, pericoOFM, pericoTARM)} %
-            </strong>
+              </strong>
             </td>
           </tr>
 
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               SAN PEDRO
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(sanPedroCOBM)} %</strong>
             </td>
@@ -104,21 +116,18 @@ const ResumenMutual = ({
               <strong>{efecmediopago(sanPedroOFM)} %</strong>
             </td>
             <td className="border border-dark">
-              <strong>{efecmediopago(sanPedroTARM)} %</strong>
-
+              <strong>---</strong>
             </td>
             <td className="border border-dark">------</td>
             <td className="border border-dark">------</td>
             <td className="border border-dark">
-              <strong>
-                {efecsucursalmsp(sanPedroCOBM, sanPedroOFM)} %
-           </strong>
+              <strong>{efecsucursalmsp(sanPedroCOBM, sanPedroOFM)} %</strong>
             </td>
           </tr>
           <tr className="border border-dark">
             <th className="border border-dark" scope="row">
               SAN SALVADOR
-          </th>
+            </th>
             <td className="border border-dark">
               <strong>{efecmediopago(CasaCentralCOBM)} %</strong>
             </td>
@@ -132,10 +141,54 @@ const ResumenMutual = ({
             <td className="border border-dark">------</td>
             <td className="border border-dark">
               <strong>
-                {efecsucursalm(CasaCentralCOBM, CasaCentralOFM, CasaCentralTARM)}{" "}
-              %
-            </strong>
+                {efecsucursalm(
+                  CasaCentralCOBM,
+                  CasaCentralOFM,
+                  CasaCentralTARM
+                )}{" "}
+                %
+              </strong>
             </td>
+          </tr>
+          <tr>
+            <td className="border border-dark">
+              <strong>SUBTOTAL</strong>
+            </td>
+
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaCOBM,
+                  sanPedroCOBM,
+                  pericoCOBM,
+                  CasaCentralCOBM
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotal(
+                  palpalaOFM,
+                  sanPedroOFM,
+                  pericoOFM,
+                  CasaCentralOFM
+                )}{" "}
+                %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>
+                {efecsubtotalTJTM(palpalaTARM, pericoTARM, CasaCentralTARM)} %
+              </strong>
+            </td>
+            <td className="border border-dark">
+              <strong>------</strong>
+            </td>
+            <td className="border border-dark">
+              <strong>------</strong>
+            </td>
+            <td className="border border-dark">------</td>
           </tr>
           <tr>
             <td className="border border-dark" colspan="6">
@@ -158,8 +211,8 @@ const ResumenMutual = ({
                   CasaCentralOFM,
                   CasaCentralTARM
                 )}{" "}
-              %
-            </strong>
+                %
+              </strong>
             </td>
           </tr>
         </tbody>

@@ -19,6 +19,54 @@ export const efecmediopago = (array1, flag) => {
   }
 };
 
+export const efecsubtotal = (array1, array2, array3, array4) => {
+  if (array1 && array2 && array3 && array4) {
+    let total =
+      parseInt(array1.total) +
+      parseInt(array2.total) +
+      parseInt(array3.total) +
+      parseInt(array4.total);
+
+    let cobrado =
+      parseInt(array1.cobrado) +
+      parseInt(array2.cobrado) +
+      parseInt(array3.cobrado) +
+      parseInt(array4.cobrado);
+
+    let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
+    let resultado = efectividad.toFixed(2);
+
+    if (resultado === "NaN") {
+      resultado = 0.0;
+      return resultado;
+    } else {
+      return resultado;
+    }
+  }
+};
+
+export const efecsubtotalTJTM = (array1, array2, array3) => {
+  if (array1 && array2 && array3) {
+    let total =
+      parseInt(array1.total) + parseInt(array2.total) + parseInt(array3.total);
+
+    let cobrado =
+      parseInt(array1.cobrado) +
+      parseInt(array2.cobrado) +
+      parseInt(array3.cobrado);
+
+    let efectividad = (parseInt(cobrado) * 100) / parseInt(total);
+    let resultado = efectividad.toFixed(2);
+
+    if (resultado === "NaN") {
+      resultado = 0.0;
+      return resultado;
+    } else {
+      return resultado;
+    }
+  }
+};
+
 export const efecsucursal = (array1, array2, array3, array4, array5) => {
   if (array1) {
     let total =
