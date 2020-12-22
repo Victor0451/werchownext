@@ -1,6 +1,6 @@
 import React from "react";
 
-const Legajo = ({ ficha }) => {
+const Legajo = ({ ficha, empresa }) => {
   if (!ficha)
     return (
       <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
@@ -10,11 +10,25 @@ const Legajo = ({ ficha }) => {
 
   return (
     <div
-      className="container alert alert-primary border border-dark
+      className="mt-4 container alert alert-primary border border-dark
     "
     >
+      <div className="row d-felx justify-content-between p-2">
+        <h2 className="  mb-4 text-center">
+          <strong>
+            <u>Legajo Virtual</u>
+          </strong>
+        </h2>
+        {empresa === "W" ? (
+          <img src="/img/logo.png" className="werchowlogo" />
+        ) : (
+          <img src="/img/logom.jpg" className="werchowlogo" />
+        )}
+      </div>
+
+      <hr />
       <div className="row mt-4 d-flex justify-content-center  ">
-        <div className="col-md-3">
+        <div className="col-md-4">
           <h3>
             <u>N° Ficha</u>: {ficha.CONTRATO}
           </h3>
@@ -24,12 +38,6 @@ const Legajo = ({ ficha }) => {
           <h3>
             {" "}
             <u>Grupo</u>:{""} {ficha.GRUPO}
-          </h3>
-        </div>
-
-        <div className="col-md-3">
-          <h3>
-            <u>Sucursal</u>: {ficha.SUCURSAL}
           </h3>
         </div>
 

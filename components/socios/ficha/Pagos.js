@@ -71,7 +71,7 @@ const Pagos = ({ pagos }) => {
                   width: 200,
                 },
                 {
-                  Header: "Tipo De Pago",
+                  Header: "Fecha De Pago",
 
                   Cell: (row) => (
                     <div>

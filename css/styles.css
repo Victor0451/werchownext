@@ -173,11 +173,9 @@ input {
   }
 }
 
-.print-efect {
-  size: 1in 1in;
-  margin: 50pt 40pt 50pt;
-  size: A4;
-  -webkit-print-color-adjust: exact;
+.print-leg {
+  size: A4 !important;
+  margin-top: 50pt;
 }
 
 .print-estadistica {

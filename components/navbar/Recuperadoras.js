@@ -54,25 +54,25 @@ export default class Recuperadoras extends Component {
         </li>
 
         <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Calendario
-        </a>
-        <ul className="dropdown-menu">
-          <li>
-            <a
-              href="/calendario/calendario"
-              className="dropdown-item text-dark"
-            >
-              Dias Festivos
-            </a>
-          </li>
-        </ul>
-      </li>
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Calendario
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                href="/calendario/calendario"
+                className="dropdown-item text-dark"
+              >
+                Dias Festivos
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li className="nav-item dropdown ">
           <a
@@ -137,10 +137,44 @@ export default class Recuperadoras extends Component {
               </ul>
             </li>
             <hr />
-            <li>
-              <a href="/socios/ficha/ficha" className="dropdown-item text-dark">
-                Buscar Ficha
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Legajo Virtual
               </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/socios/ficha/ficha"
+                    className="dropdown-item text-dark"
+                  >
+                    Buscar Ficha
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/socios/ficha/print"
+                    className="dropdown-item text-dark"
+                  >
+                    Prints
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/socios/legajovirtual/subirarchivo"
+                    className="dropdown-item text-dark"
+                  >
+                    Subir Archivos
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>

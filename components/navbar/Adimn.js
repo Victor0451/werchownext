@@ -462,6 +462,15 @@ const Adimn = () => {
               <hr />
               <li>
                 <a
+                  href="/socios/ficha/print"
+                  className="dropdown-item text-dark"
+                >
+                  Prints
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
                   href="/socios/legajovirtual/subirarchivo"
                   className="dropdown-item text-dark"
                 >

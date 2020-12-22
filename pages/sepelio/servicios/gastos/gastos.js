@@ -159,7 +159,7 @@ const gastos = () => {
                   </div>
                   <div className="col-md-4">
                     <a
-                      href="/sepelio/servicio/listado"
+                      href="/sepelio/servicios/listado"
                       className="btn btn-sm btn-block btn-danger"
                     >
                       Volver al Listado
