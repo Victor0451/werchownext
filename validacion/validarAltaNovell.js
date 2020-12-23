@@ -17,7 +17,7 @@ export default function validarAltaNovell(valores) {
   }
 
   if (!valores.cuota) {
-    errores.cuota = "La cuota es obligatoria";
+    errores.cuota = "Las cuotas del saldo son obligatorias";
   }
 
   if (!valores.gastosadm) {
@@ -47,9 +47,9 @@ export default function validarAltaNovell(valores) {
     errores.domnumsol = "El numero del solicitante es obligatorio";
   }
 
-//   if (!valores.pisosol) {
-//     errores.pisosol = "El piso del solicitante es obligatorio";
-//   }
+  //   if (!valores.pisosol) {
+  //     errores.pisosol = "El piso del solicitante es obligatorio";
+  //   }
   if (!valores.barriosol) {
     errores.barriosol = "El barrio del solicitante es obligatorio";
   }
@@ -59,6 +59,7 @@ export default function validarAltaNovell(valores) {
   if (!valores.codpostalsol) {
     errores.codpostalsol = "El codigo postal del solicitante es obligatorio";
   }
+
   if (!valores.telefonosol) {
     errores.telefonosol = "El telefono del solicitante es obligatorio";
   }
@@ -90,9 +91,10 @@ export default function validarAltaNovell(valores) {
     errores.domnumben = "El numero del beneficiario es obligatorio";
   }
 
-//   if (!valores.pisoben) {
-//     errores.pisoben = "El piso del beneficiario es obligatorio";
-//   }
+  //   if (!valores.pisoben) {
+  //     errores.pisoben = "El piso del beneficiario es obligatorio";
+  //   }
+
   if (!valores.barrioben) {
     errores.barrioben = "El barrio del beneficiario es obligatorio";
   }
@@ -102,6 +104,26 @@ export default function validarAltaNovell(valores) {
   if (!valores.codpostalben) {
     errores.codpostalben = "El codigo postal del beneficiario es obligatorio";
   }
+
+  if (!valores.nacionalidadsol) {
+    errores.nacionalidadsol = "La nacionalidad del solicitante es obligatorio";
+  }
+
+  if (!valores.nacionalidadben) {
+    errores.nacionalidadben = "La nacionalidad del beneficiario es obligatorio";
+  }
+
+  if (!valores.montosaldo) {
+    errores.montosaldo = "El monto del saldo es obligatorio";
+  }
+  if (!valores.montosaldoletra) {
+    errores.montosaldoletra = "El monto del saldo es obligatorio";
+  }
+
+  if (!valores.cuotamantenimiento) {
+    errores.cuotamantenimiento = "La cuota de mantenimiento es obligatorio";
+  }
+
   if (!valores.telefonoben) {
     errores.telefonoben = "El telefono del beneficiario es obligatorio";
   }

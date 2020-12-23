@@ -1,14 +1,19 @@
 import React from "react";
+import Spinner from "../../../layout/Spinner";
 
-const CondicionesNovell = () => {
+const CondicionesNovell = ({ novell }) => {
+  if (!novell) return <Spinner />;
+
   return (
     <div className="container">
       <div className=" mt-4 border border-dark p-2">
-        <h4 className="text-center mt-2">
+        <h4 className=" text-center mt-2">
           <strong>
             <u>Condiciones que integran el contrato de adhesion</u>
           </strong>
         </h4>
+
+        <h4 className="text-center mt-2">{novell.servicio}</h4>
 
         <div className="mt-4 conformnovell">
           <p className="text-justify mt-2">
@@ -25,28 +30,44 @@ const CondicionesNovell = () => {
             El precitado contrato de prestación de servicios, se sujetará a las
             siguientes cláusulas, a las que el solicitante presta conformidad.-
           </p>
+
+          <p className="text-justify mt-2">
+            Entre WERCHOW SERVICIOS SOCIALES SRL, con domicilio en calle
+            Independencia N° 1185, de la Ciudad de San Salvador de Jujuy,
+            representada en este acto por su Socio Gerente el Señor Joaquín
+            Iriarte DNI 25.444.609, por una parte y por otro el Sr.{" "}
+            {novell.apellido_sol}, {novell.nombre_sol}
+            DNI {novell.dni_sol}, con domicilio en calle {novell.domicilio_sol}{" "}
+            Nº {novell.domnum_sol} Bº
+            {novell.barrio_sol} de la Ciudad de San Salvador de Jujuy, en
+            adelante EL CONTRATANTE, celebran el presente contrato, que se
+            sujetará a las siguientes cláusulas:
+          </p>
+
           <p className="text-justify mt-2">
             <strong>
               <u>PRIMERA</u>:
             </strong>{" "}
             Este acuerdo se formaliza bajo la formalidad de “Contrato a favor de
-            Tercero (beneficiario)”, revistiendo esta ultima calidad el Sr/ra.
-            …………………………………………….. DNI. Nº…………………………… de nacionalidad………………….……….
+            Tercero (beneficiario)”, revistiendo esta ultima calidad el Sr/ra.{" "}
+            {novell.apellido_ben}, {novell.nombre_ben} DNI. Nº {novell.dni_ben}{" "}
+            de nacionalidad {novell.nacionalidad_ben} con domicilio en calle{" "}
+            {novell.domicilio_ben} N° {novell.domnum_ben} B° {novell.barrio_ben}{" "}
             WERCHOW SERVICIOS SOCIALES SRL., se compromete a prestar al
             beneficiario de este contrato a su fallecimiento, el servicio de
             velatorio e inhumación, que se pasa a detallar: servicio de sepelio
-            integral compuesto por ataúd: ………………………………………………… o de similares
-            características aclarándose que si el extinto excede la capacidad de
-            dicho ataúd estándar, el contratante deberá abonar la diferencia
-            correspondiente por cambio de ataúd de mayor capacidad. El servicio
-            incluye también placa identificatoria y símbolos religiosos de
-            acuerdo al culto profesado; capilla ardiente en el domicilio o sala
-            de velatorio; traslado sin cargo y por intermedio de personal
-            altamente capacitado, dentro de un radio de 20 Kms. de la Ciudad de
-            San Salvador de Jujuy ; carroza fúnebre americano, un coche porta
-            coronas, dos coches de duelo o Comby para acompañamiento; un aviso
-            fúnebre en el diario local; trámites ante el Registro civil y
-            oficinas de defunciones y cementerios.- - - - -
+            integral compuesto por ataúd: …………………………………………………...... o de
+            similares características aclarándose que si el extinto excede la
+            capacidad de dicho ataúd estándar, el contratante deberá abonar la
+            diferencia correspondiente por cambio de ataúd de mayor capacidad.
+            El servicio incluye también placa identificatoria y símbolos
+            religiosos de acuerdo al culto profesado; capilla ardiente en el
+            domicilio o sala de velatorio; traslado sin cargo y por intermedio
+            de personal altamente capacitado, dentro de un radio de 20 Kms. de
+            la Ciudad de San Salvador de Jujuy ; carroza fúnebre americano, un
+            coche porta coronas, dos coches de duelo o Comby para
+            acompañamiento; un aviso fúnebre en el diario local; trámites ante
+            el Registro civil y oficinas de defunciones y cementerios.- - - - -
           </p>
           <p className="text-justify mt-2">
             <strong>
@@ -67,7 +88,6 @@ const CondicionesNovell = () => {
             preservar la salud pública y evitar sanciones por incumplimiento a
             la restricción ordenada.- - - - - - - - - - - - - - - - - - - - - -
           </p>
-
           <p className="text-justify mt-2">
             <strong>
               <u> SEGUNDA</u>:
@@ -82,7 +102,6 @@ const CondicionesNovell = () => {
             del presente contrato, es decir la prestación de los servicios
             contratados en el mismo.- - - - - - - - - - - - - - -
           </p>
-
           <p className="text-justify mt-2">
             <strong>
               <u> TERCERA</u>:
@@ -94,7 +113,6 @@ const CondicionesNovell = () => {
             presente cláusula, será nula de nulidad absoluta y totalmente
             inoponible a la empresa.-
           </p>
-
           <p className="text-justify mt-2">
             <strong>
               <u> CUARTA</u>:
@@ -104,7 +122,6 @@ const CondicionesNovell = () => {
             designado, para cumplir funciones de control, de conformidad a la
             cláusula segunda.-------------------
           </p>
-
           <p className="text-justify mt-2">
             <strong>
               <u> QUINTA</u>:
@@ -117,7 +134,6 @@ const CondicionesNovell = () => {
             de WERCHOW SERVICIOS SOCIALES SRL, en concepto de compensación de
             gastos e indemnización por no haber requerido sus servicios.-
           </p>
-
           <div className="border border-dark mt-2">
             <div className="row d-flex justify-content-between p-2">
               <div className="col-4 text-center mt-4">
@@ -150,12 +166,13 @@ const CondicionesNovell = () => {
               <u> SEXTA</u>:
             </strong>{" "}
             EL CONTRATANTE acuerda en abonar, por los servicios contratados en
-            el presente, la suma de Pesos ………………………………………………………….($ ………………),
-            abonando en este acto en concepto de anticipo la suma de Pesos
-            …………………………………. ($……………), extendiéndose recibo por aparte. El saldo
-            se abonara en…….. (……………) de Pesos…………………………………….. ($ ……………………..)
-            Cada una. Conjuntamente con cada una de las cuotas antes mencionadas
-            deberá abonar una cuota mínima mensual en concepto de gasto de
+            el presente, la suma de Pesos {novell.monto_letra} ($ {novell.monto}
+            ), abonando en este acto en concepto de anticipo la suma de Pesos{" "}
+            {novell.anticipo_letra} ($ {novell.anticipo}), extendiéndose recibo
+            por aparte. El saldo se abonara en {novell.cuotas} cuotas de Pesos
+            {novell.cuotasaldo_letra} ($ {novell.cuotasaldo}) Cada una.
+            Conjuntamente con cada una de las cuotas antes mencionadas deberá
+            abonar una cuota mínima mensual en concepto de gasto de
             mantenimiento, la que continuará abonándose luego de cancelarse el
             precio pactado por el servicio, hasta la prestación del presente
             contrato. La cuota de gasto de mantenimiento aumentara

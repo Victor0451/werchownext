@@ -5,9 +5,13 @@ const AltaNovell = ({
   servicio,
   monto,
   montoletra,
+  montosaldo,
+  montosaldoletra,
   anticipo,
+  anticipoletra,
   cuota,
   gastosadm,
+  cuotamantenimiento,
   apellidosol,
   nombresol,
   dnisol,
@@ -18,6 +22,7 @@ const AltaNovell = ({
   pisosol,
   barriosol,
   localidadsol,
+  nacionalidadsol,
   codpostalsol,
   telefonosol,
   movilsol,
@@ -31,6 +36,7 @@ const AltaNovell = ({
   pisoben,
   barrioben,
   localidadben,
+  nacionalidadben,
   codpostalben,
   telefonoben,
   movilben,
@@ -156,17 +162,40 @@ const AltaNovell = ({
           )}
         </div>
 
+        <div className="col-md-4 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Son </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Anticipo"
+            name="anticipoletra"
+            value={anticipoletra}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.anticipoletra && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.anticipoletra}
+            </div>
+          )}
+        </div>
+
         <div className="col-md-2 mt-4 border border-dark p-2">
           <label>
             {" "}
             <strong>
-              <u> Cuota Mensual </u>:
+              <u> Cuota Saldo </u>:
             </strong>
           </label>
           <input
             className="form-control"
             type="number"
-            placeholder="Cuota"
+            placeholder="Cuota Saldo"
             name="cuota"
             value={cuota}
             onBlur={handleBlur}
@@ -175,6 +204,52 @@ const AltaNovell = ({
           {errores.cuota && (
             <div className="alert alert-danger text-center p-2 mt-2">
               {errores.cuota}
+            </div>
+          )}
+        </div>
+
+        <div className="col-md-2 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Monto Saldo </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            placeholder="Monto Saldo"
+            name="montosaldo"
+            value={montosaldo}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.montosaldo && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.montosaldo}
+            </div>
+          )}
+        </div>
+
+        <div className="col-md-4 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Son </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Monto Saldo"
+            name="montosaldoletra"
+            value={montosaldoletra}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.montosaldoletra && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.montosaldoletra}
             </div>
           )}
         </div>
@@ -201,8 +276,30 @@ const AltaNovell = ({
             </div>
           )}
         </div>
-      </div>
 
+        <div className="col-md-2 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Cuota Mantenimiento </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            placeholder="Cuota Mantenimiento"
+            name="cuotamantenimiento"
+            value={cuotamantenimiento}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.cuotamantenimiento && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.cuotamantenimiento}
+            </div>
+          )}
+        </div>
+      </div>
       <hr className="mt-4 mb-4" />
 
       <h4>
@@ -441,6 +538,29 @@ const AltaNovell = ({
           )}
         </div>
 
+        <div className="col-md-6 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Nacionalidad</u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Nacionalidad"
+            name="nacionalidadsol"
+            value={nacionalidadsol}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.nacionalidadsol && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.nacionalidadsol}
+            </div>
+          )}
+        </div>
+
         <div className="col-md-2 mt-4 border border-dark p-2">
           <label>
             {" "}
@@ -561,7 +681,7 @@ const AltaNovell = ({
           />
           {errores.nombreben && (
             <div className="alert alert-danger text-center p-2 mt-2">
-              {errores.montoletra}
+              {errores.nombreben}
             </div>
           )}
         </div>
@@ -575,7 +695,7 @@ const AltaNovell = ({
           </label>
           <input
             className="form-control"
-            type="number    "
+            type="number"
             placeholder="DNI"
             maxLength="8"
             name="dniben"
@@ -746,6 +866,29 @@ const AltaNovell = ({
           {errores.localidadben && (
             <div className="alert alert-danger text-center p-2 mt-2">
               {errores.localidadben}
+            </div>
+          )}
+        </div>
+
+        <div className="col-md-6 mt-4 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Nacionalidad</u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Nacionalidad"
+            name="nacionalidadben"
+            value={nacionalidadben}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {errores.nacionalidadben && (
+            <div className="alert alert-danger text-center p-2 mt-2">
+              {errores.nacionalidadben}
             </div>
           )}
         </div>

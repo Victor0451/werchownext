@@ -15,6 +15,7 @@ const SocioFicha = ({
   nomoro,
   ficha,
   pagos,
+  pagosbco,
   empresa,
   archivos,
   adhs,
@@ -178,7 +179,7 @@ const SocioFicha = ({
             <div className="modal-body ">
               <div id="solicitud" className="mt-4 container ">
                 <div>
-                  <Legajo ficha={ficha} />
+                  <Legajo ficha={ficha} empresa={empresa} />
 
                   <hr className="mt-4 mb-4" />
 

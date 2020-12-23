@@ -3,8 +3,8 @@ import Layout from "../../../components/layout/Layout";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
-import ImpresionNovell from "../../../components/socios/ventaplan/novell/ImpresionNovell";
-import CondicionesNovel from "../../../components/socios/ventaplan/novell/CondicionesNovell";
+import ImpresionNovell from "../../../components/ventas/ventaplan/novell/ImpresionNovell";
+import CondicionesNovel from "../../../components/ventas/ventaplan/novell/CondicionesNovell";
 
 const imprimirnovell = () => {
   const [novell, guardarNovell] = useState(null);
@@ -56,7 +56,7 @@ const imprimirnovell = () => {
         <br />
         <br />
 
-        <CondicionesNovel />
+        <CondicionesNovel novell={novell} />
       </div>
 
       <div className="container alert alert-primary mt-4">

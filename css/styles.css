@@ -51,8 +51,7 @@ input {
 
 .navbar {
   text-transform: uppercase;
-  font-weight: 20px;
-  font-size: 0.7rem;
+  font-size: 0.6rem !important;
   height: 20px;
 
   /* background: rgba(3, 36, 66, 0.685) !important; */

@@ -30,7 +30,7 @@ const PagosPrint = ({ pagos, ficha }) => {
         </strong>
       </h2>
 
-      <table class="table table-sm border border-dark">
+      <table className="table table-sm border border-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

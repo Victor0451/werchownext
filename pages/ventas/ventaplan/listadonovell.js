@@ -3,7 +3,7 @@ import Layout from "../../../components/layout/Layout";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
-import ListadoNovell from "../../../components/socios/ventaplan/novell/ListadoNovell";
+import ListadoNovell from "../../../components/ventas/ventaplan/novell/ListadoNovell";
 
 const listadonovell = () => {
   const [listado, guardarListado] = useState(null);

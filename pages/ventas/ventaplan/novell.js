@@ -5,7 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import moment from "moment";
-import AltaNovell from "../../../components/socios/ventaplan/novell/AltaNovell";
+import AltaNovell from "../../../components/ventas/ventaplan/novell/AltaNovell";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaNovell from "../../../validacion/validarAltaNovell";
 
@@ -53,11 +53,9 @@ const novell = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
-
-      if (usuario) {
-        let userData = JSON.parse(usuario);
-        guardarUsuario(userData.usuario);
-      }
+    }
+    if (usuario) {
+      guardarUsuario(JSON.parse(usuario));
     }
   }, []);
 
@@ -73,8 +71,13 @@ const novell = () => {
     servicio,
     monto,
     montoletra,
+    montosaldo,
+    montosaldoletra,
+    cuotamantenimiento,
     anticipo,
+    anticipoletra,
     cuota,
+    cuotasaldo,
     gastosadm,
     apellidosol,
     nombresol,
@@ -86,6 +89,7 @@ const novell = () => {
     pisosol,
     barriosol,
     localidadsol,
+    nacionalidadsol,
     codpostalsol,
     telefonosol,
     movilsol,
@@ -99,6 +103,7 @@ const novell = () => {
     pisoben,
     barrioben,
     localidadben,
+    nacionalidadben,
     codpostalben,
     telefonoben,
     movilben,
@@ -111,7 +116,11 @@ const novell = () => {
       monto: monto,
       monto_letra: montoletra,
       anticipo: anticipo,
-      cuota: cuota,
+      anticipo_letra: anticipoletra,
+      cuotas: cuota,
+      cuotasaldo: montosaldo,
+      cuotasaldo_letra: montosaldoletra,
+      cuota_mantenimiento: cuotamantenimiento,
       gastos_adm: gastosadm,
       apellido_sol: apellidosol,
       nombre_sol: nombresol,
@@ -123,6 +132,7 @@ const novell = () => {
       piso_sol: pisosol,
       barrio_sol: barriosol,
       localidad_sol: localidadsol,
+      nacionalidad_sol: nacionalidadsol,
       codpostal_sol: codpostalsol,
       telefono_sol: telefonosol,
       movil_sol: movilsol,
@@ -136,10 +146,11 @@ const novell = () => {
       piso_ben: pisoben,
       barrio_ben: barrioben,
       localidad_ben: localidadben,
+      nacionalidad_ben: nacionalidadben,
       codpostal_ben: codpostalben,
       telefono_ben: telefonoben,
       movil_ben: movilben,
-      operador: userData,
+      operador: userData.usuario,
     };
 
     console.log(novell);
@@ -149,7 +160,7 @@ const novell = () => {
       .then((res) => {
         console.log(res);
         toastr.success("El novell se cargo correctamente", "ATENCION");
-        window.location.replace("/socios/ventaplan/listadonovell");
+        window.location.replace("/ventas/ventaplan/listadonovell");
       })
       .catch((error) => {
         console.log(error);
@@ -162,8 +173,12 @@ const novell = () => {
         servicio={servicio}
         monto={monto}
         montoletra={montoletra}
+        montosaldo={montosaldo}
+        montosaldoletra={montosaldoletra}
+        cuotamantenimiento={cuotamantenimiento}
         anticipo={anticipo}
         cuota={cuota}
+        cuotasaldo={cuotasaldo}
         gastosadm={gastosadm}
         apellidosol={apellidosol}
         nombresol={nombresol}
@@ -175,6 +190,7 @@ const novell = () => {
         pisosol={pisosol}
         barriosol={barriosol}
         localidadsol={localidadsol}
+        nacionalidadsol={nacionalidadsol}
         codpostalsol={codpostalsol}
         telefonosol={telefonosol}
         movilsol={movilsol}
@@ -188,6 +204,7 @@ const novell = () => {
         pisoben={pisoben}
         barrioben={barrioben}
         localidadben={localidadben}
+        nacionalidadben={nacionalidadben}
         codpostalben={codpostalben}
         telefonoben={telefonoben}
         movilben={movilben}

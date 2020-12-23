@@ -8,7 +8,7 @@ const AdhPrint = ({ adhs }) => {
         El socio no posee adherentes
       </div>
     );
-  console.log(adhs);
+
   return (
     <div className="mt-4 container alert alert-primary p-4 border border-dark">
       <h2 className="mt-2 mb-2">
@@ -16,7 +16,7 @@ const AdhPrint = ({ adhs }) => {
           <u>Adherentes</u>
         </strong>
       </h2>
-      <table class="table table-sm border border-dark">
+      <table className="table table-sm border border-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

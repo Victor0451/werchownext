@@ -4,7 +4,7 @@ import matchSorter from "match-sorter";
 import moment from "moment";
 
 const Pagos = ({ pagos }) => {
-  if (!pagos)
+  if (!pagos) {
     return (
       <div className="container">
         <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
@@ -12,7 +12,8 @@ const Pagos = ({ pagos }) => {
         </div>
       </div>
     );
-
+  }
+  
   return (
     <div className="container border border-dark alert alert-primary ">
       <h2 className="mt-4 mb-4">

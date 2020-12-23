@@ -21,9 +21,9 @@ const Legajo = ({ ficha, empresa }) => {
         </h2>
         {empresa === "W" ? (
           <img src="/img/logo.png" className="werchowlogo" />
-        ) : (
+        ) : empresa === "M" ? (
           <img src="/img/logom.jpg" className="werchowlogo" />
-        )}
+        ) : null}
       </div>
 
       <hr />

@@ -285,36 +285,7 @@ export default class Gerencia extends Component {
               </ul>
             </li>
             <hr />
-            <li className="dropdown-submenu">
-              <a
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                className="  dropdown-toggle dropdown-item text-dark"
-              >
-                Venta de Novells
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    href="/socios/ventaplan/novell"
-                    className="dropdown-item text-dark"
-                  >
-                    Venta
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href="/socios/ventaplan/listadonovell"
-                    className="dropdown-item text-dark"
-                  >
-                    Listado
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <hr />
+
             <li className="dropdown-submenu">
               <a
                 href="#"
@@ -380,6 +351,37 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Ventas por periodo
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Venta de Novells
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/ventas/ventaplan/novell"
+                    className="dropdown-item text-dark"
+                  >
+                    Venta
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/ventas/ventaplan/listadonovell"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado
                   </a>
                 </li>
               </ul>

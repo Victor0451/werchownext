@@ -49,19 +49,20 @@ const print = () => {
       .get(`http://190.231.32.232:5002/api/werchow/pagos/pagos/${contrato}`)
       .then((res) => {
         let pagos = res.data;
-        guardarPagos(pagos);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
-  const traerPagosBco = async (contrato) => {
-    await axios
-      .get(`http://190.231.32.232:5002/api/werchow/pagobco/pagobco/${contrato}`)
-      .then((res) => {
-        let pagos = res.data;
-        guardarPagos(pagos);
+        axios
+          .get(
+            `http://190.231.32.232:5002/api/werchow/pagobco/pagobco/${contrato}`
+          )
+          .then((res) => {
+            let pagosbco = res.data;
+            let allPagos = pagos.concat(pagosbco);
+
+            guardarPagos(allPagos);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -75,21 +76,21 @@ const print = () => {
       )
       .then((res) => {
         let pagos = res.data;
-        guardarPagos(pagos);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+        // guardarPagos(pagos);
 
-  const traerPagosBcoM = async (contrato) => {
-    await axios
-      .get(
-        `http://190.231.32.232:5002/api/werchow/pagobco/pagobcom/${contrato}`
-      )
-      .then((res) => {
-        let pagos = res.data;
-        guardarPagos(pagos);
+        axios
+          .get(
+            `http://190.231.32.232:5002/api/werchow/pagobco/pagobcom/${contrato}`
+          )
+          .then((res) => {
+            let pagosbco = res.data;
+            let allPagos = pagos.concat(pagosbco);
+
+            guardarPagos(allPagos);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -140,13 +141,10 @@ const print = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-          console.log(ficha);
 
-          if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
-            traerPagos(ficha.CONTRATO);
-          } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
-            traerPagosBco(ficha.CONTRATO);
-          } else if (ficha === "undefined") {
+          traerPagos(ficha.CONTRATO);
+
+          if (ficha === "undefined") {
             toastr.error(
               "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
               "ATENCION"
@@ -154,7 +152,6 @@ const print = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
-
           traerAdhs(ficha.CONTRATO);
           guardarEmpresa("W");
         })
@@ -186,11 +183,9 @@ const print = () => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
 
-          if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
-            traerPagosM(ficha.CONTRATO);
-          } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
-            traerPagosBcoM(ficha.CONTRATO);
-          } else if (ficha === "undefined") {
+          traerPagosM(ficha.CONTRATO);
+
+          if (ficha === "undefined") {
             toastr.error(
               "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
               "ATENCION"
@@ -198,7 +193,6 @@ const print = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
-
           guardarEmpresa("M");
           traerAdhsM(ficha.CONTRATO);
         })
@@ -240,7 +234,6 @@ const print = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
-          traerAdhs(ficha.CONTRATO);
           guardarEmpresa("W");
         })
         .catch((error) => {
@@ -283,7 +276,7 @@ const print = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
-          traerAdhsM(ficha.CONTRATO);
+
           guardarEmpresa("M");
         })
         .catch((error) => {
