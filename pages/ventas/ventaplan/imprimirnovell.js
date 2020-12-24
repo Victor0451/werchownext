@@ -51,11 +51,8 @@ const imprimirnovell = () => {
         <ImpresionNovell novell={novell} />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+        
+       
         <CondicionesNovel novell={novell} />
       </div>
 

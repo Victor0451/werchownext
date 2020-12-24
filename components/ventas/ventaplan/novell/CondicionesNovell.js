@@ -113,27 +113,6 @@ const CondicionesNovell = ({ novell }) => {
             presente cláusula, será nula de nulidad absoluta y totalmente
             inoponible a la empresa.-
           </p>
-          <p className="text-justify mt-2">
-            <strong>
-              <u> CUARTA</u>:
-            </strong>{" "}
-            WERCHOW SERVICIOS SOCIALES SRL. no asume obligación de efectuar
-            comunicación alguna, a la persona que EL CONTRATANTE hubiere
-            designado, para cumplir funciones de control, de conformidad a la
-            cláusula segunda.-------------------
-          </p>
-          <p className="text-justify mt-2">
-            <strong>
-              <u> QUINTA</u>:
-            </strong>{" "}
-            Para el caso de que alguien contratara los servicios de velatorio e
-            inhumación en otra empresa, WERCHOW SERVICIOS SOCIALES SRL, quedará
-            totalmente eximida y liberada de las obligaciones contraídas en el
-            presente, no estando obligada a reintegro alguno. En tal caso lo que
-            se hubiere abonado por EL CONTRATANTE, quedará a exclusivo beneficio
-            de WERCHOW SERVICIOS SOCIALES SRL, en concepto de compensación de
-            gastos e indemnización por no haber requerido sus servicios.-
-          </p>
           <div className="border border-dark mt-2">
             <div className="row d-flex justify-content-between p-2">
               <div className="col-4 text-center mt-4">
@@ -158,9 +137,33 @@ const CondicionesNovell = ({ novell }) => {
 
       <br />
       <br />
+      <br />
+      <br />
 
       <div className=" mt-4 border border-dark p-2">
         <div className="mt-4 conformnovell">
+          <p className="text-justify mt-2">
+            <strong>
+              <u> CUARTA</u>:
+            </strong>{" "}
+            WERCHOW SERVICIOS SOCIALES SRL. no asume obligación de efectuar
+            comunicación alguna, a la persona que EL CONTRATANTE hubiere
+            designado, para cumplir funciones de control, de conformidad a la
+            cláusula segunda.-------------------
+          </p>
+          <p className="text-justify mt-2">
+            <strong>
+              <u> QUINTA</u>:
+            </strong>{" "}
+            Para el caso de que alguien contratara los servicios de velatorio e
+            inhumación en otra empresa, WERCHOW SERVICIOS SOCIALES SRL, quedará
+            totalmente eximida y liberada de las obligaciones contraídas en el
+            presente, no estando obligada a reintegro alguno. En tal caso lo que
+            se hubiere abonado por EL CONTRATANTE, quedará a exclusivo beneficio
+            de WERCHOW SERVICIOS SOCIALES SRL, en concepto de compensación de
+            gastos e indemnización por no haber requerido sus servicios.-
+          </p>
+
           <p className="text-justify mt-2">
             <strong>
               <u> SEXTA</u>:
@@ -206,8 +209,6 @@ const CondicionesNovell = ({ novell }) => {
             respectiva cuota, un interés equivalente al que cobra el Banco de la
             Nación Argentina para sus operaciones de Prestamos Personales.- - -
             - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            - - - - - - - - - - - - -
           </p>
           <p className="text-justify mt-2">
             <strong>
@@ -263,8 +264,6 @@ const CondicionesNovell = ({ novell }) => {
             Salvador de Jujuy con DNI. Nº……………………, como la persona que
             controlara que se cumplan estrictamente con los servicios
             comprometidos por WERCHOW SERVICIOS SOCIALES SRL. - - - - - - - - -
-            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            - - - - - - - - - - - - - - - - - -
           </p>
         </div>
         <div className="border border-dark mt-4">

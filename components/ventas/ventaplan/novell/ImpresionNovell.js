@@ -4,7 +4,7 @@ import moment from "moment";
 
 const ImpresionNovell = ({ novell }) => {
   if (!novell) return <Spinner />;
-
+  console.log(novell.cuota_mantenimiento);
   return (
     <div className="container mt-2 alert alert-dark border border-dark p-4">
       <div className="row">
@@ -21,9 +21,14 @@ const ImpresionNovell = ({ novell }) => {
         </div>
 
         <div className="col-md-4 border border-dark p-2">
-          <h6 className="mt-3">
+          <h6 className=" mt-1">
             <strong>
               <u>Fecha de Recepcion</u>: {novell.fecha_recepcion}
+            </strong>
+          </h6>
+          <h6 className=" mt-4">
+            <strong>
+              <u>Socio N°</u>:
             </strong>
           </h6>
         </div>
@@ -93,12 +98,27 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.anticipo}
           />
         </div>
+        <div className="col-md-2 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Son </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Anticipo"
+            name="anticipo"
+            defaultValue={novell.anticipo_letra}
+          />
+        </div>
 
         <div className="col-md-2 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
-              <u> Cuota Mensual </u>:
+              <u> Cuota Saldo </u>:
             </strong>
           </label>
           <input
@@ -106,10 +126,40 @@ const ImpresionNovell = ({ novell }) => {
             type="number"
             placeholder="Cuota"
             name="cuota"
-            defaultValue={novell.cuota}
+            defaultValue={novell.cuotas}
           />
         </div>
 
+        <div className="col-md-2 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Saldo </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            placeholder="Cuota"
+            name="cuota"
+            defaultValue={novell.cuotasaldo}
+          />
+        </div>
+        <div className="col-md-2 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Son </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Anticipo"
+            name="anticipo"
+            defaultValue={novell.cuotasaldo_letra}
+          />
+        </div>
         <div className="col-md-2 mt-2 border border-dark p-2">
           <label>
             {" "}
@@ -123,6 +173,21 @@ const ImpresionNovell = ({ novell }) => {
             placeholder="Gastos Adm."
             name="gastosadm"
             defaultValue={novell.gastos_adm}
+          />
+        </div>
+        <div className="col-md-2 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Cuota Mantenimiento </u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            placeholder="Gastos Adm."
+            name="cuotamantenimiento"
+            defaultValue={novell.cuota_mantenimiento}
           />
         </div>
       </div>
@@ -215,7 +280,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-8 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -263,7 +328,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-6 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -279,7 +344,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-6 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -294,7 +359,21 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.localidad_sol}
           />
         </div>
-
+        <div className="col-md-4 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Nacionalidad</u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Localidad"
+            name="nacionalidadsol"
+            defaultValue={novell.nacionalidad_sol}
+          />
+        </div>
         <div className="col-md-2 mt-2 border border-dark p-2">
           <label>
             {" "}
@@ -433,7 +512,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-8 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -481,7 +560,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-6 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -497,7 +576,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-6 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 border border-dark p-2">
           <label>
             {" "}
             <strong>
@@ -512,7 +591,21 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.localidad_ben}
           />
         </div>
-
+        <div className="col-md-4 mt-2 border border-dark p-2">
+          <label>
+            {" "}
+            <strong>
+              <u> Nacionalidad</u>:
+            </strong>
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Localidad"
+            name="nacionalidadben"
+            defaultValue={novell.nacionalidad_ben}
+          />
+        </div>
         <div className="col-md-2 mt-2 border border-dark p-2">
           <label>
             {" "}
