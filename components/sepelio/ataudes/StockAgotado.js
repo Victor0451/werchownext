@@ -4,13 +4,20 @@ import axios from "axios";
 
 // Import React Table
 import ReactTable from "react-table";
+import FromActualizarStock from "./FromActualizarStock";
 
-const Stock = ({ selcaso, selcasofrm }) => {
+const StockAgotado = ({
+  nuevoStockRef,
+  observacionRef,
+  updateStock,
+  idataudRef,
+}) => {
   const [ataudes, guardarAtaudes] = useState(null);
+  const [ataud, guardarAtaud] = useState(null);
 
   const mostrarAtaudes = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/cantidad`)
+      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/stockagotado`)
       .then((res) => {
         let ataudes = res.data;
         guardarAtaudes(ataudes);
@@ -18,6 +25,14 @@ const Stock = ({ selcaso, selcasofrm }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const selcaso = (row) => {
+    if (ataud) {
+      guardarAtaud(null);
+    } else {
+      guardarAtaud(row.original);
+    }
   };
 
   useEffect(() => {
@@ -32,11 +47,11 @@ const Stock = ({ selcaso, selcasofrm }) => {
     );
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
-      <h2 className="mt-4 mb-4">
+      <h4 className="mt-4 mb-4">
         <strong>
-          <u>Stock de Ataudes</u>
+          <u>Stock de Ataudes Agotados</u>
         </strong>
-      </h2>
+      </h4>
       <div className=" mt-4 border border-dark list">
         <ReactTable
           data={ataudes}
@@ -118,44 +133,24 @@ const Stock = ({ selcaso, selcasofrm }) => {
                   Header: "Acciones",
 
                   Cell: (row) => (
-                    <div>
-                      {selcasofrm ? (
-                        <button
-                          type="button"
-                          className="btn btn-primary btn-sm mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Actualizar Stock"
-                          onClick={() => selcasofrm(row)}
-                          data-dismiss="modal"
-                        >
-                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                        </button>
-                      ) : (
-                        <>
-                          <button
-                            type="button"
-                            className="btn btn-warning btn-sm mr-1"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Actualizar Datos"
-                            //onClick={() => selcaso(row)}
-                          >
-                            <i class="fa fa-book" aria-hidden="true"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-danger btn-sm mr-1"
-                            data-toggle="tooltip modal"
-                            data-placement="top"
-                            title="Dar de Baja"
-                            //onClick={() => selcaso(row)}
-                          >
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                          </button>
-                        </>
-                      )}
-                    </div>
+                    <>
+                      <button
+                        type="button"
+                        className="btn btn-info btn-sm mr-1"
+                        data-toggle="tooltip"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        data-placement="top"
+                        title="Actualizar Stock"
+                        onClick={() => selcaso(row)}
+                      >
+                        <i
+                          className="fa fa-pencil-square"
+                          aria-hidden="true"
+                        ></i>{" "}
+                        Actualizar Stock
+                      </button>
+                    </>
                   ),
                 },
               ],
@@ -165,8 +160,65 @@ const Stock = ({ selcaso, selcasofrm }) => {
           className="-striped -highlight"
         />
       </div>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Actualizar Stock
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="alert alert-info p-2 text-center text-uppercase">
+                En esta parte solo puedes actualizar el stock y agregar una
+                observacion si es necesario. En el nuevo stock se debe ingresar
+                como queda el numero final de ataudes. No se suma
+                automaticamente al stock actual, los ataudes ingresados.
+              </div>
+
+              <FromActualizarStock
+                ataud={ataud}
+                nuevoStockRef={nuevoStockRef}
+                observacionRef={observacionRef}
+                updateStock={updateStock}
+                idataudRef={idataudRef}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={updateStock}
+              >
+                Actualizar Stock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Stock;
+export default StockAgotado;
