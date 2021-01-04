@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import axios from "axios";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import FormEditarServicio from "../../../components/sepelio/servicios/FormEditarServicio";
 
 const editar = () => {

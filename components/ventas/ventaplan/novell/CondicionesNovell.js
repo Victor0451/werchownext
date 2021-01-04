@@ -64,10 +64,9 @@ const CondicionesNovell = ({ novell }) => {
             religiosos de acuerdo al culto profesado; capilla ardiente en el
             domicilio o sala de velatorio; traslado sin cargo y por intermedio
             de personal altamente capacitado, dentro de un radio de 20 Kms. de
-            la Ciudad de San Salvador de Jujuy ; carroza fúnebre americano, un
-            coche porta coronas, dos coches de duelo o Comby para
-            acompañamiento; un aviso fúnebre en el diario local; trámites ante
-            el Registro civil y oficinas de defunciones y cementerios.- - - - -
+            la Ciudad de San Salvador de Jujuy ; carroza fúnebre americano; un
+            aviso fúnebre en el diario local; trámites ante el Registro civil y
+            oficinas de defunciones y cementerios.- - - - -
           </p>
           <p className="text-justify mt-2">
             <strong>
