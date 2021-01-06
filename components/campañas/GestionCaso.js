@@ -13,7 +13,7 @@ const GestionCaso = ({
   let modaltrab = "lgtrab";
   let modalnuevo = "lgnuevo";
   let modalnoti = "lgnoti";
-  console.log(moment().endOf("month").format("YYYY/MM/DD"));
+
   return (
     <div className="container">
       <h1 className="mt-4 mb-4">

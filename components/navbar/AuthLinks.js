@@ -16,7 +16,7 @@ const AuthLinks = ({ userData }) => {
         {userData.perfil === 1 ? (
           <Adimn />
         ) : userData.perfil === 2 ? (
-          <Recuperadoras />
+          <Recuperadoras usuario={userData.usuario} />
         ) : userData.perfil === 3 ? (
           <Gerencia />
         ) : userData.perfil === 5 ? (

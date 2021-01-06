@@ -5,7 +5,7 @@ import Router from "next/router";
 
 import jsCookie from "js-cookie";
 
-function campanas(props) {
+function campanas() {
   let token = jsCookie.get("token");
 
   useEffect(() => {

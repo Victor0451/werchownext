@@ -39,6 +39,23 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
+          <hr />
+          <li>
+            <a
+              href="/prestamos/informeprestamos"
+              className="dropdown-item text-dark"
+            >
+              Socios: Cuotas Sin Cobrar
+            </a>
+          </li>
+
+          <hr />
+
+          <li>
+            <a href="/mutual/movimientos" className="dropdown-item text-dark">
+              Mutual: Movimientos del Mes
+            </a>
+          </li>
         </ul>
       </li>
 
@@ -112,17 +129,6 @@ const Adimn = () => {
               </li> */}
             </ul>
           </li>
-          <hr />
-
-          <li>
-            <a
-              href="/prestamos/informeprestamos"
-              className="dropdown-item text-dark"
-            >
-              Reportes
-            </a>
-          </li>
-
           <hr />
 
           <li>
