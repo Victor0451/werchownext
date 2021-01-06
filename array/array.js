@@ -60,7 +60,10 @@ export const anosventas = [
   { value: 2020, label: "2020" },
 ];
 
-export const anos = [{ value: 2020, label: "2020" }];
+export const anos = [
+  { value: 2020, label: "2020" },
+  { value: 2020, label: "2021" },
+];
 
 export const conceptossep = [
   { value: 1, label: "Alquiler de Sala Velatoria" },
