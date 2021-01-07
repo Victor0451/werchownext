@@ -207,13 +207,18 @@ const resumen = () => {
 
   const buscarNumeros = async () => {
     let month = moment().format("M");
+    let year = moment().format("YYYY");
+
     if (mes === null || ano === null) {
       toastr.warning("Debes seleccionas un mes y un año si o no", "ATENCION");
-    } else if (mes > parseInt(month)) {
+    } else if (mes > parseInt(month) && ano >= year) {
       let sindato = true;
       console.log(sindato);
       guardarSindato(sindato);
-    } else if (mes <= parseInt(month)) {
+    } else if (
+      mes >= parseInt(month) ||
+      (mes <= parseInt(month) && ano <= year)
+    ) {
       let cargando = true;
       guardarCargando(cargando);
       let sindato = false;
@@ -435,6 +440,7 @@ const resumen = () => {
           console.log(error);
         });
     }
+    
   };
 
   return (
