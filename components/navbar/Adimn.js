@@ -56,6 +56,21 @@ const Adimn = () => {
               Mutual: Movimientos del Mes
             </a>
           </li>
+          <hr />
+
+          <li>
+            <a href="/mapas/mapaasesor" className="dropdown-item text-dark">
+              Asesores: Mapeo de ventas anual
+            </a>
+          </li>
+
+          <hr />
+
+          <li>
+            <a href="/mapas/maparec" className="dropdown-item text-dark">
+              Recuperadores: Mapeo de liquidaciones por periodo
+            </a>
+          </li>
         </ul>
       </li>
 
