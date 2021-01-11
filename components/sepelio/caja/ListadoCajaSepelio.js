@@ -34,95 +34,92 @@ const ListadoCajaSepelio = ({ cajas }) => {
           filterable
           defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
           columns={[
-            
-
-
-
             {
-                Header: "Listado de Cajas",
-                columns: [
-                  {
-                    Header: "Fecha",
-                    id: "fecha",
-                    accessor: (d) =>
-                      moment(d.fecha).format("DD/MM/YYYY HH:mm:ss"),
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["fecha"] }),
-                    filterAll: true,
-                    width: 200,
-                  },
-                  {
-                    Header: "Motno",
-                    id: "monto",
-                    accessor: (d) => d.monto,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["monto"] }),
-                    filterAll: true,
-                    width: 100,
-                  },
-  
-                  {
-                    Header: "Empresa",
-                    id: "empresa",
-                    accessor: (d) => d.empresa,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["empresa"] }),
-                    filterAll: true,
-                  },
-  
-                  {
-                    Header: "Concepto",
-                    id: "concepto",
-                    accessor: (d) => d.concepto,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["concepto"] }),
-                    filterAll: true,
-                  },
-  
-                  {
-                    Header: "Gastos",
-                    id: "gastos",
-                    accessor: (d) => d.gastos,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["gastos"] }),
-                    filterAll: true,
-                    width: 100,
-                  },
-  
-                  {
-                    Header: "Total Caja",
-                    id: "totalcaja",
-                    accessor: (d) => d.totalcaja,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["totalcaja"] }),
-                    filterAll: true,
-                    width: 100,
-                  },
-  
-                  {
-                    Header: "Estado",
-                    id: "estado",
-                    accessor: (d) => d.estado,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["estado"] }),
-                    filterAll: true,
-  
-                    Cell: (row) => (
-                      <div>
-                        {row.original.estado === 1 ? (
-                          <div>Activo</div>
-                        ) : row.original.estado === 0 ? (
-                          <div>De Baja</div>
-                        ) : null}
-                      </div>
-                    ),
-                  },
-  
-                  {
-                    Header: "Acciones",
-  
-                    Cell: (row) => (
-                      <>
+              Header: "Listado de Cajas",
+              columns: [
+                {
+                  Header: "Fecha",
+                  id: "fecha",
+                  accessor: (d) =>
+                    moment(d.fecha).format("DD/MM/YYYY HH:mm:ss"),
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["fecha"] }),
+                  filterAll: true,
+                  width: 200,
+                },
+                {
+                  Header: "Motno",
+                  id: "monto",
+                  accessor: (d) => d.monto,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["monto"] }),
+                  filterAll: true,
+                  width: 100,
+                },
+
+                {
+                  Header: "Empresa",
+                  id: "empresa",
+                  accessor: (d) => d.empresa,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["empresa"] }),
+                  filterAll: true,
+                },
+
+                {
+                  Header: "Concepto",
+                  id: "concepto",
+                  accessor: (d) => d.concepto,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["concepto"] }),
+                  filterAll: true,
+                },
+
+                {
+                  Header: "Gastos",
+                  id: "gastos",
+                  accessor: (d) => d.gastos,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["gastos"] }),
+                  filterAll: true,
+                  width: 100,
+                },
+
+                {
+                  Header: "Total Caja",
+                  id: "totalcaja",
+                  accessor: (d) => d.totalcaja,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["totalcaja"] }),
+                  filterAll: true,
+                  width: 100,
+                },
+
+                {
+                  Header: "Estado",
+                  id: "estado",
+                  accessor: (d) => d.estado,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["estado"] }),
+                  filterAll: true,
+
+                  Cell: (row) => (
+                    <div>
+                      {row.original.estado === 1 ? (
+                        <div>Abierta</div>
+                      ) : row.original.estado === 0 ? (
+                        <div>Cerrada</div>
+                      ) : null}
+                    </div>
+                  ),
+                },
+
+                {
+                  Header: "Acciones",
+
+                  Cell: (row) => (
+                    <>
+                      {row.original.estado === 1 ? (
                         <Link
                           href={{
                             pathname: "/sepelio/caja/gastoscaja",
@@ -144,11 +141,30 @@ const ListadoCajaSepelio = ({ cajas }) => {
                             ></i>{" "}
                           </button>
                         </Link>
-                      </>
-                    ),
-                  },
-                ],
-              },
+                      ) : null}
+
+                      <Link
+                        href={{
+                          pathname: "/sepelio/servicios/impresion",
+                          query: {
+                            id: row.original.dni,
+                          },
+                        }}
+                      >
+                        <button
+                          className="btn btn-sm btn-primary mr-1"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Imprimir Solicitud"
+                        >
+                          <i className="fa fa-print" aria-hidden="true"></i>
+                        </button>
+                      </Link>
+                    </>
+                  ),
+                },
+              ],
+            },
           ]}
           defaultPageSize={10}
           className="-striped -highlight"

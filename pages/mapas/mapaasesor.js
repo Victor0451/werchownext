@@ -57,6 +57,19 @@ const mapaasesor = () => {
     }
   };
 
+  const imprimir = () => {
+    let contenido = document.getElementById("solicitud").innerHTML;
+    let contenidoOrg = document.body.innerHTML;
+
+    document.body.innerHTML = contenido;
+
+    window.print();
+
+    document.body.innerHTML = contenidoOrg;
+
+    window.location.reload();
+  };
+
   return (
     <Layout>
       <FormMapa
@@ -66,7 +79,28 @@ const mapaasesor = () => {
         consultarMapa={consultarMapa}
       />
 
-      {mapa ? <MapaAsesor mapa={mapa} /> : null}
+      {mapa ? (
+        <>
+          <div id="solicitud" className="mt-4">
+            <MapaAsesor mapa={mapa} />
+          </div>
+
+          <div className=" container alert alert-primary border border-dark p-4">
+            <h3>
+              <strong>
+                <u>Opciones</u>
+              </strong>
+            </h3>
+            <div className="row border border-dark p-4 mt-4">
+              <div className="col-md-12 d-flex justify-content-center">
+                <button className=" btn btn-primary " onClick={imprimir}>
+                  Imprimir
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
     </Layout>
   );
 };

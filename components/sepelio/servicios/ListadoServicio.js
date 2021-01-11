@@ -58,7 +58,7 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
                   Header: "#",
                   filterAll: false,
                   width: 20,
-                  Cell: (row) => <div>{row.index}</div>,
+                  Cell: (row) => <div>{row.index + 1}</div>,
                 },
                 {
                   Header: "Apellido",

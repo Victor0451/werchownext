@@ -17,8 +17,10 @@ import ConceptoSelect from "react-select";
 import IvaSelect from "react-select";
 import TipoFacturaSelect from "react-select";
 import OperadorSelect from "react-select";
+import Select from "../../layout/Select";
 
 const NuevoCajaGasto = ({
+  listProv,
   caja,
   user,
   nuevoGasto,
@@ -32,6 +34,7 @@ const NuevoCajaGasto = ({
   percIVARef,
   totalRef,
   detalleRef,
+  error,
 }) => {
   if (!caja) return <Spinner />;
 
@@ -134,7 +137,7 @@ const NuevoCajaGasto = ({
                 </strong>
               </label>
               <ProveedorSelect
-                options={prov}
+                options={listProv}
                 placeholder={"Proveedor"}
                 onChange={(value) => handleChange(value, "proveedor")}
               />
@@ -177,7 +180,7 @@ const NuevoCajaGasto = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 ref={ptoVentaRef}
                 placeholder="Pto. Venta"
@@ -193,7 +196,7 @@ const NuevoCajaGasto = ({
                 </strong>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 ref={nFacturaRef}
                 placeholder="N° Factura"
@@ -337,6 +340,12 @@ const NuevoCajaGasto = ({
               />
             </div>
 
+            {/* <Select
+              ref={detalleRef}
+              listado={operadoressep}
+              label={"probando"}
+            /> */}
+
             <div className="mt-4 form-group col-md-12">
               <label>
                 <strong>
@@ -351,6 +360,12 @@ const NuevoCajaGasto = ({
                 placeholder="Detalle"
               />
             </div>
+
+            {error ? (
+              <div className="alert alert-danger text-center text-uppercase col-md-12">
+                {error}
+              </div>
+            ) : null}
 
             <div className="mt-2 form-group col-md-12">
               <button

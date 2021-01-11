@@ -19,6 +19,7 @@ const gastoscaja = () => {
   let totalRef = React.createRef();
   let detalleRef = React.createRef();
 
+  const [listProv, guardarListProv] = useState(null);
   const [gastos, guardarGastos] = useState([]);
   const [caja, guardarCaja] = useState(null);
   const [acGast, guardarAcGast] = useState(null);
@@ -30,6 +31,7 @@ const gastoscaja = () => {
   const [mediopago, guardarMedioPago] = useState(null);
   const [porciva, guardarPorciva] = useState(null);
   const [proveedor, guardarProveedor] = useState(null);
+  const [error, guardarError] = useState(null);
 
   const [operadortramite, guardarOpTramite] = useState(null);
 
@@ -44,6 +46,7 @@ const gastoscaja = () => {
       let id = router.query.id;
 
       infoCaja(id);
+      listadoProveedores();
 
       let usuario = jsCookie.get("usuario");
 
@@ -53,6 +56,14 @@ const gastoscaja = () => {
       }
     }
   }, []);
+
+  const listadoProveedores = async () => {
+    axios
+      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listprov`)
+      .then((res) => {
+        guardarListProv(res.data[0]);
+      });
+  };
 
   const infoCaja = async (id) => {
     await axios
@@ -141,6 +152,29 @@ const gastoscaja = () => {
       });
   };
 
+  const restartForm = () => {
+    fechaRef.current.value = "";
+    nFacturaRef.current.value = 0;
+    ptoVentaRef.current.value = 0;
+    montoIVARef.current.value = 0;
+    retIIBBRef.current.value = 0;
+    retggciasRef.current.value = 0;
+    percIVARef.current.value = 0;
+    detalleRef.current.value = "";
+    totalRef.current.value = 0;
+
+    guardarOpTramite(null);
+    guardarAcGast(null);
+    guardarTotCaja(null);
+    guardarUsuario(null);
+    guardarEmpresa(null);
+    guardarConcepto(null);
+    guardarFactura(null);
+    guardarMedioPago(null);
+    guardarPorciva(null);
+    guardarProveedor(null);
+  };
+
   const nuevoGasto = (e) => {
     e.preventDefault();
 
@@ -167,15 +201,47 @@ const gastoscaja = () => {
       total: totalRef.current.value,
     };
 
-    guardarGastos([...gastos, gasto]);
+    if (gasto.nfactura === "") {
+      guardarError(
+        "Debes ingresar un N° de factura o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.ptoventa === "") {
+      guardarError(
+        "Debes ingresar un pto de venta o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.montoiva === "") {
+      guardarError(
+        "Debes ingresar un Monto I.V.A. o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.retiibb === "") {
+      guardarError(
+        "Debes ingresar un RetIIBB. o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.retggcias === "") {
+      guardarError(
+        "Debes ingresar un RetGGACIAS o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.perciva === "") {
+      guardarError(
+        "Debes ingresar un Perc I.V.A. o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else if (gasto.total === "") {
+      guardarError(
+        "Debes ingresar un Monto Total o de no tenerlo, ingresa un 0 (cero)"
+      );
+    } else {
+      guardarGastos([...gastos, gasto]);
 
-    let totgast = acGast + parseFloat(gasto.total);
+      let totgast = acGast + parseFloat(gasto.total);
 
-    guardarAcGast(totgast);
+      guardarAcGast(totgast);
 
-    let totcaja = caja.monto - totgast;
+      let totcaja = caja.monto - totgast;
 
-    guardarTotCaja(totcaja);
+      guardarTotCaja(totcaja);
+
+      restartForm();
+    }
   };
 
   return (
@@ -204,6 +270,7 @@ const gastoscaja = () => {
             </div>
             <div className="modal-body">
               <NuevoCajaGasto
+                listProv={listProv}
                 caja={caja}
                 user={user}
                 nuevoGasto={nuevoGasto}
@@ -217,6 +284,7 @@ const gastoscaja = () => {
                 percIVARef={percIVARef}
                 totalRef={totalRef}
                 detalleRef={detalleRef}
+                error={error}
               />
             </div>
             <div className="modal-footer">
