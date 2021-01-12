@@ -7,11 +7,15 @@ import MapaRec from "../../components/mapas/MapaRec";
 
 const maparec = () => {
   let recRef = React.createRef();
+  let rec2Ref = React.createRef();
   let desdeRef = React.createRef();
   let hastaRef = React.createRef();
+  let accionRef = React.createRef();
+  let anoRef = React.createRef();
 
   const [desde, guadarDesde] = useState(null);
   const [hasta, guardarHasta] = useState(null);
+  const [ano, guardarAno] = useState(null);
   const [mapa, guardarMapa] = useState(null);
   const [mapaM, guardarMapaM] = useState(null);
   const [recup, guardarRecup] = useState(null);
@@ -40,6 +44,7 @@ const maparec = () => {
 
   const consultarMapa = async () => {
     guardarError(null);
+    guardarAno(null);
 
     let rec = recRef.current.value;
     let desde = desdeRef.current.value;
@@ -89,6 +94,58 @@ const maparec = () => {
     }
   };
 
+  const consultarMapa2 = async () => {
+    guardarError(null);
+    guardarMapa(null);
+    guardarMapaM(null);
+    guardarAno(null);
+
+    let rec = rec2Ref.current.value;
+    let ano = anoRef.current.value;
+    let accion = accionRef.current.value;
+
+    if (ano === "no") {
+      guardarError("Debes elegir un año");
+    } else if (accion === "no") {
+      guardarError(`Debes elegir la accion a analizar `);
+    } else if (rec === "no") {
+      guardarError("Debes elegir un recuperador");
+    } else {
+      guardarAno(ano);
+      await axios
+        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec2`, {
+          params: {
+            rec: rec,
+            accion: accion,
+            ano: ano,
+            emp: "W",
+          },
+        })
+        .then((res) => {
+          guardarMapa(res.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      await axios
+        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec2`, {
+          params: {
+            rec: rec,
+            accion: accion,
+            ano: ano,
+            emp: "M",
+          },
+        })
+        .then((res) => {
+          guardarMapaM(res.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const imprimir = () => {
     let contenido = document.getElementById("solicitud").innerHTML;
     let contenidoOrg = document.body.innerHTML;
@@ -100,7 +157,6 @@ const maparec = () => {
     document.body.innerHTML = contenidoOrg;
 
     window.location.reload();
-
   };
 
   return (
@@ -108,33 +164,89 @@ const maparec = () => {
       <FormMapaRec
         listado={recup}
         recRef={recRef}
+        rec2Ref={rec2Ref}
         desdeRef={desdeRef}
         hastaRef={hastaRef}
+        anoRef={anoRef}
+        accionRef={accionRef}
         consultarMapa={consultarMapa}
+        consultarMapa2={consultarMapa2}
         error={error}
+        datatoggle={"modal"}
+        datatarget={"#exampleModal"}
       />
 
-      {mapa ? (
-        <>
-          <div id="solicitud" className="mt-4">
-            <MapaRec mapa={mapa} mapaM={mapaM} desde={desde} hasta={hasta} />
-          </div>
-          <div className=" container alert alert-primary border border-dark p-4">
-            <h3>
-              <strong>
-                <u>Opciones</u>
-              </strong>
-            </h3>
-            <div className="row border border-dark p-4 mt-4">
-              <div className="col-md-12 d-flex justify-content-center">
-                <button className=" btn btn-primary " onClick={imprimir}>
-                  Imprimir
-                </button>
-              </div>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {mapa && mapa.length !== 0 ? (
+                <>
+                  <div id="solicitud" className="mt-4">
+                    <MapaRec
+                      mapa={mapa}
+                      mapaM={mapaM}
+                      desde={desde}
+                      hasta={hasta}
+                      ano={ano}
+                    />
+                  </div>
+                  <div className=" container alert alert-primary border border-dark p-4">
+                    <h3>
+                      <strong>
+                        <u>Opciones</u>
+                      </strong>
+                    </h3>
+                    <div className="row border border-dark p-4 mt-4">
+                      <div className="col-md-12 d-flex justify-content-center">
+                        <button
+                          className=" btn btn-primary "
+                          onClick={imprimir}
+                        >
+                          Imprimir
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : error ? (
+                <div className="alert alert-danger text-center text-uppercase m-4">
+                  {error}
+                </div>
+              ) : (
+                <div className="container alert alert-warning text-center text-uppercase">
+                  No se registran acciones
+                </div>
+              )}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
             </div>
           </div>
-        </>
-      ) : null}
+        </div>
+      </div>
     </Layout>
   );
 };

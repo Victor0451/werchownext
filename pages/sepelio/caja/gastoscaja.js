@@ -20,6 +20,7 @@ const gastoscaja = () => {
   let detalleRef = React.createRef();
 
   const [listProv, guardarListProv] = useState(null);
+  const [listConcep, guardarListConcep] = useState(null);
   const [gastos, guardarGastos] = useState([]);
   const [caja, guardarCaja] = useState(null);
   const [acGast, guardarAcGast] = useState(null);
@@ -47,6 +48,7 @@ const gastoscaja = () => {
 
       infoCaja(id);
       listadoProveedores();
+      listadoConceptos();
 
       let usuario = jsCookie.get("usuario");
 
@@ -62,6 +64,14 @@ const gastoscaja = () => {
       .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listprov`)
       .then((res) => {
         guardarListProv(res.data[0]);
+      });
+  };
+
+  const listadoConceptos = async () => {
+    axios
+      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listconcepto`)
+      .then((res) => {
+        guardarListConcep(res.data[0]);
       });
   };
 
@@ -271,6 +281,7 @@ const gastoscaja = () => {
             <div className="modal-body">
               <NuevoCajaGasto
                 listProv={listProv}
+                listConcep={listConcep}
                 caja={caja}
                 user={user}
                 nuevoGasto={nuevoGasto}

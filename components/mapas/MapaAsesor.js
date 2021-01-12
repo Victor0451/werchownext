@@ -61,7 +61,7 @@ const MapaAsesor = ({ mapa }) => {
             <tbody>
               {mapa.map((mapa, index) => (
                 <tr>
-                  <th scope="row">{index}</th>
+                  <th scope="row">{index + 1}</th>
                   <td>{mapa.mes}</td>
                   <td>{mapa.ventas}</td>
                   <td>$ {mapa.monto}</td>

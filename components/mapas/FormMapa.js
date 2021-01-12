@@ -1,7 +1,14 @@
 import React from "react";
 
-const FormMapa = ({ error, listado, asesorRef, anoRef, consultarMapa }) => {
-  
+const FormMapa = ({
+  error,
+  listado,
+  asesorRef,
+  anoRef,
+  consultarMapa,
+  datatoggle,
+  datatarget,
+}) => {
   return (
     <div className="container mt-4 alert alert-primary border border-dark p-4">
       <h2 className=" mb-4 ">
@@ -17,7 +24,7 @@ const FormMapa = ({ error, listado, asesorRef, anoRef, consultarMapa }) => {
             </strong>
           </label>
           <select className="custom-select" ref={asesorRef}>
-            <option selected>Selecciona un asesor</option>
+            <option selected value="no">Selecciona un asesor</option>
             {listado ? (
               <>
                 {listado.map((asesor) => (
@@ -34,7 +41,7 @@ const FormMapa = ({ error, listado, asesorRef, anoRef, consultarMapa }) => {
             </strong>
           </label>
           <select className="custom-select" ref={anoRef}>
-            <option selected>Selecciona un año</option>
+            <option selected value="no">Selecciona un año</option>
             <option value="2017">2017</option>
             <option value="2018">2018</option>
             <option value="2019">2019</option>
@@ -46,6 +53,8 @@ const FormMapa = ({ error, listado, asesorRef, anoRef, consultarMapa }) => {
           <button
             className="mt-4 btn btn-block btn-primary"
             onClick={consultarMapa}
+            data-target={datatarget}
+            data-toggle={datatoggle}
           >
             Buscar
           </button>

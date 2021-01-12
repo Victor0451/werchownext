@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  conceptossep,
   empresa,
   porciva,
-  prov,
   tipofac,
   mediopag,
   operadoressep,
@@ -17,10 +15,10 @@ import ConceptoSelect from "react-select";
 import IvaSelect from "react-select";
 import TipoFacturaSelect from "react-select";
 import OperadorSelect from "react-select";
-import Select from "../../layout/Select";
 
 const NuevoCajaGasto = ({
   listProv,
+  listConcep,
   caja,
   user,
   nuevoGasto,
@@ -226,7 +224,7 @@ const NuevoCajaGasto = ({
                 </strong>
               </label>
               <ConceptoSelect
-                options={conceptossep}
+                options={listConcep}
                 placeholder={"Concepto"}
                 onChange={(value) => handleChange(value, "concepto")}
               />
