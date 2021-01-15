@@ -50,7 +50,7 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa }) => {
             </div>
 
             <h3 className="col-md-12 mt-2 ">
-              <font size="4" className="badge badge-info">
+              <font size="4" className="">
                 <strong>
                   <u>Nueva Vigencia De Sepelio</u>:
                 </strong>{" "}

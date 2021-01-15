@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import moment from "moment";
@@ -13,11 +13,16 @@ const ListadoCajaGastos = ({
   acGast,
   totCaja,
   regGasto,
+  eliminarGastos,
 }) => {
-  if (!caja) return <Spinner />;
   console.log(gastos);
+
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
+      {/* //   {gastos.map((mapa, index) => (
+    //     <div>{index}</div>
+    //   ))} */}
+
       {caja.estado === 1 ? (
         <div className="mt-4  alert alert-success col-md-12 d-flex justify-content-between border border-dark p-2">
           <div className="col-md-5 mt-2">
@@ -180,19 +185,18 @@ const ListadoCajaGastos = ({
 
                   Cell: (row) => (
                     <>
-                      <a
-                        href="/sepelio/caja/gastoscaja"
-                        className="btn btn-info btn-sm mr-1"
+                      <button
+                        className="btn btn-danger btn-sm mr-1"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Cargar Gastos"
-                        onClick={() => selcaso(row)}
+                        title="Eliminar Gastos"
+                        onClick={() => eliminarGastos(row.index)}
                       >
                         <i
                           className="fa fa-pencil-square"
                           aria-hidden="true"
                         ></i>{" "}
-                      </a>
+                      </button>
                     </>
                   ),
                 },

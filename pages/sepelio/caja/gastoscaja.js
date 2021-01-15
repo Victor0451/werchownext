@@ -7,6 +7,7 @@ import Router, { useRouter } from "next/router";
 import toastr from "toastr";
 import ListadoCajaGastos from "../../../components/sepelio/caja/ListadoCajaGastos";
 import NuevoCajaGasto from "../../../components/sepelio/caja/NuevoCajaGasto";
+import Spinner from "../../../components/layout/Spinner";
 
 const gastoscaja = () => {
   let fechaRef = React.createRef();
@@ -163,7 +164,7 @@ const gastoscaja = () => {
   };
 
   const restartForm = () => {
-    fechaRef.current.value = "";
+    // fechaRef.current.value = "";
     nFacturaRef.current.value = 0;
     ptoVentaRef.current.value = 0;
     montoIVARef.current.value = 0;
@@ -249,9 +250,22 @@ const gastoscaja = () => {
       let totcaja = caja.monto - totgast;
 
       guardarTotCaja(totcaja);
-
-      restartForm();
     }
+    
+  };
+
+  const eliminarGastos = (index) => {
+    let totgast = acGast - parseFloat(gastos[index].total);
+
+    guardarAcGast(totgast);
+
+    let totcaja = caja.monto - totgast;
+
+    guardarTotCaja(totcaja);
+
+    gastos.splice(index, 1);
+
+    guardarGastos([...gastos]);
   };
 
   return (
@@ -311,15 +325,20 @@ const gastoscaja = () => {
         </div>
       </div>
 
-      <ListadoCajaGastos
-        caja={caja}
-        gastos={gastos}
-        dataToggle={"modal"}
-        dataTarget={"#exampleModal"}
-        acGast={acGast}
-        totCaja={totCaja}
-        regGasto={regGasto}
-      />
+      {caja ? (
+        <ListadoCajaGastos
+          caja={caja}
+          gastos={gastos}
+          dataToggle={"modal"}
+          dataTarget={"#exampleModal"}
+          acGast={acGast}
+          totCaja={totCaja}
+          regGasto={regGasto}
+          eliminarGastos={eliminarGastos}
+        />
+      ) : (
+        <Spinner />
+      )}
     </Layout>
   );
 };

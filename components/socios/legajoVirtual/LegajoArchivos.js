@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const LegajoArchivos = ({ archivos, empresa }) => {
+  const [archi, guardarArchi] = useState(null);
+
   if (!archivos)
     return (
       <div className="alert alert-danger text-center text-uppercase">
@@ -17,8 +19,8 @@ const LegajoArchivos = ({ archivos, empresa }) => {
       </h2>
       <div className="row mt-4 mb-4 text-center text-dark d-flex justify-content-center">
         {archivos.map((archivo, index) => (
-          <div key={index} className="">
-            <div className="">
+          <div key={index} className=" mt-4">
+            <div className="col-md-12 border border-dark p-4 mr-1">
               <strong>
                 <u>{archivo.archivo}</u>
               </strong>
@@ -27,33 +29,117 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               <img
                 src={`http://190.231.32.232:5002/api/archivos/legajovirtual/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
+                className="archivos p-4 "
+                data-toggle="modal"
+                data-target="#exampleModal2"
+                onClick={(e) => {
+                  e.preventDefault(), guardarArchi(archivo.archivo);
+                }}
               />
             ) : empresa === "M" ? (
               <img
                 src={`http://190.231.32.232:5002/api/archivos/legajovirtualm/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
+                className="archivos p-4 "
+                data-toggle="modal"
+                data-target="#exampleModal2"
+                onClick={(e) => {
+                  e.preventDefault(), guardarArchi(archivo.archivo);
+                }}
               />
             ) : null}
 
             <br />
 
             {empresa === "W" ? (
-              <a
-                className="btn btn-primary mt-4 "
-                href={`http://190.231.32.232:5002/api/archivos/legajovirtual/descargararchivo/${archivo.archivo}`}
-              >
-                Descargar
-              </a>
+              <div className="">
+                <a
+                  className="btn btn-primary mr-1 "
+                  href={`http://190.231.32.232:5002/api/archivos/legajovirtual/descargararchivo/${archivo.archivo}`}
+                >
+                  <i className="fa fa-download" aria-hidden="true"></i>
+                </a>
+                <button
+                  className="btn btn-danger mr-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    eliminarArchivos(archivo.archivo, index);
+                  }}
+                >
+                  <i className="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </div>
             ) : empresa === "M" ? (
-              <a
-                className="btn btn-primary mt-4 "
-                href={`http://190.231.32.232:5002/api/archivos/legajovirtualm/descargararchivo/${archivo.archivo}`}
-              >
-                Descargar
-              </a>
+              <div className="">
+                <a
+                  className="btn btn-primary mr-1 "
+                  href={`http://190.231.32.232:5002/api/archivos/legajovirtual/descargararchivom/${archivo.archivo}`}
+                >
+                  <i className="fa fa-download" aria-hidden="true"></i>
+                </a>
+                <button
+                  className="btn btn-danger mr-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    eliminarArchivos(archivo.archivo, index);
+                  }}
+                >
+                  <i className="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </div>
             ) : null}
           </div>
         ))}
+      </div>
+
+      {/* MODAL IMAGEN AMPLIA */}
+
+      <div
+        className="modal fade"
+        id="exampleModal2"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                <u>{archi}</u>
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body d-flex justify-content-center">
+              {empresa === "W" ? (
+                <img
+                  src={`http://190.231.32.232:5002/api/archivos/legajovirtual/archivo/${archi}`}
+                  classNameName="archimodal p-4  "
+                />
+              ) : (
+                <img
+                  src={`http://190.231.32.232:5002/api/archivos/legajovirtualm/archivo/${archi}`}
+                  classNameName="archimodal p-4  "
+                />
+              )}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

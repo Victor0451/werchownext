@@ -18,7 +18,6 @@ const Rehabilitacion = ({
   vigenciaRef,
   error,
 }) => {
-  console.log(vigencia);
   let fecha = moment().format("DD/MM/YYYY");
 
   return (
@@ -261,7 +260,7 @@ const Rehabilitacion = ({
                     <label>
                       <strong>
                         {" "}
-                        <u> Cuotas A Pagar: </u>
+                        <u> Meses Adeudados: </u>
                       </strong>
                     </label>
                     <input
