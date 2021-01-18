@@ -9,7 +9,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
         No Hay Archivos
       </div>
     );
-
+  console.log(archivos, empresa);
   return (
     <div className="container border border-dark p-4">
       <h2 className="mb-4">

@@ -148,6 +148,17 @@ const Adimn = () => {
 
           <li>
             <a
+              href="/prestamos/informeprestamos"
+              className="dropdown-item text-dark"
+            >
+              Reportes
+            </a>
+          </li>
+
+          <hr />
+
+          <li>
+            <a
               href="/prestamos/imprimircaratula"
               className="dropdown-item text-dark"
             >

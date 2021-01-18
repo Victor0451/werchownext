@@ -21,6 +21,8 @@ const gastoscaja = () => {
   let detalleRef = React.createRef();
 
   const [listProv, guardarListProv] = useState(null);
+  const [servicios, guardarServicios] = useState(null);
+  const [idservicio, guardaridservicio] = useState(null);
   const [listConcep, guardarListConcep] = useState(null);
   const [gastos, guardarGastos] = useState([]);
   const [caja, guardarCaja] = useState(null);
@@ -50,6 +52,7 @@ const gastoscaja = () => {
       infoCaja(id);
       listadoProveedores();
       listadoConceptos();
+      servicioCombo();
 
       let usuario = jsCookie.get("usuario");
 
@@ -108,6 +111,9 @@ const gastoscaja = () => {
     }
     if (flag === "operadortramite") {
       guardarOpTramite(value.label);
+    }
+    if (flag === "servicio") {
+      guardaridservicio(value.value);
     }
   };
 
@@ -210,6 +216,7 @@ const gastoscaja = () => {
       perciva: percIVARef.current.value,
       detalle: detalleRef.current.value,
       total: totalRef.current.value,
+      idservicio: idservicio,
     };
 
     if (gasto.nfactura === "") {
@@ -250,8 +257,9 @@ const gastoscaja = () => {
       let totcaja = caja.monto - totgast;
 
       guardarTotCaja(totcaja);
+
+      console.log(gasto);
     }
-    
   };
 
   const eliminarGastos = (index) => {
@@ -266,6 +274,17 @@ const gastoscaja = () => {
     gastos.splice(index, 1);
 
     guardarGastos([...gastos]);
+  };
+
+  const servicioCombo = async () => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/servicio/serviciocombo`)
+      .then((res) => {
+        guardarServicios(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -310,6 +329,7 @@ const gastoscaja = () => {
                 totalRef={totalRef}
                 detalleRef={detalleRef}
                 error={error}
+                servicios={servicios}
               />
             </div>
             <div className="modal-footer">

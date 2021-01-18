@@ -57,6 +57,7 @@ const subirarchivo = () => {
   const buscarTitular = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
 
@@ -93,7 +94,7 @@ const subirarchivo = () => {
 
   const buscarTitularM = async (e) => {
     e.preventDefault();
-
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
 
@@ -131,6 +132,7 @@ const subirarchivo = () => {
   const buscarTitularDni = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
 
@@ -168,6 +170,7 @@ const subirarchivo = () => {
   const buscarTitularDniM = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
 

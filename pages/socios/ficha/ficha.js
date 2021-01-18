@@ -145,6 +145,7 @@ const ficha = () => {
   const buscarTitular = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
@@ -187,6 +188,7 @@ const ficha = () => {
   const buscarTitularM = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
@@ -213,6 +215,7 @@ const ficha = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           }
+          traerArchivosM(ficha.CONTRATO);
           guardarEmpresa("M");
           traerAdhsM(ficha.CONTRATO);
         })
@@ -228,6 +231,7 @@ const ficha = () => {
   const buscarTitularDni = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
@@ -269,6 +273,7 @@ const ficha = () => {
   const buscarTitularDniM = async (e) => {
     e.preventDefault();
 
+    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);

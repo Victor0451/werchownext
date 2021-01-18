@@ -15,6 +15,7 @@ import ConceptoSelect from "react-select";
 import IvaSelect from "react-select";
 import TipoFacturaSelect from "react-select";
 import OperadorSelect from "react-select";
+import ServicioSelect from "react-select";
 
 const NuevoCajaGasto = ({
   listProv,
@@ -33,6 +34,7 @@ const NuevoCajaGasto = ({
   totalRef,
   detalleRef,
   error,
+  servicios,
 }) => {
   if (!caja) return <Spinner />;
 
@@ -338,11 +340,19 @@ const NuevoCajaGasto = ({
               />
             </div>
 
-            {/* <Select
-              ref={detalleRef}
-              listado={operadoressep}
-              label={"probando"}
-            /> */}
+            <div className="form-group col-md-4 ">
+              <label>
+                <strong>
+                  {" "}
+                  <u>Servicio: </u>
+                </strong>
+              </label>
+              <ServicioSelect
+                options={servicios}
+                placeholder={"Servicio"}
+                onChange={(value) => handleChange(value, "servicio")}
+              />
+            </div>
 
             <div className="mt-4 form-group col-md-12">
               <label>
