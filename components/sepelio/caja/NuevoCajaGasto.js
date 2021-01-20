@@ -198,6 +198,7 @@ const NuevoCajaGasto = ({
               <input
                 type="number"
                 className="form-control"
+                name="nfactura"
                 ref={nFacturaRef}
                 placeholder="N° Factura"
                 defaultValue={0}

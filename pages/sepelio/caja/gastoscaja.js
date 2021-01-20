@@ -50,6 +50,7 @@ const gastoscaja = () => {
       let id = router.query.id;
 
       infoCaja(id);
+
       listadoProveedores();
       listadoConceptos();
       servicioCombo();
@@ -159,38 +160,59 @@ const gastoscaja = () => {
         gastos
       )
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          toastr.success(
+            "Se cerro la caja y registraron los gastos correctamente",
+            "ATENCION"
+          );
 
-        updateTotales();
-        cerrarCaja();
+          updateTotales();
+          cerrarCaja();
+          updateFechaCierre();
+
+          setTimeout(() => {
+            window.location.replace("/sepelio/caja/listado");
+          }, 500);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const restartForm = () => {
-    // fechaRef.current.value = "";
-    nFacturaRef.current.value = 0;
-    ptoVentaRef.current.value = 0;
-    montoIVARef.current.value = 0;
-    retIIBBRef.current.value = 0;
-    retggciasRef.current.value = 0;
-    percIVARef.current.value = 0;
-    detalleRef.current.value = "";
-    totalRef.current.value = 0;
-
-    guardarOpTramite(null);
-    guardarAcGast(null);
-    guardarTotCaja(null);
-    guardarUsuario(null);
-    guardarEmpresa(null);
-    guardarConcepto(null);
-    guardarFactura(null);
-    guardarMedioPago(null);
-    guardarPorciva(null);
-    guardarProveedor(null);
+  const updateFechaCierre = async () => {
+    await axios
+      .put(
+        `http://190.231.32.232:5002/api/sepelio/cajasepelio/updatefechacierre/${caja.idcaja}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+  // const restartForm = () => {
+  //   // fechaRef.current.value = "";
+
+  //   ptoVentaRef.current.value = 0;
+  //   montoIVARef.current.value = 0;
+  //   retIIBBRef.current.value = 0;
+  //   retggciasRef.current.value = 0;
+  //   percIVARef.current.value = 0;
+  //   detalleRef.current.value = "";
+  //   totalRef.current.value = 0;
+
+  //   guardarOpTramite(null);
+  //   guardarUsuario(null);
+  //   guardarEmpresa(null);
+  //   guardarConcepto(null);
+  //   guardarFactura(null);
+  //   guardarMedioPago(null);
+  //   guardarPorciva(null);
+  //   guardarProveedor(null);
+  // };
 
   const nuevoGasto = (e) => {
     e.preventDefault();
@@ -257,8 +279,6 @@ const gastoscaja = () => {
       let totcaja = caja.monto - totgast;
 
       guardarTotCaja(totcaja);
-
-      console.log(gasto);
     }
   };
 

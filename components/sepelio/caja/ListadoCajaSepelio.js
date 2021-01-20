@@ -120,46 +120,69 @@ const ListadoCajaSepelio = ({ cajas }) => {
                   Cell: (row) => (
                     <>
                       {row.original.estado === 1 ? (
+                        <>
+                          <Link
+                            href={{
+                              pathname: "/sepelio/caja/ingresoscaja",
+                              query: {
+                                id: row.original.idcaja,
+                              },
+                            }}
+                          >
+                            <button
+                              href=""
+                              className="btn btn-success btn-sm mr-1"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Cargar Ingresos"
+                            >
+                              <i
+                                className="fa fa-arrow-up"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                          </Link>
+                          <Link
+                            href={{
+                              pathname: "/sepelio/caja/gastoscaja",
+                              query: {
+                                id: row.original.idcaja,
+                              },
+                            }}
+                          >
+                            <button
+                              href=""
+                              className="btn btn-warning btn-sm mr-1"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Cargar Gastos"
+                            >
+                              <i
+                                className="fa fa-arrow-down"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                          </Link>
+                        </>
+                      ) : (
                         <Link
                           href={{
-                            pathname: "/sepelio/caja/gastoscaja",
+                            pathname: "/sepelio/caja/imprimir",
                             query: {
                               id: row.original.idcaja,
                             },
                           }}
                         >
                           <button
-                            href=""
-                            className="btn btn-info btn-sm mr-1"
+                            className="btn btn-sm btn-primary mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
-                            title="Cargar Gastos"
+                            title="Imprimir Solicitud"
                           >
-                            <i
-                              className="fa fa-pencil-square"
-                              aria-hidden="true"
-                            ></i>{" "}
+                            <i className="fa fa-print" aria-hidden="true"></i>
                           </button>
                         </Link>
-                      ) : null}
-
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/impresion",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-sm btn-primary mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Imprimir Solicitud"
-                        >
-                          <i className="fa fa-print" aria-hidden="true"></i>
-                        </button>
-                      </Link>
+                      )}
                     </>
                   ),
                 },

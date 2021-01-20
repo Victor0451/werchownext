@@ -15,14 +15,8 @@ const ListadoCajaGastos = ({
   regGasto,
   eliminarGastos,
 }) => {
-  console.log(gastos);
-
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
-      {/* //   {gastos.map((mapa, index) => (
-    //     <div>{index}</div>
-    //   ))} */}
-
       {caja.estado === 1 ? (
         <div className="mt-4  alert alert-success col-md-12 d-flex justify-content-between border border-dark p-2">
           <div className="col-md-5 mt-2">
@@ -104,6 +98,9 @@ const ListadoCajaGastos = ({
           </h3>
         </div>
         <div className="col-md-6 mt-3 d-flex justify-content-end">
+          <a className="btn btn-danger mr-1" href="/sepelio/caja/listado">
+            Cancelar
+          </a>
           <button
             type="button"
             className="btn btn-primary"
@@ -131,7 +128,7 @@ const ListadoCajaGastos = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["fecha"] }),
                   filterAll: true,
-                  width: 200,
+                  width: 150,
                 },
                 {
                   Header: "Empresa",
@@ -140,7 +137,7 @@ const ListadoCajaGastos = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["empresa"] }),
                   filterAll: true,
-                  width: 100,
+                  width: 150,
                 },
                 {
                   Header: "Concepto",
@@ -149,24 +146,25 @@ const ListadoCajaGastos = ({
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["concepto"] }),
                   filterAll: true,
-                  width: 100,
+                  width: 200,
                 },
 
                 {
-                  Header: "Tipo Factura",
-                  id: "tipofactura",
-                  accessor: (d) => d.tipofactura,
+                  Header: "Pto Venta",
+                  id: "ptoventa",
+                  accessor: (d) => d.ptoventa,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["tipofactura"] }),
+                    matchSorter(rows, filter.value, { keys: ["ptoventa"] }),
                   filterAll: true,
+                  width: 80,
                 },
 
                 {
-                  Header: "Medio de Pago",
-                  id: "mediopago",
-                  accessor: (d) => d.mediopago,
+                  Header: "N° Factura",
+                  id: "nfactura",
+                  accessor: (d) => d.nfactura,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["mediopago"] }),
+                    matchSorter(rows, filter.value, { keys: ["nfactura"] }),
                   filterAll: true,
                 },
 
@@ -178,6 +176,17 @@ const ListadoCajaGastos = ({
                     matchSorter(rows, filter.value, { keys: ["total"] }),
                   filterAll: true,
                   width: 100,
+                },
+
+                {
+                  Header: "Operador",
+                  id: "operadortramite",
+                  accessor: (d) => d.operadortramite,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["operadortramite"],
+                    }),
+                  filterAll: true,
                 },
 
                 {
