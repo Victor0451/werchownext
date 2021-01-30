@@ -72,46 +72,76 @@ export default class Sepelio extends Component {
             Sepelio
           </a>
           <ul className="dropdown-menu">
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Ataudes
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/sepelio/ataudes/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Nuevo Ataud
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/sepelio/ataudes/actualizarstock"
-                  className="dropdown-item text-dark"
-                >
-                  Actualizar Stock
-                </a>
-              </li>
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Ataudes
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/ataudes/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Nuevo Ataud
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/ataudes/actualizarstock"
+                    className="dropdown-item text-dark"
+                  >
+                    Actualizar Stock
+                  </a>
+                </li>
 
-              <hr />
-              <li>
-                <a
-                  href="/sepelio/ataudes/stock"
-                  className="dropdown-item text-dark"
-                >
-                  Stock Actual
-                </a>
-              </li>
-            </ul>
-          </li>
-            <hr/>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/ataudes/stock"
+                    className="dropdown-item text-dark"
+                  >
+                    Stock Actual
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Caja
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/caja/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Habilitar Caja
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/caja/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado de Cajas
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
             <li className="dropdown-submenu">
               <a
                 href="#"
@@ -133,6 +163,15 @@ export default class Sepelio extends Component {
                 <hr />
                 <li>
                   <a
+                    href="/sepelio/servicios/liquidacion/liquidacion"
+                    className="dropdown-item text-dark"
+                  >
+                    Liquidar Servicio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
                     href="/sepelio/servicios/listado"
                     className="dropdown-item text-dark"
                   >
@@ -148,16 +187,6 @@ export default class Sepelio extends Component {
                     Listado De Serv Historicos
                   </a>
                 </li>
-                {/* <hr />
-                <li>
-                  <a
-                    href="/sepelio/servicios/gastos"
-                    className="dropdown-item text-dark"
-                  >
-                    Ingresar Gastos
-                  </a>
-                </li>
-               
               </ul>
             </li>
             <hr />
@@ -178,9 +207,10 @@ export default class Sepelio extends Component {
                   >
                     Planificar Guardias
                   </a>
-                </li> */}
+                </li>
               </ul>
             </li>
+            <hr />
           </ul>
         </li>
       </ul>

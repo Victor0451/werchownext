@@ -15,28 +15,30 @@ const FormGastosServ = ({
   handleSubmit,
   handleBlur,
   importeRef,
+  operadorsep,
+  gastliq,
 }) => {
   if (!servicio) return <Spinner />;
 
-  const handleImport = () => {
-    let select = document.getElementById("tipogasto");
-    let importe = document.getElementById("importe");
+  // const handleImport = () => {
+  //   let select = document.getElementById("tipogasto");
+  //   let importe = document.getElementById("importe");
 
-    if (
-      select.value === "Instalacion" ||
-      select.value === "Conduccion" ||
-      select.value === "Limpieza sala" ||
-      select.value === "Guardia oficina" ||
-      select.value === "Viaje interior" ||
-      select.value === "Atencion sala"
-    ) {
-      importe.value = 0;
-      importe.readOnly = true;
-    } else {
-      importe.value = "";
-      importe.readOnly = false;
-    }
-  };
+  //   if (
+  //     select.value === "Instalacion" ||
+  //     select.value === "Conduccion" ||
+  //     select.value === "Limpieza sala" ||
+  //     select.value === "Guardia oficina" ||
+  //     select.value === "Viaje interior" ||
+  //     select.value === "Atencion sala"
+  //   ) {
+  //     importe.value = 0;
+  //     importe.readOnly = true;
+  //   } else {
+  //     importe.value = "";
+  //     importe.readOnly = false;
+  //   }
+  // };
 
   return (
     <div className="container mt-4">
@@ -128,24 +130,13 @@ const FormGastosServ = ({
                 <option selected value="no">
                   Elige una Opcion
                 </option>
-                <option value="Retiro Cuerpo">Retiro Cuerpo</option>
-                <option value="Instalacion">Instalacion</option>
-                <option value="Tramites">Tramites</option>
-                <option value="Funebre">Funebre</option>
-                <option value="Portacorona">Portacorona</option>
-                <option value="Diario">Diario</option>
-                <option value="Registro Civil">Registro Civil</option>
-                <option value="Impuesto Cementerio">Impuesto Cementerio</option>
-                <option value="Parcela">Parcela</option>
-                <option value="Comida">Comida</option>
-                <option value="Formol">Formol</option>
-                <option value="Movilidad">Movilidad</option>
-                <option value="Coffee">Coffee</option>
-                <option value="Conduccion">Conduccion Autos</option>
-                <option value="Limpieza sala">Limpieza de Sala</option>
-                <option value="Guardia oficina">Guardia en Oficina</option>
-                <option value="Viaje interior">Viaje al Interior</option>
-                <option value="Atencion sala">Atencion en Sala</option>
+                {gastliq
+                  ? gastliq.map((gasto, index) => (
+                      <option key={index} value={gasto.value}>
+                        {gasto.label}
+                      </option>
+                    ))
+                  : null}
               </select>
               {errores.tipogasto && (
                 <div className="alert alert-danger text-center p-2 mt-2">
@@ -154,7 +145,7 @@ const FormGastosServ = ({
               )}
             </div>
 
-            <div className="form-group col-md-4">
+            {/* <div className="form-group col-md-4">
               <label>Importe</label>
               <input
                 type="number"
@@ -172,7 +163,7 @@ const FormGastosServ = ({
                   {errores.importe}
                 </div>
               )}
-            </div>
+            </div> */}
 
             <div className="form-group col-md-4">
               <label>
@@ -191,12 +182,13 @@ const FormGastosServ = ({
                 <option selected value="no">
                   Elige una Opcion
                 </option>
-                <option value="agareca">agareca</option>
-                <option value="juro">juro</option>
-                <option value="muro">muro</option>
-                <option value="mquiroz">mquiroz</option>
-                <option value="jzamorano">jzamorano</option>
-                <option value="auxiliar">auxiliar</option>
+                {operadorsep
+                  ? operadorsep.map((operador, index) => (
+                      <option key={index} value={operador.value}>
+                        {operador.label}
+                      </option>
+                    ))
+                  : null}
               </select>
               {errores.operador && (
                 <div className="alert alert-danger text-center p-2 mt-2">

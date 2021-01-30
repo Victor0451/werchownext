@@ -13,7 +13,7 @@ const liquidacion = () => {
 
   let token = jsCookie.get("token");
 
-  const serviciosALiquidar = async (id) => {
+  const serviciosALiquidar = async () => {
     await axios
       .get(
         `http://190.231.32.232:5002/api/sepelio/servicioliquidacion/serviciosaliquidar`

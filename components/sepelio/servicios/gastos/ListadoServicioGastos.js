@@ -57,17 +57,17 @@ const ListadoServicioGastos = ({ listado }) => {
                   filterAll: true,
                   width: 150,
                 },
-                {
-                  Header: "Importe",
-                  id: "importe",
-                  accessor: (d) => d.importe,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, {
-                      keys: ["importe"],
-                    }),
-                  filterAll: true,
-                  width: 100,
-                },
+                // {
+                //   Header: "Importe",
+                //   id: "importe",
+                //   accessor: (d) => d.importe,
+                //   filterMethod: (filter, rows) =>
+                //     matchSorter(rows, filter.value, {
+                //       keys: ["importe"],
+                //     }),
+                //   filterAll: true,
+                //   width: 100,
+                // },
 
                 {
                   Header: "Observacion",

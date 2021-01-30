@@ -25,6 +25,8 @@ const gastos = () => {
 
   const [servicio, guardarServicio] = useState(null);
   const [gastos, guardarGastos] = useState(null);
+  const [operadorsep, guardarOperadorSep] = useState(null);
+  const [gastliq, guardarGastLiq] = useState(null);
 
   let token = jsCookie.get("token");
   let router = useRouter();
@@ -39,6 +41,10 @@ const gastos = () => {
       traerSolicitud(id);
 
       traerGastos(idservicio);
+
+      traerOperador();
+
+      traerGastLiq();
     }
   }, []);
 
@@ -77,6 +83,30 @@ const gastos = () => {
     }
 
     return total;
+  };
+
+  const traerOperador = async () => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/sepelio/serviciogastos/operadoressep`
+      )
+      .then((res) => {
+        guardarOperadorSep(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerGastLiq = async () => {
+    await axios
+      .get(`http://190.231.32.232:5002/api/sepelio/serviciogastos/gastliq`)
+      .then((res) => {
+        guardarGastLiq(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const {
@@ -141,14 +171,7 @@ const gastos = () => {
                   </strong>
                 </h2>
                 <div className=" row mt-4 mb-4 border border-dark p-4">
-                  <div className="col-md-4">
-                    <h4 className="alert alert-info">
-                      <strong>
-                        <u>Total gastos:</u> ${calcularGastos(gastos)}
-                      </strong>
-                    </h4>
-                  </div>
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <button
                       className="btn btn-sm btn-block btn-primary"
                       data-toggle="modal"
@@ -157,7 +180,7 @@ const gastos = () => {
                       Cargar Gasto
                     </button>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <a
                       href="/sepelio/servicios/listado"
                       className="btn btn-sm btn-block btn-danger"
@@ -246,6 +269,8 @@ const gastos = () => {
                 handleSubmit={handleSubmit}
                 handleBlur={handleBlur}
                 importeRef={importeRef}
+                operadorsep={operadorsep}
+                gastliq={gastliq}
               />
             </div>
             <div className="modal-footer">
