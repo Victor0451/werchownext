@@ -70,9 +70,16 @@ const GestionCaso = ({
           aria-labelledby="nav-home-tab"
         >
           {campanaOp.length === 0 ? (
-            <div className="alert alert-primary mt-4">
-              No Tienes Casos Asignados
-            </div>
+            <>
+              <div className="alert alert-primary mt-4">
+                No Tienes Casos Asignados
+              </div>
+              <div className="d-flex justify-content-end">
+                <a className="mt-4 btn btn-danger" href="/campanas/campanas">
+                  Volver al listado de campañas
+                </a>
+              </div>
+            </>
           ) : (
             <ListadoCaso
               campana={campanaOp}
@@ -89,9 +96,16 @@ const GestionCaso = ({
           aria-labelledby="nav-profile-tab"
         >
           {campanaOpTrab.length === 0 ? (
-            <div className="alert alert-primary mt-4">
-              No Tienes Casos Trabajados
-            </div>
+            <>
+              <div className="alert alert-primary mt-4">
+                No Tienes Casos Trabajados
+              </div>
+              <div className="d-flex justify-content-end">
+                <a className="mt-4 btn btn-danger" href="/campanas/campanas">
+                  Volver al listado de campañas
+                </a>
+              </div>
+            </>
           ) : (
             <ListadoCaso
               campana={campanaOpTrab}
@@ -109,9 +123,16 @@ const GestionCaso = ({
           aria-labelledby="nav-contact-tab"
         >
           {campanaOpNoti.length === 0 ? (
-            <div className="alert alert-primary mt-4">
-              No Tienes Casos Notificados
-            </div>
+            <>
+              <div className="alert alert-primary mt-4">
+                No Tienes Casos Notificados
+              </div>
+              <div className="d-flex justify-content-end">
+                <a className="mt-4 btn btn-danger" href="/campanas/campanas">
+                  Volver al listado de campañas
+                </a>
+              </div>
+            </>
           ) : (
             <ListadoCaso
               campana={campanaOpNoti}

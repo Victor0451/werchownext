@@ -70,7 +70,7 @@ const GestionCampanas = () => {
             <div className="row">
               <div className="col-md-6 mt-4">
                 <div className="card bg-light mb-3">
-                  <div className="card-header">ATRASADOS</div>
+                  <div className="card-header">ATRASADOS 1 CUOTA</div>
                   <div className="card-body">
                     <h5 className="card-title">Listado de casos:</h5>
                     <Link
@@ -78,6 +78,27 @@ const GestionCampanas = () => {
                         pathname: "/campanas/gestioncaso/[campana]",
                         query: {
                           camp: "Atrasados",
+                          empresa: "werchow",
+                          operador: operadorNom,
+                        },
+                      }}
+                    >
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 mt-4">
+                <div className="card bg-light mb-3">
+                  <div className="card-header">ATRASADOS 2 CUOTAS</div>
+                  <div className="card-body">
+                    <h5 className="card-title">Listado de casos:</h5>
+                    <Link
+                      href={{
+                        pathname: "/campanas/gestioncaso/[campana]",
+                        query: {
+                          camp: "Atrasados2",
                           empresa: "werchow",
                           operador: operadorNom,
                         },
@@ -104,6 +125,31 @@ const GestionCampanas = () => {
                         },
                       }}
                     >
+                      <div className="alert alert-info text-center text-uppercase">
+                        CAMPAÑA INHABILITADA
+                      </div>
+
+                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 mt-4">
+                <div className="card bg-light mb-3">
+                  <div className="card-header">RECUPERACION GENERAL</div>
+                  <div className="card-body">
+                    <h5 className="card-title">Listado de casos</h5>
+                    <Link
+                      href={{
+                        pathname: "/campanas/gestioncaso/[campana]",
+                        query: {
+                          camp: "Recuperaciongral",
+                          empresa: "werchow",
+                          operador: "todos",
+                        },
+                      }}
+                    >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
                   </div>
@@ -122,6 +168,30 @@ const GestionCampanas = () => {
                           camp: "Reincidente",
                           empresa: "werchow",
                           operador: operadorNom,
+                        },
+                      }}
+                    >
+                      <div className="alert alert-info text-center text-uppercase">
+                        CAMPAÑA INHABILITADA
+                      </div>
+                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 mt-4">
+                <div className="card bg-light mb-3">
+                  <div className="card-header">REINCIDENTES GENERAL</div>
+                  <div className="card-body">
+                    <h5 className="card-title">Listado de casos</h5>
+                    <Link
+                      href={{
+                        pathname: "/campanas/gestioncaso/[campana]",
+                        query: {
+                          camp: "Reincidentegral",
+                          empresa: "werchow",
+                          operador: "todos",
                         },
                       }}
                     >

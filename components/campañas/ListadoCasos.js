@@ -334,6 +334,12 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
         className="-striped -highlight"
       />
 
+      <div className="d-flex justify-content-end">
+        <a className="mt-4 btn btn-danger" href="/campanas/campanas">
+          Volver al listado de campañas
+        </a>
+      </div>
+
       <div
         className={`modal fade bd-example-modal-${modal}`}
         role="dialog"
