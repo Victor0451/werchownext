@@ -125,11 +125,11 @@ const GestionCampanas = () => {
                         },
                       }}
                     >
-                      <div className="alert alert-info text-center text-uppercase">
+                      {/* <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
-                      </div>
+                      </div> */}
 
-                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
+                      <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
                   </div>
                 </div>
@@ -150,7 +150,10 @@ const GestionCampanas = () => {
                         },
                       }}
                     >
-                      <a className="btn btn-primary">Abrir Campaña</a>
+                       <div className="alert alert-info text-center text-uppercase">
+                        CAMPAÑA INHABILITADA
+                      </div>
+                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
                     </Link>
                   </div>
                 </div>
@@ -171,10 +174,10 @@ const GestionCampanas = () => {
                         },
                       }}
                     >
-                      <div className="alert alert-info text-center text-uppercase">
+                      {/* <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
-                      </div>
-                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
+                      </div> */}
+                      <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
                   </div>
                 </div>
@@ -195,7 +198,10 @@ const GestionCampanas = () => {
                         },
                       }}
                     >
-                      <a className="btn btn-primary">Abrir Campaña</a>
+                       <div className="alert alert-info text-center text-uppercase">
+                        CAMPAÑA INHABILITADA
+                      </div>
+                      {/* <a className="btn btn-primary">Abrir Campaña</a> */}
                     </Link>
                   </div>
                 </div>

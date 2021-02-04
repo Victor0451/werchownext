@@ -135,6 +135,12 @@ const Campcaso = ({ socioRes }) => {
         ? `El socio ${socioRes.contrato} pertenece a la campaña de REINCIDENTES MUTUAL de VALERIA FIDAO`
         : socioRes.idcampana === 66
         ? `El socio ${socioRes.contrato} pertenece a la campaña de BLANQUEO MUTUAL de VALERIA FIDAO`
+        : socioRes.idcampana === 67
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS 2 MUTUAL de MARIA GALIAN`
+        : socioRes.idcampana === 68
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS 2 MUTUAL de GISELA GIMENEZ`
+        : socioRes.idcampana === 69
+        ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS 2 MUTUAL de VALERIA FIDAO`
         : null}
     </div>
   );
