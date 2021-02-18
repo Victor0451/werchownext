@@ -15,6 +15,7 @@ const consulta = () => {
   const [ventas, guardarVentas] = useState(null);
   const [ventasase, guardarVentasAse] = useState(null);
   const [ventaspago, guardarVentasPago] = useState(null);
+  const [ventaslocalidad, guardarVentasLocalidad] = useState(null);
 
   const [errores, guardarErrores] = useState(null);
   const [spinner, guardarSpinner] = useState(null);
@@ -53,6 +54,7 @@ const consulta = () => {
 
           buscarVentasXAse();
           buscarVentasXMedPago();
+          buscarVentasXLocalidad();
         })
         .catch((error) => {
           console.log(error);
@@ -98,6 +100,25 @@ const consulta = () => {
       });
   };
 
+  const buscarVentasXLocalidad = async () => {
+    await axios
+      .get(
+        `http://190.231.32.232:5002/api/ventas/consultas/consultaventaslocalidad`,
+        {
+          params: {
+            mes: mes,
+            ano: ano,
+          },
+        }
+      )
+      .then((res) => {
+        guardarVentasLocalidad(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -128,6 +149,7 @@ const consulta = () => {
             ano={ano}
             ventasase={ventasase}
             ventaspago={ventaspago}
+            ventaslocalidad={ventaslocalidad}
           />
 
           <div className="container alert alert-primary mt-4">

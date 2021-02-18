@@ -3,10 +3,15 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../components/layout/Spinner";
 
-const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
+const ListadoPadron = ({
+  ventas,
+  mes,
+  ano,
+  ventasase,
+  ventaspago,
+  ventaslocalidad,
+}) => {
   if (ventas === null) return <Spinner />;
-
-  console.log(ventas);
 
   const totalVentas = (ventas) => {
     let total = 0;
@@ -30,6 +35,11 @@ const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
         </strong>
       </h2>
       <div className="p-2">
+        <div className="mt-4 mb-4 border border-dark alert alert-warning p-4 text-center text-uppercase">
+          en este informe no se tienen en cuenta las ventas de Plan Novell ni
+          venta de Adherentes
+        </div>
+
         <div className="border border-dark alert alert-primary p-4">
           <div className="d-flex justify-content-between border border-dark alert alert-info mt-4 mb-4 p-4">
             <div className="col-md-6">
@@ -64,7 +74,7 @@ const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
                   <tbody>
                     {ventasase.map((ventas, index) => (
                       <tr key={index}>
-                        <td>{index}</td>
+                        <td>{index + 1}</td>
                         <td>{ventas.asesor}</td>
                         <td>{ventas.cantidad}</td>
                       </tr>
@@ -91,8 +101,35 @@ const ListadoPadron = ({ ventas, mes, ano, ventasase, ventaspago }) => {
                   <tbody>
                     {ventaspago.map((ventas, index) => (
                       <tr key={index}>
-                        <td>{index}</td>
+                        <td>{index + 1}</td>
                         <td>{ventas.mediopago}</td>
+                        <td>{ventas.cantidad}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+
+            {ventaslocalidad ? (
+              <div className=" mt-4 col-md-6">
+                <h5 className="mb-2">
+                  <u>Ventas por localidad</u>
+                </h5>
+
+                <table class="table table-sm border border-dark list">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Localidad</th>
+                      <th scope="col">Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ventaslocalidad.map((ventas, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{ventas.localidad}</td>
                         <td>{ventas.cantidad}</td>
                       </tr>
                     ))}
