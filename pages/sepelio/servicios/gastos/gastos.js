@@ -134,7 +134,6 @@ const gastos = () => {
       hs_inicio: hsinicio,
       hs_fin: hsfin,
       tipo_gasto: tipogasto,
-      importe: importeRef.current.value,
       operador: operador,
       observaciones: observaciones,
     };
@@ -193,41 +192,41 @@ const gastos = () => {
               <ListadoServicioGastos listado={gastos} />
             </>
           ) : (
-            <div className="container mt-4 border border-dark p-4 alert alert-primary">
-              <h2>
-                <strong>
-                  <u> Gastos del servicio N° {servicio.idservicio}</u>:{" "}
-                  {servicio.apellido}, {servicio.nombre}
-                </strong>
-              </h2>
-              <div className=" row mt-4 mb-4 border border-dark p-4">
-                <div className="col-md-4">
-                  <h4 className="">
-                    <strong>
-                      <u>No Hay gastos registrados</u>
-                    </strong>
-                  </h4>
-                </div>
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-sm btn-block btn-primary"
-                    data-toggle="modal"
-                    data-target="#adhs"
-                  >
-                    Cargar Gasto
+              <div className="container mt-4 border border-dark p-4 alert alert-primary">
+                <h2>
+                  <strong>
+                    <u> Gastos del servicio N° {servicio.idservicio}</u>:{" "}
+                    {servicio.apellido}, {servicio.nombre}
+                  </strong>
+                </h2>
+                <div className=" row mt-4 mb-4 border border-dark p-4">
+                  <div className="col-md-4">
+                    <h4 className="">
+                      <strong>
+                        <u>No Hay gastos registrados</u>
+                      </strong>
+                    </h4>
+                  </div>
+                  <div className="col-md-4">
+                    <button
+                      className="btn btn-sm btn-block btn-primary"
+                      data-toggle="modal"
+                      data-target="#adhs"
+                    >
+                      Cargar Gasto
                   </button>
-                </div>
-                <div className="col-md-4">
-                  <a
-                    href="/sepelio/servicio/listado"
-                    className="btn btn-sm btn-block btn-danger"
-                  >
-                    Volver al Listado
+                  </div>
+                  <div className="col-md-4">
+                    <a
+                      href="/sepelio/servicio/listado"
+                      className="btn btn-sm btn-block btn-danger"
+                    >
+                      Volver al Listado
                   </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </>
       ) : null}
 

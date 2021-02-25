@@ -1,6 +1,7 @@
 import React from "react";
 
 const FormLiquidarServicio = ({ servicio, liqop, total }) => {
+
   return (
     <div>
       <div className="container border border-dark alert alert-primary p-4">
@@ -24,22 +25,22 @@ const FormLiquidarServicio = ({ servicio, liqop, total }) => {
             </strong>
           </h4>
 
-          <table className="mt-4 list table border border-dark table-sm table-responsive">
+          <table className="mt-4 list table border border-dark table-sm ">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Operador</th>
-                <th scope="col">Trabajo</th>
-                <th scope="col">Hs Inicio</th>
-                <th scope="col">Hs Fin</th>
-                <th scope="col">Liquidacion</th>
+                <th >Operador</th>
+                <th >Trabajo</th>
+                <th >Hs Inicio</th>
+                <th >Hs Fin</th>
+                <th >Liquidacion</th>
               </tr>
             </thead>
             <tbody>
               {liqop.map((liq, index) => (
                 <>
                   <tr key={index}>
-                    <td>{index}</td>
+                    <th scope="row" >{index + 1}</th>
                     <td>{liq.operador}</td>
                     <td>{liq.tipo_gasto}</td>
                     <td>{liq.hs_inicio}</td>
