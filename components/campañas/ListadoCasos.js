@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
+import ReactToPrint from "react-to-print";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import FormAcciones from "./FormAcciones";
 import Notificacion from "./Notificacion";
+import Notificacion2 from "./Notificacion2";
+
 
 import moment from "moment-timezone";
 import axios from "axios";
@@ -194,8 +196,15 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
   };
 
   let fechahoy = moment().format("YYYY-MM-DD");
+  let componentRef = React.createRef();
   return (
-    <div className="mt-4">
+    <div className="mt-4 mb-4">
+      <div className="d-flex justify-content-end">
+        <button className="btn btn-info btn-sm mb-2"
+          data-toggle="modal"
+          data-target={`.bd-example-modal-xl-todo`}
+        >IMPRIMIR TODAS LAS NOTIFICACIONES</button>
+      </div>
       <ReactTable
         data={casos}
         filterable
@@ -303,27 +312,27 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                         Generar Notificacion
                       </a>
                     ) : (
-                      <>
-                        <a
-                          href={"#"}
-                          className="btn btn-primary btn-sm mr-1"
-                          data-toggle="modal"
-                          data-target={`.bd-example-modal-${modal}`}
-                          onClick={() => selcaso(row.index)}
-                        >
-                          <i className="fa fa-book" aria-hidden="true"></i>
-                        </a>
-                        <a
-                          href={"#"}
-                          className="btn btn-warning btn-sm"
-                          data-toggle="modal"
-                          data-target={`.bd-example-modal-xl${modal}`}
-                          onClick={() => selcaso(row.index)}
-                        >
-                          <i className="fa fa-envelope" aria-hidden="true"></i>
-                        </a>
-                      </>
-                    )}
+                        <>
+                          <a
+                            href={"#"}
+                            className="btn btn-primary btn-sm mr-1"
+                            data-toggle="modal"
+                            data-target={`.bd-example-modal-${modal}`}
+                            onClick={() => selcaso(row.index)}
+                          >
+                            <i className="fa fa-book" aria-hidden="true"></i>
+                          </a>
+                          <a
+                            href={"#"}
+                            className="btn btn-warning btn-sm"
+                            data-toggle="modal"
+                            data-target={`.bd-example-modal-xl${modal}`}
+                            onClick={() => selcaso(row.index)}
+                          >
+                            <i className="fa fa-envelope" aria-hidden="true"></i>
+                          </a>
+                        </>
+                      )}
                   </div>
                 ),
               },
@@ -409,6 +418,54 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
+
+      <div
+        className={`modal fade bd-example-modal-xl-todo`}
+        role="dialog"
+        aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content p-2">
+            <div className="jumbotron">
+              <div className="mt-4 p-4 border">
+                <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+                <div className="row d-flex justify-content-center">
+                  <ReactToPrint
+                    trigger={() => (
+                      <a href="#" className="btn btn-primary">
+                        imprimir{" "}
+                      </a>
+                    )}
+                    content={() => componentRef}
+                  />
+
+                  <a
+                    href="#"
+                    className="btn btn-secondary ml-1"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    Cerrar
+            </a>
+                </div>
+              </div>
+            </div>
+
+            <div id="todo"
+              ref={(el) => (componentRef = el)}
+            >
+              {casos.map(caso => (
+                <>
+                  <Notificacion2 caso={caso} userData={userData} />
+
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };
