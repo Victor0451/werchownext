@@ -30,6 +30,8 @@ const general = () => {
     const [tarjeta, guardarTarjeta] = useState(null);
     const [banco, guardarBanco] = useState(null);
     const [policia, guardarPolicia] = useState(null);
+    const [empresa, guardarEmpresa] = useState(null);
+
 
 
     let token = jsCookie.get("token");
@@ -62,6 +64,7 @@ const general = () => {
         guardarTarjeta(null)
         guardarBanco(null)
         guardarPolicia(null)
+        guardarEmpresa(null)
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -78,7 +81,7 @@ const general = () => {
             guardarCargando(false);
             guardarSindato(false);
             guardarWerchow(true)
-
+            guardarEmpresa('Werchow')
 
             traerOficina()
             traerCobrador()
@@ -99,6 +102,8 @@ const general = () => {
         guardarTarjeta(null)
         guardarBanco(null)
         guardarPolicia(null)
+        guardarEmpresa(null)
+
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -114,6 +119,7 @@ const general = () => {
             guardarCargando(false);
             guardarSindato(false);
             guardarMutual(true)
+            guardarEmpresa('Mutual')
 
             traerOficinaM()
             traerCobradorM()
@@ -700,7 +706,7 @@ const general = () => {
                                     <h3 className="text-center">
                                         <strong>
                                             <u>
-                                                Efectividad De Cobranza Werchow Periodo:{" "}
+                                                Efectividad De Cobranza {empresa} Periodo:{" "}
                                                 {mes}/{ano}
                                             </u>
                                         </strong>

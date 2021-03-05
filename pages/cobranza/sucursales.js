@@ -30,6 +30,7 @@ const sucursales = () => {
     const [tarjeta, guardarTarjeta] = useState(null);
     const [banco, guardarBanco] = useState(null);
     const [policia, guardarPolicia] = useState(null);
+    const [empresa, guardarEmpresa] = useState(null);
 
 
     let token = jsCookie.get("token");
@@ -62,6 +63,7 @@ const sucursales = () => {
         guardarTarjeta(null)
         guardarBanco(null)
         guardarPolicia(null)
+        guardarEmpresa(null)
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -77,6 +79,8 @@ const sucursales = () => {
             guardarCargando(false);
             guardarSindato(false);
             guardarWerchow(true)
+            guardarEmpresa('Werchow')
+
 
             if (sucursal === 1) {
                 traerOficina(1)
@@ -116,6 +120,7 @@ const sucursales = () => {
         guardarTarjeta(null)
         guardarBanco(null)
         guardarPolicia(null)
+        guardarEmpresa(null)
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -132,6 +137,7 @@ const sucursales = () => {
             guardarMutual(true)
             guardarCargando(false);
             guardarSindato(false);
+            guardarEmpresa('Mutual')
 
             if (sucursal === 1) {
                 traerOficinaM(1)
@@ -1066,7 +1072,7 @@ const sucursales = () => {
                                                             : sucursal == 5 ? (<>Perico</>)
                                                                 : sucursal == 60 ? (<>San Pedro</>)
                                                                     : null
-                                                } - Werchow Periodo:{" "}
+                                                } - {empresa} Periodo:{" "}
                                                 {mes}/{ano}
                                             </u>
                                         </strong>
