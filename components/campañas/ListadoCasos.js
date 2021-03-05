@@ -349,6 +349,9 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
         </a>
       </div>
 
+
+{/* MODAL DE ACCIONES DE CAMPAÑAS */}
+
       <div
         className={`modal fade bd-example-modal-${modal}`}
         role="dialog"
@@ -405,6 +408,9 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
+{/* -------------------------------------- */}
+
+{/* MODAL PARA IMPRIMIR LAS NOTIFICACIONES UNA POR UNA */}
 
       <div
         className={`modal fade bd-example-modal-xl${modal}`}
@@ -418,7 +424,9 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
+{/* --------------------------- */}
 
+{/* MODAL PARA IMPRIMIR TODAS LAS NOTIFICACIONES JUNTAS */}
       <div
         className={`modal fade bd-example-modal-xl-todo`}
         role="dialog"
@@ -465,6 +473,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
+{/* -------------*/}
 
     </div>
   );

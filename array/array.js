@@ -23,6 +23,15 @@ export const nueavaaccion = [
   { value: 17, label: "CREDITO" },
 ];
 
+
+export const sucursales = [
+  { value: 1, label: "CASA CENTRAL" },
+  { value: 3, label: "PALPALA" },
+  { value: 5, label: "PERICO" },
+  { value: 60, label: "SAN PEDRO" },
+];
+
+
 export const meses = [
   { value: 1, label: "ENERO" },
   { value: 2, label: "FEBRERO" },

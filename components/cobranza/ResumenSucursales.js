@@ -1,17 +1,26 @@
 import React from "react";
-import { meses, anos } from "../../array/array";
+import { meses, anos, sucursales } from "../../array/array";
 import MesSelect from "react-select";
 import AnoSelect from "react-select";
+import SucursalSelect from "react-select";
 
-const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) => {
+
+const ResumenSucursales = ({ buscarNumeros, buscarNumerosMutual, handleChange }) => {
   return (
     <div className="container mt-4 alert alert-primary border border-dark p-4">
       <h2 className=" mb-4 ">
         <strong>
-          <u>Seleccione El Periodo De La {titulo}</u>
+          <u>Seleccione El Periodo y Sucursal </u>
         </strong>
       </h2>
       <div className=" row border border-dark p-2">
+        <div className="col-md-4 mt-4">
+          <SucursalSelect
+            options={sucursales}
+            placeholder={"Eliga una Sucursal"}
+            onChange={(value) => handleChange(value, "sucursal")}
+          />
+        </div>
         <div className="col-md-4 mt-4">
           <MesSelect
             options={meses}
@@ -26,7 +35,7 @@ const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) =
             onChange={(value) => handleChange(value, "ano")}
           />
         </div>
-        <div className="col-md-2 mt-4">
+        <div className="col-md-6 mt-4">
           <a
             className="btn btn-block btn-primary"
             onClick={buscarNumeros}
@@ -35,7 +44,7 @@ const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) =
             Werchow
           </a>
         </div>
-        <div className="col-md-2 mt-4">
+        <div className="col-md-6 mt-4">
           <a
             className="btn btn-block btn-primary"
             onClick={buscarNumerosMutual}
@@ -49,4 +58,4 @@ const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) =
   );
 };
 
-export default Resumen;
+export default ResumenSucursales;

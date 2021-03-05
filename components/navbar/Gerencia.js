@@ -4,6 +4,7 @@ export default class Gerencia extends Component {
   render() {
     return (
       <ul className="navbar-nav ">
+
         <li className="nav-item dropdown ">
           <a
             href="#"
@@ -12,7 +13,7 @@ export default class Gerencia extends Component {
             className="nav-link dropdown-toggle"
           >
             Informes
-          </a>
+        </a>
           <ul className="dropdown-menu">
             <li className="dropdown-submenu">
               <a
@@ -22,26 +23,26 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Cobranza
-              </a>
+            </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a
-                    href="/cobranza/resumen"
-                    className="dropdown-item text-dark"
-                  >
+                  <a href="/cobranza/resumen" className="dropdown-item text-dark">
                     Resumen Efectividad de Cobranza
-                  </a>
+                </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="/cobranza/sucursales" className="dropdown-item text-dark">
+                    Efectividad de Cobranza Por Sucursales
+                </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="/cobranza/general" className="dropdown-item text-dark">
+                    Efectividad de Cobranza General
+                </a>
                 </li>
               </ul>
-            </li>
-            <hr />
-            <li>
-              <a
-                href="/prestamos/informeprestamos"
-                className="dropdown-item text-dark"
-              >
-                Socios: Cuotas Sin Cobrar
-              </a>
             </li>
 
             <hr />
@@ -49,14 +50,14 @@ export default class Gerencia extends Component {
             <li>
               <a href="/mutual/movimientos" className="dropdown-item text-dark">
                 Mutual: Movimientos del Mes
-              </a>
+            </a>
             </li>
             <hr />
 
             <li>
               <a href="/mapas/mapaasesor" className="dropdown-item text-dark">
                 Asesores: Mapeo de ventas anual
-              </a>
+            </a>
             </li>
 
             <hr />
@@ -64,7 +65,7 @@ export default class Gerencia extends Component {
             <li>
               <a href="/mapas/maparec" className="dropdown-item text-dark">
                 Recuperadores: Mapeo de liquidaciones por periodo
-              </a>
+            </a>
             </li>
           </ul>
         </li>
