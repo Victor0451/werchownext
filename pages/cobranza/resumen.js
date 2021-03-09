@@ -447,7 +447,7 @@ const resumen = () => {
     <div>
       <Layout>
         <>
-          <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Cobranza'}/>
+          <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Cobranza'} flag={'R'}/>
 
           {sindato === null ? null : (
             <div className="container mt-4 mb-4 border border-dark p-2">

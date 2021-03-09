@@ -41,6 +41,13 @@ const Adimn = () => {
                 </a>
               </li>
               <hr />
+
+              <li>
+                <a href="/cobranza/mora" className="dropdown-item text-dark">
+                  Efectividad de Mora
+                </a>
+              </li>
+              <hr />
               <li>
                 <a
                   href="/cobranza/administracion"

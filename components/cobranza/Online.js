@@ -6,6 +6,7 @@ const Online = ({ oficina,
     tarjeta,
     banco,
     policia,
+    prestamos,
     calcularTotal,
     calcularEfectividad,
     calcularEfecPersonal,
@@ -13,6 +14,7 @@ const Online = ({ oficina,
     calcularTotalGeneralM,
     calcularEfectividadTotal,
     calcularEfectividadTotalM,
+    calcularEfecPrestamo,
     werchow,
     mutual }) => {
 
@@ -408,11 +410,10 @@ const Online = ({ oficina,
             )}
 
 
-
             {werchow == true ?
                 (
                     <>
-                        {/* TARJETAS */}
+                        {/* POLICIAS */}
 
                         <h5 className="mt-4 mb-4">
                             <strong>
@@ -512,9 +513,112 @@ const Online = ({ oficina,
                 ) : mutual == true ? null : null}
 
 
+
+            {werchow == true ?
+                (
+                    <>
+                        {/* PRESTAMOS */}
+
+                        <h5 className="mt-4 mb-4">
+                            <strong>
+                                <u>Prestamos</u>
+                            </strong>
+                        </h5>
+
+                        {!prestamos ? <Spinner /> : (
+                            <>
+                                <div className="d-flex justify-content-between text-center border-bottom  border-dark  ">
+                                    <div className="col-1">
+                                        {" "}
+                                        <strong>ZONA</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        {" "}
+                                        <strong>COBRADOR</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        <strong>A COBRAR</strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>FICHAS</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        <strong>COBRADO</strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>FICHAS</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        <strong>C.ADEL</strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>EFECT</strong>
+                                    </div>
+                                </div>
+
+
+                                <div className="d-flex justify-content-between border-bottom text-center">
+                                    <div className="col-1" >**</div>
+                                    <div className="col-2">{prestamos.descr}</div>
+                                    <div className="col-2">$ {prestamos.total}</div>
+                                    <div className="col-1"></div>
+                                    <div className="col-2">$ {prestamos.cobrado}</div>
+                                    <div className="col-1"></div>
+                                    <div className="col-2"></div>
+                                    <div className="col-1">{calcularEfecPrestamo(prestamos.total, prestamos.cobrado)}% </div>
+                                </div>
+
+
+
+                                <div className="d-flex justify-content-between text-center border-bottom border-top border-dark descr ">
+                                    <div className="col-3">
+                                        {" "}
+                                        <strong>TOTAL</strong>
+                                    </div>
+
+                                    <div className="col-2">
+                                        <strong>
+                                            $ {prestamos.total}
+                                        </strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>
+
+                                        </strong>
+                                    </div>
+                                    <div className="col-2">
+                                        <strong>
+                                            $ {prestamos.cobrado}
+                                        </strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>
+
+                                        </strong>
+                                    </div>
+                                    <div className="col-2">
+
+                                    </div>
+                                    <div className="col-1">
+                                        <strong >
+                                            {calcularEfecPrestamo(prestamos.total, prestamos.cobrado)}%
+                            </strong>
+                                    </div>
+                                </div>
+
+
+                            </>
+                        )}
+
+                    </>
+
+                ) : mutual == true ? null : null}
+
+
+
             {werchow == true ? (
                 <>
-                    {cobrador && oficina && tarjeta && banco && policia ? (
+                    {cobrador && oficina && tarjeta && banco && policia && prestamos ? (
                         <div className="m-4 d-flex justify-content-between text-center border-bottom border-top border-dark descr ">
                             <div className="col-3">
                                 {" "}
@@ -523,30 +627,30 @@ const Online = ({ oficina,
 
                             <div className="col-2">
                                 <strong>
-                                    $ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, 'total')}
+                                    $ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, prestamos, 'total')}
                                 </strong>
                             </div>
                             <div className="col-1">
                                 <strong>
-                                    {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, 'fichas')}
+                                    {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, prestamos, 'fichas')}
                                 </strong>
                             </div>
                             <div className="col-2">
                                 <strong>
-                                    $ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, 'cobrado')}
+                                    $ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, prestamos, 'cobrado')}
                                 </strong>
                             </div>
                             <div className="col-1">
                                 <strong>
-                                    {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, 'fichascob')}
+                                    {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, prestamos, 'fichascob')}
                                 </strong>
                             </div>
                             <div className="col-2">
-                                <strong>$ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, 'adelantado')}</strong>
+                                <strong>$ {calcularTotalGeneral(cobrador, oficina, tarjeta, banco, policia, prestamos, 'adelantado')}</strong>
                             </div>
                             <div className="col-1">
                                 <strong >
-                                    {calcularEfectividadTotal(cobrador, oficina, tarjeta, banco, policia)}%
+                                    {calcularEfectividadTotal(cobrador, oficina, tarjeta, banco, policia, prestamos)}%
                         </strong>
                             </div>
                         </div>

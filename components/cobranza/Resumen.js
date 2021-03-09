@@ -3,7 +3,7 @@ import { meses, anos } from "../../array/array";
 import MesSelect from "react-select";
 import AnoSelect from "react-select";
 
-const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) => {
+const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo, flag }) => {
   return (
     <div className="container mt-4 alert alert-primary border border-dark p-4">
       <h2 className=" mb-4 ">
@@ -26,24 +26,41 @@ const Resumen = ({ buscarNumeros, buscarNumerosMutual, handleChange, titulo }) =
             onChange={(value) => handleChange(value, "ano")}
           />
         </div>
-        <div className="col-md-2 mt-4">
-          <a
-            className="btn btn-block btn-primary"
-            onClick={buscarNumeros}
-            href="#"
-          >
-            Werchow
+
+        {flag == 'R' ? (
+          <div className="col-md-4 mt-4">
+            <a
+              className="btn btn-block btn-primary"
+              onClick={buscarNumeros}
+              href="#"
+            >
+              Werchow
           </a>
-        </div>
-        <div className="col-md-2 mt-4">
-          <a
-            className="btn btn-block btn-primary"
-            onClick={buscarNumerosMutual}
-            href="#"
-          >
-            Mutual
+          </div>
+        ) : flag == 'E' ? (
+          <>
+            <div className="col-md-2 mt-4">
+              <a
+                className="btn btn-block btn-primary"
+                onClick={buscarNumeros}
+                href="#"
+              >
+                Werchow
           </a>
-        </div>
+            </div>
+            <div className="col-md-2 mt-4">
+              <a
+                className="btn btn-block btn-primary"
+                onClick={buscarNumerosMutual}
+                href="#"
+              >
+                Mutual
+          </a>
+            </div>
+          </>
+        ) : null}
+
+
       </div>
     </div>
   );

@@ -42,6 +42,12 @@ export default class Gerencia extends Component {
                     Efectividad de Cobranza General
                 </a>
                 </li>
+                <hr />
+                <li>
+                  <a href="/cobranza/mora" className="dropdown-item text-dark">
+                    Efectividad de Mora
+                </a>
+                </li>
               </ul>
             </li>
 

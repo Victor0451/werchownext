@@ -29,6 +29,7 @@ const general = () => {
     const [cobrador, guardarCobrador] = useState(null);
     const [tarjeta, guardarTarjeta] = useState(null);
     const [banco, guardarBanco] = useState(null);
+    const [prestamos, guardarPrestamos] = useState(null);
     const [policia, guardarPolicia] = useState(null);
     const [empresa, guardarEmpresa] = useState(null);
 
@@ -65,6 +66,7 @@ const general = () => {
         guardarBanco(null)
         guardarPolicia(null)
         guardarEmpresa(null)
+        guardarPrestamos(null)
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -88,7 +90,7 @@ const general = () => {
             traerTarjeta()
             traerBanco()
             traerPolicia()
-
+            traerPrestamos()
 
         }
     }
@@ -102,6 +104,7 @@ const general = () => {
         guardarTarjeta(null)
         guardarBanco(null)
         guardarPolicia(null)
+        guardarPrestamos(null)
         guardarEmpresa(null)
 
 
@@ -124,6 +127,7 @@ const general = () => {
             traerOficinaM()
             traerCobradorM()
             traerTarjetaM()
+
 
         }
     }
@@ -286,6 +290,24 @@ const general = () => {
             })
     }
 
+    const traerPrestamos = async () => {
+
+
+        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/prestotal`,
+            {
+                params: {
+                    mes: mes,
+                    ano: ano
+                }
+            })
+            .then(res => {
+                guardarPrestamos(res.data[0])
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     const calcularTotal = (arr, flag) => {
         let ret = 0
 
@@ -348,13 +370,16 @@ const general = () => {
         return efec.toFixed(2)
     }
 
-    const calcularTotalGeneral = (arr1, arr2, arr3, arr4, arr5, flag) => {
+    const calcularTotalGeneral = (arr1, arr2, arr3, arr4, arr5, arr6, flag) => {
 
         let total1 = 0
         let total2 = 0
         let total3 = 0
         let total4 = 0
         let total5 = 0
+
+        let totalpret = parseInt(arr6.total)
+        let cobradoprest = parseInt(arr6.cobrado)
 
         let ret = 0
 
@@ -402,7 +427,7 @@ const general = () => {
             }
 
 
-            ret = total1 + total2 + total3 + total4 + total5
+            ret = total1 + total2 + total3 + total4 + total5 + totalpret
 
             return ret
 
@@ -452,7 +477,7 @@ const general = () => {
 
 
 
-            ret = total1 + total2 + total3 + total4 + total5
+            ret = total1 + total2 + total3 + total4 + total5 + cobradoprest
 
             return ret
 
@@ -581,7 +606,7 @@ const general = () => {
 
     }
 
-    const calcularEfectividadTotal = (arr1, arr2, arr3, arr4, arr5,) => {
+    const calcularEfectividadTotal = (arr1, arr2, arr3, arr4, arr5, arr6) => {
 
 
         let total1 = 0
@@ -589,12 +614,15 @@ const general = () => {
         let total3 = 0
         let total4 = 0
         let total5 = 0
+        let total6 = parseInt(arr6.total)
 
         let cobrado1 = 0
         let cobrado2 = 0
         let cobrado3 = 0
         let cobrado4 = 0
         let cobrado5 = 0
+        let cobrado6 = parseInt(arr6.cobrado)
+
 
         let adelantado1 = 0
         let adelantado2 = 0
@@ -633,8 +661,9 @@ const general = () => {
             adelantado5 += parseInt(arr5[i].adelantado)
         }
 
-        totalgral = total1 + total2 + total3 + total4 + total5
-        cobradogral = cobrado1 + cobrado2 + cobrado3 + cobrado4 + cobrado5
+
+        totalgral = total1 + total2 + total3 + total4 + total5 + total6
+        cobradogral = cobrado1 + cobrado2 + cobrado3 + cobrado4 + cobrado5 + cobrado6
         adelantadogral = adelantado1 + adelantado2 + adelantado3 + adelantado4 + adelantado5
 
         let efecgral = ((cobradogral + adelantadogral) / (totalgral + adelantadogral)) * 100
@@ -690,9 +719,17 @@ const general = () => {
 
     }
 
+    const calcularEfecPrestamo = (total, cobrado) => {
+
+        let efec = ((cobrado / total) * 100)
+
+        return efec.toFixed(2)
+
+    }
+
     return (
         <Layout>
-            <Resumen handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} titulo={'Cobranza'} />
+            <Resumen handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} titulo={'Cobranza'} flag={'E'} />
 
             {sindato === null ? null : (
                 <div className="container mt-4 mb-4 border border-dark p-2">
@@ -719,6 +756,7 @@ const general = () => {
                                         tarjeta={tarjeta}
                                         banco={banco}
                                         policia={policia}
+                                        prestamos={prestamos}
                                         calcularTotal={calcularTotal}
                                         calcularEfectividad={calcularEfectividad}
                                         calcularEfecPersonal={calcularEfecPersonal}
@@ -726,6 +764,7 @@ const general = () => {
                                         calcularEfectividadTotal={calcularEfectividadTotal}
                                         calcularTotalGeneralM={calcularTotalGeneralM}
                                         calcularEfectividadTotalM={calcularEfectividadTotalM}
+                                        calcularEfecPrestamo={calcularEfecPrestamo}
                                         werchow={werchow}
                                         mutual={mutual}
 

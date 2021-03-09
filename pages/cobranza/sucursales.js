@@ -30,6 +30,7 @@ const sucursales = () => {
     const [tarjeta, guardarTarjeta] = useState(null);
     const [banco, guardarBanco] = useState(null);
     const [policia, guardarPolicia] = useState(null);
+    const [prestamos, guardarPrestamos] = useState(null);
     const [empresa, guardarEmpresa] = useState(null);
 
 
@@ -64,6 +65,8 @@ const sucursales = () => {
         guardarBanco(null)
         guardarPolicia(null)
         guardarEmpresa(null)
+        guardarPrestamos(null)
+
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -88,24 +91,28 @@ const sucursales = () => {
                 traerTarjeta(1)
                 traerBanco(1)
                 traerPolicia(1)
+                traerPrestamos(1)
             } else if (sucursal === 3) {
                 traerOficina(3)
                 traerCobrador(3)
                 traerTarjeta(3)
                 traerBanco(3)
                 traerPolicia(3)
+                traerPrestamos(3)
             } else if (sucursal === 5) {
                 traerOficina(5)
                 traerCobrador(5)
                 traerTarjeta(5)
                 traerBanco(5)
                 traerPolicia(5)
+                traerPrestamos(5)
             } else if (sucursal === 60) {
                 traerOficina(60)
                 traerCobrador(60)
                 traerTarjeta(60)
                 traerBanco(60)
                 traerPolicia(60)
+                traerPrestamos(60)
             }
         }
 
@@ -121,6 +128,8 @@ const sucursales = () => {
         guardarBanco(null)
         guardarPolicia(null)
         guardarEmpresa(null)
+        guardarPrestamos(null)
+
 
         let month = moment().format("M");
         let year = moment().format("YYYY");
@@ -660,6 +669,68 @@ const sucursales = () => {
 
     }
 
+    const traerPrestamos = async (flag) => {
+
+        if (flag === 1) {
+            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presw`,
+                {
+                    params: {
+                        mes: mes,
+                        ano: ano
+                    }
+                })
+                .then(res => {
+                    guardarPrestamos(res.data[0])
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } else if (flag === 3) {
+            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presl`,
+                {
+                    params: {
+                        mes: mes,
+                        ano: ano
+                    }
+                })
+                .then(res => {
+                    guardarPrestamos(res.data[0])
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } else if (flag === 5) {
+            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presr`,
+                {
+                    params: {
+                        mes: mes,
+                        ano: ano
+                    }
+                })
+                .then(res => {
+                    guardarPrestamos(res.data[0])
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } else if (flag === 60) {
+            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presp`,
+                {
+                    params: {
+                        mes: mes,
+                        ano: ano
+                    }
+                })
+                .then(res => {
+                    guardarPrestamos(res.data[0])
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+
+    }
+
     const calcularTotal = (arr, flag) => {
         let ret = 0
 
@@ -722,7 +793,7 @@ const sucursales = () => {
         return efec.toFixed(2)
     }
 
-    const calcularTotalGeneral = (arr1, arr2, arr3, arr4, arr5, flag) => {
+    const calcularTotalGeneral = (arr1, arr2, arr3, arr4, arr5, arr6, flag) => {
 
         let total1 = 0
         let total2 = 0
@@ -730,25 +801,30 @@ const sucursales = () => {
         let total4 = 0
         let total5 = 0
 
+        let totalpret = parseInt(arr6.total)
+        let cobradoprest = parseInt(arr6.cobrado)
+
         let ret = 0
 
         if (flag === 'fichas') {
 
             for (let i = 0; i < arr1.length; i++) {
-                total1 += arr1[i].fichas
+                total1 += parseInt(arr1[i].fichas)
             }
             for (let i = 0; i < arr2.length; i++) {
-                total2 += arr2[i].fichas
+                total2 += parseInt(arr2[i].fichas)
             }
             for (let i = 0; i < arr3.length; i++) {
-                total3 += arr3[i].fichas
+                total3 += parseInt(arr3[i].fichas)
             }
             for (let i = 0; i < arr4.length; i++) {
-                total4 += arr4[i].fichas
+                total4 += parseInt(arr4[i].fichas)
             }
+
             for (let i = 0; i < arr5.length; i++) {
-                total5 += arr5[i].fichas
+                total5 += parseInt(arr5[i].fichas)
             }
+
 
             ret = total1 + total2 + total3 + total4 + total5
 
@@ -757,22 +833,24 @@ const sucursales = () => {
         } else if (flag === 'total') {
 
             for (let i = 0; i < arr1.length; i++) {
-                total1 += arr1[i].total
+                total1 += parseInt(arr1[i].total)
             }
             for (let i = 0; i < arr2.length; i++) {
-                total2 += arr2[i].total
+                total2 += parseInt(arr2[i].total)
             }
             for (let i = 0; i < arr3.length; i++) {
-                total3 += arr3[i].total
+                total3 += parseInt(arr3[i].total)
             }
             for (let i = 0; i < arr4.length; i++) {
-                total4 += arr4[i].total
-            }
-            for (let i = 0; i < arr5.length; i++) {
-                total5 += arr5[i].total
+                total4 += parseInt(arr4[i].total)
             }
 
-            ret = total1 + total2 + total3 + total4 + total5
+            for (let i = 0; i < arr5.length; i++) {
+                total5 += parseInt(arr5[i].total)
+            }
+
+
+            ret = total1 + total2 + total3 + total4 + total5 + totalpret
 
             return ret
 
@@ -780,20 +858,22 @@ const sucursales = () => {
         } else if (flag === 'fichascob') {
 
             for (let i = 0; i < arr1.length; i++) {
-                total1 += arr1[i].fichascob
+                total1 += parseInt(arr1[i].fichascob)
             }
             for (let i = 0; i < arr2.length; i++) {
-                total2 += arr2[i].fichascob
+                total2 += parseInt(arr2[i].fichascob)
             }
             for (let i = 0; i < arr3.length; i++) {
-                total3 += arr3[i].fichascob
+                total3 += parseInt(arr3[i].fichascob)
             }
             for (let i = 0; i < arr4.length; i++) {
-                total4 += arr4[i].fichascob
+                total4 += parseInt(arr4[i].fichascob)
             }
+
             for (let i = 0; i < arr5.length; i++) {
-                total5 += arr5[i].fichascob
+                total5 += parseInt(arr5[i].fichascob)
             }
+
 
             ret = total1 + total2 + total3 + total4 + total5
 
@@ -802,42 +882,47 @@ const sucursales = () => {
         } else if (flag === 'cobrado') {
 
             for (let i = 0; i < arr1.length; i++) {
-                total1 += arr1[i].cobrado
+                total1 += parseInt(arr1[i].cobrado)
             }
             for (let i = 0; i < arr2.length; i++) {
-                total2 += arr2[i].cobrado
+                total2 += parseInt(arr2[i].cobrado)
             }
             for (let i = 0; i < arr3.length; i++) {
-                total3 += arr3[i].cobrado
+                total3 += parseInt(arr3[i].cobrado)
             }
             for (let i = 0; i < arr4.length; i++) {
-                total4 += arr4[i].cobrado
-            }
-            for (let i = 0; i < arr5.length; i++) {
-                total5 += arr5[i].cobrado
+                total4 += parseInt(arr4[i].cobrado)
             }
 
-            ret = total1 + total2 + total3 + total4 + total5
+            for (let i = 0; i < arr5.length; i++) {
+                total5 += parseInt(arr5[i].cobrado)
+            }
+
+
+
+            ret = total1 + total2 + total3 + total4 + total5 + cobradoprest
 
             return ret
 
         } else if (flag === 'adelantado') {
 
             for (let i = 0; i < arr1.length; i++) {
-                total1 += arr1[i].adelantado
+                total1 += parseInt(arr1[i].adelantado)
             }
             for (let i = 0; i < arr2.length; i++) {
-                total2 += arr2[i].adelantado
+                total2 += parseInt(arr2[i].adelantado)
             }
             for (let i = 0; i < arr3.length; i++) {
-                total3 += arr3[i].adelantado
+                total3 += parseInt(arr3[i].adelantado)
             }
             for (let i = 0; i < arr4.length; i++) {
-                total4 += arr4[i].adelantado
+                total4 += parseInt(arr4[i].adelantado)
             }
+
             for (let i = 0; i < arr5.length; i++) {
-                total5 += arr5[i].adelantado
+                total5 += parseInt(arr5[i].adelantado)
             }
+
 
             ret = total1 + total2 + total3 + total4 + total5
 
@@ -943,7 +1028,7 @@ const sucursales = () => {
 
     }
 
-    const calcularEfectividadTotal = (arr1, arr2, arr3, arr4, arr5,) => {
+    const calcularEfectividadTotal = (arr1, arr2, arr3, arr4, arr5, arr6) => {
 
 
         let total1 = 0
@@ -951,12 +1036,15 @@ const sucursales = () => {
         let total3 = 0
         let total4 = 0
         let total5 = 0
+        let total6 = parseInt(arr6.total)
 
         let cobrado1 = 0
         let cobrado2 = 0
         let cobrado3 = 0
         let cobrado4 = 0
         let cobrado5 = 0
+        let cobrado6 = parseInt(arr6.cobrado)
+
 
         let adelantado1 = 0
         let adelantado2 = 0
@@ -969,33 +1057,35 @@ const sucursales = () => {
         let adelantadogral = 0
 
         for (let i = 0; i < arr1.length; i++) {
-            total1 += arr1[i].total
-            cobrado1 += arr1[i].cobrado
-            adelantado1 += arr1[i].adelantado
+            total1 += parseInt(arr1[i].total)
+            cobrado1 += parseInt(arr1[i].cobrado)
+            adelantado1 += parseInt(arr1[i].adelantado)
         }
         for (let i = 0; i < arr2.length; i++) {
-            total2 += arr2[i].total
-            cobrado2 += arr2[i].cobrado
-            adelantado2 += arr2[i].adelantado
+            total2 += parseInt(arr2[i].total)
+            cobrado2 += parseInt(arr2[i].cobrado)
+            adelantado2 += parseInt(arr2[i].adelantado)
         }
         for (let i = 0; i < arr3.length; i++) {
-            total3 += arr3[i].total
-            cobrado3 += arr3[i].cobrado
-            adelantado3 += arr3[i].adelantado
+            total3 += parseInt(arr3[i].total)
+            cobrado3 += parseInt(arr3[i].cobrado)
+            adelantado3 += parseInt(arr3[i].adelantado)
         }
         for (let i = 0; i < arr4.length; i++) {
-            total4 += arr4[i].total
-            cobrado4 += arr4[i].cobrado
-            adelantado4 += arr4[i].adelantado
-        }
-        for (let i = 0; i < arr5.length; i++) {
-            total5 += arr5[i].total
-            cobrado5 += arr5[i].cobrado
-            adelantado5 += arr5[i].adelantado
+            total4 += parseInt(arr4[i].total)
+            cobrado4 += parseInt(arr4[i].cobrado)
+            adelantado4 += parseInt(arr4[i].adelantado)
         }
 
-        totalgral = total1 + total2 + total3 + total4 + total5
-        cobradogral = cobrado1 + cobrado2 + cobrado3 + cobrado4 + cobrado5
+        for (let i = 0; i < arr5.length; i++) {
+            total5 += parseInt(arr5[i].total)
+            cobrado5 += parseInt(arr5[i].cobrado)
+            adelantado5 += parseInt(arr5[i].adelantado)
+        }
+
+
+        totalgral = total1 + total2 + total3 + total4 + total5 + total6
+        cobradogral = cobrado1 + cobrado2 + cobrado3 + cobrado4 + cobrado5 + cobrado6
         adelantadogral = adelantado1 + adelantado2 + adelantado3 + adelantado4 + adelantado5
 
         let efecgral = ((cobradogral + adelantadogral) / (totalgral + adelantadogral)) * 100
@@ -1050,9 +1140,17 @@ const sucursales = () => {
 
     }
 
+    const calcularEfecPrestamo = (total, cobrado) => {
+
+        let efec = ((cobrado / total) * 100)
+
+        return efec.toFixed(2)
+
+    }
+
     return (
         <Layout>
-            <ResumenSucursales handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} />
+            <ResumenSucursales handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} flag={'E'} />
 
             {sindato === null ? null : (
                 <div className="container mt-4 mb-4 border border-dark p-2">
@@ -1086,6 +1184,7 @@ const sucursales = () => {
                                         tarjeta={tarjeta}
                                         banco={banco}
                                         policia={policia}
+                                        prestamos={prestamos}
                                         calcularTotal={calcularTotal}
                                         calcularEfectividad={calcularEfectividad}
                                         calcularEfecPersonal={calcularEfecPersonal}
@@ -1093,6 +1192,7 @@ const sucursales = () => {
                                         calcularTotalGeneralM={calcularTotalGeneralM}
                                         calcularEfectividadTotal={calcularEfectividadTotal}
                                         calcularEfectividadTotalM={calcularEfectividadTotalM}
+                                        calcularEfecPrestamo={calcularEfecPrestamo}
                                         werchow={werchow}
                                         mutual={mutual}
                                     />

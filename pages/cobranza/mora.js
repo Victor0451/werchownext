@@ -126,6 +126,208 @@ const mora = () => {
     }
   };
 
+  const calcularTotalGeneral = (arr1, arr2, arr3, arr4, arr5, arr6, flag) => {
+
+    let total1 = 0
+    let total2 = 0
+    let total3 = 0
+    let total4 = 0
+    let total5 = 0
+
+    let totalpret = parseInt(arr6.total)
+    let cobradoprest = parseInt(arr6.cobrado)
+
+    let ret = 0
+
+    if (flag === 'fichas') {
+
+      for (let i = 0; i < arr1.length; i++) {
+        total1 += parseInt(arr1[i].fichas)
+      }
+      for (let i = 0; i < arr2.length; i++) {
+        total2 += parseInt(arr2[i].fichas)
+      }
+      for (let i = 0; i < arr3.length; i++) {
+        total3 += parseInt(arr3[i].fichas)
+      }
+      for (let i = 0; i < arr4.length; i++) {
+        total4 += parseInt(arr4[i].fichas)
+      }
+
+      for (let i = 0; i < arr5.length; i++) {
+        total5 += parseInt(arr5[i].fichas)
+      }
+
+
+      ret = total1 + total2 + total3 + total4 + total5
+
+      return ret
+
+    } else if (flag === 'total') {
+
+      for (let i = 0; i < arr1.length; i++) {
+        total1 += parseInt(arr1[i].total)
+      }
+      for (let i = 0; i < arr2.length; i++) {
+        total2 += parseInt(arr2[i].total)
+      }
+      for (let i = 0; i < arr3.length; i++) {
+        total3 += parseInt(arr3[i].total)
+      }
+      for (let i = 0; i < arr4.length; i++) {
+        total4 += parseInt(arr4[i].total)
+      }
+
+      for (let i = 0; i < arr5.length; i++) {
+        total5 += parseInt(arr5[i].total)
+      }
+
+
+      ret = total1 + total2 + total3 + total4 + total5 + totalpret
+
+      return ret
+
+
+    } else if (flag === 'fichascob') {
+
+      for (let i = 0; i < arr1.length; i++) {
+        total1 += parseInt(arr1[i].fichascob)
+      }
+      for (let i = 0; i < arr2.length; i++) {
+        total2 += parseInt(arr2[i].fichascob)
+      }
+      for (let i = 0; i < arr3.length; i++) {
+        total3 += parseInt(arr3[i].fichascob)
+      }
+      for (let i = 0; i < arr4.length; i++) {
+        total4 += parseInt(arr4[i].fichascob)
+      }
+
+      for (let i = 0; i < arr5.length; i++) {
+        total5 += parseInt(arr5[i].fichascob)
+      }
+
+
+      ret = total1 + total2 + total3 + total4 + total5
+
+      return ret
+
+    } else if (flag === 'cobrado') {
+
+      for (let i = 0; i < arr1.length; i++) {
+        total1 += parseInt(arr1[i].cobrado)
+      }
+      for (let i = 0; i < arr2.length; i++) {
+        total2 += parseInt(arr2[i].cobrado)
+      }
+      for (let i = 0; i < arr3.length; i++) {
+        total3 += parseInt(arr3[i].cobrado)
+      }
+      for (let i = 0; i < arr4.length; i++) {
+        total4 += parseInt(arr4[i].cobrado)
+      }
+
+      for (let i = 0; i < arr5.length; i++) {
+        total5 += parseInt(arr5[i].cobrado)
+      }
+
+
+
+      ret = total1 + total2 + total3 + total4 + total5 + cobradoprest
+
+      return ret
+
+    } else if (flag === 'adelantado') {
+
+      for (let i = 0; i < arr1.length; i++) {
+        total1 += parseInt(arr1[i].adelantado)
+      }
+      for (let i = 0; i < arr2.length; i++) {
+        total2 += parseInt(arr2[i].adelantado)
+      }
+      for (let i = 0; i < arr3.length; i++) {
+        total3 += parseInt(arr3[i].adelantado)
+      }
+      for (let i = 0; i < arr4.length; i++) {
+        total4 += parseInt(arr4[i].adelantado)
+      }
+
+      for (let i = 0; i < arr5.length; i++) {
+        total5 += parseInt(arr5[i].adelantado)
+      }
+
+
+      ret = total1 + total2 + total3 + total4 + total5
+
+      return ret
+
+    }
+
+
+  }
+
+  const calcularTotal = (arr, flag) => {
+    let ret = 0
+    let ini = 0
+    let fin = 0
+
+    if (flag === 'fichasinicial') {
+
+      for (let i = 0; i < arr.length; i++) {
+        ret += parseInt(arr[i].fichasinicial)
+      }
+      return ret
+
+    } else if (flag === 'morainicial') {
+      for (let i = 0; i < arr.length; i++) {
+        ret += parseInt(arr[i].morainicial)
+      }
+      return ret
+
+    } else if (flag === 'fichasactual') {
+
+
+      for (let i = 0; i < arr.length; i++) {
+
+        if (!arr[i].fichasactual) {
+          ret += parseInt(arr[i].fichasinicial)
+          return ret
+        } else if (arr[i].fichasactual === arr[i].fichasinicial) {
+          ret = 0
+          return ret
+        } else if (arr[i].fichasactual < arr[i].fichasinicial) {
+          ini += parseInt(arr[i].fichasinicial)
+          fin += parseInt(arr[i].fichasactual)
+
+          ret = ini - fin
+          return ret
+        }
+
+      }
+
+    } else if (flag === 'moraactual') {
+
+      for (let i = 0; i < arr.length; i++) {
+
+        if (!arr[i].moraactual) {
+          ret += parseInt(arr[i].morainicial)
+          return ret
+        } else if (arr[i].moraactual === arr[i].morainicial) {
+          ret = 0
+          return ret
+        } else if (arr[i].moraactual < arr[i].morainicial) {
+          ini += parseInt(arr[i].morainicial)
+          fin += parseInt(arr[i].moraactual)
+
+          ret = ini - fin
+          return ret
+        }
+
+      }
+
+    }
+  }
+
   return (
     <Layout>
 
@@ -151,7 +353,7 @@ const mora = () => {
                     </strong>
                   </h2>
 
-                  <InformeMora mora={mora} moracob={moracob} moratjt={moratjt} />
+                  <InformeMora mora={mora} moracob={moracob} moratjt={moratjt} calcularTotal={calcularTotal}/>
 
                   <div className="container">
                     <hr className="mt-4 mb-4" />
