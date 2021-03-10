@@ -1,8 +1,12 @@
 import React from "react";
 import ReactTable from "react-table";
+import matchSorter from 'match-sorter'
+import Spinner from '../../components/layout/Spinner'
 
 const ListadoMovimientos = ({ listado }) => {
-  console.log(listado);
+
+  if (!listado) return <Spinner />
+
   return (
     <div className="container border border-dark alert alert-primary p-4 mt-4">
       <div className="list">

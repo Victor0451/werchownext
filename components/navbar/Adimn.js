@@ -58,6 +58,28 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
+          <hr />
+
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Calendario
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/calendario/calendario"
+                  className="dropdown-item text-dark"
+                >
+                  Dias Festivos
+            </a>
+              </li>
+            </ul>
+          </li>
 
           <hr />
 
@@ -91,19 +113,19 @@ const Adimn = () => {
           data-toggle="dropdown"
           className="nav-link dropdown-toggle"
         >
-          Calendario
+          Liquidacion
         </a>
         <ul className="dropdown-menu">
+
           <li>
-            <a
-              href="/calendario/calendario"
-              className="dropdown-item text-dark"
-            >
-              Dias Festivos
+            <a href="/liquidacion/orgamerica" className="dropdown-item text-dark">
+              Org. America
             </a>
           </li>
         </ul>
+
       </li>
+
 
       <li className="nav-item dropdown ">
         <a
