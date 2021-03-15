@@ -264,7 +264,14 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                   matchSorter(rows, filter.value, { keys: ["barrio"] }),
                 filterAll: true,
               },
-
+              {
+                Header: "Localidad",
+                id: "localidad",
+                accessor: (d) => d.localidad,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["localidad"] }),
+                filterAll: true,
+              },
               {
                 Header: "Cuota",
                 id: "cuota",
@@ -350,7 +357,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
       </div>
 
 
-{/* MODAL DE ACCIONES DE CAMPAÑAS */}
+      {/* MODAL DE ACCIONES DE CAMPAÑAS */}
 
       <div
         className={`modal fade bd-example-modal-${modal}`}
@@ -408,9 +415,9 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
-{/* -------------------------------------- */}
+      {/* -------------------------------------- */}
 
-{/* MODAL PARA IMPRIMIR LAS NOTIFICACIONES UNA POR UNA */}
+      {/* MODAL PARA IMPRIMIR LAS NOTIFICACIONES UNA POR UNA */}
 
       <div
         className={`modal fade bd-example-modal-xl${modal}`}
@@ -424,9 +431,9 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
-{/* --------------------------- */}
+      {/* --------------------------- */}
 
-{/* MODAL PARA IMPRIMIR TODAS LAS NOTIFICACIONES JUNTAS */}
+      {/* MODAL PARA IMPRIMIR TODAS LAS NOTIFICACIONES JUNTAS */}
       <div
         className={`modal fade bd-example-modal-xl-todo`}
         role="dialog"
@@ -473,7 +480,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
           </div>
         </div>
       </div>
-{/* -------------*/}
+      {/* -------------*/}
 
     </div>
   );

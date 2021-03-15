@@ -442,6 +442,28 @@ export default class Gerencia extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Asesores
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/ventas/asesores/legajovirtual"
+                    className="dropdown-item text-dark"
+                  >
+                    Legajo Virtual
+                </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Consultas
               </a>
               <ul className="dropdown-menu">
@@ -484,7 +506,14 @@ export default class Gerencia extends Component {
                     Listado
                   </a>
                 </li>
+
               </ul>
+            </li>
+            <hr />
+            <li>
+              <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+                Planes Vigentes
+                </a>
             </li>
           </ul>
         </li>

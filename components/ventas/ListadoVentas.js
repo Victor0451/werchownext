@@ -155,7 +155,7 @@ const ListadoPadron = ({
                     Header: "#",
                     filterAll: false,
                     width: 50,
-                    Cell: (row) => <div>{row.index}</div>,
+                    Cell: (row) => <div>{row.index + 1}</div>,
                   },
                   {
                     Header: "Empresa",

@@ -236,7 +236,14 @@ const Recuperadoras = ({ usuario }) => {
                   Listado
                 </a>
               </li>
+
             </ul>
+          </li>
+          <hr />
+          <li>
+            <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+              Planes Vigentes
+                </a>
           </li>
         </ul>
       </li>

@@ -145,6 +145,7 @@ const rehabilitacion = () => {
           let ficha = res.data;
           if (
             res.data.GRUPO === 1001 ||
+            res.data.GRUPO === 1000 ||
             res.data.GRUPO === 3444 ||
             res.data.GRUPO === 3666 ||
             res.data.GRUPO === 3777 ||
