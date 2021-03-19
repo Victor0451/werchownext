@@ -37,6 +37,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const [errmotiv, guardarErrMotiv] = useState(null);
   const [erridataud, guardarErrIdAtaud] = useState(null);
   const [crem, guardarCrem] = useState(0);
+  const [stock, guardarStock] = useState(null);
+
 
   const {
     valores,
@@ -111,6 +113,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
         .then((res) => {
           if ((res.status = 200)) {
             toastr.success("Servicio cargado con exito", "ATENCION");
+            updateStockAtaud(servicio.idataud, stock)
 
             Router.push({
               pathname: "/sepelio/servicios/impresion",
@@ -155,6 +158,20 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     document.getElementById("ataud").value = `${row.original.nombre}`;
     document.getElementById("idataud").value = `${row.original.idataud}`;
     document.getElementById("uso").value = `${row.original.uso}`;
+    guardarStock(row.original.stock);
+  };
+
+  const updateStockAtaud = async (idataud, stock) => {
+    let nustock = stock - 1;
+    console.log(nustock)
+    await axios
+      .put(`http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   let tiposervicio = `Particular`;

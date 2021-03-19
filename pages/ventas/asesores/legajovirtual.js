@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/Layout";
 import axios from "axios";
+import toastr from 'toastr'
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import ListadoAsesores from "../../../components/ventas/asesores/ListadoAsesores";
@@ -63,10 +64,26 @@ const legajovirtual = () => {
             });
     };
 
+    const eliminarArchivos = async (id) => {
+        console.log(id);
+        await axios
+            .delete(
+                `http://190.231.32.232:5002/api/archivos/legajovirtualasesores/eliminararchivos/${id}`
+            )
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.success("El archivo se elimino", "ATENCION");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    };
 
     return (
         <Layout>
-            <ListadoAsesores asesores={asesores} detalle={detalle} traerDetalle={traerDetalle} titulo={titulo} archivos={archivos} />
+            <ListadoAsesores asesores={asesores} detalle={detalle} traerDetalle={traerDetalle} titulo={titulo} archivos={archivos} eliminarArchivos={eliminarArchivos} />
         </Layout>
     )
 }

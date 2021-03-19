@@ -122,16 +122,9 @@ const FormAltaServicio = ({
 
   const updateStockAtaud = async (idataud, stock) => {
     let nustock = stock - 1;
-
+    console.log(nustock)
     await axios
-      .put(
-        `http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/:${idataud}`,
-        {
-          data: {
-            nustock: nustock,
-          },
-        }
-      )
+      .put(`http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
         console.log(res);
       })
@@ -273,16 +266,38 @@ const FormAltaServicio = ({
       {grupo ? (
         <div className="">
           {grupo.CODIGO === 1001 ||
-          grupo.CODIGO === 3444 ||
-          grupo.CODIGO === 3666 ||
-          grupo.CODIGO === 3777 ||
-          grupo.CODIGO === 3888 ||
-          grupo.CODIGO === 3999 ||
-          grupo.CODIGO === 4004 ? (
-            <div className="alert alert-danger border border-dark text-center text-uppercase">
-              El afiliado esta en estado de morosidad!!!. GRUPO: {grupo.CODIGO}{" "}
+            grupo.CODIGO === 3444 ||
+            grupo.CODIGO === 3666 ||
+            grupo.CODIGO === 3777 ||
+            grupo.CODIGO === 3888 ||
+            grupo.CODIGO === 3999 ||
+            grupo.CODIGO === 4004 ? (
+
+
+            <div
+              className="mt-4 alert alert-danger alert-dismissible border border-dark fade show container"
+              role="alert"
+            >
+              <h3 className="alert-heading mb-4">
+                <strong>
+                  <u>ATENCION!!</u>
+                </strong>
+              </h3>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h5>
+                El afiliado esta en estado de morosidad!!!. GRUPO: {grupo.CODIGO}{" "}
               - {grupo.DESCRIP}
+
+              </h5>
             </div>
+
           ) : (
             <div className="alert alert-info border border-dark text-center text-uppercase">
               GRUPO: {grupo.CODIGO} - {grupo.DESCRIP}

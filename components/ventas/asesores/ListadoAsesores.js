@@ -3,7 +3,7 @@ import Spinner from '../../layout/Spinner'
 import FormSubirArchivo from './FormSubirArchivo'
 import LegajoArchivos from './LegajoArchivos'
 
-const ListadoAsesores = ({ asesores, traerDetalle, detalle, titulo, archivos }) => {
+const ListadoAsesores = ({ asesores, traerDetalle, detalle, titulo, archivos, eliminarArchivos }) => {
 
     if (!asesores) return <Spinner />
 
@@ -111,7 +111,7 @@ const ListadoAsesores = ({ asesores, traerDetalle, detalle, titulo, archivos }) 
                                                     </div>
                                                 </div>
 
-                                                <LegajoArchivos archivos={archivos} />
+                                                <LegajoArchivos archivos={archivos} eliminarArchivos={eliminarArchivos}/>
 
                                                 <FormSubirArchivo id={d.usu_ide} />
                                             </>

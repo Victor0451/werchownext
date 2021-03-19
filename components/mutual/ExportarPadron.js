@@ -24,6 +24,7 @@ const ExportarPadron = ({ altas, bajas }) => {
     >
       <ExcelSheet data={dataSet1} name="ALTAS">
         <ExcelColumn label="CONTRATO" value="CONTRATO" />
+        <ExcelColumn label="DNI" value="NRO_DOC" />
         <ExcelColumn label="APELLIDO" value="APELLIDOS" />
         <ExcelColumn label="NOMBRE" value="NOMBRES" />
         <ExcelColumn label="ALTA" value="ALTA" />
@@ -35,6 +36,7 @@ const ExportarPadron = ({ altas, bajas }) => {
       </ExcelSheet>
       <ExcelSheet data={dataSet2} name="BAJAS">
         <ExcelColumn label="CONTRATO" value="CONTRATO" />
+        <ExcelColumn label="DNI" value="NRO_DOC" />
         <ExcelColumn label="APELLIDO" value="APELLIDOS" />
         <ExcelColumn label="NOMBRE" value="NOMBRES" />
         <ExcelColumn label="ALTA" value="ALTA" />

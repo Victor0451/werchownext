@@ -2,30 +2,36 @@ import React from "react";
 import moment from "moment";
 import SolicitudLegales from "./SolicitudLegales";
 
-const Solicitud = () => {
+const SolicitudIngreso = ({ ficha, adhs, empresa }) => {
+
   return (
-    <div className=" mt-4 container border border-dark p-4">
+    <div className=" mt-4  border border-dark p-4 container">
       <div className="row ">
         <div className="col-md-6">
-          <h2>
+          <h3>
             <strong>
-              <u>Solicitud de Reafiliacion</u>
+              <u>Solicitud de Ingreso</u>
             </strong>
-          </h2>
+          </h3>
         </div>
         <div className="col-md-6 d-flex justify-content-end">
-          <img src="/img/logo.png" className="werchowlogo" />
+          {empresa == 'W' ? (
+            <img src="/img/logo.png" className="werchowlogo" />
+          ) : (
+            <img src="/img/logom.jpg" className="werchowlogo" />
+          )}
+
         </div>
       </div>
 
-      <div className="row mt-4">
+      <div className="row mt-2">
         <div className="col-md-3">
           <label>
             <strong>
               <u>Afiliado N°</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.CONTRATO} />
         </div>
         <div className="col-md-3">
           <label>
@@ -33,7 +39,7 @@ const Solicitud = () => {
               <u>Fecha</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={moment().format("DD/MM/YYYY")} />
         </div>
         <div className="col-md-3">
           <label>
@@ -41,7 +47,7 @@ const Solicitud = () => {
               <u>Cod</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.PRODUCTOR} />
         </div>
         <div className="col-md-3">
           <label>
@@ -51,9 +57,9 @@ const Solicitud = () => {
           </label>
           <input
             type="text"
-            className="form-control"
-            readOnly
-            defaultValue={moment().format("DD/MM/YYYY")}
+            className=" border border-dark form-control"
+
+
           />
         </div>
       </div>
@@ -75,50 +81,61 @@ const Solicitud = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
+
+
+            <tr >
               <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
+              <td>{ficha.APELLIDOS}, {ficha.NOMBRES}</td>
+              <td>{moment(ficha.NACIMIENTO).format('DD/MM/YYYY')}</td>
+              <td>{moment().diff(ficha.NACIMIENTO, 'years')}</td>
+              <td>{ficha.NRO_DOC}</td>
+              <td></td>
+              <td>{ficha.OBRA_SOC}</td>
+              <td>{ficha.TSEG}</td>
+              <td>{ficha.PLAN}</td>
+              <td>{ficha.VIGENCIA}</td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-            </tr>
+
+
+            {adhs ? (
+
+              adhs.map((a, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 2}</th>
+                  <td>{a.APELLIDOS}, {a.NOMBRES}</td>
+                  <td>{moment(a.NACIMIENTO).format('DD/MM/YYYY')}</td>
+                  <td>{moment().diff(a.NACIMIENTO, 'years')}</td>
+                  <td>{a.NRO_DOC}</td>
+                  <td>{a.PARENT}</td>
+                  <td>{a.OBRA_SOC}</td>
+                  <td>{a.PARENTESCO}</td>
+                  <td>{a.PLAN}</td>
+                  <td>{a.VIGENCIA}</td>
+                </tr>
+              ))
+
+            ) : null}
+
           </tbody>
         </table>
       </div>
 
-      <div className="row mt-4 border p-2 alert-primary">
+      <div className="row mt-2 border p-2 alert-primary">
         <div className="col-md-4">
           <label>
             <strong>
               <u>Domicilio</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.CALLE} />
         </div>
-        <div className="col-md-1">
+        <div className="col-md-2">
           <label>
             <strong>
               <u>N°</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.NRO_CALLE} />
         </div>
         <div className="col-md-3">
           <label>
@@ -126,15 +143,15 @@ const Solicitud = () => {
               <u>Barrio</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.BARRIO} />
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           <label>
             <strong>
               <u>Localidad</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.LOCALIDAD} />
         </div>
       </div>
 
@@ -171,7 +188,7 @@ const Solicitud = () => {
               <u>Celular</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.MOVIL} />
         </div>
         <div class="form-group mt-3">
           <div class="custom-control custom-radio">
@@ -217,7 +234,7 @@ const Solicitud = () => {
               <u>Domicilio Laboral</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" defaultValue={ficha.DOMI_LAB} />
         </div>
         <div class="form-group mt-1">
           <div class="custom-control custom-radio">
@@ -283,14 +300,14 @@ const Solicitud = () => {
         </div>
       </div>
 
-      <div className="row mt-4 border p-2 alert-primary">
+      <div className="row mt-2 border p-2 alert-primary">
         <div className="col-md-4">
           <label>
             <strong>
               <u>Domicilio de Cobranza</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" />
         </div>
         <div className="col-md-1">
           <label>
@@ -298,7 +315,7 @@ const Solicitud = () => {
               <u>N°</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" />
         </div>
         <div className="col-md-3">
           <label>
@@ -306,7 +323,7 @@ const Solicitud = () => {
               <u>Barrio</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" />
         </div>
         <div className="col-md-4">
           <label>
@@ -314,30 +331,36 @@ const Solicitud = () => {
               <u>Dia y hs de Cobranza</u>
             </strong>
           </label>
-          <input type="text" className="form-control" readOnly />
+          <input type="text" className="form-control border border-dark" />
         </div>
       </div>
-      <div className="mt-4">
-        <SolicitudLegales />
-      </div>
 
-      <div className=" mt-4 p-4 d-flex justify-content-between">
+      {
+        empresa == 'W' ? (
+          <div className="mt-2">
+            <SolicitudLegales />
+          </div>
+        ) : null
+      }
+
+
+      <div className=" mt-2 p-4 d-flex justify-content-between">
         <div className="col-4 text-center ">
-          <br />
+          <br border border-dark />
           <br />
           <br />
           <p>-----------------------------</p>
           <label>Firma</label>
         </div>
         <div className="col-4 text-center ">
-          <br />
+          <br border border-dark />
           <br />
           <br />
           <p>-----------------------------</p>
           <label>Aclaracion</label>
         </div>
         <div className="col-4 text-center ">
-          <br />
+          <br border border-dark />
           <br />
           <br />
           <p>-----------------------------</p>
@@ -348,4 +371,4 @@ const Solicitud = () => {
   );
 };
 
-export default Solicitud;
+export default SolicitudIngreso;

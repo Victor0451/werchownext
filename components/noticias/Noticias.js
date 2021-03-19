@@ -30,7 +30,7 @@ const Noticias = () => {
         >
             <h3 className="alert-heading mb-4">
                 <strong>
-                    <u>Novedades</u>
+                    <u>Noticias</u>
                 </strong>
             </h3>
             <button

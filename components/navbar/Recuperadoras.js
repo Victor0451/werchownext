@@ -154,6 +154,15 @@ const Recuperadoras = ({ usuario }) => {
                   Rehabilitacion
                 </a>
               </li>
+              <hr/> 
+              <li>
+                <a
+                  href="/socios/conveniodeuda/conveniodeuda"
+                  className="dropdown-item text-dark"
+                >
+                  Convenio de Reconocimiento de Deuda
+                </a>
+              </li>
             </ul>
           </li>
           <hr />

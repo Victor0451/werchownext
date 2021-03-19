@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LegajoArchivos = ({ archivos }) => {
+const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
   const [archi, guardarArchi] = useState(null);
 
   if (!archivos)
@@ -9,6 +9,8 @@ const LegajoArchivos = ({ archivos }) => {
         No Hay Archivos
       </div>
     );
+
+
 
   return (
     <div className="container border border-dark p-4">
@@ -48,10 +50,7 @@ const LegajoArchivos = ({ archivos }) => {
               </a>
               <button
                 className="btn btn-danger mr-1"
-                onClick={(e) => {
-                  e.preventDefault();
-                  eliminarArchivos(archivo.archivo, index);
-                }}
+                onClick={() => { eliminarArchivos(archivo.archivo) }}
               >
                 <i className="fa fa-trash" aria-hidden="true"></i>
               </button>
