@@ -455,6 +455,65 @@ const Adimn = () => {
             </ul>
           </li>
           <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Parcelas
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/sepelio/parcelas/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Nueva Parcela
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/parcelas/stock"
+                  className="dropdown-item text-dark"
+                >
+                  Stock Actual
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Tareas
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/sepelio/tareas/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Nueva Tarea
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/tareas/calendario"
+                  className="dropdown-item text-dark"
+                >
+                  Tareas Programadas
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
 
@@ -673,9 +732,9 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
-          <hr />
 
           <hr />
+
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -694,7 +753,7 @@ const Adimn = () => {
                   Rehabilitacion
                 </a>
               </li>
-              <hr/> 
+              <hr />
               <li>
                 <a
                   href="/socios/conveniodeuda/conveniodeuda"

@@ -154,7 +154,7 @@ const Recuperadoras = ({ usuario }) => {
                   Rehabilitacion
                 </a>
               </li>
-              <hr/> 
+              <hr />
               <li>
                 <a
                   href="/socios/conveniodeuda/conveniodeuda"
@@ -204,6 +204,15 @@ const Recuperadoras = ({ usuario }) => {
                 </a>
               </li>
             </ul>
+          </li>
+          <hr />
+          <li>
+            <a
+              href="/socios/reportes/estadopadron"
+              className="dropdown-item text-dark"
+            >
+              Reportes Atrasados
+              </a>
           </li>
         </ul>
       </li>

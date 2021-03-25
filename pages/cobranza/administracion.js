@@ -3,6 +3,7 @@ import Layout from "../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import axios from "axios";
 import toastr from "toastr";
+import Administracion from "../../components/cobranza/Administracion";
 
 const administracion = () => {
   let sucursalRefW = React.createRef();
@@ -17,8 +18,8 @@ const administracion = () => {
   }, []);
 
   // INSERTS
-  const postC1000 = () => {
-    axios
+  const postC1000 = async () => {
+    await axios
       .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertc1000`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -29,8 +30,8 @@ const administracion = () => {
       });
   };
 
-  const postC1000M = () => {
-    axios
+  const postC1000M = async () => {
+    await axios
       .post(` http://190.231.32.232:5002/api/sgi/insertartablasm/insertc1000m`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -41,8 +42,8 @@ const administracion = () => {
       });
   };
 
-  const postCTjt = () => {
-    axios
+  const postCTjt = async () => {
+    await axios
       .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertctjt`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -53,8 +54,8 @@ const administracion = () => {
       });
   };
 
-  const postCTjtM = () => {
-    axios
+  const postCTjtM = async () => {
+    await axios
       .post(` http://190.231.32.232:5002/api/sgi/insertartablasm/insertctjtm`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -65,8 +66,8 @@ const administracion = () => {
       });
   };
 
-  const postCBanco = () => {
-    axios
+  const postCBanco = async () => {
+    await axios
       .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcbanco`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -77,8 +78,8 @@ const administracion = () => {
       });
   };
 
-  const postCPolicia = () => {
-    axios
+  const postCPolicia = async () => {
+    await axios
       .post(
         ` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcpolicia`
       )
@@ -91,14 +92,28 @@ const administracion = () => {
       });
   };
 
+  const postPrestamos = async () => {
+    await axios
+      .post(
+        ` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcprestamos`
+      )
+      .then((res) => {
+        toastr.success(`${res.data}`, `ATENCION`);
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.success(`${error}`, `ATENCION`);
+      });
+  };
+
   //   UPDATES
-  const putCtjt = () => {
+  const putCtjt = async () => {
     if (sucursalRefW.current.value === "no") {
       toastr.error("Seleccionar Sucursal", "ATENCION");
     } else {
       let id = sucursalRefW.current.value;
 
-      axios
+      await axios
         .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/ctjt/${id}`)
         .then((res) => {
           toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -110,13 +125,13 @@ const administracion = () => {
     }
   };
 
-  const putCtjtm = () => {
+  const putCtjtm = async () => {
     if (sucursalRefM.current.value === "no") {
       toastr.error("Seleccionar Sucursal", "ATENCION");
     } else {
       let id = sucursalRefM.current.value;
 
-      axios
+      await axios
         .put(
           ` http://190.231.32.232:5002/api/sgi/actualizartablasm/ctjtm/${id}`
         )
@@ -130,8 +145,8 @@ const administracion = () => {
     }
   };
 
-  const putCobradoresM = () => {
-    axios
+  const putCobradoresM = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mcob`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -142,8 +157,8 @@ const administracion = () => {
       });
   };
 
-  const putCobradores = () => {
-    axios
+  const putCobradores = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000cob`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -154,8 +169,8 @@ const administracion = () => {
       });
   };
 
-  const putOficinaM = () => {
-    axios
+  const putOficinaM = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mof`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -166,8 +181,8 @@ const administracion = () => {
       });
   };
 
-  const putOficina = () => {
-    axios
+  const putOficina = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000of`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -178,8 +193,8 @@ const administracion = () => {
       });
   };
 
-  const putAdelantadoM = () => {
-    axios
+  const putAdelantadoM = async () => {
+    await axios
       .put(
         ` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000madelantado`
       )
@@ -192,8 +207,8 @@ const administracion = () => {
       });
   };
 
-  const putAdelantado = () => {
-    axios
+  const putAdelantado = async () => {
+    await axios
       .put(
         ` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000adelantado`
       )
@@ -206,8 +221,8 @@ const administracion = () => {
       });
   };
 
-  const putNoNullM = () => {
-    axios
+  const putNoNullM = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mnonull`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -218,8 +233,8 @@ const administracion = () => {
       });
   };
 
-  const putNoNull = () => {
-    axios
+  const putNoNull = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000nonull`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -230,8 +245,8 @@ const administracion = () => {
       });
   };
 
-  const putBanco = () => {
-    axios
+  const putBanco = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cbanco`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -242,8 +257,8 @@ const administracion = () => {
       });
   };
 
-  const putPolicia = () => {
-    axios
+  const putPolicia = async () => {
+    await axios
       .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cpolicia`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -254,271 +269,46 @@ const administracion = () => {
       });
   };
 
+  const putPrestamos = async () => {
+    await axios
+      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cprestamos`)
+      .then((res) => {
+        toastr.success(`${res.data[0].info}`, `ATENCION`);
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.success(`${error}`, `ATENCION`);
+      });
+  }
+
+
+
   return (
     <Layout>
-      <div className="container alert alert-primary border border-dark p-4 mt-4">
-        <h2 className="mb-4">
-          <strong>
-            <u>Administracion de datos para la efectividad</u>
-          </strong>
-        </h2>
-
-        <br />
-
-        <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li className="nav-item" role="presentation">
-            <a
-              className="nav-link active"
-              id="pills-home-tab"
-              data-toggle="pill"
-              href="#pills-home"
-              role="tab"
-              aria-controls="pills-home"
-              aria-selected="true"
-            >
-              Insertar Datos Para Efectividad
-            </a>
-          </li>
-          <li className="nav-item" role="presentation">
-            <a
-              className="nav-link"
-              id="pills-profile-tab"
-              data-toggle="pill"
-              href="#pills-profile"
-              role="tab"
-              aria-controls="pills-profile"
-              aria-selected="false"
-            >
-              Actualizar Datos Para Efectividad
-            </a>
-          </li>
-        </ul>
-        <div className="tab-content" id="pills-tabContent">
-          <div
-            className="tab-pane fade show active"
-            id="pills-home"
-            role="tabpanel"
-            aria-labelledby="pills-home-tab"
-          >
-            <div className=" alert alert-primary border border-dark p-4 mt-4">
-              <h2 className=" mb-4">
-                <strong>
-                  <u>INSERTAR DATOS WERCHOW</u>
-                </strong>
-              </h2>
-              <div className="row d-flex justify-content-between border border-dark p-4">
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary "
-                    onClick={postC1000}
-                  >
-                    Insertar C1000
-                  </button>
-                </div>
-
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={postCTjt}
-                  >
-                    Insertar Tarjetas
-                  </button>
-                </div>
-
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={postCBanco}
-                  >
-                    Insertar Banco
-                  </button>
-                </div>
-
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={postCPolicia}
-                  >
-                    Insertar Policias
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="container alert alert-primary border border-dark p-4 mt-4">
-              <h2 className=" mb-4">
-                <strong>
-                  <u>INSERTAR DATOS MUTUAL</u>
-                </strong>
-              </h2>
-              <div className="row d-flex justify-content-between border border-dark p-4">
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary "
-                    onClick={postC1000M}
-                  >
-                    Insertar C1000m
-                  </button>
-                </div>
-
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={postCTjtM}
-                  >
-                    Insertar Tarjetas
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="tab-pane fade"
-            id="pills-profile"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
-            <div className=" alert alert-primary border border-dark p-4 mt-4">
-              <h2 className=" mb-4">
-                <strong>
-                  <u>ACTUALIZAR DATOS WERCHOW</u>
-                </strong>
-              </h2>
-              <div className="row d-flex justify-content-between border border-dark p-4">
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary "
-                    onClick={putCobradores}
-                  >
-                    Actualizar Cobradores
-                  </button>
-                </div>
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putOficina}
-                  >
-                    Actualizar Oficina
-                  </button>
-                </div>
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putAdelantado}
-                  >
-                    Actualizar Adelantado
-                  </button>
-                </div>
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putCtjt}
-                  >
-                    Actualizar Tarjetas
-                  </button>
-                  <select
-                    className="form-control form-control-sm mt-1"
-                    ref={sucursalRefW}
-                  >
-                    <option value="no">Seleccionar Sucursal</option>
-                    <option value="W">Casa Central</option>
-                    <option value="L">Palpala</option>
-                    <option value="R">Perico</option>
-                    <option value="P">San Pedro</option>
-                  </select>
-                </div>
-
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putBanco}
-                  >
-                    Actualizar Banco
-                  </button>
-                </div>
-
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putPolicia}
-                  >
-                    Actualizar Policias
-                  </button>
-                </div>
-
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putNoNull}
-                  >
-                    Sacar Null
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="container alert alert-primary border border-dark p-4 mt-4">
-              <h2 className=" mb-4">
-                <strong>
-                  <u>ACTUALIZAR DATOS MUTUAL</u>
-                </strong>
-              </h2>
-              <div className="row d-flex justify-content-between border border-dark p-4">
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary "
-                    onClick={putCobradoresM}
-                  >
-                    Actualizar Cobradores
-                  </button>
-                </div>
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putOficinaM}
-                  >
-                    Actualizar Oficina
-                  </button>
-                </div>
-                <div className="col-md-4">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putAdelantadoM}
-                  >
-                    Actualizar Adelantado
-                  </button>
-                </div>
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putCtjtm}
-                  >
-                    Actualizar Tarjetas
-                  </button>
-                  <select
-                    className="form-control form-control-sm mt-1"
-                    ref={sucursalRefM}
-                  >
-                    <option value="no">Seleccionar Sucursal</option>
-                    <option value="W">Casa Central</option>
-                    <option value="L">Palpala</option>
-                    <option value="R">Perico</option>
-                    <option value="P">San Pedro</option>
-                  </select>
-                </div>
-                <div className="col-md-4 mt-2">
-                  <button
-                    className="btn btn-block btn-primary"
-                    onClick={putNoNullM}
-                  >
-                    No Null
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Administracion
+        postC1000={postC1000}
+        postC1000M={postC1000M}
+        postCBanco={postCBanco}
+        postCPolicia={postCPolicia}
+        postCTjt={postCTjt}
+        postCTjtM={postCTjtM}
+        postPrestamos={postPrestamos}
+        putOficina={putOficina}
+        putOficinaM={putOficinaM}
+        putPolicia={putPolicia}
+        putPrestamos={putPrestamos}
+        putAdelantado={putAdelantado}
+        putAdelantadoM={putAdelantadoM}
+        putBanco={putBanco}
+        putCobradores={putCobradores}
+        putCobradoresM={putCobradoresM}
+        putCtjt={putCtjt}
+        putCtjtm={putCtjtm}
+        putNoNull={putNoNull}
+        putNoNullM={putNoNullM}
+        sucursalRefM={sucursalRefM}
+        sucursalRefW={sucursalRefW}
+      />
     </Layout>
   );
 };

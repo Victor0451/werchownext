@@ -286,15 +286,6 @@ export default class Gerencia extends Component {
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    href="/sepelio/ataudes/nuevo"
-                    className="dropdown-item text-dark"
-                  >
-                    Nuevo Ataud
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
                     href="/sepelio/ataudes/actualizarstock"
                     className="dropdown-item text-dark"
                   >
@@ -348,6 +339,57 @@ export default class Gerencia extends Component {
                   >
                     Listado De Serv Historicos
                   </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Parcelas
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/parcelas/stock"
+                    className="dropdown-item text-dark"
+                  >
+                    Stock Actual
+                </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Tareas
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/tareas/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Nueva Tarea
+                </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/tareas/calendario"
+                    className="dropdown-item text-dark"
+                  >
+                    Tareas Programadas
+                </a>
                 </li>
               </ul>
             </li>

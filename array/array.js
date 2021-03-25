@@ -511,9 +511,25 @@ export const estadocartera = [
   { value: 5, label: "Morosos Tarjetas" },
 ];
 
-export const zona = [
+export const zonas = [
   { value: 1, label: "Oficina Casa Central" },
   { value: 3, label: "Oficina Palpala" },
   { value: 5, label: "Oficina Perico" },
   { value: 60, label: "Oficina San Pedro" },
+];
+
+export const zonaPal = [
+  { value: 3, label: "Oficina Palpala" },
+];
+
+export const zonaPer = [
+  { value: 5, label: "Oficina Perico" },
+];
+
+export const zonaSP = [
+  { value: 60, label: "Oficina San Pedro" },
+];
+
+export const zonaCC = [
+  { value: 1, label: "Oficina Casa Central" },
 ];

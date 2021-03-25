@@ -54,7 +54,6 @@ const calendario = () => {
 
   const localizer = momentLocalizer(moment);
 
-  console.log(events);
   return (
     <Layout>
       <div className="container mt-4 border border-dark p-4 alert alert-dark">

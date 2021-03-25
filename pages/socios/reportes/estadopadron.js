@@ -6,17 +6,20 @@ import axios from "axios";
 import ExportarPadron from "../../../components/socios/reportes/ExportarPadron";
 import jsCookie from "js-cookie";
 import Router from "next/router";
+import { zonaPer, zonaPal, zonaSP, zonaCC, zonas } from "../../../array/array";
 
 const estadopadron = () => {
   let desdeRef = React.createRef();
   let hastaRef = React.createRef();
 
+  const [userData, guardarUsuario] = useState(null)
   const [cartera, guardarCartera] = useState(null);
   const [zona, guardarZona] = useState(null);
   const [mes, guardarMes] = useState(null);
   const [errores, guardarErrores] = useState(null);
   const [errorrango, guardarErrorRango] = useState(null);
   const [padron, guardarPadron] = useState(null);
+  const [listZona, guardarListZona] = useState(null)
 
   const handleChange = (value, flag) => {
     document.getElementById("cuotas").hidden = true;
@@ -276,12 +279,33 @@ const estadopadron = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+
+        if (userData.usuario === 'vgorosito') {
+          guardarListZona(zonaPer)
+        } else if (userData.usuario === 'mcarrizo') {
+          guardarListZona(zonaPal)
+        } else if (userData.usuario === 'sjuarez') {
+          guardarListZona(zonaSP)
+        } else if (userData.usuario === 'mgalian' || userData.usuario === 'ggimenez') {
+          guardarListZona(zonaCC)
+        } else {
+          guardarListZona(zonas)
+        }
+
+      }
     }
   }, []);
 
   return (
     <Layout>
       <BuscarPadron
+        userData={userData}
         handleChange={handleChange}
         desdeRef={desdeRef}
         hastaRef={hastaRef}
@@ -289,6 +313,7 @@ const estadopadron = () => {
         buscarCarteram={buscarCarteram}
         errores={errores}
         errorrango={errorrango}
+        listZona={listZona}
       />
 
       {padron !== null ? (

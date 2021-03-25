@@ -10,7 +10,7 @@ import validarAltaServicio from "../../../validacion/validarAltaServicio";
 import toastr from "toastr";
 import Router from "next/router";
 import ListadoAdherentes from "./ListadoAdherentes";
-import ListadoParcelas from "./ListadoParcelas";
+import ListadoParcelas from "../parcelas/ListadoParcelas";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",

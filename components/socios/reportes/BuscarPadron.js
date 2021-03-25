@@ -2,7 +2,7 @@ import React from "react";
 import CarteraSelect from "react-select";
 import ZonaSelect from "react-select";
 import MesSelect from "react-select";
-import { estadocartera, zona, meses } from "../../../array/array";
+import { estadocartera, meses } from "../../../array/array";
 
 const BuscarPadron = ({
   handleChange,
@@ -13,7 +13,10 @@ const BuscarPadron = ({
   buscarCartera,
   buscarCarteram,
   errorrango,
+  listZona
 }) => {
+
+
   return (
     <div className="container">
       <form className="mt-4 border border-dark p-4 alert alert-primary">
@@ -38,7 +41,7 @@ const BuscarPadron = ({
                 </strong>
               </label>
               <ZonaSelect
-                options={zona}
+                options={listZona}
                 placeholder={"Seleccionar Zona"}
                 onChange={(value) => handleChange(value, "zona")}
               />
