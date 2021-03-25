@@ -5,7 +5,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import Spinner from "../../layout/Spinner";
 import Stock from "../ataudes/Stock";
-import ListadoParcelas from "../servicios/ListadoParcelas";
+import ListadoParcelas from "../parcelas/ListadoParcelas";
 
 const FormEditarServicio = ({ servicio }) => {
   if (!servicio) return <Spinner />;
