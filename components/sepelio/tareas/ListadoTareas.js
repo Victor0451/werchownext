@@ -2,10 +2,10 @@ import React from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
-import Link from "next/link";
 import moment from "moment";
+import EditarTareas from './EditarTarea'
 
-const ListadoTareas = ({ listado }) => {
+const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, tareaRef, task, editarTarea, eliminarTarea, operadorsep, error, opRef }) => {
     if (!listado) return <Spinner />;
 
     return (
@@ -31,7 +31,7 @@ const ListadoTareas = ({ listado }) => {
                                 {
                                     Header: "#",
                                     filterAll: false,
-                                    width: 20,
+                                    width: 50,
                                     Cell: (row) => <div>{row.index + 1}</div>,
                                 },
                                 {
@@ -41,11 +41,12 @@ const ListadoTareas = ({ listado }) => {
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["title"] }),
                                     filterAll: true,
+                                    width: 400,
 
                                 },
                                 {
                                     Header: "Acciones",
-
+                                    width: 100,
                                     Cell: (row) => (
                                         <div>
                                             {row.original.allDay == 1 ? (<div>Si</div>)
@@ -58,7 +59,7 @@ const ListadoTareas = ({ listado }) => {
                                 {
                                     Header: "Inicio",
                                     id: "start",
-                                    accessor: (d) => d.start,
+                                    accessor: (d) => moment(d.start).utcOffset("+000").format('YYYY-MM-DD HH:mm:ss'),
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["start"] }),
                                     filterAll: true,
@@ -67,7 +68,7 @@ const ListadoTareas = ({ listado }) => {
                                 {
                                     Header: "Fin",
                                     id: "end",
-                                    accessor: (d) => d.end,
+                                    accessor: (d) => moment(d.end).utcOffset("+000").format('YYYY-MM-DD HH:mm:ss'),
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, {
                                             keys: ["end"],
@@ -81,47 +82,30 @@ const ListadoTareas = ({ listado }) => {
 
                                     Cell: (row) => (
                                         <div>
-
-
-                                            <Link
-                                                href={{
-                                                    pathname: "/sepelio/servicios/editar",
-                                                    query: {
-                                                        id: row.original.dni,
-                                                    },
-                                                }}
+                                            <button
+                                                className="btn btn-sm btn-warning border mr-1"
+                                                data-toggle="tooltip"
+                                                data-toggle="modal"
+                                                data-placement="top"
+                                                title="Editar"
+                                                data-target="#staticBackdrop"
+                                                onClick={() => traerTarea(row.original.idevents)}
                                             >
-                                                <button
-                                                    className="btn btn-sm btn-warning border mr-1"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Editar"
-                                                >
-                                                    <i
-                                                        className="fa fa-pencil-square-o"
-                                                        aria-hidden="true"
-                                                    ></i>
-                                                </button>
-                                            </Link>
-                                            <Link
-                                                href={{
-                                                    pathname: "/sepelio/servicios/editar",
-                                                    query: {
-                                                        id: row.original.dni,
-                                                    },
-                                                }}
+                                                <i
+                                                    className="fa fa-pencil-square-o"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </button>
+
+                                            <button
+                                                className="btn btn-sm btn-danger border mr-1"
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="Eliminar"
+                                                onClick={() => eliminarTarea(row.original.idevents)}
                                             >
-                                                <button
-                                                    className="btn btn-sm btn-danger border mr-1"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Eliminar"
-                                                >
-                                                    <i className="fa fa-trash" aria-hidden="true"></i>
-                                                </button>
-                                            </Link>
-
-
+                                                <i className="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
                                         </div>
                                     ),
                                 },
@@ -132,6 +116,47 @@ const ListadoTareas = ({ listado }) => {
                     className="-striped -highlight"
                 />
             </div>
+
+
+
+            <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog modal-xl">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="staticBackdropLabel">Editar Tarea</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+
+                            {
+                                task ? (
+                                    <EditarTareas
+                                        inicioRef={inicioRef}
+                                        finRef={finRef}
+                                        siRef={siRef}
+                                        noRef={noRef}
+                                        tareaRef={tareaRef}
+                                        opRef={opRef}
+                                        task={task}
+                                        operadorsep={operadorsep}
+                                        error={error}
+                                    />
+                                ) : (<Spinner />)
+                            }
+
+                        </div>
+                        <div className="modal-footer">
+
+                            <button className="btn btn-primary" onClick={editarTarea} >Editar</button>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 };

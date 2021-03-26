@@ -253,6 +253,15 @@ export default class Sepelio extends Component {
                 <hr />
                 <li>
                   <a
+                    href="/sepelio/tareas/editar"
+                    className="dropdown-item text-dark"
+                  >
+                    Editar Tarea
+                </a>
+                </li>
+                <hr />
+                <li>
+                  <a
                     href="/sepelio/tareas/calendario"
                     className="dropdown-item text-dark"
                   >

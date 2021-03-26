@@ -1,8 +1,9 @@
 import React from 'react'
 
-const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea }) => {
+const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, operadorsep, opRef, error }) => {
     return (
         <div className="container mt-4 border border-dark alert alert-primary p-4">
+
 
             <div className="row">
                 <div className="col-md-8">
@@ -18,6 +19,8 @@ const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea }) =
                         </a>
                 </div>
             </div>
+
+            {error ? (<div className="mt-4 mb-4 border border-dark alert alert-danger text-center text-uppercase">{error}</div>) : null}
 
             <div className="mt-4 border border-dark p-4 ">
                 <div className="row border border-dark p-4">
@@ -82,8 +85,31 @@ const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea }) =
                             </label>
                         </div>
                     </div>
-                </div>
 
+
+                    <div className="form-group col-md-4">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Operador: </u>
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="operador"
+                            ref={opRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+                            {operadorsep
+                                ? operadorsep.map((operador, index) => (
+                                    <option key={index} value={operador.value}>
+                                        {operador.label}
+                                    </option>
+                                ))
+                                : null}
+                        </select>
+                    </div>
+                </div>
 
                 <div className="mt-4 row border border-dark p-4">
                     <div className=" col-md-6">
