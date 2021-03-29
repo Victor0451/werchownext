@@ -7,6 +7,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import ListadoTareas from "../../../components/sepelio/tareas/ListadoTareas";
 import { confirmAlert } from 'react-confirm-alert'
+import { ip } from '../../../config/config'
 
 
 const editar = () => {
@@ -39,7 +40,7 @@ const editar = () => {
 
     const traerEventos = async () => {
         await axios
-            .get(` http://190.231.32.232:5002/api/sepelio/tareas/traertareas`)
+            .get(` ${ip}api/sepelio/tareas/traertareas`)
             .then((res) => {
                 guardarEvents(res.data);
             })
@@ -51,7 +52,7 @@ const editar = () => {
     const traerTarea = async (id) => {
         guardarTask(null)
         await axios
-            .get(` http://190.231.32.232:5002/api/sepelio/tareas/traertarea/${id}`)
+            .get(` ${ip}api/sepelio/tareas/traertarea/${id}`)
             .then((res) => {
                 guardarTask(res.data);
             })
@@ -89,7 +90,7 @@ const editar = () => {
         }
 
         await axios
-            .put(` http://190.231.32.232:5002/api/sepelio/tareas/editartarea/${task.idevents}`, taskedit)
+            .put(` ${ip}api/sepelio/tareas/editartarea/${task.idevents}`, taskedit)
             .then((res) => {
                 if (res.status === 200) {
                     toastr.success("La tarea se edito con exito", "ATENCION")
@@ -132,7 +133,7 @@ const editar = () => {
 
     const deleteTask = async (id) => {
         await axios
-            .delete(` http://190.231.32.232:5002/api/sepelio/tareas/eliminartarea/${id}`,)
+            .delete(` ${ip}api/sepelio/tareas/eliminartarea/${id}`,)
             .then((res) => {
 
                 if (res.status === 200)
@@ -150,7 +151,7 @@ const editar = () => {
     const traerOperador = async () => {
         await axios
             .get(
-                `http://190.231.32.232:5002/api/sepelio/serviciogastos/operadoressep`
+                `${ip}api/sepelio/serviciogastos/operadoressep`
             )
             .then((res) => {
                 guardarOperadorSep(res.data[0]);

@@ -6,6 +6,7 @@ import Resultados from "../../components/campañas/Resultados";
 import toastr from "toastr";
 import axios from "axios";
 import Router from "next/router";
+import {ip} from '../../config/config'
 
 const resultado_campana = () => {
   let token = jsCookie.get("token");
@@ -37,7 +38,7 @@ const resultado_campana = () => {
   const estadisticasW = async (operador, empresa) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/llamin/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/llamin/${operador}`
       )
       .then((res) => {
         const llamin = res.data[0][0].casos;
@@ -49,7 +50,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/compago/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/compago/${operador}`
       )
       .then((res) => {
         const compago = res.data[0][0].casos;
@@ -61,7 +62,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/nopaga/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/nopaga/${operador}`
       )
       .then((res) => {
         const nopaga = res.data[0][0].casos;
@@ -73,7 +74,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/cuotadia/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/cuotadia/${operador}`
       )
       .then((res) => {
         const cuotadia = res.data[0][0].casos;
@@ -85,7 +86,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/notificacion/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/notificacion/${operador}`
       )
       .then((res) => {
         const notificacion = res.data[0][0].casos;
@@ -97,7 +98,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/carteraroja/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/carteraroja/${operador}`
       )
       .then((res) => {
         const carteraroja = res.data[0][0].casos;
@@ -109,7 +110,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/sociofallecido/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/sociofallecido/${operador}`
       )
       .then((res) => {
         const sociofallecido = res.data[0][0].casos;
@@ -121,7 +122,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/casosabiertos/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/casosabiertos/${operador}`
       )
       .then((res) => {
         const casosabiertos = res.data[0][0].casos;
@@ -133,7 +134,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/casoscerrados/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/casoscerrados/${operador}`
       )
       .then((res) => {
         const casoscerrados = res.data[0][0].casos;
@@ -145,7 +146,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/casosconaccion/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/casosconaccion/${operador}`
       )
       .then((res) => {
         const casosconaccion = res.data[0][0].casos;
@@ -157,7 +158,7 @@ const resultado_campana = () => {
 
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/estadistica/${empresa}/casossinaccion/${operador}`
+        `${ip}api/sgi/estadistica/${empresa}/casossinaccion/${operador}`
       )
       .then((res) => {
         const casossinaccion = res.data[0][0].casos;

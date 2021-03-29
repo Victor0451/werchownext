@@ -5,6 +5,7 @@ import ReactToPrint from "react-to-print";
 import Layout from "../../components/layout/Layout";
 import Router from "next/router";
 import JsCookie from "js-cookie";
+import { ip } from '../../config/config'
 
 const caratula = () => {
   let componentRef = React.createRef();
@@ -20,7 +21,7 @@ const caratula = () => {
 
   const prestamoPorId = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/prestamos/prestamosporid/${id}`)
+      .get(`${ip}api/sgi/prestamos/prestamosporid/${id}`)
       .then((res) => {
         let prestamos = res.data;
         guardarPrestamos(prestamos);
@@ -35,7 +36,7 @@ const caratula = () => {
   const consultarFicha = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/prestamos/consultarficha/${contrato}`
+        `${ip}api/sgi/prestamos/consultarficha/${contrato}`
       )
       .then((res) => {
         let ficha = res.data;

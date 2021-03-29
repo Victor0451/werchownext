@@ -4,6 +4,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import ListadoNovell from "../../../components/ventas/ventaplan/novell/ListadoNovell";
+import { ip } from '../../../config/config'
 
 const listadonovell = () => {
   const [listado, guardarListado] = useState(null);
@@ -19,7 +20,7 @@ const listadonovell = () => {
 
   const taerListadoNovell = async () => {
     await axios
-      .get(`http://192.168.1.102:5002/api/sgi/socios/listadonovell`)
+      .get(`${ip}api/sgi/socios/listadonovell`)
       .then((res) => {
         console.log(res);
         guardarListado(res.data);

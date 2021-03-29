@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import BuscarSocio from "../../../components/socios/legajoVirtual/BuscarSocio";
+import { ip } from '../../../config/config'
 
 const subirarchivo = () => {
   let contratoRef = React.createRef();
@@ -29,7 +30,7 @@ const subirarchivo = () => {
   const traerArchivos = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/archivos/legajovirtual/listaarchivos/${contrato}`
+        `${ip}api/archivos/legajovirtual/listaarchivos/${contrato}`
       )
       .then((res) => {
         let archivos = res.data;
@@ -43,7 +44,7 @@ const subirarchivo = () => {
   const traerArchivosM = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualm/listaarchivos/${contrato}`
+        `${ip}api/archivos/legajovirtualm/listaarchivos/${contrato}`
       )
       .then((res) => {
         let archivos = res.data;
@@ -66,7 +67,7 @@ const subirarchivo = () => {
       guardarContrato(contrato);
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titular/${contrato}`
+          `${ip}api/werchow/maestro/titular/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -103,7 +104,7 @@ const subirarchivo = () => {
       guardarContrato(contrato);
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titularm/${contrato}`
+          `${ip}api/werchow/maestro/titularm/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -140,7 +141,7 @@ const subirarchivo = () => {
       let dni = dniRef.current.value;
 
       await axios
-        .get(`http://190.231.32.232:5002/api/werchow/maestro/titulardni/${dni}`)
+        .get(`${ip}api/werchow/maestro/titulardni/${dni}`)
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
@@ -179,7 +180,7 @@ const subirarchivo = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titulardnim/${dni}`
+          `${ip}api/werchow/maestro/titulardnim/${dni}`
         )
         .then((res) => {
           let ficha = res.data[0][0];

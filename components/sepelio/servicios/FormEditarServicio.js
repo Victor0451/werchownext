@@ -6,6 +6,7 @@ import Router from "next/router";
 import Spinner from "../../layout/Spinner";
 import Stock from "../ataudes/Stock";
 import ListadoParcelas from "../parcelas/ListadoParcelas";
+import {ip} from '../../../config/config'
 
 const FormEditarServicio = ({ servicio }) => {
   if (!servicio) return <Spinner />;
@@ -47,7 +48,7 @@ const FormEditarServicio = ({ servicio }) => {
 
   const traerAtaud = async (idataud) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/ataud/${idataud}`)
+      .get(`${ip}api/sepelio/ataudes/ataud/${idataud}`)
       .then((res) => {
         guardarAtaud(res.data);
       })
@@ -59,7 +60,7 @@ const FormEditarServicio = ({ servicio }) => {
   const traerParcela = async (idparcela) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/parcelas/traerparcela/${idparcela}`
+        `${ip}api/sepelio/parcelas/traerparcela/${idparcela}`
       )
       .then((res) => {
         guardarParcela(res.data);
@@ -103,7 +104,7 @@ const FormEditarServicio = ({ servicio }) => {
 
     // await axios
     //   .put(
-    //     `http://190.231.32.232:5002/api/sepelio/servicio/editarservicio/${servicio.idservicio}`,
+    //     `${ip}api/sepelio/servicio/editarservicio/${servicio.idservicio}`,
     //     editServicio
     //   )
     //   .then((res) => {

@@ -10,6 +10,7 @@ import Notificacion2 from "./Notificacion2";
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
+import {ip} from '../../config/config'
 
 const ListadoCasos = ({ campana, operador, modal, userData }) => {
   let fechaaccionRef = React.createRef();
@@ -46,7 +47,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
 
   const getGestionCaso = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/getgestioncaso/${id}`)
+      .get(`${ip}api/sgi/campanas/getgestioncaso/${id}`)
       .then((res) => {
         console.log(res);
         const gestion = res.data[0];
@@ -59,7 +60,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
 
   const cerrarCaso = async (id) => {
     await axios
-      .put(`http://190.231.32.232:5002/api/sgi/campanas/cerrarcaso/${id}`)
+      .put(`${ip}api/sgi/campanas/cerrarcaso/${id}`)
       .then((res) => {
         console.log(res);
       })
@@ -70,7 +71,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
 
   const gestionCaso = async (datos) => {
     await axios
-      .post(`http://190.231.32.232:5002/api/sgi/campanas/gestioncaso`, datos)
+      .post(`${ip}api/sgi/campanas/gestioncaso`, datos)
       .then((res) => {
         console.log(res);
         toastr.success("Se registro la accion con exito", "ANTENCION");
@@ -83,7 +84,7 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
 
   const updateAccion = async (id) => {
     await axios
-      .put(`http://190.231.32.232:5002/api/sgi/campanas/updateaccion/${id}`)
+      .put(`${ip}api/sgi/campanas/updateaccion/${id}`)
       .then((res) => {
         console.log(res);
       })

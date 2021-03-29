@@ -6,6 +6,7 @@ import jsCookie from "js-cookie";
 
 import axios from "axios";
 import toastr from "toastr";
+import { ip } from '../../../config/config'
 
 const rehabilitacion = () => {
   let contratoRef = React.createRef();
@@ -71,7 +72,7 @@ const rehabilitacion = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sgi/socios/consultarficha/${contrato}`
+          `${ip}api/sgi/socios/consultarficha/${contrato}`
         )
         .then((res) => {
           let ficha = res.data;
@@ -139,7 +140,7 @@ const rehabilitacion = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sgi/socios/consultarficham/${contrato}`
+          `${ip}api/sgi/socios/consultarficham/${contrato}`
         )
         .then((res) => {
           let ficha = res.data;
@@ -222,7 +223,7 @@ const rehabilitacion = () => {
     }
 
     await axios
-      .post(`http://190.231.32.232:5002/api/sgi/socios/nuevarehab`, rehab)
+      .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
       .then((res) => {
         console.log(res.data, res.status);
         toastr.success(

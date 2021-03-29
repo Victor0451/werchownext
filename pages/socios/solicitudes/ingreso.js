@@ -6,6 +6,7 @@ import axios from "axios";
 import toastr from "toastr";
 import SolicitudIngreso from "../../../components/socios/solilcitudes/SolicitudIngreso";
 import BuscarSocio from "../../../components/socios/solilcitudes/BuscarSocio";
+import { ip } from '../../../config/config'
 
 
 const solicitud = () => {
@@ -37,7 +38,7 @@ const solicitud = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titular/${contrato}`
+          `${ip}api/werchow/maestro/titular/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -76,7 +77,7 @@ const solicitud = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titularm/${contrato}`
+          `${ip}api/werchow/maestro/titularm/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -107,7 +108,7 @@ const solicitud = () => {
   const traerAdhs = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/werchow/adherent/adherentestit/${contrato}`
+        `${ip}api/werchow/adherent/adherentestit/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -120,7 +121,7 @@ const solicitud = () => {
   const traerAdhsM = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/mutual/adherent/adherentestit/${contrato}`
+        `${ip}api/mutual/adherent/adherentestit/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);

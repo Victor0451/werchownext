@@ -7,6 +7,7 @@ import Router, { useRouter } from "next/router";
 
 import toastr from "toastr";
 import IngresoCaja from "../../../components/sepelio/caja/IngresoCaja";
+import { ip } from '../../../config/config'
 
 const ingresoscaja = () => {
   let fechaRef = React.createRef();
@@ -59,7 +60,7 @@ const ingresoscaja = () => {
 
   const infoCaja = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/caja/${id}`)
+      .get(`${ip}api/sepelio/cajasepelio/caja/${id}`)
       .then((res) => {
         guardarCaja(res.data);
       })
@@ -71,7 +72,7 @@ const ingresoscaja = () => {
   const listIngresos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/listadoingresos/${id}`
+        `${ip}api/sepelio/cajasepelio/listadoingresos/${id}`
       )
       .then((res) => {
         guardarIngresos(res.data);
@@ -83,7 +84,7 @@ const ingresoscaja = () => {
 
   const listadoConceptos = async () => {
     axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listconcepto`)
+      .get(`${ip}api/sepelio/cajasepelio/listconcepto`)
       .then((res) => {
         guardarListConcep(res.data[0]);
       });
@@ -122,7 +123,7 @@ const ingresoscaja = () => {
     } else {
       axios
         .post(
-          `http://190.231.32.232:5002/api/sepelio/cajasepelio/ingresocaja`,
+          `${ip}api/sepelio/cajasepelio/ingresocaja`,
           ingreso
         )
         .then((res) => {
@@ -155,7 +156,7 @@ const ingresoscaja = () => {
 
     axios
       .put(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/updatetotalesing/${caja.idcaja}`,
+        `${ip}api/sepelio/cajasepelio/updatetotalesing/${caja.idcaja}`,
         valores
       )
       .then((res) => {

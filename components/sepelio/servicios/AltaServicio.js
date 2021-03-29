@@ -3,6 +3,7 @@ import FormAltaServicio from "./FormAltaServicio";
 import FormAltaServicioPart from "./FormAltaServicioPart";
 import toastr from "toastr";
 import axios from "axios";
+import {ip} from '../../../config/config'
 
 const AltaServicio = ({
   empresaRef,
@@ -26,7 +27,7 @@ const AltaServicio = ({
   const adherentesTit = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/servicio/adherentestit/${contrato}`
+        `${ip}api/sepelio/servicio/adherentestit/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -39,7 +40,7 @@ const AltaServicio = ({
   const adherentesTitMut = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/servicio/adherentestitm/${contrato}`
+        `${ip}api/sepelio/servicio/adherentestitm/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -61,7 +62,7 @@ const AltaServicio = ({
     if (contrato !== "") {
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${contrato}`
+          `${ip}api/sepelio/servicio/impservicio/${contrato}`
         )
         .then((res) => {
           if (res.data) {
@@ -75,7 +76,7 @@ const AltaServicio = ({
           } else {
             axios
               .get(
-                `http://190.231.32.232:5002/api/sepelio/servicio/consultarficha/${contrato}`
+                `${ip}api/sepelio/servicio/consultarficha/${contrato}`
               )
               .then((res) => {
                 if (res.data) {
@@ -87,7 +88,7 @@ const AltaServicio = ({
                 } else if (!res.data) {
                   axios
                     .get(
-                      `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadh/${contrato}`
+                      `${ip}api/sepelio/servicio/consultarfichaadh/${contrato}`
                     )
                     .then((res) => {
                       if (res.data) {
@@ -135,7 +136,7 @@ const AltaServicio = ({
     if (contrato !== "") {
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${contrato}`
+          `${ip}api/sepelio/servicio/impservicio/${contrato}`
         )
         .then((res) => {
           if (res.data) {
@@ -149,7 +150,7 @@ const AltaServicio = ({
           } else {
             axios
               .get(
-                `http://190.231.32.232:5002/api/sepelio/servicio/consultarficham/${contrato}`
+                `${ip}api/sepelio/servicio/consultarficham/${contrato}`
               )
               .then((res) => {
                 if (res.data) {
@@ -161,7 +162,7 @@ const AltaServicio = ({
                 } else if (!res.data) {
                   axios
                     .get(
-                      `http://190.231.32.232:5002/api/sepelio/servicio/consultarfichaadhm/${contrato}`
+                      `${ip}api/sepelio/servicio/consultarfichaadhm/${contrato}`
                     )
                     .then((res) => {
                       if (res.data) {
@@ -198,12 +199,12 @@ const AltaServicio = ({
 
   const traerPagos = async (contrato) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/werchow/pagos/pagos/${contrato}`)
+      .get(`${ip}api/werchow/pagos/pagos/${contrato}`)
       .then((res) => {
         let pagos = res.data;
         axios
           .get(
-            `http://190.231.32.232:5002/api/werchow/pagobco/pagobco/${contrato}`
+            `${ip}api/werchow/pagobco/pagobco/${contrato}`
           )
           .then((res) => {
             let pagobco = res.data;
@@ -224,14 +225,14 @@ const AltaServicio = ({
   const traerPagosM = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/werchow/pagos/pagosmutual/${contrato}`
+        `${ip}api/werchow/pagos/pagosmutual/${contrato}`
       )
       .then((res) => {
         let pagos = res.data;
 
         axios
           .get(
-            `http://190.231.32.232:5002/api/werchow/pagobco/pagobcom/${contrato}`
+            `${ip}api/werchow/pagobco/pagobcom/${contrato}`
           )
           .then((res) => {
             let pagobco = res.data;
@@ -251,7 +252,7 @@ const AltaServicio = ({
 
   const traerGrupo = async (grupo) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/grupo/${grupo}`)
+      .get(`${ip}api/sepelio/servicio/grupo/${grupo}`)
       .then((res) => {
         guardarGrupo(res.data);
       })

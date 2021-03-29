@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Spinner from "../../layout/Spinner";
 import axios from "axios";
 import toastr from "toastr";
+import { ip } from '../../../config/config'
 
 const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
   if (!ficha) {
@@ -16,7 +17,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
     console.log(id);
     await axios
       .delete(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
+        `${ip}api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -329,7 +330,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
                 </strong> */}
 
                 <img
-                  src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
+                  src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
                   className="archivos p-4 "
                   data-toggle="modal"
                   data-target="#exampleModal"
@@ -340,7 +341,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
                 <div className="">
                   <a
                     className="btn btn-primary mr-1 "
-                    href={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/descargararchivo/${archivo.archivo}`}
+                    href={`${ip}api/archivos/legajovirtualprestamos/descargararchivo/${archivo.archivo}`}
                   >
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </a>
@@ -382,7 +383,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
             </div>
             <div className="modal-body d-flex justify-content-center">
               <img
-                src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archi}`}
+                src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archi}`}
                 classNameName="archimodal p-4  "
               />
             </div>

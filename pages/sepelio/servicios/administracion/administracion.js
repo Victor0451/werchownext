@@ -5,6 +5,7 @@ import axios from "axios";
 import AdministracionServicios from "../../../../components/sepelio/servicios/administracion/AdministracionServicios";
 import ExportarPadron from "../../../../components/sepelio/servicios/administracion/ExportarPadron";
 import toastr from "toastr";
+import { ip } from '../../../../config/config'
 
 const administracion = () => {
   const [servicio, guardarServicio] = useState(null);
@@ -14,7 +15,7 @@ const administracion = () => {
   const traerServicio = async () => {
     axios
       .get(
-        ` http://190.231.32.232:5002/api/sepelio/servicio/serviciossinimpactar`
+        ` ${ip}api/sepelio/servicio/serviciossinimpactar`
       )
       .then((res) => {
         guardarServicio(res.data[0]);
@@ -26,7 +27,7 @@ const administracion = () => {
 
   const putTitularesW = async () => {
     axios
-      .put(` http://190.231.32.232:5002/api/sepelio/servicio/puttitularesw`)
+      .put(` ${ip}api/sepelio/servicio/puttitularesw`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -37,7 +38,7 @@ const administracion = () => {
 
   const putTitularesM = async () => {
     axios
-      .put(` http://190.231.32.232:5002/api/sepelio/servicio/puttitularesm`)
+      .put(` ${ip}api/sepelio/servicio/puttitularesm`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -48,7 +49,7 @@ const administracion = () => {
 
   const putAdherentesW = async () => {
     axios
-      .put(` http://190.231.32.232:5002/api/sepelio/servicio/putadherentesw`)
+      .put(` ${ip}api/sepelio/servicio/putadherentesw`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -59,7 +60,7 @@ const administracion = () => {
 
   const putAdherentesM = async () => {
     axios
-      .put(` http://190.231.32.232:5002/api/sepelio/servicio/putadherentesm`)
+      .put(` ${ip}api/sepelio/servicio/putadherentesm`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })

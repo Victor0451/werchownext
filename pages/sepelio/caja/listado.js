@@ -6,6 +6,7 @@ import moment from "moment";
 import Router, { useRouter } from "next/router";
 import ListadoCajaSepelio from "../../../components/sepelio/caja/ListadoCajaSepelio";
 import toastr from "toastr";
+import {ip} from '../../../config/config'
 
 const listado = () => {
   const [cajas, guardarCajas] = useState(null);
@@ -22,7 +23,7 @@ const listado = () => {
 
   const listadoCaja = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listadocajas`)
+      .get(`${ip}api/sepelio/cajasepelio/listadocajas`)
       .then((res) => {
         guardarCajas(res.data);
       })

@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import GenerarGanadores from "../../../components/socios/clubwerchow/GenerarGanadores";
+import { ip } from '../../../config/config'
 
 const realizarsorteo = () => {
   const [padron, guardarPadron] = useState(null);
@@ -21,7 +22,7 @@ const realizarsorteo = () => {
 
   const padronParticipante = async () => {
     await axios
-      .get("http://192.168.1.102:5002/api/clubwerchow/socios/participantes")
+      .get(`${ip}api/clubwerchow/socios/participantes`)
       .then((res) => {
         guardarPadron(res.data);
 

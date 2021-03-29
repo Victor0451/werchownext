@@ -11,6 +11,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import ListadoAdherentes from "./ListadoAdherentes";
 import ListadoParcelas from "../parcelas/ListadoParcelas";
+import { ip } from '../../../config/config'
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -83,7 +84,7 @@ const FormAltaServicio = ({
   const postServicio = async (servicio) => {
     await axios
       .post(
-        `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+        `${ip}api/sepelio/servicio/nuevoservicio`,
         servicio
       )
       .then((res) => {
@@ -124,7 +125,7 @@ const FormAltaServicio = ({
     let nustock = stock - 1;
     console.log(nustock)
     await axios
-      .put(`http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
+      .put(`${ip}api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
         console.log(res);
       })

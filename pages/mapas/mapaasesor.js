@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import FormMapa from "../../components/mapas/FormMapa";
 import MapaAsesor from "../../components/mapas/MapaAsesor";
+import { ip } from '../../config/config'
 
 const mapaasesor = () => {
   let asesorRef = React.createRef();
@@ -25,7 +26,7 @@ const mapaasesor = () => {
 
   const asesores = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/mapa/asesores`)
+      .get(`${ip}api/sgi/mapa/asesores`)
       .then((res) => {
         guardarAsesores(res.data[0]);
       })
@@ -42,7 +43,7 @@ const mapaasesor = () => {
       guardarError("Debes seleccionar un asesor y/o un año");
     } else {
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/mapa/mapaasesor`, {
+        .get(`${ip}api/sgi/mapa/mapaasesor`, {
           params: {
             asesor: ase,
             ano: ano,

@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import ListadoSolicitudes from "../../../components/socios/clubwerchow/ListadoSolicitudes";
+import { ip } from '../../../config/config'
 
 const solicitudes = () => {
   const [listsolicitudes, guardarListSolicitudes] = useState(null);
@@ -13,7 +14,7 @@ const solicitudes = () => {
 
   const traerSolic = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/clubwerchow/socios/solicitudes`)
+      .get(`${ip}api/clubwerchow/socios/solicitudes`)
       .then((res) => {
         let listsolicitudes = res.data;
         guardarListSolicitudes(listsolicitudes);

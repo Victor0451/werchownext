@@ -5,6 +5,7 @@ import axios from "axios";
 // Import React Table
 import ReactTable from "react-table";
 import FromActualizarStock from "./FromActualizarStock";
+import { ip } from '../../../config/config'
 
 const StockAgotado = ({
   nuevoStockRef,
@@ -17,7 +18,7 @@ const StockAgotado = ({
 
   const mostrarAtaudes = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/stockagotado`)
+      .get(`${ip}api/sepelio/ataudes/stockagotado`)
       .then((res) => {
         let ataudes = res.data;
         guardarAtaudes(ataudes);

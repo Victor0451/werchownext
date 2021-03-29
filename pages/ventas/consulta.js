@@ -7,6 +7,7 @@ import axios from "axios";
 import Spinner from "../../components/layout/Spinner";
 import jsCookie from "js-cookie";
 import Router from "next/router";
+import { ip } from '../../config/config'
 
 const consulta = () => {
   const [mes, guardarMes] = useState(null);
@@ -41,7 +42,7 @@ const consulta = () => {
     } else {
       guardarSpinner(true);
       await axios
-        .get(`http://190.231.32.232:5002/api/ventas/consultas/consultaventas`, {
+        .get(`${ip}api/ventas/consultas/consultaventas`, {
           params: {
             mes: mes,
             ano: ano,
@@ -65,7 +66,7 @@ const consulta = () => {
   const buscarVentasXAse = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/ventas/consultas/consultaventasporasesor`,
+        `${ip}api/ventas/consultas/consultaventasporasesor`,
         {
           params: {
             mes: mes,
@@ -84,7 +85,7 @@ const consulta = () => {
   const buscarVentasXMedPago = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/ventas/consultas/consultaventasmediopago`,
+        `${ip}api/ventas/consultas/consultaventasmediopago`,
         {
           params: {
             mes: mes,
@@ -103,7 +104,7 @@ const consulta = () => {
   const buscarVentasXLocalidad = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/ventas/consultas/consultaventaslocalidad`,
+        `${ip}api/ventas/consultas/consultaventaslocalidad`,
         {
           params: {
             mes: mes,

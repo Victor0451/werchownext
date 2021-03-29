@@ -3,7 +3,7 @@ import matchSorter from "match-sorter";
 import toastr from "toastr";
 import Router from "next/router";
 import axios from "axios";
-
+import { ip } from '../../config/config'
 // Import React Table
 import ReactTable from "react-table";
 
@@ -18,7 +18,7 @@ const TablaPrestamosPrendientes = ({
     const id = row.original.ptm_id;
 
     await axios
-      .put(`http://190.231.32.232:5002/api/sgi/prestamos/aprobarprestamo/${id}`)
+      .put(`${ip}api/sgi/prestamos/aprobarprestamo/${id}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.status);

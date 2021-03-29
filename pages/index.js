@@ -4,6 +4,7 @@ import LoginUsuario from "../components/auth/LoginUsuario";
 import axios from "axios";
 import Router from "next/router";
 import jsCookie from "js-cookie";
+import { ip } from '../config/config'
 
 // Validaciones
 import useValidacion from "../hooks/useValidacion";
@@ -41,7 +42,7 @@ const Login = () => {
       const body = JSON.stringify({ usuario, contrasena });
 
       await axios
-        .post("http://190.231.32.232:5002/api/sgi/auth/auth", body, config)
+        .post(`${ip}api/sgi/auth/auth`, body, config)
         .then((res) => {
           const usuario = res.data.user;
           console.log(usuario);

@@ -8,6 +8,7 @@ import toastr from "toastr";
 import ListadoCajaGastos from "../../../components/sepelio/caja/ListadoCajaGastos";
 import NuevoCajaGasto from "../../../components/sepelio/caja/NuevoCajaGasto";
 import Spinner from "../../../components/layout/Spinner";
+import { ip } from '../../../config/config'
 
 const gastoscaja = () => {
   let fechaRef = React.createRef();
@@ -66,7 +67,7 @@ const gastoscaja = () => {
 
   const listadoProveedores = async () => {
     axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listprov`)
+      .get(`${ip}api/sepelio/cajasepelio/listprov`)
       .then((res) => {
         guardarListProv(res.data[0]);
       });
@@ -74,7 +75,7 @@ const gastoscaja = () => {
 
   const listadoConceptos = async () => {
     axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/listconcepto`)
+      .get(`${ip}api/sepelio/cajasepelio/listconcepto`)
       .then((res) => {
         guardarListConcep(res.data[0]);
       });
@@ -82,7 +83,7 @@ const gastoscaja = () => {
 
   const infoCaja = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/caja/${id}`)
+      .get(`${ip}api/sepelio/cajasepelio/caja/${id}`)
       .then((res) => {
         guardarCaja(res.data);
       })
@@ -128,7 +129,7 @@ const gastoscaja = () => {
 
     await axios
       .put(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/updatetotales/${id}`,
+        `${ip}api/sepelio/cajasepelio/updatetotales/${id}`,
         valores
       )
       .then((res) => {
@@ -143,7 +144,7 @@ const gastoscaja = () => {
     let id = router.query.id;
     await axios
       .put(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/updatecierrecaja/${id}`
+        `${ip}api/sepelio/cajasepelio/updatecierrecaja/${id}`
       )
       .then((res) => {
         console.log(res);
@@ -156,7 +157,7 @@ const gastoscaja = () => {
   const regGasto = async () => {
     await axios
       .post(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/gastocaja`,
+        `${ip}api/sepelio/cajasepelio/gastocaja`,
         gastos
       )
       .then((res) => {
@@ -183,7 +184,7 @@ const gastoscaja = () => {
   const updateFechaCierre = async () => {
     await axios
       .put(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/updatefechacierre/${caja.idcaja}`
+        `${ip}api/sepelio/cajasepelio/updatefechacierre/${caja.idcaja}`
       )
       .then((res) => {
         console.log(res);
@@ -298,7 +299,7 @@ const gastoscaja = () => {
 
   const servicioCombo = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/serviciocombo`)
+      .get(`${ip}api/sepelio/servicio/serviciocombo`)
       .then((res) => {
         guardarServicios(res.data[0]);
       })

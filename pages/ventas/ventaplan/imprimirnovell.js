@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import ImpresionNovell from "../../../components/ventas/ventaplan/novell/ImpresionNovell";
 import CondicionesNovel from "../../../components/ventas/ventaplan/novell/CondicionesNovell";
+import { ip } from '../../../config/config'
 
 const imprimirnovell = () => {
   const [novell, guardarNovell] = useState(null);
@@ -25,7 +26,7 @@ const imprimirnovell = () => {
 
   const traerNovell = async (id) => {
     await axios
-      .get(`http://192.168.1.102:5002/api/sgi/socios/traernovell/${id}`)
+      .get(`${ip}api/sgi/socios/traernovell/${id}`)
       .then((res) => {
         guardarNovell(res.data);
       })
@@ -51,8 +52,8 @@ const imprimirnovell = () => {
         <ImpresionNovell novell={novell} />
         <br />
         <br />
-        
-       
+
+
         <CondicionesNovel novell={novell} />
       </div>
 

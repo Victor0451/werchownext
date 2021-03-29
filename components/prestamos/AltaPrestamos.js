@@ -4,6 +4,7 @@ import axios from "axios";
 import toastr from "toastr";
 import FormAltaPrestamo from "./FormAltaPrestamo";
 import ListadoPrestamosAct from "./ListadoPrestamosAct";
+import { ip } from '../../config/config'
 
 const AltaPrestamos = ({
   usuario,
@@ -43,7 +44,7 @@ const AltaPrestamos = ({
   const prestamosActivos = async (prestamos) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/prestamos/prestamosactivos/${contrato}`
+        `${ip}api/sgi/prestamos/prestamosactivos/${contrato}`
       )
       .then((res) => {
         if (res.data.length !== 0) {
@@ -66,7 +67,7 @@ const AltaPrestamos = ({
     if (contrato) {
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sgi/prestamos/consultarficha/${contrato}`
+          `${ip}api/sgi/prestamos/consultarficha/${contrato}`
         )
         .then((res) => {
           let ficha = res.data;

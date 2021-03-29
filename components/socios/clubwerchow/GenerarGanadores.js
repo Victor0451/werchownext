@@ -3,6 +3,7 @@ import toastr from "toastr";
 import axios from "axios";
 import Ruleta from "../../layout/Ruleta";
 import moment from "moment";
+import { ip } from '../../../config/config'
 
 const GenerarGanadores = ({ socio }) => {
   const [ganador, guardarGanador] = useState([]);
@@ -49,7 +50,7 @@ const GenerarGanadores = ({ socio }) => {
     };
 
     axios
-      .post("http://192.168.1.102:5002/api/clubwerchow/socios/ganador", winner)
+      .post(`${ip}api/clubwerchow/socios/ganador`, winner)
       .then((res) => {
         console.log(res);
       })

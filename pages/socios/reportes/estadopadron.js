@@ -7,6 +7,7 @@ import ExportarPadron from "../../../components/socios/reportes/ExportarPadron";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import { zonaPer, zonaPal, zonaSP, zonaCC, zonas } from "../../../array/array";
+import { ip } from '../../../config/config'
 
 const estadopadron = () => {
   let desdeRef = React.createRef();
@@ -135,7 +136,7 @@ const estadopadron = () => {
       console.log(parametros);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/socios/estadocarteraw`, {
+        .get(`${ip}api/sgi/socios/estadocarteraw`, {
           params: {
             mes: parametros.mes,
             grupo: parametros.grupo,
@@ -253,7 +254,7 @@ const estadopadron = () => {
       console.log(parametros);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/socios/estadocarteram`, {
+        .get(`${ip}api/sgi/socios/estadocarteram`, {
           params: {
             mes: parametros.mes,
             grupo: parametros.grupo,

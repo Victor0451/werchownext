@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import ImpresionSolicitudServicio from "../../../components/sepelio/servicios/ImpresionSolicitudServicio";
 import ConformidadServicio from "../../../components/sepelio/servicios/ConformidadServicio";
+import { ip } from '../../../config/config'
 
 const impresion = () => {
   const [servicio, guardarServicio] = useState(null);
@@ -27,7 +28,7 @@ const impresion = () => {
 
   const traerSolicitud = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
+      .get(`${ip}api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         const servicio = res.data;
         guardarServicio(servicio);
@@ -44,7 +45,7 @@ const impresion = () => {
 
   const traerIdparcela = async (id, idservicio) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/parcelas/traerid/${id}`)
+      .get(`${ip}api/sepelio/parcelas/traerid/${id}`)
       .then((res) => {
         if (res.data.idparcela) {
           guardarIdParcela(res.data.idparcela);
@@ -58,7 +59,7 @@ const impresion = () => {
 
   const traerAtaud = async (idataud) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/ataud/${idataud}`)
+      .get(`${ip}api/sepelio/ataudes/ataud/${idataud}`)
       .then((res) => {
         guardarAtaud(res.data);
       })
@@ -85,7 +86,7 @@ const impresion = () => {
     };
 
     await axios
-      .put(`http://190.231.32.232:5002/api/sepelio/parcelas/putid`, ides)
+      .put(`${ip}api/sepelio/parcelas/putid`, ides)
       .then((res) => {
         console.log(res);
       })
@@ -94,7 +95,7 @@ const impresion = () => {
       });
 
     await axios
-      .put(`http://190.231.32.232:5002/api/sepelio/parcelas/putidserv`, ides)
+      .put(`${ip}api/sepelio/parcelas/putidserv`, ides)
       .then((res) => {
         console.log(res);
       })
@@ -113,7 +114,7 @@ const impresion = () => {
 
     await axios
       .put(
-        `http://190.231.32.232:5002/api/sepelio/parcelas/asignarparcela/${router.query.idparcela}`,
+        `${ip}api/sepelio/parcelas/asignarparcela/${router.query.idparcela}`,
         parcelaAsig
       )
       .then((res) => {

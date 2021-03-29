@@ -8,6 +8,7 @@ import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
 import toastr from "toastr";
 import Router from "next/router";
+import { ip } from '../../../config/config'
 
 const STATE_INICIAL = {
   nombre: "",
@@ -107,7 +108,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
 
       await axios
         .post(
-          `http://190.231.32.232:5002/api/sepelio/servicio/nuevoservicio`,
+          `${ip}api/sepelio/servicio/nuevoservicio`,
           servicio
         )
         .then((res) => {
@@ -165,7 +166,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     let nustock = stock - 1;
     console.log(nustock)
     await axios
-      .put(`http://190.231.32.232:5002/api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
+      .put(`${ip}api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
         console.log(res);
       })

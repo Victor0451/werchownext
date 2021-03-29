@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
+import { ip } from '../../../config/config'
 
 import axios from "axios";
 
@@ -9,7 +10,7 @@ const ListadoParcelas = ({ selcasoparcela }) => {
 
   const mostrarParcelas = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/parcelas/parcelaslibres`)
+      .get(`${ip}api/sepelio/parcelas/parcelaslibres`)
       .then((res) => {
         guardarParcelas(res.data);
       })

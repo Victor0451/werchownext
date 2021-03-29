@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import Router, { useRouter } from "next/router";
 import FormEditarServicio from "../../../components/sepelio/servicios/FormEditarServicio";
+import {ip} from '../../../config/config'
 
 const editar = () => {
     
@@ -15,7 +16,7 @@ const editar = () => {
 
   const traerServicio = async (id) => {
     axios
-      .get(` http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
+      .get(` ${ip}api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         guardarServicio(res.data);
         console.log(res.data);

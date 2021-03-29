@@ -6,6 +6,7 @@ import Router from "next/router";
 import NuevoAtaud from "../../../components/sepelio/ataudes/NuevoAtaud";
 import moment from "moment";
 import toastr from 'toastr'
+import { ip } from '../../../config/config'
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -63,10 +64,10 @@ const nuevo = () => {
 
 
     await axios
-      .post("http://190.231.32.232:5002/api/sepelio/ataudes/nuevo", ataud)
+      .post(`${ip}api/sepelio/ataudes/nuevo`, ataud)
       .then((res) => {
-        if(res.status === 200){
-          toastr.success("Ataud Registrado","ATENCION")
+        if (res.status === 200) {
+          toastr.success("Ataud Registrado", "ATENCION")
         }
       })
       .catch((error) => {

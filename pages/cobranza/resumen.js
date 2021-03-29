@@ -9,6 +9,7 @@ import ReactToPrint from "react-to-print";
 import moment from "moment-timezone";
 import toastr from "toastr";
 import Router from "next/router";
+import { ip } from '../../config/config'
 
 const resumen = () => {
   let token = jsCookie.get("token");
@@ -225,7 +226,7 @@ const resumen = () => {
       guardarSindato(sindato);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/resofi`, {
+        .get(`${ip}api/sgi/efectividadw/resofi`, {
           params: {
             mes: mes,
             ano: ano,
@@ -241,7 +242,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/resofi`, {
+        .get(`${ip}api/sgi/efectividadm/resofi`, {
           params: {
             mes: mes,
             ano: ano,
@@ -257,7 +258,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/resban`, {
+        .get(`${ip}api/sgi/efectividadw/resban`, {
           params: {
             mes: mes,
             ano: ano,
@@ -273,7 +274,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/respol`, {
+        .get(`${ip}api/sgi/efectividadw/respol`, {
           params: {
             mes: mes,
             ano: ano,
@@ -289,7 +290,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/restar`, {
+        .get(`${ip}api/sgi/efectividadw/restar`, {
           params: {
             mes: mes,
             ano: ano,
@@ -305,7 +306,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/restar`, {
+        .get(`${ip}api/sgi/efectividadm/restar`, {
           params: {
             mes: mes,
             ano: ano,
@@ -321,7 +322,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/respalcob`, {
+        .get(`${ip}api/sgi/efectividadw/respalcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -336,7 +337,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/respalcob`, {
+        .get(`${ip}api/sgi/efectividadm/respalcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -351,7 +352,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/respercob`, {
+        .get(`${ip}api/sgi/efectividadw/respercob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -366,7 +367,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/respercob`, {
+        .get(`${ip}api/sgi/efectividadm/respercob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -381,7 +382,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/resspcob`, {
+        .get(`${ip}api/sgi/efectividadw/resspcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -396,7 +397,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/resspcob`, {
+        .get(`${ip}api/sgi/efectividadm/resspcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -411,7 +412,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadw/resssjcob`, {
+        .get(`${ip}api/sgi/efectividadw/resssjcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -426,7 +427,7 @@ const resumen = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/efectividadm/resssjcob`, {
+        .get(`${ip}api/sgi/efectividadm/resssjcob`, {
           params: {
             mes: mes,
             ano: ano,
@@ -440,14 +441,14 @@ const resumen = () => {
           console.log(error);
         });
     }
-    
+
   };
 
   return (
     <div>
       <Layout>
         <>
-          <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Cobranza'} flag={'R'}/>
+          <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Cobranza'} flag={'R'} />
 
           {sindato === null ? null : (
             <div className="container mt-4 mb-4 border border-dark p-2">

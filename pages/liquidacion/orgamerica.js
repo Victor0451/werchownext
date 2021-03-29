@@ -7,6 +7,7 @@ import ReactToPrint from 'react-to-print'
 import SelecLiqu from "../../components/liquidacion/orgamerica/SelecLiq";
 import ListadoPagos from "../../components/liquidacion/orgamerica/ListadoPagos";
 import ExportarPadron from "../../components/liquidacion/orgamerica/ExportarPadron";
+import { ip } from '../../config/config'
 
 const orgamerica = () => {
 
@@ -66,7 +67,7 @@ const orgamerica = () => {
 
     const pagosP100 = async () => {
         await axios
-            .get(`http://190.231.32.232:5002/api/sgi/orgamerica/liquidacion`, {
+            .get(`${ip}api/sgi/orgamerica/liquidacion`, {
                 params: {
                     mes: mes,
                     ano: ano,
@@ -92,46 +93,46 @@ const orgamerica = () => {
                             <strong>No hay datos generados aun. Intente mas tarde</strong>
                         </div>
                     ) : (
-                            <>
-                                <div className="print-efect p-4" ref={componentRef}>
-                                    <h3 className="">
-                                        <strong>
-                                            <u>
-                                                Pagos Realizados de fichas con Productor 100 (Org. America) periodo
+                        <>
+                            <div className="print-efect p-4" ref={componentRef}>
+                                <h3 className="">
+                                    <strong>
+                                        <u>
+                                            Pagos Realizados de fichas con Productor 100 (Org. America) periodo
                                                  {mes}/{ano}
-                                            </u>
-                                        </strong>
+                                        </u>
+                                    </strong>
+                                </h3>
+
+                                <ListadoPagos listado={pagos} />
+
+                            </div>
+
+                            <div className="container">
+                                <hr className="mt-4 mb-4" />
+
+                                <div className="alert alert-primary border border-dark p-4">
+                                    <h3 className="text-center mb-4 font-weight-bold">
+                                        <u>Opciones</u>
                                     </h3>
+                                    <div className="row d-flex justify-content-center">
+                                        <ReactToPrint
+                                            trigger={() => (
+                                                <a href="#" className="btn btn-primary mr-1">
+                                                    imprimir{" "}
+                                                </a>
+                                            )}
+                                            content={() => componentRef.current}
+                                        />
 
-                                    <ListadoPagos listado={pagos} />
-
-                                </div>
-
-                                <div className="container">
-                                    <hr className="mt-4 mb-4" />
-
-                                    <div className="alert alert-primary border border-dark p-4">
-                                        <h3 className="text-center mb-4 font-weight-bold">
-                                            <u>Opciones</u>
-                                        </h3>
-                                        <div className="row d-flex justify-content-center">
-                                            <ReactToPrint
-                                                trigger={() => (
-                                                    <a href="#" className="btn btn-primary mr-1">
-                                                        imprimir{" "}
-                                                    </a>
-                                                )}
-                                                content={() => componentRef.current}
-                                            />
-
-                                            <ExportarPadron listado={pagos} />
+                                        <ExportarPadron listado={pagos} />
 
 
-                                        </div>
                                     </div>
                                 </div>
-                            </>
-                        )}
+                            </div>
+                        </>
+                    )}
                 </div>
             )}
 

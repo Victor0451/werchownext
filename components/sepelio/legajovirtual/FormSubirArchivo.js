@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
+import { ip } from '../../../config/config'
 
 const FormSubirArchivo = ({ contrato }) => {
   const [archivos, guardarArchivos] = useState(null);
@@ -28,7 +29,7 @@ const FormSubirArchivo = ({ contrato }) => {
 
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtualservicios/uploadfichalegajo/${contrato}`,
+          `${ip}api/archivos/legajovirtualservicios/uploadfichalegajo/${contrato}`,
           upload
         )
         .then((res) => {

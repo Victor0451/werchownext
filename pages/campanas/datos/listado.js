@@ -6,6 +6,7 @@ import moment from "moment";
 import JsCookie from "js-cookie";
 import Router from "next/router";
 import ListadoDatos from "../../../components/campañas/datos/ListadoDatos";
+import { ip } from '../../../config/config'
 
 const listado = () => {
   let token = JsCookie.get("token");
@@ -25,7 +26,7 @@ const listado = () => {
 
   const mostrarDatosOperador = async (user) => {
     axios
-      .get(`http://190.231.32.232:5002/api/sgi/datos/datosop/${user}`)
+      .get(`${ip}api/sgi/datos/datosop/${user}`)
       .then((res) => {
         guardarDatos(res.data);
         console.log(res.data);

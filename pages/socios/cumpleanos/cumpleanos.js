@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import ListadoCumpleanos from "../../../components/socios/cumpleanos/ListadoCumpleanos";
 import BuscarCumple from "../../../components/socios/cumpleanos/BuscarCumple";
+import { ip } from '../../../config/config'
 
 const cumpleanos = () => {
   let fechaRef = React.createRef();
@@ -27,7 +28,7 @@ const cumpleanos = () => {
       guardarFecha(fecha);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/socios/listcumple`, {
+        .get(`${ip}api/sgi/socios/listcumple`, {
           params: {
             fecha: fecha,
           },
@@ -52,7 +53,7 @@ const cumpleanos = () => {
       guardarFecha(fecha);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/socios/listcumpleM`, {
+        .get(`${ip}api/sgi/socios/listcumpleM`, {
           params: {
             fecha: fecha,
           },

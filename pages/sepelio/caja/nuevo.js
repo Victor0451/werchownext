@@ -6,6 +6,7 @@ import moment from "moment";
 import Router, { useRouter } from "next/router";
 import NuevaCaja from "../../../components/sepelio/caja/NuevaCaja";
 import toastr from "toastr";
+import { ip } from '../../../config/config'
 
 const nuevo = () => {
   let montoRef = React.createRef();
@@ -54,7 +55,7 @@ const nuevo = () => {
       monto: montoRef.current.value,
       concepto: concepto,
       detalle: detalleRef.current.value,
-      fecha: moment().format("YYYY-MM-DD HH:mm:ss" ),
+      fecha: moment().format("YYYY-MM-DD HH:mm:ss"),
       tipofactura: tipofactura,
       ptoventa: ptoVentaRef.current.value,
       nfactura: nfacturaRef.current.value,
@@ -77,7 +78,7 @@ const nuevo = () => {
     console.log(nuevaCaja);
     await axios
       .post(
-        "http://190.231.32.232:5002/api/sepelio/cajasepelio/nuevacaja",
+        `${ip}api/sepelio/cajasepelio/nuevacaja`,
         nuevaCaja
       )
       .then((res) => {

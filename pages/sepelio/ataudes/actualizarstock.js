@@ -7,6 +7,7 @@ import Router from "next/router";
 import moment from "moment";
 import toastr from "toastr";
 import ActualizarStock from "../../../components/sepelio/ataudes/ActualizarStock";
+import { ip } from '../../../config/config'
 
 const actualizar = () => {
   let nuevoStockRef = React.createRef();
@@ -44,7 +45,7 @@ const actualizar = () => {
     } else {
       await axios
         .put(
-          `http://190.231.32.232:5002/api/sepelio/ataudes/nuevostock/${stock.idataud}`,
+          `${ip}api/sepelio/ataudes/nuevostock/${stock.idataud}`,
           stock
         )
         .then((res) => {

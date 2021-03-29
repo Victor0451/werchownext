@@ -10,6 +10,7 @@ import moment from "moment-timezone";
 import toastr from "toastr";
 import Router from "next/router";
 import InformeMora from "../../components/cobranza/InformeMora";
+import { ip } from '../../config/config'
 
 
 
@@ -62,7 +63,7 @@ const mora = () => {
 
   const traerMoraSoOf = async () => {
 
-    axios.get(`http://190.231.32.232:5002/api/sgi/moraw/morasoof`, {
+    axios.get(`${ip}api/sgi/moraw/morasoof`, {
       params: {
         mes: mes,
         ano: ano,
@@ -80,7 +81,7 @@ const mora = () => {
 
   const traerMoraSoOfCob = async () => {
 
-    axios.get(`http://190.231.32.232:5002/api/sgi/moraw/morasoofcob`,
+    axios.get(`${ip}api/sgi/moraw/morasoofcob`,
       {
         params: {
           mes: mes,
@@ -99,7 +100,7 @@ const mora = () => {
 
   const traerMoraSoTjt = async () => {
 
-    axios.get(`http://190.231.32.232:5002/api/sgi/moraw/morasotjt`,
+    axios.get(`${ip}api/sgi/moraw/morasotjt`,
       {
         params: {
           mes: mes,
@@ -342,42 +343,42 @@ const mora = () => {
               <strong>No hay datos generados aun. Intente mas tarde</strong>
             </div>
           ) : (
-              <>
-                <div className="print-efect p-4" ref={componentRef}>
-                  <h2>
-                    <strong>
-                      <u>
-                        Efectividad De Mora Werchow Periodo:{" "}
-                        {mes - 1}/{ano}
-                      </u>
-                    </strong>
-                  </h2>
+            <>
+              <div className="print-efect p-4" ref={componentRef}>
+                <h2>
+                  <strong>
+                    <u>
+                      Efectividad De Mora Werchow Periodo:{" "}
+                      {mes - 1}/{ano}
+                    </u>
+                  </strong>
+                </h2>
 
-                  <InformeMora mora={mora} moracob={moracob} moratjt={moratjt} calcularTotal={calcularTotal}/>
+                <InformeMora mora={mora} moracob={moracob} moratjt={moratjt} calcularTotal={calcularTotal} />
 
-                  <div className="container">
-                    <hr className="mt-4 mb-4" />
+                <div className="container">
+                  <hr className="mt-4 mb-4" />
 
 
-                  </div>
                 </div>
-                <div className="alert alert-primary border border-dark p-4">
-                  <h3 className="text-center mb-4 font-weight-bold">
-                    <u>Opciones</u>
-                  </h3>
-                  <div className="row d-flex justify-content-center">
-                    <ReactToPrint
-                      trigger={() => (
-                        <a href="#" className="btn btn-primary">
-                          imprimir{" "}
-                        </a>
-                      )}
-                      content={() => componentRef.current}
-                    />
-                  </div>
+              </div>
+              <div className="alert alert-primary border border-dark p-4">
+                <h3 className="text-center mb-4 font-weight-bold">
+                  <u>Opciones</u>
+                </h3>
+                <div className="row d-flex justify-content-center">
+                  <ReactToPrint
+                    trigger={() => (
+                      <a href="#" className="btn btn-primary">
+                        imprimir{" "}
+                      </a>
+                    )}
+                    content={() => componentRef.current}
+                  />
                 </div>
-              </>
-            )}
+              </div>
+            </>
+          )}
         </div>
       )}
 

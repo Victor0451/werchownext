@@ -5,6 +5,7 @@ import Router from "next/router";
 import { confirmAlert } from "react-confirm-alert";
 import axios from "axios";
 import Planes from '../../../components/ventas/precioplan/Planes'
+import { ip } from '../../../config/config'
 
 const precios = () => {
 
@@ -22,7 +23,7 @@ const precios = () => {
 
     const traerPlanes = async () => {
 
-        axios.get(`http://192.168.1.102:5002/api/ventas/planes/consultaplanes`)
+        axios.get(`${ip}api/ventas/planes/consultaplanes`)
             .then(res => {
                 guardarPlanes(res.data)
             })

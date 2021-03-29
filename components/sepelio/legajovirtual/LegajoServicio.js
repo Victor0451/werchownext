@@ -3,6 +3,7 @@ import Spinner from "../../layout/Spinner";
 import axios from "axios";
 import toastr from "toastr";
 import moment from 'moment'
+import { ip } from '../../../config/config'
 
 const LegajoServicio = ({ archivos, id, servicio, }) => {
   if (!servicio) {
@@ -17,7 +18,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
     console.log(id);
     await axios
       .delete(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
+        `${ip}api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -454,7 +455,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 </strong> */}
 
                 <img
-                  src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
+                  src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
                   className="archivos p-4 "
                   data-toggle="modal"
                   data-target="#exampleModal"
@@ -465,7 +466,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 <div className="">
                   <a
                     className="btn btn-primary mr-1 "
-                    href={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/descargararchivo/${archivo.archivo}`}
+                    href={`${ip}api/archivos/legajovirtualprestamos/descargararchivo/${archivo.archivo}`}
                   >
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </a>
@@ -507,7 +508,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
             </div>
             <div className="modal-body d-flex justify-content-center">
               <img
-                src={`http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/archivo/${archi}`}
+                src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archi}`}
                 classNameName="archimodal p-4  "
               />
             </div>

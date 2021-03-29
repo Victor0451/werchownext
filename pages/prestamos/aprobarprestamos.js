@@ -4,6 +4,7 @@ import Router from "next/router";
 import TablaPrestamosPendientes from "../../components/prestamos/TablaPrestamosPrendientes";
 import jsCookie from "js-cookie";
 import axios from "axios";
+import { ip } from '../../config/config'
 
 const aprobarprestamos = () => {
   const [prestamospen, guardarPrestamosPen] = useState(null);
@@ -17,7 +18,7 @@ const aprobarprestamos = () => {
   const prestamosPendientes = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/prestamos/listadoprestamospendientes`
+        `${ip}api/sgi/prestamos/listadoprestamospendientes`
       )
       .then((res) => {
         if (res.data.length !== 0) {

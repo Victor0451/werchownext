@@ -10,6 +10,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import ResumenSucursales from "../../components/cobranza/ResumenSucursales";
 import Online from "../../components/cobranza/Online";
+import { ip } from '../../config/config'
 
 
 
@@ -176,7 +177,7 @@ const sucursales = () => {
     const traerOficina = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/ofw`,
+            await axios.get(`${ip}api/sgi/efectividadw/ofw`,
                 {
                     params: {
                         mes: mes,
@@ -190,7 +191,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/ofl`,
+            await axios.get(`${ip}api/sgi/efectividadw/ofl`,
                 {
                     params: {
                         mes: mes,
@@ -204,7 +205,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/ofr`,
+            await axios.get(`${ip}api/sgi/efectividadw/ofr`,
                 {
                     params: {
                         mes: mes,
@@ -218,7 +219,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/ofp`,
+            await axios.get(`${ip}api/sgi/efectividadw/ofp`,
                 {
                     params: {
                         mes: mes,
@@ -238,7 +239,7 @@ const sucursales = () => {
     const traerOficinaM = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/ofw`,
+            await axios.get(`${ip}api/sgi/efectividadm/ofw`,
                 {
                     params: {
                         mes: mes,
@@ -252,7 +253,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/ofl`,
+            await axios.get(`${ip}api/sgi/efectividadm/ofl`,
                 {
                     params: {
                         mes: mes,
@@ -266,7 +267,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/ofr`,
+            await axios.get(`${ip}api/sgi/efectividadm/ofr`,
                 {
                     params: {
                         mes: mes,
@@ -280,7 +281,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/ofp`,
+            await axios.get(`${ip}api/sgi/efectividadm/ofp`,
                 {
                     params: {
                         mes: mes,
@@ -300,7 +301,7 @@ const sucursales = () => {
     const traerCobrador = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/cobW`,
+            await axios.get(`${ip}api/sgi/efectividadw/cobW`,
                 {
                     params: {
                         mes: mes,
@@ -314,7 +315,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/cobl`,
+            await axios.get(`${ip}api/sgi/efectividadw/cobl`,
                 {
                     params: {
                         mes: mes,
@@ -328,7 +329,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/cobr`,
+            await axios.get(`${ip}api/sgi/efectividadw/cobr`,
                 {
                     params: {
                         mes: mes,
@@ -342,7 +343,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/cobp`,
+            await axios.get(`${ip}api/sgi/efectividadw/cobp`,
                 {
                     params: {
                         mes: mes,
@@ -362,7 +363,7 @@ const sucursales = () => {
     const traerCobradorM = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/cobW`,
+            await axios.get(`${ip}api/sgi/efectividadm/cobW`,
                 {
                     params: {
                         mes: mes,
@@ -376,7 +377,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/cobl`,
+            await axios.get(`${ip}api/sgi/efectividadm/cobl`,
                 {
                     params: {
                         mes: mes,
@@ -390,7 +391,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/cobr`,
+            await axios.get(`${ip}api/sgi/efectividadm/cobr`,
                 {
                     params: {
                         mes: mes,
@@ -404,7 +405,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/cobp`,
+            await axios.get(`${ip}api/sgi/efectividadm/cobp`,
                 {
                     params: {
                         mes: mes,
@@ -424,7 +425,7 @@ const sucursales = () => {
     const traerTarjeta = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/tjtw`,
+            await axios.get(`${ip}api/sgi/efectividadw/tjtw`,
                 {
                     params: {
                         mes: mes,
@@ -438,7 +439,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/tjtl`,
+            await axios.get(`${ip}api/sgi/efectividadw/tjtl`,
                 {
                     params: {
                         mes: mes,
@@ -452,7 +453,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/tjtr`,
+            await axios.get(`${ip}api/sgi/efectividadw/tjtr`,
                 {
                     params: {
                         mes: mes,
@@ -466,7 +467,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/tjtp`,
+            await axios.get(`${ip}api/sgi/efectividadw/tjtp`,
                 {
                     params: {
                         mes: mes,
@@ -486,7 +487,7 @@ const sucursales = () => {
     const traerTarjetaM = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/tjtw`,
+            await axios.get(`${ip}api/sgi/efectividadm/tjtw`,
                 {
                     params: {
                         mes: mes,
@@ -500,7 +501,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/tjtl`,
+            await axios.get(`${ip}api/sgi/efectividadm/tjtl`,
                 {
                     params: {
                         mes: mes,
@@ -514,7 +515,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/tjtr`,
+            await axios.get(`${ip}api/sgi/efectividadm/tjtr`,
                 {
                     params: {
                         mes: mes,
@@ -528,7 +529,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/tjtp`,
+            await axios.get(`${ip}api/sgi/efectividadm/tjtp`,
                 {
                     params: {
                         mes: mes,
@@ -548,7 +549,7 @@ const sucursales = () => {
     const traerBanco = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/banw`,
+            await axios.get(`${ip}api/sgi/efectividadw/banw`,
                 {
                     params: {
                         mes: mes,
@@ -562,7 +563,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/banl`,
+            await axios.get(`${ip}api/sgi/efectividadw/banl`,
                 {
                     params: {
                         mes: mes,
@@ -576,7 +577,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/banr`,
+            await axios.get(`${ip}api/sgi/efectividadw/banr`,
                 {
                     params: {
                         mes: mes,
@@ -590,7 +591,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/banp`,
+            await axios.get(`${ip}api/sgi/efectividadw/banp`,
                 {
                     params: {
                         mes: mes,
@@ -610,7 +611,7 @@ const sucursales = () => {
     const traerPolicia = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/polw`,
+            await axios.get(`${ip}api/sgi/efectividadw/polw`,
                 {
                     params: {
                         mes: mes,
@@ -624,7 +625,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/poll`,
+            await axios.get(`${ip}api/sgi/efectividadw/poll`,
                 {
                     params: {
                         mes: mes,
@@ -638,7 +639,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/polr`,
+            await axios.get(`${ip}api/sgi/efectividadw/polr`,
                 {
                     params: {
                         mes: mes,
@@ -652,7 +653,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/polp`,
+            await axios.get(`${ip}api/sgi/efectividadw/polp`,
                 {
                     params: {
                         mes: mes,
@@ -672,7 +673,7 @@ const sucursales = () => {
     const traerPrestamos = async (flag) => {
 
         if (flag === 1) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presw`,
+            await axios.get(`${ip}api/sgi/efectividadw/presw`,
                 {
                     params: {
                         mes: mes,
@@ -686,7 +687,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 3) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presl`,
+            await axios.get(`${ip}api/sgi/efectividadw/presl`,
                 {
                     params: {
                         mes: mes,
@@ -700,7 +701,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 5) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presr`,
+            await axios.get(`${ip}api/sgi/efectividadw/presr`,
                 {
                     params: {
                         mes: mes,
@@ -714,7 +715,7 @@ const sucursales = () => {
                     console.log(error)
                 })
         } else if (flag === 60) {
-            await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/presp`,
+            await axios.get(`${ip}api/sgi/efectividadw/presp`,
                 {
                     params: {
                         mes: mes,
@@ -1159,67 +1160,67 @@ const sucursales = () => {
                             <strong>No hay datos generados aun. Intente mas tarde</strong>
                         </div>
                     ) : (
-                            <>
-                                <div className="print-efect p-4" ref={componentRef}>
-                                    <h3 className="text-center">
-                                        <strong>
-                                            <u>
-                                                Efectividad De Cobranza {
-                                                    sucursal == 1 ? (<>Casa Central</>)
-                                                        : sucursal == 3 ? (<>Palpala</>)
-                                                            : sucursal == 5 ? (<>Perico</>)
-                                                                : sucursal == 60 ? (<>San Pedro</>)
-                                                                    : null
-                                                } - {empresa} Periodo:{" "}
-                                                {mes}/{ano}
-                                            </u>
-                                        </strong>
-                                    </h3>
+                        <>
+                            <div className="print-efect p-4" ref={componentRef}>
+                                <h3 className="text-center">
+                                    <strong>
+                                        <u>
+                                            Efectividad De Cobranza {
+                                                sucursal == 1 ? (<>Casa Central</>)
+                                                    : sucursal == 3 ? (<>Palpala</>)
+                                                        : sucursal == 5 ? (<>Perico</>)
+                                                            : sucursal == 60 ? (<>San Pedro</>)
+                                                                : null
+                                            } - {empresa} Periodo:{" "}
+                                            {mes}/{ano}
+                                        </u>
+                                    </strong>
+                                </h3>
 
 
-                                    <Online
-                                        sucursal={sucursal}
-                                        oficina={oficina}
-                                        cobrador={cobrador}
-                                        tarjeta={tarjeta}
-                                        banco={banco}
-                                        policia={policia}
-                                        prestamos={prestamos}
-                                        calcularTotal={calcularTotal}
-                                        calcularEfectividad={calcularEfectividad}
-                                        calcularEfecPersonal={calcularEfecPersonal}
-                                        calcularTotalGeneral={calcularTotalGeneral}
-                                        calcularTotalGeneralM={calcularTotalGeneralM}
-                                        calcularEfectividadTotal={calcularEfectividadTotal}
-                                        calcularEfectividadTotalM={calcularEfectividadTotalM}
-                                        calcularEfecPrestamo={calcularEfecPrestamo}
-                                        werchow={werchow}
-                                        mutual={mutual}
+                                <Online
+                                    sucursal={sucursal}
+                                    oficina={oficina}
+                                    cobrador={cobrador}
+                                    tarjeta={tarjeta}
+                                    banco={banco}
+                                    policia={policia}
+                                    prestamos={prestamos}
+                                    calcularTotal={calcularTotal}
+                                    calcularEfectividad={calcularEfectividad}
+                                    calcularEfecPersonal={calcularEfecPersonal}
+                                    calcularTotalGeneral={calcularTotalGeneral}
+                                    calcularTotalGeneralM={calcularTotalGeneralM}
+                                    calcularEfectividadTotal={calcularEfectividadTotal}
+                                    calcularEfectividadTotalM={calcularEfectividadTotalM}
+                                    calcularEfecPrestamo={calcularEfecPrestamo}
+                                    werchow={werchow}
+                                    mutual={mutual}
+                                />
+
+                                <div className="container">
+                                    <hr className="mt-4 mb-4" />
+
+
+                                </div>
+                            </div>
+                            <div className="alert alert-primary border border-dark p-4">
+                                <h3 className="text-center mb-4 font-weight-bold">
+                                    <u>Opciones</u>
+                                </h3>
+                                <div className="row d-flex justify-content-center">
+                                    <ReactToPrint
+                                        trigger={() => (
+                                            <a href="#" className="btn btn-primary">
+                                                imprimir{" "}
+                                            </a>
+                                        )}
+                                        content={() => componentRef.current}
                                     />
-
-                                    <div className="container">
-                                        <hr className="mt-4 mb-4" />
-
-
-                                    </div>
                                 </div>
-                                <div className="alert alert-primary border border-dark p-4">
-                                    <h3 className="text-center mb-4 font-weight-bold">
-                                        <u>Opciones</u>
-                                    </h3>
-                                    <div className="row d-flex justify-content-center">
-                                        <ReactToPrint
-                                            trigger={() => (
-                                                <a href="#" className="btn btn-primary">
-                                                    imprimir{" "}
-                                                </a>
-                                            )}
-                                            content={() => componentRef.current}
-                                        />
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                            </div>
+                        </>
+                    )}
                 </div>
             )}
 

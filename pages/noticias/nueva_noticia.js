@@ -6,6 +6,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import Router from "next/router";
+import { ip } from '../../config/config'
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -48,7 +49,7 @@ const nueva_noticia = () => {
       };
 
       await axios
-        .post(`http://190.231.32.232:5002/api/sgi/noticia/nuevanoticia`, noti)
+        .post(`${ip}api/sgi/noticia/nuevanoticia`, noti)
         .then((res) => {
           toastr.success("La Noticia se registro con exito", "ATENCION");
         });

@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import toastr from "toastr";
 import Administracion from "../../components/cobranza/Administracion";
+import { ip } from '../../config/config'
 
 const administracion = () => {
   let sucursalRefW = React.createRef();
@@ -20,7 +21,7 @@ const administracion = () => {
   // INSERTS
   const postC1000 = async () => {
     await axios
-      .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertc1000`)
+      .post(` ${ip}api/sgi/insertartablasw/insertc1000`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
       })
@@ -32,7 +33,7 @@ const administracion = () => {
 
   const postC1000M = async () => {
     await axios
-      .post(` http://190.231.32.232:5002/api/sgi/insertartablasm/insertc1000m`)
+      .post(` ${ip}api/sgi/insertartablasm/insertc1000m`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
       })
@@ -44,7 +45,7 @@ const administracion = () => {
 
   const postCTjt = async () => {
     await axios
-      .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertctjt`)
+      .post(` ${ip}api/sgi/insertartablasw/insertctjt`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
       })
@@ -56,7 +57,7 @@ const administracion = () => {
 
   const postCTjtM = async () => {
     await axios
-      .post(` http://190.231.32.232:5002/api/sgi/insertartablasm/insertctjtm`)
+      .post(` ${ip}api/sgi/insertartablasm/insertctjtm`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
       })
@@ -68,7 +69,7 @@ const administracion = () => {
 
   const postCBanco = async () => {
     await axios
-      .post(` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcbanco`)
+      .post(` ${ip}api/sgi/insertartablasw/insertcbanco`)
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
       })
@@ -81,7 +82,7 @@ const administracion = () => {
   const postCPolicia = async () => {
     await axios
       .post(
-        ` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcpolicia`
+        ` ${ip}api/sgi/insertartablasw/insertcpolicia`
       )
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -95,7 +96,7 @@ const administracion = () => {
   const postPrestamos = async () => {
     await axios
       .post(
-        ` http://190.231.32.232:5002/api/sgi/insertartablasw/insertcprestamos`
+        ` ${ip}api/sgi/insertartablasw/insertcprestamos`
       )
       .then((res) => {
         toastr.success(`${res.data}`, `ATENCION`);
@@ -114,7 +115,7 @@ const administracion = () => {
       let id = sucursalRefW.current.value;
 
       await axios
-        .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/ctjt/${id}`)
+        .put(` ${ip}api/sgi/actualizartablasw/ctjt/${id}`)
         .then((res) => {
           toastr.success(`${res.data[0].info}`, `ATENCION`);
         })
@@ -133,7 +134,7 @@ const administracion = () => {
 
       await axios
         .put(
-          ` http://190.231.32.232:5002/api/sgi/actualizartablasm/ctjtm/${id}`
+          ` ${ip}api/sgi/actualizartablasm/ctjtm/${id}`
         )
         .then((res) => {
           toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -147,7 +148,7 @@ const administracion = () => {
 
   const putCobradoresM = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mcob`)
+      .put(` ${ip}api/sgi/actualizartablasm/c1000mcob`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -159,7 +160,7 @@ const administracion = () => {
 
   const putCobradores = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000cob`)
+      .put(` ${ip}api/sgi/actualizartablasw/c1000cob`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -171,7 +172,7 @@ const administracion = () => {
 
   const putOficinaM = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mof`)
+      .put(` ${ip}api/sgi/actualizartablasm/c1000mof`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -183,7 +184,7 @@ const administracion = () => {
 
   const putOficina = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000of`)
+      .put(` ${ip}api/sgi/actualizartablasw/c1000of`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -196,7 +197,7 @@ const administracion = () => {
   const putAdelantadoM = async () => {
     await axios
       .put(
-        ` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000madelantado`
+        ` ${ip}api/sgi/actualizartablasm/c1000madelantado`
       )
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -210,7 +211,7 @@ const administracion = () => {
   const putAdelantado = async () => {
     await axios
       .put(
-        ` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000adelantado`
+        ` ${ip}api/sgi/actualizartablasw/c1000adelantado`
       )
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
@@ -223,7 +224,7 @@ const administracion = () => {
 
   const putNoNullM = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasm/c1000mnonull`)
+      .put(` ${ip}api/sgi/actualizartablasm/c1000mnonull`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -235,7 +236,7 @@ const administracion = () => {
 
   const putNoNull = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/c1000nonull`)
+      .put(` ${ip}api/sgi/actualizartablasw/c1000nonull`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -247,7 +248,7 @@ const administracion = () => {
 
   const putBanco = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cbanco`)
+      .put(` ${ip}api/sgi/actualizartablasw/cbanco`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -259,7 +260,7 @@ const administracion = () => {
 
   const putPolicia = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cpolicia`)
+      .put(` ${ip}api/sgi/actualizartablasw/cpolicia`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })
@@ -271,7 +272,7 @@ const administracion = () => {
 
   const putPrestamos = async () => {
     await axios
-      .put(` http://190.231.32.232:5002/api/sgi/actualizartablasw/cprestamos`)
+      .put(` ${ip}api/sgi/actualizartablasw/cprestamos`)
       .then((res) => {
         toastr.success(`${res.data[0].info}`, `ATENCION`);
       })

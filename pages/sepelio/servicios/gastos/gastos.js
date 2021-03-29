@@ -9,6 +9,7 @@ import toastr from "toastr";
 import useValidacion from "../../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../../validacion/validarGastoServicio";
 import ListadoServicioGastos from "../../../../components/sepelio/servicios/gastos/ListadoServicioGastos";
+import { ip } from '../../../../config/config'
 
 const STATE_INICIAL = {
   fecha: "",
@@ -50,7 +51,7 @@ const gastos = () => {
 
   const traerSolicitud = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
+      .get(`${ip}api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         const servicio = res.data;
         guardarServicio(servicio);
@@ -63,7 +64,7 @@ const gastos = () => {
   const traerGastos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/serviciogastos/listadogastos/${id}`
+        `${ip}api/sepelio/serviciogastos/listadogastos/${id}`
       )
       .then((res) => {
         if (res.data) {
@@ -88,7 +89,7 @@ const gastos = () => {
   const traerOperador = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/serviciogastos/operadoressep`
+        `${ip}api/sepelio/serviciogastos/operadoressep`
       )
       .then((res) => {
         guardarOperadorSep(res.data[0]);
@@ -100,7 +101,7 @@ const gastos = () => {
 
   const traerGastLiq = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/serviciogastos/gastliq`)
+      .get(`${ip}api/sepelio/serviciogastos/gastliq`)
       .then((res) => {
         guardarGastLiq(res.data[0]);
       })
@@ -140,7 +141,7 @@ const gastos = () => {
 
     await axios
       .post(
-        `http://190.231.32.232:5002/api/sepelio/serviciogastos/cargargasto`,
+        `${ip}api/sepelio/serviciogastos/cargargasto`,
         gasto
       )
       .then((res) => {
@@ -192,41 +193,41 @@ const gastos = () => {
               <ListadoServicioGastos listado={gastos} />
             </>
           ) : (
-              <div className="container mt-4 border border-dark p-4 alert alert-primary">
-                <h2>
-                  <strong>
-                    <u> Gastos del servicio N° {servicio.idservicio}</u>:{" "}
-                    {servicio.apellido}, {servicio.nombre}
-                  </strong>
-                </h2>
-                <div className=" row mt-4 mb-4 border border-dark p-4">
-                  <div className="col-md-4">
-                    <h4 className="">
-                      <strong>
-                        <u>No Hay gastos registrados</u>
-                      </strong>
-                    </h4>
-                  </div>
-                  <div className="col-md-4">
-                    <button
-                      className="btn btn-sm btn-block btn-primary"
-                      data-toggle="modal"
-                      data-target="#adhs"
-                    >
-                      Cargar Gasto
+            <div className="container mt-4 border border-dark p-4 alert alert-primary">
+              <h2>
+                <strong>
+                  <u> Gastos del servicio N° {servicio.idservicio}</u>:{" "}
+                  {servicio.apellido}, {servicio.nombre}
+                </strong>
+              </h2>
+              <div className=" row mt-4 mb-4 border border-dark p-4">
+                <div className="col-md-4">
+                  <h4 className="">
+                    <strong>
+                      <u>No Hay gastos registrados</u>
+                    </strong>
+                  </h4>
+                </div>
+                <div className="col-md-4">
+                  <button
+                    className="btn btn-sm btn-block btn-primary"
+                    data-toggle="modal"
+                    data-target="#adhs"
+                  >
+                    Cargar Gasto
                   </button>
-                  </div>
-                  <div className="col-md-4">
-                    <a
-                      href="/sepelio/servicio/listado"
-                      className="btn btn-sm btn-block btn-danger"
-                    >
-                      Volver al Listado
+                </div>
+                <div className="col-md-4">
+                  <a
+                    href="/sepelio/servicio/listado"
+                    className="btn btn-sm btn-block btn-danger"
+                  >
+                    Volver al Listado
                   </a>
-                  </div>
                 </div>
               </div>
-            )}
+            </div>
+          )}
         </>
       ) : null}
 

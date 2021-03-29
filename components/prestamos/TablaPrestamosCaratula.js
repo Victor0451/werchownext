@@ -6,6 +6,7 @@ import toastr from "toastr";
 import Router from "next/router";
 // Import React Table
 import ReactTable from "react-table";
+import { ip } from '../../config/config'
 
 const TablaPrestamosCaratula = ({
   data,
@@ -21,7 +22,7 @@ const TablaPrestamosCaratula = ({
     const id = row.original.ptm_id;
 
     await axios
-      .put(`http://190.231.32.232:5002/api/sgi/prestamos/aprobarprestamo/${id}`)
+      .put(`${ip}api/sgi/prestamos/aprobarprestamo/${id}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.status);
@@ -44,7 +45,7 @@ const TablaPrestamosCaratula = ({
   const afiliado = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/prestamos/aprobarprestamo/${contrato}`
+        `${ip}api/sgi/prestamos/aprobarprestamo/${contrato}`
       )
       .then((res) => {
         let afi = res.data.APELLIDOS;

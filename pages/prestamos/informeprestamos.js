@@ -9,6 +9,7 @@ import axios from "axios";
 import ReactToPrint from "react-to-print";
 import toastr from "toastr";
 import moment from "moment-timezone";
+import { ip } from '../../config/config'
 
 const informeprestamos = () => {
   let token = jsCookie.get("token");
@@ -248,7 +249,7 @@ const informeprestamos = () => {
       guardarHasta(hastaRef.current.value);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/prestamos/listadoprestamos2`, {
+        .get(`${ip}api/sgi/prestamos/listadoprestamos2`, {
           params: {
             desde: desde,
             hasta: hasta,
@@ -264,7 +265,7 @@ const informeprestamos = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/prestamos/prestamosporop`, {
+        .get(`${ip}api/sgi/prestamos/prestamosporop`, {
           params: {
             desde: desde,
             hasta: hasta,
@@ -281,7 +282,7 @@ const informeprestamos = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sgi/prestamos/prestamosporestado`,
+          `${ip}api/sgi/prestamos/prestamosporestado`,
           {
             params: {
               desde: desde,

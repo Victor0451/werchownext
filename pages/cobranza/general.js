@@ -10,6 +10,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import Resumen from "../../components/cobranza/Resumen";
 import Online from "../../components/cobranza/Online";
+import { ip } from '../../config/config'
 
 
 
@@ -135,7 +136,7 @@ const general = () => {
     const traerOficina = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/oftotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/oftotal`,
             {
                 params: {
                     mes: mes,
@@ -155,7 +156,7 @@ const general = () => {
     const traerOficinaM = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/oftotal`,
+        await axios.get(`${ip}api/sgi/efectividadm/oftotal`,
             {
                 params: {
                     mes: mes,
@@ -175,7 +176,7 @@ const general = () => {
     const traerCobrador = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/cobtotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/cobtotal`,
             {
                 params: {
                     mes: mes,
@@ -196,7 +197,7 @@ const general = () => {
     const traerCobradorM = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/cobtotal`,
+        await axios.get(`${ip}api/sgi/efectividadm/cobtotal`,
             {
                 params: {
                     mes: mes,
@@ -217,7 +218,7 @@ const general = () => {
     const traerTarjeta = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/tjttotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/tjttotal`,
             {
                 params: {
                     mes: mes,
@@ -237,7 +238,7 @@ const general = () => {
     const traerTarjetaM = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadm/tjttotal`,
+        await axios.get(`${ip}api/sgi/efectividadm/tjttotal`,
             {
                 params: {
                     mes: mes,
@@ -257,7 +258,7 @@ const general = () => {
     const traerBanco = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/bantotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/bantotal`,
             {
                 params: {
                     mes: mes,
@@ -275,7 +276,7 @@ const general = () => {
     const traerPolicia = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/poltotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/poltotal`,
             {
                 params: {
                     mes: mes,
@@ -293,7 +294,7 @@ const general = () => {
     const traerPrestamos = async () => {
 
 
-        await axios.get(`http://190.231.32.232:5002/api/sgi/efectividadw/prestotal`,
+        await axios.get(`${ip}api/sgi/efectividadw/prestotal`,
             {
                 params: {
                     mes: mes,
@@ -738,61 +739,61 @@ const general = () => {
                             <strong>No hay datos generados aun. Intente mas tarde</strong>
                         </div>
                     ) : (
-                            <>
-                                <div className="print-efect p-4" ref={componentRef}>
-                                    <h3 className="text-center">
-                                        <strong>
-                                            <u>
-                                                Efectividad De Cobranza {empresa} Periodo:{" "}
-                                                {mes}/{ano}
-                                            </u>
-                                        </strong>
-                                    </h3>
+                        <>
+                            <div className="print-efect p-4" ref={componentRef}>
+                                <h3 className="text-center">
+                                    <strong>
+                                        <u>
+                                            Efectividad De Cobranza {empresa} Periodo:{" "}
+                                            {mes}/{ano}
+                                        </u>
+                                    </strong>
+                                </h3>
 
-                                    <Online
-                                        sucursal={sucursal}
-                                        oficina={oficina}
-                                        cobrador={cobrador}
-                                        tarjeta={tarjeta}
-                                        banco={banco}
-                                        policia={policia}
-                                        prestamos={prestamos}
-                                        calcularTotal={calcularTotal}
-                                        calcularEfectividad={calcularEfectividad}
-                                        calcularEfecPersonal={calcularEfecPersonal}
-                                        calcularTotalGeneral={calcularTotalGeneral}
-                                        calcularEfectividadTotal={calcularEfectividadTotal}
-                                        calcularTotalGeneralM={calcularTotalGeneralM}
-                                        calcularEfectividadTotalM={calcularEfectividadTotalM}
-                                        calcularEfecPrestamo={calcularEfecPrestamo}
-                                        werchow={werchow}
-                                        mutual={mutual}
+                                <Online
+                                    sucursal={sucursal}
+                                    oficina={oficina}
+                                    cobrador={cobrador}
+                                    tarjeta={tarjeta}
+                                    banco={banco}
+                                    policia={policia}
+                                    prestamos={prestamos}
+                                    calcularTotal={calcularTotal}
+                                    calcularEfectividad={calcularEfectividad}
+                                    calcularEfecPersonal={calcularEfecPersonal}
+                                    calcularTotalGeneral={calcularTotalGeneral}
+                                    calcularEfectividadTotal={calcularEfectividadTotal}
+                                    calcularTotalGeneralM={calcularTotalGeneralM}
+                                    calcularEfectividadTotalM={calcularEfectividadTotalM}
+                                    calcularEfecPrestamo={calcularEfecPrestamo}
+                                    werchow={werchow}
+                                    mutual={mutual}
 
+                                />
+
+                                <div className="container">
+                                    <hr className="mt-4 mb-4" />
+
+
+                                </div>
+                            </div>
+                            <div className="alert alert-primary border border-dark p-4">
+                                <h3 className="text-center mb-4 font-weight-bold">
+                                    <u>Opciones</u>
+                                </h3>
+                                <div className="row d-flex justify-content-center">
+                                    <ReactToPrint
+                                        trigger={() => (
+                                            <a href="#" className="btn btn-primary">
+                                                imprimir{" "}
+                                            </a>
+                                        )}
+                                        content={() => componentRef.current}
                                     />
-
-                                    <div className="container">
-                                        <hr className="mt-4 mb-4" />
-
-
-                                    </div>
                                 </div>
-                                <div className="alert alert-primary border border-dark p-4">
-                                    <h3 className="text-center mb-4 font-weight-bold">
-                                        <u>Opciones</u>
-                                    </h3>
-                                    <div className="row d-flex justify-content-center">
-                                        <ReactToPrint
-                                            trigger={() => (
-                                                <a href="#" className="btn btn-primary">
-                                                    imprimir{" "}
-                                                </a>
-                                            )}
-                                            content={() => componentRef.current}
-                                        />
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                            </div>
+                        </>
+                    )}
                 </div>
             )}
 

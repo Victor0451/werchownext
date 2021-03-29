@@ -8,6 +8,7 @@ import Router from "next/router";
 import MovimientosMensuales from "../../components/mutual/MovimientosMensuales";
 import ListadoMovimientos from "../../components/mutual/ListadoMovimientos";
 import ExportarPadron from "../../components/mutual/ExportarPadron";
+import {ip} from '../../config/config'
 
 const movimientos = () => {
   let desdeRef = React.createRef();
@@ -55,7 +56,7 @@ const movimientos = () => {
   const altasMutual = async (desde, hasta) => {
     await axios
       .get(
-        "http://190.231.32.232:5002/api/werchow/movimientosmutual/altasmensuales",
+        `${ip}api/werchow/movimientosmutual/altasmensuales`,
         {
           params: {
             desde: desde,
@@ -74,7 +75,7 @@ const movimientos = () => {
   const bajasMutual = async (desde, hasta) => {
     await axios
       .get(
-        "http://190.231.32.232:5002/api/werchow/movimientosmutual/bajasmensuales",
+        `${ip}api/werchow/movimientosmutual/bajasmensuales`,
         {
           params: {
             desde: desde,

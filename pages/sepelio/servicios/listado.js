@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import PeriodoServicios from "../../../components/sepelio/servicios/PeriodoServicios";
 import moment from "moment";
+import { ip } from '../../../config/config'
 
 const listado = () => {
   let desdeRef = React.createRef();
@@ -31,7 +32,7 @@ const listado = () => {
       guardarHasta(hasta);
       await axios
         .get(
-          `http://190.231.32.232:5002/api/sepelio/servicio/listadoservicios`,
+          `${ip}api/sepelio/servicio/listadoservicios`,
           {
             params: {
               desde: desde,
@@ -54,7 +55,7 @@ const listado = () => {
   const todoLosServicios = async () => {
     console.log("toy");
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/todoslosservicios`)
+      .get(`${ip}api/sepelio/servicio/todoslosservicios`)
       .then((res) => {
         guardarListado(res.data);
       })

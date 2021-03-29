@@ -6,6 +6,7 @@ import axios from "axios";
 import NuevaTarea from "../../../components/sepelio/tareas/NuevaTarea";
 import toastr from "toastr";
 import Router from "next/router";
+import { ip } from '../../../config/config'
 
 const nuevo = () => {
     const [operadorsep, guardarOperadorSep] = useState(null)
@@ -58,7 +59,7 @@ const nuevo = () => {
         } else {
 
             await axios
-                .post(` http://190.231.32.232:5002/api/sepelio/tareas/nuevatarea`, task)
+                .post(` ${ip}api/sepelio/tareas/nuevatarea`, task)
                 .then((res) => {
 
                     if (res.status === 200)
@@ -78,7 +79,7 @@ const nuevo = () => {
     const traerOperador = async () => {
         await axios
             .get(
-                `http://190.231.32.232:5002/api/sepelio/serviciogastos/operadoressep`
+                `${ip}api/sepelio/serviciogastos/operadoressep`
             )
             .then((res) => {
                 guardarOperadorSep(res.data[0]);

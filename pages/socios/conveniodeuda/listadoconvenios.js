@@ -4,6 +4,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import Router, { useRouter } from "next/router";
 import ListadoConvenios from "../../../components/socios/conveniodeuda/ListadoConvenios";
+import {ip} from '../../../config/config'
 
 const listadoconvenios = () => {
 
@@ -22,7 +23,7 @@ const listadoconvenios = () => {
     }, []);
 
     const traerListado = async () => {
-        axios.get(`http://190.231.32.232:5002/api/sgi/socios/traerconvenios`)
+        axios.get(`${ip}api/sgi/socios/traerconvenios`)
             .then(res => {
                 guardarListado(res.data)
             })

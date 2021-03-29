@@ -8,6 +8,7 @@ import Router from "next/router";
 import AltaDatos from "../../../components/campañas/datos/AltaDatos";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaDatos from "../../../validacion/validarAltaDatos";
+import { ip } from '../../../config/config'
 
 const STATE_INICIAL = {
   apellido: "",
@@ -84,7 +85,7 @@ const nuevo = () => {
     }
 
     axios
-      .post("http://190.231.32.232:5002/api/sgi/datos/altadato", dato)
+      .post(`${ip}api/sgi/datos/altadato`, dato)
       .then((res) => {
         if ((res.status = 200)) {
           toastr.success("Dato cargado correctamente", "ATENCION");

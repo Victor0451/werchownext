@@ -6,6 +6,7 @@ import axios from "axios";
 import toastr from "toastr";
 import JsCookie from "js-cookie";
 import Router from "next/router";
+import {ip} from '../../config/config'
 
 const estadosocio = () => {
   let token = JsCookie.get("token");
@@ -80,7 +81,7 @@ const estadosocio = () => {
 
   const buscarAT = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/atW`)
+      .get(`${ip}api/sgi/campanas/atW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -104,7 +105,7 @@ const estadosocio = () => {
 
   const buscarRec = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/recW`)
+      .get(`${ip}api/sgi/campanas/recW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -128,7 +129,7 @@ const estadosocio = () => {
 
   const buscarRein = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/reinW`)
+      .get(`${ip}api/sgi/campanas/reinW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -152,7 +153,7 @@ const estadosocio = () => {
 
   const buscarBlan = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/blanW`)
+      .get(`${ip}api/sgi/campanas/blanW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -176,7 +177,7 @@ const estadosocio = () => {
 
   const buscarAux = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/AuxW`)
+      .get(`${ip}api/sgi/campanas/AuxW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -200,7 +201,7 @@ const estadosocio = () => {
 
   const buscarPoli = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/PoliW`)
+      .get(`${ip}api/sgi/campanas/PoliW`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -226,7 +227,7 @@ const estadosocio = () => {
 
   const buscarATM = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanasM/atM`)
+      .get(`${ip}api/sgi/campanasM/atM`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -250,7 +251,7 @@ const estadosocio = () => {
 
   const buscarRecM = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanasM/recM`)
+      .get(`${ip}api/sgi/campanasM/recM`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -274,7 +275,7 @@ const estadosocio = () => {
 
   const buscarReinM = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanasM/reinM`)
+      .get(`${ip}api/sgi/campanasM/reinM`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];
@@ -298,7 +299,7 @@ const estadosocio = () => {
 
   const buscarBlanM = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanasM/blanM`)
+      .get(`${ip}api/sgi/campanasM/blanM`)
       .then((res) => {
         if (res.data[0].length > 0) {
           const array = res.data[0];

@@ -8,6 +8,7 @@ import moment from 'moment'
 import { confirmAlert } from "react-confirm-alert";
 import FormConvenioDeuda from "../../../components/socios/conveniodeuda/FormConvenioDeuda";
 import BuscarSocio from "../../../components/socios/conveniodeuda/BuscarSocio";
+import {ip} from '../../../config/config'
 
 const conveniodeuda = () => {
 
@@ -49,7 +50,7 @@ const conveniodeuda = () => {
 
             await axios
                 .get(
-                    `http://190.231.32.232:5002/api/sgi/socios/consultarficha/${contrato}`
+                    `${ip}api/sgi/socios/consultarficha/${contrato}`
                 )
                 .then((res) => {
                     let ficha = res.data;
@@ -90,7 +91,7 @@ const conveniodeuda = () => {
 
             await axios
                 .get(
-                    `http://190.231.32.232:5002/api/sgi/socios/consultarficham/${contrato}`
+                    `${ip}api/sgi/socios/consultarficham/${contrato}`
                 )
                 .then((res) => {
                     let ficha = res.data;
@@ -153,7 +154,7 @@ const conveniodeuda = () => {
             convenio.empresa = "MUTUAL SAN VALENTIN";
         }
 
-        axios.post(`http://190.231.32.232:5002/api/sgi/socios/nuevoconvdeuda`, convenio)
+        axios.post(`${ip}api/sgi/socios/nuevoconvdeuda`, convenio)
             .then(res => {
                 if (res.status === 200) {
                     toastr.success("El convenio se registro correctamente", "ATENCION")

@@ -5,6 +5,7 @@ import toastr from 'toastr'
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import ListadoAsesores from "../../../components/ventas/asesores/ListadoAsesores";
+import { ip } from '../../../config/config'
 
 const legajovirtual = () => {
 
@@ -24,7 +25,7 @@ const legajovirtual = () => {
     }, []);
 
     const traerAsesores = () => {
-        axios.get(`http://192.168.1.102:5002/api/ventas/asesores/asesoresactivos`)
+        axios.get(`${ip}api/ventas/asesores/asesoresactivos`)
             .then(res => {
                 guardarAsesores(res.data[0])
             })
@@ -40,7 +41,7 @@ const legajovirtual = () => {
 
         guardarTitulo(asesor)
 
-        axios.get(`http://192.168.1.102:5002/api/ventas/asesores/detalleasesor/${id}`)
+        axios.get(`${ip}api/ventas/asesores/detalleasesor/${id}`)
             .then(res => {
                 guardarDetalle(res.data[0])
                 traerArchivos(id)
@@ -53,7 +54,7 @@ const legajovirtual = () => {
     const traerArchivos = async (id) => {
         await axios
             .get(
-                `http://190.231.32.232:5002/api/archivos/legajovirtualasesores/listaarchivos/${id}`
+                `${ip}api/archivos/legajovirtualasesores/listaarchivos/${id}`
             )
             .then((res) => {
                 let archivos = res.data;
@@ -68,7 +69,7 @@ const legajovirtual = () => {
         console.log(id);
         await axios
             .delete(
-                `http://190.231.32.232:5002/api/archivos/legajovirtualasesores/eliminararchivos/${id}`
+                `${ip}api/archivos/legajovirtualasesores/eliminararchivos/${id}`
             )
             .then((res) => {
                 if (res.status === 200) {

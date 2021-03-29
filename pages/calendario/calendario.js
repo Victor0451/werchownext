@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
+import { ip } from "../../config/config";
 
 const calendario = () => {
   const [events, guardarEvents] = useState([]);
@@ -22,7 +23,7 @@ const calendario = () => {
 
   const traerEventos = async () => {
     axios
-      .get(` http://190.231.32.232:5002/api/sgi/eventos/traereventos`)
+      .get(` ${ip}api/sgi/eventos/traereventos`)
       .then((res) => {
         let evs = res.data;
 

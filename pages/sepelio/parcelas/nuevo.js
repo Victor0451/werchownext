@@ -10,6 +10,7 @@ import NuevaParcela from "../../../components/sepelio/parcelas/NuevaParcela";
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaParcela from "../../../validacion/validarAltaParcela";
+import { ip } from '../../../config/config'
 
 
 const STATE_INICIAL = {
@@ -64,7 +65,7 @@ const nuevo = () => {
 
 
         await axios
-            .post("http://190.231.32.232:5002/api/sepelio/parcelas/nuevaparcela", nuparcela)
+            .post(`${ip}api/sepelio/parcelas/nuevaparcela`, nuparcela)
             .then((res) => {
                 if (res.status === 200) {
                     toastr.success("Parcela Registrada", "ATENCION")

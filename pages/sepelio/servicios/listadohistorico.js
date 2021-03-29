@@ -3,6 +3,7 @@ import Layout from "../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import axios from "axios";
 import ListadoServiciosHistorico from "../../../components/sepelio/servicios/ListadoServicioHistorico";
+import { ip } from '../../../config/config'
 
 const listadohistorico = () => {
   const [listado, guardarListado] = useState(null);
@@ -11,7 +12,7 @@ const listadohistorico = () => {
 
   const listadosServicios = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/servhistoricos`)
+      .get(`${ip}api/sepelio/servicio/servhistoricos`)
 
       .then((res) => {
         const listado = res.data;

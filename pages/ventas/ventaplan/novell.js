@@ -8,6 +8,7 @@ import moment from "moment";
 import AltaNovell from "../../../components/ventas/ventaplan/novell/AltaNovell";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaNovell from "../../../validacion/validarAltaNovell";
+import { ip } from '../../../config/config'
 
 const STATE_INICIAL = {
   servicio: "",
@@ -156,7 +157,7 @@ const novell = () => {
     console.log(novell);
 
     await axios
-      .post(`http://192.168.1.102:5002/api/sgi/socios/nuevonovell`, novell)
+      .post(`${ip}api/sgi/socios/nuevonovell`, novell)
       .then((res) => {
         console.log(res);
         toastr.success("El novell se cargo correctamente", "ATENCION");

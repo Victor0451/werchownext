@@ -4,6 +4,7 @@ import GestionCaso from "../../../components/campañas/GestionCaso";
 import Layout from "../../../components/layout/Layout";
 import jsCookies from "js-cookie";
 import axios from "axios";
+import { ip } from '../../../config/config'
 
 const campana = (porps) => {
   const [campanaOp, guardarCampana] = useState({});
@@ -19,7 +20,7 @@ const campana = (porps) => {
 
   const nuevosCasos = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/campanaoperador`, {
+      .get(`${ip}api/sgi/campanas/campanaoperador`, {
         params: {
           empresa: empresa,
           operador: operador,
@@ -34,7 +35,7 @@ const campana = (porps) => {
 
   const casosTrabajados = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/campanaoperadortrab`, {
+      .get(`${ip}api/sgi/campanas/campanaoperadortrab`, {
         params: {
           empresa: empresa,
           operador: operador,
@@ -49,7 +50,7 @@ const campana = (porps) => {
 
   const casosNotificados = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/campanaoperadornoti`, {
+      .get(`${ip}api/sgi/campanas/campanaoperadornoti`, {
         params: {
           empresa: empresa,
           operador: operador,
@@ -64,7 +65,7 @@ const campana = (porps) => {
 
   let usuario = jsCookies.get("usuario");
 
-  
+
 
   useEffect(() => {
     if (camp) {

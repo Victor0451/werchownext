@@ -7,6 +7,7 @@ import Router, { useRouter } from "next/router";
 
 import toastr from "toastr";
 import ImprimirCaja from "../../../components/sepelio/caja/ImprimirCaja";
+import { ip } from '../../../config/config'
 
 const imprimir = () => {
   const [caja, guardarCaja] = useState(null);
@@ -29,7 +30,7 @@ const imprimir = () => {
 
   const infoCaja = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/cajasepelio/caja/${id}`)
+      .get(`${ip}api/sepelio/cajasepelio/caja/${id}`)
       .then((res) => {
         guardarCaja(res.data);
       })
@@ -41,7 +42,7 @@ const imprimir = () => {
   const listGastos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/listadogastos/${id}`
+        `${ip}api/sepelio/cajasepelio/listadogastos/${id}`
       )
       .then((res) => {
         guardarGastos(res.data);
@@ -54,7 +55,7 @@ const imprimir = () => {
   const listIngresos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/cajasepelio/listadoingresos/${id}`
+        `${ip}api/sepelio/cajasepelio/listadoingresos/${id}`
       )
       .then((res) => {
         guardarIngresos(res.data);

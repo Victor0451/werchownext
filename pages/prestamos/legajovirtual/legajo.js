@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router, { useRouter } from "next/router";
 import toastr from "toastr";
 import LegajoArchivos from "../../../components/prestamos/legajovirtual/LegajoArchivos";
+import { ip } from '../../../config/config'
 
 const legajo = () => {
   const [archivos, guardarArchivos] = useState(null);
@@ -26,7 +27,7 @@ const legajo = () => {
 
   const traerPrestamo = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/prestamos/prestamosporid/${id}`)
+      .get(`${ip}api/sgi/prestamos/prestamosporid/${id}`)
       .then((res) => {
         let prestamo = res.data;
         guardarPrestamo(prestamo);
@@ -39,7 +40,7 @@ const legajo = () => {
   const traerAchivos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualprestamos/listaarchivos/${id}`
+        `${ip}api/archivos/legajovirtualprestamos/listaarchivos/${id}`
       )
       .then((res) => {
         let archivos = res.data;
@@ -53,7 +54,7 @@ const legajo = () => {
   const traerSocio = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sgi/prestamos/consultarficha/${contrato}`
+        `${ip}api/sgi/prestamos/consultarficha/${contrato}`
       )
       .then((res) => {
         let ficha = res.data;

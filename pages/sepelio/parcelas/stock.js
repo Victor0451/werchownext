@@ -6,6 +6,7 @@ import Router from "next/router";
 import Stock from "../../../components/sepelio/parcelas/Stock";
 import moment from "moment";
 import toastr from "toastr";
+import { ip } from '../../../config/config'
 
 
 
@@ -23,7 +24,7 @@ const stock = () => {
 
     const parcelasLibres = async () => {
         await axios
-            .get(`http://190.231.32.232:5002/api/sepelio/parcelas/parcelaslibres`)
+            .get(`${ip}api/sepelio/parcelas/parcelaslibres`)
             .then((res) => {
                 guardarParcelas(res.data);
             })
@@ -34,7 +35,7 @@ const stock = () => {
 
     const parcelasOcupadas = async () => {
         await axios
-            .get(`http://190.231.32.232:5002/api/sepelio/parcelas/parcelasocupadas`)
+            .get(`${ip}api/sepelio/parcelas/parcelasocupadas`)
             .then((res) => {
                 guardarParcelas(res.data);
             })

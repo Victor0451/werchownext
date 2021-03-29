@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import FormMapaRec from "../../components/mapas/FormMapaRec";
 import MapaRec from "../../components/mapas/MapaRec";
+import { ip } from '../../config/config'
 
 const maparec = () => {
   let recRef = React.createRef();
@@ -33,7 +34,7 @@ const maparec = () => {
 
   const recuperadores = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/mapa/recuperadores`)
+      .get(`${ip}api/sgi/mapa/recuperadores`)
       .then((res) => {
         guardarRecup(res.data[0]);
       })
@@ -61,7 +62,7 @@ const maparec = () => {
       guardarHasta(hasta);
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec`, {
+        .get(`${ip}api/sgi/mapa/maparec`, {
           params: {
             rec: rec,
             desde: desde,
@@ -77,7 +78,7 @@ const maparec = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec`, {
+        .get(`${ip}api/sgi/mapa/maparec`, {
           params: {
             rec: rec,
             desde: desde,
@@ -113,7 +114,7 @@ const maparec = () => {
     } else {
       guardarAno(ano);
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec2`, {
+        .get(`${ip}api/sgi/mapa/maparec2`, {
           params: {
             rec: rec,
             accion: accion,
@@ -129,7 +130,7 @@ const maparec = () => {
         });
 
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/mapa/maparec2`, {
+        .get(`${ip}api/sgi/mapa/maparec2`, {
           params: {
             rec: rec,
             accion: accion,

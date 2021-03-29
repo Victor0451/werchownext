@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment-timezone'
 import axios from 'axios'
+import { ip } from '../../config/config'
 
 const Noticias = () => {
     const [noticia, guardarNoticia] = useState({});
 
     const mostarNoticias = async () => {
         await axios.get(
-            `http://190.231.32.232:5002/api/sgi/noticia/noticias`
+            `${ip}api/sgi/noticia/noticias`
         ).then((res => {
             const noticia = res.data
             guardarNoticia(noticia)

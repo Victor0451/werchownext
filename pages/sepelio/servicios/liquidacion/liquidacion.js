@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import ListadoServicios from "../../../../components/sepelio/servicios/liquidacion/ListadoServicio";
 import toastr from "toastr";
+import { ip } from '../../../../config/config'
 
 const liquidacion = () => {
   const [servicio, guardarServicio] = useState(null);
@@ -17,7 +18,7 @@ const liquidacion = () => {
   const serviciosALiquidar = async () => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/servicioliquidacion/serviciosaliquidar`
+        `${ip}api/sepelio/servicioliquidacion/serviciosaliquidar`
       )
       .then((res) => {
         const servicio = res.data[0];
@@ -31,7 +32,7 @@ const liquidacion = () => {
   const traerGastos = async (id, servliq) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/serviciogastos/listadogastos/${id}`
+        `${ip}api/sepelio/serviciogastos/listadogastos/${id}`
       )
       .then((res) => {
         if (res.data) {
@@ -49,7 +50,7 @@ const liquidacion = () => {
   const liquidarOperador = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/sepelio/servicioliquidacion/liquidacionoperador/${id}`
+        `${ip}api/sepelio/servicioliquidacion/liquidacionoperador/${id}`
       )
       .then((res) => {
         if (res.data) {
@@ -81,7 +82,7 @@ const liquidacion = () => {
       fecha_liquidacion: moment().format('YYYY-MM-DD')
     };
 
-    axios.post('http://190.231.32.232:5002/api/sepelio/servicioliquidacion/postliquidacion', liquidacion)
+    axios.post(`${ip}api/sepelio/servicioliquidacion/postliquidacion`, liquidacion)
       .then(res => {
         if (res.status === 200) {
           toastr.success("Se liquido el servicio correctamente", "ATENCION")

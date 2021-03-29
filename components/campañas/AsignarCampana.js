@@ -4,6 +4,7 @@ import ListadoCampana from "./ListadoCampana";
 import BotonCamp from "./BotonCamp";
 import toastr from "toastr";
 import axios from "axios";
+import { ip } from '../../config/config'
 
 const AsignarCampana = ({
   CasaCentralMG,
@@ -17,7 +18,7 @@ const AsignarCampana = ({
 }) => {
   const subirCamp = async (caso) => {
     await axios
-      .post(`http://190.231.32.232:5002/api/sgi/campanas/crearcamp`, caso)
+      .post(`${ip}api/sgi/campanas/crearcamp`, caso)
       .then((res) => {
         console.log(res);
         toastr.success(`${res.status}`, "ATENCION");
@@ -74,7 +75,7 @@ const AsignarCampana = ({
             : {""}
             {CasaCentralMG.length +
               CasaCentralGG.length +
-             // CasaCentralVF.length +
+              // CasaCentralVF.length +
               perico.length +
               palpala.length +
               sanPedro.length}

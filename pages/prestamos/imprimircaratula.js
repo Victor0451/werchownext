@@ -4,6 +4,7 @@ import ImprimirCaratulas from "../../components/prestamos/ImprimirCaratula";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import axios from "axios";
+import { ip } from '../../config/config'
 
 const imprimircaratula = () => {
   const [prestamos, guardarPrestamos] = useState(null);
@@ -48,7 +49,7 @@ const imprimircaratula = () => {
 
   const prestamosPorCodigo = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/prestamos/prestamosporcodigo`, {
+      .get(`${ip}api/sgi/prestamos/prestamosporcodigo`, {
         params: {
           id: id,
         },

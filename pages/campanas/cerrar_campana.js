@@ -4,6 +4,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import CampanaActivas from "../../components/campañas/CampanasActivas";
 import Router from "next/router";
+import {ip} from '../../config/config'
 
 
 const cerrar_campana = () => {
@@ -11,7 +12,7 @@ const cerrar_campana = () => {
 
   const campanasActivas = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sgi/campanas/campanasasignadas`)
+      .get(`${ip}api/sgi/campanas/campanasasignadas`)
       .then((res) => {
         let campanas = res.data[0];
         guardarCampanas(campanas);

@@ -4,6 +4,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import Router, { useRouter } from "next/router";
 import ImprimirConvenio from "../../../components/socios/conveniodeuda/ImprimirConvenio";
+import { ip } from '../../../config/config'
 
 const imprimirconvenio = () => {
 
@@ -40,7 +41,7 @@ const imprimirconvenio = () => {
 
         let id = router.query.id
 
-        axios.get(`http://190.231.32.232:5002/api/sgi/socios/traerconvenio/${id}`)
+        axios.get(`${ip}api/sgi/socios/traerconvenio/${id}`)
             .then(res => {
                 guardarConvenio(res.data)
 

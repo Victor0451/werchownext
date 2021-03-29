@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import toastr from "toastr";
 import FormSubirArchivo from "../../../../components/sepelio/legajovirtual/FormSubirArchivo";
 
+
 const subirarchivos = () => {
     let token = jsCookie.get("token");
 

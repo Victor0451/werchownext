@@ -7,6 +7,7 @@ import axios from "axios";
 import PlanificacionGuardias from "../../../components/sepelio/planificacion/PlanificacionGuardias";
 import ListadoServicios from "../../../components/sepelio/servicios/ListadoServicio";
 import ListadoPlanificacion from "../../../components/sepelio/planificacion/ListadoPlanificacion";
+import { ip } from '../../../config/config'
 
 const guardias = () => {
   let lugarRef = React.createRef();
@@ -30,7 +31,7 @@ const guardias = () => {
 
   const listPlani = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/planificacion/listadoplani`)
+      .get(`${ip}api/sepelio/planificacion/listadoplani`)
       .then((res) => {
         guardarPlani(res.data);
       })
@@ -78,7 +79,7 @@ const guardias = () => {
 
       await axios
         .post(
-          `http://190.231.32.232:5002/api/sepelio/planificacion/nuevaplani`,
+          `${ip}api/sepelio/planificacion/nuevaplani`,
           planificacion
         )
         .then((res) => {

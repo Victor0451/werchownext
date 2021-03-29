@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import axios from "axios";
 import toastr from "toastr";
+import { ip } from '../../config/config'
 
 const CampanasActivas = ({ campanas }) => {
   let data = Object.values(campanas);
@@ -10,7 +11,7 @@ const CampanasActivas = ({ campanas }) => {
   const cerrarCamp = async (idcampana) => {
     axios
       .put(
-        `http://190.231.32.232:5002/api/sgi/campanas/cerrarcamps/${idcampana}`
+        `${ip}api/sgi/campanas/cerrarcamps/${idcampana}`
       )
 
       .then((res) => {

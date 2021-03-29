@@ -9,6 +9,7 @@ import Print from "../../../components/socios/ficha/Print";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import AdhPrint from "../../../components/socios/ficha/AdhPrint";
 import PagosPrint from "../../../components/socios/ficha/PagosPrint";
+import { ip } from '../../../config/config'
 
 const print = () => {
   let contratoRef = React.createRef();
@@ -46,13 +47,13 @@ const print = () => {
 
   const traerPagos = async (contrato) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/werchow/pagos/pagos/${contrato}`)
+      .get(`${ip}api/werchow/pagos/pagos/${contrato}`)
       .then((res) => {
         let pagos = res.data;
 
         axios
           .get(
-            `http://190.231.32.232:5002/api/werchow/pagobco/pagobco/${contrato}`
+            `${ip}api/werchow/pagobco/pagobco/${contrato}`
           )
           .then((res) => {
             let pagosbco = res.data;
@@ -72,7 +73,7 @@ const print = () => {
   const traerPagosM = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/werchow/pagos/pagosmutual/${contrato}`
+        `${ip}api/werchow/pagos/pagosmutual/${contrato}`
       )
       .then((res) => {
         let pagos = res.data;
@@ -80,7 +81,7 @@ const print = () => {
 
         axios
           .get(
-            `http://190.231.32.232:5002/api/werchow/pagobco/pagobcom/${contrato}`
+            `${ip}api/werchow/pagobco/pagobcom/${contrato}`
           )
           .then((res) => {
             let pagosbco = res.data;
@@ -100,7 +101,7 @@ const print = () => {
   const traerAdhs = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/werchow/adherent/adherentestit/${contrato}`
+        `${ip}api/werchow/adherent/adherentestit/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -113,7 +114,7 @@ const print = () => {
   const traerAdhsM = async (contrato) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/mutual/adherent/adherentestit/${contrato}`
+        `${ip}api/mutual/adherent/adherentestit/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -136,7 +137,7 @@ const print = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titular/${contrato}`
+          `${ip}api/werchow/maestro/titular/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -177,7 +178,7 @@ const print = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titularm/${contrato}`
+          `${ip}api/werchow/maestro/titularm/${contrato}`
         )
         .then((res) => {
           let ficha = res.data[0][0];
@@ -216,7 +217,7 @@ const print = () => {
       let dni = dniRef.current.value;
 
       await axios
-        .get(`http://190.231.32.232:5002/api/werchow/maestro/titulardni/${dni}`)
+        .get(`${ip}api/werchow/maestro/titulardni/${dni}`)
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
@@ -257,7 +258,7 @@ const print = () => {
 
       await axios
         .get(
-          `http://190.231.32.232:5002/api/werchow/maestro/titulardnim/${dni}`
+          `${ip}api/werchow/maestro/titulardnim/${dni}`
         )
         .then((res) => {
           let ficha = res.data[0][0];

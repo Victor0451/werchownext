@@ -6,6 +6,7 @@ import Router from "next/router";
 import axios from "axios";
 import toastr from "toastr";
 import moment from "moment-timezone";
+import { ip } from '../../config/config'
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -116,7 +117,7 @@ const nuevoprestamo = () => {
 
       await axios
         .post(
-          `http://190.231.32.232:5002/api/sgi/prestamos/altaprestamo`,
+          `${ip}api/sgi/prestamos/altaprestamo`,
           prestamo
         )
         .then((res) => {

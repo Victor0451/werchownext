@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import matchSorter from "match-sorter";
 import axios from "axios";
+import { ip } from '../../../config/config'
 
 // Import React Table
 import ReactTable from "react-table";
@@ -10,7 +11,7 @@ const Stock = ({ selcaso, selcasofrm }) => {
 
   const mostrarAtaudes = async () => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/ataudes/cantidad`)
+      .get(`${ip}api/sepelio/ataudes/cantidad`)
       .then((res) => {
         let ataudes = res.data;
         guardarAtaudes(ataudes);
@@ -139,7 +140,7 @@ const Stock = ({ selcaso, selcasofrm }) => {
                             data-toggle="tooltip"
                             data-placement="top"
                             title="Actualizar Datos"
-                            //onClick={() => selcaso(row)}
+                          //onClick={() => selcaso(row)}
                           >
                             <i class="fa fa-book" aria-hidden="true"></i>
                           </button>
@@ -149,7 +150,7 @@ const Stock = ({ selcaso, selcasofrm }) => {
                             data-toggle="tooltip modal"
                             data-placement="top"
                             title="Dar de Baja"
-                            //onClick={() => selcaso(row)}
+                          //onClick={() => selcaso(row)}
                           >
                             <i class="fa fa-times" aria-hidden="true"></i>
                           </button>

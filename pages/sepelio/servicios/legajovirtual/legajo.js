@@ -5,6 +5,7 @@ import jsCookie from "js-cookie";
 import Router, { useRouter } from "next/router";
 import toastr from "toastr";
 import LegajoServicio from "../../../../components/sepelio/legajovirtual/LegajoServicio";
+import { ip } from '../../../../config/config'
 
 const legajo = () => {
   const [archivos, guardarArchivos] = useState(null);
@@ -25,7 +26,7 @@ const legajo = () => {
 
   const traerServicio = async (id) => {
     await axios
-      .get(`http://190.231.32.232:5002/api/sepelio/servicio/impservicio/${id}`)
+      .get(`${ip}api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         guardarServicio(res.data);
       })
@@ -37,7 +38,7 @@ const legajo = () => {
   const traerAchivos = async (id) => {
     await axios
       .get(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualservicios/listaarchivos/${id}`
+        `${ip}api/archivos/legajovirtualservicios/listaarchivos/${id}`
       )
       .then((res) => {
         let archivos = res.data;
