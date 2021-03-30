@@ -380,8 +380,9 @@ const NuevoCajaGasto = ({
               <button
                 className="mt-4 btn btn-primary btn-block"
                 onClick={nuevoGasto}
+                data-dismiss="modal"
               >
-                Registrar Gasto
+                Generar Gasto
               </button>
             </div>
           </div>

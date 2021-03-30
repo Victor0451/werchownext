@@ -9,6 +9,8 @@ import ListadoCajaGastos from "../../../components/sepelio/caja/ListadoCajaGasto
 import NuevoCajaGasto from "../../../components/sepelio/caja/NuevoCajaGasto";
 import Spinner from "../../../components/layout/Spinner";
 import { ip } from '../../../config/config'
+import ListadoCajaGastosCargados from "../../../components/sepelio/caja/ListadoCajaGastosCargados";
+import { confirmAlert } from 'react-confirm-alert'
 
 const gastoscaja = () => {
   let fechaRef = React.createRef();
@@ -37,6 +39,7 @@ const gastoscaja = () => {
   const [porciva, guardarPorciva] = useState(null);
   const [proveedor, guardarProveedor] = useState(null);
   const [error, guardarError] = useState(null);
+  const [listgastos, guardarListGastos] = useState(null);
 
   const [operadortramite, guardarOpTramite] = useState(null);
 
@@ -55,6 +58,7 @@ const gastoscaja = () => {
       listadoProveedores();
       listadoConceptos();
       servicioCombo();
+      traerGastos(id)
 
       let usuario = jsCookie.get("usuario");
 
@@ -62,23 +66,29 @@ const gastoscaja = () => {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.usuario);
       }
+
     }
   }, []);
 
   const listadoProveedores = async () => {
-    axios
+    await axios
       .get(`${ip}api/sepelio/cajasepelio/listprov`)
       .then((res) => {
         guardarListProv(res.data[0]);
-      });
+      }).catch(error => {
+        console.log(error)
+      })
   };
 
   const listadoConceptos = async () => {
-    axios
+    await axios
       .get(`${ip}api/sepelio/cajasepelio/listconcepto`)
       .then((res) => {
         guardarListConcep(res.data[0]);
-      });
+      })
+      .catch(error => {
+        console.log(error)
+      })
   };
 
   const infoCaja = async (id) => {
@@ -86,6 +96,11 @@ const gastoscaja = () => {
       .get(`${ip}api/sepelio/cajasepelio/caja/${id}`)
       .then((res) => {
         guardarCaja(res.data);
+
+        if (res.data.gastos) {
+          guardarAcGast(res.data.gastos)
+        }
+
       })
       .catch((error) => {
         console.log(error);
@@ -147,10 +162,20 @@ const gastoscaja = () => {
         `${ip}api/sepelio/cajasepelio/updatecierrecaja/${id}`
       )
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          updateFechaCierre()
+
+          toastr.success("Se cerro la caja correctamente", "Atencion")
+        }
+
+        setTimeout(() => {
+          Router.push('/sepelio/caja/listado')
+        }, 500);
+
       })
       .catch((error) => {
-        console.log(error);
+        toastr.error("Ocurrio un error", "ATENCION")
+        console.log(error)
       });
   };
 
@@ -163,23 +188,38 @@ const gastoscaja = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success(
-            "Se cerro la caja y registraron los gastos correctamente",
+            "Los gastos se cargaron correctamente",
             "ATENCION"
           );
 
           updateTotales();
-          cerrarCaja();
-          updateFechaCierre();
+          updateUltimaCarga()
 
           setTimeout(() => {
-            window.location.replace("/sepelio/caja/listado");
+            confirmAlert({
+              title: 'ATENCION',
+              message: '¿Vas a cerrar la caja?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => { cerrarCaja() }
+                },
+                {
+                  label: 'No',
+                  onClick: () => { Router.push('/sepelio/caja/listado') }
+                }
+              ]
+            });
           }, 500);
+
+
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
 
   const updateFechaCierre = async () => {
     await axios
@@ -194,26 +234,18 @@ const gastoscaja = () => {
       });
   };
 
-  // const restartForm = () => {
-  //   // fechaRef.current.value = "";
-
-  //   ptoVentaRef.current.value = 0;
-  //   montoIVARef.current.value = 0;
-  //   retIIBBRef.current.value = 0;
-  //   retggciasRef.current.value = 0;
-  //   percIVARef.current.value = 0;
-  //   detalleRef.current.value = "";
-  //   totalRef.current.value = 0;
-
-  //   guardarOpTramite(null);
-  //   guardarUsuario(null);
-  //   guardarEmpresa(null);
-  //   guardarConcepto(null);
-  //   guardarFactura(null);
-  //   guardarMedioPago(null);
-  //   guardarPorciva(null);
-  //   guardarProveedor(null);
-  // };
+  const updateUltimaCarga = async () => {
+    await axios
+      .put(
+        `${ip}api/sepelio/cajasepelio/updateultimacarga/${caja.idcaja}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const nuevoGasto = (e) => {
     e.preventDefault();
@@ -271,6 +303,7 @@ const gastoscaja = () => {
         "Debes ingresar un Monto Total o de no tenerlo, ingresa un 0 (cero)"
       );
     } else {
+
       guardarGastos([...gastos, gasto]);
 
       let totgast = acGast + parseFloat(gasto.total);
@@ -307,6 +340,20 @@ const gastoscaja = () => {
         console.log(error);
       });
   };
+
+
+  const traerGastos = async (id) => {
+    await axios
+      .get(`${ip}api/sepelio/cajasepelio/listadogastos/${id}`)
+      .then((res) => {
+        guardarListGastos(res.data);
+        console.log(res.data)
+      }).catch(error => {
+        console.log(error)
+      })
+  }
+
+
 
   return (
     <Layout>
@@ -366,15 +413,58 @@ const gastoscaja = () => {
         </div>
       </div>
 
+      <div
+        className="modal fade"
+        id="gastoscargados"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content ">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Gastos Cargados
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <ListadoCajaGastosCargados
+                listado={listgastos}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {caja ? (
         <ListadoCajaGastos
           caja={caja}
           gastos={gastos}
           dataToggle={"modal"}
           dataTarget={"#exampleModal"}
+          dataToggle1={"modal"}
+          dataTarget1={"#gastoscargados"}
           acGast={acGast}
           totCaja={totCaja}
           regGasto={regGasto}
+          cerrarCaja={cerrarCaja}
           eliminarGastos={eliminarGastos}
         />
       ) : (

@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import moment from "moment";
-import Link from "next/link";
-import Spinner from "../../layout/Spinner";
+
 
 const ListadoCajaGastos = ({
   gastos,
   dataToggle,
   dataTarget,
+  dataToggle1,
+  dataTarget1,
   caja,
   acGast,
   totCaja,
   regGasto,
+  cerrarCaja,
   eliminarGastos,
 }) => {
   return (
@@ -23,7 +25,7 @@ const ListadoCajaGastos = ({
             <strong>CAJA ABIERTA</strong>
           </div>
           <div className="col-md-5">
-            <button className="btn btn-success btn-block" onClick={regGasto}>
+            <button className="btn btn-success btn-block" onClick={cerrarCaja}>
               {" "}
               Cerrar Caja
             </button>
@@ -89,26 +91,50 @@ const ListadoCajaGastos = ({
         </div>
       </div>
 
-      <div className="row mt-4">
-        <div className="col-md-6">
+      <div className="row mt-4 border border-dark p-2">
+        <div className="col-md-4">
           <h3 className="mt-4 mb-4">
             <strong>
               <u>Listado Gastos</u>
             </strong>
           </h3>
         </div>
-        <div className="col-md-6 mt-3 d-flex justify-content-end">
-          <a className="btn btn-danger mr-1" href="/sepelio/caja/listado">
-            Cancelar
-          </a>
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-toggle={dataToggle}
-            data-target={dataTarget}
-          >
-            Registrar Gasto
+        <div className="col-md-8 mt-4 d-flex justify-content-end">
+          <div>
+            <button
+              type="button"
+              className="btn btn-info btn-sm mr-1"
+              data-toggle={dataToggle1}
+              data-target={dataTarget1}
+            >
+              Ver Gastos Cargados
           </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm mr-1"
+              data-toggle={dataToggle}
+              data-target={dataTarget}
+            >
+              Generar Gasto
+          </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="btn btn-warning btn-sm mr-1"
+              onClick={regGasto}
+            >
+              Guardar Gastos
+          </button>
+          </div>
+          <div>
+            <a className="btn btn-danger btn-sm mr-1" href="/sepelio/caja/listado">
+              Cancelar
+          </a>
+          </div>
+
         </div>
       </div>
 
@@ -119,7 +145,7 @@ const ListadoCajaGastos = ({
           defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
           columns={[
             {
-              Header: "Listado de Cajas",
+              Header: "Listado de Gastos",
               columns: [
                 {
                   Header: "Fecha",
@@ -201,10 +227,7 @@ const ListadoCajaGastos = ({
                         title="Eliminar Gastos"
                         onClick={() => eliminarGastos(row.index)}
                       >
-                        <i
-                          className="fa fa-pencil-square"
-                          aria-hidden="true"
-                        ></i>{" "}
+                        <i className="fa fa-trash" aria-hidden="true"></i>
                       </button>
                     </>
                   ),
