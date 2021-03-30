@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
+import {ip} from '../../../config/config'
 
 const FormSubirArchivo = ({ contrato, empresa }) => {
   const [archivos, guardarArchivos] = useState(null);
@@ -22,7 +23,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     if (flag === "S") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtual/uploadfichalegajosoli/${contrato}`,
+          `${ip}api/archivos/legajovirtual/uploadfichalegajosoli/${contrato}`,
           upload
         )
         .then((res) => {
@@ -35,7 +36,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     } else if (flag === "C") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtual/uploadfichalegajocondi/${contrato}`,
+          `${ip}api/archivos/legajovirtual/uploadfichalegajocondi/${contrato}`,
           upload
         )
         .then((res) => {
@@ -48,7 +49,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     } else if (flag === "R") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtual/uploadfichalegajorehab/${contrato}`,
+          `${ip}api/archivos/legajovirtual/uploadfichalegajorehab/${contrato}`,
           upload
         )
         .then((res) => {
@@ -69,7 +70,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     if (flag === "S") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtualm/uploadfichalegajosoli/${contrato}`,
+          `${ip}api/archivos/legajovirtualm/uploadfichalegajosoli/${contrato}`,
           upload
         )
         .then((res) => {
@@ -82,7 +83,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     } else if (flag === "C") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtualm/uploadfichalegajocondi/${contrato}`,
+          `${ip}api/archivos/legajovirtualm/uploadfichalegajocondi/${contrato}`,
           upload
         )
         .then((res) => {
@@ -95,7 +96,7 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
     } else if (flag === "R") {
       await axios
         .post(
-          `http://190.231.32.232:5002/api/archivos/legajovirtualm/uploadfichalegajorehab/${contrato}`,
+          `${ip}api/archivos/legajovirtualm/uploadfichalegajorehab/${contrato}`,
           upload
         )
         .then((res) => {

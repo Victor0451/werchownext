@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ip } from '../../../config/config'
 
 const LegajoArchivos = ({ archivos, empresa }) => {
   const [archi, guardarArchi] = useState(null);
@@ -27,7 +28,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
             </div>
             {empresa === "W" ? (
               <img
-                src={`http://190.231.32.232:5002/api/archivos/legajovirtual/archivo/${archivo.archivo}`}
+                src={`${ip}api/archivos/legajovirtual/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
                 className="archivos p-4 "
                 data-toggle="modal"
@@ -38,7 +39,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               />
             ) : empresa === "M" ? (
               <img
-                src={`http://190.231.32.232:5002/api/archivos/legajovirtualm/archivo/${archivo.archivo}`}
+                src={`${ip}api/archivos/legajovirtualm/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
                 className="archivos p-4 "
                 data-toggle="modal"
@@ -55,7 +56,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               <div className="">
                 <a
                   className="btn btn-primary mr-1 "
-                  href={`http://190.231.32.232:5002/api/archivos/legajovirtual/descargararchivo/${archivo.archivo}`}
+                  href={`${ip}api/archivos/legajovirtual/descargararchivo/${archivo.archivo}`}
                 >
                   <i className="fa fa-download" aria-hidden="true"></i>
                 </a>
@@ -73,7 +74,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               <div className="">
                 <a
                   className="btn btn-primary mr-1 "
-                  href={`http://190.231.32.232:5002/api/archivos/legajovirtual/descargararchivom/${archivo.archivo}`}
+                  href={`${ip}api/archivos/legajovirtual/descargararchivom/${archivo.archivo}`}
                 >
                   <i className="fa fa-download" aria-hidden="true"></i>
                 </a>
@@ -119,12 +120,12 @@ const LegajoArchivos = ({ archivos, empresa }) => {
             <div className="modal-body d-flex justify-content-center">
               {empresa === "W" ? (
                 <img
-                  src={`http://190.231.32.232:5002/api/archivos/legajovirtual/archivo/${archi}`}
+                  src={`${ip}api/archivos/legajovirtual/archivo/${archi}`}
                   classNameName="archimodal p-4  "
                 />
               ) : (
                 <img
-                  src={`http://190.231.32.232:5002/api/archivos/legajovirtualm/archivo/${archi}`}
+                  src={`${ip}api/archivos/legajovirtualm/archivo/${archi}`}
                   classNameName="archimodal p-4  "
                 />
               )}
