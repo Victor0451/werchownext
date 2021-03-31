@@ -512,7 +512,7 @@ const Adimn = () => {
                   Editar Tarea
                 </a>
               </li>
-              <hr/>
+              <hr />
               <li>
                 <a
                   href="/sepelio/tareas/calendario"
@@ -775,6 +775,36 @@ const Adimn = () => {
           </li>
           <hr />
 
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Gestion Turnos
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/socios/turnobajas/turno"
+                  className="dropdown-item text-dark"
+                >
+                  Recepcion Bajas
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/socios/turnobajas/listado"
+                  className="dropdown-item text-dark"
+                >
+                  Listado Turnos
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
           <li>
             <a
               href="/socios/reportes/estadopadron"
