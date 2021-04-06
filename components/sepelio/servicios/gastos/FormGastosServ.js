@@ -20,26 +20,6 @@ const FormGastosServ = ({
 }) => {
   if (!servicio) return <Spinner />;
 
-  // const handleImport = () => {
-  //   let select = document.getElementById("tipogasto");
-  //   let importe = document.getElementById("importe");
-
-  //   if (
-  //     select.value === "Instalacion" ||
-  //     select.value === "Conduccion" ||
-  //     select.value === "Limpieza sala" ||
-  //     select.value === "Guardia oficina" ||
-  //     select.value === "Viaje interior" ||
-  //     select.value === "Atencion sala"
-  //   ) {
-  //     importe.value = 0;
-  //     importe.readOnly = true;
-  //   } else {
-  //     importe.value = "";
-  //     importe.readOnly = false;
-  //   }
-  // };
-
   return (
     <div className="container mt-4">
       <div className="alert alert-primary border border-dark  p-4">
@@ -132,10 +112,10 @@ const FormGastosServ = ({
                 </option>
                 {gastliq
                   ? gastliq.map((gasto, index) => (
-                      <option key={index} value={gasto.value}>
-                        {gasto.label}
-                      </option>
-                    ))
+                    <option key={index} value={gasto.value}>
+                      {gasto.label}
+                    </option>
+                  ))
                   : null}
               </select>
               {errores.tipogasto && (
@@ -144,26 +124,6 @@ const FormGastosServ = ({
                 </div>
               )}
             </div>
-
-            {/* <div className="form-group col-md-4">
-              <label>Importe</label>
-              <input
-                type="number"
-                className="form-control"
-                id="importe"
-                name="importe"
-                defaultValue={importe}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onFocus={handleImport}
-                ref={importeRef}
-              />
-              {errores.importe && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.importe}
-                </div>
-              )}
-            </div> */}
 
             <div className="form-group col-md-4">
               <label>
@@ -184,10 +144,10 @@ const FormGastosServ = ({
                 </option>
                 {operadorsep
                   ? operadorsep.map((operador, index) => (
-                      <option key={index} value={operador.value}>
-                        {operador.label}
-                      </option>
-                    ))
+                    <option key={index} value={operador.value}>
+                      {operador.label}
+                    </option>
+                  ))
                   : null}
               </select>
               {errores.operador && (

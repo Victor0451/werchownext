@@ -4,11 +4,13 @@ import moment from "moment-timezone";
 const PlanificacionGuardias = ({
   registroPlanificacion,
   lugarRef,
-  fechaRef,
   hsInicioRef,
   hsFinRef,
   operadorRef,
   error,
+  operadorsep,
+  siRef,
+  noRef
 }) => {
   let mes = moment().locale("es-es").format("MMMM");
   return (
@@ -48,34 +50,17 @@ const PlanificacionGuardias = ({
             )}
           </div>
 
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> fecha: </u>
-              </strong>
-            </label>
-            <input type="date" className="form-control" ref={fechaRef} />
-            {error && (
-              <div className="mt-2 form-group  alert alert-danger">
-                {error.fecha}
-              </div>
-            )}
-          </div>
 
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-3">
             <label>
               <strong>
                 {" "}
-                <u> Hora Incio: </u>
+                <u> Incio: </u>
               </strong>
             </label>
-            <input
-              type="time"
-              className="form-control"
-              ref={hsInicioRef}
-              name="start"
-            />
+
+            <input type="datetime-local" className="form-control" ref={hsInicioRef} name="start" />
+
             {error && (
               <div className="mt-2 form-group  alert alert-danger">
                 {error.hs_inicio}
@@ -83,24 +68,57 @@ const PlanificacionGuardias = ({
             )}
           </div>
 
-          <div className="form-group col-md-4">
+
+
+          <div className="form-group col-md-3">
             <label>
               <strong>
                 {" "}
                 <u> Hora Fin: </u>
               </strong>
             </label>
-            <input
-              type="time"
-              className="form-control"
-              ref={hsFinRef}
-              name="end"
-            />
+            <input type="datetime-local" className="form-control" ref={hsFinRef} name="end" />
             {error && (
               <div className="mt-2 form-group  alert alert-danger">
                 {error.hs_fin}
               </div>
             )}
+          </div>
+
+          <div className="col-md-2 mb-4">
+            <label>
+              <strong>
+                <u>Feriado</u>
+              </strong>
+            </label>
+            <br />
+            <div className="form-check ">
+              <input
+                className="form-check-input "
+                type="radio"
+                id="covid"
+                name="motivo"
+                value="option1"
+                ref={siRef}
+              />
+              <label className="form-check-label" for="si">
+                Si
+                            </label>
+            </div>
+            <div className="form-check ">
+              <input
+                className="form-check-input "
+                type="radio"
+                id="covid"
+                name="motivo"
+                value="option1"
+                defaultChecked={true}
+                ref={noRef}
+              />
+              <label className="form-check-label" for="no">
+                No
+                            </label>
+            </div>
           </div>
 
           <div className="form-group col-md-4">
@@ -110,16 +128,21 @@ const PlanificacionGuardias = ({
                 <u> Operador: </u>
               </strong>
             </label>
-            <select className="custom-select" ref={operadorRef}>
-              <option selected>Elige una Opcion</option>
-              <option value="pbandur">Pablo Bandur</option>
-              <option value="juro">Jorge Uro</option>
-              <option value="muro">Marcelo Uro</option>
-              <option value="mquiroz">Marcelo Quiroz</option>
-              <option value="jzamorano">Jose Zamorano</option>
-              <option value="cvalda">Carlos Valda</option>
-              <option value="agareca">Abel Gareca</option>
+            <select
+              className="custom-select"
+              name="operador"
+              ref={operadorRef}
+            >
+              <option selected value="no"> Elige una Opcion </option>
+              {operadorsep
+                ? operadorsep.map((operador, index) => (
+                  <option key={index} value={operador.value}>
+                    {operador.label}
+                  </option>
+                ))
+                : null}
             </select>
+
             {error && (
               <div className="mt-2 form-group  alert alert-danger">
                 {error.operador}

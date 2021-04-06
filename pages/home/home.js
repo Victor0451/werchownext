@@ -4,6 +4,7 @@ import BuscarSocio from "../../components/buscar/BuscarSocio";
 import Noticias from "../../components/noticias/Noticias";
 import jsCookie from "js-cookie";
 import axios from "axios";
+import { ip } from '../../config/config'
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -53,7 +54,7 @@ const home = () => {
       if (socio) {
         await axios
           .get(
-            `http://190.231.32.232:5002/api/sgi/campanas/buscarcaso/${socio}`
+            `${ip}api/sgi/campanas/buscarcaso/${socio}`
           )
 
           .then((res) => {
@@ -67,7 +68,7 @@ const home = () => {
 
         await axios
           .get(
-            `http://190.231.32.232:5002/api/sgi/campanas/buscargestioncaso/${socio}`
+            `${ip}api/sgi/campanas/buscargestioncaso/${socio}`
           )
 
           .then((res) => {
@@ -77,7 +78,7 @@ const home = () => {
       } else if (dni) {
         await axios
           .get(
-            `http://190.231.32.232:5002/api/sgi/campanas/buscarcasodni/${dni}`
+            `${ip}api/sgi/campanas/buscarcasodni/${dni}`
           )
 
           .then((res) => {
@@ -90,7 +91,7 @@ const home = () => {
 
               axios
                 .get(
-                  `http://190.231.32.232:5002/api/sgi/campanas/buscargestioncaso/${socioRes.contrato}`
+                  `${ip}api/sgi/campanas/buscargestioncaso/${socioRes.contrato}`
                 )
 
                 .then((res) => {
@@ -102,7 +103,7 @@ const home = () => {
       } else if (apellido) {
         await axios
           .get(
-            `http://190.231.32.232:5002/api/sgi/campanas/buscarcasoapellido/${apellido}`
+            `${ip}api/sgi/campanas/buscarcasoapellido/${apellido}`
           )
 
           .then((res) => {

@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
 import moment from "moment-timezone";
+import FormTareasAdicionales from "./FormTareasAdicionales";
 
-const ListadoPlanificacion = ({ plani, mes }) => {
-  //let casos = Object.values(listado);
-
-  const selcaso = (index) => {
-    console.log(index);
-  };
-
-  // const handleChange = (value, flag) => {
-  //   if (flag === "accion") {
-  //     const accion = value.value;
-  //     guardarAccion(accion);
-  //   } else if (flag === "nuevaaccion") {
-  //     const nuevaaccion = value.value;
-  //     guardarNuevaAccion(nuevaaccion);
-  //   }
-  // };
+const ListadoPlanificacion = ({
+  plani,
+  mes,
+  gastliq,
+  hsInicioTRef,
+  hsFinTRef,
+  tareaRef,
+  observacionesTRef,
+  siTRef,
+  noTRef,
+  registrarTareaAdicional,
+  selcaso,
+  idturno,
+  operador
+}) => {
 
   if (!plani) return <div>No Hay Planificacion Aun</div>;
 
@@ -40,15 +40,7 @@ const ListadoPlanificacion = ({ plani, mes }) => {
             {
               Header: "Planificacion",
               columns: [
-                {
-                  Header: "Fecha",
-                  id: "fecha",
-                  accessor: (d) => moment(d.fecha).format("DD/MM/YYYY"),
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["fecha"] }),
-                  filterAll: true,
-                  //   width: 150,
-                },
+
                 {
                   Header: "Operador",
                   id: "operador",
@@ -60,19 +52,19 @@ const ListadoPlanificacion = ({ plani, mes }) => {
                 },
                 {
                   Header: "Inicio",
-                  id: "hs_inicio",
-                  accessor: (d) => d.hs_inicio,
+                  id: "inicio",
+                  accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["hs_inicio"] }),
+                    matchSorter(rows, filter.value, { keys: ["inicio"] }),
                   filterAll: true,
                   //   width: 100,
                 },
                 {
                   Header: "Fin",
-                  id: "hs_fin",
-                  accessor: (d) => d.hs_fin,
+                  id: "fin",
+                  accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["hs_fin"] }),
+                    matchSorter(rows, filter.value, { keys: ["fin"] }),
                   filterAll: true,
                   //   width: 100,
                 },
@@ -110,21 +102,46 @@ const ListadoPlanificacion = ({ plani, mes }) => {
                   ),
                 },
 
-                // {
-                //   Header: "Acciones",
+                {
+                  Header: "Tipo Guardia",
+                  id: "feriado",
+                  accessor: (d) => d.feriado,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["feriado"],
+                    }),
+                  filterAll: true,
+                  //   width: 120,
+                  Cell: (row) => (
+                    <div>
+                      {row.original.feriado === 1 ? (
+                        <div>
+                          <strong>Feriado</strong>
+                        </div>
+                      ) : row.original.feriado === 0 ? (
+                        <div>
+                          <strong>Normal</strong>
+                        </div>
+                      ) : null}
+                    </div>
+                  ),
+                },
 
-                //   Cell: (row) => (
-                //     <div>
-                //       <a
-                //         href={"#"}
-                //         className="btn btn-primary"
-                //         onClick={() => selcaso(row)}
-                //       >
-                //         Acciones
-                //       </a>
-                //     </div>
-                //   ),
-                // },
+                {
+                  Header: "Acciones",
+
+                  Cell: (row) => (
+                    <div>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => selcaso(row.original.idturno, row.original.operador)}
+                        data-toggle="modal" data-target="#staticBackdrop"
+                      >
+                        <i className="fa fa-money" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  ),
+                },
               ],
             },
           ]}
@@ -132,6 +149,40 @@ const ListadoPlanificacion = ({ plani, mes }) => {
           className="-striped -highlight"
         />
       </div>
+
+
+      <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">Tareas Adicionales</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <FormTareasAdicionales
+                gastliq={gastliq}
+                idturno={idturno}
+                operador={operador}
+                hsInicioTRef={hsInicioTRef}
+                hsFinTRef={hsFinTRef}
+                tareaRef={tareaRef}
+                observacionesTRef={observacionesTRef}
+                siTRef={siTRef}
+                noTRef={noTRef}
+              />
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+              <button type="button" className="btn btn-primary btn-sm" onClick={registrarTareaAdicional}>Registrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
   );
 };
