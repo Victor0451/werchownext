@@ -31,6 +31,7 @@ const ExportarPadron = ({ listado }) => {
         <ExcelColumn label="BARRIO" value="BARRIO" />
         <ExcelColumn label="TELEFONO" value="TELEFONO" />
         <ExcelColumn label="MOVIL" value="MOVIL" />
+        <ExcelColumn label="CUOTA" value="IMPORTE" />
       </ExcelSheet>
     </ExcelFile>
   );

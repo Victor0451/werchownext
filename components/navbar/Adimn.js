@@ -122,6 +122,12 @@ const Adimn = () => {
               Org. America
             </a>
           </li>
+          <hr />
+          <li>
+            <a href="/planificacion/liquidacion" className="dropdown-item text-dark">
+              Liquidacion Personal Sepelio
+            </a>
+          </li>
         </ul>
 
       </li>
@@ -452,6 +458,7 @@ const Adimn = () => {
                   Planificar Guardias
                 </a>
               </li>
+
             </ul>
           </li>
           <hr />

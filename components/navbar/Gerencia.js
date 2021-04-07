@@ -115,6 +115,12 @@ export default class Gerencia extends Component {
                 Org. America
             </a>
             </li>
+            <hr />
+            <li>
+              <a href="/planificacion/liquidacion" className="dropdown-item text-dark">
+                Liquidacion Personal Sepelio
+            </a>
+            </li>
           </ul>
 
         </li>
@@ -476,35 +482,35 @@ export default class Gerencia extends Component {
             <hr />
 
             <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Gestion Turnos
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Gestion Turnos
             </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/socios/turnobajas/turno"
-                  className="dropdown-item text-dark"
-                >
-                  Recepcion Bajas
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/socios/turnobajas/turno"
+                    className="dropdown-item text-dark"
+                  >
+                    Recepcion Bajas
                 </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/socios/turnobajas/listado"
-                  className="dropdown-item text-dark"
-                >
-                  Listado Turnos
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/socios/turnobajas/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado Turnos
                 </a>
-              </li>
-            </ul>
-          </li>
-<hr/>
+                </li>
+              </ul>
+            </li>
+            <hr />
 
             <li>
               <a
