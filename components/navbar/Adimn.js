@@ -124,7 +124,7 @@ const Adimn = () => {
           </li>
           <hr />
           <li>
-            <a href="/planificacion/liquidacion" className="dropdown-item text-dark">
+            <a href="/sepelio/planificacion/liquidacion" className="dropdown-item text-dark">
               Liquidacion Personal Sepelio
             </a>
           </li>
