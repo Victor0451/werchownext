@@ -121,6 +121,12 @@ export default class Gerencia extends Component {
                 Liquidacion Personal Sepelio
             </a>
             </li>
+            <hr />
+            <li>
+              <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+                Liquidacion Tareas en Servicios
+            </a>
+            </li>
           </ul>
 
         </li>

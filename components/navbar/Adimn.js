@@ -128,6 +128,12 @@ const Adimn = () => {
               Liquidacion Personal Sepelio
             </a>
           </li>
+          <hr />
+          <li>
+            <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+              Liquidacion Tareas en Servicios
+            </a>
+          </li>
         </ul>
 
       </li>
@@ -401,15 +407,7 @@ const Adimn = () => {
                   Ingresar Servicio
                 </a>
               </li>
-              <hr />
-              <li>
-                <a
-                  href="/sepelio/servicios/liquidacion/liquidacion"
-                  className="dropdown-item text-dark"
-                >
-                  Liquidar Servicio
-                </a>
-              </li>
+
               <hr />
               <li>
                 <a

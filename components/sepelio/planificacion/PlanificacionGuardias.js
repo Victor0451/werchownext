@@ -74,7 +74,7 @@ const PlanificacionGuardias = ({
             <label>
               <strong>
                 {" "}
-                <u> Hora Fin: </u>
+                <u> Fin: </u>
               </strong>
             </label>
             <input type="datetime-local" className="form-control" ref={hsFinRef} name="end" />

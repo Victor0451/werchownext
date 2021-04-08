@@ -12,17 +12,16 @@ import ListadoServicioGastos from "../../../../components/sepelio/servicios/gast
 import { ip } from '../../../../config/config'
 
 const STATE_INICIAL = {
-  fecha: "",
   hsinicio: "",
   hsfin: "",
   tipogasto: "",
-  importe: "",
   operador: "",
   observaciones: "",
 };
 
 const gastos = () => {
-  let importeRef = React.createRef();
+  let siRef = React.createRef();
+  let noRef = React.createRef();
 
   const [servicio, guardarServicio] = useState(null);
   const [gastos, guardarGastos] = useState(null);
@@ -119,11 +118,9 @@ const gastos = () => {
   } = useValidacion(STATE_INICIAL, validarAltaServicioPart, cargarGasto);
 
   const {
-    fecha,
     hsinicio,
     hsfin,
     tipogasto,
-    importe,
     operador,
     observaciones,
   } = valores;
@@ -131,13 +128,21 @@ const gastos = () => {
   async function cargarGasto() {
     let gasto = {
       idservicio: servicio.idservicio,
-      fecha_gasto: fecha,
-      hs_inicio: hsinicio,
-      hs_fin: hsfin,
+      inicio: hsinicio,
+      fin: hsfin,
       tipo_gasto: tipogasto,
       operador: operador,
       observaciones: observaciones,
+      feriado: '',
+      liquidado: 0
     };
+
+
+    if (siRef.current.checked === true) {
+      gasto.feriado = 1
+    } else if (noRef.current.checked === true) {
+      gasto.feriado = 0
+    }
 
     await axios
       .post(
@@ -155,7 +160,6 @@ const gastos = () => {
       });
   }
 
-  console.log(servicio, gastos);
 
   return (
     <Layout>
@@ -219,7 +223,7 @@ const gastos = () => {
                 </div>
                 <div className="col-md-4">
                   <a
-                    href="/sepelio/servicio/listado"
+                    href="/sepelio/servicios/listado"
                     className="btn btn-sm btn-block btn-danger"
                   >
                     Volver al Listado
@@ -257,18 +261,17 @@ const gastos = () => {
             <div className="modal-body">
               <FormGastosServ
                 servicio={servicio}
-                fecha={fecha}
                 hsinicio={hsinicio}
                 hsfin={hsfin}
                 tipogasto={tipogasto}
-                importe={importe}
                 operador={operador}
                 observaciones={observaciones}
                 errores={errores}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handleBlur={handleBlur}
-                importeRef={importeRef}
+                siRef={siRef}
+                noRef={noRef}
                 operadorsep={operadorsep}
                 gastliq={gastliq}
               />

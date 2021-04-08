@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
 import FormLiquidarServicio from "./FormLiquidarServicio";
+import moment from "moment";
 
 
 const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total }) => {
@@ -77,11 +78,11 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                       keys: ["tipo_servicio"],
                     }),
                   filterAll: true,
-                  width: 150,
+                  width: 100,
                 },
 
                 {
-                  Header: "Fecha de Fallecimiento",
+                  Header: "Fallecimiento",
                   id: "fecha_fallecimiento",
                   accessor: (d) => d.fecha_fallecimiento,
                   filterMethod: (filter, rows) =>
@@ -97,18 +98,24 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
 
                   Cell: (row) => (
                     <div>
-                      <button
-                        className="btn btn-sm btn-primary mr-1"
-                        data-toggle="modal"
-                        data-placement="top"
-                        title="Liquidar"
-                        data-target="#liquidar"
-                        onClick={() =>
-                          traerGastos(row.original.idservicio, row.original)
-                        }
-                      >
-                        <i className="fa fa-money" aria-hidden="true"></i>
-                      </button>
+                      {row.original.liquidado == 1 ? (
+                        <div>Liquidado {moment(row.original.fecha_liquidacion).utcOffset('+000').format('DD/MM/YYYY HH:mm:ss')}</div>
+
+                      ) : (
+                        <button
+                          className="btn btn-sm btn-primary btn-sm mr-1"
+                          data-toggle="modal"
+                          data-placement="top"
+                          title="Ver Liquidacion"
+                          data-target="#liquidar"
+                          onClick={() =>
+                            traerGastos(row.original.idservicio, row.original)
+                          }
+                        >
+                          <i className="fa fa-money" aria-hidden="true"></i>
+                        </button>
+                      )}
+
                     </div>
                   ),
                 },
@@ -159,10 +166,10 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-success"
                 onClick={liquidarServicio}
               >
-                Liquidar
+                Liquidar Servicio
               </button>
             </div>
           </div>

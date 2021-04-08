@@ -97,6 +97,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
       cremacion: crem,
+      liquidado: 0
     };
 
     if (motivoRef.current.value === "") {

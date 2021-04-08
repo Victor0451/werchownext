@@ -4,11 +4,11 @@ import Spinner from "../../../layout/Spinner";
 const FormGastosServ = ({
   servicio,
   observaciones,
-  fecha,
   hsinicio,
   hsfin,
   tipogasto,
-  importe,
+  siRef,
+  noRef,
   operador,
   errores,
   handleChange,
@@ -38,28 +38,13 @@ const FormGastosServ = ({
           </h4>
 
           <div className="row border border-dark">
-            <div className="form-group mt-4 col-md-4">
-              <label>Fecha</label>
-              <input
-                type="date"
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                name="fecha"
-                defaultValue={fecha}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errores.fecha && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {errores.fecha}
-                </div>
-              )}
-            </div>
+
+
 
             <div className="form-group mt-4 col-md-4">
-              <label>Hs Inicio</label>
+              <label>Inicio</label>
               <input
-                type="time"
+                type="datetime-local"
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 name="hsinicio"
@@ -75,9 +60,9 @@ const FormGastosServ = ({
             </div>
 
             <div className="form-group mt-4 col-md-4">
-              <label>Hs Fin</label>
+              <label>Fin</label>
               <input
-                type="time"
+                type="datetime-local"
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 name="hsfin"
@@ -92,7 +77,43 @@ const FormGastosServ = ({
               )}
             </div>
 
-            <div className="form-group col-md-4">
+            <div className="mt-4 col-md-1 ">
+              <label>
+                <strong>
+                  <u>Feriado</u>
+                </strong>
+              </label>
+              <br />
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  id="covid"
+                  name="motivo"
+                  value="option1"
+                  ref={siRef}
+                />
+                <label className="form-check-label" for="si">
+                  Si
+                            </label>
+              </div>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  id="covid"
+                  name="motivo"
+                  value="option1"
+                  defaultChecked={true}
+                  ref={noRef}
+                />
+                <label className="form-check-label" for="no">
+                  No
+                            </label>
+              </div>
+            </div>
+
+            <div className="mt-4 form-group col-md-3">
               <label>
                 <strong>
                   {" "}
@@ -125,7 +146,7 @@ const FormGastosServ = ({
               )}
             </div>
 
-            <div className="form-group col-md-4">
+            <div className="mt-4 form-group col-md-4">
               <label>
                 <strong>
                   {" "}

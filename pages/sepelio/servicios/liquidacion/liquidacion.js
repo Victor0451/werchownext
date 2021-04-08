@@ -6,12 +6,15 @@ import moment from "moment";
 import ListadoServicios from "../../../../components/sepelio/servicios/liquidacion/ListadoServicio";
 import toastr from "toastr";
 import { ip } from '../../../../config/config'
+import Router from 'next/router'
 
 const liquidacion = () => {
   const [servicio, guardarServicio] = useState(null);
   const [servliq, guardarServliq] = useState(null);
   const [gastos, guardarGastos] = useState(null);
   const [liqop, guardarLiqOp] = useState(null);
+  const [usuario, guardarUsuario] = useState(null);
+
 
   let token = jsCookie.get("token");
 
@@ -79,14 +82,17 @@ const liquidacion = () => {
     const liquidacion = {
       idservicio: servicio[0].idservicio,
       total_liquidacion: total(liqop),
-      fecha_liquidacion: moment().format('YYYY-MM-DD')
+      fecha_liquidacion: moment().format('YYYY-MM-DD HH:mm:ss'),
+      operador: usuario
     };
 
     axios.post(`${ip}api/sepelio/servicioliquidacion/postliquidacion`, liquidacion)
       .then(res => {
         if (res.status === 200) {
           toastr.success("Se liquido el servicio correctamente", "ATENCION")
-
+          setTimeout(() => {
+            Router.reload()
+          }, 500);
         }
       })
       .catch(error => {
@@ -100,8 +106,17 @@ const liquidacion = () => {
     if (!token) {
       Router.push("/redirect");
     } else {
+
+      serviciosALiquidar();
+
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+      }
+
     }
-    serviciosALiquidar();
   }, []);
 
   return (

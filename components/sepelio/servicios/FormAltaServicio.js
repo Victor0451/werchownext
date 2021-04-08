@@ -165,6 +165,7 @@ const FormAltaServicio = ({
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
       cremacion: crem,
+      liquidado: 0
     };
 
     if (ficha.GRUPO && ficha.PLAN !== "P") {

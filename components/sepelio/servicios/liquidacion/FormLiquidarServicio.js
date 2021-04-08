@@ -1,5 +1,5 @@
 import React from "react";
-
+import moment from 'moment'
 const FormLiquidarServicio = ({ servicio, liqop, total }) => {
 
   return (
@@ -31,8 +31,8 @@ const FormLiquidarServicio = ({ servicio, liqop, total }) => {
                 <th scope="col">#</th>
                 <th >Operador</th>
                 <th >Trabajo</th>
-                <th >Hs Inicio</th>
-                <th >Hs Fin</th>
+                <th >Inicio</th>
+                <th >Fin</th>
                 <th >Liquidacion</th>
               </tr>
             </thead>
@@ -43,8 +43,8 @@ const FormLiquidarServicio = ({ servicio, liqop, total }) => {
                     <th scope="row" >{index + 1}</th>
                     <td>{liq.operador}</td>
                     <td>{liq.tipo_gasto}</td>
-                    <td>{liq.hs_inicio}</td>
-                    <td>{liq.hs_fin}</td>
+                    <td>{moment(liq.inicio).format('DD/MM/YYYY HH:mm:ss')}</td>
+                    <td>{moment(liq.fin).format('DD/MM/YYYY HH:mm:ss')}</td>
                     <td>{liq.liquidacion}</td>
                   </tr>
                 </>
