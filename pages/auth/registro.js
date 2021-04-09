@@ -5,6 +5,7 @@ import axios from "axios";
 import Router from "next/router";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
+import { ip } from '../../config/config'
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -59,7 +60,7 @@ const Registro = () => {
       });
 
       await axios.post(
-        "http://190.231.32.232:5002/api/sgi/operador/postoperador",
+        `${ip}api/sgi/operador/postoperador`,
         body,
         config
       );

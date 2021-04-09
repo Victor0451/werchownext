@@ -429,6 +429,15 @@ const Adimn = () => {
               <hr />
               <li>
                 <a
+                  href="/sepelio/servicios/venta/venta"
+                  className="dropdown-item text-dark"
+                >
+                  Cargar Servicios Vendidos
+                </a>
+              </li>
+              <hr/>
+              <li>
+                <a
                   href="/sepelio/servicios/administracion/administracion"
                   className="dropdown-item text-dark"
                 >

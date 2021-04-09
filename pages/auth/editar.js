@@ -6,6 +6,7 @@ import Router from "next/router";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import BuscarUsuario from "../../components/auth/BuscarUsuario";
+import {ip} from '../../config/config'
 
 const editar = () => {
   let userRef = React.createRef();
@@ -35,7 +36,7 @@ const editar = () => {
       let id = userRef.current.value;
       console.log(id);
       await axios
-        .get(`http://190.231.32.232:5002/api/sgi/operador/operador/${id}`)
+        .get(`${ip}api/sgi/operador/operador/${id}`)
         .then((res) => {
           guardarUsername(res.data);
           console.log(res.data);
@@ -62,7 +63,7 @@ const editar = () => {
 
     await axios
       .put(
-        `http://190.231.32.232:5002/api/sgi/operador/editar/${user.usuario}`,
+        `${ip}api/sgi/operador/editar/${user.usuario}`,
         user
       )
       .then((res) => {
