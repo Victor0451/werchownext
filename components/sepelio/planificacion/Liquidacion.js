@@ -5,7 +5,7 @@ import Spinner from "../../../components/layout/Spinner";
 import moment from "moment-timezone";
 
 
-const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => {
+const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprobarGuardias, aprobarTareas, user }) => {
 
     if (!liqguardias) return <Spinner />
 
@@ -60,7 +60,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["operador"] }),
                                     filterAll: true,
-                                    //   width: 100,
+                                    width: 100,
                                 },
                                 {
                                     Header: "Inicio",
@@ -69,7 +69,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["inicio"] }),
                                     filterAll: true,
-                                    //   width: 100,
+                                    width: 180,
                                 },
                                 {
                                     Header: "Fin",
@@ -78,7 +78,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["fin"] }),
                                     filterAll: true,
-                                    //   width: 100,
+                                    width: 180,
                                 },
                                 {
                                     Header: "Horas",
@@ -87,7 +87,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["horas"] }),
                                     filterAll: true,
-                                    //   width: 100,
+                                    width: 100,
                                 },
 
                                 {
@@ -97,33 +97,102 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["liquidacion"] }),
                                     filterAll: true,
-                                    //   width: 100,
+                                    width: 130,
                                 },
                                 {
-                                    Header: "Acciones",
+                                    Header: "Aprobado",
 
                                     Cell: (row) => (
                                         <>
-                                            {row.original.liquidado === 0 ? (
-
-                                                <button
-                                                    href=""
-                                                    className="btn btn-success btn-sm mr-1"
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title="Liquidar"
-                                                    onClick={() => regLiqGuardia(row.original.idturno)}
-                                                >
-                                                    <i className="fa fa-check" aria-hidden="true"></i>
-                                                </button>
-
-                                            ) : row.original.liquidado === 1 ? (
+                                            {row.original.aprobado === 0 ? (
 
                                                 <div>
-                                                    Liquidado: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                    Rechazado por {row.original.operadorap}: {moment(row.original.fecha_aprobacion).format('DD/MM/YYYY HH:mm:ss')}
                                                 </div>
 
-                                            ) : null}
+                                            ) : row.original.aprobado === 1 ? (
+
+                                                <div>
+                                                    Aprobado por {row.original.operadorap}: {moment(row.original.fecha_aprobacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                </div>
+
+                                            ) : row.original.aprobado === null ?
+                                                (
+                                                    <div>
+                                                        Esperando Aprobacion
+                                                    </div>
+                                                ) : null}
+                                        </>
+                                    ),
+                                },
+                                {
+                                    Header: "Acciones",
+                                    width: 100,
+                                    Cell: (row) => (
+                                        <>
+                                            {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+
+                                                <>
+                                                    <button
+                                                        href=""
+                                                        className="btn btn-success btn-sm mr-1"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Aprobar"
+                                                        onClick={() => aprobarGuardias(row.original.idturno, 1)}
+                                                    >
+                                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+
+                                                    <button
+                                                        href=""
+                                                        className="btn btn-danger btn-sm mr-1"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Rechazar"
+                                                        onClick={() => aprobarGuardias(row.original.idturno, 0)}
+                                                    >
+                                                        <i className="fa fa-times" aria-hidden="true"></i>
+                                                    </button>
+                                                </>
+
+                                            ) : (
+                                                <>
+                                                    {row.original.liquidado === 0 ? (
+
+                                                        row.original.aprobado === 1 ? (
+                                                            <button
+                                                                href=""
+                                                                className="btn btn-info btn-sm mr-1"
+                                                                data-toggle="tooltip"
+                                                                data-placement="top"
+                                                                title="Liquidar"
+                                                                onClick={() => regLiqGuardia(row.original.idturno)}
+                                                            >
+                                                                <i className="fa fa-check" aria-hidden="true"></i>   Liquidar
+                                                            </button>
+                                                        ) : row.original.aprobado === 0 ? (
+                                                            <div>
+                                                                Rechazado
+                                                            </div>
+                                                        ) : (
+                                                            <div>
+                                                                ...
+                                                            </div>
+                                                        )
+
+                                                    ) : row.original.liquidado === 1 ? (
+
+                                                        <div>
+                                                            Liquidado por {row.original.operadorliq}: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                        </div>
+
+
+
+                                                    ) : null}
+                                                </>
+                                            )}
+
                                         </>
                                     ),
                                 },
@@ -176,7 +245,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["operador"] }),
                                                 filterAll: true,
-                                                //   width: 100,
+                                                width: 100,
                                             },
                                             {
                                                 Header: "Inicio",
@@ -185,7 +254,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["inicio"] }),
                                                 filterAll: true,
-                                                //   width: 100,
+                                                width: 180,
                                             },
                                             {
                                                 Header: "Fin",
@@ -194,7 +263,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["fin"] }),
                                                 filterAll: true,
-                                                //   width: 100,
+                                                width: 180,
                                             },
                                             {
                                                 Header: "Horas",
@@ -203,7 +272,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["horas"] }),
                                                 filterAll: true,
-                                                //   width: 100,
+                                                width: 100,
                                             },
 
                                             {
@@ -213,36 +282,110 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => 
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["liquidacion"] }),
                                                 filterAll: true,
-                                                //   width: 100,
+                                                width: 100,
                                             },
 
                                         ],
                                     },
                                     {
-                                        Header: "Acciones",
+                                        Header: "Aprobado",
 
                                         Cell: (row) => (
                                             <>
-                                                {row.original.liquidado === 0 ? (
-
-                                                    <button
-                                                        href=""
-                                                        className="btn btn-success btn-sm mr-1"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Liquidar"
-                                                        onClick={() => regLiqTareas(row.original.idtarea)}
-                                                    >
-                                                        <i className="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
-
-                                                ) : row.original.liquidado === 1 ? (
+                                                {row.original.aprobado === 0 ? (
 
                                                     <div>
-                                                        Liquidado: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                        Rechazado por {row.original.operadorap}: {moment(row.original.fecha_aprobacion).format('DD/MM/YYYY HH:mm:ss')}
                                                     </div>
 
-                                                ) : null}
+                                                ) : row.original.aprobado === 1 ? (
+
+                                                    <div>
+                                                        Aprobado por {row.original.operadorap}: {moment(row.original.fecha_aprobacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                    </div>
+
+                                                ) : row.original.aprobado === null ?
+                                                    (
+                                                        <div>
+                                                            Esperando Aprobacion
+                                                        </div>
+                                                    ) : null}
+                                            </>
+                                        ),
+                                    },
+                                    {
+                                        Header: "Acciones",
+                                        width: 100,
+                                        Cell: (row) => (
+                                            <>
+
+                                                {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+
+                                                    <>
+                                                        <button
+                                                            href=""
+                                                            className="btn btn-success btn-sm mr-1"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Aprobar"
+                                                            onClick={() => aprobarTareas(row.original.idtarea, 1)}
+                                                        >
+                                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                                        </button>
+
+                                                        <button
+                                                            href=""
+                                                            className="btn btn-danger btn-sm mr-1"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Rechazar"
+                                                            onClick={() => aprobarTareas(row.original.idtarea, 0)}
+                                                        >
+                                                            <i className="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                    </>
+
+                                                ) : (
+                                                    <>
+                                                        {
+                                                            row.original.liquidado === 0 ? (
+                                                                <>
+                                                                    {
+                                                                        row.original.aprobado === 1 ? (
+                                                                            <button
+                                                                                href=""
+                                                                                className="btn btn-info btn-sm mr-1"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Liquidar"
+                                                                                onClick={() => regLiqTareas(row.original.idtarea)}
+                                                                            >
+                                                                                <i className="fa fa-check" aria-hidden="true"></i>   Liquidar
+                                                                            </button>
+                                                                        ) : row.original.aprobado === 0 ? (
+                                                                            <div>
+                                                                                Rechazado
+                                                                            </div>
+                                                                        ) : (
+                                                                            <div>
+                                                                                ...
+                                                                            </div>
+                                                                        )
+                                                                    }
+
+                                                                </>
+                                                            ) : row.original.liquidado === 1 ? (
+
+                                                                <div>
+                                                                    Liquidado por {row.original.operadorliq}: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                                </div>
+
+                                                            ) : null
+                                                        }
+                                                    </>
+                                                )}
+
+
                                             </>
                                         ),
                                     },

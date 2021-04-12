@@ -24,6 +24,7 @@ const liquidacion = () => {
     const [liqtarad, guardarLiqTareas] = useState(null)
     const [resumenG, guardarResumenG] = useState(null)
     const [resumenT, guardarResumenT] = useState(null)
+    const [user, guardarUsuario] = useState(null)
 
 
     let token = JsCookie.get("token");
@@ -31,6 +32,13 @@ const liquidacion = () => {
     useEffect(() => {
         if (!token) {
             Router.push("/redirect");
+        } else {
+            let usuario = JsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
         }
     }, []);
 
@@ -165,7 +173,12 @@ const liquidacion = () => {
 
     const regLiqGuardia = async (id) => {
         axios.put(
-            `${ip}api/sepelio/planificacion/regliqguardia/${id}`
+            `${ip}api/sepelio/planificacion/regliqguardia/${id}`,
+            {
+                params: {
+                    operador: user
+                }
+            }
         )
             .then(res => {
                 if (res.status === 200) {
@@ -180,7 +193,12 @@ const liquidacion = () => {
 
     const regLiqTareas = async (id) => {
         axios.put(
-            `${ip}api/sepelio/tareasadicionales/regliqtareas/${id}`
+            `${ip}api/sepelio/tareasadicionales/regliqtareas/${id}`,
+            {
+                params: {
+                    operador: user
+                }
+            }
         )
             .then(res => {
                 if (res.status === 200) {
@@ -191,6 +209,90 @@ const liquidacion = () => {
                 toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
                 console.log(error)
             })
+    }
+
+    const aprobarTareas = async (id, flag) => {
+        if (flag === 1) {
+            axios.put(
+                `${ip}api/sepelio/tareasadicionales/aprobarliqtarea/${id}`,
+                {
+                    params: {
+                        operador: user
+                    }
+                }
+            )
+                .then(res => {
+                    if (res.status === 200) {
+                        toastr.success("Liquidacion de tarea aprobada", "ATENCION")
+                    }
+                })
+                .catch(error => {
+                    toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
+                    console.log(error)
+                })
+        } else if (flag === 0) {
+            axios.put(
+                `${ip}api/sepelio/tareasadicionales/cancelarliqtarea/${id}`,
+                {
+                    params: {
+                        operador: user
+                    }
+                }
+            )
+                .then(res => {
+                    if (res.status === 200) {
+                        toastr.success("Liquidacion de tarea rechazada", "ATENCION")
+                    }
+                })
+                .catch(error => {
+                    toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
+                    console.log(error)
+                })
+        }
+
+
+    }
+
+    const aprobarGuardias = async (id, flag) => {
+        if (flag === 1) {
+            axios.put(
+                `${ip}api/sepelio/planificacion/aprobarliqguardia/${id}`,
+                {
+                    params: {
+                        operador: user
+                    }
+                }
+            )
+                .then(res => {
+                    if (res.status === 200) {
+                        toastr.success("Liquidacion de guardia aprobada", "ATENCION")
+                    }
+                })
+                .catch(error => {
+                    toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
+                    console.log(error)
+                })
+        } else if (flag === 0) {
+            axios.put(
+                `${ip}api/sepelio/planificacion/cancelarliqguardia/${id}`,
+                {
+                    params: {
+                        operador: user
+                    }
+                }
+            )
+                .then(res => {
+                    if (res.status === 200) {
+                        toastr.success("Liquidacion de guardia rechazada", "ATENCION")
+                    }
+                })
+                .catch(error => {
+                    toastr.error("Ocurrio un error en la aprobacion de la guardia", "ATENCION")
+                    console.log(error)
+                })
+        }
+
+
     }
 
     return (
@@ -224,7 +326,7 @@ const liquidacion = () => {
                                     </div>
                                 </div>
 
-                                <Liquidacion liqguardias={liqguardias} liqtarad={liqtarad} regLiqGuardia={regLiqGuardia} regLiqTareas={regLiqTareas} />
+                                <Liquidacion liqguardias={liqguardias} liqtarad={liqtarad} regLiqGuardia={regLiqGuardia} regLiqTareas={regLiqTareas} aprobarGuardias={aprobarGuardias} aprobarTareas={aprobarTareas} user={user} />
 
                             </div>
 
