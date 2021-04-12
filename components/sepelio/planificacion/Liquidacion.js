@@ -1,21 +1,27 @@
-import React from 'react'
-import Spinner from '../../layout/Spinner'
-import moment from 'moment'
+import React, { useState } from "react";
+import ReactTable from "react-table";
+import matchSorter from "match-sorter";
+import Spinner from "../../../components/layout/Spinner";
+import moment from "moment-timezone";
 
-const Liquidacion = ({ liqguardias, liqtarad }) => {
+
+const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas }) => {
 
     if (!liqguardias) return <Spinner />
 
 
     const totalGuardias = (arr) => {
+        if (arr) {
+            let total = 0
 
-        let total = 0
+            for (let i = 0; i < arr.length; i++) {
+                total += arr[i].liquidacion
+            }
 
-        for (let i = 0; i < arr.length; i++) {
-            total += arr[i].liquidacion
+            return total
         }
 
-        return total
+
     }
 
 
@@ -30,37 +36,110 @@ const Liquidacion = ({ liqguardias, liqtarad }) => {
                 </strong>
             </h4>
 
-            <table class="table table-sm list border border-dark">
-                <thead className="thead-dark">
-                    <tr>
-                        <th scope="col">ID Guardia</th>
-                        <th scope="col">Operador</th>
-                        <th scope="col">Inicio</th>
-                        <th scope="col">Fin</th>
-                        <th scope="col">Horas</th>
-                        <th scope="col">Liquidacion</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    {liqguardias.map((l, index) => (
-                        <tr key={index}>
-                            <th scope="row">{l.idturno}</th>
-                            <td>{l.operador}</td>
-                            <td>{moment(l.inicio).utcOffset("+000").format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td>{moment(l.fin).utcOffset("+000").format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td>{l.horas}</td>
-                            <td>{l.liquidacion}</td>
-                        </tr>
-                    ))}
+            <div className="list border border-dark p-4">
+                <ReactTable
+                    data={liqguardias}
+                    filterable
+                    defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+                    columns={[
+                        {
+                            Header: "Planificacion",
+                            columns: [
 
-                </tbody>
-            </table>
+                                {
+                                    Header: "#",
+                                    filterAll: false,
+                                    width: 50,
+                                    Cell: (row) => <div>{row.index + 1}</div>,
+                                },
+                                {
+                                    Header: "Operador",
+                                    id: "operador",
+                                    accessor: (d) => d.operador,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["operador"] }),
+                                    filterAll: true,
+                                    //   width: 100,
+                                },
+                                {
+                                    Header: "Inicio",
+                                    id: "inicio",
+                                    accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["inicio"] }),
+                                    filterAll: true,
+                                    //   width: 100,
+                                },
+                                {
+                                    Header: "Fin",
+                                    id: "fin",
+                                    accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["fin"] }),
+                                    filterAll: true,
+                                    //   width: 100,
+                                },
+                                {
+                                    Header: "Horas",
+                                    id: "horas",
+                                    accessor: (d) => d.horas,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["horas"] }),
+                                    filterAll: true,
+                                    //   width: 100,
+                                },
 
-            <div className="mb-4 alert alert-success border border-dark text-center text-uppercase">
+                                {
+                                    Header: "Liquidacion",
+                                    id: "liquidacion",
+                                    accessor: (d) => d.liquidacion,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["liquidacion"] }),
+                                    filterAll: true,
+                                    //   width: 100,
+                                },
+                                {
+                                    Header: "Acciones",
+
+                                    Cell: (row) => (
+                                        <>
+                                            {row.original.liquidado === 0 ? (
+
+                                                <button
+                                                    href=""
+                                                    className="btn btn-success btn-sm mr-1"
+                                                    data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Liquidar"
+                                                    onClick={() => regLiqGuardia(row.original.idturno)}
+                                                >
+                                                    <i className="fa fa-check" aria-hidden="true"></i>
+                                                </button>
+
+                                            ) : row.original.liquidado === 1 ? (
+
+                                                <div>
+                                                    Liquidado: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                </div>
+
+                                            ) : null}
+                                        </>
+                                    ),
+                                },
+                            ],
+                        },
+                    ]}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                />
+            </div>
+
+            <div className="mt-4 mb-4 alert alert-success border border-dark text-center text-uppercase">
                 Liquidacion Total de Guardias: ${totalGuardias(liqguardias)}
             </div>
 
+            <hr className="mt-4 mb-4" />
 
             <h4 className="mt-4 mb-4">
                 <strong>
@@ -70,34 +149,116 @@ const Liquidacion = ({ liqguardias, liqtarad }) => {
                 </strong>
             </h4>
 
+            {
+                !liqtarad ? (<Spinner />)
+                    : (
 
-            <table class="table table-sm list border border-dark">
-                <thead className="thead-dark">
-                    <tr>
-                        <th scope="col">ID Guardia</th>
-                        <th scope="col">Operador</th>
-                        <th scope="col">Inicio</th>
-                        <th scope="col">Fin</th>
-                        <th scope="col">Horas</th>
-                        <th scope="col">Liquidacion</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        <div className="list border border-dark p-4">
+                            <ReactTable
+                                data={liqtarad}
+                                filterable
+                                defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+                                columns={[
+                                    {
+                                        Header: "Planificacion",
+                                        columns: [
 
-                    {liqtarad.map((lt, index) => (
-                        <tr key={index}>
-                            <th scope="row">{lt.idturno}</th>
-                            <td>{lt.operador}</td>
-                            <td>{moment(lt.inicio).utcOffset("+000").format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td>{moment(lt.fin).utcOffset("+000").format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td>{lt.horas}</td>
-                            <td>{lt.liquidacion}</td>
-                        </tr>
-                    ))}
+                                            {
+                                                Header: "#",
+                                                filterAll: false,
+                                                width: 50,
+                                                Cell: (row) => <div>{row.index + 1}</div>,
+                                            },
+                                            {
+                                                Header: "Operador",
+                                                id: "operador",
+                                                accessor: (d) => d.operador,
+                                                filterMethod: (filter, rows) =>
+                                                    matchSorter(rows, filter.value, { keys: ["operador"] }),
+                                                filterAll: true,
+                                                //   width: 100,
+                                            },
+                                            {
+                                                Header: "Inicio",
+                                                id: "inicio",
+                                                accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                                filterMethod: (filter, rows) =>
+                                                    matchSorter(rows, filter.value, { keys: ["inicio"] }),
+                                                filterAll: true,
+                                                //   width: 100,
+                                            },
+                                            {
+                                                Header: "Fin",
+                                                id: "fin",
+                                                accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                                filterMethod: (filter, rows) =>
+                                                    matchSorter(rows, filter.value, { keys: ["fin"] }),
+                                                filterAll: true,
+                                                //   width: 100,
+                                            },
+                                            {
+                                                Header: "Horas",
+                                                id: "horas",
+                                                accessor: (d) => d.horas,
+                                                filterMethod: (filter, rows) =>
+                                                    matchSorter(rows, filter.value, { keys: ["horas"] }),
+                                                filterAll: true,
+                                                //   width: 100,
+                                            },
 
-                </tbody>
-            </table>
+                                            {
+                                                Header: "Liquidacion",
+                                                id: "liquidacion",
+                                                accessor: (d) => d.liquidacion,
+                                                filterMethod: (filter, rows) =>
+                                                    matchSorter(rows, filter.value, { keys: ["liquidacion"] }),
+                                                filterAll: true,
+                                                //   width: 100,
+                                            },
 
+                                        ],
+                                    },
+                                    {
+                                        Header: "Acciones",
+
+                                        Cell: (row) => (
+                                            <>
+                                                {row.original.liquidado === 0 ? (
+
+                                                    <button
+                                                        href=""
+                                                        className="btn btn-success btn-sm mr-1"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="Liquidar"
+                                                        onClick={() => regLiqTareas(row.original.idtarea)}
+                                                    >
+                                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+
+                                                ) : row.original.liquidado === 1 ? (
+
+                                                    <div>
+                                                        Liquidado: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                    </div>
+
+                                                ) : null}
+                                            </>
+                                        ),
+                                    },
+                                ]}
+                                defaultPageSize={10}
+                                className="-striped -highlight"
+                            />
+                        </div>
+
+
+
+                    )
+            }
+            <div className="mt-4 mb-4 alert alert-success border border-dark text-center text-uppercase">
+                Liquidacion Total de Tareas Adicionales: ${totalGuardias(liqtarad)}
+            </div>
         </div>
     )
 }

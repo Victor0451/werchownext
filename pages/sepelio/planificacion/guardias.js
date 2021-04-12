@@ -6,6 +6,7 @@ import moment from "moment";
 import axios from "axios";
 import PlanificacionGuardias from "../../../components/sepelio/planificacion/PlanificacionGuardias";
 import ListadoPlanificacion from "../../../components/sepelio/planificacion/ListadoPlanificacion";
+import FormTareasAdicionales from "../../../components/sepelio/planificacion/FormTareasAdicionales"
 import { ip } from '../../../config/config'
 import toastr from 'toastr'
 
@@ -21,15 +22,15 @@ const guardias = () => {
   let hsInicioTRef = React.createRef();
   let hsFinTRef = React.createRef();
   let operadorRef = React.createRef();
-  let operadorTRef = React.createRef();
   let tareaRef = React.createRef();
+  let opRef = React.createRef()
 
   const [plani, guardarPlani] = useState(null);
   const [error, guardarError] = useState(null);
   const [gastliq, guardarGastLiq] = useState(null);
   const [operadorsep, guardarOperadorSep] = useState(null)
   const [idturno, guardarIdTurno] = useState(null)
-  const [operador, guardarOperador] = useState(null)
+
 
   let token = JsCookie.get("token");
 
@@ -78,12 +79,6 @@ const guardias = () => {
       });
   };
 
-
-  const selcaso = (id, operador) => {
-    guardarIdTurno(id)
-    guardarOperador(operador)
-  };
-
   const registroPlanificacion = async (e) => {
     e.preventDefault();
 
@@ -114,7 +109,8 @@ const guardias = () => {
         fin: moment(hsFinRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
         operador: operadorRef.current.value,
         mes_planificacion: moment().locale("es-es").format("MMMM"),
-        feriado: ''
+        feriado: '',
+        liquidado: 0
       };
 
       if (siRef.current.checked === true) {
@@ -151,20 +147,22 @@ const guardias = () => {
   const registrarTareaAdicional = async () => {
     const task = {
 
-      idturno: idturno,
       inicio: moment(hsInicioTRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
       fin: moment(hsFinTRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
       tarea: tareaRef.current.value,
-      operador: operador,
+      operador: opRef.current.value,
       observaciones: observacionesTRef.current.value,
-      feriado: ''
+      feriado: '',
+      mes_planificacion: moment().locale("es-es").format("MMMM"),
+      liquidado: 0
     }
 
-    if (siRef.current.checked === true) {
-      planificacion.feriado = 1
-    } else if (noRef.current.checked === true) {
-      planificacion.feriado = 0
+    if (siTRef.current.checked === true) {
+      task.feriado = 1
+    } else if (noTRef.current.checked === true) {
+      task.feriado = 0
     }
+
 
     axios.post(`${ip}api/sepelio/tareasadicionales/registrartarea`, task)
       .then(res => {
@@ -197,22 +195,72 @@ const guardias = () => {
 
       <hr className="container mt-4 mb-4" />
 
+      <div className="container border border-dark alert alert-dark p-4">
+
+        <div className="row">
+          <div className="col-md-6">
+            <h2>
+              <strong>
+                <u>
+                  Cargar Tareas Adicionales
+    </u>
+              </strong>
+            </h2>
+          </div>
+
+          <div className="col-md-6">
+            <button
+              className="btn btn-primary btn-block"
+              data-toggle="modal" data-target="#staticBackdrop"
+            >
+              Cargar Tareas
+            </button>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <hr className="container mt-4 mb-4" />
+
+
       <ListadoPlanificacion
         plani={plani}
         mes={moment().locale("es-es").format("MMMM")}
-        gastliq={gastliq}
-        hsInicioTRef={hsInicioTRef}
-        hsFinTRef={hsFinTRef}
-        operadorTRef={operadorTRef}
-        tareaRef={tareaRef}
-        observacionesTRef={observacionesTRef}
-        siTRef={siTRef}
-        noTRef={noTRef}
-        registrarTareaAdicional={registrarTareaAdicional}
-        selcaso={selcaso}
-        idturno={idturno}
-        operador={operador}
       />
+
+      <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">Tareas Adicionales</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <FormTareasAdicionales
+                gastliq={gastliq}
+                idturno={idturno}
+                operadorsep={operadorsep}
+                hsInicioTRef={hsInicioTRef}
+                hsFinTRef={hsFinTRef}
+                tareaRef={tareaRef}
+                observacionesTRef={observacionesTRef}
+                siTRef={siTRef}
+                noTRef={noTRef}
+                opRef={opRef}
+              />
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+              <button type="button" className="btn btn-primary btn-sm" onClick={registrarTareaAdicional}>Registrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </Layout>
   );
 };

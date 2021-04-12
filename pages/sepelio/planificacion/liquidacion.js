@@ -22,7 +22,8 @@ const liquidacion = () => {
     const [sindato, guardarSindato] = useState(null);
     const [liqguardias, guardarLiqGuardias] = useState(null);
     const [liqtarad, guardarLiqTareas] = useState(null)
-    const [liqfinal, guardarLiqFinal] = useState(null)
+    const [resumenG, guardarResumenG] = useState(null)
+    const [resumenT, guardarResumenT] = useState(null)
 
 
     let token = JsCookie.get("token");
@@ -75,7 +76,13 @@ const liquidacion = () => {
 
 
     const liquidarTareasAd = async () => {
-        await axios.get(`${ip}api/sepelio/tareasadicionales/liquidartareas`)
+        await axios.get(`${ip}api/sepelio/tareasadicionales/liquidartareas`, {
+            params: {
+                mes: mes,
+                ano: ano
+            }
+        }
+        )
             .then(res => {
                 guardarLiqTareas(res.data[0])
             }).catch(error => {
@@ -86,7 +93,14 @@ const liquidacion = () => {
 
 
     const liquidarGuardias = async () => {
-        await axios.get(`${ip}api/sepelio/planificacion/liquidarguardias`)
+        await axios.get(`${ip}api/sepelio/planificacion/liquidarguardias`,
+            {
+                params: {
+                    mes: mes,
+                    ano: ano
+                }
+            }
+        )
             .then(res => {
                 if (res.status === 200) {
                     guardarLiqGuardias(res.data[0])
@@ -98,41 +112,41 @@ const liquidacion = () => {
             })
     }
 
-    const crearResumenLiq = async () => {
-        await axios.get(`${ip}api/sepelio/planificacion/registrarliqguardias`)
-            .then(res => {
-                if (res.status === 200) {
-                    axios.get(`${ip}api/sepelio/tareasadicionales/registrarliqtareas`)
+    const traerResumenLiq = async () => {
+        await axios.get(`${ip}api/sepelio/planificacion/resumenguardias`, {
+            params: {
+                mes: mes,
+                ano: ano
+            }
+        })
+            .then(res1 => {
+                if (res1.status === 200) {
+
+                    guardarResumenG(res1.data[0])
+
+                    console.log(res1.data[0])
+
+                    axios.get(`${ip}api/sepelio/tareasadicionales/resumentareas`, {
+                        params: {
+                            mes: mes,
+                            ano: ano
+                        }
+                    })
                         .then(res2 => {
-                            if (res2.status === 200) {
-
-                                setTimeout(() => {
-                                    traerResumenLiq()
-                                }, 500);
-
-                                toastr.success(`Se genero correctamente la liquidacion del periodo ${moment().format('MM-YYYY')}`, "ATENCION")
-                            }
-                        }).catch(error => {
-                            toastr.error("Ocurrio un error generando tabla liq tareas", "ATENCION")
+                            guardarResumenT(res2.data[0])
+                        })
+                        .catch(error => {
+                            toastr.error('Ocurrio un error al traer la liquidacion final', "ATENCION")
                             console.log(error)
                         })
                 }
-            }).catch(error => {
-                toastr.error("Ocurrio un error generando tabla liq guardias", "ATENCION")
-                console.log(error)
-            })
-    }
-
-
-    const traerResumenLiq = () => {
-        axios.get(`${ip}api/sepelio/liquidacionsepelio/traerliquidacion`)
-            .then(res => {
-                guardarLiqFinal(res.data[0])
             })
             .catch(error => {
                 toastr.error('Ocurrio un error al traer la liquidacion final', "ATENCION")
                 console.log(error)
             })
+
+
 
     }
 
@@ -149,6 +163,36 @@ const liquidacion = () => {
         window.location.reload()
     };
 
+    const regLiqGuardia = async (id) => {
+        axios.put(
+            `${ip}api/sepelio/planificacion/regliqguardia/${id}`
+        )
+            .then(res => {
+                if (res.status === 200) {
+                    toastr.success("La guardia se liquido correctamente", "ATENCION")
+                }
+            })
+            .catch(error => {
+                toastr.error("Ocurrio un error al liquidar la guardia", "ATENCION")
+                console.log(error)
+            })
+    }
+
+    const regLiqTareas = async (id) => {
+        axios.put(
+            `${ip}api/sepelio/tareasadicionales/regliqtareas/${id}`
+        )
+            .then(res => {
+                if (res.status === 200) {
+                    toastr.success("La tarea se liquido correctamente", "ATENCION")
+                }
+            })
+            .catch(error => {
+                toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
+                console.log(error)
+            })
+    }
+
     return (
         <Layout>
             <FromLiquidacion handleChange={handleChange} buscarTareasALiquidar={buscarTareasALiquidar} />
@@ -162,49 +206,33 @@ const liquidacion = () => {
                     ) : (
                         <>
                             <div className="print-efect" ref={componentRef}>
-                                <h2>
-                                    <strong>
-                                        <u>
-                                            Liquidacion de guardias y tareas adicionales Periodo:{" "}
-                                            {mes}/{ano}
-                                        </u>
-                                    </strong>
-                                </h2>
-
-                                <Liquidacion liqguardias={liqguardias} liqtarad={liqtarad} />
-
-                            </div>
-
-
-                            <div className="container mt-4 border border-dark alert alert-primary">
-                                <h4>
-                                    <strong>
-                                        <u>
-                                            OPCIONES
-        </u>
-                                    </strong>
-                                </h4>
-
                                 <div className="row">
-                                    <div className="col-md-6">
-                                        <button className="btn  btn-sm btn-success" onClick={crearResumenLiq} >
-                                            Generar Liquidacion
-                                        </button>
+                                    <div className="col-md-9">
+                                        <h3>
+                                            <strong>
+                                                <u>
+                                                    Liquidacion de guardias y tareas adicionales Periodo:{" "}
+                                                    {mes}/{ano}
+                                                </u>
+                                            </strong>
+                                        </h3>
                                     </div>
-
-                                    <div className="col-md-6">
-                                        <button className="btn  btn-sm btn-primary" data-toggle="modal" data-target="#liqmodal" onClick={traerResumenLiq} >
-                                            Generar Liquidacion
+                                    <div className="col-md-3">
+                                        <button className="btn btn-info" data-toggle="modal" data-target="#liqmodal" onClick={traerResumenLiq} >
+                                            Resumen Liquidacion
                                         </button>
                                     </div>
                                 </div>
+
+                                <Liquidacion liqguardias={liqguardias} liqtarad={liqtarad} regLiqGuardia={regLiqGuardia} regLiqTareas={regLiqTareas} />
 
                             </div>
 
                         </>
                     )}
                 </div>
-            )}
+            )
+            }
 
 
 
@@ -213,14 +241,14 @@ const liquidacion = () => {
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">Liquidacion Final Periodo - {moment().format('MM-YYYY')}</h5>
+                            <h5 className="modal-title" id="staticBackdropLabel">Liquidacion Final Periodo - {mes}/{ano}</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
                             <div id="liquidacion">
-                                <ResumenLiquidacion liqfinal={liqfinal} />
+                                <ResumenLiquidacion resumenG={resumenG} resumenT={resumenT} mes={mes} ano={ano} />
                             </div>
                         </div>
                         <div className="modal-footer">
@@ -232,7 +260,7 @@ const liquidacion = () => {
             </div>
 
 
-        </Layout>
+        </Layout >
     )
 }
 

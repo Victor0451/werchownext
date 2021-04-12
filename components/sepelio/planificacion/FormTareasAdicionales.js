@@ -10,10 +10,9 @@ const FormTareasAdicionales = ({
   noTRef,
   idturno,
   tareaRef,
-  operador,
+  operadorsep,
   gastliq,
-
-
+  opRef
 }) => {
 
 
@@ -30,18 +29,27 @@ const FormTareasAdicionales = ({
           <div className="row border border-dark">
 
 
-            <div className="mt-4 form-group  col-md-2">
-              <label>Operador</label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                name="hsfin"
-                defaultValue={operador}
-
-
-              />
-
+            <div className="mt-4 form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Operador: </u>
+                </strong>
+              </label>
+              <select
+                className="custom-select"
+                name="operador"
+                ref={opRef}
+              >
+                <option selected value="no"> Elige una Opcion </option>
+                {operadorsep
+                  ? operadorsep.map((operador, index) => (
+                    <option key={index} value={operador.value}>
+                      {operador.label}
+                    </option>
+                  ))
+                  : null}
+              </select>
             </div>
 
 
