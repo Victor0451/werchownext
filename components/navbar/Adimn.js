@@ -134,6 +134,12 @@ const Adimn = () => {
               Liquidacion Tareas en Servicios
             </a>
           </li>
+          <hr />
+          <li>
+            <a href="/sepelio/servicios/venta/liquidacion" className="dropdown-item text-dark">
+              Liquidacion Ventas de Servicios
+            </a>
+          </li>
         </ul>
 
       </li>
@@ -435,7 +441,7 @@ const Adimn = () => {
                   Cargar Servicios Vendidos
                 </a>
               </li>
-              <hr/>
+              <hr />
               <li>
                 <a
                   href="/sepelio/servicios/administracion/administracion"

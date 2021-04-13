@@ -6,7 +6,7 @@ import FormLiquidarServicio from "./FormLiquidarServicio";
 import moment from "moment";
 
 
-const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total }) => {
+const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total, user, aprobarGasto, regLiqGasto }) => {
   if (!listado) return <Spinner />;
 
   return (
@@ -154,6 +154,9 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                 servicio={servliq}
                 liqop={liqop}
                 total={total}
+                user={user}
+                aprobarGasto={aprobarGasto}
+                regLiqGasto={regLiqGasto}
               />
             </div>
             <div className="modal-footer">

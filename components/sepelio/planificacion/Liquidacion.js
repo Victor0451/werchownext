@@ -65,7 +65,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                 {
                                     Header: "Inicio",
                                     id: "inicio",
-                                    accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                    accessor: (d) => moment(d.inicio).utcOffset("+000").locale('es').format('llll'),
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["inicio"] }),
                                     filterAll: true,
@@ -74,7 +74,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                 {
                                     Header: "Fin",
                                     id: "fin",
-                                    accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                    accessor: (d) => moment(d.fin).utcOffset("+000").locale('es').format('llll'),
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["fin"] }),
                                     filterAll: true,
@@ -133,29 +133,42 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                             {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
 
                                                 <>
-                                                    <button
-                                                        href=""
-                                                        className="btn btn-success btn-sm mr-1"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Aprobar"
-                                                        onClick={() => aprobarGuardias(row.original.idturno, 1)}
-                                                    >
-                                                        <i className="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
+                                                    {
+                                                        row.original.aprobado === 1 ? (
+                                                            <div>
+                                                                Aprobado
+                                                            </div>
+                                                        ) : row.original.aprobado === null ? (
+                                                            <>
+                                                                <button
+                                                                    href=""
+                                                                    className="btn btn-success btn-sm mr-1"
+                                                                    data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Aprobar"
+                                                                    onClick={() => aprobarGuardias(row.original.idturno, 1)}
+                                                                >
+                                                                    <i className="fa fa-check" aria-hidden="true"></i>
+                                                                </button>
 
-                                                    <button
-                                                        href=""
-                                                        className="btn btn-danger btn-sm mr-1"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Rechazar"
-                                                        onClick={() => aprobarGuardias(row.original.idturno, 0)}
-                                                    >
-                                                        <i className="fa fa-times" aria-hidden="true"></i>
-                                                    </button>
+                                                                <button
+                                                                    href=""
+                                                                    className="btn btn-danger btn-sm mr-1"
+                                                                    data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Rechazar"
+                                                                    onClick={() => aprobarGuardias(row.original.idturno, 0)}
+                                                                >
+                                                                    <i className="fa fa-times" aria-hidden="true"></i>
+                                                                </button>
+                                                            </>
+
+                                                        ) : null
+                                                    }
+
+
+
                                                 </>
-
                                             ) : (
                                                 <>
                                                     {row.original.liquidado === 0 ? (
@@ -250,7 +263,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                             {
                                                 Header: "Inicio",
                                                 id: "inicio",
-                                                accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                                accessor: (d) => moment(d.inicio).utcOffset("+000").locale('es').format('llll'),
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["inicio"] }),
                                                 filterAll: true,
@@ -259,7 +272,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                             {
                                                 Header: "Fin",
                                                 id: "fin",
-                                                accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                                                accessor: (d) => moment(d.fin).utcOffset("+000").locale('es').format('llll'),
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["fin"] }),
                                                 filterAll: true,

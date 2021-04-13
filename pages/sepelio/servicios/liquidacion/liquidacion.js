@@ -102,6 +102,67 @@ const liquidacion = () => {
 
   };
 
+  const aprobarGasto = async (id, flag, u) => {
+    
+    if (flag === 1) {
+      axios.put(
+        `${ip}api/sepelio/serviciogastos/aprobarliqgasto/${id}`,
+        {
+          params: {
+            operador: u
+          }
+        }
+      )
+        .then(res => {
+          if (res.status === 200) {
+            toastr.success("Liquidacion de gasto aprobado", "ATENCION")
+          }
+        })
+        .catch(error => {
+          toastr.error("Ocurrio un error al liquidar el gasto seleccionado", "ATENCION")
+          console.log(error)
+        })
+    } else if (flag === 0) {
+      axios.put(
+        `${ip}api/sepelio/serviciogastos/cancelarliqgasto/${id}`,
+        {
+          params: {
+            operador: u
+          }
+        }
+      )
+        .then(res => {
+          if (res.status === 200) {
+            toastr.success("Liquidacion de gasto rechazada", "ATENCION")
+          }
+        })
+        .catch(error => {
+          toastr.error("Ocurrio un error al liquidar el gasto seleccionado", "ATENCION")
+          console.log(error)
+        })
+    }
+  }
+
+  const regLiqGasto = async (id, u) => {
+    axios.put(
+      `${ip}api/sepelio/serviciogastos/regliqgasto/${id}`,
+      {
+        params: {
+          operador: u
+        }
+      }
+    )
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("El gasto se liquido correctamente", "ATENCION")
+        }
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al liquidar el gasto seleccionado", "ATENCION")
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
@@ -129,6 +190,9 @@ const liquidacion = () => {
         liqop={liqop}
         total={total}
         liquidarServicio={liquidarServicio}
+        user={usuario}
+        aprobarGasto={aprobarGasto}
+        regLiqGasto={regLiqGasto}
       />
     </Layout>
   );

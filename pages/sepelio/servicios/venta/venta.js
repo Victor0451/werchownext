@@ -86,7 +86,8 @@ const venta = () => {
             nombre_sol: nombreRef.current.value,
             dni_sol: dniRef.current.value,
             parentesco: parentescoRef.current.value,
-            operador_venta: opRef.current.value
+            operador_venta: opRef.current.value,
+            liquidado: 0
         }
 
         axios.get(`${ip}api/sepelio/servicioventa/cheqventa/${venta.idservicio}`)
