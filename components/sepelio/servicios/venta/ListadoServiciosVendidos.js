@@ -94,22 +94,23 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                 },
                                 {
                                     Header: "Acciones",
-                                    width: 200,
+                                    width: 220,
                                     Cell: (row) => (
-                                        <>
-                                            <button
-                                                className="btn btn-sm btn-secondary border border-dark btn-sm mr-1"
-                                                data-toggle="modal"
-                                                data-placement="top"
-                                                title="Ver Mas"
-                                                data-target="#masinfo"
-                                                onClick={() =>
-                                                    traerDetalles(row.original)
-                                                }
-                                            >
-                                                <i className="fa fa-eye" aria-hidden="true"></i>
-                                            </button>
-
+                                        <div className="row">
+                                            <div className="ml-4">
+                                                <button
+                                                    className="btn btn-secondary border border-dark btn-sm mr-1"
+                                                    data-toggle="modal"
+                                                    data-placement="top"
+                                                    title="Ver Mas"
+                                                    data-target="#masinfo"
+                                                    onClick={() =>
+                                                        traerDetalles(row.original)
+                                                    }
+                                                >
+                                                    <i className="fa fa-eye" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
 
                                             {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
 
@@ -137,7 +138,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                                     </button>
                                                 </>
 
-                                            ) : (
+                                            ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
                                                 <>
                                                     {
                                                         row.original.liquidado === 0 ? (
@@ -175,10 +176,10 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                                         ) : null
                                                     }
                                                 </>
-                                            )}
+                                            ) : null}
 
 
-                                        </>
+                                        </div>
                                     ),
                                 },
 

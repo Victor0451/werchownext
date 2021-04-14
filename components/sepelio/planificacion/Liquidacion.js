@@ -169,7 +169,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
 
                                                 </>
-                                            ) : (
+                                            ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
                                                 <>
                                                     {row.original.liquidado === 0 ? (
 
@@ -204,7 +204,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
                                                     ) : null}
                                                 </>
-                                            )}
+                                            ) : (<div>Sin Acciones</div>)}
 
                                         </>
                                     ),

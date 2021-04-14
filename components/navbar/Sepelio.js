@@ -279,8 +279,43 @@ export default class Sepelio extends Component {
                 </li>
               </ul>
             </li>
+
           </ul>
         </li>
+
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Liquidacion
+        </a>
+          <ul className="dropdown-menu">
+
+
+            <li>
+              <a href="/sepelio/planificacion/liquidacion" className="dropdown-item text-dark">
+                Liquidacion Personal Sepelio
+            </a>
+            </li>
+            <hr />
+            <li>
+              <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+                Liquidacion Tareas en Servicios
+            </a>
+            </li>
+            <hr />
+            <li>
+              <a href="/sepelio/servicios/venta/liquidacion" className="dropdown-item text-dark">
+                Liquidacion Ventas de Servicios
+            </a>
+            </li>
+          </ul>
+
+        </li>
+
       </ul>
     );
   }

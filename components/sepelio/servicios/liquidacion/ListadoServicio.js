@@ -99,11 +99,15 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                   Cell: (row) => (
                     <div>
                       {row.original.liquidado == 1 ? (
-                        <div>Liquidado {moment(row.original.fecha_liquidacion).utcOffset('+000').format('DD/MM/YYYY HH:mm:ss')}</div>
+                        <div><a href="#" data-toggle="modal" data-target="#liquidar"
+                          onClick={() =>
+                            traerGastos(row.original.idservicio, row.original)
+                          }
+                        >Liquidado {moment(row.original.fecha_liquidacion).utcOffset('+000').format('DD/MM/YYYY HH:mm:ss')}</a></div>
 
                       ) : (
                         <button
-                          className="btn btn-sm btn-primary btn-sm mr-1"
+                          className="btn btn-sm btn-info btn-sm mr-1"
                           data-toggle="modal"
                           data-placement="top"
                           title="Ver Liquidacion"
@@ -112,7 +116,7 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                             traerGastos(row.original.idservicio, row.original)
                           }
                         >
-                          <i className="fa fa-money" aria-hidden="true"></i>
+                          <i className="fa fa-eye" aria-hidden="true"> Ver Liquidacion</i>
                         </button>
                       )}
 

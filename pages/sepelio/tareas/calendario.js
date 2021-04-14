@@ -4,7 +4,7 @@ import jsCookie from "js-cookie";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
-import {id} from '../../../config/config'
+import { ip } from '../../../config/config'
 
 const calendario = () => {
 

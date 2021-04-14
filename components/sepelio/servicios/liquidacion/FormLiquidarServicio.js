@@ -163,7 +163,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                             </>
 
 
-                          ) : (
+                          ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
                             <>
                               {row.original.liquidado == 0 ? (
 
@@ -198,7 +198,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
 
                               ) : null}
                             </>
-                          )}
+                          ) : (<div>Sin Acciones</div>)}
 
                         </>
                       ),
