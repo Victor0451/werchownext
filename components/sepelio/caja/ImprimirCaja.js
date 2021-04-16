@@ -12,7 +12,20 @@ const ImprimirCaja = ({ caja, gastos, ingresos }) => {
       for (let i = 0; i < array.length; i++) {
         total += array[i].total;
       }
-      return total;
+      return total.toFixed(2);
+    }
+  };
+
+  const totalFinal = (array, monto) => {
+    let total = 0;
+
+    if (array) {
+      for (let i = 0; i < array.length; i++) {
+        total += array[i].total;
+      }
+
+      let final = monto - total
+      return final.toFixed(2);
     }
   };
 
@@ -75,12 +88,12 @@ const ImprimirCaja = ({ caja, gastos, ingresos }) => {
                 </tr>
                 {ingresos
                   ? ingresos.map((ingreso, index) => (
-                      <tr key={index}>
-                        <th scope="row">{index + 2}</th>
-                        <td>{ingreso.concepto}</td>
-                        <td>{ingreso.monto}</td>
-                      </tr>
-                    ))
+                    <tr key={index}>
+                      <th scope="row">{index + 2}</th>
+                      <td>{ingreso.concepto}</td>
+                      <td>{ingreso.monto}</td>
+                    </tr>
+                  ))
                   : null}
               </tbody>
             </table>
@@ -95,12 +108,12 @@ const ImprimirCaja = ({ caja, gastos, ingresos }) => {
               <tbody>
                 {gastos
                   ? gastos.map((gasto, index) => (
-                      <tr>
-                        <th>{index + 1}</th>
-                        <td>{gasto.concepto}</td>
-                        <td>{gasto.total}</td>
-                      </tr>
-                    ))
+                    <tr>
+                      <th>{index + 1}</th>
+                      <td>{gasto.concepto}</td>
+                      <td>{gasto.total}</td>
+                    </tr>
+                  ))
                   : null}
               </tbody>
             </table>
@@ -112,7 +125,7 @@ const ImprimirCaja = ({ caja, gastos, ingresos }) => {
         </div>
 
         <div className=" alert alert-success text-center text-uppercase border border-dark">
-          Saldo Restante: {caja.monto - totalGastos(gastos)}
+          Saldo Restante: {totalFinal(gastos, caja.monto)}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Router from "next/router";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import BuscarUsuario from "../../components/auth/BuscarUsuario";
-import {ip} from '../../config/config'
+import { ip } from '../../config/config'
 
 const editar = () => {
   let userRef = React.createRef();
@@ -59,7 +59,9 @@ const editar = () => {
       perfil: perfilRef.current.value,
     };
 
-    console.log(user);
+    if (user.codigo === '') {
+      user.codigo = 0
+    }
 
     await axios
       .put(
@@ -68,7 +70,7 @@ const editar = () => {
       )
       .then((res) => {
         console.log(res);
-        if (res) {
+        if (res.status === 200) {
           toastr.success("Usuario editado con exito", "ATENCION");
         }
       })

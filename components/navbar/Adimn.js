@@ -59,6 +59,26 @@ const Adimn = () => {
             </ul>
           </li>
           <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Sepelio
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a href="/sepelio/informes/balance" className="dropdown-item text-dark">
+                  Balance Mensual
+            </a>
+              </li>
+            </ul>
+          </li>
+
+          <hr />
+
 
           <li className="dropdown-submenu">
             <a
@@ -95,8 +115,8 @@ const Adimn = () => {
               Asesores: Mapeo de ventas anual
             </a>
           </li>
-
           <hr />
+
 
           <li>
             <a href="/mapas/maparec" className="dropdown-item text-dark">
@@ -140,6 +160,7 @@ const Adimn = () => {
               Liquidacion Ventas de Servicios
             </a>
           </li>
+
         </ul>
 
       </li>

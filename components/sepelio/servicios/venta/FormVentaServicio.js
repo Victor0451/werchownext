@@ -13,6 +13,7 @@ const FormVentaServicio = ({
     opRef,
     parentescoRef,
     registrarVentas,
+    fechaventaRef,
     error
 }) => {
     return (
@@ -30,6 +31,14 @@ const FormVentaServicio = ({
 
                     <div className="col-md-4">
                         <label>
+                            Fecha de Venta
+                        </label>
+
+                        <input type="date" className="form-control" ref={fechaventaRef} />
+                    </div>
+
+                    <div className="col-md-4">
+                        <label>
                             Apellido Solicitante
                         </label>
 
@@ -44,7 +53,7 @@ const FormVentaServicio = ({
                         <input type="text" className="form-control" ref={nombreRef} />
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="mt-4 col-md-4">
                         <label>
                             DNI Solicitante
                         </label>

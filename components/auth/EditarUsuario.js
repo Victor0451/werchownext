@@ -86,12 +86,13 @@ const EditarUsuario = ({
           <div className="form-group col-md-6">
             <label>Codigo</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              placeholder="Apellido"
+              placeholder="Codigo"
               name="apellido"
               defaultValue={username.codigo}
               ref={codigoRef}
+
             />
           </div>
 

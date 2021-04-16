@@ -52,7 +52,24 @@ export default class Gerencia extends Component {
               </ul>
             </li>
             <hr />
-
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Sepelio
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a href="/sepelio/informes/balance" className="dropdown-item text-dark">
+                    Balance Mensual
+            </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
             <li className="dropdown-submenu">
               <a
                 href="#"

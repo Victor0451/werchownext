@@ -16,6 +16,7 @@ const venta = () => {
     let motnoRef = React.createRef()
     let opRef = React.createRef()
     let parentescoRef = React.createRef()
+    let fechaventaRef = React.createRef()
 
     const [servicios, guardarServicios] = useState(null);
     const [idservicio, guardaridservicio] = useState(null);
@@ -81,13 +82,15 @@ const venta = () => {
             idservicio: idservicio,
             monto: motnoRef.current.value,
             operador: user,
-            fecha_venta: moment().format('YYYY-MM-DD HH:mm:ss'),
+            fecha_venta: moment(fechaventaRef.current.value).format('YYYY-MM-DD'),
             apellido_sol: apellidoRef.current.value,
             nombre_sol: nombreRef.current.value,
             dni_sol: dniRef.current.value,
             parentesco: parentescoRef.current.value,
             operador_venta: opRef.current.value,
-            liquidado: 0
+            liquidado: 0,
+            fecha_carga: moment().format('YYYY-MM-DD HH:mm:ss'),
+
         }
 
         axios.get(`${ip}api/sepelio/servicioventa/cheqventa/${venta.idservicio}`)
@@ -144,6 +147,7 @@ const venta = () => {
                 opRef={opRef}
                 error={error}
                 parentescoRef={parentescoRef}
+                fechaventaRef={fechaventaRef}
                 registrarVentas={registrarVentas}
             />
         </Layout>
