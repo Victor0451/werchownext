@@ -102,8 +102,8 @@ const liquidacion = () => {
 
   };
 
-  const aprobarGasto = async (id, flag, u) => {
-    
+  const aprobarGasto = async (id, flag, u, idservicio) => {
+
     if (flag === 1) {
       axios.put(
         `${ip}api/sepelio/serviciogastos/aprobarliqgasto/${id}`,
@@ -116,6 +116,14 @@ const liquidacion = () => {
         .then(res => {
           if (res.status === 200) {
             toastr.success("Liquidacion de gasto aprobado", "ATENCION")
+
+            updateTareasApServicio(idservicio)
+
+            setInterval(() => {
+              Router.reload()
+            }, 500);
+
+
           }
         })
         .catch(error => {
@@ -134,6 +142,12 @@ const liquidacion = () => {
         .then(res => {
           if (res.status === 200) {
             toastr.success("Liquidacion de gasto rechazada", "ATENCION")
+
+            updateTareasApServicio(idservicio)
+
+            setInterval(() => {
+              Router.reload()
+            }, 500);
           }
         })
         .catch(error => {
@@ -162,6 +176,21 @@ const liquidacion = () => {
         console.log(error)
       })
   }
+
+  const updateTareasApServicio = async (id) => {
+
+    await axios.put(`${ip}api/sepelio/serviciogastos/updatetareasapservicio/${id}`)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Tareas en servicio actualizadas", "ATENCION")
+        }
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error verificando el estado de las tareas", "ATENCION")
+        console.log(error)
+      })
+  }
+
 
   useEffect(() => {
     if (!token) {
@@ -193,6 +222,8 @@ const liquidacion = () => {
         user={usuario}
         aprobarGasto={aprobarGasto}
         regLiqGasto={regLiqGasto}
+
+
       />
     </Layout>
   );

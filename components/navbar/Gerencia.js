@@ -376,6 +376,28 @@ export default class Gerencia extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Planificacion
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/planificacion/guardias"
+                    className="dropdown-item text-dark"
+                  >
+                    Planificar Guardias
+                </a>
+                </li>
+
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Servicios
               </a>
               <ul className="dropdown-menu">

@@ -53,7 +53,7 @@ const ListadoPlanificacion = ({
                 {
                   Header: "Inicio",
                   id: "inicio",
-                  accessor: (d) => moment(d.inicio).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                  accessor: (d) => moment(d.inicio).utcOffset("+000").locale('es').format('llll'),
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["inicio"] }),
                   filterAll: true,
@@ -62,7 +62,7 @@ const ListadoPlanificacion = ({
                 {
                   Header: "Fin",
                   id: "fin",
-                  accessor: (d) => moment(d.fin).utcOffset("+000").format('DD/MM/YYYY HH:ss:mm'),
+                  accessor: (d) => moment(d.fin).utcOffset("+000").locale('es').format('llll'),
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["fin"] }),
                   filterAll: true,

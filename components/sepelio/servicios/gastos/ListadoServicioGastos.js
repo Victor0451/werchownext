@@ -20,31 +20,22 @@ const ListadoServicioGastos = ({ listado }) => {
               Header: "Listado De Servicios",
               columns: [
                 {
-                  Header: "Fecha",
-                  id: "fecha_gasto",
-                  accessor: (d) => d.fecha_gasto,
+                  Header: "Inicio",
+                  id: "inicio",
+                  accessor: (d) => moment(d.inicio).utcOffset("+000").locale('es').format('llll'),
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["fecha_gasto"] }),
+                    matchSorter(rows, filter.value, { keys: ["inicio"] }),
                   filterAll: true,
-                  width: 110,
+
                 },
                 {
-                  Header: "Hs Inicio",
-                  id: "hs_inicio",
-                  accessor: (d) => d.hs_inicio,
+                  Header: "Fin",
+                  id: "fin",
+                  accessor: (d) => moment(d.fin).utcOffset("+000").locale('es').format('llll'),
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["hs_inicio"] }),
+                    matchSorter(rows, filter.value, { keys: ["fin"] }),
                   filterAll: true,
-                  width: 100,
-                },
-                {
-                  Header: "Hs Fin",
-                  id: "hs_fin",
-                  accessor: (d) => d.hs_fin,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["hs_fin"] }),
-                  filterAll: true,
-                  width: 100,
+
                 },
                 {
                   Header: "Gasto",

@@ -140,7 +140,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                                       data-toggle="tooltip"
                                       data-placement="top"
                                       title="Aprobar"
-                                      onClick={() => aprobarGasto(row.original.idgastos, 1, user)}
+                                      onClick={() => aprobarGasto(row.original.idgastos, 1, user, servicio.idservicio)}
                                     >
                                       <i className="fa fa-check" aria-hidden="true"></i>
                                     </button>
@@ -151,7 +151,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                                       data-toggle="tooltip"
                                       data-placement="top"
                                       title="Rechazar"
-                                      onClick={() => aprobarGasto(row.original.idgastos, 0, user)}
+                                      onClick={() => aprobarGasto(row.original.idgastos, 0, user, servicio.idservicio)}
                                     >
                                       <i className="fa fa-times" aria-hidden="true"></i>
                                     </button>

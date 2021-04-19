@@ -109,6 +109,20 @@ const gastos = () => {
       });
   };
 
+  const updateTareasServicio = async (id) => {
+
+    await axios.put(`${ip}api/sepelio/serviciogastos/updatetareasservicio/${id}`)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Tareas en servicio actualizadas", "ATENCION")
+        }
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error verificando el estado de las tareas", "ATENCION")
+        console.log(error)
+      })
+  }
+
   const {
     valores,
     errores,
@@ -153,6 +167,8 @@ const gastos = () => {
         console.log(res);
         if (res.status === 200) {
           toastr.success("El gasto se cargo con exito", "ATENCION");
+
+          updateTareasServicio(gasto.idservicio)
         }
       })
       .catch((error) => {

@@ -92,7 +92,23 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                   filterAll: true,
                   width: 105,
                 },
+                {
+                  Header: "Sin Aprobar",
 
+                  Cell: (row) => (
+                    <>
+                      {row.original.gastos_cargados === 0 ?
+                        (<div className="alert alert-success alert-sm text-center">
+                          {row.original.gastos_cargados}
+                        </div>) : (
+                          <div className="alert alert-danger text-center">
+                            {row.original.gastos_cargados}
+                          </div>
+                        )}
+
+                    </>
+                  ),
+                },
                 {
                   Header: "Acciones",
 
