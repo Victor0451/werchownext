@@ -27,6 +27,7 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
               columns: [
                 {
                   Header: "#",
+                  id: "#",
                   filterAll: false,
                   width: 20,
                   Cell: (row) => <div>{row.index + 1}</div>,
@@ -94,7 +95,8 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                 },
                 {
                   Header: "Sin Aprobar",
-
+                  id: "Sin Aprobar",
+                  filterAll: true,
                   Cell: (row) => (
                     <>
                       {row.original.gastos_cargados === 0 ?
@@ -111,7 +113,8 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                 },
                 {
                   Header: "Acciones",
-
+                  id: "Acciones",
+                  filterAll: true,
                   Cell: (row) => (
                     <div>
                       {row.original.liquidado == 1 ? (

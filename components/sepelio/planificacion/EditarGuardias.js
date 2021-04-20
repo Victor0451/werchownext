@@ -1,30 +1,27 @@
 import React from "react";
 import moment from "moment-timezone";
+import Spinner from "../../layout/Spinner";
 
-const PlanificacionGuardias = ({
-  fn,
-  lugarRef,
-  hsInicioRef,
-  hsFinRef,
-  operadorRef,
+const EditarGuardias = ({
+  planiID,
+  lugarERef,
+  hsInicioERef,
+  hsFinERef,
+  operadorERef,
   error,
   operadorsep,
-  siRef,
-  noRef
+  siERef,
+  noERef
 }) => {
-  let mes = moment().locale("es-es").format("MMMM");
+
+  if (!planiID) return <Spinner />
+
   return (
     <div className="container border border-dark alert alert-primary p-4 mt-4">
-      <h2 className="mb-4">
-        <strong>
-          <u>Planificacion de Guardias de Sepelio</u>
-        </strong>
-      </h2>
-
-      <form className="border border-dark p-4" onSubmit={fn}>
+      <form className="border border-dark p-4" >
         <h4 className="mb-4">
           <strong>
-            <u>Planificacion de {mes}</u>
+            <u>Editar Planificacion</u>
           </strong>
         </h4>
 
@@ -33,10 +30,10 @@ const PlanificacionGuardias = ({
             <label>
               <strong>
                 {" "}
-                <u> Lugar: </u>
+                <u> Lugar</u>: {planiID.lugar === 'sv' ? (<>Sala Velatoria</>) : (<>Casa Central</>)}
               </strong>
             </label>
-            <select className="custom-select" ref={lugarRef}>
+            <select className="custom-select" ref={lugarERef}>
               <option selected value="no">
                 Elige una Opcion
               </option>
@@ -55,11 +52,11 @@ const PlanificacionGuardias = ({
             <label>
               <strong>
                 {" "}
-                <u> Incio: </u>
+                <u> Incio</u>: {moment(planiID.inicio).format('DD/MM/YYYY HH:mm:ss')}
               </strong>
             </label>
 
-            <input type="datetime-local" className="form-control" ref={hsInicioRef} name="start" />
+            <input type="datetime-local" className="form-control" ref={hsInicioERef} name="start" />
 
             {error && (
               <div className="mt-2 form-group  alert alert-danger">
@@ -74,10 +71,10 @@ const PlanificacionGuardias = ({
             <label>
               <strong>
                 {" "}
-                <u> Fin: </u>
+                <u> Fin</u>: {moment(planiID.fin).format('DD/MM/YYYY HH:mm:ss')}
               </strong>
             </label>
-            <input type="datetime-local" className="form-control" ref={hsFinRef} name="end" />
+            <input type="datetime-local" className="form-control" ref={hsFinERef} name="end" />
             {error && (
               <div className="mt-2 form-group  alert alert-danger">
                 {error.hs_fin}
@@ -88,7 +85,7 @@ const PlanificacionGuardias = ({
           <div className="col-md-2 mb-4">
             <label>
               <strong>
-                <u>Feriado</u>
+                <u>Feriado:</u> {planiID.feriado === 1 ? (<>Si</>) : (<>No</>)}
               </strong>
             </label>
             <br />
@@ -99,9 +96,9 @@ const PlanificacionGuardias = ({
                 id="covid"
                 name="motivo"
                 value="option1"
-                ref={siRef}
+                ref={siERef}
               />
-              <label className="form-check-label" htmlFor="si">
+              <label className="form-check-label" for="si">
                 Si
                             </label>
             </div>
@@ -113,9 +110,9 @@ const PlanificacionGuardias = ({
                 name="motivo"
                 value="option1"
                 defaultChecked={true}
-                ref={noRef}
+                ref={noERef}
               />
-              <label className="form-check-label" htmlFor="no">
+              <label className="form-check-label" for="no">
                 No
                             </label>
             </div>
@@ -125,13 +122,13 @@ const PlanificacionGuardias = ({
             <label>
               <strong>
                 {" "}
-                <u> Operador: </u>
+                <u> Operador</u>: {planiID.operador}
               </strong>
             </label>
             <select
               className="custom-select"
               name="operador"
-              ref={operadorRef}
+              ref={operadorERef}
             >
               <option selected value="no"> Elige una Opcion </option>
               {operadorsep
@@ -150,15 +147,10 @@ const PlanificacionGuardias = ({
             )}
           </div>
 
-          <div className="form-group col-md-4 mt-4">
-            <button type="submit" className="btn btn-primary btn-block">
-              Registrar
-            </button>
-          </div>
         </div>
       </form>
     </div>
   );
 };
 
-export default PlanificacionGuardias;
+export default EditarGuardias;

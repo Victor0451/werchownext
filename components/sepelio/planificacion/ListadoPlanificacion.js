@@ -3,22 +3,22 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../components/layout/Spinner";
 import moment from "moment-timezone";
-import FormTareasAdicionales from "./FormTareasAdicionales";
+import EditarGuardias from "./EditarGuardias";
 
 const ListadoPlanificacion = ({
   plani,
   mes,
-  gastliq,
-  hsInicioTRef,
-  hsFinTRef,
-  tareaRef,
-  observacionesTRef,
-  siTRef,
-  noTRef,
-  registrarTareaAdicional,
+  lugarERef,
+  siERef,
+  noERef,
+  hsInicioERef,
+  hsFinERef,
+  operadorERef,
+  error,
+  operadorsep,
   selcaso,
-  idturno,
-  operador
+  editarPlanificacion,
+  planiID
 }) => {
 
   if (!plani) return <div>No Hay Planificacion Aun</div>;
@@ -133,11 +133,11 @@ const ListadoPlanificacion = ({
                   Cell: (row) => (
                     <div>
                       <button
-                        className="btn btn-primary btn-sm"
-                        onClick={() => selcaso(row.original.idturno, row.original.operador)}
-                        data-toggle="modal" data-target="#staticBackdrop"
+                        className="btn btn-warning btn-sm"
+                        onClick={() => selcaso(row.original)}
+                        data-toggle="modal" data-target="#modaleditguardia"
                       >
-                        <i className="fa fa-money" aria-hidden="true"></i>
+                        <i className="fa fa-pencil" aria-hidden="true"></i>
                       </button>
                     </div>
                   ),
@@ -151,36 +151,35 @@ const ListadoPlanificacion = ({
       </div>
 
 
-      <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div className="modal" id="modaleditguardia" tabIndex="-1">
         <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">Tareas Adicionales</h5>
+              <h5 className="modal-title">Editar Guardia</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
-              <FormTareasAdicionales
-                gastliq={gastliq}
-                idturno={idturno}
-                operador={operador}
-                hsInicioTRef={hsInicioTRef}
-                hsFinTRef={hsFinTRef}
-                tareaRef={tareaRef}
-                observacionesTRef={observacionesTRef}
-                siTRef={siTRef}
-                noTRef={noTRef}
+              <EditarGuardias
+                planiID={planiID}
+                lugarERef={lugarERef}
+                siERef={siERef}
+                noERef={noERef}
+                hsInicioERef={hsInicioERef}
+                hsFinERef={hsFinERef}
+                operadorERef={operadorERef}
+                error={error}
+                operadorsep={operadorsep}
               />
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
-              <button type="button" className="btn btn-primary btn-sm" onClick={registrarTareaAdicional}>Registrar</button>
+              <button type="button" className="btn btn-primary btn-sm" onClick={(e) => { e.preventDefault, editarPlanificacion(planiID.idturno) }}>Registrar</button>
             </div>
           </div>
         </div>
       </div>
-
 
 
     </div>

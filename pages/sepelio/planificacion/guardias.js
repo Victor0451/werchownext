@@ -12,20 +12,27 @@ import toastr from 'toastr'
 
 const guardias = () => {
   let lugarRef = React.createRef();
+  let lugarERef = React.createRef();
   let observacionesTRef = React.createRef();
   let siRef = React.createRef();
   let noRef = React.createRef();
+  let siERef = React.createRef();
+  let noERef = React.createRef();
   let siTRef = React.createRef();
   let noTRef = React.createRef();
   let hsInicioRef = React.createRef();
   let hsFinRef = React.createRef();
+  let hsInicioERef = React.createRef();
+  let hsFinERef = React.createRef();
   let hsInicioTRef = React.createRef();
   let hsFinTRef = React.createRef();
   let operadorRef = React.createRef();
+  let operadorERef = React.createRef();
   let tareaRef = React.createRef();
   let opRef = React.createRef()
 
   const [plani, guardarPlani] = useState(null);
+  const [planiID, guardarPlaniID] = useState(null);
   const [error, guardarError] = useState(null);
   const [gastliq, guardarGastLiq] = useState(null);
   const [operadorsep, guardarOperadorSep] = useState(null)
@@ -110,7 +117,8 @@ const guardias = () => {
         operador: operadorRef.current.value,
         mes_planificacion: moment().locale("es-es").format("MMMM"),
         feriado: '',
-        liquidado: 0
+        liquidado: 0,
+        tarea: 'Guardia Oficina'
       };
 
       if (siRef.current.checked === true) {
@@ -179,10 +187,77 @@ const guardias = () => {
 
   }
 
+  const editarPlanificacion = async (id) => {
+
+
+    const planificacion = {
+      lugar: lugarERef.current.value,
+      inicio: '',
+      fin: '',
+      operador: operadorERef.current.value,
+      mes_planificacion: planiID.mes_planificacion,
+      feriado: planiID.feriado,
+      liquidado: 0
+    };
+
+
+    if (planificacion.lugar === 'no') {
+      planificacion.lugar = planiID.lugar
+    }
+
+    if (hsInicioERef.current.value === '') {
+      planificacion.inicio = moment(planiID.inicio).format('YYYY-MM-DD HH:mm:ss')
+    } else if (hsInicioERef.current.value !== '') {
+      planificacion.inicio = moment(hsInicioERef.current.value).format('YYYY-MM-DD HH:mm:ss')
+    }
+
+    if (hsFinERef.current.value === '') {
+      planificacion.fin = moment(planiID.fin).format('YYYY-MM-DD HH:mm:ss')
+    } else if (hsFinERef.current.value !== '') {
+      planificacion.fin = moment(hsFinERef.current.value).format('YYYY-MM-DD HH:mm:ss')
+    }
+
+    if (planificacion.fin === '') {
+      planificacion.fin = moment(planiID.fin).format('YYYY-MM-DD HH:mm:ss')
+    }
+    if (planificacion.operador === 'no') {
+      planificacion.operador = planiID.operador
+    }
+
+
+    await axios
+      .put(
+        `${ip}api/sepelio/planificacion/editarplani/${id}`,
+        planificacion
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          toastr.success("La guardia se registro correctamente", "ATENCION")
+
+          setTimeout(() => {
+            Router.reload()
+          }, 500);
+
+        }
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+  }
+
+  const selcaso = (row) => {
+    guardarPlaniID(null)
+    guardarPlaniID(row)
+  }
+
   return (
     <Layout>
       <PlanificacionGuardias
-        registroPlanificacion={registroPlanificacion}
+        fn={registroPlanificacion}
         lugarRef={lugarRef}
         siRef={siRef}
         noRef={noRef}
@@ -191,6 +266,7 @@ const guardias = () => {
         operadorRef={operadorRef}
         error={error}
         operadorsep={operadorsep}
+
       />
 
       <hr className="container mt-4 mb-4" />
@@ -211,7 +287,7 @@ const guardias = () => {
           <div className="col-md-6">
             <button
               className="btn btn-primary btn-block"
-              data-toggle="modal" data-target="#staticBackdrop"
+              data-toggle="modal" data-target="#modalformtask"
             >
               Cargar Tareas
             </button>
@@ -228,13 +304,25 @@ const guardias = () => {
       <ListadoPlanificacion
         plani={plani}
         mes={moment().locale("es-es").format("MMMM")}
+        editarPlanificacion={editarPlanificacion}
+        lugarERef={lugarERef}
+        siERef={siERef}
+        noERef={noERef}
+        hsInicioERef={hsInicioERef}
+        hsFinERef={hsFinERef}
+        operadorERef={operadorERef}
+        error={error}
+        operadorsep={operadorsep}
+
+        planiID={planiID}
+        selcaso={selcaso}
       />
 
-      <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div className="modal" id="modalformtask" tabIndex="-1">
         <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">Tareas Adicionales</h5>
+              <h5 className="modal-title">Tareas Adicionales</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -260,6 +348,8 @@ const guardias = () => {
           </div>
         </div>
       </div>
+
+
 
     </Layout>
   );

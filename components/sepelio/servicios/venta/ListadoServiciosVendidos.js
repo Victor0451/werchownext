@@ -69,6 +69,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                 {
                                     Header: "Aprobado",
                                     width: 200,
+                                    filterAll: true,
                                     Cell: (row) => (
                                         <>
                                             {row.original.aprobado === 0 ? (
@@ -95,6 +96,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                 {
                                     Header: "Acciones",
                                     width: 220,
+                                    filterAll: true,
                                     Cell: (row) => (
                                         <div className="row">
                                             <div className="ml-4">

@@ -24,7 +24,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
     }
 
-
+    console.log(liqguardias)
     return (
         <div className="container mt-4 border border-dark alert alert-primary p-4">
 
@@ -49,6 +49,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
                                 {
                                     Header: "#",
+                                    id: "#",
                                     filterAll: false,
                                     width: 50,
                                     Cell: (row) => <div>{row.index + 1}</div>,
@@ -97,11 +98,12 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["liquidacion"] }),
                                     filterAll: true,
-                                    width: 130,
+                                    width: 90,
                                 },
                                 {
                                     Header: "Aprobado",
-
+                                    filterAll: true,
+                                    id: "Aprobado",
                                     Cell: (row) => (
                                         <>
                                             {row.original.aprobado === 0 ? (
@@ -128,6 +130,8 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                 {
                                     Header: "Acciones",
                                     width: 100,
+                                    id: "Acciones",
+                                    filterAll: true,
                                     Cell: (row) => (
                                         <>
                                             {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
@@ -247,6 +251,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
                                             {
                                                 Header: "#",
+                                                id: "#",
                                                 filterAll: false,
                                                 width: 50,
                                                 Cell: (row) => <div>{row.index + 1}</div>,
@@ -302,7 +307,8 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                     },
                                     {
                                         Header: "Aprobado",
-
+                                        id: "Aprobado",
+                                        filterAll: true,
                                         Cell: (row) => (
                                             <>
                                                 {row.original.aprobado === 0 ? (
@@ -328,7 +334,9 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                     },
                                     {
                                         Header: "Acciones",
+                                        id: "Acciones",
                                         width: 100,
+                                        filterAll: true,
                                         Cell: (row) => (
                                             <>
 

@@ -203,6 +203,7 @@ const liquidacion = () => {
             .then(res => {
                 if (res.status === 200) {
                     toastr.success("La tarea se liquido correctamente", "ATENCION")
+                    console.log(res.data)
                 }
             })
             .catch(error => {

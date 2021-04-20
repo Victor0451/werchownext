@@ -42,19 +42,20 @@ const FormTareasAdicionales = ({
                 ref={opRef}
               >
                 <option selected value="no"> Elige una Opcion </option>
+
                 {operadorsep
-                  ? operadorsep.map((operador, index) => (
-                    <option key={index} value={operador.value}>
-                      {operador.label}
+                  ? operadorsep.map((o, index) => (
+                    <option key={index} value={o.value}>
+                      {o.label}
                     </option>
                   ))
                   : null}
+
               </select>
             </div>
 
-
             <div className="form-group mt-4 col-md-4">
-              <label>Hs Inicio</label>
+              <label>Inicio</label>
               <input
                 type="datetime-local"
                 className="form-control"
@@ -67,7 +68,7 @@ const FormTareasAdicionales = ({
             </div>
 
             <div className="form-group mt-4 col-md-4">
-              <label>Hs Fin</label>
+              <label>Fin</label>
               <input
                 type="datetime-local"
                 className="form-control"
@@ -96,7 +97,7 @@ const FormTareasAdicionales = ({
                   value="option1"
                   ref={siTRef}
                 />
-                <label className="form-check-label" for="si">
+                <label className="form-check-label" htmlFor="si">
                   Si
                             </label>
               </div>
@@ -110,7 +111,7 @@ const FormTareasAdicionales = ({
                   defaultChecked={true}
                   ref={noTRef}
                 />
-                <label className="form-check-label" for="no">
+                <label className="form-check-label" htmlFor="no">
                   No
                             </label>
               </div>
