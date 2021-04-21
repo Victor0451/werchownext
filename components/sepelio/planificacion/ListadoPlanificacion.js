@@ -17,6 +17,7 @@ const ListadoPlanificacion = ({
   error,
   operadorsep,
   selcaso,
+  delCaso,
   editarPlanificacion,
   planiID
 }) => {
@@ -138,6 +139,13 @@ const ListadoPlanificacion = ({
                         data-toggle="modal" data-target="#modaleditguardia"
                       >
                         <i className="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm ml-1"
+                        onClick={() => delCaso(row.original.idturno)}
+
+                      >
+                        <i className="fa fa-trash" aria-hidden="true"></i>
                       </button>
                     </div>
                   ),

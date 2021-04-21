@@ -254,6 +254,22 @@ const guardias = () => {
     guardarPlaniID(row)
   }
 
+  const delCaso = async (id) => {
+    axios.delete(`${ip}api/sepelio/planificacion/eliminarturno/${id}`)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("La guardia se eliminio con exito", "ATENCION")
+          setTimeout(() => {
+            Router.reload()
+          }, 500);
+        }
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al eliminar la guardia", "ATENCION")
+        console.log(error)
+      })
+  }
+
   return (
     <Layout>
       <PlanificacionGuardias
@@ -313,7 +329,7 @@ const guardias = () => {
         operadorERef={operadorERef}
         error={error}
         operadorsep={operadorsep}
-
+        delCaso={delCaso}
         planiID={planiID}
         selcaso={selcaso}
       />
