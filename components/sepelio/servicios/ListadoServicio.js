@@ -5,7 +5,14 @@ import Spinner from "../../../components/layout/Spinner";
 import Link from "next/link";
 import moment from "moment";
 
-const ListadoServicios = ({ listado, desde, hasta }) => {
+const ListadoServicios = ({
+  listado,
+  desde,
+  hasta,
+  datatoggle,
+  datatarget,
+  getRow
+}) => {
   if (!listado) return <Spinner />;
 
   return (
@@ -145,101 +152,13 @@ const ListadoServicios = ({ listado, desde, hasta }) => {
 
                   Cell: (row) => (
                     <div>
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/impresion",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
+                      <button className="btn btn-primary btn-sm btn-block "
+                        onClick={() => getRow(row.original)}
+                        data-toggle={datatoggle}
+                        data-target={datatarget}
                       >
-                        <button
-                          className="btn btn-sm btn-primary mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Imprimir Solicitud"
-                        >
-                          <i className="fa fa-print" aria-hidden="true"></i>
-                        </button>
-                      </Link>
-
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/editar",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-sm btn-secondary border mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Editar Servicio"
-                        >
-                          <i
-                            className="fa fa-pencil-square-o"
-                            aria-hidden="true"
-                          ></i>
-                        </button>
-                      </Link>
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/legajovirtual/legajo",
-                          query: {
-                            id: `${row.original.dni}`,
-                            codigo: `${row.original.idservicio}-${row.original.dni}`,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-warning btn-sm mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Legajo Virtual"
-                        >
-                          <i
-                            className="fa fa-folder-open"
-                            aria-hidden="true"
-                          ></i>
-                        </button>
-                      </Link>
-                      <Link
-                        href={{
-                          pathname:
-                            "/sepelio/servicios/legajovirtual/subirarchivos",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-sm btn-success mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Subir Archivos"
-                        >
-                          <i className="fa fa-upload" aria-hidden="true"></i>
-                        </button>
-                      </Link>
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/gastos/gastos",
-                          query: {
-                            id: row.original.dni,
-                            idservicio: row.original.idservicio,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-sm btn-info mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Cargar Gastos"
-                        >
-                          <i className="fa fa-money" aria-hidden="true"></i>
-                        </button>
-                      </Link>
+                        Opciones
+                      </button>
                     </div>
                   ),
                 },

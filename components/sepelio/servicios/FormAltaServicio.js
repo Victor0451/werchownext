@@ -1153,7 +1153,7 @@ const FormAltaServicio = ({
               </button>
             </div>
             <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} />
+              <Stock selcasofrm={selcasofrm} fl={0} />
             </div>
             <div className="modal-footer">
               <button

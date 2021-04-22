@@ -6,12 +6,17 @@ import { ip } from '../../../config/config'
 // Import React Table
 import ReactTable from "react-table";
 
-const Stock = ({ selcaso, selcasofrm }) => {
+const Stock = ({ selcaso, selcasofrm, fl }) => {
   const [ataudes, guardarAtaudes] = useState(null);
 
   const mostrarAtaudes = async () => {
+
     await axios
-      .get(`${ip}api/sepelio/ataudes/cantidad`)
+      .get(`${ip}api/sepelio/ataudes/cantidad`, {
+        params: {
+          flag: fl
+        }
+      })
       .then((res) => {
         let ataudes = res.data;
         guardarAtaudes(ataudes);
@@ -31,13 +36,23 @@ const Stock = ({ selcaso, selcasofrm }) => {
         No Hay Stock De Ataudes
       </div>
     );
+
+  const calcularTotal = (arr) => {
+    let total = 0
+
+    for (let i = 0; i < arr.length; i++) {
+      total += arr[i].stock
+    }
+    return total
+  }
+
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
-      <h2 className="mt-4 mb-4">
+      <h3 className="mt-4 mb-4">
         <strong>
-          <u>Stock de Ataudes</u>
+          <u>Stock de Ataudes</u> {fl === 1 ? (<>- Cantidad Actual {calcularTotal(ataudes)} Ataudes</>) : null}
         </strong>
-      </h2>
+      </h3>
       <div className=" mt-4 border border-dark list">
         <ReactTable
           data={ataudes}

@@ -18,7 +18,7 @@ const stock = () => {
 
   return (
     <Layout>
-      <Stock />
+      <Stock fl={1} />
     </Layout>
   );
 };

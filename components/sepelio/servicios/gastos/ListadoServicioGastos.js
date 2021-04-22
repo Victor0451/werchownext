@@ -5,7 +5,14 @@ import Spinner from "../../../../components/layout/Spinner";
 import Link from "next/link";
 import moment from "moment";
 
-const ListadoServicioGastos = ({ listado }) => {
+
+const ListadoServicioGastos = ({
+  listado,
+  datatoggle,
+  datatarget,
+  getRow,
+  eliminarGasto
+}) => {
   if (!listado) return <Spinner />;
 
   return (
@@ -89,44 +96,30 @@ const ListadoServicioGastos = ({ listado }) => {
 
                   Cell: (row) => (
                     <div>
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/editar",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
-                      >
-                        <button
-                          className="btn btn-sm btn-warning border mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Editar Gasto"
-                        >
-                          <i
-                            className="fa fa-pencil-square-o"
-                            aria-hidden="true"
-                          ></i>
-                        </button>
-                      </Link>
 
-                      <Link
-                        href={{
-                          pathname: "/sepelio/servicios/impresion",
-                          query: {
-                            id: row.original.dni,
-                          },
-                        }}
+                      <button
+                        className="btn btn-sm btn-warning border mr-1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-toggle={datatoggle}
+                        data-target={datatarget}
+                        title="Editar Gasto"
+                        onClick={() => getRow(row.original)}
                       >
-                        <button
-                          className="btn btn-sm btn-danger mr-1"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Eliminar Gasto"
-                        >
-                          <i className="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                      </Link>
+                        <i
+                          className="fa fa-pencil-square-o"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger mr-1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Eliminar Gasto"
+                        onClick={() => eliminarGasto(row.original.idgastos)}
+                      >
+                        <i className="fa fa-trash" aria-hidden="true"></i>
+                      </button>
                     </div>
                   ),
                 },
@@ -137,6 +130,8 @@ const ListadoServicioGastos = ({ listado }) => {
           className="-striped -highlight"
         />
       </div>
+
+
     </div>
   );
 };

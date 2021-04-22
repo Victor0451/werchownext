@@ -1,12 +1,13 @@
 {
-  "name": "pruebawerchow",
-  "version": "0.1.0",
+  "name": "werchowsgi",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT"
   },
+  "author": "Ing. Longo Victor Manuel <victor.m.longo@gmail.com>",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "assert": "^2.0.0",

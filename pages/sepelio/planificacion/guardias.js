@@ -220,6 +220,7 @@ const guardias = () => {
     if (planificacion.fin === '') {
       planificacion.fin = moment(planiID.fin).format('YYYY-MM-DD HH:mm:ss')
     }
+    
     if (planificacion.operador === 'no') {
       planificacion.operador = planiID.operador
     }
