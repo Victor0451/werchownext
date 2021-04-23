@@ -162,6 +162,7 @@ const listado = () => {
 
                         </div>
 
+
                         <div className="col-md-3">
 
                           <button
@@ -193,7 +194,27 @@ const listado = () => {
                           </button>
 
                         </div>
-                        <div className="col-md-3">
+
+
+                        <div className="col-md-3 mt-4">
+
+                          <button
+                            className="btn btn-block btn-danger border mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Detalles Servicio"
+                            data-dismiss="modal"
+                            onClick={() => push(row.dni, row.idservicio, "/sepelio/servicios/detalles/nuevo")}
+                          >
+
+                            <i className="fa fa-sort-amount-desc" aria-hidden="true">
+                              {""} Detalles del Servicio</i>
+                          </button>
+
+                        </div>
+
+
+                        <div className="col-md-3 mt-4">
 
                           <button
                             className="btn btn-block btn-info mr-1"
