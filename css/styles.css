@@ -1,8 +1,13 @@
 /* WERCHOW && MUTUAL LOGO */
 
 .werchowlogo {
-  width: 160px;
-  height: 40px;
+  width: 75px;
+  height: 65px;
+}
+
+.mutuallogo {
+  width: 150px !important;
+  height: 50px !important;
 }
 
 .table {
@@ -44,11 +49,6 @@ tr {
   width: 95% !important;
   height: 95% !important;
   position: absolute !important;
-}
-
-.mutuallogo {
-  width: 185px;
-  height: 70px;
 }
 
 .faccontainer {

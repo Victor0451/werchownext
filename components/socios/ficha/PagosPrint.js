@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-const PagosPrint = ({ pagos, ficha }) => {
+const PagosPrint = ({ pagos, ficha, empresa }) => {
   if (!pagos)
     return (
       <div className="container">
@@ -19,7 +19,11 @@ const PagosPrint = ({ pagos, ficha }) => {
             <u>Constancia de Pagos</u>
           </strong>
         </h2>
-        <img src="/img/logo.png" className="werchowlogo" />
+        {empresa === "W" ? (
+          <img src="/img/logo.png" className="werchowlogo" />
+        ) : empresa === "M" ? (
+          <img src="/img/logom.jpg" className="mutuallogo" />
+        ) : null}
       </div>
 
       <h2 className="mt-2 mb-4">

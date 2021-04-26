@@ -229,6 +229,23 @@ const listado = () => {
                           </button>
 
                         </div>
+
+
+                        <div className="col-md-3 mt-4">
+
+                          <button
+                            className="btn btn-block btn-success mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Cargar Gasto De Luto"
+                            data-dismiss="modal"
+                            onClick={() => push(row.dni, row.idservicio, "/sepelio/servicios/gastoluto/nuevo")}
+
+                          >
+                            <i className="fa fa-money" aria-hidden="true"> Gasto De Luto</i>
+                          </button>
+
+                        </div>
                       </div>
                     </div>
                   ) : null}
