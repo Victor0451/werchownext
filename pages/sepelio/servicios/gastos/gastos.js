@@ -250,7 +250,23 @@ const gastos = () => {
 
   }
 
-  const eliminarGasto = async (id) => {
+  const deleteGasto = async (id) => {
+    await axios.delete(`${ip}api/sepelio/serviciogastos/eliminargasto/${id}`)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Se elimino el gasto correctamente", "ATENCION")
+          setTimeout(() => {
+            const idservicio = router.query.idservicio;
+            traerGastos(idservicio)
+          }, 100);
+        }
+      }).catch(error => {
+        toastr.error("Ocurrio un error al eliminar el gasto", "ATENCION")
+        console.log(error)
+      })
+  }
+
+  const eliminarGasto = (id) => {
 
     confirmAlert({
       title: 'ATENCION',
@@ -259,19 +275,7 @@ const gastos = () => {
         {
           label: 'Si',
           onClick: () => {
-            axios.delete(`${ip}api/sepelio/serviciogastos/eliminargasto/${id}`)
-              .then(res => {
-                if (res.status === 200) {
-                  toastr.success("Se elimino el gasto correctamente", "ATENCION")
-                  setTimeout(() => {
-                    const idservicio = router.query.idservicio;
-                    traerGastos(idservicio)
-                  }, 100);
-                }
-              }).catch(error => {
-                toastr.error("Ocurrio un error al eliminar el gasto", "ATENCION")
-                console.log(error)
-              })
+            deleteGasto(id)
           }
         },
         {

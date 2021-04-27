@@ -255,20 +255,39 @@ const guardias = () => {
     guardarPlaniID(row)
   }
 
-  const delCaso = async (id) => {
-    axios.delete(`${ip}api/sepelio/planificacion/eliminarturno/${id}`)
-      .then(res => {
-        if (res.status === 200) {
-          toastr.success("La guardia se eliminio con exito", "ATENCION")
-          setTimeout(() => {
-            Router.reload()
-          }, 500);
+  const deleteCaso = async (id) => {
+    await axios.delete(`${ip}api/sepelio/planificacion/eliminarturno/${id}`)
+    .then(res => {
+      if (res.status === 200) {
+        toastr.success("La guardia se eliminio con exito", "ATENCION")
+        setTimeout(() => {
+          Router.reload()
+        }, 500);
+      }
+    })
+    .catch(error => {
+      toastr.error("Ocurrio un error al eliminar la guardia", "ATENCION")
+      console.log(error)
+    })
+  }
+
+  const delCaso =  (id) => {
+    confirmAlert({
+      title: 'ATENCION',
+      message: '¿Seguro quieres eliminar el gasto?',
+      buttons: [
+        {
+          label: 'Siu',
+          onClick: () => {
+            deleteCaso(id)
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {}
         }
-      })
-      .catch(error => {
-        toastr.error("Ocurrio un error al eliminar la guardia", "ATENCION")
-        console.log(error)
-      })
+      ]
+    });
   }
 
   return (

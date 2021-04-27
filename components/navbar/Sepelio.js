@@ -160,7 +160,20 @@ export default class Sepelio extends Component {
                     Ingresar Servicio
                   </a>
                 </li>
+
                 <hr />
+
+                <li>
+                  <a
+                    href="/sepelio/servicios/gastoluto/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Gasto de luto
+                </a>
+                </li>
+
+                <hr />
+
                 <li>
                   <a
                     href="/sepelio/servicios/listado"
