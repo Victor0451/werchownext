@@ -183,6 +183,11 @@ const liquidacion = () => {
             .then(res => {
                 if (res.status === 200) {
                     toastr.success("La guardia se liquido correctamente", "ATENCION")
+
+                    setTimeout(() => {
+                        liquidarTareasAd()
+                        liquidarTareasAd()
+                    }, 500);
                 }
             })
             .catch(error => {
@@ -203,7 +208,12 @@ const liquidacion = () => {
             .then(res => {
                 if (res.status === 200) {
                     toastr.success("La tarea se liquido correctamente", "ATENCION")
-                    console.log(res.data)
+
+                    setTimeout(() => {
+                        liquidarTareasAd()
+                        liquidarTareasAd()
+                    }, 500);
+
                 }
             })
             .catch(error => {
@@ -225,7 +235,13 @@ const liquidacion = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Liquidacion de tarea aprobada", "ATENCION")
+
+                        setTimeout(() => {
+                            liquidarTareasAd()
+                            liquidarTareasAd()
+                        }, 500);
                     }
+
                 })
                 .catch(error => {
                     toastr.error("Ocurrio un error al liquidar la tarea", "ATENCION")
@@ -243,6 +259,11 @@ const liquidacion = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Liquidacion de tarea rechazada", "ATENCION")
+
+                        setTimeout(() => {
+                            liquidarTareasAd()
+                            liquidarTareasAd()
+                        }, 500);
                     }
                 })
                 .catch(error => {
@@ -267,6 +288,12 @@ const liquidacion = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Liquidacion de guardia aprobada", "ATENCION")
+
+
+                        setTimeout(() => {
+                            liquidarTareasAd()
+                            liquidarTareasAd()
+                        }, 500);
                     }
                 })
                 .catch(error => {
@@ -285,6 +312,12 @@ const liquidacion = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Liquidacion de guardia rechazada", "ATENCION")
+
+                        setTimeout(() => {
+                            liquidarTareasAd()
+                            liquidarTareasAd()
+                        }, 500);
+
                     }
                 })
                 .catch(error => {

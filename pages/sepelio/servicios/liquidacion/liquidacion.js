@@ -120,7 +120,8 @@ const liquidacion = () => {
             updateTareasApServicio(idservicio)
 
             setInterval(() => {
-              Router.reload()
+              serviciosALiquidar()
+              traerGastos(idservicio)
             }, 500);
 
 
@@ -157,7 +158,7 @@ const liquidacion = () => {
     }
   }
 
-  const regLiqGasto = async (id, u) => {
+  const regLiqGasto = async (id, u, idservicio) => {
     axios.put(
       `${ip}api/sepelio/serviciogastos/regliqgasto/${id}`,
       {
@@ -169,6 +170,11 @@ const liquidacion = () => {
       .then(res => {
         if (res.status === 200) {
           toastr.success("El gasto se liquido correctamente", "ATENCION")
+
+          setInterval(() => {
+            serviciosALiquidar()
+            traerGastos(idservicio)
+          }, 500);
         }
       })
       .catch(error => {

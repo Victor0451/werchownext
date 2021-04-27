@@ -1,7 +1,17 @@
 import React from 'react'
 import Spinner from '../../../layout/Spinner'
 
-const FormGastoLuto = ({ servicio, ataud }) => {
+const FormGastoLuto = ({
+    servicio,
+    ataud,
+    errores,
+    gastoLutoRef,
+    apellidoBenRef,
+    nombreBenRef,
+    telefonoBenRef,
+    parentezcoRef,
+    registrarGastoLuto,
+}) => {
 
     if (!servicio) return <Spinner />
 
@@ -16,6 +26,15 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                 </strong>
             </h2>
 
+
+
+            {
+                errores ? (
+                    <div className="mt-4 mb-4 alert alert-danger text-center text-uppercase border border-dark">
+                        {errores}
+                    </div>
+                ) : null
+            }
 
 
             <div className=" border border-dark p-4">
@@ -74,11 +93,63 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                                     Gasto de Luto:
                                 </u>
                             </label>
-                            <input type="number" className="form-control" placeholder="Gasto de Luto" />
+                            <input type="number" className="form-control" placeholder="Gasto de Luto" ref={gastoLutoRef} />
                         </div>
 
                     </div>
                 </div>
+
+                {
+                    !ataud ? (<div className="mt-4 border border-dark  alert alert-info text-center text-uppercase">No hay Ataud Registrado</div>) : (
+                        <div className="border border-dark mt-4 p-4">
+                            <h4>
+                                <strong>
+                                    <u>
+                                        Informacion sobre el ataud
+                               </u>
+                                </strong>
+                            </h4>
+
+                            <div className="row border border-dark mt-4 p-4">
+
+                                <div className="mt-4 col-md-4">
+                                    <label>
+                                        <u>Ataud</u>:
+            </label>
+                                    <input className="form-control" defaultValue={ataud.nombre} />
+                                </div>
+
+                                <div className="mt-4 col-md-3">
+                                    <label>
+                                        <u>Tipo</u>:
+            </label>
+                                    <input className="form-control" defaultValue={ataud.tipo} />
+                                </div>
+
+                                <div className="mt-4 col-md-3">
+                                    <label>
+                                        <u>Uso</u>:
+            </label>
+                                    <input className="form-control" defaultValue={ataud.uso} />
+                                </div>
+
+                                <div className="mt-4 col-md-3">
+                                    <label>
+                                        <u>Medidas</u>:
+            </label>
+                                    <input className="form-control" defaultValue={ataud.medidas} />
+                                </div>
+
+                                <div className="mt-4 col-md-3">
+                                    <label>
+                                        <u>Fabricante</u>:
+            </label>
+                                    <input className="form-control" defaultValue={ataud.fabricante} />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
 
                 <div className="mt-4 border border-dark p-4">
 
@@ -100,7 +171,7 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                                     Apellido del Beneficiario:
                                 </u>
                             </label>
-                            <input type="text" className="form-control" placeholder="Apellido Beneficiario" />
+                            <input type="text" className="form-control" placeholder="Apellido Beneficiario" ref={apellidoBenRef} />
                         </div>
 
                         <div className="mt-4  col-md-4">
@@ -109,7 +180,7 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                                     Nombre del Beneficiario:
                                 </u>
                             </label>
-                            <input type="text" className="form-control" placeholder="Nombre Beneficiario" />
+                            <input type="text" className="form-control" placeholder="Nombre Beneficiario" ref={nombreBenRef} />
                         </div>
 
 
@@ -119,7 +190,7 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                                     Telefono del Beneficiario:
                                 </u>
                             </label>
-                            <input type="text" className="form-control" placeholder="Telefono Beneficiario" />
+                            <input type="text" className="form-control" placeholder="Telefono Beneficiario" ref={telefonoBenRef} />
                         </div>
 
 
@@ -129,13 +200,30 @@ const FormGastoLuto = ({ servicio, ataud }) => {
                                     Parentezco del Beneficiario:
                                 </u>
                             </label>
-                            <input type="text" className="form-control" placeholder="Parentezco Beneficiario" />
+                            <input type="text" className="form-control" placeholder="Parentezco Beneficiario" ref={parentezcoRef} />
                         </div>
 
                     </div>
 
                 </div>
             </div>
+
+            <div className="row border border-dark mt-4 p-4">
+
+                <div className="col-md-6">
+                    <a href="/sepelio/servicios/listado" className="btn btn-danger btn-block">
+                        Cancelar
+</a>
+                </div>
+
+                <div className="col-md-6">
+                    <button href="/sepelio/servicios/listado" className="btn btn-primary btn-block" onClick={registrarGastoLuto}>
+                        Registrar
+</button>
+                </div>
+
+            </div>
+
         </div>
     )
 }

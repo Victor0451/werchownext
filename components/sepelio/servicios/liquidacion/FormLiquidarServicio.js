@@ -174,7 +174,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="Liquidar"
-                                    onClick={() => regLiqGasto(row.original.idgastos, user)}
+                                    onClick={() => regLiqGasto(row.original.idgastos, user, servicio.idservicio)}
                                   >
                                     <i className="fa fa-check" aria-hidden="true"></i>   Liquidar
                                   </button>

@@ -88,6 +88,10 @@ const liquidacion = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Liquidacion de venta aprobado", "ATENCION")
+
+                        setInterval(() => {
+                            traerServiciosVendidos()
+                        }, 500);
                     }
                 })
                 .catch(error => {
@@ -127,6 +131,9 @@ const liquidacion = () => {
             .then(res => {
                 if (res.status === 200) {
                     toastr.success("La venta se liquido correctamente", "ATENCION")
+                    setInterval(() => {
+                        traerServiciosVendidos()
+                    }, 500);
                 }
             })
             .catch(error => {
