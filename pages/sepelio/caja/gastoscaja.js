@@ -40,7 +40,7 @@ const gastoscaja = () => {
   const [proveedor, guardarProveedor] = useState(null);
   const [error, guardarError] = useState(null);
   const [listgastos, guardarListGastos] = useState(null);
-
+  const [operadorsep, guardarOperadorSep] = useState(null);
   const [operadortramite, guardarOpTramite] = useState(null);
 
   let token = jsCookie.get("token");
@@ -54,7 +54,7 @@ const gastoscaja = () => {
       let id = router.query.id;
 
       infoCaja(id);
-
+      traerOperador()
       listadoProveedores();
       listadoConceptos();
       servicioCombo();
@@ -69,6 +69,20 @@ const gastoscaja = () => {
 
     }
   }, []);
+
+  const traerOperador = async () => {
+    await axios
+      .get(
+        `${ip}api/sepelio/serviciogastos/operadoressep`
+      )
+      .then((res) => {
+        guardarOperadorSep(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const listadoProveedores = async () => {
     await axios
@@ -398,6 +412,7 @@ const gastoscaja = () => {
                 detalleRef={detalleRef}
                 error={error}
                 servicios={servicios}
+                operadorsep={operadorsep}
               />
             </div>
             <div className="modal-footer">

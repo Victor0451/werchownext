@@ -211,6 +211,7 @@ const StockAgotado = ({
                 type="button"
                 className="btn btn-primary"
                 onClick={updateStock}
+                data-dismiss="modal"
               >
                 Actualizar Stock
               </button>

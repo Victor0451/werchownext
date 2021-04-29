@@ -4,7 +4,6 @@ import {
   porciva,
   tipofac,
   mediopag,
-  operadoressep,
 } from "../../../array/array";
 import moment from "moment";
 import Spinner from "../../layout/Spinner";
@@ -35,6 +34,7 @@ const NuevoCajaGasto = ({
   detalleRef,
   error,
   servicios,
+  operadorsep
 }) => {
   if (!caja) return <Spinner />;
 
@@ -335,7 +335,7 @@ const NuevoCajaGasto = ({
                 </strong>
               </label>
               <OperadorSelect
-                options={operadoressep}
+                options={operadorsep}
                 placeholder={"Operador del Tramite"}
                 onChange={(value) => handleChange(value, "operadortramite")}
               />

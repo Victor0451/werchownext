@@ -8,6 +8,8 @@ import moment from "moment";
 import toastr from "toastr";
 import ActualizarStock from "../../../components/sepelio/ataudes/ActualizarStock";
 import { ip } from '../../../config/config'
+import { confirmAlert } from 'react-confirm-alert'
+
 
 const actualizar = () => {
   let nuevoStockRef = React.createRef();
@@ -43,22 +45,42 @@ const actualizar = () => {
     if (stock.stock === "") {
       toastr.warning("Debes ingresar el nuevo stock", "ATENCION");
     } else {
-      await axios
-        .put(
-          `${ip}api/sepelio/ataudes/nuevostock/${stock.idataud}`,
-          stock
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            toastr.success("El stock se actualizo correctamente", "ATENCION");
+
+      await confirmAlert({
+        title: 'ATENCION',
+        message: '¿Seguro quieres actualizar el stock?',
+        buttons: [
+          {
+            label: 'Si',
+            onClick: () => {
+              axios
+                .put(
+                  `${ip}api/sepelio/ataudes/nuevostock/${stock.idataud}`,
+                  stock
+                )
+                .then((res) => {
+                  if (res.status === 200) {
+                    toastr.success("El stock se actualizo correctamente", "ATENCION");
+                  }
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 300);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => { }
           }
-          setTimeout(() => {
-            window.location.reload();
-          }, 300);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        ]
+      });
+
+
+
+
     }
   };
 

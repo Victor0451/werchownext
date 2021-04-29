@@ -710,6 +710,45 @@ export default class Gerencia extends Component {
               </ul>
             </li>
             <hr />
+            <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Obsequios
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/ventas/obsequios/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Nuevo Producto
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/ventas/obsequios/actualizar"
+                  className="dropdown-item text-dark"
+                >
+                  Actualizar Stock
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/ventas/obsequios/stock"
+                  className="dropdown-item text-dark"
+                >
+                  Stock
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr/>
             <li>
               <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
                 Planes Vigentes
