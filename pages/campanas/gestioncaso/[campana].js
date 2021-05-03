@@ -14,9 +14,12 @@ const campana = (porps) => {
   const [userData, guardarUsuario] = useState(null);
 
   const router = useRouter();
+
   const {
     query: { empresa, operador, camp },
   } = router;
+
+  console.log(router.query)
 
   const nuevosCasos = async () => {
     await axios
@@ -66,8 +69,9 @@ const campana = (porps) => {
   let usuario = jsCookies.get("usuario");
 
 
-
   useEffect(() => {
+
+
     if (camp) {
       nuevosCasos();
       casosTrabajados();
@@ -79,7 +83,7 @@ const campana = (porps) => {
     } else {
       console.log("error");
     }
-  }, [camp]);
+  }, []);
 
   return (
     <Layout>

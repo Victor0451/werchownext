@@ -4,22 +4,223 @@ import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
 import moment from 'moment'
 
-const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regLiqGasto }) => {
+const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regLiqGasto, ataud, parcela }) => {
 
   return (
     <div>
       <div className="container border border-dark alert alert-primary p-4">
         {servicio ? (
-          <h2>
-            <strong>
-              <u>Servicio N°: {servicio.idservicio}</u>: {servicio.apellido},{" "}
-              {servicio.nombre}
-            </strong>
-          </h2>
+          <>
+            <h2>
+              <strong>
+                <u>Servicio N° {servicio.idservicio} - Extinto</u>: {servicio.apellido},{" "}
+                {servicio.nombre}
+              </strong>
+            </h2>
+
+            <div className="mt-4 border border-dark p-4">
+              <div className="border border-dark p-4">
+                <h4>
+                  <strong>
+                    <u>
+                      Detalles del servicio
+                  </u>
+                  </strong>
+                </h4>
+
+                <div className="mt-4 row">
+
+                  <div className=" col-md-4">
+                    <label>
+                      <u>
+                        Fecha Recepcion
+                    </u>
+                      <input type="text" className="mt-2 form-control" value={moment(servicio.fecha_recepcion).format('DD/MM/YYYY HH:mm:ss')} />
+                    </label>
+                  </div>
+
+                  <div className=" col-md-4">
+                    <label>
+                      <u>
+                        Motivo Fallecimiento
+                    </u>
+                      <input type="text" className="mt-2 form-control" value={servicio.motivo} />
+                    </label>
+                  </div>
+
+                  <div className=" col-md-4">
+                    <label>
+                      <u>
+                        Tipo de Sevicio
+    </u>
+                      <input type="text" className="mt-2 form-control" value={servicio.tipo_servicio} />
+                    </label>
+                  </div>
+
+                  <div className="mt-4 col-md-4">
+                    <label>
+                      <u>
+                        Lugar de Fallecimiento
+    </u>
+                      <input type="text" className="mt-2 form-control" value={servicio.lugar_fallecimiento} />
+                    </label>
+                  </div>
+
+                  <div className="mt-4 col-md-4">
+                    <label>
+                      <u>
+                        Velatorio
+    </u>
+                      <input type="text" className="mt-2 form-control" value={servicio.casa_mortuaria} />
+                    </label>
+                  </div>
+                  <div className="mt-4 col-md-4">
+                    <label>
+                      <u>
+                        Fecha de inhumacion
+    </u>
+                      <input type="text" className="mt-2 form-control" value={moment(servicio.fecha_inhumacion).format('DD/MM/YYYY')} />
+                    </label>
+                  </div>
+                  <div className="mt-4 col-md-4">
+                    <label>
+                      <u>
+                        Cementerio
+    </u>
+                      <input type="text" className="mt-2 form-control" value={servicio.cementerio} />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {ataud ? (
+                <div className="mt-4 border border-dark p-4">
+                  <h4>
+                    <strong>
+                      <u>
+                        Detalles del ataud
+                  </u>
+                    </strong>
+                  </h4>
+                  <div className="row">
+                    <div className="mt-4 col-md-4">
+                      <label>
+                        <u>
+                          Ataud
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={ataud.nombre} />
+                      </label>
+                    </div>
+
+                    <div className="mt-4 col-md-4">
+                      <label>
+                        <u>
+                          Tipo
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={ataud.tipo} />
+                      </label>
+                    </div>
+
+                    <div className="mt-4 col-md-4">
+                      <label>
+                        <u>
+                          Uso
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={ataud.uso} />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className=" mt-4 col-md-12 alert alert-info border border-dark text-center text-uppercase">
+                  Este servicio no tiene ataud designado
+                </div>
+              )}
+
+              {parcela ? (
+                <div className="mt-4 border border-dark p-4">
+                  <h4>
+                    <strong>
+                      <u>
+                        Detalles de la Parcela
+                </u>
+                    </strong>
+                  </h4>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <label>
+                        <u>
+                          Parcela
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={parcela.parcela} />
+                      </label>
+                    </div>
+
+                    <div className="col-md-4">
+                      <label>
+                        <u>
+                          Manzana
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={parcela.mza} />
+                      </label>
+                    </div>
+
+                    <div className="col-md-4">
+                      <label>
+                        <u>
+                          Lote
+                        </u>
+                        <input type="text" className="mt-2 form-control" value={parcela.lote} />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className=" mt-4 col-md-12 alert alert-info border border-dark text-center text-uppercase">
+                  Este servicio no tiene parcela designada
+                </div>
+              )}
+
+
+            </div>
+
+          </>
         ) : null}
       </div>
 
       <hr className="mt-4 mb-4" />
+
+      {/* <table className="table table-sm">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table> */}
+
 
       {liqop ? (
         <div className=" border border-dark alert alert-primary mt-4 p-4">

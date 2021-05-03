@@ -4,10 +4,13 @@ import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
 import FormLiquidarServicio from "./FormLiquidarServicio";
 import moment from "moment";
+import axios from "axios";
 
 
-const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total, user, aprobarGasto, regLiqGasto }) => {
+const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total, user, aprobarGasto, regLiqGasto, ataud, parcela }) => {
   if (!listado) return <Spinner />;
+
+
 
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
@@ -132,7 +135,7 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                           title="Ver Liquidacion"
                           data-target="#liquidar"
                           onClick={() =>
-                            traerGastos(row.original.idservicio, row.original)
+                            traerGastos(row.original.idservicio, row.original, row.original.idataud)
                           }
                         >
                           <i className="fa fa-eye" aria-hidden="true"> Ver Liquidacion</i>
@@ -180,6 +183,8 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                 user={user}
                 aprobarGasto={aprobarGasto}
                 regLiqGasto={regLiqGasto}
+                ataud={ataud}
+                parcela={parcela}
               />
             </div>
             <div className="modal-footer">

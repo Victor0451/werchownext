@@ -9,6 +9,8 @@ import { ip } from '../../../../config/config'
 import Router from 'next/router'
 
 const liquidacion = () => {
+  const [ataud, guardarAtaud] = useState(null)
+  const [parcela, guardarParcela] = useState(null)
   const [servicio, guardarServicio] = useState(null);
   const [servliq, guardarServliq] = useState(null);
   const [gastos, guardarGastos] = useState(null);
@@ -32,7 +34,7 @@ const liquidacion = () => {
       });
   };
 
-  const traerGastos = async (id, servliq) => {
+  const traerGastos = async (id, servliq, idataud) => {
     await axios
       .get(
         `${ip}api/sepelio/serviciogastos/listadogastos/${id}`
@@ -41,6 +43,10 @@ const liquidacion = () => {
         if (res.data) {
           guardarGastos(res.data);
           guardarServliq(servliq);
+
+          tarerAtaud(idataud)
+          tarerParcela(idservicio)
+
         }
       })
       .catch((error) => {
@@ -198,6 +204,32 @@ const liquidacion = () => {
   }
 
 
+  const tarerAtaud = async (id) => {
+    await axios.get(`${ip}api/sepelio/ataudes/ataud/${id}`)
+      .then(res => {
+        guardarAtaud(res.data)
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer el ataud", "ATENCION")
+        console.log(error)
+      })
+
+  }
+
+
+  const tarerParcela = async (id) => {
+    await axios.get(`${ip}api/sepelio/parcelas/traerparcela/${id}`)
+      .then(res => {
+        guardarParcela(res.data)
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer el ataud", "ATENCION")
+        console.log(error)
+      })
+
+  }
+
+
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
@@ -228,7 +260,8 @@ const liquidacion = () => {
         user={usuario}
         aprobarGasto={aprobarGasto}
         regLiqGasto={regLiqGasto}
-
+        ataud={ataud}
+        parcela={parcela}
 
       />
     </Layout>
