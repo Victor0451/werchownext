@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, operadorsep , opRef}) => {
+const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priorityRef, error, operadorsep, opRef }) => {
     return (
         <div className="container mt-4 border border-dark alert alert-primary p-4">
 
@@ -21,6 +21,10 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, o
             </div>
 
             <div className="mt-4 border border-dark p-4 ">
+                <div className="mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase">
+                    Cuando eliges al operador este se concatena con la tarea descripta en el campo tareas, por lo tanto debes borrar el operador anterior y poner el nuevo
+                </div>
+
                 <div className="row border border-dark p-4">
                     <div className="col-md-12">
                         <label>
@@ -62,7 +66,7 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, o
                                 value="option1"
                                 ref={siRef}
                             />
-                            <label className="form-check-label" for="si">
+                            <label className="form-check-label" htmlFor="si">
                                 Si
                         </label>
                         </div>
@@ -76,7 +80,7 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, o
                                 defaultChecked={true}
                                 ref={noRef}
                             />
-                            <label className="form-check-label" for="no">
+                            <label className="form-check-label" htmlFor="no">
                                 No
                         </label>
                         </div>
@@ -86,7 +90,7 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, o
                         <label>
                             <strong>
                                 {" "}
-                                <u> Operador: </u>
+                                <u> Operador</u>:
                             </strong>
                         </label>
                         <select
@@ -102,6 +106,31 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, error, o
                                     </option>
                                 ))
                                 : null}
+                        </select>
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Prioridad </u>: {task.priority === 1 ? (<>Normal</>) : task.priority === 2 ? (<>Importante</>) : task.priority === 3 ? (<>Urgente</>) : null}
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="operador"
+                            ref={priorityRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+
+                            <option value="1">
+                                Normal
+                                    </option>
+                            <option value="2">
+                                Importante
+                                    </option>
+                            <option value="3">
+                                Urgente
+                                    </option>
                         </select>
                     </div>
                 </div>

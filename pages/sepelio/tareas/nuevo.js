@@ -18,6 +18,7 @@ const nuevo = () => {
     let inicioRef = React.createRef()
     let finRef = React.createRef()
     let opRef = React.createRef()
+    let prioridadRef = React.createRef()
 
     let token = jsCookie.get("token");
 
@@ -39,6 +40,7 @@ const nuevo = () => {
             allDay: "",
             start: moment(inicioRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
             end: moment(finRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
+            priority: prioridadRef.current.value
         }
 
         if (siRef.current.checked === true && noRef.current.checked === false) {
@@ -56,6 +58,8 @@ const nuevo = () => {
             guardarError('La fecha de inicio de la tarea no puede ser mayor a la de finalizacion ')
         } else if (opRef.current.value === "" || opRef.current.value === "no") {
             guardarError('Debes Seleccionar un operador')
+        } else if (prioridadRef.current.value === "" || prioridadRef.current.value === "no") {
+            guardarError('Debes Seleccionar la prioridad de la tarea')
         } else {
 
             await axios
@@ -98,6 +102,7 @@ const nuevo = () => {
                 inicioRef={inicioRef}
                 finRef={finRef}
                 opRef={opRef}
+                prioridadRef={prioridadRef}
                 nuevaTarea={nuevaTarea}
                 operadorsep={operadorsep}
                 error={error}

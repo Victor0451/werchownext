@@ -5,7 +5,7 @@ import Spinner from "../../../components/layout/Spinner";
 import moment from "moment";
 import EditarTareas from './EditarTarea'
 
-const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, tareaRef, task, editarTarea, eliminarTarea, operadorsep, error, opRef }) => {
+const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, tareaRef, task, editarTarea, eliminarTarea, operadorsep, error, opRef, priorityRef }) => {
     if (!listado) return <Spinner />;
 
     return (
@@ -45,7 +45,7 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
 
                                 },
                                 {
-                                    Header: "Acciones",
+                                    Header: "Todo el Dia",
                                     width: 100,
                                     Cell: (row) => (
                                         <div>
@@ -76,7 +76,19 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                     filterAll: true,
 
                                 },
-
+                                {
+                                    Header: "Prioridad",
+                                    width: 100,
+                                    Cell: (row) => (
+                                        <div>
+                                            {row.original.priority == 1 ? (<div>Normal</div>)
+                                                : row.original.priority == 2 ? (<div>Importante</div>)
+                                                    : row.original.priority == 3 ? (<div>Urgente</div>)
+                                                        : null
+                                            }
+                                        </div>
+                                    ),
+                                },
                                 {
                                     Header: "Acciones",
 
@@ -89,7 +101,8 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                                 data-placement="top"
                                                 title="Editar"
                                                 data-target="#staticBackdrop"
-                                                onClick={() => traerTarea(row.original.idevents)}
+                                                
+                                                onClick={() => traerTarea(row.original)}
                                             >
                                                 <i
                                                     className="fa fa-pencil-square-o"
@@ -119,7 +132,7 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
 
 
 
-            <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -139,6 +152,7 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                         noRef={noRef}
                                         tareaRef={tareaRef}
                                         opRef={opRef}
+                                        priorityRef={priorityRef}
                                         task={task}
                                         operadorsep={operadorsep}
                                         error={error}
@@ -149,7 +163,7 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                         </div>
                         <div className="modal-footer">
 
-                            <button className="btn btn-primary" onClick={editarTarea} >Editar</button>
+                            <button className="btn btn-primary" data-dismiss="modal" onClick={editarTarea} >Editar</button>
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
                         </div>

@@ -21,6 +21,8 @@ const editar = () => {
     let noRef = React.createRef()
     let tareaRef = React.createRef()
     let opRef = React.createRef()
+    let priorityRef = React.createRef()
+
 
     const [events, guardarEvents] = useState(null)
     const [task, guardarTask] = useState(null)
@@ -49,16 +51,10 @@ const editar = () => {
             });
     };
 
-    const traerTarea = async (id) => {
+    const traerTarea = async (row) => {
         guardarTask(null)
-        await axios
-            .get(` ${ip}api/sepelio/tareas/traertarea/${id}`)
-            .then((res) => {
-                guardarTask(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        guardarTask(row)
+
     };
 
     const editarTarea = async () => {
@@ -68,6 +64,7 @@ const editar = () => {
             allDay: "",
             start: moment(inicioRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
             end: moment(finRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
+            priority: priorityRef.current.value
         }
 
         if (siRef.current.checked === true && noRef.current.checked === false) {
@@ -89,6 +86,10 @@ const editar = () => {
             taskedit.allDay = task.allDay
         }
 
+        if (taskedit.priority === "") {
+            taskedit.priority = task.priority
+        }
+
         await axios
             .put(` ${ip}api/sepelio/tareas/editartarea/${task.idevents}`, taskedit)
             .then((res) => {
@@ -96,8 +97,9 @@ const editar = () => {
                     toastr.success("La tarea se edito con exito", "ATENCION")
 
                     setTimeout(() => {
-                        Router.reload()
-                    }, 1000);
+                        traerEventos()
+                        guardarTask(null)
+                    }, 500);
 
                 }
             })
@@ -105,20 +107,31 @@ const editar = () => {
                 console.log(error);
                 toastr.error("Ocurrio un error", "ATENCION")
             });
-
-
     }
 
-    const eliminarTarea = (id) => {
+    const eliminarTarea = async (id) => {
 
-        confirmAlert({
+        await confirmAlert({
             title: 'ATENCION',
             message: '¿Seguro que quieres eliminar la tarea?',
             buttons: [
                 {
                     label: 'Si',
                     onClick: () => {
-                        deleteTask(id)
+                        axios
+                            .delete(` ${ip}api/sepelio/tareas/eliminartarea/${id}`,)
+                            .then((res) => {
+
+                                if (res.status === 200)
+                                    toastr.success("La tarea se elimino con exito", "Atencion")
+                                setTimeout(() => {
+                                    traerEventos()
+                                }, 500);
+                            })
+                            .catch((error) => {
+                                toastr.error("Ocurrio un error", "Atencion")
+                                console.log(error);
+                            });
                     }
                 },
                 {
@@ -131,22 +144,7 @@ const editar = () => {
 
     }
 
-    const deleteTask = async (id) => {
-        await axios
-            .delete(` ${ip}api/sepelio/tareas/eliminartarea/${id}`,)
-            .then((res) => {
 
-                if (res.status === 200)
-                    toastr.success("La tarea se elimino con exito", "Atencion")
-                setTimeout(() => {
-                    Router.reload()
-                }, 1000);
-            })
-            .catch((error) => {
-                toastr.error("Ocurrio un error", "Atencion")
-                console.log(error);
-            });
-    }
 
     const traerOperador = async () => {
         await axios
@@ -174,6 +172,7 @@ const editar = () => {
                 noRef={noRef}
                 tareaRef={tareaRef}
                 opRef={opRef}
+                priorityRef={priorityRef}
                 task={task}
                 editarTarea={editarTarea}
                 eliminarTarea={eliminarTarea}

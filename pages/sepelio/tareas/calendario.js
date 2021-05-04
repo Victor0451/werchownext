@@ -34,6 +34,7 @@ const calendario = () => {
                         allDay: evs[i].allDay,
                         start: new Date(evs[i].start),
                         end: new Date(evs[i].end),
+                        priority: evs[i].priority
                     };
 
                     if (evarr.allDay === 1) {
@@ -54,6 +55,7 @@ const calendario = () => {
 
     const localizer = momentLocalizer(moment);
 
+    console.log(events)
     return (
         <Layout>
             <div className="container mt-4 border border-dark p-4 alert alert-dark">
@@ -90,6 +92,14 @@ const calendario = () => {
                             day: "Día",
                         }}
                         defaultView="week"
+                        eventPropGetter={events => ({
+                            style: {
+                                backgroundColor: events.priority === 1 ? "#3FD503"
+                                    : events.priority === 2 ? "#E6F82F"
+                                        : events.priority === 3 ? "#F82F2F"
+                                            : null
+                            }
+                        })}
                     />
                 </div>
             </div>

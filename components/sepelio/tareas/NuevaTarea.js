@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, operadorsep, opRef, error }) => {
+const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, operadorsep, opRef, prioridadRef, error }) => {
     return (
         <div className="container mt-4 border border-dark alert alert-primary p-4">
 
@@ -107,6 +107,33 @@ const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, ope
                                     </option>
                                 ))
                                 : null}
+                        </select>
+                    </div>
+
+
+                    <div className="form-group col-md-4">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Prioridad: </u>
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="operador"
+                            ref={prioridadRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+
+                            <option value="1">
+                                Normal
+                                    </option>
+                            <option value="2">
+                                Importante
+                                    </option>
+                            <option value="3">
+                                Urgente
+                                    </option>
                         </select>
                     </div>
                 </div>
