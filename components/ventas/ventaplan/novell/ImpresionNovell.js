@@ -4,7 +4,7 @@ import moment from "moment";
 
 const ImpresionNovell = ({ novell }) => {
   if (!novell) return <Spinner />;
-  console.log(novell.cuota_mantenimiento);
+
   return (
     <div className="container mt-2 alert alert-dark border border-dark p-4">
       <div className="row">
@@ -276,7 +276,7 @@ const ImpresionNovell = ({ novell }) => {
             className="form-control"
             type="text"
             name="fecnacsol"
-            defaultValue={moment(novell.fec_nac_sol).format("DD/MM/YYYY")}
+            defaultValue={moment(novell.fecha_nac_sol).format("DD/MM/YYYY")}
           />
         </div>
 
@@ -508,7 +508,7 @@ const ImpresionNovell = ({ novell }) => {
             className="form-control"
             type="text"
             name="fecnacben"
-            defaultValue={moment(novell.fec_nac_ben).format("DD/MM/YYYY")}
+            defaultValue={moment(novell.fecha_nac_ben).format("DD/MM/YYYY")}
           />
         </div>
 
