@@ -398,6 +398,36 @@ export default class Gerencia extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Proveedores
+            </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/proveedores/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Ingresar Proveedor
+                </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/proveedores/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado Proveedores
+                </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Servicios
               </a>
               <ul className="dropdown-menu">
@@ -711,44 +741,44 @@ export default class Gerencia extends Component {
             </li>
             <hr />
             <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Obsequios
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Obsequios
             </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/ventas/obsequios/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Nuevo Producto
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/ventas/obsequios/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Nuevo Producto
                 </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/ventas/obsequios/actualizar"
-                  className="dropdown-item text-dark"
-                >
-                  Actualizar Stock
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/ventas/obsequios/actualizar"
+                    className="dropdown-item text-dark"
+                  >
+                    Actualizar Stock
                 </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/ventas/obsequios/stock"
-                  className="dropdown-item text-dark"
-                >
-                  Stock
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/ventas/obsequios/stock"
+                    className="dropdown-item text-dark"
+                  >
+                    Stock
                 </a>
-              </li>
-            </ul>
-          </li>
-          <hr/>
+                </li>
+              </ul>
+            </li>
+            <hr />
             <li>
               <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
                 Planes Vigentes

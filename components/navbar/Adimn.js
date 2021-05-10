@@ -545,6 +545,36 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Proveedores
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/sepelio/proveedores/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Ingresar Proveedor
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/proveedores/listado"
+                  className="dropdown-item text-dark"
+                >
+                  Listado Proveedores
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Tareas
             </a>
             <ul className="dropdown-menu">
