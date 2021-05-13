@@ -79,6 +79,36 @@ export default class Sepelio extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Autos
+            </a>
+              <ul className="dropdown-menu">
+                {/* <li>
+                <a
+                  href="/sepelio/proveedores/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Ingresar Proveedor
+                </a>
+              </li> */}
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/autos/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado Autos
+                </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Ataudes
               </a>
               <ul className="dropdown-menu">
