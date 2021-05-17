@@ -17,6 +17,7 @@ const Rehabilitacion = ({
   vigencia,
   vigenciaRef,
   error,
+  cuotas
 }) => {
   let fecha = moment().format("DD/MM/YYYY");
 
@@ -340,13 +341,14 @@ const Rehabilitacion = ({
                     <div
                       id="solicitud"
                       className="mt-4 container "
-                      //ref={(el) => (componentRef = el)}
+                    //ref={(el) => (componentRef = el)}
                     >
                       <NotaRehabilitacion
                         ficha={ficha}
                         fecha={fecha}
                         vigencia={vigencia}
                         empresa={empresa}
+                        cuotas={cuotas}
                       />
                     </div>
 

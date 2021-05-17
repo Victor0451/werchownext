@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment-timezone";
 
-const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa }) => {
+const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
   return (
     <div className=" p-1">
       <div className="border border-dark p-4">
@@ -69,15 +69,32 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa }) => {
 
           <p className="text-justify mt-2 p-2">
             <font size="5">
-              Por la presente solicito la reafiliación a la Empresa Werchow
-              Medicina Privada S.A, a los efectos de poder efectivizar el
-              pago de las cuotas de la cual me encuentro en mora por cuanto su
-              pago debía realizarse hasta el día 15 de cada mes. Asimismo acepto
-              que de conformidad a las condiciones de la contratación, afrontaré
-              un periodo de carencia de 15 días por cada mes de atraso, a contar
-              desde el pago de la cuota en mora, en lo que se refiere al
-              servicio de sepelio no así en lo que se refiere a otros servicios
-              que me brinda la empresa.-
+              {cuotas === 1 ? (
+                <>
+                  Por la presente solicito la reafiliación a la Empresa Werchow
+                  Medicina Privada S.A, a los efectos de poder efectivizar el
+                  pago de las cuotas de la cual me encuentro en mora por cuanto su
+                  pago debía realizarse hasta el día 15 de cada mes. Asimismo acepto
+                  que de conformidad a las condiciones de la contratación, afrontaré
+                  un periodo de carencia de 15 días por cada mes de atraso, a contar
+                  desde el pago de la cuota en mora, en lo que se refiere al
+                  servicio de sepelio no así en lo que se refiere a otros servicios
+                  que me brinda la empresa.-
+                </>
+              ) : cuotas > 1 ? (
+                <>
+                  Por la presente solicito la reafiliación a la Empresa Werchow
+                  Medicina Privada S.A, a los efectos de poder efectivizar el
+                  pago de las cuotas de la cual me encuentro en mora por cuanto su
+                  pago debía realizarse hasta el día 15 de cada mes. Asimismo acepto
+                  que de conformidad a las condiciones de la contratación, afrontaré
+                  un periodo de carencia de 30 días por cada mes de atraso, a contar
+                  desde el pago de la cuota en mora, en lo que se refiere al
+                  servicio de sepelio no así en lo que se refiere a otros servicios
+                  que me brinda la empresa.-
+                </>
+              ) : null}
+
             </font>
           </p>
 

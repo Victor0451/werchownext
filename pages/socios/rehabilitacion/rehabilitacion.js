@@ -14,15 +14,28 @@ const rehabilitacion = () => {
   let vigenciaRef = React.createRef();
 
   const [vigencia, guardarVigencia] = useState(null);
+  const [cuotas, guardarCuotas] = useState(null);
   const [error, guardarError] = useState(null);
 
   const handlechange = () => {
-    let cuotas = vigenciaRef.current.value;
-
+    let cuotas = parseInt(vigenciaRef.current.value);
+    console.log(cuotas)
     if (cuotas === "") {
       document.getElementById("btn").hidden = true;
-    } else {
+    } else if (cuotas === 1) {
+      guardarCuotas(cuotas)
+
       let carencia = cuotas * 15;
+
+      let vigencia = moment().add(carencia, "days").format("YYYY-MM-DD");
+
+      document.getElementById("btn").hidden = false;
+
+      guardarVigencia(vigencia);
+    } else if (cuotas > 1) {
+      guardarCuotas(cuotas)
+
+      let carencia = cuotas * 30;
 
       let vigencia = moment().add(carencia, "days").format("YYYY-MM-DD");
 
@@ -222,18 +235,18 @@ const rehabilitacion = () => {
       rehab.empresa = "MUTUAL SAN VALENTIN";
     }
 
-    await axios
-      .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
-      .then((res) => {
-        console.log(res.data, res.status);
-        toastr.success(
-          "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
-          "ATENCION"
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // await axios
+    //   .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
+    //   .then((res) => {
+    //     console.log(res.data, res.status);
+    //     toastr.success(
+    //       "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
+    //       "ATENCION"
+    //     );
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   let fecha = moment().format("YYYY-MM-DD");
@@ -263,6 +276,7 @@ const rehabilitacion = () => {
         vigenciaRef={vigenciaRef}
         vigencia={vigencia}
         error={error}
+        cuotas={cuotas}
       />
     </Layout>
   );

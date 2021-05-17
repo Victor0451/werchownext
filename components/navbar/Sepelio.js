@@ -82,14 +82,14 @@ export default class Sepelio extends Component {
                 Autos
             </a>
               <ul className="dropdown-menu">
-                {/* <li>
-                <a
-                  href="/sepelio/proveedores/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Ingresar Proveedor
+                <li>
+                  <a
+                    href="/sepelio/autos/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Ingresar Auto
                 </a>
-              </li> */}
+                </li>
                 <hr />
                 <li>
                   <a

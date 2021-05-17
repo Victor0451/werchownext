@@ -319,14 +319,14 @@ export default class Gerencia extends Component {
                 Autos
             </a>
               <ul className="dropdown-menu">
-                {/* <li>
+              <li>
                 <a
-                  href="/sepelio/proveedores/nuevo"
+                  href="/sepelio/autos/nuevo"
                   className="dropdown-item text-dark"
                 >
-                  Ingresar Proveedor
+                  Ingresar Auto
                 </a>
-              </li> */}
+              </li>
                 <hr />
                 <li>
                   <a
