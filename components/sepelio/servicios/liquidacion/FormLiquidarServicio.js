@@ -326,7 +326,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                       width: 100,
                       Cell: (row) => (
                         <>
-                          {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+                          {user.usuario === 'joaquini' || user.usuario === 'isantiago' || user.usuario === 'jmorales' || user.usuario === 'emoreno' || user.usuario === 'jcmorales' ? (
                             <>
                               {
                                 row.original.aprobado === 1 ? (
@@ -364,7 +364,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
                             </>
 
 
-                          ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
+                          ) : user.perfil === 3 && user.usuario === 'nmquintana' || user.perfil === 1 ? (
                             <>
                               {row.original.liquidado == 0 ? (
 

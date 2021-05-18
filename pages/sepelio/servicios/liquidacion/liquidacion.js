@@ -241,12 +241,12 @@ const liquidacion = () => {
 
       if (usuario) {
         let userData = JSON.parse(usuario);
-        guardarUsuario(userData.usuario);
+        guardarUsuario(userData);
       }
 
     }
   }, []);
-
+  
   return (
     <Layout>
       <ListadoServicios

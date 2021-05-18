@@ -68,6 +68,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                 },
                                 {
                                     Header: "Aprobado",
+                                    id: "Aprobado",
                                     width: 200,
                                     filterAll: true,
                                     Cell: (row) => (
@@ -95,6 +96,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                 },
                                 {
                                     Header: "Acciones",
+                                    id: "Acciones",
                                     width: 220,
                                     filterAll: true,
                                     Cell: (row) => (
@@ -114,7 +116,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                                 </button>
                                             </div>
 
-                                            {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+                                            {user.usuario === 'joaquini' || user.usuario === 'isantiago' || user.usuario === 'jmorales' || user.usuario === 'emoreno' || user.usuario === 'jcmorales' ? (
 
                                                 <>
 
@@ -151,7 +153,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
                                                         ) : null}
                                                 </>
 
-                                            ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
+                                            ) : user.perfil === 3 && user.usuario === 'nmquintana' || user.perfil === 1 ? (
                                                 <>
                                                     {
                                                         row.original.liquidado === 0 ? (

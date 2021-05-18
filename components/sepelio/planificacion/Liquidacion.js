@@ -134,7 +134,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                     filterAll: true,
                                     Cell: (row) => (
                                         <>
-                                            {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+                                            {user.usuario === 'joaquini' || user.usuario === 'isantiago' || user.usuario === 'jmorales' || user.usuario === 'emoreno' || user.usuario === 'jcmorales' ? (
 
                                                 <>
                                                     {
@@ -173,7 +173,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
 
 
                                                 </>
-                                            ) : user === 'rquispe' || user === 'nquintana' || user === 'vlongo' ? (
+                                            ) : user.perfil === 3 && user.usuario === 'nquintana' || user.perfil === 1 ? (
                                                 <>
                                                     {row.original.liquidado === 0 ? (
 
@@ -340,7 +340,7 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                         Cell: (row) => (
                                             <>
 
-                                                {user === 'joaquini' || user === 'isantiago' || user === 'jmorales' || user === 'emoreno' || user === 'jcmorales' ? (
+                                                {user.usuario === 'joaquini' || user.usuario === 'isantiago' || user.usuario === 'jmorales' || user.usuario === 'emoreno' || user.usuario === 'jcmorales' ? (
 
                                                     <>
                                                         {
@@ -379,43 +379,46 @@ const Liquidacion = ({ liqguardias, liqtarad, regLiqGuardia, regLiqTareas, aprob
                                                     </>
 
                                                 ) : (
-                                                    <>
-                                                        {
-                                                            row.original.liquidado === 0 ? (
-                                                                <>
-                                                                    {
-                                                                        row.original.aprobado === 1 ? (
-                                                                            <button
-                                                                                href=""
-                                                                                className="btn btn-info btn-sm mr-1"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Liquidar"
-                                                                                onClick={() => regLiqTareas(row.original.idtarea)}
-                                                                            >
-                                                                                <i className="fa fa-check" aria-hidden="true"></i>   Liquidar
-                                                                            </button>
-                                                                        ) : row.original.aprobado === 0 ? (
-                                                                            <div>
-                                                                                Rechazado
-                                                                            </div>
-                                                                        ) : (
-                                                                            <div>
-                                                                                ...
-                                                                            </div>
-                                                                        )
-                                                                    }
+                                                    user.perfil === 3 && user.usuario === 'nquintana' || user.perfil === 1 ? (
 
-                                                                </>
-                                                            ) : row.original.liquidado === 1 ? (
+                                                        <>
+                                                            {
+                                                                row.original.liquidado === 0 ? (
+                                                                    <>
+                                                                        {
+                                                                            row.original.aprobado === 1 ? (
+                                                                                <button
+                                                                                    href=""
+                                                                                    className="btn btn-info btn-sm mr-1"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Liquidar"
+                                                                                    onClick={() => regLiqTareas(row.original.idtarea)}
+                                                                                >
+                                                                                    <i className="fa fa-check" aria-hidden="true"></i>   Liquidar
+                                                                                </button>
+                                                                            ) : row.original.aprobado === 0 ? (
+                                                                                <div>
+                                                                                    Rechazado
+                                                                                </div>
+                                                                            ) : (
+                                                                                <div>
+                                                                                    ...
+                                                                                </div>
+                                                                            )
+                                                                        }
 
-                                                                <div>
-                                                                    Liquidado por {row.original.operadorliq}: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
-                                                                </div>
+                                                                    </>
+                                                                ) : row.original.liquidado === 1 ? (
 
-                                                            ) : null
-                                                        }
-                                                    </>
+                                                                    <div>
+                                                                        Liquidado por {row.original.operadorliq}: {moment(row.original.fecha_liquidacion).format('DD/MM/YYYY HH:mm:ss')}
+                                                                    </div>
+
+                                                                ) : null
+                                                            }
+                                                        </>
+                                                    ) : (<div>Sin Acciones</div>)
                                                 )}
 
 
