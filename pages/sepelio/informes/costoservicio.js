@@ -127,7 +127,17 @@ const costoservicio = () => {
                             <div id="costo">
                                 <InformeCostoTotalServicio cajas={cajas} gastos={gastos} ataud={ataud} row={row} />
                             </div>
+
+                            <div className="border border-dark alert alert-primary p-4 d-flex justify-content-center">
+                                <div className="row ">
+                                    <div className="col-md-12">
+                                        <button className="btn btn-primary" onClick={() => imprimir("costo")}>Imprimir</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Cerrar</button>
                             <button type="button" className="btn btn-primary" onClick={() => imprimir('costo')}>Imprimir</button>

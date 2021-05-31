@@ -2,6 +2,7 @@ import React from 'react'
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from '../../layout/Spinner';
+import moment from 'moment'
 
 const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
 
@@ -17,8 +18,6 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
 
     }
 
-    console.log(row)
-
     return (
         <div className="container mt-4 border border-dark alert alert-primary">
 
@@ -31,61 +30,104 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
             </h2>
 
             {row ? (
-                <div className=" border border-dark p-4">
+                <>
+                    <div className="mt-2 border border-dark p-4">
+                        <h2>
+                            <strong>
+                                <u>Servicio N° {row.idservicio} - Extinto</u>: {row.apellido},{" "}
+                                {row.nombre}
+                            </strong>
+                        </h2>
+                        <div className="border border-dark p-4">
+                            <h4>
+                                <strong>
+                                    <u>
+                                        Detalles del servicio
+                    </u>
+                                </strong>
+                            </h4>
 
-                    <h4>
-                        <strong>
-                            <u>
-                                Datos del Servicio
-            </u>
-                        </strong>
-                    </h4>
+                            <div className="mt-2 row">
 
-                    <div className="mt-4 row border border-dark p-4">
-                        <div className="mt-4 col-md-4">
-                            <label>
-                                <u>Extinto</u>
-                            </label>
-                            <input className="form-control" defaultValue={`${row.apellido}, ${row.nombre}`} />
-                        </div>
+                                <div className=" col-md-4">
+                                    <label>
+                                        <u>
+                                            Fecha Recepcion
+                      </u>
+                                        <input type="text" className="mt-1 form-control" value={moment(row.fecha_recepcion).format('DD/MM/YYYY HH:mm:ss')} />
+                                    </label>
+                                </div>
 
-                        <div className="mt-4 col-md-4">
-                            <label>
-                                <u>DNI</u>
-                            </label>
-                            <input className="form-control" defaultValue={row.dni} />
-                        </div>
+                                <div className=" col-md-4">
+                                    <label>
+                                        <u>
+                                            Motivo Fallecimiento
+                      </u>
+                                        <input type="text" className="mt-1 form-control" value={row.motivo} />
+                                    </label>
+                                </div>
 
-                        <div className="mt-4 col-md-4">
-                            <label>
-                                <u>Fecha Fallecimiento</u>
-                            </label>
-                            <input className="form-control" defaultValue={row.fecha_fallecimiento} />
-                        </div>
+                                <div className=" col-md-4">
+                                    <label>
+                                        <u>
+                                            Tipo de Sevicio
+      </u>
+                                        <input type="text" className="mt-1 form-control" value={row.tipo_servicio} />
+                                    </label>
+                                </div>
 
-                        <div className="mt-4 col-md-4">
-                            <label>
-                                <u>Causa</u>
-                            </label>
-                            <input className="form-control" defaultValue={row.motivo} />
+                                <div className="mt-4 col-md-4">
+                                    <label>
+                                        <u>
+                                            Lugar de Fallecimiento
+      </u>
+                                        <input type="text" className="mt-1 form-control" value={row.lugar_fallecimiento} />
+                                    </label>
+                                </div>
+
+                                <div className="mt-4 col-md-4">
+                                    <label>
+                                        <u>
+                                            Velatorio
+      </u>
+                                        <input type="text" className="mt-1 form-control" value={row.casa_mortuaria} />
+                                    </label>
+                                </div>
+                                <div className="mt-4 col-md-4">
+                                    <label>
+                                        <u>
+                                            Fecha de inhumacion
+      </u>
+                                        <input type="text" className="mt-1 form-control" value={moment(row.fecha_inhumacion).format('DD/MM/YYYY')} />
+                                    </label>
+                                </div>
+                                <div className="mt-4 col-md-4">
+                                    <label>
+                                        <u>
+                                            Cementerio
+      </u>
+                                        <input type="text" className="mt-1 form-control" value={row.cementerio} />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </>
             ) : <Spinner />}
 
-            <div className="row border border-dark mt-4 p-4">
+            <div className="row border border-dark mt-2 p-4">
                 <div className="col-md-6">
                     <h4>
                         <strong>
                             <u>
-                                Gastos por tareas en servicio
+                                Liquidacion Final Del Personal
             </u>
                         </strong>
                     </h4>
 
                     {
                         !gastos ? (<div className="alert alert-info text-center text-uppercase">No hay Gastos registrados</div>) : (
-                            <div className="list mt-4 border border-dark ">
+                            <div className="list mt-2 border border-dark ">
                                 <ReactTable
                                     data={gastos}
                                     filterable
@@ -108,7 +150,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                     filterMethod: (filter, rows) =>
                                                         matchSorter(rows, filter.value, { keys: ["operador"] }),
                                                     filterAll: true,
-
+                                                    width: 100,
                                                 },
                                                 {
                                                     Header: "Concepto",
@@ -117,6 +159,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                     filterMethod: (filter, rows) =>
                                                         matchSorter(rows, filter.value, { keys: ["tipo_gasto"] }),
                                                     filterAll: true,
+                                                    width: 150,
 
                                                 },
                                                 {
@@ -126,6 +169,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                     filterMethod: (filter, rows) =>
                                                         matchSorter(rows, filter.value, { keys: ["monto"] }),
                                                     filterAll: true,
+                                                    width: 100,
 
                                                 },
 
@@ -156,7 +200,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
 
                     {!gastos ? (<div className="alert alert-info text-center text-uppercase">No hay Gastos registrados</div>) : (
 
-                        <div className="list mt-4 border border-dark ">
+                        <div className="list mt-2 border border-dark ">
                             <ReactTable
                                 data={cajas}
                                 filterable
@@ -179,6 +223,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["operador"] }),
                                                 filterAll: true,
+                                                width: 100,
 
                                             },
                                             {
@@ -188,6 +233,7 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["concepto"] }),
                                                 filterAll: true,
+                                                width: 150,
 
                                             },
                                             {
@@ -197,8 +243,10 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                                                 filterMethod: (filter, rows) =>
                                                     matchSorter(rows, filter.value, { keys: ["monto"] }),
                                                 filterAll: true,
+                                                width: 100,
 
                                             },
+
 
                                         ],
                                     },
@@ -210,11 +258,21 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                         </div>
 
                     )}
+
+
                 </div>
+
+                <div className="col-md-12">
+                    {gastos && cajas ? (
+                        <div className="mt-4 border border-dark alert alert-info text-center text-uppercase">Gasto Total Del Serivicio {parseInt(calcularTotal(cajas)) + parseInt(calcularTotal(gastos))}</div>
+
+                    ) : null}
+                </div>
+
             </div>
 
             {
-                !ataud ? (<div className="mt-4 border border-dark  alert alert-info text-center text-uppercase">No hay Ataud Registrado</div>) : (
+                !ataud ? (<div className="mt-2 border border-dark  alert alert-info text-center text-uppercase">No hay Ataud Registrado</div>) : (
                     <div className="border border-dark mt-4 p-4">
                         <h4>
                             <strong>
@@ -224,37 +282,37 @@ const InformeCostoTotalServicio = ({ cajas, gastos, ataud, row }) => {
                             </strong>
                         </h4>
 
-                        <div className="row border border-dark mt-4 p-4">
+                        <div className="row border border-dark mt-2 p-4">
 
-                            <div className="mt-4 col-md-4">
+                            <div className="mt-2 col-md-4">
                                 <label>
                                     <u>Ataud</u>:
             </label>
                                 <input className="form-control" defaultValue={ataud.nombre} />
                             </div>
 
-                            <div className="mt-4 col-md-3">
+                            <div className="mt-2 col-md-3">
                                 <label>
                                     <u>Tipo</u>:
             </label>
                                 <input className="form-control" defaultValue={ataud.tipo} />
                             </div>
 
-                            <div className="mt-4 col-md-3">
+                            <div className="mt-2 col-md-3">
                                 <label>
                                     <u>Uso</u>:
             </label>
                                 <input className="form-control" defaultValue={ataud.uso} />
                             </div>
 
-                            <div className="mt-4 col-md-3">
+                            <div className="mt-2 col-md-3">
                                 <label>
                                     <u>Medidas</u>:
             </label>
                                 <input className="form-control" defaultValue={ataud.medidas} />
                             </div>
 
-                            <div className="mt-4 col-md-3">
+                            <div className="mt-2 col-md-3">
                                 <label>
                                     <u>Fabricante</u>:
             </label>

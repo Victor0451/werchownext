@@ -246,6 +246,22 @@ const listado = () => {
                           </button>
 
                         </div>
+
+                        <div className="col-md-3 mt-4">
+
+                          <button
+                            className="btn btn-block btn-primary mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Cargar Gasto De Luto"
+                            data-dismiss="modal"
+                            onClick={() => push(row.dni, row.idservicio, "/socios/conformidad/conformidad")}
+
+                          >
+                            <i className="fa fa-sticky-note-o" aria-hidden="true"> Conformidad de No Servicio</i>
+                          </button>
+
+                        </div>
                       </div>
                     </div>
                   ) : null}

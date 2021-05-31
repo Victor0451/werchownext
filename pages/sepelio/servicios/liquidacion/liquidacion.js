@@ -10,6 +10,7 @@ import Router from 'next/router'
 
 const liquidacion = () => {
   const [ataud, guardarAtaud] = useState(null)
+  const [cajas, guardarCajas] = useState(null)
   const [parcela, guardarParcela] = useState(null)
   const [servicio, guardarServicio] = useState(null);
   const [servliq, guardarServliq] = useState(null);
@@ -45,7 +46,8 @@ const liquidacion = () => {
           guardarServliq(servliq);
 
           tarerAtaud(idataud)
-          tarerParcela(idservicio)
+          tarerParcela(id)
+          traerCajasSepelio(id)
 
         }
       })
@@ -229,6 +231,17 @@ const liquidacion = () => {
 
   }
 
+  const traerCajasSepelio = async (id) => {
+    await axios.get(`${ip}api/sepelio/informes/cajasepelio/${id}`)
+      .then(res => {
+        guardarCajas(res.data[0])
+        console.log(res.data[0])
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer las cajas", "ATENCION")
+        console.log(error)
+      })
+  }
 
   useEffect(() => {
     if (!token) {
@@ -246,7 +259,7 @@ const liquidacion = () => {
 
     }
   }, []);
-  
+
   return (
     <Layout>
       <ListadoServicios
@@ -261,6 +274,7 @@ const liquidacion = () => {
         aprobarGasto={aprobarGasto}
         regLiqGasto={regLiqGasto}
         ataud={ataud}
+        cajas={cajas}
         parcela={parcela}
 
       />

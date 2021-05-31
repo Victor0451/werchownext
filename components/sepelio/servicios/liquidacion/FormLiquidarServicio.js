@@ -4,7 +4,19 @@ import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
 import moment from 'moment'
 
-const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regLiqGasto, ataud, parcela }) => {
+const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regLiqGasto, ataud, parcela, cajas }) => {
+
+  const calcularTotal = (arr) => {
+
+    let total = 0
+
+    for (let i = 0; i < arr.length; i++) {
+      total += arr[i].monto
+    }
+
+    return total.toFixed(2)
+
+  }
 
   return (
     <div>
@@ -190,36 +202,6 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
 
       <hr className="mt-4 mb-4" />
 
-      {/* <table className="table table-sm">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table> */}
 
 
       {liqop ? (
@@ -426,6 +408,68 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
       }
 
       <hr className="mt-4 mb-4" />
+
+      {!cajas ? (<div className="alert alert-info text-center text-uppercase">No hay Gastos registrados</div>) : (
+
+        <div className="list mt-2 border border-dark ">
+          <ReactTable
+            data={cajas}
+            filterable
+            defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+            columns={[
+              {
+                Header: "Gastos Caja De Sepelio",
+                columns: [
+                  {
+                    Header: "#",
+                    id: "#",
+                    filterAll: false,
+                    width: 20,
+                    Cell: (row) => <div>{row.index + 1}</div>,
+                  },
+                  {
+                    Header: "Operador",
+                    id: "operador",
+                    accessor: (d) => d.operador,
+                    filterMethod: (filter, rows) =>
+                      matchSorter(rows, filter.value, { keys: ["operador"] }),
+                    filterAll: true,
+                    width: 100,
+
+                  },
+                  {
+                    Header: "Concepto",
+                    id: "concepto",
+                    accessor: (d) => d.concepto,
+                    filterMethod: (filter, rows) =>
+                      matchSorter(rows, filter.value, { keys: ["concepto"] }),
+                    filterAll: true,
+                    width: 150,
+
+                  },
+                  {
+                    Header: "Monto",
+                    id: "monto",
+                    accessor: (d) => d.monto,
+                    filterMethod: (filter, rows) =>
+                      matchSorter(rows, filter.value, { keys: ["monto"] }),
+                    filterAll: true,
+                    width: 100,
+
+                  },
+
+
+                ],
+              },
+            ]}
+            defaultPageSize={5}
+            className="-striped -highlight"
+          />
+          <div className="mt-4 border border-dark alert alert-info text-center text-uppercase">{calcularTotal(cajas)}</div>
+        </div>
+
+      )}
+
     </div >
   );
 };
