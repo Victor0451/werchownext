@@ -4,7 +4,20 @@ import matchSorter from "match-sorter";
 import Spinner from "../../../../components/layout/Spinner";
 import moment from 'moment'
 
-const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regLiqGasto, ataud, parcela, cajas }) => {
+const FormLiquidarServicio = ({
+  servicio,
+  liqop,
+  total,
+  user,
+  aprobarGasto,
+  regLiqGasto,
+  ataud,
+  parcela,
+  cajas,
+  acugascaja,
+  aculiqop,
+  servmes,
+}) => {
 
   const calcularTotal = (arr) => {
 
@@ -18,8 +31,23 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
 
   }
 
+
+
   return (
     <div>
+
+      <div className=" mb-4 card bg-info" >
+        <div className="card-header">
+          <h5><u>Informacion</u></h5>
+        </div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item text-uppercase">{servmes ? (<>Cantidad de servicios en el mes de : {servmes.cant}</>) : (<>No hay registros aun.</>)}</li>
+          <li className="list-group-item text-uppercase ">{aculiqop ? (<>Acumulado de Liquidaciones por servicio Realizadas: {aculiqop.cant}, Monto: $ {aculiqop.monto}</>) : (<>No hay registros aun.</>)}</li>
+          <li className="list-group-item text-uppercase">{acugascaja ? (<>Acumulado de gastos de caja: $ {acugascaja.total}</>) : (<>No hay registros aun.</>)}</li>
+        </ul>
+      </div>
+
+
       <div className="container border border-dark alert alert-primary p-4">
         {servicio ? (
           <>
@@ -401,7 +429,7 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
 
 
           <div className="mt-4 alert alert-info text-center text-uppercase border border-dark ">
-            Total Liquidacion del personal: {total(liqop)}
+            Total Liquidacion del personal: $ {total(liqop)}
           </div>
         </div>
       ) : null
@@ -411,64 +439,80 @@ const FormLiquidarServicio = ({ servicio, liqop, total, user, aprobarGasto, regL
 
       {!cajas ? (<div className="alert alert-info text-center text-uppercase">No hay Gastos registrados</div>) : (
 
-        <div className="list mt-2 border border-dark ">
-          <ReactTable
-            data={cajas}
-            filterable
-            defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
-            columns={[
-              {
-                Header: "Gastos Caja De Sepelio",
-                columns: [
-                  {
-                    Header: "#",
-                    id: "#",
-                    filterAll: false,
-                    width: 20,
-                    Cell: (row) => <div>{row.index + 1}</div>,
-                  },
-                  {
-                    Header: "Operador",
-                    id: "operador",
-                    accessor: (d) => d.operador,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["operador"] }),
-                    filterAll: true,
-                    width: 100,
 
-                  },
-                  {
-                    Header: "Concepto",
-                    id: "concepto",
-                    accessor: (d) => d.concepto,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["concepto"] }),
-                    filterAll: true,
-                    width: 150,
+        <div className=" border border-dark alert alert-primary mt-4 p-4">
+          <h4>
+            <strong>
+              <u>Gastos Por Caja de Sepelio</u>
+            </strong>
+          </h4>
 
-                  },
-                  {
-                    Header: "Monto",
-                    id: "monto",
-                    accessor: (d) => d.monto,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["monto"] }),
-                    filterAll: true,
-                    width: 100,
+          <div className="list mt-4 border border-dark ">
+            <ReactTable
+              data={cajas}
+              filterable
+              defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+              columns={[
+                {
+                  Header: "Gastos Caja De Sepelio",
+                  columns: [
+                    {
+                      Header: "#",
+                      id: "#",
+                      filterAll: false,
+                      width: 20,
+                      Cell: (row) => <div>{row.index + 1}</div>,
+                    },
+                    {
+                      Header: "Operador",
+                      id: "operador",
+                      accessor: (d) => d.operador,
+                      filterMethod: (filter, rows) =>
+                        matchSorter(rows, filter.value, { keys: ["operador"] }),
+                      filterAll: true,
+                      width: 150,
 
-                  },
+                    },
+                    {
+                      Header: "Concepto",
+                      id: "concepto",
+                      accessor: (d) => d.concepto,
+                      filterMethod: (filter, rows) =>
+                        matchSorter(rows, filter.value, { keys: ["concepto"] }),
+                      filterAll: true,
+                      width: 250,
+
+                    },
+                    {
+                      Header: "Monto",
+                      id: "monto",
+                      accessor: (d) => d.monto,
+                      filterMethod: (filter, rows) =>
+                        matchSorter(rows, filter.value, { keys: ["monto"] }),
+                      filterAll: true,
+                      width: 100,
+
+                    },
 
 
-                ],
-              },
-            ]}
-            defaultPageSize={5}
-            className="-striped -highlight"
-          />
-          <div className="mt-4 border border-dark alert alert-info text-center text-uppercase">{calcularTotal(cajas)}</div>
+                  ],
+                },
+              ]}
+              defaultPageSize={5}
+              className="-striped -highlight"
+            />
+          </div>
+          <div className="mt-4 border border-dark alert alert-info text-center text-uppercase">Total Gastos Por Caja de Sepelio:  $ {calcularTotal(cajas)}</div>
         </div>
 
       )}
+
+      {
+        cajas ? (
+          <div className="mt-4 border border-dark alert alert-info text-center text-uppercase">Total Gastos En este Servicio:  $ {parseInt(calcularTotal(cajas)) + parseInt(total(liqop))}</div>
+
+        ) : null
+      }
 
     </div >
   );

@@ -7,7 +7,24 @@ import moment from "moment";
 import axios from "axios";
 
 
-const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquidarServicio, total, user, aprobarGasto, regLiqGasto, ataud, parcela, cajas }) => {
+const ListadoServicios = ({
+  listado,
+  gastos,
+  traerGastos,
+  servliq,
+  liqop,
+  liquidarServicio,
+  total,
+  user,
+  aprobarGasto,
+  regLiqGasto,
+  ataud,
+  parcela,
+  cajas,
+  acugascaja,
+  aculiqop,
+  servmes,
+}) => {
   if (!listado) return <Spinner />;
 
 
@@ -186,6 +203,10 @@ const ListadoServicios = ({ listado, gastos, traerGastos, servliq, liqop, liquid
                 ataud={ataud}
                 parcela={parcela}
                 cajas={cajas}
+                acugascaja={acugascaja}
+                aculiqop={aculiqop}
+                servmes={servmes}
+
               />
             </div>
             <div className="modal-footer">

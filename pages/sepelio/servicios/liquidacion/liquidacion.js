@@ -17,6 +17,10 @@ const liquidacion = () => {
   const [gastos, guardarGastos] = useState(null);
   const [liqop, guardarLiqOp] = useState(null);
   const [usuario, guardarUsuario] = useState(null);
+  const [servmes, guardarServMes] = useState(null);
+  const [aculiqop, guardarAcuLiqOp] = useState(null);
+  const [acugascaja, guardarAcuGasCaja] = useState(null);
+
 
 
   let token = jsCookie.get("token");
@@ -243,12 +247,53 @@ const liquidacion = () => {
       })
   }
 
+
+  const serviciosDelMes = async (id) => {
+    await axios.get(`${ip}api/sepelio/informes/serviciosenelmes`)
+      .then(res => {
+        guardarServMes(res.data[0])
+
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer la informacion", "ATENCION")
+        console.log(error)
+      })
+  }
+
+  const acumuladoLiqOp = async (id) => {
+    await axios.get(`${ip}api/sepelio/informes/acumuladoliqop`)
+      .then(res => {
+        guardarAcuLiqOp(res.data[0])
+
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer las cajas", "ATENCION")
+        console.log(error)
+      })
+  }
+
+  const acumuladoGastoCaja = async (id) => {
+    await axios.get(`${ip}api/sepelio/informes/acumuladogastocaja`)
+      .then(res => {
+        guardarAcuGasCaja(res.data[0])
+
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al traer las cajas", "ATENCION")
+        console.log(error)
+      })
+  }
+
+
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
     } else {
 
       serviciosALiquidar();
+      serviciosDelMes()
+      acumuladoGastoCaja()
+      acumuladoLiqOp()
 
       let usuario = jsCookie.get("usuario");
 
@@ -276,6 +321,9 @@ const liquidacion = () => {
         ataud={ataud}
         cajas={cajas}
         parcela={parcela}
+        acugascaja={acugascaja}
+        aculiqop={aculiqop}
+        servmes={servmes}
 
       />
     </Layout>
