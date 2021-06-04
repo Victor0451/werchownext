@@ -36,16 +36,7 @@ const FormLiquidarServicio = ({
   return (
     <div>
 
-      <div className=" mb-4 card bg-info" >
-        <div className="card-header">
-          <h5><u>Informacion</u></h5>
-        </div>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item text-uppercase">{servmes ? (<>Cantidad de servicios en el mes de : {servmes.cant}</>) : (<>No hay registros aun.</>)}</li>
-          <li className="list-group-item text-uppercase ">{aculiqop ? (<>Acumulado de Liquidaciones por servicio Realizadas: {aculiqop.cant}, Monto: $ {aculiqop.monto}</>) : (<>No hay registros aun.</>)}</li>
-          <li className="list-group-item text-uppercase">{acugascaja ? (<>Acumulado de gastos de caja: $ {acugascaja.total}</>) : (<>No hay registros aun.</>)}</li>
-        </ul>
-      </div>
+
 
 
       <div className="container border border-dark alert alert-primary p-4">
@@ -230,7 +221,18 @@ const FormLiquidarServicio = ({
 
       <hr className="mt-4 mb-4" />
 
+      <div className=" mb-4 card bg-info" >
+        <div className="card-header">
+          <h5><u>Informacion</u></h5>
+        </div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item text-uppercase">{servmes ? (<>Cantidad de servicios en el mes de : {servmes.cant}</>) : (<>No hay registros aun.</>)}</li>
+          <li className="list-group-item text-uppercase ">{aculiqop ? (<>Acumulado de Liquidaciones por servicio Realizadas: {aculiqop.cant}, Monto: $ {aculiqop.monto}</>) : (<>No hay registros aun.</>)}</li>
+          <li className="list-group-item text-uppercase">{acugascaja ? (<>Acumulado de gastos de caja: $ {acugascaja.total}</>) : (<>No hay registros aun.</>)}</li>
+        </ul>
+      </div>
 
+      <hr className="mt-4 mb-4" />
 
       {liqop ? (
         <div className=" border border-dark alert alert-primary mt-4 p-4">

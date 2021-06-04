@@ -15,8 +15,8 @@ const GestionCaso = ({
   let modalnoti = "lgnoti";
 
   return (
-    <div className="container">
-      <h1 className="mt-4 mb-4">
+    <div className="mt-4 container border border-dark alert alert-primary">
+      <h1 className="mb-4">
         <u>
           {" "}
           Gestion Casos de {camp} - Casos asignados:{" "}
@@ -24,10 +24,10 @@ const GestionCaso = ({
         </u>
       </h1>
 
-      <nav>
-        <div className="nav nav-tabs" id="nav-tab" role="tablist">
+      <nav className="">
+        <div className="nav nav-tabs border border-dark p-1" id="nav-tab" role="tablist">
           <a
-            className="nav-item nav-link active"
+            className="nav-item nav-link active border border-dark"
             id="nav-home-tab"
             data-toggle="tab"
             href="#nav-home"
@@ -35,10 +35,10 @@ const GestionCaso = ({
             aria-controls="nav-home"
             aria-selected="true"
           >
-            Listado de Casos
+            <u>  Listado de Casos</u>
           </a>
           <a
-            className="nav-item nav-link"
+            className="nav-item nav-link border border-dark"
             id="nav-profile-tab"
             data-toggle="tab"
             href="#nav-profile"
@@ -46,10 +46,10 @@ const GestionCaso = ({
             aria-controls="nav-profile"
             aria-selected="false"
           >
-            Casos Trabajados
+            <u> Casos Trabajados</u>
           </a>
           <a
-            className="nav-item nav-link"
+            className="nav-item nav-link border border-dark"
             id="nav-contact-tab"
             data-toggle="tab"
             href="#nav-contact"
@@ -57,7 +57,7 @@ const GestionCaso = ({
             aria-controls="nav-contact"
             aria-selected="false"
           >
-            Casos Notificados
+            <u> Casos Notificados</u>
           </a>
         </div>
       </nav>
@@ -71,7 +71,7 @@ const GestionCaso = ({
         >
           {campanaOp.length === 0 ? (
             <>
-              <div className="alert alert-primary mt-4">
+              <div className="alert alert-info border border-dark text-center text-uppercase mt-4">
                 No Tienes Casos Asignados
               </div>
               <div className="d-flex justify-content-end">
@@ -86,6 +86,7 @@ const GestionCaso = ({
               operador={operador}
               modal={modalnuevo}
               userData={userData}
+              camp={camp}
             />
           )}
         </div>
@@ -97,7 +98,7 @@ const GestionCaso = ({
         >
           {campanaOpTrab.length === 0 ? (
             <>
-              <div className="alert alert-primary mt-4">
+              <div className="alert alert-info border border-dark text-center text-uppercase mt-4">
                 No Tienes Casos Trabajados
               </div>
               <div className="d-flex justify-content-end">
@@ -112,6 +113,8 @@ const GestionCaso = ({
               operador={operador}
               modal={modaltrab}
               userData={userData}
+              camp={camp}
+
             />
           )}
         </div>
@@ -124,7 +127,7 @@ const GestionCaso = ({
         >
           {campanaOpNoti.length === 0 ? (
             <>
-              <div className="alert alert-primary mt-4">
+              <div className="alert alert-info border border-dark text-center text-uppercase mt-4">
                 No Tienes Casos Notificados
               </div>
               <div className="d-flex justify-content-end">
@@ -139,6 +142,8 @@ const GestionCaso = ({
               operador={operador}
               modal={modalnoti}
               userData={userData}
+              camp={camp}
+
             />
           )}
         </div>

@@ -18,8 +18,7 @@ const campana = (porps) => {
   const {
     query: { empresa, operador, camp },
   } = router;
-
-  console.log(router.query)
+  
 
   const nuevosCasos = async () => {
     await axios

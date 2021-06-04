@@ -10,9 +10,10 @@ import Notificacion2 from "./Notificacion2";
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
-import {ip} from '../../config/config'
+import { ip } from '../../config/config'
+import ExportarPadron from "./ExportarPadron";
 
-const ListadoCasos = ({ campana, operador, modal, userData }) => {
+const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
   let fechaaccionRef = React.createRef();
   let fechaaccionnuevaRef = React.createRef();
   let obsRef = React.createRef();
@@ -199,127 +200,140 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
   let fechahoy = moment().format("YYYY-MM-DD");
   let componentRef = React.createRef();
   return (
-    <div className="mt-4 mb-4">
+    <div className="mt-4 mb-4 border border-dark alert alert-primary">
       <div className="d-flex justify-content-end">
-        <button className="btn btn-info btn-sm mb-2"
-          data-toggle="modal"
-          data-target={`.bd-example-modal-xl-todo`}
-        >IMPRIMIR TODAS LAS NOTIFICACIONES</button>
+        <div>
+          <button className="btn btn-info btn-sm mb-2"
+            data-toggle="modal"
+            data-target={`.bd-example-modal-xl-todo`}
+          >IMPRIMIR TODAS LAS NOTIFICACIONES</button>
+        </div>
+
+        <div>
+          <ExportarPadron
+            listado={casos}
+            camp={camp}
+
+          />
+        </div>
+
       </div>
-      <ReactTable
-        data={casos}
-        filterable
-        defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
-        columns={[
-          {
-            Header: "Cartera",
-            columns: [
-              {
-                Header: "Contrato",
-                id: "contrato",
-                accessor: (d) => d.contrato,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["contrato"] }),
-                filterAll: true,
-                width: 80,
-              },
-              {
-                Header: "Apellido",
-                id: "apellido",
-                accessor: (d) => d.apellido,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["apellido"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Nombre",
-                id: "nombre",
-                accessor: (d) => d.nombre,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["nombre"] }),
-                filterAll: true,
-              },
 
-              {
-                Header: "Calle",
-                id: "calle",
-                accessor: (d) => d.calle,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["calle"] }),
-                filterAll: true,
-              },
-              {
-                Header: "N°",
-                id: "nro_calle",
-                accessor: (d) => d.nro_calle,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["nro_calle"] }),
-                filterAll: true,
-                width: 50,
-              },
-              {
-                Header: "Barrio",
-                id: "barrio",
-                accessor: (d) => d.barrio,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["barrio"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Localidad",
-                id: "localidad",
-                accessor: (d) => d.localidad,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["localidad"] }),
-                filterAll: true,
-              },
-              {
-                Header: "Cuota",
-                id: "cuota",
-                accessor: (d) => d.cuota,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["cuota"] }),
-                filterAll: true,
-                width: 60,
-              },
+      <div className="list border border-dark">
+        <ReactTable
+          data={casos}
+          filterable
+          defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+          columns={[
+            {
+              Header: "Cartera",
+              columns: [
+                {
+                  Header: "Contrato",
+                  id: "contrato",
+                  accessor: (d) => d.contrato,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["contrato"] }),
+                  filterAll: true,
+                  width: 80,
+                },
+                {
+                  Header: "Apellido",
+                  id: "apellido",
+                  accessor: (d) => d.apellido,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["apellido"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "Nombre",
+                  id: "nombre",
+                  accessor: (d) => d.nombre,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["nombre"] }),
+                  filterAll: true,
+                },
 
-              {
-                Header: "Deuda",
-                id: "cuotasadeudadas",
-                accessor: (d) => d.cuotasadeudadas,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, {
-                    keys: ["cuotasadeudadas"],
-                  }),
-                filterAll: true,
-                width: 60,
-              },
-              {
-                Header: "Deuda Total",
-                id: "montoadeudado",
-                accessor: (d) => d.montoadeudado,
-                filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["montoadeudado"] }),
-                filterAll: true,
-                width: 100,
-              },
+                {
+                  Header: "Calle",
+                  id: "calle",
+                  accessor: (d) => d.calle,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["calle"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "N°",
+                  id: "nro_calle",
+                  accessor: (d) => d.nro_calle,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["nro_calle"] }),
+                  filterAll: true,
+                  width: 50,
+                },
+                {
+                  Header: "Barrio",
+                  id: "barrio",
+                  accessor: (d) => d.barrio,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["barrio"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "Localidad",
+                  id: "localidad",
+                  accessor: (d) => d.localidad,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["localidad"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "Cuota",
+                  id: "cuota",
+                  accessor: (d) => d.cuota,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["cuota"] }),
+                  filterAll: true,
+                  width: 60,
+                },
 
-              {
-                Header: "Acciones",
+                {
+                  Header: "Deuda",
+                  id: "cuotasadeudadas",
+                  accessor: (d) => d.cuotasadeudadas,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, {
+                      keys: ["cuotasadeudadas"],
+                    }),
+                  filterAll: true,
+                  width: 60,
+                },
+                {
+                  Header: "Deuda Total",
+                  id: "montoadeudado",
+                  accessor: (d) => d.montoadeudado,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["montoadeudado"] }),
+                  filterAll: true,
+                  width: 100,
+                },
 
-                Cell: (row) => (
-                  <div>
-                    {modal === "lgnoti" ? (
-                      <a
-                        href={"#"}
-                        className="btn btn-warning"
-                        data-toggle="modal"
-                        data-target={`.bd-example-modal-xl${modal}`}
-                        onClick={() => selcaso(row.index)}
-                      >
-                        Generar Notificacion
-                      </a>
-                    ) : (
+                {
+                  Header: "Acciones",
+
+                  Cell: (row) => (
+                    <div>
+                      {modal === "lgnoti" ? (
+                        <a
+                          href={"#"}
+                          className="btn btn-warning"
+                          data-toggle="modal"
+                          data-target={`.bd-example-modal-xl${modal}`}
+                          onClick={() => selcaso(row.index)}
+                        >
+                          Generar Notificacion
+                        </a>
+                      ) : (
                         <>
                           <a
                             href={"#"}
@@ -341,15 +355,16 @@ const ListadoCasos = ({ campana, operador, modal, userData }) => {
                           </a>
                         </>
                       )}
-                  </div>
-                ),
-              },
-            ],
-          },
-        ]}
-        defaultPageSize={10}
-        className="-striped -highlight"
-      />
+                    </div>
+                  ),
+                },
+              ],
+            },
+          ]}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+      </div>
 
       <div className="d-flex justify-content-end">
         <a className="mt-4 btn btn-danger" href="/campanas/campanas">
