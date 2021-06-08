@@ -10,6 +10,7 @@ const FormLiquidarServicio = ({
   total,
   user,
   aprobarGasto,
+  aprobarTodoGasto,
   regLiqGasto,
   ataud,
   parcela,
@@ -273,11 +274,43 @@ const FormLiquidarServicio = ({
 
       {liqop ? (
         <div className=" border border-dark alert alert-primary mt-4 p-4">
-          <h4>
-            <strong>
-              <u>Liquidacion del personal</u>
-            </strong>
-          </h4>
+          <div className="row">
+            <div className="col-md-7">
+              <h4>
+                <strong>
+                  <u>Liquidacion del personal</u>
+                </strong>
+              </h4>
+            </div>
+
+            <div className="col-md-5">
+              <button
+                className="btn btn-success btn-sm mr-1"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Aprobar"
+                onClick={(e) => {
+                  e.preventDefault();
+                  aprobarTodoGasto(1, user.usuario, servicio.idservicio);
+                }}
+              >
+                <i className="fa fa-check" aria-hidden="true"></i> Aprobar Todas
+              </button>
+
+              <button
+                className="btn btn-danger btn-sm "
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Rechazar"
+                onClick={() =>
+                  aprobarTodoGasto(0, user.usuario, servicio.idservicio)
+                }
+              >
+                <i className="fa fa-times" aria-hidden="true"></i> Rechazar
+                Todas
+              </button>
+            </div>
+          </div>
 
           <div className="list mt-4 border border-dark ">
             <ReactTable
@@ -403,14 +436,15 @@ const FormLiquidarServicio = ({
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="Aprobar"
-                                    onClick={() =>
+                                    onClick={(e) => {
+                                      e.preventDefault();
                                       aprobarGasto(
                                         row.original.idgastos,
                                         1,
-                                        user,
-                                        servicio.idservicio
-                                      )
-                                    }
+                                        user.usuario,
+                                        row.original.idservicio
+                                      );
+                                    }}
                                   >
                                     <i
                                       className="fa fa-check"
@@ -428,8 +462,8 @@ const FormLiquidarServicio = ({
                                       aprobarGasto(
                                         row.original.idgastos,
                                         0,
-                                        user,
-                                        servicio.idservicio
+                                        user.usuario,
+                                        row.original.idservicio
                                       )
                                     }
                                   >
@@ -439,7 +473,9 @@ const FormLiquidarServicio = ({
                                     ></i>
                                   </button>
                                 </>
-                              ) : null}
+                              ) : (
+                                <div>Rechazado</div>
+                              )}
                             </>
                           ) : (user.perfil === 3 &&
                               user.usuario === "nmquintana") ||

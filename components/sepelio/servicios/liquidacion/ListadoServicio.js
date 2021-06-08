@@ -6,7 +6,6 @@ import FormLiquidarServicio from "./FormLiquidarServicio";
 import moment from "moment";
 import axios from "axios";
 
-
 const ListadoServicios = ({
   listado,
   gastos,
@@ -17,6 +16,7 @@ const ListadoServicios = ({
   total,
   user,
   aprobarGasto,
+  aprobarTodoGasto,
   regLiqGasto,
   ataud,
   parcela,
@@ -26,8 +26,6 @@ const ListadoServicios = ({
   servmes,
 }) => {
   if (!listado) return <Spinner />;
-
-
 
   return (
     <div className="container border border-dark alert alert-primary mt-4 p-4">
@@ -119,15 +117,15 @@ const ListadoServicios = ({
                   filterAll: true,
                   Cell: (row) => (
                     <>
-                      {row.original.gastos_cargados === 0 ?
-                        (<div className="alert alert-success alert-sm text-center">
+                      {row.original.gastos_cargados === 0 ? (
+                        <div className="alert alert-success alert-sm text-center">
                           {row.original.gastos_cargados}
-                        </div>) : (
-                          <div className="alert alert-danger text-center">
-                            {row.original.gastos_cargados}
-                          </div>
-                        )}
-
+                        </div>
+                      ) : (
+                        <div className="alert alert-danger text-center">
+                          {row.original.gastos_cargados}
+                        </div>
+                      )}
                     </>
                   ),
                 },
@@ -138,12 +136,21 @@ const ListadoServicios = ({
                   Cell: (row) => (
                     <div>
                       {row.original.liquidado == 1 ? (
-                        <div><a href="#" data-toggle="modal" data-target="#liquidar"
-                          onClick={() =>
-                            traerGastos(row.original.idservicio, row.original)
-                          }
-                        >Liquidado {moment(row.original.fecha_liquidacion).utcOffset('+000').format('DD/MM/YYYY HH:mm:ss')}</a></div>
-
+                        <div>
+                          <a
+                            href="#"
+                            data-toggle="modal"
+                            data-target="#liquidar"
+                            onClick={() =>
+                              traerGastos(row.original.idservicio, row.original)
+                            }
+                          >
+                            Liquidado{" "}
+                            {moment(row.original.fecha_liquidacion)
+                              .utcOffset("+000")
+                              .format("DD/MM/YYYY HH:mm:ss")}
+                          </a>
+                        </div>
                       ) : (
                         <button
                           className="btn btn-sm btn-info btn-sm mr-1"
@@ -152,13 +159,19 @@ const ListadoServicios = ({
                           title="Ver Liquidacion"
                           data-target="#liquidar"
                           onClick={() =>
-                            traerGastos(row.original.idservicio, row.original, row.original.idataud)
+                            traerGastos(
+                              row.original.idservicio,
+                              row.original,
+                              row.original.idataud
+                            )
                           }
                         >
-                          <i className="fa fa-eye" aria-hidden="true"> Ver Liquidacion</i>
+                          <i className="fa fa-eye" aria-hidden="true">
+                            {" "}
+                            Ver Liquidacion
+                          </i>
                         </button>
                       )}
-
                     </div>
                   ),
                 },
@@ -206,7 +219,7 @@ const ListadoServicios = ({
                 acugascaja={acugascaja}
                 aculiqop={aculiqop}
                 servmes={servmes}
-
+                aprobarTodoGasto={aprobarTodoGasto}
               />
             </div>
             <div className="modal-footer">
