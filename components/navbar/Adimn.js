@@ -1,4 +1,5 @@
 import React from "react";
+import { ip } from "../../config/config";
 
 const Adimn = () => {
   return (
@@ -30,7 +31,10 @@ const Adimn = () => {
               </li>
               <hr />
               <li>
-                <a href="/cobranza/sucursales" className="dropdown-item text-dark">
+                <a
+                  href="/cobranza/sucursales"
+                  className="dropdown-item text-dark"
+                >
                   Efectividad de Cobranza Por Sucursales
                 </a>
               </li>
@@ -70,15 +74,17 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/sepelio/informes/balance" className="dropdown-item text-dark">
+                <a
+                  href="/sepelio/informes/balance"
+                  className="dropdown-item text-dark"
+                >
                   Balance Mensual
-            </a>
+                </a>
               </li>
             </ul>
           </li>
 
           <hr />
-
 
           <li className="dropdown-submenu">
             <a
@@ -96,7 +102,7 @@ const Adimn = () => {
                   className="dropdown-item text-dark"
                 >
                   Dias Festivos
-            </a>
+                </a>
               </li>
             </ul>
           </li>
@@ -117,7 +123,6 @@ const Adimn = () => {
           </li>
           <hr />
 
-
           <li>
             <a href="/mapas/maparec" className="dropdown-item text-dark">
               Recuperadores: Mapeo de liquidaciones por periodo
@@ -136,35 +141,43 @@ const Adimn = () => {
           Liquidacion
         </a>
         <ul className="dropdown-menu">
-
           <li>
-            <a href="/liquidacion/orgamerica" className="dropdown-item text-dark">
+            <a
+              href="/liquidacion/orgamerica"
+              className="dropdown-item text-dark"
+            >
               Org. America
             </a>
           </li>
           <hr />
           <li>
-            <a href="/sepelio/planificacion/liquidacion" className="dropdown-item text-dark">
+            <a
+              href="/sepelio/planificacion/liquidacion"
+              className="dropdown-item text-dark"
+            >
               Liquidacion Personal Sepelio
             </a>
           </li>
           <hr />
           <li>
-            <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+            <a
+              href="/sepelio/servicios/liquidacion/liquidacion"
+              className="dropdown-item text-dark"
+            >
               Liquidacion Tareas en Servicios
             </a>
           </li>
           <hr />
           <li>
-            <a href="/sepelio/servicios/venta/liquidacion" className="dropdown-item text-dark">
+            <a
+              href="/sepelio/servicios/venta/liquidacion"
+              className="dropdown-item text-dark"
+            >
               Liquidacion Ventas de Servicios
             </a>
           </li>
-
         </ul>
-
       </li>
-
 
       <li className="nav-item dropdown ">
         <a
@@ -353,6 +366,45 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Archivos (Descargas)
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Protocolo Inst. en domicilio
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-SOLI.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  ISJ - Solicitud de Pago
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-DDJJ.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  ISJ - Declaracion Jurada
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Autos
             </a>
             <ul className="dropdown-menu">
@@ -533,7 +585,6 @@ const Adimn = () => {
                   Planificar Guardias
                 </a>
               </li>
-
             </ul>
           </li>
           <hr />
@@ -733,7 +784,6 @@ const Adimn = () => {
                 </a>
               </li>
             </ul>
-
           </li>
 
           <hr />
@@ -807,9 +857,12 @@ const Adimn = () => {
           </li>
           <hr />
           <li>
-            <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+            <a
+              href="/ventas/precioplan/precios"
+              className="dropdown-item text-dark"
+            >
               Planes Vigentes
-                </a>
+            </a>
           </li>
         </ul>
       </li>

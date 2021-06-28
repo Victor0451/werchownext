@@ -136,14 +136,12 @@ const liquidacion = () => {
           },
         })
         .then((res) => {
-          if (res.status === 200) {
-            toastr.success("Liquidacion de gasto rechazada", "ATENCION");
+          toastr.success("Liquidacion de gasto rechazada", "ATENCION");
 
-            updateTareasApServicio(idservicio);
+          updateTareasApServicio(idservicio);
 
-            serviciosALiquidar();
-            traerGastos(idservicio);
-          }
+          serviciosALiquidar();
+          traerGastos(idservicio);
         })
         .catch((error) => {
           toastr.error(
@@ -187,13 +185,12 @@ const liquidacion = () => {
           },
         })
         .then((res) => {
-          if (res.status === 200) {
-            toastr.success("Liquidacion de gasto rechazada", "ATENCION");
+          toastr.success("Liquidacion de gasto rechazada", "ATENCION");
 
-            updateTareasApServicio(idservicio);
+          updateTareasApServicio(idservicio);
 
-            traerGastos(idservicio);
-          }
+          serviciosALiquidar();
+          traerGastos(idservicio);
         })
         .catch((error) => {
           toastr.error(

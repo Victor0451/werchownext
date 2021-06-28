@@ -4,7 +4,6 @@ export default class Gerencia extends Component {
   render() {
     return (
       <ul className="navbar-nav ">
-
         <li className="nav-item dropdown ">
           <a
             href="#"
@@ -13,7 +12,7 @@ export default class Gerencia extends Component {
             className="nav-link dropdown-toggle"
           >
             Informes
-        </a>
+          </a>
           <ul className="dropdown-menu">
             <li className="dropdown-submenu">
               <a
@@ -23,31 +22,40 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Cobranza
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/cobranza/resumen" className="dropdown-item text-dark">
+                  <a
+                    href="/cobranza/resumen"
+                    className="dropdown-item text-dark"
+                  >
                     Resumen Efectividad de Cobranza
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/cobranza/sucursales" className="dropdown-item text-dark">
+                  <a
+                    href="/cobranza/sucursales"
+                    className="dropdown-item text-dark"
+                  >
                     Efectividad de Cobranza Por Sucursales
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/cobranza/general" className="dropdown-item text-dark">
+                  <a
+                    href="/cobranza/general"
+                    className="dropdown-item text-dark"
+                  >
                     Efectividad de Cobranza General
-                </a>
+                  </a>
                 </li>
                 <hr />
 
                 <li>
                   <a href="/cobranza/mora" className="dropdown-item text-dark">
                     Efectividad de Mora
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -60,12 +68,15 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Sepelio
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/sepelio/informes/balance" className="dropdown-item text-dark">
+                  <a
+                    href="/sepelio/informes/balance"
+                    className="dropdown-item text-dark"
+                  >
                     Balance Mensual
-            </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -78,7 +89,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Calendario
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -86,7 +97,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Dias Festivos
-            </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -96,14 +107,14 @@ export default class Gerencia extends Component {
             <li>
               <a href="/mutual/movimientos" className="dropdown-item text-dark">
                 Mutual: Movimientos del Mes
-            </a>
+              </a>
             </li>
             <hr />
 
             <li>
               <a href="/mapas/mapaasesor" className="dropdown-item text-dark">
                 Asesores: Mapeo de ventas anual
-            </a>
+              </a>
             </li>
 
             <hr />
@@ -111,7 +122,7 @@ export default class Gerencia extends Component {
             <li>
               <a href="/mapas/maparec" className="dropdown-item text-dark">
                 Recuperadores: Mapeo de liquidaciones por periodo
-            </a>
+              </a>
             </li>
           </ul>
         </li>
@@ -124,34 +135,44 @@ export default class Gerencia extends Component {
             className="nav-link dropdown-toggle"
           >
             Liquidacion
-        </a>
+          </a>
           <ul className="dropdown-menu">
-
             <li>
-              <a href="/liquidacion/orgamerica" className="dropdown-item text-dark">
+              <a
+                href="/liquidacion/orgamerica"
+                className="dropdown-item text-dark"
+              >
                 Org. America
-            </a>
+              </a>
             </li>
             <hr />
             <li>
-              <a href="/sepelio/planificacion/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/planificacion/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Personal Sepelio
-            </a>
+              </a>
             </li>
             <hr />
             <li>
-              <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/servicios/liquidacion/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Tareas en Servicios
-            </a>
+              </a>
             </li>
             <hr />
             <li>
-              <a href="/sepelio/servicios/venta/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/servicios/venta/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Ventas de Servicios
-            </a>
+              </a>
             </li>
           </ul>
-
         </li>
 
         <li className="nav-item dropdown ">
@@ -316,17 +337,57 @@ export default class Gerencia extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
-                Autos
-            </a>
+                Archivos (Descargas)
+              </a>
               <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/sepelio/autos/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Ingresar Auto
-                </a>
-              </li>
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Protocolo Inst. en domicilio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-SOLI.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Solicitud de Pago
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-DDJJ.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Declaracion Jurada
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Autos
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/autos/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Ingresar Auto
+                  </a>
+                </li>
                 <hr />
                 <li>
                   <a
@@ -334,7 +395,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Autos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -407,7 +468,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Planificacion
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -415,9 +476,8 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Planificar Guardias
-                </a>
+                  </a>
                 </li>
-
               </ul>
             </li>
             <hr />
@@ -429,7 +489,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Proveedores
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -437,7 +497,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Ingresar Proveedor
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -446,7 +506,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Proveedores
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -471,14 +531,13 @@ export default class Gerencia extends Component {
                 </li>
                 <hr />
 
-
                 <li>
                   <a
                     href="/sepelio/servicios/gastoluto/listado"
                     className="dropdown-item text-dark"
                   >
                     Gasto de luto
-                </a>
+                  </a>
                 </li>
 
                 <hr />
@@ -506,7 +565,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Cargar Servicios Vendidos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -519,7 +578,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Parcelas
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -527,7 +586,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Stock Actual
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -540,7 +599,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Tareas
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -548,7 +607,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Nueva Tarea
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -557,7 +616,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Editar Tarea
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -566,7 +625,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Tareas Programadas
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -630,7 +689,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Convenio de Reconocimiento de Deuda
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -651,7 +710,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Gestion Turnos
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -659,7 +718,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Recepcion Bajas
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -668,7 +727,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Turnos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -703,7 +762,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Asesores
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -711,7 +770,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Legajo Virtual
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -766,7 +825,6 @@ export default class Gerencia extends Component {
                     Listado
                   </a>
                 </li>
-
               </ul>
             </li>
             <hr />
@@ -778,7 +836,7 @@ export default class Gerencia extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Obsequios
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -786,7 +844,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Nuevo Producto
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -795,7 +853,7 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Actualizar Stock
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -804,15 +862,18 @@ export default class Gerencia extends Component {
                     className="dropdown-item text-dark"
                   >
                     Stock
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
             <hr />
             <li>
-              <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+              <a
+                href="/ventas/precioplan/precios"
+                className="dropdown-item text-dark"
+              >
                 Planes Vigentes
-                </a>
+              </a>
             </li>
           </ul>
         </li>

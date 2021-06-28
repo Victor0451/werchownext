@@ -79,8 +79,47 @@ export default class Sepelio extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Archivos (Descargas)
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Protocolo Inst. en domicilio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-SOLI.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Solicitud de Pago
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-DDJJ.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Declaracion Jurada
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Autos
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -88,7 +127,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Ingresar Auto
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -97,7 +136,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Autos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -199,7 +238,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Gasto de luto
-                </a>
+                  </a>
                 </li>
 
                 <hr />
@@ -228,7 +267,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Cargar Servicios Vendidos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -262,7 +301,7 @@ export default class Sepelio extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Parcelas
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -270,7 +309,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Nueva Parcela
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -279,7 +318,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Stock Actual
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -292,7 +331,7 @@ export default class Sepelio extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Proveedores
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -300,7 +339,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Ingresar Proveedor
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -309,7 +348,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Proveedores
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -322,7 +361,7 @@ export default class Sepelio extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Tareas
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -330,7 +369,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Nueva Tarea
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -339,7 +378,7 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Editar Tarea
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -348,11 +387,10 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Tareas Programadas
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
-
           </ul>
         </li>
 
@@ -364,31 +402,36 @@ export default class Sepelio extends Component {
             className="nav-link dropdown-toggle"
           >
             Liquidacion
-        </a>
+          </a>
           <ul className="dropdown-menu">
-
-
             <li>
-              <a href="/sepelio/planificacion/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/planificacion/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Personal Sepelio
-            </a>
+              </a>
             </li>
             <hr />
             <li>
-              <a href="/sepelio/servicios/liquidacion/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/servicios/liquidacion/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Tareas en Servicios
-            </a>
+              </a>
             </li>
             <hr />
             <li>
-              <a href="/sepelio/servicios/venta/liquidacion" className="dropdown-item text-dark">
+              <a
+                href="/sepelio/servicios/venta/liquidacion"
+                className="dropdown-item text-dark"
+              >
                 Liquidacion Ventas de Servicios
-            </a>
+              </a>
             </li>
           </ul>
-
         </li>
-
       </ul>
     );
   }
