@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ip } from "../../config/config";
 
 export default class Gerencia extends Component {
   render() {

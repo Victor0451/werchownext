@@ -1,4 +1,5 @@
 import React from "react";
+import { ip } from "../../config/config";
 
 const Recuperadoras = ({ usuario }) => {
   return (
