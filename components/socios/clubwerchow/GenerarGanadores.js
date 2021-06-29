@@ -10,6 +10,7 @@ const GenerarGanadores = ({
   sociog,
   eliminarGanador,
   padronGanadores,
+  imprimir,
 }) => {
   const [ganador, guardarGanador] = useState([]);
   const [selec, guardarSelec] = useState(null);
@@ -107,15 +108,17 @@ const GenerarGanadores = ({
           </div>
 
           <br />
-          <div className="row mt-4">
-            <div className=" mt-4 mb-4 col-md-6">
-              <h6>Participantes</h6>
+          <div className="row  mt-4">
+            <div className=" mt-2 mb-4 col-md-6 border border-dark  list">
+              <h6 className="mt-4 mb-4">
+                <u>Participantes</u>
+              </h6>
               <div className="card">
-                <div>
+                <div className="verticalScroll">
                   {socio.map((part, index) => (
-                    <div className="row ml-2">
+                    <div className="row ml-2 ">
                       <div className="mt-2">*</div>
-                      <div className="mt-2 col-md-10" key={index}>
+                      <div className="mt-2 col-md-10 over" key={index}>
                         {part}
                       </div>
                     </div>
@@ -124,19 +127,23 @@ const GenerarGanadores = ({
               </div>
             </div>
 
-            <div className=" mt-4 mb-4 col-md-6">
-              <div className="row mb-2">
-                <div className="col-md-6">
-                  <h6>Ganadores</h6>
+            <div className="mt-2 mb-4 col-md-6 border border-dark  list">
+              <div className="row d-flex justify-content-center mt-4 mb-4">
+                <div className="col-md-6 mt-2 mb-4 ">
+                  <h6>
+                    <u>Ganadores</u>
+                  </h6>
                 </div>
 
                 <div className="col-md-6">
-                  <button className="btn btn-sm btn-primary" onClick={()=>imprimir("")}>Imprimir</button>
+                  <button className="btn btn-sm btn-primary" onClick={imprimir}>
+                    Imprimir
+                  </button>
                 </div>
               </div>
 
               <div className="card">
-                <div>
+                <div id="win">
                   {!sociog ? null : (
                     <>
                       {sociog.map((partg, index) => (
@@ -160,16 +167,6 @@ const GenerarGanadores = ({
                     </>
                   )}
                 </div>
-                {/* {ganador !== null ? (
-                  <div>
-                    {ganador.map((ganador, index) => (
-                      <div key={index}>
-                        {" "}
-                        {index + 1} - {ganador}
-                      </div>
-                    ))}
-                  </div>
-                ) : null} */}
               </div>
             </div>
           </div>

@@ -81,6 +81,17 @@ const realizarsorteo = () => {
     }
   };
 
+  const imprimir = () => {
+    let contenido = document.getElementById("win").innerHTML;
+    let contenidoOrg = document.body.innerHTML;
+
+    document.body.innerHTML = contenido;
+
+    window.print();
+
+    document.body.innerHTML = contenidoOrg;
+  };
+
   return (
     <Layout>
       {" "}
@@ -89,6 +100,7 @@ const realizarsorteo = () => {
         sociog={sociog}
         eliminarGanador={eliminarGanador}
         padronGanadores={padronGanadores}
+        imprimir={imprimir}
       />{" "}
     </Layout>
   );

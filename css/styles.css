@@ -1,5 +1,10 @@
 /* WERCHOW && MUTUAL LOGO */
 
+.verticalScroll {
+  height: 500px !important;
+  overflow-y: scroll !important;
+}
+
 .werchowlogo {
   width: 75px;
   height: 65px;

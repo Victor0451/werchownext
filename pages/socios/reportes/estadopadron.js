@@ -7,20 +7,20 @@ import ExportarPadron from "../../../components/socios/reportes/ExportarPadron";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import { zonaPer, zonaPal, zonaSP, zonaCC, zonas } from "../../../array/array";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const estadopadron = () => {
   let desdeRef = React.createRef();
   let hastaRef = React.createRef();
 
-  const [userData, guardarUsuario] = useState(null)
+  const [userData, guardarUsuario] = useState(null);
   const [cartera, guardarCartera] = useState(null);
   const [zona, guardarZona] = useState(null);
   const [mes, guardarMes] = useState(null);
   const [errores, guardarErrores] = useState(null);
   const [errorrango, guardarErrorRango] = useState(null);
   const [padron, guardarPadron] = useState(null);
-  const [listZona, guardarListZona] = useState(null)
+  const [listZona, guardarListZona] = useState(null);
 
   const handleChange = (value, flag) => {
     document.getElementById("cuotas").hidden = true;
@@ -77,6 +77,15 @@ const estadopadron = () => {
       } else if (cartera === 2) {
         (parametros.grupo = [3400, 3600, 3700, 3800, 3900, 4000]),
           (parametros.flag = 2);
+        if (zona === 1) {
+          parametros.sucursal = "W";
+        } else if (zona === 3) {
+          parametros.sucursal = "L";
+        } else if (zona === 5) {
+          parametros.sucursal = "R";
+        } else if (zona === 60) {
+          parametros.sucursal = "P";
+        }
       }
       //   BACHES BANCO
       else if (cartera === 3) {
@@ -132,8 +141,6 @@ const estadopadron = () => {
             (parametros.flag = 3);
         }
       }
-
-      console.log(parametros);
 
       await axios
         .get(`${ip}api/sgi/socios/estadocarteraw`, {
@@ -281,24 +288,25 @@ const estadopadron = () => {
     if (!token) {
       Router.push("/redirect");
     } else {
-
       let usuario = jsCookie.get("usuario");
 
       if (usuario) {
         let userData = JSON.parse(usuario);
 
-        if (userData.usuario === 'vgorosito') {
-          guardarListZona(zonaPer)
-        } else if (userData.usuario === 'mcarrizo') {
-          guardarListZona(zonaPal)
-        } else if (userData.usuario === 'sjuarez') {
-          guardarListZona(zonaSP)
-        } else if (userData.usuario === 'mgalian' || userData.usuario === 'ggimenez') {
-          guardarListZona(zonaCC)
+        if (userData.usuario === "vgorosito") {
+          guardarListZona(zonaPer);
+        } else if (userData.usuario === "mcarrizo") {
+          guardarListZona(zonaPal);
+        } else if (userData.usuario === "sjuarez") {
+          guardarListZona(zonaSP);
+        } else if (
+          userData.usuario === "mgalian" ||
+          userData.usuario === "ggimenez"
+        ) {
+          guardarListZona(zonaCC);
         } else {
-          guardarListZona(zonas)
+          guardarListZona(zonas);
         }
-
       }
     }
   }, []);
