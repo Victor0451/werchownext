@@ -3,9 +3,14 @@ import toastr from "toastr";
 import axios from "axios";
 import Ruleta from "../../layout/Ruleta";
 import moment from "moment";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
-const GenerarGanadores = ({ socio }) => {
+const GenerarGanadores = ({
+  socio,
+  sociog,
+  eliminarGanador,
+  padronGanadores,
+}) => {
   const [ganador, guardarGanador] = useState([]);
   const [selec, guardarSelec] = useState(null);
   const [premio, guardarPremio] = useState(0);
@@ -40,6 +45,8 @@ const GenerarGanadores = ({ socio }) => {
     } else if (socio.length === 0) {
       toastr.info("No Hay Mas Participantes", "Atencion");
     }
+
+    padronGanadores();
   };
 
   const regGanador = async (seleccion, premio) => {
@@ -98,6 +105,7 @@ const GenerarGanadores = ({ socio }) => {
               <img src="/img/premios.jpg" className="premios " />
             </div>
           </div>
+
           <br />
           <div className="row mt-4">
             <div className=" mt-4 mb-4 col-md-6">
@@ -105,16 +113,54 @@ const GenerarGanadores = ({ socio }) => {
               <div className="card">
                 <div>
                   {socio.map((part, index) => (
-                    <div key={index}>{part}</div>
+                    <div className="row ml-2">
+                      <div className="mt-2">*</div>
+                      <div className="mt-2 col-md-10" key={index}>
+                        {part}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
             </div>
 
             <div className=" mt-4 mb-4 col-md-6">
-              <h6>Ganadores</h6>
+              <div className="row mb-2">
+                <div className="col-md-6">
+                  <h6>Ganadores</h6>
+                </div>
+
+                <div className="col-md-6">
+                  <button className="btn btn-sm btn-primary" onClick={()=>imprimir("")}>Imprimir</button>
+                </div>
+              </div>
+
               <div className="card">
-                {ganador !== null ? (
+                <div>
+                  {!sociog ? null : (
+                    <>
+                      {sociog.map((partg, index) => (
+                        <>
+                          <div className="row ml-2 mb-2">
+                            <div className=" mt-2">{index + 1} -</div>
+                            <div className="mt-2 col-md-8" key={index}>
+                              {partg}
+                            </div>
+                            <div className="mt-2 col-md-3">
+                              <button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => eliminarGanador(partg)}
+                              >
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ))}
+                    </>
+                  )}
+                </div>
+                {/* {ganador !== null ? (
                   <div>
                     {ganador.map((ganador, index) => (
                       <div key={index}>
@@ -123,16 +169,10 @@ const GenerarGanadores = ({ socio }) => {
                       </div>
                     ))}
                   </div>
-                ) : null}
+                ) : null} */}
               </div>
             </div>
           </div>
-          <button
-            className="btn btn-primary col-12 d-flex justify-content-center"
-            onClick={buscarGanador}
-          >
-            Buscar Ganador
-          </button>
         </div>
       </div>
     </div>

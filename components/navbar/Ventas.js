@@ -53,6 +53,15 @@ export default class Ventas extends Component {
                     Solicitudes
                   </a>
                 </li>
+                <hr />
+                <li>
+                  <a
+                    href="/socios/clubwerchow/realizarsorteo"
+                    className="dropdown-item text-dark"
+                  >
+                    Realizar Sorteo
+                  </a>
+                </li>
               </ul>
             </li>
             <hr />
@@ -65,7 +74,7 @@ export default class Ventas extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Gestion Turnos
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -73,7 +82,7 @@ export default class Ventas extends Component {
                     className="dropdown-item text-dark"
                   >
                     Recepcion Bajas
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -82,7 +91,7 @@ export default class Ventas extends Component {
                     className="dropdown-item text-dark"
                   >
                     Listado Turnos
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -222,7 +231,7 @@ export default class Ventas extends Component {
                 className="  dropdown-toggle dropdown-item text-dark"
               >
                 Obsequios
-            </a>
+              </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
@@ -230,7 +239,7 @@ export default class Ventas extends Component {
                     className="dropdown-item text-dark"
                   >
                     Nuevo Producto
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -239,7 +248,7 @@ export default class Ventas extends Component {
                     className="dropdown-item text-dark"
                   >
                     Actualizar Stock
-                </a>
+                  </a>
                 </li>
                 <hr />
                 <li>
@@ -248,15 +257,18 @@ export default class Ventas extends Component {
                     className="dropdown-item text-dark"
                   >
                     Stock
-                </a>
+                  </a>
                 </li>
               </ul>
             </li>
             <hr />
             <li>
-              <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+              <a
+                href="/ventas/precioplan/precios"
+                className="dropdown-item text-dark"
+              >
                 Planes Vigentes
-                </a>
+              </a>
             </li>
           </ul>
         </li>

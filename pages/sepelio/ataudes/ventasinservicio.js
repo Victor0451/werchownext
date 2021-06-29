@@ -6,6 +6,7 @@ import Router from "next/router";
 import moment from "moment";
 import toastr from "toastr";
 import FormVentaSinServicio from "../../../components/sepelio/ataudes/FormVentaSinServicio";
+import { ip } from "../../../config/config";
 
 const ventasinservicio = () => {
   const [ataud, guardarStock] = useState(null);
@@ -24,7 +25,7 @@ const ventasinservicio = () => {
 
   return (
     <Layout>
-      <FormVentaSinServicio selcasofrm={selcasofrm} ataud={ataud}/>
+      <FormVentaSinServicio selcasofrm={selcasofrm} ataud={ataud} />
     </Layout>
   );
 };
