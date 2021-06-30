@@ -11,6 +11,7 @@ const GenerarGanadores = ({
   eliminarGanador,
   padronGanadores,
   imprimir,
+  eliminarGanadores,
 }) => {
   const [ganador, guardarGanador] = useState([]);
   const [selec, guardarSelec] = useState(null);
@@ -129,15 +130,23 @@ const GenerarGanadores = ({
 
             <div className="mt-2 mb-4 col-md-6 border border-dark  list">
               <div className="row d-flex justify-content-center mt-4 mb-4">
-                <div className="col-md-6 mt-2 mb-4 ">
+                <div className="col-md-4 mt-2 mb-4 ">
                   <h6>
                     <u>Ganadores</u>
                   </h6>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-3">
                   <button className="btn btn-sm btn-primary" onClick={imprimir}>
                     Imprimir
+                  </button>
+                </div>
+                <div className="col-md-4">
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={eliminarGanadores}
+                  >
+                    Eliminar Todos
                   </button>
                 </div>
               </div>

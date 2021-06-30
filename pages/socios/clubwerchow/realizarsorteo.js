@@ -56,10 +56,13 @@ const realizarsorteo = () => {
     await axios
       .delete(`${ip}api/clubwerchow/socios/eliminarganador/${id}`)
       .then((res) => {
-        console.log("eliminado");
+        if (res.status === 200) {
+          toastr.success("El ganador fue eliminado con exito", "Atencion");
+        }
       })
       .catch((error) => {
         console.log(error);
+        toastr.error("Ocurrio un error al eliminar al ganador", "Atencion");
       });
     padronGanadores();
   };
@@ -72,7 +75,6 @@ const realizarsorteo = () => {
         soc.push(`${array[i].participante} - ${array[i].dni}`);
       }
       guardarSocio(soc);
-      console.log(soc);
     } else if (f === "g") {
       for (let i = 0; i < array.length; i++) {
         soc.push(array[i].ganador);
@@ -92,6 +94,27 @@ const realizarsorteo = () => {
     document.body.innerHTML = contenidoOrg;
   };
 
+  const eliminarGanadores = async () => {
+    await axios
+      .delete(`${ip}api/clubwerchow/socios/eliminarganadores`)
+      .then((res) => {
+        if (res.status === 200) {
+          toastr.success(
+            "El listado de ganadores fue eliminado con exito",
+            "Atencion"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error(
+          "Ocurrio un error al eliminar el listado de ganadores",
+          "Atencion"
+        );
+      });
+    padronGanadores();
+  };
+
   return (
     <Layout>
       {" "}
@@ -101,6 +124,7 @@ const realizarsorteo = () => {
         eliminarGanador={eliminarGanador}
         padronGanadores={padronGanadores}
         imprimir={imprimir}
+        eliminarGanadores={eliminarGanadores}
       />{" "}
     </Layout>
   );
