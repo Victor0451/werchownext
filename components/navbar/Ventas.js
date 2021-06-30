@@ -183,21 +183,21 @@ export default class Ventas extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
-                Solicitudes
+                Solicitudes (Descargas)
               </a>
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    href="/ventas/solicitudes/ingresogenesis"
+                    href={`${ip}api/archivos/ventas/descargararchivo/solicitud-genesis.pdf`}
                     className="dropdown-item text-dark"
                   >
-                    Ingreso Genesis
+                    Solicitud Genesis
                   </a>
                 </li>
                 <hr />
                 <li>
                   <a
-                    href="/ventas/solicitudes/condicionesgenesis"
+                    href={`${ip}api/archivos/ventas/descargararchivo/condiciones-genesis.pdf`}
                     className="dropdown-item text-dark"
                   >
                     Condiciones Genesis
@@ -206,58 +206,37 @@ export default class Ventas extends Component {
                 <hr />
                 <li>
                   <a
-                    href="/ventas/solicitudes/prestadores"
+                    href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
                     className="dropdown-item text-dark"
                   >
-                    Prestadores
+                    Modificacion de Datos
                   </a>
                 </li>
                 <hr />
                 <li>
                   <a
-                    href="/ventas/solicitudes/prestadoresdorso"
+                    href={`${ip}api/archivos/ventas/descargararchivo/autorizacion-debito.pdf`}
                     className="dropdown-item text-dark"
                   >
-                    Prestadores Dorso
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <hr />
-            <li className="dropdown-submenu">
-              <a
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                className="  dropdown-toggle dropdown-item text-dark"
-              >
-                Obsequios
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    href="/ventas/obsequios/nuevo"
-                    className="dropdown-item text-dark"
-                  >
-                    Nuevo Producto
+                    Autorizacion de Retencion de Haberes
                   </a>
                 </li>
                 <hr />
                 <li>
                   <a
-                    href="/ventas/obsequios/actualizar"
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-10000.pdf`}
                     className="dropdown-item text-dark"
                   >
-                    Actualizar Stock
+                    Subsidio de 10000
                   </a>
                 </li>
                 <hr />
                 <li>
                   <a
-                    href="/ventas/obsequios/stock"
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-30000.pdf`}
                     className="dropdown-item text-dark"
                   >
-                    Stock
+                    Subsidio de 30000
                   </a>
                 </li>
               </ul>

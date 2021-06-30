@@ -109,6 +109,60 @@ export default class Sepelio extends Component {
                     ISJ - Declaracion Jurada
                   </a>
                 </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/solicitud-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud Genesis
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/condiciones-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Condiciones Genesis
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Modificacion de Datos
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/autorizacion-debito.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Autorizacion de Retencion de Haberes
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-10000.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Subsidio de 10000
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-30000.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Subsidio de 30000
+                  </a>
+                </li>
               </ul>
             </li>
             <hr />

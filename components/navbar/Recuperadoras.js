@@ -243,7 +243,7 @@ const Recuperadoras = ({ usuario }) => {
               className="dropdown-item text-dark"
             >
               Reportes Atrasados
-              </a>
+            </a>
           </li>
         </ul>
       </li>
@@ -258,6 +258,72 @@ const Recuperadoras = ({ usuario }) => {
           Ventas
         </a>
         <ul className="dropdown-menu">
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Solicitudes (Descargas)
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/solicitud-genesis.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud Genesis
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/condiciones-genesis.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Condiciones Genesis
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Modificacion de Datos
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/autorizacion-debito.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Autorizacion de Retencion de Haberes
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sub-10000.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Subsidio de 10000
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sub-30000.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Subsidio de 30000
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -285,14 +351,16 @@ const Recuperadoras = ({ usuario }) => {
                   Listado
                 </a>
               </li>
-
             </ul>
           </li>
           <hr />
           <li>
-            <a href="/ventas/precioplan/precios" className="dropdown-item text-dark">
+            <a
+              href="/ventas/precioplan/precios"
+              className="dropdown-item text-dark"
+            >
               Planes Vigentes
-                </a>
+            </a>
           </li>
         </ul>
       </li>

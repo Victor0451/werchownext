@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import jsCookies from "js-cookie";
-import Router from 'next/router'
+import Router from "next/router";
 
 const GestionCampanas = () => {
   let usuario = jsCookies.get("usuario");
@@ -17,8 +17,6 @@ const GestionCampanas = () => {
       guardarOperador(operadorNom);
     }
   });
-
-
 
   return (
     <div>
@@ -86,10 +84,9 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
-
                     </Link>
                   </div>
                 </div>
@@ -103,10 +100,13 @@ const GestionCampanas = () => {
                     <Link
                       href={{
                         pathname: "/campanas/gestioncaso/[campana]",
-                        query: { camp: 'Atrasados2', empresa: 'werchow', operador: operadorNom },
-
+                        query: {
+                          camp: "Atrasados2",
+                          empresa: "werchow",
+                          operador: operadorNom,
+                        },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -128,7 +128,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       {/* <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
@@ -154,7 +154,7 @@ const GestionCampanas = () => {
                           operador: "todos",
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
@@ -179,7 +179,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       {/* <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
@@ -204,7 +204,7 @@ const GestionCampanas = () => {
                           operador: "todos",
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <div className="alert alert-info text-center text-uppercase">
                         CAMPAÑA INHABILITADA
@@ -229,7 +229,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -251,7 +251,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -275,7 +275,31 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
+                    >
+                      <a className="btn btn-primary">Abrir Campaña</a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 mt-4">
+                <div className="card bg-light mb-3">
+                  <div className="card-header">CAMPAÑA AUXILIAR 2</div>
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      Campaña para gestionar casos especiales.
+                    </h5>
+                    <Link
+                      href={{
+                        pathname: "/campanas/gestioncaso/[campana]",
+                        query: {
+                          camp: "Recordatorio2",
+                          empresa: "werchow",
+                          operador: operadorNom,
+                        },
+                      }}
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -308,7 +332,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -330,7 +354,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -352,7 +376,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -374,7 +398,7 @@ const GestionCampanas = () => {
                           operador: operadorNom,
                         },
                       }}
-                      as='/campanas/gestioncaso/campana'
+                      as="/campanas/gestioncaso/campana"
                     >
                       <a className="btn btn-primary">Abrir Campaña</a>
                     </Link>
@@ -393,7 +417,7 @@ const GestionCampanas = () => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
