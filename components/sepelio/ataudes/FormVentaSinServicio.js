@@ -1,17 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 import Stock from "../ataudes/Stock";
 
-const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
-  console.log(ataud);
+const FormVentaSinServicio = ({
+  selcasofrm,
+  ataud,
+  socio,
+  buscarTitular,
+  buscarTitularM,
+  contratoRef,
+  errores,
+  apellidoFallRef,
+  nombreFallRef,
+  dniFallRef,
+  domFallRef,
+  nDomFallRef,
+  barrioFallRef,
+  telefonoFallRef,
+  apellidoSolRef,
+  nombreSolRef,
+  dniSolRef,
+  telefonoSolRef,
+  parentescoSolRef,
+  registrarVenta,
+  errval,
+}) => {
+  const [fallAp, guardarApFall] = useState("-");
+  const [fallNom, guardarNomFall] = useState("-");
+
+  const garbApFall = () => {
+    if (apellidoFallRef.current.value === "") {
+      guardarApFall("-");
+    } else {
+      guardarApFall(`${apellidoFallRef.current.value}`);
+    }
+  };
+
+  const garbNomFall = () => {
+    if (nombreFallRef.current.value === "") {
+      guardarNomFall("-");
+    } else {
+      guardarNomFall(`${nombreFallRef.current.value}`);
+    }
+  };
+
   return (
     <div className="container mt-4 border border-dark alert alert-primary p-4">
-      <h2>
-        <strong>
-          <u>Venta de Ataudes sin servicio</u>
-        </strong>
-      </h2>
+      <div className="row">
+        <div className="col-md-8">
+          <h2>
+            <strong>
+              <u>Venta de Ataudes sin servicio</u>
+            </strong>
+          </h2>
+        </div>
+
+        <div className="col-md-4">
+          <a
+            className="btn btn-info btn-block btn-sm"
+            href="/sepelio/ataudes/listadoventassinservicio"
+          >
+            Listado de ventas Realizadas
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-4 mb-4 alert alert-warning border border-dark text-center text-uppercase">
+        Esta seccion del sistema esta diseñada exclusivamente para la venta de
+        ataudes sin la solicitud de un servicio.
+      </div>
 
       <div className="mt-4 border border-dark p-4">
+        <h4>
+          <strong>
+            <u>Datos del ataud</u>
+          </strong>
+        </h4>
         <div className="row">
           <div className="col-md-4">
             <button
@@ -87,18 +150,34 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
       </div>
 
       <div className="mt-4 border border-dark p-4">
-        <div className="row d-flex justify-content-center">
-          <div className="border border-dark col-md-5">
-            <div className="col-md-12">
+        <h4>
+          <strong>
+            <u>Datos del fallecido</u>
+          </strong>
+        </h4>
+        <div className=" mt-4 row d-flex justify-content-center">
+          <div className="row border border-dark col-md-5">
+            <div className="col-md-6">
               <button
                 className="mt-4 btn btn-primary btn-block"
                 data-toggle="modal"
                 data-target="#afiliado"
+                onClick={buscarTitular}
               >
-                Buscar Afiliado
+                Werchow
               </button>
             </div>
-            <div className="col-md-12 mt-4 mb-4">
+            <div className="col-md-6">
+              <button
+                className="mt-4 btn btn-primary btn-block"
+                data-toggle="modal"
+                data-target="#afiliado"
+                onClick={buscarTitularM}
+              >
+                Mutual
+              </button>
+            </div>
+            <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
                   <u>Contrato:</u>
@@ -108,8 +187,24 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                 type="text"
                 className="form-control"
                 placeholder="Contrato"
+                ref={contratoRef}
               />
             </div>
+            {socio ? (
+              <div className="col-md-8 mt-4 mb-4">
+                <label>
+                  <strong>
+                    <u>Socio:</u>
+                  </strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={`${socio.APELLIDOS}, ${socio.NOMBRES}`}
+                  readOnly
+                />
+              </div>
+            ) : null}
           </div>
 
           <div className="border border-dark col-md-5 ml-1">
@@ -122,9 +217,126 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                 Particular
               </button>
             </div>
+
+            <div className="mt-4 ">
+              <label>
+                <strong>
+                  <u>Fallecido:</u>
+                </strong>
+              </label>
+              <div className=" col-md-12 form-control">
+                {fallAp !== "-" ? <>{fallAp}, </> : null}
+                {fallNom !== "-" ? <>{fallNom}</> : null}
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div className="border border-dark mt-4 p-4">
+        <h4>
+          <strong>
+            <u>Datos del solicitante</u>
+          </strong>
+        </h4>
+        <div className="mt-4 row border border-dark p-4">
+          <div className="col-md-4 mt-4 ">
+            <label>
+              <strong>
+                <u>Apellido Solicitante:</u>
+              </strong>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Apellido Solicitante"
+              ref={apellidoSolRef}
+            />
+          </div>
+
+          <div className="col-md-4 mt-4 ">
+            <label>
+              <strong>
+                <u>Nombre Solicitante:</u>
+              </strong>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Nombre Solicitante"
+              ref={nombreSolRef}
+            />
+          </div>
+
+          <div className="col-md-4 mt-4 ">
+            <label>
+              <strong>
+                <u>DNI Solicitante:</u>
+              </strong>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="DNI Solicitante"
+              ref={dniSolRef}
+            />
+          </div>
+
+          <div className="col-md-4 mt-4 ">
+            <label>
+              <strong>
+                <u>Telefono Solicitante:</u>
+              </strong>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Telefono Solicitante"
+              ref={telefonoSolRef}
+            />
+          </div>
+
+          <div className="col-md-4 mt-4 ">
+            <label>
+              <strong>
+                <u>Parentesco:</u>
+              </strong>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Parentesco"
+              ref={parentescoSolRef}
+            />
+          </div>
+        </div>
+      </div>
+
+      {errval ? (
+        <div className="mt-4 mb-4 alert alert-danger text-center text-uppercase border border-dark">
+          {errval}
+        </div>
+      ) : null}
+
+      <div className="border border-dark p-4 mt-4">
+        <div className="row">
+          <div className="col-md-6">
+            <button
+              className="btn btn-block btn-primary"
+              onClick={registrarVenta}
+            >
+              Registrar Venta
+            </button>
+          </div>
+          <div className="col-md-6">
+            <a className="btn btn-block btn-danger" href="/">
+              Cancelar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* -----------------------  MODALES ------------------------------- */}
 
       {/* MODAL ATAUD */}
       <div
@@ -227,72 +439,81 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                     <div className="col-md-4 mt-4 ">
                       <label>
                         <strong>
-                          <u>Apellido Solicitante:</u>
+                          <u>DNI:</u>
                         </strong>
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Apellido Solicitante"
+                        defaultValue={socio.NRO_DOC}
+                        readOnly
+                      />
+                    </div>
+
+                    <div className="col-md-8 mt-4 ">
+                      <label>
+                        <strong>
+                          <u>Domicilio:</u>
+                        </strong>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        defaultValue={`${socio.CALLE} - N° ${socio.NRO_CALLE}`}
+                        readOnly
                       />
                     </div>
 
                     <div className="col-md-4 mt-4 ">
                       <label>
                         <strong>
-                          <u>Nombre Solicitante:</u>
+                          <u>Barrio:</u>
                         </strong>
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Nombre Solicitante"
+                        defaultValue={socio.BARRIO}
+                        readOnly
                       />
                     </div>
 
                     <div className="col-md-4 mt-4 ">
                       <label>
                         <strong>
-                          <u>DNI Solicitante:</u>
+                          <u>Telefono:</u>
                         </strong>
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="DNI Solicitante"
+                        defaultValue={socio.TELEFONO}
+                        readOnly
                       />
                     </div>
 
                     <div className="col-md-4 mt-4 ">
                       <label>
                         <strong>
-                          <u>Telefono Solicitante:</u>
+                          <u>Movil:</u>
                         </strong>
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Telefono Solicitante"
-                      />
-                    </div>
-
-                    <div className="col-md-4 mt-4 ">
-                      <label>
-                        <strong>
-                          <u>Parentesco:</u>
-                        </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Parentesco"
+                        defaultValue={socio.MOVIL}
+                        readOnly
                       />
                     </div>
                   </div>
                 ) : (
-                  <div className="border border-dark alert alert-info text-center text-uppercase">
-                    El N° de Contrato No pertenece a un socio registrado
-                  </div>
+                  <>
+                    {errores ? (
+                      <div className="border border-dark alert alert-danger text-center text-uppercase">
+                        {errores}
+                      </div>
+                    ) : null}
+                  </>
                 )}
               </div>
               <div className="modal-footer">
@@ -346,6 +567,8 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       type="text"
                       className="form-control"
                       placeholder="Apellido Fallecido"
+                      ref={apellidoFallRef}
+                      onChange={garbApFall}
                     />
                   </div>
 
@@ -359,6 +582,8 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       type="text"
                       className="form-control"
                       placeholder="Nombre Fallecido"
+                      ref={nombreFallRef}
+                      onChange={garbNomFall}
                     />
                   </div>
 
@@ -369,9 +594,10 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       </strong>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       placeholder="DNI Fallecido"
+                      ref={dniFallRef}
                     />
                   </div>
 
@@ -385,6 +611,7 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       type="text"
                       className="form-control"
                       placeholder="Domicilio Fallecido"
+                      ref={domFallRef}
                     />
                   </div>
 
@@ -395,9 +622,10 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       </strong>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       placeholder="N°"
+                      ref={nDomFallRef}
                     />
                   </div>
 
@@ -411,71 +639,21 @@ const FormVentaSinServicio = ({ selcasofrm, ataud, socio }) => {
                       type="text"
                       className="form-control"
                       placeholder="Barrio"
+                      ref={barrioFallRef}
                     />
                   </div>
 
-                  <div className="col-md-4 mt-4 ">
+                  <div className="col-md-4 mt-4">
                     <label>
                       <strong>
-                        <u>Apellido Solicitante:</u>
+                        <u>Telefono:</u>
                       </strong>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
-                      placeholder="Apellido Solicitante"
-                    />
-                  </div>
-
-                  <div className="col-md-4 mt-4 ">
-                    <label>
-                      <strong>
-                        <u>Nombre Solicitante:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Nombre Solicitante"
-                    />
-                  </div>
-
-                  <div className="col-md-4 mt-4 ">
-                    <label>
-                      <strong>
-                        <u>DNI Solicitante:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="DNI Solicitante"
-                    />
-                  </div>
-
-                  <div className="col-md-4 mt-4 ">
-                    <label>
-                      <strong>
-                        <u>Telefono Solicitante:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Telefono Solicitante"
-                    />
-                  </div>
-
-                  <div className="col-md-4 mt-4 ">
-                    <label>
-                      <strong>
-                        <u>Parentesco:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Parentesco"
+                      placeholder="Telefono"
+                      ref={telefonoFallRef}
                     />
                   </div>
                 </div>

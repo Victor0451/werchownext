@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import matchSorter from "match-sorter";
 import axios from "axios";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 // Import React Table
 import ReactTable from "react-table";
@@ -10,12 +10,11 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
   const [ataudes, guardarAtaudes] = useState(null);
 
   const mostrarAtaudes = async () => {
-
     await axios
       .get(`${ip}api/sepelio/ataudes/cantidad`, {
         params: {
-          flag: fl
-        }
+          flag: fl,
+        },
       })
       .then((res) => {
         let ataudes = res.data;
@@ -38,19 +37,22 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
     );
 
   const calcularTotal = (arr) => {
-    let total = 0
+    let total = 0;
 
     for (let i = 0; i < arr.length; i++) {
-      total += arr[i].stock
+      total += arr[i].stock;
     }
-    return total
-  }
+    return total;
+  };
 
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
       <h3 className="mt-4 mb-4">
         <strong>
-          <u>Stock de Ataudes</u> {fl === 1 ? (<>- Cantidad Actual {calcularTotal(ataudes)} Ataudes</>) : null}
+          <u>Stock de Ataudes</u>{" "}
+          {fl === 1 ? (
+            <>- Cantidad Actual {calcularTotal(ataudes)} Ataudes</>
+          ) : null}
         </strong>
       </h3>
       <div className=" mt-4 border border-dark list">
@@ -145,7 +147,10 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
                           onClick={() => selcasofrm(row)}
                           data-dismiss="modal"
                         >
-                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          <i
+                            className="fa fa-pencil-square"
+                            aria-hidden="true"
+                          ></i>
                         </button>
                       ) : (
                         <>
@@ -155,9 +160,9 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
                             data-toggle="tooltip"
                             data-placement="top"
                             title="Actualizar Datos"
-                          //onClick={() => selcaso(row)}
+                            //onClick={() => selcaso(row)}
                           >
-                            <i class="fa fa-book" aria-hidden="true"></i>
+                            <i className="fa fa-book" aria-hidden="true"></i>
                           </button>
                           <button
                             type="button"
@@ -165,9 +170,9 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
                             data-toggle="tooltip modal"
                             data-placement="top"
                             title="Dar de Baja"
-                          //onClick={() => selcaso(row)}
+                            //onClick={() => selcaso(row)}
                           >
-                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <i className="fa fa-times" aria-hidden="true"></i>
                           </button>
                         </>
                       )}

@@ -464,6 +464,24 @@ const Adimn = () => {
                   Stock Actual
                 </a>
               </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/ataudes/ventasinservicio"
+                  className="dropdown-item text-dark"
+                >
+                  Venta De Ataud Sin Servicio
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/sepelio/ataudes/listadoventassinservicio"
+                  className="dropdown-item text-dark"
+                >
+                  Listado Se Ataudes Vendidos
+                </a>
+              </li>
             </ul>
           </li>
           <hr />
