@@ -17,6 +17,13 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
           <img src="/img/logo.png" className="werchowlogo" />
         </div>
 
+        <div className="alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase">
+          Se deja establecido que, por razones de Salud Pública, en todos los
+          casos el retiro del cuerpo del Sanatorio u Hospital, será dentro de
+          las 24 hs. del día y hora determinado, y comunicado, por el cementerio
+          o crematorio.-
+        </div>
+
         <div className="mt-4 alert alert-primary border border-dark p-4">
           <div className="d-flex justify-content-between">
             <h2 className="  col-8">
