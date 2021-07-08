@@ -3,7 +3,7 @@ import matchSorter from "match-sorter";
 import Spinner from "../../layout/Spinner";
 import ReactTable from "react-table";
 
-const ListadoVentasSinServicio = ({ listado }) => {
+const ListadoVentasSinServicio = ({ listado, eliminarVentaSinServ }) => {
   if (!listado) return <Spinner />;
   return (
     <div className="mt-4 container borde border-dark alert alert-primary p-4">
@@ -128,7 +128,20 @@ const ListadoVentasSinServicio = ({ listado }) => {
                 {
                   Header: "Acciones",
 
-                  Cell: (row) => <div></div>,
+                  Cell: (row) => (
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm mr-1"
+                        data-toggle="tooltip modal"
+                        data-placement="top"
+                        title="Dar de Baja"
+                        onClick={() => eliminarVentaSinServ(row.original)}
+                      >
+                        <i className="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  ),
                 },
               ],
             },
