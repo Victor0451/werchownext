@@ -6,7 +6,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import Router from "next/router";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -27,16 +27,12 @@ const nueva_noticia = () => {
 
   const operadorRef = React.createRef();
   const fechaRef = React.createRef();
+  const perfilRef = React.createRef();
 
   const [error, guardarError] = useState(false);
 
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarNoticia, nuevanoticia);
+  const { valores, errores, handleChange, handleSubmit, handleBlur } =
+    useValidacion(STATE_INICIAL, validarNoticia, nuevanoticia);
 
   const { noticia } = valores;
 
@@ -46,13 +42,18 @@ const nueva_noticia = () => {
         operador: operadorRef.current.value,
         fecha: moment(fechaRef).format("YYYY-MM-DD HH:mm:ss"),
         noticia,
+        perfil: perfilRef.current.value,
       };
 
-      await axios
-        .post(`${ip}api/sgi/noticia/nuevanoticia`, noti)
-        .then((res) => {
-          toastr.success("La Noticia se registro con exito", "ATENCION");
-        });
+      if (noti.perfil === "no") {
+        guardarError("Debes elegir el perfil de quien vera la noticia");
+      } else {
+        await axios
+          .post(`${ip}api/sgi/noticia/nuevanoticia`, noti)
+          .then((res) => {
+            toastr.success("La Noticia se registro con exito", "ATENCION");
+          });
+      }
     } catch (error) {
       console.log(error.response.data, error.response.status, "LOGIN_FAIL");
       guardarError(error.response.data.msg);
@@ -76,6 +77,8 @@ const nueva_noticia = () => {
             fechaRef={fechaRef}
             today={today}
             usuario={usuario}
+            perfilRef={perfilRef}
+            error={error}
           />
         </div>
       )}

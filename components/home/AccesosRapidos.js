@@ -1,6 +1,9 @@
 import React from "react";
 
-const AccesosRapidos = () => {
+const AccesosRapidos = ({ user }) => {
+  if (!user) return null;
+
+  console.log(user);
   return (
     <div className="container">
       <div className="row d-flex justify-content-center">
@@ -50,6 +53,55 @@ const AccesosRapidos = () => {
           </div>
         </div>{" "}
       </div>
+
+      {user === 4 ? (
+        <div className="row d-flex justify-content-center">
+          <div className="card col-md-3 text-white bg-info mb-3 mr-1">
+            <div className="card-header">Nuevo Servicio</div>
+            <div className="card-body">
+              <a
+                className="btn btn-secondary btn-block text-dark"
+                href="/sepelio/servicios/nuevo"
+              >
+                Cargar Servicio
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido a la seccion que te permite registrar
+                un nuevo servicio en el sistema
+              </p>
+            </div>
+          </div>{" "}
+          <div className="card col-md-4 text-white bg-info mb-3">
+            <div className="card-header">Nueva Caja de Sepelio</div>
+            <div className="card-body">
+              <a
+                className="btn btn-secondary btn-block text-dark"
+                href="/sepelio/caja/nuevo"
+              >
+                Cargar Caja Sepelio
+              </a>
+              <p className="card-text mt-2">
+                Acceso rapido para registrar una nueva caja de sepelio.
+              </p>
+            </div>
+          </div>
+          <div className="card col-md-3 text-white bg-info mb-3 ml-1">
+            <div className="card-header">Stock Ataudes</div>
+            <div className="card-body">
+              <a
+                className="btn btn-secondary btn-block text-dark"
+                href="/sepelio/ataudes/stock"
+              >
+                Ver Stock Ataudes
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido al Stock de ataudes para poder ver y
+                gestinar la exitencia de los mismos.
+              </p>
+            </div>
+          </div>{" "}
+        </div>
+      ) : null}
     </div>
   );
 };

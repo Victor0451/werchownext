@@ -47,14 +47,35 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
 
   return (
     <div className="container mt-4 border border-dark alert alert-primary">
-      <h3 className="mt-4 mb-4">
-        <strong>
-          <u>Stock de Ataudes</u>{" "}
-          {fl === 1 ? (
-            <>- Cantidad Actual {calcularTotal(ataudes)} Ataudes</>
-          ) : null}
-        </strong>
-      </h3>
+      <div className="row">
+        <div className="col-md-8">
+          <h3 className="mt-4 mb-4">
+            <strong>
+              <u>Stock de Ataudes</u>{" "}
+              {fl === 1 ? (
+                <>- Cantidad Actual {calcularTotal(ataudes)} Ataudes</>
+              ) : null}
+            </strong>
+          </h3>
+        </div>
+        <div className="col-md-2">
+          <a
+            className="mt-4 btn btn-sm btn-info "
+            href="/sepelio/ataudes/nuevo"
+          >
+            Ingresar Nuevo Ataud
+          </a>
+        </div>
+        <div className="col-md-2">
+          <a
+            className="mt-4 btn btn-sm btn-warning text-dark"
+            href="/sepelio/ataudes/actualizarstock"
+          >
+            Actualizar Stock
+          </a>
+        </div>
+      </div>
+
       <div className=" mt-4 border border-dark list">
         <ReactTable
           data={ataudes}

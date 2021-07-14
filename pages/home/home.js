@@ -4,7 +4,7 @@ import BuscarSocio from "../../components/buscar/BuscarSocio";
 import Noticias from "../../components/noticias/Noticias";
 import jsCookie from "js-cookie";
 import axios from "axios";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 
 // Validaciones
 import useValidacion from "../../hooks/useValidacion";
@@ -24,6 +24,13 @@ const home = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.perfil);
+      }
     }
   }, []);
 
@@ -32,14 +39,10 @@ const home = () => {
   const [socioRes, guardarSocio] = useState(null);
   const [socioGest, guardarGestion] = useState(null);
   const [listSocio, guardarListSocio] = useState(null);
+  const [user, guardarUsuario] = useState(null);
 
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarBuscarSocio, buscarSocio);
+  const { valores, errores, handleChange, handleSubmit, handleBlur } =
+    useValidacion(STATE_INICIAL, validarBuscarSocio, buscarSocio);
 
   const { socio, dni, apellido } = valores;
 
@@ -53,9 +56,7 @@ const home = () => {
 
       if (socio) {
         await axios
-          .get(
-            `${ip}api/sgi/campanas/buscarcaso/${socio}`
-          )
+          .get(`${ip}api/sgi/campanas/buscarcaso/${socio}`)
 
           .then((res) => {
             if (res.data === null) {
@@ -67,9 +68,7 @@ const home = () => {
           });
 
         await axios
-          .get(
-            `${ip}api/sgi/campanas/buscargestioncaso/${socio}`
-          )
+          .get(`${ip}api/sgi/campanas/buscargestioncaso/${socio}`)
 
           .then((res) => {
             const socioGest = res.data;
@@ -77,9 +76,7 @@ const home = () => {
           });
       } else if (dni) {
         await axios
-          .get(
-            `${ip}api/sgi/campanas/buscarcasodni/${dni}`
-          )
+          .get(`${ip}api/sgi/campanas/buscarcasodni/${dni}`)
 
           .then((res) => {
             if (res.data === null) {
@@ -102,9 +99,7 @@ const home = () => {
           });
       } else if (apellido) {
         await axios
-          .get(
-            `${ip}api/sgi/campanas/buscarcasoapellido/${apellido}`
-          )
+          .get(`${ip}api/sgi/campanas/buscarcasoapellido/${apellido}`)
 
           .then((res) => {
             if (res.data === null) {
@@ -123,21 +118,23 @@ const home = () => {
   return (
     <Layout>
       <div>
-        <Noticias />
-        <AccesosRapidos />
-        <BuscarSocio
-          socio={socio}
-          dni={dni}
-          apellido={apellido}
-          errores={errores}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleBlur={handleBlur}
-          error={error}
-          socioGest={socioGest}
-          socioRes={socioRes}
-          listSocio={listSocio}
-        />
+        <Noticias user={user} />
+        <AccesosRapidos user={user} />
+        {user === 2 ? (
+          <BuscarSocio
+            socio={socio}
+            dni={dni}
+            apellido={apellido}
+            errores={errores}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleBlur={handleBlur}
+            error={error}
+            socioGest={socioGest}
+            socioRes={socioRes}
+            listSocio={listSocio}
+          />
+        ) : null}
       </div>
     </Layout>
   );

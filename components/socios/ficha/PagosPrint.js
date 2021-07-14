@@ -29,12 +29,12 @@ const PagosPrint = ({ pagos, ficha, empresa }) => {
       <h2 className="mt-2 mb-4">
         <strong>
           <u>
-            Socio: {ficha.APELLIDOS}, {ficha.NOMBRES}
+            Socio: {ficha.CONTRATO} - {ficha.APELLIDOS}, {ficha.NOMBRES}
           </u>
         </strong>
       </h2>
 
-      <table className="table table-sm border border-dark">
+      <table className="table table-sm border border-dark list text-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

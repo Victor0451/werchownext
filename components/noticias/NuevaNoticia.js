@@ -9,6 +9,7 @@ const NuevaNoticia = ({
   noticia,
   operadorRef,
   fechaRef,
+  perfilRef,
   today,
   usuario,
 }) => {
@@ -22,7 +23,7 @@ const NuevaNoticia = ({
         </h2>
         <form className="" onSubmit={handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <label>Fecha</label>
               <input
                 type="text"
@@ -34,7 +35,7 @@ const NuevaNoticia = ({
                 onBlur={handleBlur}
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <label>Operador</label>
               <input
                 type="text"
@@ -46,6 +47,15 @@ const NuevaNoticia = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+            </div>
+            <div className="col-md-4">
+              <label>Perfil</label>
+              <select className="custom-select" ref={perfilRef}>
+                <option value="no" selected>Selecciona quien vera la noticia</option>
+                <option value="3">Gerencia</option>
+                <option value="2">Ventas</option>
+                <option value="4">Sepelio</option>
+              </select>
             </div>
             <div className="col-md-12 mt-4">
               <textarea
@@ -65,6 +75,13 @@ const NuevaNoticia = ({
               )}
             </div>
           </div>
+
+          {error ? (
+            <div className="mt-4 mb-4 alert alert-danger border border-dark text-center text-uppercase">
+              {error}
+            </div>
+          ) : null}
+
           <button type="submit" className="btn btn-primary mt-4 btn-block">
             Registrar Noticia
           </button>

@@ -16,7 +16,7 @@ const AdhPrint = ({ adhs }) => {
           <u>Adherentes</u>
         </strong>
       </h2>
-      <table className="table table-sm border border-dark">
+      <table className="table table-sm border border-dark list text-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

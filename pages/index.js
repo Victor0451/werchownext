@@ -4,7 +4,7 @@ import LoginUsuario from "../components/auth/LoginUsuario";
 import axios from "axios";
 import Router from "next/router";
 import jsCookie from "js-cookie";
-import { ip } from '../config/config'
+import { ip } from "../config/config";
 
 // Validaciones
 import useValidacion from "../hooks/useValidacion";
@@ -18,13 +18,8 @@ const STATE_INICIAL = {
 const Login = () => {
   const [error, guardarError] = useState(false);
 
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarIniciarSession, iniciarSession);
+  const { valores, errores, handleChange, handleSubmit, handleBlur } =
+    useValidacion(STATE_INICIAL, validarIniciarSession, iniciarSession);
 
   const { usuario, contrasena } = valores;
 
@@ -41,20 +36,14 @@ const Login = () => {
 
       const body = JSON.stringify({ usuario, contrasena });
 
-      await axios
-        .post(`${ip}api/sgi/auth/auth`, body, config)
-        .then((res) => {
-          const usuario = res.data.user;
-          console.log(usuario);
-          jsCookie.set("token", res.data.token);
-          jsCookie.set("usuario", usuario);
+      await axios.post(`${ip}api/sgi/auth/auth`, body, config).then((res) => {
+        const usuario = res.data.user;
+        console.log(usuario);
+        jsCookie.set("token", res.data.token);
+        jsCookie.set("usuario", usuario);
 
-          if (usuario.perfil === 4) {
-            Router.push("/socios/ficha/ficha");
-          } else {
-            Router.push("/home/home");
-          }
-        });
+        Router.push("/home/home");
+      });
     } catch (error) {
       console.log(error.response.data, error.response.status, "LOGIN_FAIL");
       guardarError(error.response.data.msg);
