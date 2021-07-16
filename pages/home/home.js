@@ -120,7 +120,7 @@ const home = () => {
       <div>
         <Noticias user={user} />
         <AccesosRapidos user={user} />
-        {user === 2 ? (
+        {user == 2 || user == 1 || user == 5 ? (
           <BuscarSocio
             socio={socio}
             dni={dni}

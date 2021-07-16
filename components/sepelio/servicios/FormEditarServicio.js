@@ -5,7 +5,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import Spinner from "../../layout/Spinner";
 import Stock from "../ataudes/Stock";
-import ListadoParcelas from "../parcelas/ListadoParcelas";
+
 import {ip} from '../../../config/config'
 
 const FormEditarServicio = ({ servicio }) => {
@@ -43,7 +43,6 @@ const FormEditarServicio = ({ servicio }) => {
   let retiroRef = React.createRef();
   let solicitadoRef = React.createRef();
   let parentescoRef = React.createRef();
-  let idparcelaRef = React.createRef();
   let idataudRef = React.createRef();
 
   const traerAtaud = async (idataud) => {
@@ -122,13 +121,7 @@ const FormEditarServicio = ({ servicio }) => {
     //   });
   };
 
-  const selcasoparcela = (row) => {
-    guardarParcela(row.original);
 
-    // document.getElementById("parcela").value = `${row.original.parcela}`;
-    // document.getElementById("mza").value = `${row.original.mza}`;
-    // document.getElementById("lote").value = `${row.original.lote}`;
-  };
 
   const selcasofrm = (row) => {
     document.getElementById("ataud").value = `${row.original.nombre}`;
@@ -489,116 +482,7 @@ const FormEditarServicio = ({ servicio }) => {
           </div>
         </div>
 
-        {servicio.plan !== "Particular" ? (
-          <>
-            <div>
-              <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
-                {parcela ? (
-                  <div className="alert alert-info text-center border border-dark">
-                    <h5>
-                      <strong>
-                        <u>Parcela Actual</u>
-                      </strong>
-                    </h5>
-                    <div className="row d-flex justify-content-center">
-                      <div className="col-md-2 mt-4 mb-4">
-                        <label>
-                          <strong>
-                            <u>Parcela: {parcela.idparcela}</u>
-                          </strong>
-                        </label>
-                      </div>
-                      <div className="col-md-2 mt-4 mb-4">
-                        <label>
-                          <strong>{/* <u>Mza: {parcela[0].mza}</u> */}</strong>
-                        </label>
-                      </div>
-                      <div className="col-md-2 mt-4 mb-4">
-                        <label>
-                          <strong>
-                            {/* <u>Lote: {parcela[0].lote}</u> */}
-                          </strong>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mb-4 alert alert-info text-center text-uppercase">
-                    No tiene parcela registrada
-                  </div>
-                )}
-
-                <h2 className="mt-2">
-                  <strong>
-                    <u>Parcela</u>
-                  </strong>
-                </h2>
-
-                <div className="row d-flex justify-content-center">
-                  <div className="col-md-2 mt-4 mb-4">
-                    <label>
-                      <strong>
-                        <u>Parcela:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Parcela"
-                      name="parcela"
-                      id="parcela"
-                      ref={idparcelaRef}
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-md-4 mt-4 mb-4">
-                    <label>
-                      <strong>
-                        <u>Manzana:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Manzana"
-                      name="mza"
-                      id="mza"
-                      readOnly
-                    />
-                  </div>
-
-                  <div className="col-md-2 mt-4 mb-4">
-                    <label>
-                      <strong>
-                        <u>Lote:</u>
-                      </strong>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Lote"
-                      name="lote"
-                      id="lote"
-                      readOnly
-                    />
-                  </div>
-
-                  <div className=" col-md-4 mt-4 mb-4">
-                    <button
-                      type="button"
-                      className="mt-4 btn btn-primary btn-block"
-                      data-toggle="modal"
-                      data-target="#stockparcela"
-                    >
-                      Stock
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
+     
 
         <hr />
 
@@ -791,44 +675,7 @@ const FormEditarServicio = ({ servicio }) => {
         </div>
       </div>
 
-      <div
-        className="modal fade"
-        id="stockparcela"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Stock Parcelas
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <ListadoParcelas selcasoparcela={selcasoparcela} />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };
