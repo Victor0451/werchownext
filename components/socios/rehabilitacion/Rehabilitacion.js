@@ -17,7 +17,7 @@ const Rehabilitacion = ({
   vigencia,
   vigenciaRef,
   error,
-  cuotas
+  cuotas,
 }) => {
   let fecha = moment().format("DD/MM/YYYY");
 
@@ -338,11 +338,7 @@ const Rehabilitacion = ({
                     </button>
                   </div>
                   <div className="modal-body ">
-                    <div
-                      id="solicitud"
-                      className="mt-4 container "
-                    //ref={(el) => (componentRef = el)}
-                    >
+                    <div id="solicitud" className="mt-4 container ">
                       <NotaRehabilitacion
                         ficha={ficha}
                         fecha={fecha}
@@ -358,15 +354,6 @@ const Rehabilitacion = ({
                           Opciones
                         </h3>
                         <div className="row d-flex justify-content-center">
-                          {/* <ReactToPrint
-              trigger={() => (
-                <a href="#" className="btn btn-primary">
-                  imprimir{" "}
-                </a>
-              )}
-              content={() => componentRef}
-            /> */}
-
                           <button
                             className="btn btn-primary"
                             onClick={imprimir}
