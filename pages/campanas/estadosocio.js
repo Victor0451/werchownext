@@ -6,7 +6,7 @@ import axios from "axios";
 import toastr from "toastr";
 import JsCookie from "js-cookie";
 import Router from "next/router";
-import {ip} from '../../config/config'
+import { ip } from "../../config/config";
 
 const estadosocio = () => {
   let token = JsCookie.get("token");
@@ -20,7 +20,6 @@ const estadosocio = () => {
   const [campana, guardarCampana] = useState({});
   const [empresa, guardarEmpresa] = useState({});
   const [array, guardarArray] = useState({});
-
   const [perico, guardarPerico] = useState({});
   const [palpala, guardarPalpala] = useState({});
   const [sanPedro, guardarSanPedro] = useState({});
@@ -44,7 +43,6 @@ const estadosocio = () => {
     let CasaCentral = array.filter((at) => {
       return at.SUCURSAL === "W";
     });
-
 
     // DIVIDIR EN DOS
 
@@ -89,6 +87,30 @@ const estadosocio = () => {
           segmentacion(array);
 
           const campana = "Atrasados";
+          guardarCampana(campana);
+
+          const empresa = "W";
+          guardarEmpresa(empresa);
+        } else if (res.data[0].length === 0) {
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("La tabla no fue creada", "ATENCION");
+      });
+  };
+
+  const buscarAT2 = async () => {
+    await axios
+      .get(`${ip}api/sgi/campanas/at2W`)
+      .then((res) => {
+        if (res.data[0].length > 0) {
+          const array = res.data[0];
+          guardarArray(array);
+          segmentacion(array);
+
+          const campana = "Atrasados2";
           guardarCampana(campana);
 
           const empresa = "W";
@@ -249,6 +271,30 @@ const estadosocio = () => {
       });
   };
 
+  const buscarAT2M = async () => {
+    await axios
+      .get(`${ip}api/sgi/campanasM/at2M`)
+      .then((res) => {
+        if (res.data[0].length > 0) {
+          const array = res.data[0];
+          guardarArray(array);
+          segmentacion(array);
+
+          const campana = "Atrasados2";
+          guardarCampana(campana);
+
+          const empresa = "M";
+          guardarEmpresa(empresa);
+        } else if (res.data[0].length === 0) {
+          toastr.warning("No se encuentran casos para asignar", "ATENCION");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("La tabla no fue creada", "ATENCION");
+      });
+  };
+
   const buscarRecM = async () => {
     await axios
       .get(`${ip}api/sgi/campanasM/recM`)
@@ -327,6 +373,8 @@ const estadosocio = () => {
         array={array}
         buscarAT={buscarAT}
         buscarATM={buscarATM}
+        buscarAT2={buscarAT2}
+        buscarAT2M={buscarAT2M}
         buscarRec={buscarRec}
         buscarRecM={buscarRecM}
         buscarRein={buscarRein}
@@ -341,7 +389,7 @@ const estadosocio = () => {
         <AsignarCampana
           CasaCentralMG={CasaCentralMG}
           CasaCentralGG={CasaCentralGG}
-         // CasaCentralVF={CasaCentralVF}
+          // CasaCentralVF={CasaCentralVF}
           perico={perico}
           palpala={palpala}
           sanPedro={sanPedro}
@@ -349,14 +397,12 @@ const estadosocio = () => {
           campana={JSON.stringify(campana)}
         />
       ) : (
-          <div className="container">
-            <div className=" mt-4 border border-dark alert alert-info text-dark text-center p-4">
-              <h3>
-                <u>Busca si existen casos disponibles para asignar</u>
-              </h3>
-            </div>
+        <div className="container">
+          <div className=" mt-4 border border-dark alert alert-info text-dark text-center text-uppercase p-4">
+            <u>Busca si existen casos disponibles para asignar</u>
           </div>
-        )}
+        </div>
+      )}
     </Layout>
   );
 };

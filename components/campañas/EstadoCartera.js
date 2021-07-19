@@ -3,6 +3,8 @@ import React from "react";
 const EstadoCartera = ({
   buscarAT,
   buscarATM,
+  buscarAT2,
+  buscarAT2M,
   buscarRec,
   buscarRecM,
   buscarRein,
@@ -33,6 +35,17 @@ const EstadoCartera = ({
             aria-selected="true"
           >
             Atrasados {""}
+          </a>
+          <a
+            className="nav-item nav-link "
+            id="nav-at2-tab"
+            data-toggle="tab"
+            href="#nav-at2"
+            role="tab"
+            aria-controls="nav-at2"
+            aria-selected="false"
+          >
+            Atrasados2 {""}
           </a>
           <a
             className="nav-item nav-link"
@@ -132,6 +145,47 @@ const EstadoCartera = ({
             </div>
             <div className="col-md-6">
               <button className="btn btn-primary btn-block" onClick={buscarATM}>
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ATRASADOS2 */}
+        <div
+          className="tab-pane fade  "
+          id="nav-at2"
+          role="tabpanel"
+          aria-labelledby="nav-at2-tab"
+        >
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
+            <div className="col-md-6">
+              <h4>
+                <strong>
+                  <u>Buscar Cartera At2 - WERCHOW</u>
+                </strong>
+              </h4>
+            </div>
+            <div className="col-md-6">
+              <button className="btn btn-primary btn-block" onClick={buscarAT2}>
+                Buscar
+              </button>
+            </div>
+          </div>
+
+          <div className="border border-dark alert alert-primary p-4 row mt-4">
+            <div className="col-md-6">
+              <h4>
+                <strong>
+                  <u>Buscar Cartera At2 - MUTUAL</u>
+                </strong>
+              </h4>
+            </div>
+            <div className="col-md-6">
+              <button
+                className="btn btn-primary btn-block"
+                onClick={buscarAT2M}
+              >
                 Buscar
               </button>
             </div>

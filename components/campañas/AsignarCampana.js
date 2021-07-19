@@ -4,7 +4,7 @@ import ListadoCampana from "./ListadoCampana";
 import BotonCamp from "./BotonCamp";
 import toastr from "toastr";
 import axios from "axios";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 
 const AsignarCampana = ({
   CasaCentralMG,
@@ -44,6 +44,7 @@ const AsignarCampana = ({
           sucursal: array[i].SUCURSAL,
           contrato: array[i].CONTRATO,
           apellido: array[i].APELLIDOS,
+          edad: array[i].EDAD,
           nombre: array[i].NOMBRES,
           dni: array[i].NRO_DOC,
           telefono: array[i].TELEFONO,
@@ -106,6 +107,14 @@ const AsignarCampana = ({
                   id={11}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={CasaCentralMG}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={67}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={CasaCentralMG}
@@ -156,6 +165,14 @@ const AsignarCampana = ({
                   camp={"At"}
                   emp={"Mutual"}
                   id={28}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={CasaCentralMG}
+                  camp={"At2"}
+                  emp={"Mutual"}
+                  id={70}
                   fn={crearCampana}
                 />
               ) : campana === '"Recuperacion"' ? (
@@ -214,6 +231,14 @@ const AsignarCampana = ({
                   id={12}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={CasaCentralGG}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={68}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={CasaCentralGG}
@@ -266,6 +291,14 @@ const AsignarCampana = ({
                   id={29}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={CasaCentralGG}
+                  camp={"At2"}
+                  emp={"Mutual"}
+                  id={71}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={CasaCentralGG}
@@ -296,7 +329,6 @@ const AsignarCampana = ({
         </div>
         <ListadoCampana listado={CasaCentralGG} />
       </div>
-
 
       {/* VISUALIZAR CAMP DE LA TERCERA RECUPERADORA */}
 
@@ -435,12 +467,28 @@ const AsignarCampana = ({
                   id={14}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={perico}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={67}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={perico}
                   camp={"Rec"}
                   emp={"Werchow"}
                   id={4}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={perico}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={67}
                   fn={crearCampana}
                 />
               ) : campana === '"Reincidente"' ? (
@@ -485,6 +533,14 @@ const AsignarCampana = ({
                   camp={"At"}
                   emp={"Mutual"}
                   id={31}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={perico}
+                  camp={"At2M"}
+                  emp={"Mutual"}
+                  id={70}
                   fn={crearCampana}
                 />
               ) : campana === '"Recuperacion"' ? (
@@ -543,6 +599,14 @@ const AsignarCampana = ({
                   id={13}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={palpala}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={67}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={palpala}
@@ -593,6 +657,14 @@ const AsignarCampana = ({
                   camp={"At"}
                   emp={"Mutual"}
                   id={30}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={palpala}
+                  camp={"At2"}
+                  emp={"Mutual"}
+                  id={70}
                   fn={crearCampana}
                 />
               ) : campana === '"Recuperacion"' ? (
@@ -651,6 +723,14 @@ const AsignarCampana = ({
                   id={15}
                   fn={crearCampana}
                 />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={sanPedro}
+                  camp={"At2"}
+                  emp={"Werchow"}
+                  id={67}
+                  fn={crearCampana}
+                />
               ) : campana === '"Recuperacion"' ? (
                 <BotonCamp
                   array={sanPedro}
@@ -701,6 +781,14 @@ const AsignarCampana = ({
                   camp={"At"}
                   emp={"Mutual"}
                   id={32}
+                  fn={crearCampana}
+                />
+              ) : campana === '"Atrasados2"' ? (
+                <BotonCamp
+                  array={sanPedro}
+                  camp={"At2"}
+                  emp={"Mutual"}
+                  id={70}
                   fn={crearCampana}
                 />
               ) : campana === '"Recuperacion"' ? (

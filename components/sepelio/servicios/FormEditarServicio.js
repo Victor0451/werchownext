@@ -6,7 +6,7 @@ import Router from "next/router";
 import Spinner from "../../layout/Spinner";
 import Stock from "../ataudes/Stock";
 
-import {ip} from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const FormEditarServicio = ({ servicio }) => {
   if (!servicio) return <Spinner />;
@@ -58,9 +58,7 @@ const FormEditarServicio = ({ servicio }) => {
 
   const traerParcela = async (idparcela) => {
     await axios
-      .get(
-        `${ip}api/sepelio/parcelas/traerparcela/${idparcela}`
-      )
+      .get(`${ip}api/sepelio/parcelas/traerparcela/${idparcela}`)
       .then((res) => {
         guardarParcela(res.data);
       })
@@ -95,33 +93,32 @@ const FormEditarServicio = ({ servicio }) => {
       fecha_recepcion: servicio.fecha_recepcion,
       sucursal: servicio.sucursal,
       idataud: idataudRef.current.value,
-      idparcela: idparcelaRef.current.value,
       estado: 1,
     };
 
-    console.log(editServicio);
+    if (editServicio.idataud === "") {
+      editServicio.idataud = ataud.idataudu;
+    }
+    await axios
+      .put(
+        `${ip}api/sepelio/servicio/editarservicio/${servicio.idservicio}`,
+        editServicio
+      )
+      .then((res) => {
+        if ((res.status = 200)) {
+          console.log(res);
+          toastr.success("Servicio editado con exito", "ATENCION");
 
-    // await axios
-    //   .put(
-    //     `${ip}api/sepelio/servicio/editarservicio/${servicio.idservicio}`,
-    //     editServicio
-    //   )
-    //   .then((res) => {
-    //     if ((res.status = 200)) {
-    //       toastr.success("Servicio editado con exito", "ATENCION");
-
-    //       Router.push({
-    //         pathname: "/sepelio/servicios/impresion",
-    //         query: { id: servicio.dni },
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+          Router.push({
+            pathname: "/sepelio/servicios/impresion",
+            query: { id: servicio.dni },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
-
 
   const selcasofrm = (row) => {
     document.getElementById("ataud").value = `${row.original.nombre}`;
@@ -482,8 +479,6 @@ const FormEditarServicio = ({ servicio }) => {
           </div>
         </div>
 
-     
-
         <hr />
 
         <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
@@ -674,8 +669,6 @@ const FormEditarServicio = ({ servicio }) => {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 };

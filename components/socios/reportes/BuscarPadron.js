@@ -13,10 +13,8 @@ const BuscarPadron = ({
   buscarCartera,
   buscarCarteram,
   errorrango,
-  listZona
+  listZona,
 }) => {
-
-
   return (
     <div className="container">
       <form className="mt-4 border border-dark p-4 alert alert-primary">
@@ -50,7 +48,7 @@ const BuscarPadron = ({
               <label>
                 <strong>
                   {" "}
-                  <u> Tipo De Cartera: </u>
+                  <u> Mes: </u>
                 </strong>
               </label>
               <MesSelect

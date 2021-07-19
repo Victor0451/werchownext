@@ -210,8 +210,6 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
     return {};
   };
 
-  console.log(casos);
-
   return (
     <div className="mt-4 mb-4 border border-dark alert alert-primary">
       <div className="d-flex justify-content-end">
