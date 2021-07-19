@@ -22,9 +22,26 @@ const FormAcciones = ({
   return (
     <div className="container">
       <div className="jumbotron">
-        <h3>
-          <u>Datos del socio</u>
-        </h3>
+        {caso.edad >= 65 ? (
+          <div className="row">
+            <div className="col-md-4">
+              <h3>
+                <u>Datos del socio</u>
+              </h3>
+            </div>
+            <div className="col-md-8">
+              <div className="alert alert-warning border border-dark text-center text-uppercase">
+                ¡¡cuidado!!. el afiliado tiene {caso.edad}, verificar con
+                gerencia como se procede.
+              </div>
+            </div>
+          </div>
+        ) : (
+          <h3>
+            <u>Datos del socio</u>
+          </h3>
+        )}
+
         <form className="mt-4 border">
           <div className="row">
             <div className="form-group col-md-6">

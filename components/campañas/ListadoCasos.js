@@ -6,11 +6,10 @@ import FormAcciones from "./FormAcciones";
 import Notificacion from "./Notificacion";
 import Notificacion2 from "./Notificacion2";
 
-
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 import ExportarPadron from "./ExportarPadron";
 
 const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
@@ -199,28 +198,46 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
 
   let fechahoy = moment().format("YYYY-MM-DD");
   let componentRef = React.createRef();
+
+  const getTrProps = (state, rowInfo, instance) => {
+    if (rowInfo) {
+      return {
+        style: {
+          "background-color": rowInfo.original.edad >= 65 ? "yellow" : null,
+        },
+      };
+    }
+    return {};
+  };
+
+  console.log(casos);
+
   return (
     <div className="mt-4 mb-4 border border-dark alert alert-primary">
       <div className="d-flex justify-content-end">
         <div>
-          <button className="btn btn-info btn-sm mb-2"
+          <button
+            className="btn btn-info btn-sm mb-2"
             data-toggle="modal"
             data-target={`.bd-example-modal-xl-todo`}
-          >IMPRIMIR TODAS LAS NOTIFICACIONES</button>
+          >
+            IMPRIMIR TODAS LAS NOTIFICACIONES
+          </button>
         </div>
 
         <div>
-          <ExportarPadron
-            listado={casos}
-            camp={camp}
-
-          />
+          <ExportarPadron listado={casos} camp={camp} />
         </div>
+      </div>
 
+      <div className="mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase">
+        las columnas resaltadas en amarillo, indica que el afiliado es mayor a
+        65 años por lo que se debe consutar con gerencia como se debe proceder.
       </div>
 
       <div className="list border border-dark">
         <ReactTable
+          getTrProps={getTrProps}
           data={casos}
           filterable
           defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
@@ -313,7 +330,9 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
                   id: "montoadeudado",
                   accessor: (d) => d.montoadeudado,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["montoadeudado"] }),
+                    matchSorter(rows, filter.value, {
+                      keys: ["montoadeudado"],
+                    }),
                   filterAll: true,
                   width: 100,
                 },
@@ -351,7 +370,10 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
                             data-target={`.bd-example-modal-xl${modal}`}
                             onClick={() => selcaso(row.index)}
                           >
-                            <i className="fa fa-envelope" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-envelope"
+                              aria-hidden="true"
+                            ></i>
                           </a>
                         </>
                       )}
@@ -371,7 +393,6 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
           Volver al listado de campañas
         </a>
       </div>
-
 
       {/* MODAL DE ACCIONES DE CAMPAÑAS */}
 
@@ -478,18 +499,15 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
                     aria-label="Close"
                   >
                     Cerrar
-            </a>
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div id="todo"
-              ref={(el) => (componentRef = el)}
-            >
-              {casos.map(caso => (
+            <div id="todo" ref={(el) => (componentRef = el)}>
+              {casos.map((caso) => (
                 <>
                   <Notificacion2 caso={caso} userData={userData} />
-
                 </>
               ))}
             </div>
@@ -497,7 +515,6 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
         </div>
       </div>
       {/* -------------*/}
-
     </div>
   );
 };
