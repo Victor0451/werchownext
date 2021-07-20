@@ -76,14 +76,25 @@ const listado = () => {
     }
   }, []);
 
-  const push = (p1, p2, url) => {
-    Router.push({
-      pathname: url,
-      query: {
-        id: p1,
-        idservicio: p2,
-      },
-    });
+  const push = (p1, p2, p3, url) => {
+    if (p3) {
+      Router.push({
+        pathname: url,
+        query: {
+          id: p1,
+          idservicio: p2,
+          idataud: p3,
+        },
+      });
+    } else {
+      Router.push({
+        pathname: url,
+        query: {
+          id: p1,
+          idservicio: p2,
+        },
+      });
+    }
   };
 
   return (
@@ -322,7 +333,7 @@ const listado = () => {
                             className="btn btn-block btn-secondary mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
-                            title="Cargar Gasto De Luto"
+                            title="Asignar Parcela"
                             data-dismiss="modal"
                             onClick={() =>
                               push(
@@ -338,6 +349,29 @@ const listado = () => {
                             >
                               {" "}
                               Asignar Parcela
+                            </i>
+                          </button>
+                        </div>
+
+                        <div className="col-md-3 mt-4">
+                          <button
+                            className="btn btn-block btn-warning mr-1"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Gestionar Ataud Asignado"
+                            data-dismiss="modal"
+                            onClick={() =>
+                              push(
+                                row.dni,
+                                row.idservicio,
+                                row.idataud,
+                                "/sepelio/servicios/ataud/gestion"
+                              )
+                            }
+                          >
+                            <i className="fa fa-outden" aria-hidden="true">
+                              {" "}
+                              Gestionar Ataud
                             </i>
                           </button>
                         </div>

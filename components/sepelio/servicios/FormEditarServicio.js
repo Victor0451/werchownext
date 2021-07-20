@@ -11,20 +11,6 @@ import { ip } from "../../../config/config";
 const FormEditarServicio = ({ servicio }) => {
   if (!servicio) return <Spinner />;
 
-  useEffect(() => {
-    if (servicio.idataud) {
-      traerAtaud(servicio.idataud);
-      if (servicio.idparcela) {
-        console.log(servicio.idparcela);
-        traerParcela(servicio.idparcela);
-      }
-    }
-  }, []);
-
-  const [stock, guardarStock] = useState(null);
-  const [ataud, guardarAtaud] = useState(null);
-  const [parcela, guardarParcela] = useState(null);
-
   let contratoRef = React.createRef();
   let empresaRef = React.createRef();
   let dniRef = React.createRef();
@@ -43,29 +29,6 @@ const FormEditarServicio = ({ servicio }) => {
   let retiroRef = React.createRef();
   let solicitadoRef = React.createRef();
   let parentescoRef = React.createRef();
-  let idataudRef = React.createRef();
-
-  const traerAtaud = async (idataud) => {
-    await axios
-      .get(`${ip}api/sepelio/ataudes/ataud/${idataud}`)
-      .then((res) => {
-        guardarAtaud(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const traerParcela = async (idparcela) => {
-    await axios
-      .get(`${ip}api/sepelio/parcelas/traerparcela/${idparcela}`)
-      .then((res) => {
-        guardarParcela(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const editarServicio = async (e) => {
     e.preventDefault();
@@ -92,7 +55,6 @@ const FormEditarServicio = ({ servicio }) => {
       parentesco: parentescoRef.current.value,
       fecha_recepcion: servicio.fecha_recepcion,
       sucursal: servicio.sucursal,
-      idataud: idataudRef.current.value,
       estado: 1,
     };
 
@@ -118,13 +80,6 @@ const FormEditarServicio = ({ servicio }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const selcasofrm = (row) => {
-    document.getElementById("ataud").value = `${row.original.nombre}`;
-    document.getElementById("idataud").value = `${row.original.idataud}`;
-    document.getElementById("uso").value = `${row.original.uso}`;
-    guardarStock(row.original.stock);
   };
 
   return (
@@ -478,197 +433,7 @@ const FormEditarServicio = ({ servicio }) => {
             </div>
           </div>
         </div>
-
-        <hr />
-
-        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
-          <h2 className="mt-2">
-            <strong>
-              <u>Ataud</u>
-            </strong>
-          </h2>
-
-          {ataud ? (
-            <div className="alert alert-info text-center border border-dark">
-              <h5>
-                <strong>
-                  <u>Parcela Actual</u>
-                </strong>
-              </h5>
-              <div className="row d-flex justify-content-center">
-                <div className="col-md-3 mt-4 mb-4">
-                  <label>
-                    <strong>
-                      <u>Fabricante</u>: {ataud.fabricante}
-                    </strong>
-                  </label>
-                </div>
-                <div className="col-md-4 mt-4 mb-4">
-                  <label>
-                    <strong>
-                      {" "}
-                      <u>Ataud</u>: {ataud.nombre}
-                    </strong>
-                  </label>
-                </div>
-                <div className="col-md-3 mt-4 mb-4">
-                  <label>
-                    <strong>
-                      {" "}
-                      <u>Tipo</u>: {ataud.tipo}{" "}
-                    </strong>
-                  </label>
-                </div>
-                <div className="col-md-3 mt-4 mb-4">
-                  <label>
-                    <strong>
-                      {" "}
-                      <u>Uso</u>: {ataud.uso}{" "}
-                    </strong>
-                  </label>
-                </div>
-                <div className="col-md-3 mt-4 mb-4">
-                  <label>
-                    <strong>
-                      {" "}
-                      <u>Medidas</u>: {ataud.medidas}{" "}
-                    </strong>
-                  </label>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="mb-4 alert alert-info text-center text-uppercase">
-              No tiene parcela registrada
-            </div>
-          )}
-
-          <div className="row d-flex justify-content-center">
-            <div className="col-md-2 mt-4 mb-4">
-              <label>
-                <strong>
-                  <u>Codigo:</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Codigo"
-                name="idataud"
-                id="idataud"
-                ref={idataudRef}
-                //  defaultValue={ataud.idataud}
-                readOnly
-              />
-              {/* {erridataud && (
-                <div className="alert alert-danger text-center p-2 mt-2">
-                  {erridataud}
-                </div>
-              )} */}
-            </div>
-
-            <div className="col-md-4 mt-4 mb-4">
-              <label>
-                <strong>
-                  <u>Ataud:</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Ataud"
-                name="ataud"
-                id="ataud"
-                // defaultValue={ataud.}
-                readOnly
-              />
-            </div>
-
-            <div className="col-md-2 mt-4 mb-4">
-              <label>
-                <strong>
-                  <u>Uso:</u>
-                </strong>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Uso"
-                name="uso"
-                id="uso"
-                readOnly
-              />
-            </div>
-
-            <div className=" col-md-4 mt-4 mb-4">
-              <button
-                className="mt-4 btn btn-primary btn-block"
-                data-toggle="modal"
-                data-target="#stockataud"
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                Stock
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="row d-flex justify-content-center">
-          <button
-            type="submit"
-            className="btn btn-primary btn-block mt-4 col-5 mr-1"
-          >
-            Registrar
-          </button>
-          <a
-            href="/sepelio/servicios/listado"
-            className="btn btn-danger btn-block border border-dark mt-4 col-5"
-          >
-            Cancelar
-          </a>
-        </div>
       </form>
-
-      <div
-        className="modal fade"
-        id="stockataud"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Stock Ataudes
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

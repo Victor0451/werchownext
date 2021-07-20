@@ -768,6 +768,15 @@ const Adimn = () => {
             <ul className="dropdown-menu">
               <li>
                 <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/solicitud-novell.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud Novell
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
                   href={`${ip}api/archivos/ventas/descargararchivo/solicitud-genesis.pdf`}
                   className="dropdown-item text-dark"
                 >

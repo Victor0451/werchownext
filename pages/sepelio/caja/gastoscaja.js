@@ -8,9 +8,9 @@ import toastr from "toastr";
 import ListadoCajaGastos from "../../../components/sepelio/caja/ListadoCajaGastos";
 import NuevoCajaGasto from "../../../components/sepelio/caja/NuevoCajaGasto";
 import Spinner from "../../../components/layout/Spinner";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 import ListadoCajaGastosCargados from "../../../components/sepelio/caja/ListadoCajaGastosCargados";
-import { confirmAlert } from 'react-confirm-alert'
+import { confirmAlert } from "react-confirm-alert";
 
 const gastoscaja = () => {
   let fechaRef = React.createRef();
@@ -54,11 +54,11 @@ const gastoscaja = () => {
       let id = router.query.id;
 
       infoCaja(id);
-      traerOperador()
+      traerOperador();
       listadoProveedores();
       listadoConceptos();
       servicioCombo();
-      traerGastos(id)
+      traerGastos(id);
 
       let usuario = jsCookie.get("usuario");
 
@@ -66,15 +66,12 @@ const gastoscaja = () => {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.usuario);
       }
-
     }
   }, []);
 
   const traerOperador = async () => {
     await axios
-      .get(
-        `${ip}api/sepelio/serviciogastos/operadoressep`
-      )
+      .get(`${ip}api/sepelio/serviciogastos/operadoressep`)
       .then((res) => {
         guardarOperadorSep(res.data[0]);
       })
@@ -83,15 +80,15 @@ const gastoscaja = () => {
       });
   };
 
-
   const listadoProveedores = async () => {
     await axios
       .get(`${ip}api/sepelio/cajasepelio/listprov`)
       .then((res) => {
         guardarListProv(res.data[0]);
-      }).catch(error => {
-        console.log(error)
       })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const listadoConceptos = async () => {
@@ -100,9 +97,9 @@ const gastoscaja = () => {
       .then((res) => {
         guardarListConcep(res.data[0]);
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const infoCaja = async (id) => {
@@ -111,10 +108,7 @@ const gastoscaja = () => {
       .then((res) => {
         guardarCaja(res.data);
 
-        if (res.data.gastos) {
-          guardarAcGast(res.data.gastos)
-        }
-
+        guardarAcGast(res.data.gastos);
       })
       .catch((error) => {
         console.log(error);
@@ -157,10 +151,7 @@ const gastoscaja = () => {
     };
 
     await axios
-      .put(
-        `${ip}api/sepelio/cajasepelio/updatetotales/${id}`,
-        valores
-      )
+      .put(`${ip}api/sepelio/cajasepelio/updatetotales/${id}`, valores)
       .then((res) => {
         console.log(res);
       })
@@ -172,61 +163,54 @@ const gastoscaja = () => {
   const cerrarCaja = async () => {
     let id = router.query.id;
     await axios
-      .put(
-        `${ip}api/sepelio/cajasepelio/updatecierrecaja/${id}`
-      )
+      .put(`${ip}api/sepelio/cajasepelio/updatecierrecaja/${id}`)
       .then((res) => {
         if (res.status === 200) {
-          updateFechaCierre()
+          updateFechaCierre();
 
-          toastr.success("Se cerro la caja correctamente", "Atencion")
+          toastr.success("Se cerro la caja correctamente", "Atencion");
         }
 
         setTimeout(() => {
-          Router.push('/sepelio/caja/listado')
+          Router.push("/sepelio/caja/listado");
         }, 500);
-
       })
       .catch((error) => {
-        toastr.error("Ocurrio un error", "ATENCION")
-        console.log(error)
+        toastr.error("Ocurrio un error", "ATENCION");
+        console.log(error);
       });
   };
 
   const regGasto = async () => {
     await axios
-      .post(
-        `${ip}api/sepelio/cajasepelio/gastocaja`,
-        gastos
-      )
+      .post(`${ip}api/sepelio/cajasepelio/gastocaja`, gastos)
       .then((res) => {
         if (res.status === 200) {
-          toastr.success(
-            "Los gastos se cargaron correctamente",
-            "ATENCION"
-          );
+          toastr.success("Los gastos se cargaron correctamente", "ATENCION");
 
           updateTotales();
-          updateUltimaCarga()
+          updateUltimaCarga();
 
           setTimeout(() => {
             confirmAlert({
-              title: 'ATENCION',
-              message: '¿Vas a cerrar la caja?',
+              title: "ATENCION",
+              message: "¿Vas a cerrar la caja?",
               buttons: [
                 {
-                  label: 'Si',
-                  onClick: () => { cerrarCaja() }
+                  label: "Si",
+                  onClick: () => {
+                    cerrarCaja();
+                  },
                 },
                 {
-                  label: 'No',
-                  onClick: () => { Router.push('/sepelio/caja/listado') }
-                }
-              ]
+                  label: "No",
+                  onClick: () => {
+                    Router.push("/sepelio/caja/listado");
+                  },
+                },
+              ],
             });
           }, 500);
-
-
         }
       })
       .catch((error) => {
@@ -234,12 +218,9 @@ const gastoscaja = () => {
       });
   };
 
-
   const updateFechaCierre = async () => {
     await axios
-      .put(
-        `${ip}api/sepelio/cajasepelio/updatefechacierre/${caja.idcaja}`
-      )
+      .put(`${ip}api/sepelio/cajasepelio/updatefechacierre/${caja.idcaja}`)
       .then((res) => {
         console.log(res);
       })
@@ -250,9 +231,7 @@ const gastoscaja = () => {
 
   const updateUltimaCarga = async () => {
     await axios
-      .put(
-        `${ip}api/sepelio/cajasepelio/updateultimacarga/${caja.idcaja}`
-      )
+      .put(`${ip}api/sepelio/cajasepelio/updateultimacarga/${caja.idcaja}`)
       .then((res) => {
         console.log(res);
       })
@@ -317,7 +296,6 @@ const gastoscaja = () => {
         "Debes ingresar un Monto Total o de no tenerlo, ingresa un 0 (cero)"
       );
     } else {
-
       guardarGastos([...gastos, gasto]);
 
       let totgast = acGast + parseFloat(gasto.total);
@@ -355,19 +333,17 @@ const gastoscaja = () => {
       });
   };
 
-
   const traerGastos = async (id) => {
     await axios
       .get(`${ip}api/sepelio/cajasepelio/listadogastos/${id}`)
       .then((res) => {
         guardarListGastos(res.data);
-        console.log(res.data)
-      }).catch(error => {
-        console.log(error)
+        console.log(res.data);
       })
-  }
-
-
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Layout>
@@ -451,9 +427,7 @@ const gastoscaja = () => {
               </button>
             </div>
             <div className="modal-body">
-              <ListadoCajaGastosCargados
-                listado={listgastos}
-              />
+              <ListadoCajaGastosCargados listado={listgastos} />
             </div>
             <div className="modal-footer">
               <button

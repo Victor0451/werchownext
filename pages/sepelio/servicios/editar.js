@@ -4,12 +4,10 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import Router, { useRouter } from "next/router";
 import FormEditarServicio from "../../../components/sepelio/servicios/FormEditarServicio";
-import {ip} from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const editar = () => {
-    
- 
-    const [servicio, guardarServicio] = useState(null);
+  const [servicio, guardarServicio] = useState(null);
 
   let token = jsCookie.get("token");
   let router = useRouter();
@@ -36,7 +34,7 @@ const editar = () => {
 
   return (
     <Layout>
-      <FormEditarServicio servicio={servicio} /> 
+      <FormEditarServicio servicio={servicio} />
     </Layout>
   );
 };
