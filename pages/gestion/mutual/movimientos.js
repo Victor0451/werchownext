@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/layout/Layout";
+import Layout from "../../../components/layout/Layout";
 import moment from "moment-timezone";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import Router from "next/router";
-import MovimientosMensuales from "../../components/mutual/MovimientosMensuales";
-import ListadoMovimientos from "../../components/mutual/ListadoMovimientos";
-import ExportarPadron from "../../components/mutual/ExportarPadron";
-import {ip} from '../../config/config'
+import MovimientosMensuales from "../../../components/gestion/mutual/movimientos/MovimientosMensuales";
+import ListadoMovimientos from "../../../components/gestion/mutual/movimientos/ListadoMovimientos";
+import ExportarPadron from "../../../components/gestion/mutual/movimientos/ExportarPadron";
+import { ip } from "../../../config/config";
 
 const movimientos = () => {
   let desdeRef = React.createRef();
@@ -55,15 +55,12 @@ const movimientos = () => {
 
   const altasMutual = async (desde, hasta) => {
     await axios
-      .get(
-        `${ip}api/werchow/movimientosmutual/altasmensuales`,
-        {
-          params: {
-            desde: desde,
-            hasta: hasta,
-          },
-        }
-      )
+      .get(`${ip}api/werchow/movimientosmutual/altasmensuales`, {
+        params: {
+          desde: desde,
+          hasta: hasta,
+        },
+      })
       .then((res) => {
         guardarAltas(res.data);
       })
@@ -74,15 +71,12 @@ const movimientos = () => {
 
   const bajasMutual = async (desde, hasta) => {
     await axios
-      .get(
-        `${ip}api/werchow/movimientosmutual/bajasmensuales`,
-        {
-          params: {
-            desde: desde,
-            hasta: hasta,
-          },
-        }
-      )
+      .get(`${ip}api/werchow/movimientosmutual/bajasmensuales`, {
+        params: {
+          desde: desde,
+          hasta: hasta,
+        },
+      })
       .then((res) => {
         guardarBajas(res.data);
       })

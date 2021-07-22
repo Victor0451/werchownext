@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTable from "react-table";
 import matchSorter from 'match-sorter'
-import Spinner from '../../components/layout/Spinner'
+import Spinner from '../../../layout/Spinner'
 
 const ListadoMovimientos = ({ listado }) => {
 

@@ -66,7 +66,10 @@ const Recuperadoras = ({ usuario }) => {
 
           <ul className="dropdown-menu">
             <li>
-              <a href="/mutual/movimientos" className="dropdown-item text-dark">
+              <a
+                href="/gestion/mutual/movimientos"
+                className="dropdown-item text-dark"
+              >
                 Movimientos del Mes
               </a>
             </li>

@@ -36,7 +36,7 @@ const FormAltaPrestamo = ({
     let principal = parseInt(capital);
     console.log(principal);
 
-    let interest = 130 / 100 / 12;
+    let interest = 150 / 100 / 12;
     let payments = parseInt(cuotas);
     let x = Math.pow(1 + interest, payments);
     let monthly = ((principal * x * interest) / (x - 1)).toFixed(0);

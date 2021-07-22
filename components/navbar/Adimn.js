@@ -11,6 +11,196 @@ const Adimn = () => {
           data-toggle="dropdown"
           className="nav-link dropdown-toggle"
         >
+          Administracion
+        </a>
+        <ul className="dropdown-menu">
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Campañas
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/campanas/estadosocio"
+                  className="dropdown-item text-dark"
+                >
+                  Asignar Campañas
+                </a>
+              </li>
+              <hr />
+              <li className="dropdown-submenu">
+                <a
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  className="  dropdown-toggle dropdown-item text-dark"
+                >
+                  Opciones
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a
+                      href="/campanas/cerrar_campana"
+                      className="dropdown-item text-dark"
+                    >
+                      Cerrar Campañas Activas
+                    </a>
+                  </li>
+                  <hr />
+                  <li>
+                    <a
+                      href="/campanas/resultado_campana"
+                      className="dropdown-item text-dark"
+                    >
+                      Resultados Campañas Activas
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <hr />
+              <li className="dropdown-submenu">
+                <a
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  className="  dropdown-toggle dropdown-item text-dark"
+                >
+                  Datos En Campo
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a
+                      href="/campanas/datos/nuevo"
+                      className="dropdown-item text-dark"
+                    >
+                      Cargar
+                    </a>
+                  </li>
+                  <hr />
+                  <li>
+                    <a
+                      href="/campanas/datos/listado"
+                      className="dropdown-item text-dark"
+                    >
+                      Listado De Datos
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Noticias
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/noticias/nueva_noticia"
+                  className="dropdown-item text-dark"
+                >
+                  Ingresar Noticia
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Usuarios
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a href="/auth/registro" className="dropdown-item text-dark">
+                  Registrar Usuario
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a href="/auth/editar" className="dropdown-item text-dark">
+                  Modificacion de Usuario
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li className="nav-item dropdown ">
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
+          Gestion
+        </a>
+        <ul className="dropdown-menu">
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              WERCHOW
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a href="#" className="dropdown-item text-dark">
+                  Resumen Efectividad de Cobranza
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              MUTUAL
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/mutual/cobranza/emisionrecibo"
+                  className="dropdown-item text-dark"
+                >
+                  Emision de Recibo
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li className="nav-item dropdown ">
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
           Informes
         </a>
         <ul className="dropdown-menu">
@@ -110,7 +300,10 @@ const Adimn = () => {
           <hr />
 
           <li>
-            <a href="/mutual/movimientos" className="dropdown-item text-dark">
+            <a
+              href="/gestion/mutual/movimientos"
+              className="dropdown-item text-dark"
+            >
               Mutual: Movimientos del Mes
             </a>
           </li>
@@ -250,103 +443,6 @@ const Adimn = () => {
             </a>
           </li>
         </ul>
-      </li>
-
-      <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Campañas
-        </a>
-        <ul className="dropdown-menu">
-          <li>
-            <a href="/campanas/estadosocio" className="dropdown-item text-dark">
-              Asignar Campañas
-            </a>
-          </li>
-          <hr />
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Opciones
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/campanas/cerrar_campana"
-                  className="dropdown-item text-dark"
-                >
-                  Cerrar Campañas Activas
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/campanas/resultado_campana"
-                  className="dropdown-item text-dark"
-                >
-                  Resultados Campañas Activas
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <hr />
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Datos En Campo
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/campanas/datos/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Cargar
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/campanas/datos/listado"
-                  className="dropdown-item text-dark"
-                >
-                  Listado De Datos
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li className="nav-item dropdown">
-        <a
-          href=""
-          className="nav-link dropdown-toggle"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Noticias{" "}
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="/noticias/nueva_noticia" className="dropdown-item text-dark">
-            Ingresar Noticia
-          </a>
-        </div>
       </li>
 
       <li className="nav-item dropdown ">
@@ -1072,30 +1168,6 @@ const Adimn = () => {
             </a>
           </li>
         </ul>
-      </li>
-
-      <li className="nav-item dropdown">
-        <a
-          href=""
-          className="nav-link dropdown-toggle"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Usuarios{" "}
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="/auth/registro" className="dropdown-item text-dark">
-            Registrar Usuario
-          </a>
-
-          <hr />
-
-          <a href="/auth/editar" className="dropdown-item text-dark">
-            Modificacion de Usuario
-          </a>
-        </div>
       </li>
     </ul>
   );
