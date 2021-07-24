@@ -88,8 +88,7 @@ const nuevoprestamo = () => {
       ptm_afi: `${apellidoRef.current.value}, ${nombreRef.current.value}`,
     };
 
-    console.log(prestamo);
-
+    
     if (prestamo.renova === null) {
       const renoverror = "Debes indicar si es renovacion o no";
       guardarRenoverror(renoverror);

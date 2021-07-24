@@ -5,24 +5,6 @@ import matchSorter from "match-sorter";
 const ListadoPrestamosAct = ({ prestamos }) => {
   let casos = Object.values(prestamos);
 
-  // const selcaso = (index) => {
-  //   campana;
-  //   const caso = campana[index];
-  //   guardarCaso(caso);
-
-  //   getGestionCaso(caso.idcaso);
-  // };
-
-  // const handleChange = (value, flag) => {
-  //   if (flag === "accion") {
-  //     const accion = value.value;
-  //     guardarAccion(accion);
-  //   } else if (flag === "nuevaaccion") {
-  //     const nuevaaccion = value.value;
-  //     guardarNuevaAccion(nuevaaccion);
-  //   }
-  // };
-
   return (
     <div className="mt-4">
       <ReactTable

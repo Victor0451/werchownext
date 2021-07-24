@@ -72,8 +72,8 @@ const Notificacion = ({ caso, userData }) => {
               {caso.telefono} - {caso.movil}
             </div>
             <p className="text-justify mt-2 p-2">
-              Por medio de la presente se le informa que se encuentra con los
-              servicios de seperlios atrasados. Por este motivo lo invitamos a
+              Por medio de la presente se le informa que se encuentra con el
+              servicio de sepelio atrasado. Por este motivo lo invitamos a
               concurrir a nuestras oficinas, ubicadas en la calle Lavalle 123,
               para regularizar su situación. Si al momento de recibir esta nota
               ud ya abono las cuotas pendientes, rogamos que nos disculpe. Sin
@@ -140,8 +140,8 @@ const Notificacion = ({ caso, userData }) => {
               {caso.telefono} - {caso.movil}
             </div>
             <p className="text-justify mt-2 p-2">
-              Por medio de la presente se le informa que se encuentra con los
-              servicios de seperlios atrasados. Por este motivo lo invitamos a
+              Por medio de la presente se le informa que se encuentra con el
+              servicio de sepelio atrasado. Por este motivo lo invitamos a
               concurrir a nuestras oficinas, ubicadas en la calle Lavalle 123,
               para regularizar su situación. Si al momento de recibir esta nota
               ud ya abono las cuotas pendientes, rogamos que nos disculpe. Sin

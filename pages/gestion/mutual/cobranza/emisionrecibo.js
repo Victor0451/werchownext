@@ -14,7 +14,9 @@ const emisionrecibo = () => {
   let dniRef = React.createRef();
   let mesRef = React.createRef();
   let anoRef = React.createRef();
+  let importeRef = React.createRef();
 
+  const [user, guardarUsuario] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [adhs, guardarAdhs] = useState(null);
@@ -22,6 +24,7 @@ const emisionrecibo = () => {
   const [errores, guardarErrores] = useState(null);
   const [nupagos, guardarNuPagos] = useState([]);
   const [flag, guardarFlag] = useState(false);
+  const [recibo, guardarRecibo] = useState(null);
 
   const traerPagosM = async (contrato) => {
     await axios
@@ -48,7 +51,7 @@ const emisionrecibo = () => {
 
   const traerCuoFijaM = async (contrato) => {
     await axios
-      .get(`${ip}/api/werchow/cuofija/cuomutual/${contrato}`)
+      .get(`${ip}api/werchow/cuofija/cuomutual/${contrato}`)
       .then((res) => {
         guardarCuoFija(res.data);
       })
@@ -206,9 +209,21 @@ const emisionrecibo = () => {
 
   const preCargarPago = () => {
     const prepago = {
-      mes: mesRef.current.value,
-      ano: anoRef.current.value,
-      fecha: moment().format("YYYY-MM-DD"),
+      SERIE: recibo.SERIE,
+      NRO_RECIBO: recibo.NRO_RECIBO + 1,
+      MES: mesRef.current.value,
+      ANO: anoRef.current.value,
+      IMPORTE: importeRef.current.value,
+      DIA_REN: moment().format("YYYY-MM-DD"),
+      DIA_CAR: moment().format("YYYY-MM-DD"),
+      DIA_EMI: moment().format("YYYY-MM-DD"),
+      DIA_PAG: moment().format("YYYY-MM-DD"),
+      HORA_CAR: moment().format("HH:mm:ss"),
+      CONTRATO: ficha.CONTRATO,
+      MAN_COB: "X",
+      MOVIM: "P",
+      OPERADOR: user.idoperador,
+      PUESTO: user.puestom,
     };
 
     if (prepago.mes === "") {
@@ -216,15 +231,54 @@ const emisionrecibo = () => {
     } else if (prepago.ano === "") {
       toastr.warning("Debes ingresar el año a cobrar", "ATENCION");
     } else {
+      toastr.success("Pago pre cargado exitosamente", "ATENCION");
       guardarNuPagos([...nupagos, prepago]);
     }
   };
+
+  const totalPagosPrecargados = (arr) => {
+    let total = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      total += parseFloat(arr[i].importe);
+    }
+
+    return total.toFixed(2);
+  };
+
+  const eliminarPagoPrecargado = (index) => {
+    nupagos.splice(index, 1);
+
+    guardarNuPagos([...nupagos]);
+  };
+
+  const traerUltimoRecibo = async (id) => {
+    await axios
+      .get(`${ip}api/werchow/pagos/ultimorecibo/${id}`)
+      .then((res) => {
+        guardarRecibo(res.data);
+      })
+      .catch((error) => {
+        toastr.error("Ocurrio un error al traer el recibo", "ATENCION");
+        console.log(error);
+      });
+  };
+
+  const registrarPago = async () => {};
 
   let token = jsCookie.get("token");
 
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+        traerUltimoRecibo(userData.puestom);
+      }
     }
   }, []);
 
@@ -249,8 +303,12 @@ const emisionrecibo = () => {
               nupagos={nupagos}
               mesRef={mesRef}
               anoRef={anoRef}
+              importeRef={importeRef}
               preCargarPago={preCargarPago}
+              eliminarPagoPrecargado={eliminarPagoPrecargado}
               cuofija={cuofija}
+              totalPagosPrecargados={totalPagosPrecargados}
+              registrarPago={registrarPago}
             />
           ) : null}
         </>

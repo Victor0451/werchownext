@@ -10,8 +10,12 @@ const EmitirRecibo = ({
   nupagos,
   mesRef,
   anoRef,
+  importeRef,
   preCargarPago,
+  eliminarPagoPrecargado,
+  totalPagosPrecargados,
   cuofija,
+  registrarPago,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -153,73 +157,82 @@ const EmitirRecibo = ({
                     columns: [
                       {
                         Header: "Mes",
-                        id: "mes",
-                        accessor: (d) => d.mes,
+                        id: "MES",
+                        accessor: (d) => d.MES,
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
-                            keys: ["mes"],
+                            keys: ["MES"],
                           }),
                         filterAll: true,
                         width: 50,
                       },
                       {
                         Header: "Año",
-                        id: "ano",
-                        accessor: (d) => d.ano,
+                        id: "ANO",
+                        accessor: (d) => d.ANO,
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
-                            keys: ["ano"],
+                            keys: ["ANO"],
                           }),
                         filterAll: true,
                       },
                       {
                         Header: "Importe",
-                        id: "importe",
-                        accessor: (d) => d.importe,
+                        id: "IMPORTE",
+                        accessor: (d) => d.IMPORTE,
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
-                            keys: ["importe"],
+                            keys: ["IMPORTE"],
                           }),
                         filterAll: true,
                         width: 80,
                       },
                       {
-                        Header: "Serie",
-                        id: "SERIE",
-                        accessor: (d) => d.SERIE,
-                        filterMethod: (filter, rows) =>
-                          matchSorter(rows, filter.value, {
-                            keys: ["SERIE"],
-                          }),
-                        filterAll: true,
-                        width: 50,
-                      },
-                      {
-                        Header: "Recibo",
-                        id: "NRO_RECIBO",
-                        accessor: (d) => d.NRO_RECIBO,
-                        filterMethod: (filter, rows) =>
-                          matchSorter(rows, filter.value, {
-                            keys: ["NRO_RECIBO"],
-                          }),
-                        filterAll: true,
-                      },
-                      {
                         Header: "Fecha",
-                        id: "fecha",
-                        accessor: (d) => d.fecha,
+                        id: "FECHA",
+                        accessor: (d) => d.FECHA,
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
-                            keys: ["fecha"],
+                            keys: ["FECHA"],
                           }),
                         filterAll: true,
+                      },
+                      {
+                        Header: "Acciones",
+                        id: "acciones",
+                        filterAll: true,
+                        width: 100,
+                        Cell: (row) => (
+                          <div>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() => eliminarPagoPrecargado(row.index)}
+                            >
+                              <i className="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                        ),
                       },
                     ],
                   },
                 ]}
-                defaultPageSize={10}
+                defaultPageSize={5}
                 className="-striped -highlight"
               />
+            </div>
+            <div className="col-md-12">
+              <div className="mt-4 alert alert-info border border-dark text-center text-uppercase">
+                Total a Pagar: $ {totalPagosPrecargados(nupagos)}
+              </div>
+
+              <div className="col-md-6">
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={registrarPago}
+                >
+                  Registrar Pagos
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -255,6 +268,7 @@ const EmitirRecibo = ({
               <FormGenerarPago
                 mesRef={mesRef}
                 anoRef={anoRef}
+                importeRef={importeRef}
                 preCargarPago={preCargarPago}
                 cuofija={cuofija}
               />

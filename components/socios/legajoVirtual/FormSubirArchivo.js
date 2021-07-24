@@ -85,6 +85,19 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
         .catch((error) => {
           console.log(error);
         });
+    } else if (flag === "Noti") {
+      await axios
+        .post(
+          `${ip}api/archivos/legajovirtual/uploadfichalegajonoti/${contrato}`,
+          upload
+        )
+        .then((res) => {
+          console.log(res);
+          toastr.success("Archivo Subido Con Exito", "Atencion");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -149,6 +162,19 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
       await axios
         .post(
           `${ip}api/archivos/legajovirtualm/uploadfichalegajorecd/${contrato}`,
+          upload
+        )
+        .then((res) => {
+          console.log(res);
+          toastr.success("Archivo Subido Con Exito", "Atencion");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (flag === "Noti") {
+      await axios
+        .post(
+          `${ip}api/archivos/legajovirtualm/uploadfichalegajonoti/${contrato}`,
           upload
         )
         .then((res) => {
@@ -317,6 +343,53 @@ const FormSubirArchivo = ({ contrato, empresa }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     uploadArchivosM(`R`);
+                  }}
+                >
+                  Subir Archivos
+                </button>
+              ) : null}
+            </div>
+          </div>
+
+          {/* NOTIFICACION */}
+
+          <div className="row d-flex justify-content-center">
+            <div className="mt-4 form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Subir Notificacion: </u>
+                </strong>
+              </label>
+              <input
+                type="file"
+                id="fil3"
+                className="form-control"
+                name="file"
+                // multiple
+                onChange={handlerArchivos}
+              />
+            </div>
+
+            <div className="mt-4 form-group col-md-4">
+              {empresa === "W" ? (
+                <button
+                  type="submit"
+                  className="mt-4 btn btn-primary btn-block"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    uploadArchivos(`Noti`);
+                  }}
+                >
+                  Subir Archivos
+                </button>
+              ) : empresa === "M" ? (
+                <button
+                  type="submit"
+                  className="mt-4 btn btn-primary btn-block"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    uploadArchivosM(`Noti`);
                   }}
                 >
                   Subir Archivos
