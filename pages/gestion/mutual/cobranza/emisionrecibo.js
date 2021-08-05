@@ -264,7 +264,42 @@ const emisionrecibo = () => {
       });
   };
 
-  const registrarPago = async () => {};
+  const registrarPago = async () => {
+    await confirmAlert({
+      title: "ATENCION",
+      message: "¿Vas a registrar los pagos y generar el recibo?",
+      buttons: [
+        {
+          label: "Si",
+          onClick: () => {
+            axios
+              .post(`${ip}api/werchow/pagos/regpagom`, nupagos)
+              .then((res) => {
+                if (res.status === 200) {
+                  toastr.success(
+                    "Se registraron los pagos con exito",
+                    "ATENCION"
+                  );
+                }
+              })
+              .catch((error) => {
+                toastr.error(
+                  "Ocurrio un error al registar los pagos",
+                  "ATENCION"
+                );
+                console.log(error);
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {
+            toastr.info("Los pagos precargados no se registran", "ATENCION");
+          },
+        },
+      ],
+    });
+  };
 
   let token = jsCookie.get("token");
 

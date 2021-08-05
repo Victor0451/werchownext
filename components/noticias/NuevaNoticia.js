@@ -51,10 +51,13 @@ const NuevaNoticia = ({
             <div className="col-md-4">
               <label>Perfil</label>
               <select className="custom-select" ref={perfilRef}>
-                <option value="no" selected>Selecciona quien vera la noticia</option>
+                <option value="no" selected>
+                  Selecciona quien vera la noticia
+                </option>
+                <option value="2">Morosos</option>
                 <option value="3">Gerencia</option>
-                <option value="2">Ventas</option>
                 <option value="4">Sepelio</option>
+                <option value="5">Ventas</option>
               </select>
             </div>
             <div className="col-md-12 mt-4">
