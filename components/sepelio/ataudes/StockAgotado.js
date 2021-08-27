@@ -5,13 +5,17 @@ import axios from "axios";
 // Import React Table
 import ReactTable from "react-table";
 import FromActualizarStock from "./FromActualizarStock";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const StockAgotado = ({
   nuevoStockRef,
   observacionRef,
   updateStock,
   idataudRef,
+  stockFinal,
+  sf,
+  nRemitoRef,
+  fechaRec,
 }) => {
   const [ataudes, guardarAtaudes] = useState(null);
   const [ataud, guardarAtaud] = useState(null);
@@ -184,11 +188,11 @@ const StockAgotado = ({
               </button>
             </div>
             <div className="modal-body">
-              <div className="alert alert-info p-2 text-center text-uppercase">
+              <div className="border border-dark alert alert-info p-2 text-center text-uppercase">
                 En esta parte solo puedes actualizar el stock y agregar una
-                observacion si es necesario. En el nuevo stock se debe ingresar
-                como queda el numero final de ataudes. No se suma
-                automaticamente al stock actual, los ataudes ingresados.
+                observacion si es necesario. Ahora solo debes digitrar el numero
+                de stock ingresante y el stock final se calculara
+                automaticamente.
               </div>
 
               <FromActualizarStock
@@ -197,6 +201,10 @@ const StockAgotado = ({
                 observacionRef={observacionRef}
                 updateStock={updateStock}
                 idataudRef={idataudRef}
+                stockFinal={stockFinal}
+                sf={sf}
+                nRemitoRef={nRemitoRef}
+                fechaRec={fechaRec}
               />
             </div>
             <div className="modal-footer">

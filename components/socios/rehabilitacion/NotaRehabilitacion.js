@@ -73,28 +73,31 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
                 <>
                   Por la presente solicito la reafiliación a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
-                  pago de las cuotas de la cual me encuentro en mora por cuanto su
-                  pago debía realizarse hasta el día 15 de cada mes. Asimismo acepto
-                  que de conformidad a las condiciones de la contratación, afrontaré
-                  un periodo de carencia de 15 días por cada mes de atraso, a contar
-                  desde el pago de la cuota en mora, en lo que se refiere al
-                  servicio de sepelio no así en lo que se refiere a otros servicios
-                  que me brinda la empresa.-
+                  pago de las cuotas de la cual me encuentro en mora por cuanto
+                  su pago debía realizarse hasta el día 15 de cada mes. Asimismo
+                  acepto que de conformidad a las condiciones de la
+                  contratación, afrontaré un periodo de carencia de 15 días por
+                  cada mes de atraso, a contar desde el pago de la cuota en
+                  mora, en lo que se refiere al servicio de sepelio no así en lo
+                  que se refiere a otros servicios que me brinda la empresa.
+                  Tambien tomo conocimiento que es la ultima rehabilitacion que
+                  se me otorga-
                 </>
               ) : cuotas > 1 ? (
                 <>
                   Por la presente solicito la reafiliación a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
-                  pago de las cuotas de la cual me encuentro en mora por cuanto su
-                  pago debía realizarse hasta el día 15 de cada mes. Asimismo acepto
-                  que de conformidad a las condiciones de la contratación, afrontaré
-                  un periodo de carencia de 30 días por cada mes de atraso, a contar
-                  desde el pago de la cuota en mora, en lo que se refiere al
-                  servicio de sepelio no así en lo que se refiere a otros servicios
-                  que me brinda la empresa.-
+                  pago de las cuotas de la cual me encuentro en mora por cuanto
+                  su pago debía realizarse hasta el día 15 de cada mes. Asimismo
+                  acepto que de conformidad a las condiciones de la
+                  contratación, afrontaré un periodo de carencia de 30 días por
+                  cada mes de atraso, a contar desde el pago de la cuota en
+                  mora, en lo que se refiere al servicio de sepelio no así en lo
+                  que se refiere a otros servicios que me brinda la empresa.
+                  Tambien tomo conocimiento que es la ultima rehabilitacion que
+                  se me otorga-
                 </>
               ) : null}
-
             </font>
           </p>
 

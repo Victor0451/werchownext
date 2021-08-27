@@ -6,9 +6,13 @@ const FromActualizarStock = ({
   nuevoStockRef,
   observacionRef,
   idataudRef,
+  sf,
+  stockFinal,
+  nRemitoRef,
+  fechaRec,
 }) => {
   if (!ataud) return <Spinner />;
-  console.log(ataud.operador);
+
   return (
     <div className="container border border-dark alert alert-primary p-4">
       <div className="row">
@@ -105,21 +109,6 @@ const FromActualizarStock = ({
           </select>
         </div>
 
-        {/* <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Codigo De Precios: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              //ref={}
-              readOnly
-            />
-          </div> */}
-
         <div className="form-group col-md-4">
           <label>
             <strong>
@@ -154,7 +143,7 @@ const FromActualizarStock = ({
           <label>
             <strong>
               {" "}
-              <u> Nuevo Stock: </u>
+              <u> Stock Ingresante: </u>
             </strong>
           </label>
           <input
@@ -162,6 +151,54 @@ const FromActualizarStock = ({
             className="form-control"
             name="stock"
             ref={nuevoStockRef}
+            onChange={() =>
+              stockFinal(ataud.stock, nuevoStockRef.current.value)
+            }
+          />
+        </div>
+
+        <div className="form-group col-md-2">
+          <label>
+            <strong>
+              {" "}
+              <u> Stock Final: </u>
+            </strong>
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="stock"
+            defaultValue={sf}
+          />
+        </div>
+
+        <div className="form-group col-md-2">
+          <label>
+            <strong>
+              {" "}
+              <u> Remito N°: </u>
+            </strong>
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="stock"
+            ref={nRemitoRef}
+          />
+        </div>
+
+        <div className="form-group col-md-4">
+          <label>
+            <strong>
+              {" "}
+              <u> Fecha de Recepcion: </u>
+            </strong>
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            name="stock"
+            ref={fechaRec}
           />
         </div>
 
@@ -178,6 +215,13 @@ const FromActualizarStock = ({
             defaultValue={ataud.operador}
             readOnly
           />
+        </div>
+
+        <div className="mt-4 form-group col-md-8">
+          <div className="alert alert-info p-2 text-center text-uppercase border border-dark">
+            ¡¡¡¡Digitar solo el numero de stock ingresante y el stock final se
+            calculara automaticamente.!!!!
+          </div>
         </div>
 
         <div className="form-group col-md-12">
