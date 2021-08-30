@@ -76,7 +76,7 @@ const listado = () => {
     }
   }, []);
 
-  const push = (p1, p2, p3, url) => {
+  const push = (url, p1, p2, p3) => {
     if (p3) {
       Router.push({
         pathname: url,
@@ -154,9 +154,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/impresion",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/impresion"
+                                row.idservicio
                               )
                             }
                           >
@@ -176,9 +176,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/editar",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/editar"
+                                row.idservicio
                               )
                             }
                           >
@@ -201,9 +201,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/legajovirtual/legajo",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/legajovirtual/legajo"
+                                row.idservicio
                               )
                             }
                           >
@@ -222,9 +222,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/legajovirtual/subirarchivos",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/legajovirtual/subirarchivos"
+                                row.idservicio
                               )
                             }
                           >
@@ -244,9 +244,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/detalles/nuevo",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/detalles/nuevo"
+                                row.idservicio
                               )
                             }
                           >
@@ -268,9 +268,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/gastos/gastos",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/gastos/gastos"
+                                row.idservicio
                               )
                             }
                           >
@@ -290,9 +290,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/gastoluto/nuevo",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/gastoluto/nuevo"
+                                row.idservicio
                               )
                             }
                           >
@@ -312,9 +312,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/socios/conformidad/conformidad",
                                 row.dni,
-                                row.idservicio,
-                                "/socios/conformidad/conformidad"
+                                row.idservicio
                               )
                             }
                           >
@@ -337,9 +337,9 @@ const listado = () => {
                             data-dismiss="modal"
                             onClick={() =>
                               push(
+                                "/sepelio/servicios/parcelas/asignar",
                                 row.dni,
-                                row.idservicio,
-                                "/sepelio/servicios/parcelas/asignar"
+                                row.idservicio
                               )
                             }
                           >
@@ -363,9 +363,9 @@ const listado = () => {
                             onClick={() =>
                               push(
                                 row.dni,
+                                "/sepelio/servicios/ataud/gestion",
                                 row.idservicio,
-                                row.idataud,
-                                "/sepelio/servicios/ataud/gestion"
+                                row.idataud
                               )
                             }
                           >
