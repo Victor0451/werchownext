@@ -20,7 +20,8 @@ const actualizar = () => {
   const [user, guardarUsuario] = useState(null);
   const [sf, guardarSF] = useState(null);
   const [sa, guardarSA] = useState(null);
-  
+  const [historial, guardarHistorial] = useState([]);
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -119,6 +120,21 @@ const actualizar = () => {
       });
   };
 
+  const traerHistorial = async (id) => {
+    await axios
+      .get(`${ip}api/sepelio/ataudes/historial/${id}`)
+      .then((res) => {
+        guardarHistorial(res.data);
+      })
+      .catch((error) => {
+        toastr.error(
+          "Ocurrio un error al traer el historial del ataud",
+          "ATENCION"
+        );
+        console.log(error);
+      });
+  };
+
   const stockFinal = (sa, sn) => {
     guardarSA(sa);
     let sf = parseInt(sa) + parseInt(sn);
@@ -136,7 +152,8 @@ const actualizar = () => {
         sf={sf}
         nRemitoRef={nRemitoRef}
         fechaRec={fechaRec}
-        
+        traerHistorial={traerHistorial}
+        historial={historial}
       />
     </Layout>
   );

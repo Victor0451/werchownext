@@ -10,6 +10,8 @@ const ActualizarStock = ({
   sf,
   nRemitoRef,
   fechaRec,
+  traerHistorial,
+  historial,
   
 }) => {
   return (
@@ -30,6 +32,8 @@ const ActualizarStock = ({
           sf={sf}
           nRemitoRef={nRemitoRef}
           fechaRec={fechaRec}
+          traerHistorial={traerHistorial}
+          historial={historial}
           
         />
       </div>

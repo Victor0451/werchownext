@@ -6,6 +6,7 @@ import axios from "axios";
 import ReactTable from "react-table";
 import FromActualizarStock from "./FromActualizarStock";
 import { ip } from "../../../config/config";
+import HistorialActualizaciones from "./HistorialActualizaciones";
 
 const StockAgotado = ({
   nuevoStockRef,
@@ -16,6 +17,8 @@ const StockAgotado = ({
   sf,
   nRemitoRef,
   fechaRec,
+  traerHistorial,
+  historial,
 }) => {
   const [ataudes, guardarAtaudes] = useState(null);
   const [ataud, guardarAtaud] = useState(null);
@@ -153,7 +156,18 @@ const StockAgotado = ({
                           className="fa fa-pencil-square"
                           aria-hidden="true"
                         ></i>{" "}
-                        Actualizar Stock
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-warning btn-sm mr-1"
+                        data-toggle="tooltip"
+                        data-toggle="modal"
+                        data-target="#historial"
+                        data-placement="top"
+                        title="Historial"
+                        onClick={() => traerHistorial(row.original.idataud)}
+                      >
+                        <i className="fa fa-history" aria-hidden="true"></i>
                       </button>
                     </>
                   ),
@@ -222,6 +236,49 @@ const StockAgotado = ({
                 data-dismiss="modal"
               >
                 Actualizar Stock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="historial"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Historial
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="border border-dark alert alert-info p-2 text-center text-uppercase">
+                Este es el historial de actualizaciones en el stock del ataud
+                seleccionado
+              </div>
+
+              <HistorialActualizaciones historial={historial} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cancelar
               </button>
             </div>
           </div>

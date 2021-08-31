@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import matchSorter from "match-sorter";
 import axios from "axios";
 import { ip } from "../../../config/config";
+import HistorialActualizaciones from "./HistorialActualizaciones";
 
 // Import React Table
 import ReactTable from "react-table";
 
-const Stock = ({ selcaso, selcasofrm, fl }) => {
+const Stock = ({ selcaso, selcasofrm, fl, traerHistorial, historial }) => {
   const [ataudes, guardarAtaudes] = useState(null);
 
   const mostrarAtaudes = async () => {
@@ -86,13 +87,31 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
               Header: "STOCK DE ATAUDES",
               columns: [
                 {
+                  Header: "Codigo",
+                  id: "codigo",
+                  accessor: (d) => d.codigo,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["codigo"] }),
+                  filterAll: true,
+                  width: 90,
+                },
+                {
                   Header: "Ataud",
                   id: "nombre",
                   accessor: (d) => d.nombre,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["nombre"] }),
                   filterAll: true,
-                  width: 350,
+                  width: 300,
+                },
+                {
+                  Header: "Tipo",
+                  id: "tipo",
+                  accessor: (d) => d.tipo,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["tipo"] }),
+                  filterAll: true,
+                  width: 90,
                 },
                 {
                   Header: "Medidas",
@@ -179,21 +198,13 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
                             type="button"
                             className="btn btn-warning btn-sm mr-1"
                             data-toggle="tooltip"
+                            data-toggle="modal"
+                            data-target="#historial"
                             data-placement="top"
-                            title="Actualizar Datos"
-                            //onClick={() => selcaso(row)}
+                            title="Historial"
+                            onClick={() => traerHistorial(row.original.idataud)}
                           >
-                            <i className="fa fa-book" aria-hidden="true"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-danger btn-sm mr-1"
-                            data-toggle="tooltip modal"
-                            data-placement="top"
-                            title="Dar de Baja"
-                            //onClick={() => selcaso(row)}
-                          >
-                            <i className="fa fa-times" aria-hidden="true"></i>
+                            <i className="fa fa-history" aria-hidden="true"></i>
                           </button>
                         </>
                       )}
@@ -206,6 +217,48 @@ const Stock = ({ selcaso, selcasofrm, fl }) => {
           defaultPageSize={10}
           className="-striped -highlight"
         />
+      </div>
+      <div
+        className="modal fade"
+        id="historial"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Historial
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="border border-dark alert alert-info p-2 text-center text-uppercase">
+                Este es el historial de actualizaciones en el stock del ataud
+                seleccionado
+              </div>
+
+              <HistorialActualizaciones historial={historial} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
