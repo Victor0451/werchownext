@@ -6,10 +6,10 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
   if (!servicio || !ataud) return <Spinner />;
 
   return (
-    <div className="container  mt-4">
-      <div className=" border border-dark p-4">
+    <div className="container  ">
+      <div className="  p-1">
         <div className="row d-felx justify-content-between p-2">
-          <h1 className="  mb-4 text-center">
+          <h1 className="   text-center">
             <strong>
               <u>Solicitud De Servicio</u>
             </strong>
@@ -455,25 +455,19 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
           </div>
         </div>
         <hr />
-        <div className="alert alert-primary border border-dark p-4">
-          <div className="row d-flex justify-content-between p-2">
+        <div className="alert alert-primary border border-dark">
+          <div className="row d-flex justify-content-between ">
             <div className="col-4 text-center ">
-              <br />
-              <br />
               <br />
               <p>-----------------------------</p>
               <label>Firma</label>
             </div>
             <div className="col-4 text-center ">
               <br />
-              <br />
-              <br />
               <p>-----------------------------</p>
               <label>Aclaracion</label>
             </div>
             <div className="col-4 text-center ">
-              <br />
-              <br />
               <br />
               <p>-----------------------------</p>
               <label>N° de documento</label>

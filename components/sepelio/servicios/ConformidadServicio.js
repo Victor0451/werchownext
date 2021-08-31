@@ -2,7 +2,7 @@ import React from "react";
 
 const ConformidadServicio = () => {
   return (
-    <div className="container  mt-4">
+    <div className="container text-dark mt-4">
       <div className="border border-dark p-4">
         <h2 className="mb-4 text-center">
           <strong>
@@ -62,6 +62,13 @@ const ConformidadServicio = () => {
             Sepelio se efectúe de acuerdo al detalle precedente, renunciando a
             cualquier reclamo ulterior judicial y extrajudicial o indemnización
             alguna.
+          </p>
+
+          <p className="text-justify mt-4">
+            Werchow no es una compañia de seguro, solo se emitirá una constancia
+            por el servicios birndado a sus afiliados. Por lo tanto no
+            corresponde emitir factura, ya que mensualmente se emite un recibo
+            por el abono de la cuota.
           </p>
 
           <div className="">

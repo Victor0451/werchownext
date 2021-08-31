@@ -80,6 +80,10 @@ const Notificacion = ({ caso, userData }) => {
               otro particular y a la espera de solucionar este inconveniente,
               nos despedimos atentamente.
             </p>
+            <p className="text-justify mt-2 p-2">
+              Nuestros horarios de atencion son: Lunes a Viernes de 9hs a
+              12:30hs y de 16:30hs a 20:30hs. Sabados de 9hs a 12:30hs
+            </p>
 
             <div className="col-md-12 mt-2">
               <strong>Departamento de Cobranza</strong>
@@ -147,6 +151,10 @@ const Notificacion = ({ caso, userData }) => {
               ud ya abono las cuotas pendientes, rogamos que nos disculpe. Sin
               otro particular y a la espera de solucionar este inconveniente,
               nos despedimos atentamente.
+            </p>
+            <p className="text-justify mt-2 p-2">
+              Nuestros horarios de atencion son: Lunes a Viernes de 9hs a
+              12:30hs y de 16:30hs a 20:30hs. Sabados de 9hs a 12:30hs
             </p>
 
             <div className="col-md-12 mt-2">
