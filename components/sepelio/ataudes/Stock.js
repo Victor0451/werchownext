@@ -183,12 +183,12 @@ const Stock = ({ selcaso, selcasofrm, fl, traerHistorial, historial }) => {
                           className="btn btn-primary btn-sm mr-1"
                           data-toggle="tooltip"
                           data-placement="top"
-                          title="Actualizar Stock"
+                          title="Seleccionar ataud"
                           onClick={() => selcasofrm(row)}
                           data-dismiss="modal"
                         >
                           <i
-                            className="fa fa-pencil-square"
+                            className="fa fa-mouse-pointer"
                             aria-hidden="true"
                           ></i>
                         </button>

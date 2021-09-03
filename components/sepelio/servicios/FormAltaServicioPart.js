@@ -8,7 +8,7 @@ import useValidacion from "../../../hooks/useValidacion";
 import validarAltaServicioPart from "../../../validacion/validarAltaServicioPart";
 import toastr from "toastr";
 import Router from "next/router";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const STATE_INICIAL = {
   nombre: "",
@@ -40,14 +40,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const [crem, guardarCrem] = useState(0);
   const [stock, guardarStock] = useState(null);
 
-
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarAltaServicioPart, nuevoServicio);
+  const { valores, errores, handleChange, handleSubmit, handleBlur } =
+    useValidacion(STATE_INICIAL, validarAltaServicioPart, nuevoServicio);
 
   const {
     nombre,
@@ -97,7 +91,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
       cremacion: crem,
-      liquidado: 0
+      liquidado: 0,
     };
 
     if (motivoRef.current.value === "") {
@@ -108,14 +102,11 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       console.log(servicio);
 
       await axios
-        .post(
-          `${ip}api/sepelio/servicio/nuevoservicio`,
-          servicio
-        )
+        .post(`${ip}api/sepelio/servicio/nuevoservicio`, servicio)
         .then((res) => {
           if ((res.status = 200)) {
             toastr.success("Servicio cargado con exito", "ATENCION");
-            updateStockAtaud(servicio.idataud, stock)
+            updateStockAtaud(servicio.idataud, stock);
 
             Router.push({
               pathname: "/sepelio/servicios/impresion",
@@ -165,7 +156,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
 
   const updateStockAtaud = async (idataud, stock) => {
     let nustock = stock - 1;
-    console.log(nustock)
+    console.log(nustock);
     await axios
       .put(`${ip}api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
@@ -846,7 +837,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
               </button>
             </div>
             <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} fl={0} />
+              <Stock selcasofrm={selcasofrm} fl={0} historial={[]} />
             </div>
             <div className="modal-footer">
               <button

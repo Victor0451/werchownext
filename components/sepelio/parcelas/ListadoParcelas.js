@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 import axios from "axios";
 
@@ -92,11 +92,11 @@ const ListadoParcelas = ({ selcasoparcela }) => {
                         className="btn btn-primary btn-sm mr-1"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Actualizar Stock"
+                        title="Seleccionar Parcela"
                         onClick={() => selcasoparcela(row)}
                         data-dismiss="modal"
                       >
-                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        <i class="fa fa-mouse-pointer" aria-hidden="true"></i>
                       </button>
                     </div>
                   ),

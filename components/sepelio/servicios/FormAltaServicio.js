@@ -11,7 +11,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import ListadoAdherentes from "./ListadoAdherentes";
 import ListadoParcelas from "../parcelas/ListadoParcelas";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -57,13 +57,8 @@ const FormAltaServicio = ({
   const [crem, guardarCrem] = useState(0);
   const [stock, guardarStock] = useState(null);
 
-  const {
-    valores,
-    errores,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-  } = useValidacion(STATE_INICIAL, validarAltaServicio, nuevoServicio);
+  const { valores, errores, handleChange, handleSubmit, handleBlur } =
+    useValidacion(STATE_INICIAL, validarAltaServicio, nuevoServicio);
 
   const {
     fechafallecimiento,
@@ -83,10 +78,7 @@ const FormAltaServicio = ({
 
   const postServicio = async (servicio) => {
     await axios
-      .post(
-        `${ip}api/sepelio/servicio/nuevoservicio`,
-        servicio
-      )
+      .post(`${ip}api/sepelio/servicio/nuevoservicio`, servicio)
       .then((res) => {
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
@@ -123,7 +115,7 @@ const FormAltaServicio = ({
 
   const updateStockAtaud = async (idataud, stock) => {
     let nustock = stock - 1;
-    console.log(nustock)
+    console.log(nustock);
     await axios
       .put(`${ip}api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
@@ -165,7 +157,7 @@ const FormAltaServicio = ({
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
       cremacion: crem,
-      liquidado: 0
+      liquidado: 0,
     };
 
     if (ficha.GRUPO && ficha.PLAN !== "P") {
@@ -268,14 +260,12 @@ const FormAltaServicio = ({
       {grupo ? (
         <div className="">
           {grupo.CODIGO === 1001 ||
-            grupo.CODIGO === 3444 ||
-            grupo.CODIGO === 3666 ||
-            grupo.CODIGO === 3777 ||
-            grupo.CODIGO === 3888 ||
-            grupo.CODIGO === 3999 ||
-            grupo.CODIGO === 4004 ? (
-
-
+          grupo.CODIGO === 3444 ||
+          grupo.CODIGO === 3666 ||
+          grupo.CODIGO === 3777 ||
+          grupo.CODIGO === 3888 ||
+          grupo.CODIGO === 3999 ||
+          grupo.CODIGO === 4004 ? (
             <div
               className="mt-4 alert alert-danger alert-dismissible border border-dark fade show container"
               role="alert"
@@ -294,12 +284,10 @@ const FormAltaServicio = ({
                 <span aria-hidden="true">&times;</span>
               </button>
               <h5>
-                El afiliado esta en estado de morosidad!!!. GRUPO: {grupo.CODIGO}{" "}
-              - {grupo.DESCRIP}
-
+                El afiliado esta en estado de morosidad!!!. GRUPO:{" "}
+                {grupo.CODIGO} - {grupo.DESCRIP}
               </h5>
             </div>
-
           ) : (
             <div className="alert alert-info border border-dark text-center text-uppercase">
               GRUPO: {grupo.CODIGO} - {grupo.DESCRIP}
@@ -1153,7 +1141,7 @@ const FormAltaServicio = ({
               </button>
             </div>
             <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} fl={0} />
+              <Stock selcasofrm={selcasofrm} fl={0} historial={[]} />
             </div>
             <div className="modal-footer">
               <button
