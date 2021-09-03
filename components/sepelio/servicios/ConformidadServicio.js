@@ -61,14 +61,12 @@ const ConformidadServicio = () => {
             responsable manifiesta su total conformidad para que el Servicio de
             Sepelio se efectúe de acuerdo al detalle precedente, renunciando a
             cualquier reclamo ulterior judicial y extrajudicial o indemnización
-            alguna.
-          </p>
-
-          <p className="text-justify mt-4">
-            Werchow no es una compañia de seguro, solo se emitirá una constancia
-            por el servicios birndado a sus afiliados. Por lo tanto no
-            corresponde emitir factura, ya que mensualmente se emite un recibo
-            por el abono de la cuota.
+            alguna. Werchow no es una compañía de seguro, por lo y que no
+            emitimos facturas por servicios de sepelio brindados a nuestros
+            afiliados, ya que mensualmente se emite un recibo, factura o
+            comprobante de pago de acuerdo al abono de la cuota que abona, por
+            lo tanto se entrega una constancia por el servicio de sepelio
+            brindado por la Empresa.
           </p>
 
           <div className="">

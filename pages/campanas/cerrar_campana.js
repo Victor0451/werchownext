@@ -4,8 +4,8 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import CampanaActivas from "../../components/campañas/CampanasActivas";
 import Router from "next/router";
-import {ip} from '../../config/config'
-
+import { ip } from "../../config/config";
+import toastr from "toastr";
 
 const cerrar_campana = () => {
   const [campanas, guardarCampanas] = useState(null);
@@ -32,6 +32,25 @@ const cerrar_campana = () => {
     }
   }, []);
 
+  const cerrarCamp = async (idcampana) => {
+    axios
+      .put(`${ip}api/sgi/campanas/cerrarcamps/${idcampana}`)
+
+      .then((res) => {
+        let status = res.statusText;
+        if (status === "OK") {
+          toastr.success("Se cerror con exito la campaña", "Atencion");
+          setTimeout(() => {
+            campanasActivas();
+          }, 300);
+        } else if (status === "Bad Request" || status === "Not Found")
+          toastr.error("Ocurrio un error, no se cerro la campaa", "Atencion");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Layout>
       <>
@@ -40,7 +59,7 @@ const cerrar_campana = () => {
             No hay campañas activas
           </div>
         ) : (
-          <CampanaActivas campanas={campanas} />
+          <CampanaActivas campanas={campanas} cerrarCamp={cerrarCamp} />
         )}
       </>
     </Layout>

@@ -422,7 +422,6 @@ const Adimn = () => {
             </ul>
           </li>
           <hr />
-
           <li>
             <a
               href="/prestamos/informeprestamos"
@@ -431,9 +430,16 @@ const Adimn = () => {
               Reportes
             </a>
           </li>
-
           <hr />
-
+          <li>
+            <a
+              href="/prestamos/aprobarprestamos"
+              className="dropdown-item text-dark"
+            >
+              Aprobar Sub. Cont. Familiar
+            </a>
+          </li>
+          <hr />
           <li>
             <a
               href="/prestamos/imprimircaratula"
@@ -895,6 +901,24 @@ const Adimn = () => {
                   className="dropdown-item text-dark"
                 >
                   Modificacion de Datos
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sol-con-amanecer.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud y condiciones Amanecer Oficio
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sol-con-genesis.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud y condiciones Genesis Oficio
                 </a>
               </li>
               <hr />

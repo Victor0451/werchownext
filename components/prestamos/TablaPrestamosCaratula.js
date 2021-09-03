@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import matchSorter from "match-sorter";
 import Link from "next/link";
-import axios from "axios";
-import toastr from "toastr";
-import Router from "next/router";
-// Import React Table
 import ReactTable from "react-table";
-import { ip } from '../../config/config'
 
 const TablaPrestamosCaratula = ({
   data,
@@ -14,52 +9,10 @@ const TablaPrestamosCaratula = ({
   intereses,
   cantprest,
   capconint,
-  codigo,
 }) => {
-  const [afi, guardarAfi] = useState(null);
-
-  const aprobarPrestamos = async (row) => {
-    const id = row.original.ptm_id;
-
-    await axios
-      .put(`${ip}api/sgi/prestamos/aprobarprestamo/${id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res.status);
-
-          //Router.push("/prestamos/aprobarprestamos");
-          toastr.success("Se aprobo el prestamo con exito", "Atencion");
-
-          //window.location.reload();
-
-          setTimeout(() => {
-            Router.reload();
-          }, 1000);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const afiliado = async (contrato) => {
-    await axios
-      .get(
-        `${ip}api/sgi/prestamos/aprobarprestamo/${contrato}`
-      )
-      .then((res) => {
-        let afi = res.data.APELLIDOS;
-        return afi;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <div className="mt-4 mb-4">
       <hr />
-
       <div className=" d-fex justify-content-between alert alert-secondary text-dark border border-dark p-4">
         <h4 className="mb-4 ">
           <strong>
@@ -215,15 +168,6 @@ const TablaPrestamosCaratula = ({
                   width: 260,
                   Cell: (row) => (
                     <div>
-                      {codigo === 1 ? (
-                        <button
-                          className="btn btn-success btn-sm mr-1"
-                          onClick={() => aprobarPrestamos(row)}
-                        >
-                          <i class="fa fa-check" aria-hidden="true"></i>
-                        </button>
-                      ) : null}
-
                       <Link
                         href={{
                           pathname: "/prestamos/caratula",

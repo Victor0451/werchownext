@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Spinner from "../../layout/Spinner";
 import axios from "axios";
 import toastr from "toastr";
-import { ip } from '../../../config/config'
+import { ip } from "../../../config/config";
 
-const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
+const LegajoArchivos = ({ archivos, id, ficha, prestamo, fl }) => {
   if (!ficha) {
     return <Spinner />;
   } else if (!archivos) {
@@ -16,9 +16,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
   const eliminarArchivos = async (id, flag) => {
     console.log(id);
     await axios
-      .delete(
-        `${ip}api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
-      )
+      .delete(`${ip}api/archivos/legajovirtualprestamos/eliminararchivos/${id}`)
       .then((res) => {
         if (res.status === 200) {
           toastr.success("El archivo se elimino", "ATENCION");
@@ -39,12 +37,22 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo }) => {
             <u>Legajo Virtual N°:</u> "{id}"
           </strong>
         </h2>
-        <a
-          href="/prestamos/imprimircaratula"
-          className="btn btn-primary  mt-4 text-white col-md-4"
-        >
-          Volver Al Listado
-        </a>
+
+        {fl === "ap" ? (
+          <a
+            href="/prestamos/aprobarprestamos"
+            className="btn btn-primary  mt-4 text-white col-md-4"
+          >
+            Volver Al Listado
+          </a>
+        ) : (
+          <a
+            href="/prestamos/imprimircaratula"
+            className="btn btn-primary  mt-4 text-white col-md-4"
+          >
+            Volver Al Listado
+          </a>
+        )}
       </div>
 
       <form className="border border-dark p-4 mt-4">

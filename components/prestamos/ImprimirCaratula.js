@@ -10,8 +10,7 @@ const ImprimirCaratula = ({
   capconint,
   codigo,
 }) => {
-  console.log(prestamos);
-  return (
+    return (
     <div className="container mt-4 alert alert-primary border border-dark p-4">
       <h2 className=" mb-4">
         <strong>

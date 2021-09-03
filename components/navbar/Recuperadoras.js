@@ -290,6 +290,24 @@ const Recuperadoras = ({ usuario }) => {
               </li>
               <hr />
               <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-amanecer.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud y condiciones Amanecer Oficio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud y condiciones Genesis Oficio
+                  </a>
+                </li>
+                <hr/>
+              <li>
                 <a
                   href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
                   className="dropdown-item text-dark"

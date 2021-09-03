@@ -264,16 +264,7 @@ export default class Gerencia extends Component {
                   >
                     Subir Archivos
                   </a>
-                </li>
-                {/* <hr />
-              <li>
-                <a
-                  href="/prestamos/legajovirtual/legajo"
-                  className="dropdown-item text-dark"
-                >
-                  Buscar Ficha
-                </a>
-              </li> */}
+                </li>              
               </ul>
             </li>
             <hr />
@@ -284,6 +275,16 @@ export default class Gerencia extends Component {
                 className="dropdown-item text-dark"
               >
                 Reportes
+              </a>
+            </li>
+
+            <hr />
+            <li>
+              <a
+                href="/prestamos/aprobarprestamos"
+                className="dropdown-item text-dark"
+              >
+                Aprobar Sub. Cont. Familiar
               </a>
             </li>
 
