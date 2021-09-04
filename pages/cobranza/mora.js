@@ -332,7 +332,7 @@ const mora = () => {
   return (
     <Layout>
 
-      <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Mora'} />
+      <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Mora'} flag={'E'} />
 
       <div className=" container border border-dark mt-4 mb-4 alert alert-info text-center text-uppercase"><u>¡atencion!</u>: La mora a analizar, es la plata no cobrada del mes anterior con respecto al mes en curso</div>
 

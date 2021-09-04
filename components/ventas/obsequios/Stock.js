@@ -80,24 +80,24 @@ const Stock = ({ stock }) => {
 
                                 },
 
-                                {
-                                    Header: "Estado",
-                                    id: "estado",
-                                    accessor: (d) => d.estado,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["estado"] }),
-                                    filterAll: true,
+                                // {
+                                //     Header: "Estado",
+                                //     id: "estado",
+                                //     accessor: (d) => d.estado,
+                                //     filterMethod: (filter, rows) =>
+                                //         matchSorter(rows, filter.value, { keys: ["estado"] }),
+                                //     filterAll: true,
 
-                                    Cell: (row) => (
-                                        <div>
-                                            {row.original.estado === 1 ? (
-                                                <div>Activo</div>
-                                            ) : row.original.estado === 0 ? (
-                                                <div>De Baja</div>
-                                            ) : null}
-                                        </div>
-                                    ),
-                                },
+                                //     Cell: (row) => (
+                                //         <div>
+                                //             {row.original.estado === 1 ? (
+                                //                 <div>Activo</div>
+                                //             ) : row.original.estado === 0 ? (
+                                //                 <div>De Baja</div>
+                                //             ) : null}
+                                //         </div>
+                                //     ),
+                                // },
 
                                 {
                                     Header: "Acciones",
