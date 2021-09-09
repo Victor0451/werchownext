@@ -13,11 +13,10 @@ const editar = () => {
   let router = useRouter();
 
   const traerServicio = async (id) => {
-    axios
+    await axios
       .get(` ${ip}api/sepelio/servicio/impservicio/${id}`)
       .then((res) => {
         guardarServicio(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

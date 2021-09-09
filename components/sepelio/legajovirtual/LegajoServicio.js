@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import Spinner from "../../layout/Spinner";
 import axios from "axios";
 import toastr from "toastr";
-import moment from 'moment'
-import { ip } from '../../../config/config'
+import moment from "moment";
+import { ip } from "../../../config/config";
 
-const LegajoServicio = ({ archivos, id, servicio, }) => {
+const LegajoServicio = ({ archivos, servicio, ataud }) => {
   if (!servicio) {
     return <Spinner />;
   } else if (!archivos) {
+    return <Spinner />;
+  } else if (!ataud) {
     return <Spinner />;
   }
 
@@ -17,9 +19,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
   const eliminarArchivos = async (id, flag) => {
     console.log(id);
     await axios
-      .delete(
-        `${ip}api/archivos/legajovirtualprestamos/eliminararchivos/${id}`
-      )
+      .delete(`${ip}api/archivos/legajovirtualservicios/eliminararchivos/${id}`)
       .then((res) => {
         if (res.status === 200) {
           toastr.success("El archivo se elimino", "ATENCION");
@@ -34,21 +34,21 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
 
   return (
     <div className="container alert alert-primary border border-dark p-4 mt-4">
-
       <div className=" border border-dark p-4">
         <div className="row d-felx justify-content-between p-2">
-          <h1 className="  mb-4 text-center">
+          <h3 className="  mb-4 text-center">
             <strong>
-              <u>Legajo Virtual Del Servicio</u>: {id}
+              <u>Legajo Virtual Del Servicio</u>: {servicio.idservicio} -{" "}
+              {servicio.apellido}, {servicio.nombre}
             </strong>
-          </h1>
+          </h3>
           <div>
             <a
               href="/sepelio/servicios/listado"
-              className="btn btn-danger text-white"
+              className="btn btn-danger btn-sm text-white"
             >
               Volver Al Listado
-          </a>
+            </a>
           </div>
         </div>
 
@@ -409,7 +409,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 className="form-control"
                 placeholder="Solicitado Por"
                 name="solicitado"
-                // defaultValue={ataud.nombre}
+                defaultValue={ataud.nombre}
                 readOnly
               />
             </div>
@@ -426,15 +426,13 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 className="form-control"
                 placeholder="Solicitado Por"
                 name="solicitado"
-                //defaultValue={ataud.tipo}
+                defaultValue={ataud.tipo}
                 readOnly
               />
             </div>
           </div>
         </div>
       </div>
-
-
 
       <div className=" col-md-12 mt-4 mb-4 border border-dark p-4">
         <h2 className="mt-4 mb-4 col-8">
@@ -455,7 +453,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 </strong> */}
 
                 <img
-                  src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archivo.archivo}`}
+                  src={`${ip}api/archivos/legajovirtualservicios/archivo/${archivo.archivo}`}
                   className="archivos p-4 "
                   data-toggle="modal"
                   data-target="#exampleModal"
@@ -466,7 +464,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
                 <div className="">
                   <a
                     className="btn btn-primary mr-1 "
-                    href={`${ip}api/archivos/legajovirtualprestamos/descargararchivo/${archivo.archivo}`}
+                    href={`${ip}api/archivos/legajovirtualservicios/descargararchivo/${archivo.archivo}`}
                   >
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </a>
@@ -487,7 +485,7 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -508,8 +506,8 @@ const LegajoServicio = ({ archivos, id, servicio, }) => {
             </div>
             <div className="modal-body d-flex justify-content-center">
               <img
-                src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archi}`}
-                classNameName="archimodal p-4  "
+                src={`${ip}api/archivos/legajovirtualservicios/archivo/${archi}`}
+                className="archimodal p-4  "
               />
             </div>
             <div className="modal-footer">

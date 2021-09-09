@@ -14,7 +14,7 @@ const RedirectToLogin = () => {
 
         <div className="d-flex justify-content-center">
           <img
-            src="/img/logerr.jpeg"
+            src="/img/logerr.jpg"
             className="logerr mt-4 mb-4 border border-dark 
         "
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import { ip } from "../../config/config";
 
-const Recuperadoras = ({ usuario }) => {
+const Recuperadoras = ({ usuario, perfil }) => {
   return (
     <ul className="navbar-nav">
       <li className="nav-item dropdown ">
@@ -129,6 +129,224 @@ const Recuperadoras = ({ usuario }) => {
           </li>
         </ul>
       </li>
+
+      {usuario === "mcarrizo" ||
+      usuario === "sjuarez" ||
+      usuario === "vgorosito" ? (
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Sepelio
+          </a>
+          <ul className="dropdown-menu">
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Archivos (Descargas)
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Protocolo Inst. en domicilio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-SOLI.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Solicitud de Pago
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-DDJJ.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    ISJ - Declaracion Jurada
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/solicitud-novell.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud Novell
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/solicitud-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud Genesis
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/condiciones-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Condiciones Genesis
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-amanecer.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud y condiciones Amanecer Oficio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-genesis.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud y condiciones Genesis Oficio
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Modificacion de Datos
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/autorizacion-debito.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Autorizacion de Retencion de Haberes
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-10000.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Subsidio de 10000
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href={`${ip}api/archivos/ventas/descargararchivo/sub-30000.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Subsidio de 30000
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Ataudes
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/ataudes/ventasinservicio"
+                    className="dropdown-item text-dark"
+                  >
+                    Venta De Ataud Sin Servicio
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Servicios
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/sepelio/servicios/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Ingresar Servicio
+                  </a>
+                </li>
+
+                <hr />
+
+                <li>
+                  <a
+                    href="/sepelio/servicios/gastoluto/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Gasto de luto
+                  </a>
+                </li>
+
+                <hr />
+
+                <li>
+                  <a
+                    href="/sepelio/servicios/listado"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado De Servicios
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/servicios/listadohistorico"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado De Serv Historicos
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/servicios/venta/venta"
+                    className="dropdown-item text-dark"
+                  >
+                    Cargar Servicios Vendidos
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      ) : null}
 
       <li className="nav-item dropdown ">
         <a
@@ -290,23 +508,23 @@ const Recuperadoras = ({ usuario }) => {
               </li>
               <hr />
               <li>
-                  <a
-                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-amanecer.pdf`}
-                    className="dropdown-item text-dark"
-                  >
-                    Solicitud y condiciones Amanecer Oficio
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-genesis.pdf`}
-                    className="dropdown-item text-dark"
-                  >
-                    Solicitud y condiciones Genesis Oficio
-                  </a>
-                </li>
-                <hr/>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-amanecer.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud y condiciones Amanecer Oficio
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/ventas/descargararchivo/sol-cond-genesis.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Solicitud y condiciones Genesis Oficio
+                </a>
+              </li>
+              <hr />
               <li>
                 <a
                   href={`${ip}api/archivos/ventas/descargararchivo/modificacion-datos.pdf`}
