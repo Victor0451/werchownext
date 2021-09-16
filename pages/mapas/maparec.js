@@ -4,7 +4,8 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import FormMapaRec from "../../components/mapas/FormMapaRec";
 import MapaRec from "../../components/mapas/MapaRec";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
+import toastr from "toastr";
 
 const maparec = () => {
   let recRef = React.createRef();
@@ -19,6 +20,8 @@ const maparec = () => {
   const [ano, guardarAno] = useState(null);
   const [mapa, guardarMapa] = useState(null);
   const [mapaM, guardarMapaM] = useState(null);
+  const [mora, guardarMora] = useState(null);
+  const [moraM, guardarMoraM] = useState(null);
   const [recup, guardarRecup] = useState(null);
   const [error, guardarError] = useState(null);
 
@@ -72,9 +75,15 @@ const maparec = () => {
         })
         .then((res) => {
           guardarMapa(res.data[0]);
+
+          traerMora(rec, desde, hasta);
+
+          toastr.success("Se trajo el mapeo con exito", "ATENCION");
         })
         .catch((error) => {
           console.log(error);
+
+          toastr.error("Ocurrio un error al traer el mapeo", "ATENCION");
         });
 
       await axios
@@ -147,6 +156,42 @@ const maparec = () => {
     }
   };
 
+  const traerMora = async (rec, desde, hasta) => {
+    await axios
+      .get(`${ip}api/sgi/mapa/mapareccamp`, {
+        params: {
+          rec: rec,
+          desde: desde,
+          hasta: hasta,
+          emp: "werchow",
+        },
+      })
+      .then((res) => {
+        guardarMora(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("Ocurrio un error al traer la mora", "ATENCION");
+      });
+
+    await axios
+      .get(`${ip}api/sgi/mapa/mapareccamp`, {
+        params: {
+          rec: rec,
+          desde: desde,
+          hasta: hasta,
+          emp: "mutual",
+        },
+      })
+      .then((res) => {
+        guardarMoraM(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("Ocurrio un error al traer la mora", "ATENCION");
+      });
+  };
+
   const imprimir = () => {
     let contenido = document.getElementById("solicitud").innerHTML;
     let contenidoOrg = document.body.innerHTML;
@@ -175,12 +220,13 @@ const maparec = () => {
         error={error}
         datatoggle={"modal"}
         datatarget={"#exampleModal"}
+      
       />
 
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -206,6 +252,8 @@ const maparec = () => {
                       desde={desde}
                       hasta={hasta}
                       ano={ano}
+                      mora={mora}
+                      moraM={moraM}
                     />
                   </div>
                   <div className=" container alert alert-primary border border-dark p-4">

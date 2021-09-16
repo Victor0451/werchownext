@@ -38,7 +38,7 @@ const Login = () => {
 
       await axios.post(`${ip}api/sgi/auth/auth`, body, config).then((res) => {
         const usuario = res.data.user;
-        console.log(usuario);
+
         jsCookie.set("token", res.data.token);
         jsCookie.set("usuario", usuario);
 

@@ -162,7 +162,7 @@ const TablaPrestamosPrendientes = ({
                           className="btn btn-success btn-sm mr-1"
                           onClick={() => aprobarPrestamos(row)}
                         >
-                          <i class="fa fa-check" aria-hidden="true"></i>
+                          <i className="fa fa-check" aria-hidden="true"></i>
                         </button>
                       ) : null}
                       <Link

@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-const MapaRec = ({ mapa, mapaM, desde, hasta, ano }) => {
+const MapaRec = ({ mapa, mapaM, desde, hasta, ano, mora, moraM }) => {
   const totalVentas = (array) => {
     let total = 0;
     for (let i = 0; i < array.length; i++) {
@@ -13,7 +13,7 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano }) => {
   const totalMonto = (array) => {
     let total = 0;
     for (let i = 0; i < array.length; i++) {
-      total += array[i].monto;
+      total += parseFloat(array[i].monto);
     }
     return total;
   };
@@ -47,6 +47,23 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano }) => {
       month = "DICIEMBRE";
     }
     return month;
+  };
+
+  const efectividadMora = (mora, liq) => {
+    let mor = 0;
+    let rec = 0;
+
+    for (let i = 0; i < mora.length; i++) {
+      mor += parseFloat(mora[i].monto);
+    }
+
+    for (let i = 0; i < liq.length; i++) {
+      rec += parseFloat(liq[i].monto);
+    }
+
+    let efec = (rec * 100) / mor;
+
+    return efec.toFixed(2);
   };
 
   return (
@@ -86,54 +103,116 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano }) => {
 
         {mapa ? (
           mapa.length !== 0 ? (
-            <div className="mt-4 border border-dark p-4">
-              <h4 className="mb-4">
-                <strong>
-                  <u>Empresa</u>: Werchow
-                </strong>
-              </h4>
+            <>
+              <div className="mt-4 border border-dark p-4">
+                <h4 className="mb-4">
+                  <strong>
+                    <u>Empresa</u>: Werchow
+                  </strong>
+                </h4>
+                <div className="row">
+                  {mora ? (
+                    mora.length !== 0 ? (
+                      <div className="col-md-6">
+                        <h6 className="mb-4">
+                          <strong>
+                            <u>Mora asignada en campaña</u>
+                          </strong>
+                        </h6>
+                        <table className="table table-sm list">
+                          <thead className="thead-dark">
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">ACCION</th>
+                              <th scope="col">CASOS</th>
+                              <th scope="col">MORA</th>
+                              <th scope="col">EMPRESA</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {mora.map((mora, index) => (
+                              <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{mora.descripcion}</td>
+                                <td>{mora.cantidad}</td>
+                                <td>$ {mora.monto}</td>
+                                {mora.empresa === "werchow" ? (
+                                  <td>WERCHOW</td>
+                                ) : null}
+                              </tr>
+                            ))}
+                            <tr className="alert alert-info border border-dark text-center text-uppercase">
+                              <td colSpan="2" className="text-center ">
+                                TOTAL
+                              </td>
 
-              <table className="table table-sm list">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ACCION</th>
-                    {mapa[0].mes ? <th scope="col">MES</th> : null}
-                    <th scope="col">CANTIDAD</th>
-                    <th scope="col">INGRESOS</th>
-                    <th scope="col">EMPRESA</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {mapa.map((mapa, index) => (
-                    <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{mapa.accion}</td>
-                      {mapa.mes ? <td>{mesNombre(mapa.mes)}</td> : null}
-                      <td>{mapa.cantidad}</td>
-                      <td>$ {mapa.monto}</td>
-                      {mapa.empresa === "W" ? <td>WERCHOW</td> : null}
-                    </tr>
-                  ))}
-                  <tr className="alert alert-info">
-                    <td colSpan="2" className="text-center ">
-                      TOTAL
-                    </td>
-                    <td></td>
-                    <td>{totalVentas(mapa)}</td>
-                    <td>$ {totalMonto(mapa)}</td>
-                    {mapa[0].mes ? <td></td> : null}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                              <td>{totalVentas(mora)}</td>
+                              <td>$ {totalMonto(mora)}</td>
+                              {mora[0].mes ? <td></td> : null}
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="border border-dark p-4">
+                        <div className="alert alert-warning text-center text-uppercase">
+                          No se registran acciones
+                        </div>
+                      </div>
+                    )
+                  ) : null}
+
+                  <div className="col-md-6">
+                    <h6 className="mb-4">
+                      <strong>
+                        <u>Liquidacion (Mora recuperada)</u>
+                      </strong>
+                    </h6>
+                    <table className="table table-sm list">
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">ACCION</th>
+                          {mapa[0].mes ? <th scope="col">MES</th> : null}
+                          <th scope="col">CANTIDAD</th>
+                          <th scope="col">INGRESOS</th>
+                          <th scope="col">EMPRESA</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {mapa.map((mapa, index) => (
+                          <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{mapa.accion}</td>
+                            {mapa.mes ? <td>{mesNombre(mapa.mes)}</td> : null}
+                            <td>{mapa.cantidad}</td>
+                            <td>$ {mapa.monto}</td>
+                            {mapa.empresa === "W" ? <td>WERCHOW</td> : null}
+                          </tr>
+                        ))}
+                        <tr className="alert alert-info border border-dark text-center text-uppercase">
+                          <td colSpan="2" className="text-center ">
+                            TOTAL
+                          </td>
+
+                          <td>{totalVentas(mapa)}</td>
+                          <td>$ {totalMonto(mapa)}</td>
+                          <td></td>
+                          {mapa[0].mes ? <td></td> : null}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="mt-4 alert alert-info border border-dark text-center text-uppercase">
+                  Efectividad de mora {efectividadMora(mora, mapa)} %
+                </div>
+              </div>
+            </>
           ) : (
             <div className="border border-dark p-4">
-              <h4 className="mb-4">
-                <strong>
-                  <u>Empresa</u>: Werchow
-                </strong>
-              </h4>
               <div className="alert alert-warning text-center text-uppercase">
                 No se registran acciones
               </div>
@@ -143,53 +222,116 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano }) => {
 
         {mapaM ? (
           mapaM.length !== 0 ? (
-            <div className="mt-4 border border-dark p-4">
-              <h4 className="mb-4">
-                <strong>
-                  <u>Empresa</u>: Mutual
-                </strong>
-              </h4>
-              <table className="table table-sm list">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ACCION</th>
-                    {mapaM[0].mes ? <th scope="col">MES</th> : null}
-                    <th scope="col">CANTIDAD</th>
-                    <th scope="col">INGRESOS</th>
-                    <th scope="col">EMPRESA</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {mapaM.map((mapa, index) => (
-                    <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{mapa.accion}</td>
-                      {mapa.mes ? <td>{mesNombre(mapa.mes)}</td> : null}
-                      <td>{mapa.cantidad}</td>
-                      <td>$ {mapa.monto}</td>
-                      {mapa.empresa === "M" ? <td>MUTUAL</td> : null}
-                    </tr>
-                  ))}
-                  <tr className="alert alert-info">
-                    <td colSpan="2" className="text-center ">
-                      TOTAL
-                    </td>
-                    <td></td>
-                    <td>{totalVentas(mapaM)}</td>
-                    <td>$ {totalMonto(mapaM)}</td>
-                    {mapaM[0].mes ? <td></td> : null}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <>
+              <div className="mt-4 border border-dark p-4">
+                <h4 className="mb-4">
+                  <strong>
+                    <u>Empresa</u>: Mutual San Valentin
+                  </strong>
+                </h4>
+                <div className="row">
+                  {moraM ? (
+                    moraM.length !== 0 ? (
+                      <div className="col-md-6">
+                        <h6 className="mb-4">
+                          <strong>
+                            <u>Mora asignada en campaña</u>
+                          </strong>
+                        </h6>
+                        <table className="table table-sm list">
+                          <thead className="thead-dark">
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">ACCION</th>
+                              <th scope="col">CASOS</th>
+                              <th scope="col">MORA</th>
+                              <th scope="col">EMPRESA</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {moraM.map((moraM, index) => (
+                              <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{moraM.descripcion}</td>
+                                <td>{moraM.cantidad}</td>
+                                <td>$ {moraM.monto}</td>
+                                {moraM.empresa === "mutual" ? (
+                                  <td>MUTUAL</td>
+                                ) : null}
+                              </tr>
+                            ))}
+                            <tr className="alert alert-info border border-dark text-center text-uppercase">
+                              <td colSpan="2" className="text-center ">
+                                TOTAL
+                              </td>
+
+                              <td>{totalVentas(moraM)}</td>
+                              <td>$ {totalMonto(moraM)}</td>
+                              <td></td>
+                              {moraM[0].mes ? <td></td> : null}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="border border-dark p-4">
+                        <div className="alert alert-warning text-center text-uppercase">
+                          No se registran acciones
+                        </div>
+                      </div>
+                    )
+                  ) : null}
+
+                  <div className="col-md-6">
+                    <h6 className="mb-4">
+                      <strong>
+                        <u>Liquidacion (Mora recuperada)</u>
+                      </strong>
+                    </h6>
+                    <table className="table table-sm list">
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">ACCION</th>
+                          {mapaM[0].mes ? <th scope="col">MES</th> : null}
+                          <th scope="col">CANTIDAD</th>
+                          <th scope="col">INGRESOS</th>
+                          <th scope="col">EMPRESA</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {mapaM.map((mapaM, index) => (
+                          <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{mapaM.accion}</td>
+                            {mapaM.mes ? <td>{mesNombre(mapaM.mes)}</td> : null}
+                            <td>{mapaM.cantidad}</td>
+                            <td>$ {mapaM.monto}</td>
+                            {mapaM.empresa === "M" ? <td>MUTUAL</td> : null}
+                          </tr>
+                        ))}
+                        <tr className="alert alert-info border border-dark text-center text-uppercase">
+                          <td colSpan="2" className="text-center ">
+                            TOTAL
+                          </td>
+
+                          <td>{totalVentas(mapaM)}</td>
+                          <td>$ {totalMonto(mapaM)}</td>
+                          <td></td>
+                          {mapaM[0].mes ? <td></td> : null}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="mt-4 alert alert-info border border-dark text-center text-uppercase">
+                  Efectividad de mora {efectividadMora(moraM, mapaM)} %
+                </div>
+              </div>
+            </>
           ) : (
             <div className="border border-dark p-4">
-              <h4 className="mt-4 mb-4">
-                <strong>
-                  <u>Empresa</u>: Mutual
-                </strong>
-              </h4>
               <div className="alert alert-warning text-center text-uppercase">
                 No se registran acciones
               </div>

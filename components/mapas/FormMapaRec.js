@@ -13,6 +13,7 @@ const FormMapaRec = ({
   error,
   datatoggle,
   datatarget,
+
 }) => {
   return (
     <div className="container mt-4 alert alert-primary border border-dark p-4">
@@ -29,13 +30,13 @@ const FormMapaRec = ({
             </strong>
           </label>
           <select className="custom-select" ref={recRef}>
-            <option value="no" selected>
-              Selecciona un asesor
-            </option>
+            <option defaultValue="no">Selecciona un asesor</option>
             {listado ? (
               <>
-                {listado.map((rec) => (
-                  <option value={rec.value}>{rec.label}</option>
+                {listado.map((rec, index) => (
+                  <option key={index} value={rec.value}>
+                    {rec.label}
+                  </option>
                 ))}
               </>
             ) : null}
@@ -85,13 +86,13 @@ const FormMapaRec = ({
             </strong>
           </label>
           <select className="custom-select" ref={rec2Ref}>
-            <option value="no" selected>
-              Selecciona un asesor
-            </option>
+            <option defaultValue="no">Selecciona un asesor</option>
             {listado ? (
               <>
-                {listado.map((rec) => (
-                  <option value={rec.value}>{rec.label}</option>
+                {listado.map((rec, index) => (
+                  <option key={index} value={rec.value}>
+                    {rec.label}
+                  </option>
                 ))}
               </>
             ) : null}
@@ -105,9 +106,7 @@ const FormMapaRec = ({
             </strong>
           </label>
           <select className="custom-select" ref={accionRef}>
-            <option selected value="no">
-              Selecciona un año
-            </option>
+            <option defaultValue="no">Selecciona un año</option>
             <option value="ADELANTO">Adelanto</option>
             <option value="AT1">AT1</option>
             <option value="BLANQUEO">Blanqueo</option>
@@ -126,9 +125,7 @@ const FormMapaRec = ({
             </strong>
           </label>
           <select className="custom-select" ref={anoRef}>
-            <option selected value="no">
-              Selecciona un año
-            </option>
+            <option defaultValue="no">Selecciona un año</option>
             <option value="2017">2017</option>
             <option value="2018">2018</option>
             <option value="2019">2019</option>
