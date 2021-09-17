@@ -473,10 +473,28 @@ const Adimn = () => {
             <ul className="dropdown-menu">
               <li>
                 <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/inst-convenios-fadedsfya.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Listado de Convenios FADEDSFYA
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
                   href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
                   className="dropdown-item text-dark"
                 >
                   Protocolo Inst. en domicilio
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/aut-policia-servdom.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Modelo de autorizacion policial para serv. en domicilio
                 </a>
               </li>
               <hr />

@@ -264,7 +264,7 @@ export default class Gerencia extends Component {
                   >
                     Subir Archivos
                   </a>
-                </li>              
+                </li>
               </ul>
             </li>
             <hr />
@@ -342,6 +342,15 @@ export default class Gerencia extends Component {
                 Archivos (Descargas)
               </a>
               <ul className="dropdown-menu">
+              <li>
+                <a
+                  href={`${ip}api/archivos/sepelio/descargararchivo/inst-convenios-fadedsfya.pdf`}
+                  className="dropdown-item text-dark"
+                >
+                  Listado de Convenios FADEDSFYA
+                </a>
+              </li>
+              <hr/>
                 <li>
                   <a
                     href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
@@ -350,7 +359,19 @@ export default class Gerencia extends Component {
                     Protocolo Inst. en domicilio
                   </a>
                 </li>
+
                 <hr />
+
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/aut-policia-servdom.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Modelo de autorizacion policial para serv. en domicilio
+                  </a>
+                </li>
+                <hr />
+
                 <li>
                   <a
                     href={`${ip}api/archivos/sepelio/descargararchivo/ISJ-SOLI.pdf`}
