@@ -125,6 +125,13 @@ export default class Gerencia extends Component {
                 Recuperadores: Mapeo de liquidaciones por periodo
               </a>
             </li>
+            <hr />
+
+            <li>
+              <a href="/campanas/mapeo" className="dropdown-item text-dark">
+                Campañas: Acciones registradas en campañas del mes
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -342,15 +349,15 @@ export default class Gerencia extends Component {
                 Archivos (Descargas)
               </a>
               <ul className="dropdown-menu">
-              <li>
-                <a
-                  href={`${ip}api/archivos/sepelio/descargararchivo/inst-convenios-fadedsfya.pdf`}
-                  className="dropdown-item text-dark"
-                >
-                  Listado de Convenios FADEDSFYA
-                </a>
-              </li>
-              <hr/>
+                <li>
+                  <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/inst-convenios-fadedsfya.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Listado de Convenios FADEDSFYA
+                  </a>
+                </li>
+                <hr />
                 <li>
                   <a
                     href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}

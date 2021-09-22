@@ -321,6 +321,13 @@ const Adimn = () => {
               Recuperadores: Mapeo de liquidaciones por periodo
             </a>
           </li>
+          <hr />
+
+          <li>
+            <a href="/campanas/mapeo" className="dropdown-item text-dark">
+              Campañas: Acciones registradas en campañas del mes
+            </a>
+          </li>
         </ul>
       </li>
 
