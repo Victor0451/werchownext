@@ -32,6 +32,7 @@ const Adimn = () => {
                   Asignar Campañas
                 </a>
               </li>
+
               <hr />
               <li className="dropdown-submenu">
                 <a
@@ -153,6 +154,27 @@ const Adimn = () => {
           Gestion
         </a>
         <ul className="dropdown-menu">
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Mesa de Entrada
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/mesaentrada/datos"
+                  className="dropdown-item text-dark"
+                >
+                  Registrar Datos
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
           <li className="dropdown-submenu">
             <a
               href="#"

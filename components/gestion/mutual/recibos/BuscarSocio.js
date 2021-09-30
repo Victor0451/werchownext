@@ -6,6 +6,7 @@ const BuscarSocio = ({
   buscarTitularM,
   buscarTitularDniM,
   errores,
+  titulo
 }) => {
   return (
     <div className="container border border-dark alert alert-primary mt-4">
@@ -13,7 +14,7 @@ const BuscarSocio = ({
         <div className="col-md-8">
           <h1 className="mt-2 mb-4">
             <strong>
-              <u>Emision de Recibos</u>
+              <u>Emision de {titulo}</u>
             </strong>
           </h1>
         </div>
@@ -60,7 +61,7 @@ const BuscarSocio = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularM}
                 >
-                  MUTUAL
+                  Buscar Socio
                 </button>
               </div>
               {errores && (
@@ -105,7 +106,7 @@ const BuscarSocio = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDniM}
                 >
-                  MUTUAL
+                  Buscar Socio
                 </button>
               </div>
               {errores && (

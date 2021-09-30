@@ -6,9 +6,10 @@ import matchSorter from "match-sorter";
 const ModalAccionesReg = ({ acciones }) => {
   if (acciones && acciones.length === 0)
     return (
-      <div className="container alert alert-info border border-dark text-center text-uppercase">
-        No se registran acciones
-      </div>
+      // <div className="container alert alert-info border border-dark text-center text-uppercase">
+      //   No se registran acciones
+      // </div>
+      null
     );
 
   return (

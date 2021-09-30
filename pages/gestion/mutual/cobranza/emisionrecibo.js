@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../../../components/layout/Layout";
+import Layout from "../../../../components/layout/Layout"
 import moment from "moment-timezone";
 import axios from "axios";
 import jsCookie from "js-cookie";
@@ -327,6 +327,7 @@ const emisionrecibo = () => {
           buscarTitularM={buscarTitularM}
           buscarTitularDniM={buscarTitularDniM}
           errores={errores}
+          titulo={"Recibos"}
         />
       ) : flag === true ? (
         <>
