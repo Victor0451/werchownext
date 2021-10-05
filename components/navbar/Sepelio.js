@@ -27,37 +27,37 @@ export default class Sepelio extends Component {
         </li>
 
         <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Gestion
-        </a>
-        <ul className="dropdown-menu">
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Mesa de Entrada
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/gestion/mesaentrada/datos"
-                  className="dropdown-item text-dark"
-                >
-                  Registrar Datos
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Gestion
+          </a>
+          <ul className="dropdown-menu">
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Mesa de Entrada
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/gestion/mesaentrada/datos"
+                    className="dropdown-item text-dark"
+                  >
+                    Registrar Datos
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
 
         <li className="nav-item dropdown ">
           <a

@@ -6,7 +6,7 @@ const ListadoPrestamosAct = ({ prestamos }) => {
   let casos = Object.values(prestamos);
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 list">
       <ReactTable
         data={casos}
         filterable

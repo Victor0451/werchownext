@@ -9,7 +9,7 @@ import axios from "axios";
 import ReactToPrint from "react-to-print";
 import toastr from "toastr";
 import moment from "moment-timezone";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 
 const informeprestamos = () => {
   let token = jsCookie.get("token");
@@ -147,13 +147,13 @@ const informeprestamos = () => {
     for (let i = 0; i < prestporestado.length; i++) {
       totalprestamosest += prestporestado[i].prestamos;
       totalcapitalest += parseInt(prestporestado[i].capital);
-      totalinteresest += prestporestado[i].interes;
-      totalcapconintest += prestporestado[i].capconint;
+      totalinteresest += parseInt(prestporestado[i].interes);
+      totalcapconintest += parseInt(prestporestado[i].capconint);
 
       guardarTotalprestamoest(totalprestamosest);
-      guardarTotalcapitalest(totalcapconintest);
+      guardarTotalcapitalest(totalcapitalest);
       guardarTotalinteresest(totalinteresest);
-      guardarTotalcapconintest(totalinteresest);
+      guardarTotalcapconintest(totalcapconintest);
 
       if (prestporestado[i].estado === "APROBADO") {
         const aprobado = {
@@ -281,15 +281,12 @@ const informeprestamos = () => {
         });
 
       await axios
-        .get(
-          `${ip}api/sgi/prestamos/prestamosporestado`,
-          {
-            params: {
-              desde: desde,
-              hasta: hasta,
-            },
-          }
-        )
+        .get(`${ip}api/sgi/prestamos/prestamosporestado`, {
+          params: {
+            desde: desde,
+            hasta: hasta,
+          },
+        })
         .then((res) => {
           const prestamosest = res.data;
           guardarPrestamosEst(prestamosest);

@@ -1,4 +1,5 @@
 import React from "react";
+import ModalFarmacia from "./ModalFarmacia";
 
 const OpcionesServicios = ({ socio }) => {
   return (
@@ -20,7 +21,9 @@ const OpcionesServicios = ({ socio }) => {
             <div className="card-body">
               <h5 className="card-title">Farmacia</h5>
               <p className="card-text">Emitir Orden de Farmacia</p>
-              <button className="btn btn-primary btn-sm rounded">Generar</button>
+              <button className="btn btn-primary btn-sm rounded"
+              data-toggle="modal" data-target="#modalFarmacia"
+              >Generar</button>
             </div>
           </div>
         </div>
@@ -63,6 +66,10 @@ const OpcionesServicios = ({ socio }) => {
           </div>
         </div>
       </div>
+
+
+<ModalFarmacia />
+
     </div>
   );
 };

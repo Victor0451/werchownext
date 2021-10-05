@@ -62,7 +62,7 @@ const TablaInformes = ({
                 <strong>{atejerina.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{atejerina.interes}</strong>
+                <strong>{atejerina.capconint - atejerina.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{atejerina.capconint}</strong>
@@ -81,7 +81,7 @@ const TablaInformes = ({
                 <strong>{mgalian.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{mgalian.interes}</strong>
+                <strong>{mgalian.capconint - mgalian.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{mgalian.capconint}</strong>
@@ -100,7 +100,7 @@ const TablaInformes = ({
                 <strong>{mcarrizo.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{mcarrizo.interes}</strong>
+                <strong>{mcarrizo.capconint - mcarrizo.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{mcarrizo.capconint}</strong>
@@ -119,7 +119,7 @@ const TablaInformes = ({
                 <strong>{vgorosito.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{vgorosito.interes}</strong>
+                <strong>{vgorosito.capconint - vgorosito.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{vgorosito.capconint}</strong>
@@ -138,7 +138,7 @@ const TablaInformes = ({
                 <strong>{sjuarez.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{sjuarez.interes}</strong>
+                <strong>{sjuarez.capconint - sjuarez.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{sjuarez.capconint}</strong>
@@ -157,7 +157,7 @@ const TablaInformes = ({
                 <strong>{ggimenez.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{ggimenez.interes}</strong>
+                <strong>{ggimenez.capconint - ggimenez.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{ggimenez.capconint}</strong>
@@ -178,7 +178,7 @@ const TablaInformes = ({
               <strong>{totalcapital}</strong>
             </div>
             <div className="col-2">
-              <strong>{totalinteres}</strong>
+              <strong>{totalcapconint - totalcapital}</strong>
             </div>
             <div className="col-3">
               <strong>{totalcapconint}</strong>
@@ -227,7 +227,7 @@ const TablaInformes = ({
                 <strong>{aprobado.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{aprobado.interes}</strong>
+                <strong>{aprobado.capconint - aprobado.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{aprobado.capconint}</strong>
@@ -246,7 +246,7 @@ const TablaInformes = ({
                 <strong>{rechazado.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{rechazado.interes}</strong>
+                <strong>{rechazado.capconint - rechazado.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{rechazado.capconint}</strong>
@@ -265,7 +265,7 @@ const TablaInformes = ({
                 <strong>{cancelado.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{cancelado.interes}</strong>
+                <strong>{cancelado.capconint - cancelado.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{cancelado.capconint}</strong>
@@ -284,7 +284,7 @@ const TablaInformes = ({
                 <strong>{pendiente.capital}</strong>
               </div>
               <div className="col-2">
-                <strong>{pendiente.interes}</strong>
+                <strong>{pendiente.capconint - pendiente.capital}</strong>
               </div>
               <div className="col-3">
                 <strong>{pendiente.capconint}</strong>
@@ -305,7 +305,7 @@ const TablaInformes = ({
               <strong>{totalcapitalest}</strong>
             </div>
             <div className="col-2">
-              <strong>{totalinteresest}</strong>
+              <strong>{totalcapconintest - totalcapitalest}</strong>
             </div>
             <div className="col-3">
               <strong>{totalcapconintest}</strong>

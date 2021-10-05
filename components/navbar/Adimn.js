@@ -412,6 +412,12 @@ const Adimn = () => {
         </a>
         <ul className="dropdown-menu">
           <li>
+            <a href="/prestamos/simulador" className="dropdown-item text-dark">
+              Simular Sub. Cont. Familiar
+            </a>
+          </li>
+          <hr />
+          <li>
             <a
               href="/prestamos/nuevoprestamo"
               className="dropdown-item text-dark"

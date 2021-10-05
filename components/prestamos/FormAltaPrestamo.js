@@ -6,6 +6,7 @@ import moment from "moment-timezone";
 
 import { capitalaprest, cuotasprest, renovaprest } from "../../array/array";
 import FormSubirArchivo from "./legajovirtual/FormSubirArchivo";
+import { interest } from "../../utils/variables";
 
 const FormAltaPrestamo = ({
   ficha,
@@ -34,9 +35,7 @@ const FormAltaPrestamo = ({
     guardarFlag(false);
 
     let principal = parseInt(capital);
-    console.log(principal);
 
-    let interest = 150 / 100 / 12;
     let payments = parseInt(cuotas);
     let x = Math.pow(1 + interest, payments);
     let monthly = ((principal * x * interest) / (x - 1)).toFixed(0);

@@ -16,9 +16,8 @@ const Emision = () => {
   const [user, guardarUsuario] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
-  const [pagobco, guardarPagosBco] = useState(null);
   const [adhs, guardarAdhs] = useState(null);
-  const [cuofija, guardarCuoFija] = useState(null);
+
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
   const [socio, guardarSocio] = useState(null);
@@ -30,7 +29,6 @@ const Emision = () => {
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
-    guardarCuoFija(null);
 
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
@@ -103,7 +101,6 @@ const Emision = () => {
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
-    guardarCuoFija(null);
 
     if (dniRef.current.value !== "") {
       let dni = dniRef.current.value;
@@ -127,8 +124,6 @@ const Emision = () => {
             traerPagos(ficha.CONTRATO);
 
             traerAdhs(ficha.CONTRATO);
-
-            traerCuoFija(ficha.CONTRATO);
 
             if (
               ficha.GRUPO === 1001 ||
@@ -204,18 +199,6 @@ const Emision = () => {
       });
   };
 
-  const traerCuoFija = async (contrato) => {
-    await axios
-      .get(`${ip}api/werchow/cuofija/cuowerchow/${contrato}`)
-      .then((res) => {
-        guardarCuoFija(res.data);
-      })
-      .catch((error) => {
-        toastr.error("Ocurrio un error al tarer la cuota", "ATENCION");
-        console.log(error);
-      });
-  };
-
   const selectSocio = (row) => {
     guardarSocio(null);
 
@@ -255,7 +238,6 @@ const Emision = () => {
             <EmitirServicio
               adhs={adhs}
               pagos={pagos}
-              pagobco={pagobco}
               ficha={ficha}
               selectSocio={selectSocio}
               socio={socio}

@@ -4,7 +4,7 @@ import axios from "axios";
 import toastr from "toastr";
 import FormAltaPrestamo from "./FormAltaPrestamo";
 import ListadoPrestamosAct from "./ListadoPrestamosAct";
-import { ip } from '../../config/config'
+import { ip } from "../../config/config";
 
 const AltaPrestamos = ({
   usuario,
@@ -43,9 +43,7 @@ const AltaPrestamos = ({
 
   const prestamosActivos = async (prestamos) => {
     await axios
-      .get(
-        `${ip}api/sgi/prestamos/prestamosactivos/${contrato}`
-      )
+      .get(`${ip}api/sgi/prestamos/prestamosactivos/${contrato}`)
       .then((res) => {
         if (res.data.length !== 0) {
           const prestamos = res.data;
@@ -66,9 +64,7 @@ const AltaPrestamos = ({
 
     if (contrato) {
       await axios
-        .get(
-          `${ip}api/sgi/prestamos/consultarficha/${contrato}`
-        )
+        .get(`${ip}api/sgi/prestamos/consultarficha/${contrato}`)
         .then((res) => {
           let ficha = res.data;
           if (res.data.GRUPO === 6 || res.data.GRUPO === 5006) {
@@ -202,7 +198,7 @@ const AltaPrestamos = ({
             <>
               <hr className="mt-4 mb-4" />
 
-              <div className="border border-dark p-2 mt-4 mb-4">
+              <div className="alert alert-primary border border-dark p-4 mt-4 mb-4">
                 <div className="mt-4 mb-4 alert alert-warning border border-dark text-uppercase text-center">
                   <strong>
                     {" "}
@@ -210,7 +206,7 @@ const AltaPrestamos = ({
                   </strong>
                 </div>
 
-                <h2 className="mt-4 mb-4">
+                <h2 className="mt-4 mb-4 ">
                   <strong>
                     <u>Prestamos Activos</u>
                   </strong>
