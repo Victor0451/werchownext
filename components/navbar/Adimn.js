@@ -21,6 +21,36 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Personal
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/personal/legajovirtual"
+                  className="dropdown-item text-dark"
+                >
+                  Agregar Personal
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/personal/legajovirtual"
+                  className="dropdown-item text-dark"
+                >
+                  Legajo Virtual
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Campañas
             </a>
             <ul className="dropdown-menu">
@@ -445,15 +475,6 @@ const Adimn = () => {
                   Subir Archivos
                 </a>
               </li>
-              {/* <hr />
-              <li>
-                <a
-                  href="/prestamos/legajovirtual/legajo"
-                  className="dropdown-item text-dark"
-                >
-                  Buscar Ficha
-                </a>
-              </li> */}
             </ul>
           </li>
           <hr />
@@ -872,26 +893,6 @@ const Adimn = () => {
           Ventas
         </a>
         <ul className="dropdown-menu">
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Asesores
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/ventas/asesores/legajovirtual"
-                  className="dropdown-item text-dark"
-                >
-                  Legajo Virtual
-                </a>
-              </li>
-            </ul>
-          </li>
           <hr />
           <li className="dropdown-submenu">
             <a

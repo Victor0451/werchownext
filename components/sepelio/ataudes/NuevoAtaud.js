@@ -146,6 +146,11 @@ const NuevoAtaud = ({
               <option selected>Elige una Opcion</option>
               <option value="ANSARDI">Ansardi</option>
               <option value="HECCAR">Heccar</option>
+              <option value="FIORI">Fiori</option>
+              <option value="LOPEZ/C">Lopez/C</option>
+              <option value="AIMI">AIMI</option>
+              <option value="GRENOP">GRENOP</option>
+              <option value="PIEVE">Pieve</option>
             </select>
             {errores.fabricante && (
               <div className="mt-2 form-group  alert alert-danger">
@@ -153,21 +158,6 @@ const NuevoAtaud = ({
               </div>
             )}
           </div>
-
-          {/* <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Codigo De Precios: </u>
-              </strong>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              //ref={}
-              readOnly
-            />
-          </div> */}
 
           <div className="form-group col-md-4">
             <label>

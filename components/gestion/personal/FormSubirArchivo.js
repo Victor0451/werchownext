@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
+import { ip } from "../../../config/config";
 
-const FormSubirArchivo = ({ id }) => {
+const FormSubirArchivo = ({ id, traerArchivos }) => {
   const [archivos, guardarArchivos] = useState(null);
   const [error, guardarError] = useState(null);
 
@@ -21,19 +22,17 @@ const FormSubirArchivo = ({ id }) => {
 
     await axios
       .post(
-        `http://190.231.32.232:5002/api/archivos/legajovirtualasesores/uploadfichalegajo/${id}`,
+        `${ip}api/archivos/legajovirtualpersonal/uploadfichalegajo/${id}`,
         upload
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         toastr.success("Archivo Subido Con Exito", "Atencion");
       })
       .catch((error) => {
         console.log(error);
       });
-
   };
-
 
   return (
     <div className="container border border-dark alert alerft-primary mt-4">
@@ -71,7 +70,6 @@ const FormSubirArchivo = ({ id }) => {
           </div>
 
           <div className="mt-4 form-group col-md-4">
-
             <button
               type="submit"
               className="mt-4 btn btn-primary btn-block"
@@ -81,8 +79,7 @@ const FormSubirArchivo = ({ id }) => {
               }}
             >
               Subir Archivos
-              </button>
-
+            </button>
           </div>
         </div>
       </form>

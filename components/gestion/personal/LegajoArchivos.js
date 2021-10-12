@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ip } from "../../../config/config";
 
 const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
   const [archi, guardarArchi] = useState(null);
@@ -9,8 +10,6 @@ const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
         No Hay Archivos
       </div>
     );
-
-
 
   return (
     <div className="container border border-dark p-4">
@@ -28,8 +27,8 @@ const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
               </strong>
             </div>
 
-            <img
-              src={`http://190.231.32.232:5002/api/archivos/legajovirtualasesores/archivo/${archivo.archivo}`}
+            {/* <img
+              src={`${ip}api/archivos/legajovirtualpersonal/archivo/${archivo.archivo}`}
               className="archivos p-4 mb-4"
               className="archivos p-4 "
               data-toggle="modal"
@@ -37,20 +36,22 @@ const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
               onClick={(e) => {
                 e.preventDefault(), guardarArchi(archivo.archivo);
               }}
-            />
+            /> */}
 
             <br />
 
             <div className="">
               <a
                 className="btn btn-primary mr-1 "
-                href={`http://190.231.32.232:5002/api/archivos/legajovirtualasesores/descargararchivo/${archivo.archivo}`}
+                href={`${ip}api/archivos/legajovirtualpersonal/descargararchivo/${archivo.archivo}`}
               >
                 <i className="fa fa-download" aria-hidden="true"></i>
               </a>
               <button
                 className="btn btn-danger mr-1"
-                onClick={() => { eliminarArchivos(archivo.archivo) }}
+                onClick={() => {
+                  eliminarArchivos(archivo.archivo);
+                }}
               >
                 <i className="fa fa-trash" aria-hidden="true"></i>
               </button>
@@ -64,7 +65,7 @@ const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
       <div
         className="modal fade"
         id="exampleModal2"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -84,12 +85,10 @@ const LegajoArchivos = ({ archivos, eliminarArchivos }) => {
               </button>
             </div>
             <div className="modal-body d-flex justify-content-center">
-
               <img
-                src={`http://190.231.32.232:5002/api/archivos/legajovirtualasesores/archivo/${archi}`}
-                classNameName="archimodal p-4  "
+                src={`${ip}api/archivos/legajovirtualpersonal/archivo/${archi}`}
+                className="archimodal p-4  "
               />
-
             </div>
             <div className="modal-footer">
               <button
