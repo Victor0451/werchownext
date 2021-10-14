@@ -584,6 +584,27 @@ export default class Sepelio extends Component {
             </li>
           </ul>
         </li>
+
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Novedades
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                href="/sepelio/novedades/nuevo"
+                className="dropdown-item text-dark"
+              >
+                Registrar Novedad
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
     );
   }

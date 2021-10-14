@@ -15,6 +15,7 @@ const NuevoAtaud = ({
   fecha_alta,
   stock,
   observaciones,
+  fabri,
 }) => {
   return (
     <div className="container mt-4 border border-dark p-4 alert alert-primary">
@@ -62,7 +63,7 @@ const NuevoAtaud = ({
               onBlur={handleBlur}
               onChange={handleChange}
             >
-              <option selected>Elige una Opcion</option>
+              <option value="no">Elige una Opcion</option>
               <option value="BOVEDA">Boveda</option>
               <option value="BOVEDILLA">Bovedilla</option>
               <option value="BORLA">Borla</option>
@@ -118,7 +119,7 @@ const NuevoAtaud = ({
               onBlur={handleBlur}
               onChange={handleChange}
             >
-              <option selected>Elige una Opcion</option>
+              <option value="no">Elige una Opcion</option>
               <option value="TIERRA">Tierra</option>
               <option value="NICHO">Nicho</option>
             </select>
@@ -129,35 +130,35 @@ const NuevoAtaud = ({
             )}
           </div>
 
-          <div className="form-group col-md-4">
-            <label>
-              <strong>
-                {" "}
-                <u> Fabricante: </u>
-              </strong>
-            </label>
-            <select
-              className="custom-select"
-              name="fabricante"
-              value={fabricante}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            >
-              <option selected>Elige una Opcion</option>
-              <option value="ANSARDI">Ansardi</option>
-              <option value="HECCAR">Heccar</option>
-              <option value="FIORI">Fiori</option>
-              <option value="LOPEZ/C">Lopez/C</option>
-              <option value="AIMI">AIMI</option>
-              <option value="GRENOP">GRENOP</option>
-              <option value="PIEVE">Pieve</option>
-            </select>
-            {errores.fabricante && (
-              <div className="mt-2 form-group  alert alert-danger">
-                {errores.fabricante}
-              </div>
-            )}
-          </div>
+          {fabri ? (
+            <div className="form-group col-md-4">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Fabricante: </u>
+                </strong>
+              </label>
+              <select
+                className="custom-select"
+                name="fabricante"
+                value={fabricante}
+                onBlur={handleBlur}
+                onChange={handleChange}
+              >
+                <option value="no">Elige una Opcion</option>
+                {fabri.map((f, index) => (
+                  <option key={index} value={f.value}>
+                    {f.value}
+                  </option>
+                ))}
+              </select>
+              {errores.fabricante && (
+                <div className="mt-2 form-group  alert alert-danger">
+                  {errores.fabricante}
+                </div>
+              )}
+            </div>
+          ) : null}
 
           <div className="form-group col-md-4">
             <label>
