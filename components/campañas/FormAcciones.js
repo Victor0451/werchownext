@@ -21,7 +21,7 @@ const FormAcciones = ({
   let fecha1 = moment().format("DD/MM/YYYY");
   return (
     <div className="container">
-      <div className="jumbotron">
+      <div className="alert alert-primary border border-dark p-4">
         {caso.edad >= 65 ? (
           <div className="row">
             <div className="col-md-4">
@@ -42,7 +42,7 @@ const FormAcciones = ({
           </h3>
         )}
 
-        <form className="mt-4 border">
+        <form className="mt-4  border border-dark p-4">
           <div className="row">
             <div className="form-group col-md-6">
               <label>
@@ -203,24 +203,22 @@ const FormAcciones = ({
                   <u> Deuda: {""}</u>
                 </strong>
               </label>
-              <input
-                type="text"
-                className="mr-2 alert alert-danger border-0"
-                defaultValue={caso.cuota}
-                readOnly
-              ></input>
+
+              {" "}{caso.cuota}
+
+
             </div>
           </div>
         </form>
       </div>
 
       {!gestion ? null : (
-        <div className="jumbotron">
+        <div className="alert alert-primary border border-dark">
           <h3>
             <u>Acciones Anterior</u>
           </h3>
 
-          <table className="table table-striped table-sm table-responsive border mt-4">
+          <table className="list table table-striped table-sm table-responsive border border-dark mt-4">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">CONTRATO</th>
@@ -248,7 +246,7 @@ const FormAcciones = ({
       <hr />
 
       <div>
-        <div className="jumbotron">
+        <div className="alert alert-primary border border-dark">
           <h3>
             <u>Acciones</u>
           </h3>
@@ -287,7 +285,7 @@ const FormAcciones = ({
         </div>
 
         {accion > 0 && accion < 4 ? (
-          <div className="jumbotron">
+          <div className="alert alert-primary border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -314,7 +312,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion > 3 && accion < 7 ? (
-          <div className="jumbotron">
+          <div className="alert alert-primary border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -341,7 +339,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 7 ? (
-          <div className="jumbotron">
+          <div className="alert alert-primary border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -366,7 +364,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 8 || accion === 9 ? (
-          <div className="jumbotron">
+          <div className="alert alert-primary border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -395,7 +393,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 10 ? (
-          <div className="jumbotron">
+          <div className="alert alert-primary border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>

@@ -12,7 +12,18 @@ import toastr from "toastr";
 import { ip } from "../../config/config";
 import ExportarPadron from "./ExportarPadron";
 
-const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
+const ListadoCasos = ({
+  campana,
+  operador,
+  modal,
+  userData,
+  camp,
+  empresa,
+  nuevosCasos,
+  casosNotificados,
+  casosTrabajados,
+
+}) => {
   let fechaaccionRef = React.createRef();
   let fechaaccionnuevaRef = React.createRef();
   let obsRef = React.createRef();
@@ -128,24 +139,24 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
       if (datos.nuevaaccion === 17)
         datos.nuevaaccion = "PASA POR OFICINA Y PAGA CON CREDITO";
 
-      datos.fechanuevaaccion = fechaaccionnuevaRef.current.value;
+      datos.fechanuevaaccion = moment().format('YYYY-MM-DD');
     }
 
     if (datos.accion === 8) {
       datos.nuevaaccion = "SOCIO DE NIEGA A PAGAR, SE CIERRA EL CASO";
-      datos.fechanuevaaccion = fechaaccionnuevaRef.current.value;
+      datos.fechanuevaaccion = moment().format('YYYY-MM-DD');
       //      let id = datos.idcaso;
       //cerrarCaso(id);
     }
     if (datos.accion === 9) {
       datos.nuevaaccion = "SOCIO ESTA AL DIA CON SUS PAGOS, SE CIERRA EL CASO";
-      datos.fechanuevaaccion = fechaaccionnuevaRef.current.value;
+      datos.fechanuevaaccion = moment().format('YYYY-MM-DD');
       //let id = datos.idcaso;
       //cerrarCaso(id);
     }
     if (datos.accion === 10) {
       datos.nuevaaccion = "SOCIO SERA NOTIFICADO, SE CIERRA EL CASO";
-      datos.fechanuevaaccion = fechaaccionnuevaRef.current.value;
+      datos.fechanuevaaccion = moment().format('YYYY-MM-DD');
       //let id = datos.idcaso;
       // cerrarCaso(id);
     }
@@ -189,11 +200,10 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
     let id = datos.idcaso;
     updateAccion(id);
 
-    console.log(datos);
-
     setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      refresh()
+    }, 500);
+
   };
 
   let fechahoy = moment().format("YYYY-MM-DD");
@@ -209,6 +219,14 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
     }
     return {};
   };
+
+  const refresh = () => {
+    nuevosCasos(operador, camp, empresa)
+    casosNotificados(operador, camp, empresa)
+    casosTrabajados(operador, camp, empresa)
+
+    toastr.info("Listados Actualizados", "ATENCION")
+  }
 
   return (
     <div className="mt-4 mb-4 border border-dark alert alert-primary">
@@ -226,7 +244,24 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
         <div>
           <ExportarPadron listado={casos} camp={camp} />
         </div>
+
+        <div>
+          <button
+            className="btn btn-primary btn-sm mb-2 ml-1"
+            onClick={refresh}
+          >
+            Actualizar Listados
+          </button>
+        </div>
+
+
+        <div className="">
+          <a className="btn btn-danger btn-sm mb-2 ml-1" href="/campanas/campanas">
+            Volver al listado de campañas
+          </a>
+        </div>
       </div>
+
 
       <div className="mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase">
         las columnas resaltadas en amarillo, indica que el afiliado es mayor a
@@ -386,11 +421,6 @@ const ListadoCasos = ({ campana, operador, modal, userData, camp }) => {
         />
       </div>
 
-      <div className="d-flex justify-content-end">
-        <a className="mt-4 btn btn-danger" href="/campanas/campanas">
-          Volver al listado de campañas
-        </a>
-      </div>
 
       {/* MODAL DE ACCIONES DE CAMPAÑAS */}
 

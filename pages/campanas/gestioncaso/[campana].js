@@ -18,9 +18,11 @@ const campana = (porps) => {
   const {
     query: { empresa, operador, camp },
   } = router;
-  
+
 
   const nuevosCasos = async () => {
+
+
     await axios
       .get(`${ip}api/sgi/campanas/campanaoperador`, {
         params: {
@@ -36,6 +38,8 @@ const campana = (porps) => {
   };
 
   const casosTrabajados = async () => {
+
+
     await axios
       .get(`${ip}api/sgi/campanas/campanaoperadortrab`, {
         params: {
@@ -51,6 +55,8 @@ const campana = (porps) => {
   };
 
   const casosNotificados = async () => {
+
+
     await axios
       .get(`${ip}api/sgi/campanas/campanaoperadornoti`, {
         params: {
@@ -92,6 +98,10 @@ const campana = (porps) => {
         campanaOpNoti={campanaOpNoti}
         operador={operador}
         camp={camp}
+        empresa={empresa}
+        nuevosCasos={nuevosCasos}
+        casosNotificados={casosNotificados}
+        casosTrabajados={casosTrabajados}
         userData={userData}
       />
     </Layout>

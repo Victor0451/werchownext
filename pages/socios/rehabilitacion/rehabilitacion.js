@@ -235,18 +235,18 @@ const rehabilitacion = () => {
       rehab.empresa = "MUTUAL SAN VALENTIN";
     }
 
-    // await axios
-    //   .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
-    //   .then((res) => {
-    //     console.log(res.data, res.status);
-    //     toastr.success(
-    //       "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
-    //       "ATENCION"
-    //     );
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    await axios
+      .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
+      .then((res) => {
+        console.log(res.data, res.status);
+        toastr.success(
+          "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
+          "ATENCION"
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   let fecha = moment().format("YYYY-MM-DD");

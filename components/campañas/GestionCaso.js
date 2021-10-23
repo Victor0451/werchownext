@@ -8,6 +8,10 @@ const GestionCaso = ({
   campanaOpNoti,
   operador,
   camp,
+  empresa,
+  nuevosCasos,
+  casosNotificados,
+  casosTrabajados,
   userData,
 }) => {
   let modaltrab = "lgtrab";
@@ -87,6 +91,10 @@ const GestionCaso = ({
               modal={modalnuevo}
               userData={userData}
               camp={camp}
+              empresa={empresa}
+              nuevosCasos={nuevosCasos}
+              casosNotificados={casosNotificados}
+              casosTrabajados={casosTrabajados}
             />
           )}
         </div>
@@ -109,11 +117,15 @@ const GestionCaso = ({
             </>
           ) : (
             <ListadoCaso
-              campana={campanaOpTrab}
-              operador={operador}
-              modal={modaltrab}
-              userData={userData}
-              camp={camp}
+            campana={campanaOpTrab}
+            operador={operador}
+            modal={modalnuevo}
+            userData={userData}
+            camp={camp}
+            empresa={empresa}
+            nuevosCasos={nuevosCasos}
+            casosNotificados={casosNotificados}
+            casosTrabajados={casosTrabajados}
 
             />
           )}
@@ -138,11 +150,15 @@ const GestionCaso = ({
             </>
           ) : (
             <ListadoCaso
-              campana={campanaOpNoti}
-              operador={operador}
-              modal={modalnoti}
-              userData={userData}
-              camp={camp}
+            campana={campanaOpNoti}
+            operador={operador}
+            modal={modalnuevo}
+            userData={userData}
+            camp={camp}
+            empresa={empresa}
+            nuevosCasos={nuevosCasos}
+            casosNotificados={casosNotificados}
+            casosTrabajados={casosTrabajados}
 
             />
           )}
