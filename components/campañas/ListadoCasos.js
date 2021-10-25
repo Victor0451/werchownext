@@ -375,41 +375,32 @@ const ListadoCasos = ({
 
                   Cell: (row) => (
                     <div>
-                      {modal === "lgnoti" ? (
-                        <a
-                          href={"#"}
-                          className="btn btn-warning"
-                          data-toggle="modal"
-                          data-target={`.bd-example-modal-xl${modal}`}
-                          onClick={() => selcaso(row.index)}
-                        >
-                          Generar Notificacion
-                        </a>
-                      ) : (
-                        <>
-                          <a
-                            href={"#"}
-                            className="btn btn-primary btn-sm mr-1"
-                            data-toggle="modal"
-                            data-target={`.bd-example-modal-${modal}`}
-                            onClick={() => selcaso(row.index)}
-                          >
-                            <i className="fa fa-book" aria-hidden="true"></i>
-                          </a>
-                          <a
-                            href={"#"}
-                            className="btn btn-warning btn-sm"
-                            data-toggle="modal"
-                            data-target={`.bd-example-modal-xl${modal}`}
-                            onClick={() => selcaso(row.index)}
-                          >
-                            <i
-                              className="fa fa-envelope"
-                              aria-hidden="true"
-                            ></i>
-                          </a>
-                        </>
-                      )}
+
+
+
+                      <a
+                        href={"#"}
+                        className="btn btn-primary btn-sm mr-1"
+                        data-toggle="modal"
+                        data-target={`.bd-example-modal-${modal}`}
+                        onClick={() => selcaso(row.index)}
+                      >
+                        <i className="fa fa-book" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href={"#"}
+                        className="btn btn-warning btn-sm"
+                        data-toggle="modal"
+                        data-target={`.bd-example-modal-xl${modal}`}
+                        onClick={() => selcaso(row.index)}
+                      >
+                        <i
+                          className="fa fa-envelope"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+
+
                     </div>
                   ),
                 },
