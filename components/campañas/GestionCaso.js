@@ -88,7 +88,7 @@ const GestionCaso = ({
             <ListadoCaso
               campana={campanaOp}
               operador={operador}
-              modal={modalnuevo}
+              modal={modaltrab}
               userData={userData}
               camp={camp}
               empresa={empresa}
@@ -117,15 +117,15 @@ const GestionCaso = ({
             </>
           ) : (
             <ListadoCaso
-            campana={campanaOpTrab}
-            operador={operador}
-            modal={modalnuevo}
-            userData={userData}
-            camp={camp}
-            empresa={empresa}
-            nuevosCasos={nuevosCasos}
-            casosNotificados={casosNotificados}
-            casosTrabajados={casosTrabajados}
+              campana={campanaOpTrab}
+              operador={operador}
+              modal={modalnoti}
+              userData={userData}
+              camp={camp}
+              empresa={empresa}
+              nuevosCasos={nuevosCasos}
+              casosNotificados={casosNotificados}
+              casosTrabajados={casosTrabajados}
 
             />
           )}
@@ -150,15 +150,15 @@ const GestionCaso = ({
             </>
           ) : (
             <ListadoCaso
-            campana={campanaOpNoti}
-            operador={operador}
-            modal={modalnuevo}
-            userData={userData}
-            camp={camp}
-            empresa={empresa}
-            nuevosCasos={nuevosCasos}
-            casosNotificados={casosNotificados}
-            casosTrabajados={casosTrabajados}
+              campana={campanaOpNoti}
+              operador={operador}
+              modal={modalnuevo}
+              userData={userData}
+              camp={camp}
+              empresa={empresa}
+              nuevosCasos={nuevosCasos}
+              casosNotificados={casosNotificados}
+              casosTrabajados={casosTrabajados}
 
             />
           )}
