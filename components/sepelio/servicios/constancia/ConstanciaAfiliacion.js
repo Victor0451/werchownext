@@ -1,6 +1,10 @@
 import React from 'react'
+import moment from 'moment'
+import Spinner from '../../../layout/Spinner'
 
-const ConstanciaAfiliacion = () => {
+const ConstanciaAfiliacion = ({ consta, servicio, cancelarReg }) => {
+
+    if (!consta) return <Spinner />
     return (
         <div className="container mt-4 border border-dark p-4 alert alert-primary">
 
@@ -28,11 +32,11 @@ const ConstanciaAfiliacion = () => {
 
                 <div className="row mt-4 p-4">
                     <p className="text-justify ">
-                        Por medio de la presente se extiende una constancia en la que el Extinto  Sr. Pacheco Roberto  DNI: 6.147.427
-                        hasta el momento de su deceso estuvo afiliado a WERCHOW SERVICIOS SOCIALES S.R.L., en carácter de Titular del Grupo familiar.
-                        Se extiende la presente constancia para ser entregado a la Cia de Seguros del Instituto de Seguros de Jujuy.
-                        A solicitud de La Sra. Carmen Lucrecia  Reyes  DNI 13.393.659. En la ciudad de San Salvador de Jujuy,
-                        a los veintisiete días mes de Octubre del  año dos mil veinte.- - - - - - - - -
+                        Por medio de la presente se extiende una constancia en la que el Extinto  Sr. {servicio.apellido}, {servicio.nombre}  DNI: {servicio.dni_extinto}
+                        hasta el momento de su deceso estuvo afiliado a WERCHOW MEDICINA PRIVADA S.A., en carácter de Titular del Grupo familiar.
+                        Se extiende la presente constancia para ser entregado a {consta.lugar}.
+                        A solicitud del Sr/a  {consta.apellido}, {consta.nombre}  DNI {consta.dni}. En la ciudad de San Salvador de Jujuy,
+                        {" "}el {moment().locale('es-ES').format('LL')}.- - - - - - - - -
                     </p>
                 </div>
 
@@ -48,6 +52,12 @@ const ConstanciaAfiliacion = () => {
                         // onClick={imprimir}
                         >
                             Imprimir
+                        </button>
+
+                        <button className="btn btn-danger ml-1"
+                            onClick={cancelarReg}
+                        >
+                            Cancelar
                         </button>
                     </div>
                 </div>

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import ReactToPrint from "react-to-print";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
-import FormAcciones from "./FormAcciones";
-import Notificacion from "./Notificacion";
-import Notificacion2 from "./Notificacion2";
-
+import ExportarPadron from "./ExportarPadron";
+import ModalAcciones from "./ModalAcciones";
+import ModalNotificacion from "./ModalNotificacion";
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
 import { ip } from "../../config/config";
-import ExportarPadron from "./ExportarPadron";
+import ModalNotificaciones from "./ModalNotificaciones";
+
 
 const ListadoCasos = ({
   campana,
@@ -206,8 +205,6 @@ const ListadoCasos = ({
 
   };
 
-  let fechahoy = moment().format("YYYY-MM-DD");
-  let componentRef = React.createRef();
 
   const getTrProps = (state, rowInfo, instance) => {
     if (rowInfo) {
@@ -415,124 +412,38 @@ const ListadoCasos = ({
 
       {/* MODAL DE ACCIONES DE CAMPAÑAS */}
 
-      <div
-        className={`modal fade bd-example-modal-${modal}`}
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLongTitle">
-                Registrar Accion
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <FormAcciones
-                gestion={gestion}
-                caso={caso}
-                accion={accion}
-                fechaaccionRef={fechaaccionRef}
-                fechaaccionnuevaRef={fechaaccionnuevaRef}
-                obsRef={obsRef}
-                nuevaaccionRef={nuevaaccionRef}
-                contratoRef={contratoRef}
-                idcasoRef={idcasoRef}
-                handleChange={handleChange}
-                obtenerDatos={obtenerDatos}
-              />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={obtenerDatos}
-                data-dismiss="modal"
-              >
-                Registrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ModalAcciones
+        modal={modal}
+        gestion={gestion}
+        caso={caso}
+        accion={accion}
+        fechaaccionRef={fechaaccionRef}
+        fechaaccionnuevaRef={fechaaccionnuevaRef}
+        obsRef={obsRef}
+        nuevaaccionRef={nuevaaccionRef}
+        contratoRef={contratoRef}
+        idcasoRef={idcasoRef}
+        handleChange={handleChange}
+        obtenerDatos={obtenerDatos}
+      />
+
       {/* -------------------------------------- */}
 
       {/* MODAL PARA IMPRIMIR LAS NOTIFICACIONES UNA POR UNA */}
 
-      <div
-        className={`modal fade bd-example-modal-xl${modal}`}
-        role="dialog"
-        aria-labelledby="myExtraLargeModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content p-2">
-            <Notificacion caso={caso} userData={userData} />
-          </div>
-        </div>
-      </div>
+      <ModalNotificacion
+        modal={modal}
+        caso={caso}
+        userData={userData}
+      />
       {/* --------------------------- */}
 
       {/* MODAL PARA IMPRIMIR TODAS LAS NOTIFICACIONES JUNTAS */}
-      <div
-        className={`modal fade bd-example-modal-xl-todo`}
-        role="dialog"
-        aria-labelledby="myExtraLargeModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content p-2">
-            <div className="jumbotron">
-              <div className="mt-4 p-4 border">
-                <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
-                <div className="row d-flex justify-content-center">
-                  <ReactToPrint
-                    trigger={() => (
-                      <a href="#" className="btn btn-primary">
-                        imprimir{" "}
-                      </a>
-                    )}
-                    content={() => componentRef}
-                  />
+      <ModalNotificaciones
+        casos={casos}
+        userData={userData}
+      />
 
-                  <a
-                    href="#"
-                    className="btn btn-secondary ml-1"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    Cerrar
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div id="todo" ref={(el) => (componentRef = el)}>
-              {casos.map((caso) => (
-                <>
-                  <Notificacion2 caso={caso} userData={userData} />
-                </>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
       {/* -------------*/}
     </div>
   );

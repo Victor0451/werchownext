@@ -268,6 +268,28 @@ const ServicioOpciones = ({ push, row }) => {
                       </i>
                     </button>
                   </div>
+
+                  <div className="col-md-3 mt-4">
+                    <button
+                      className="btn btn-block btn-danger mr-1"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Solicitud de Afiliacion"
+                      data-dismiss="modal"
+                      onClick={() =>
+                        push(
+                          "/sepelio/servicios/constancia/afiliacion",
+                          row.dni,
+                          row.idservicio
+                        )
+                      }
+                    >
+                      <i className="fa fa-certificate" aria-hidden="true">
+                        {" "}
+                        Solicitud de Afiliacion
+                      </i>
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : null}
