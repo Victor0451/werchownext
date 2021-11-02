@@ -32,36 +32,36 @@ const FormRenovarPoliza = ({ row, nuevaPolRef, nuevoVencimientoRef, nuevaEmpresa
                         <label>
                             <u>
                                 Auto - Patente
-                                </u>
+                            </u>
                         </label>
-                        <input type="text" className="form-control" value={`${row.auto} - ${row.patente}`} />
+                        <input type="text" className="form-control" defaultValue={`${row.auto} - ${row.patente}`} readOnly />
                     </div>
 
                     <div className="col-md-4">
                         <label>
                             <u>
                                 Empresa Aseguradora
-                                </u>
+                            </u>
                         </label>
-                        <input type="text" className="form-control" value={row.empresa} />
+                        <input type="text" className="form-control" defaultValue={row.empresa} readOnly />
                     </div>
 
                     <div className="col-md-4">
                         <label>
                             <u>
                                 Poliza Actual
-                                </u>
+                            </u>
                         </label>
-                        <input type="text" className="form-control" value={row.nro_poliza} />
+                        <input type="text" className="form-control" defaultValue={row.nro_poliza} readOnly />
                     </div>
 
                     <div className="col-md-4 mt-4">
                         <label>
                             <u>
                                 Vencimiento Actual
-                                </u>
+                            </u>
                         </label>
-                        <input type="text" className="form-control" value={moment(row.vencimiento).format('DD/MM/YYYY')} />
+                        <input type="text" className="form-control" defaultValue={moment(row.vencimiento).format('DD/MM/YYYY')} readOnly />
                     </div>
 
 
@@ -75,7 +75,7 @@ const FormRenovarPoliza = ({ row, nuevaPolRef, nuevoVencimientoRef, nuevaEmpresa
                         <label>
                             <u>
                                 Empresa
-                                </u>
+                            </u>
                         </label>
                         <input type="text" className="form-control" ref={nuevaEmpresaRef} />
                     </div>
@@ -84,7 +84,7 @@ const FormRenovarPoliza = ({ row, nuevaPolRef, nuevoVencimientoRef, nuevaEmpresa
                         <label>
                             <u>
                                 Nueva Poliza
-                                </u>
+                            </u>
                         </label>
                         <input type="number" className="form-control" ref={nuevaPolRef} />
                     </div>
@@ -93,7 +93,7 @@ const FormRenovarPoliza = ({ row, nuevaPolRef, nuevoVencimientoRef, nuevaEmpresa
                         <label>
                             <u>
                                 Vencimiento
-                                </u>
+                            </u>
                         </label>
                         <input type="date" className="form-control" ref={nuevoVencimientoRef} />
                     </div>

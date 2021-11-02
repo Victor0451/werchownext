@@ -24,7 +24,7 @@ const FormNuevoAuto = ({
                 <strong>
                     <u>
                         Nuevo Auto
-        </u>
+                    </u>
                 </strong>
             </h2>
 
@@ -39,7 +39,7 @@ const FormNuevoAuto = ({
                     <strong>
                         <u>
                             Datos del Vehiculo
-                       </u>
+                        </u>
                     </strong>
                 </h4>
 
@@ -69,7 +69,7 @@ const FormNuevoAuto = ({
                                 Kilometraje
                             </u>
                         </label>
-                        <input type="number" className="form-control" placeholder="Kilometraje" ref={kilometrosRef} />
+                        <input type="text" className="form-control" placeholder="Kilometraje" ref={kilometrosRef} />
                     </div>
 
                     <div className="col-md-4 mt-4">
@@ -78,7 +78,7 @@ const FormNuevoAuto = ({
                                 Nro Serie del Motor
                             </u>
                         </label>
-                        <input type="number" className="form-control" placeholder="Nro Serie del Motor" ref={motorRef} />
+                        <input type="text" className="form-control" placeholder="Nro Serie del Motor" ref={motorRef} />
                     </div>
 
                     <div className="col-md-4 mt-4">
@@ -87,7 +87,7 @@ const FormNuevoAuto = ({
                                 Nro Serie del Chasis
                             </u>
                         </label>
-                        <input type="number" className="form-control" placeholder="Nro Serie del Chasis" ref={chasisRef} />
+                        <input type="text" className="form-control" placeholder="Nro Serie del Chasis" ref={chasisRef} />
                     </div>
 
                     <div className="col-md-4 mt-4">
@@ -123,7 +123,7 @@ const FormNuevoAuto = ({
                     <strong>
                         <u>
                             Poliza de Seguro
-        </u>
+                        </u>
                     </strong>
                 </h4>
 
@@ -133,7 +133,7 @@ const FormNuevoAuto = ({
                         <label>
                             <u>
                                 Empresa
-            </u>
+                            </u>
                         </label>
                         <input type="text" className="form-control" placeholder="Empresa" ref={empresaRef} />
                     </div>
@@ -142,7 +142,7 @@ const FormNuevoAuto = ({
                         <label>
                             <u>
                                 Nro Poliza
-            </u>
+                            </u>
                         </label>
                         <input type="number" className="form-control" placeholder="Nro Poliza" ref={nroPolizaRef} />
                     </div>
@@ -151,7 +151,7 @@ const FormNuevoAuto = ({
                         <label>
                             <u>
                                 Vencimiento
-            </u>
+                            </u>
                         </label>
                         <input type="date" className="form-control" placeholder="Vencimiento" ref={vencimientoRef} />
                     </div>
@@ -159,7 +159,7 @@ const FormNuevoAuto = ({
                         <label>
                             <u>
                                 Cobertura
-            </u>
+                            </u>
                         </label>
                         <input type="text" className="form-control" placeholder="Cobertura" ref={coberturaRef} />
                     </div>
