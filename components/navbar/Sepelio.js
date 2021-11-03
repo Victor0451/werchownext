@@ -272,6 +272,15 @@ export default class Sepelio extends Component {
                     Listado Autos
                   </a>
                 </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/autos/novedades"
+                    className="dropdown-item text-dark"
+                  >
+                    Registar Novedades
+                  </a>
+                </li>
               </ul>
             </li>
             <hr />

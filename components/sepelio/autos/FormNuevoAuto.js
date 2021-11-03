@@ -144,7 +144,7 @@ const FormNuevoAuto = ({
                                 Nro Poliza
                             </u>
                         </label>
-                        <input type="number" className="form-control" placeholder="Nro Poliza" ref={nroPolizaRef} />
+                        <input type="text" className="form-control" placeholder="Nro Poliza" ref={nroPolizaRef} />
                     </div>
 
                     <div className="col-md-4">

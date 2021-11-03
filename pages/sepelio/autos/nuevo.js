@@ -22,6 +22,7 @@ const nuevo = () => {
     let vencimientoRef = React.createRef();
     let coberturaRef = React.createRef();
 
+    const [user, guardarUsuario] = useState(null)
     const [errores, guardarErrores] = useState(null)
 
     let token = jsCookie.get("token");
@@ -29,11 +30,21 @@ const nuevo = () => {
     useEffect(() => {
         if (!token) {
             Router.push("/redirect");
+        } else {
+            let usuario = jsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
         }
     }, []);
 
 
     const registrarAuto = async () => {
+
+        guardarErrores(null)
+
         const car = {
 
             patente: patenteRef.current.value,
@@ -47,10 +58,10 @@ const nuevo = () => {
             chasis: chasisRef.current.value,
             modelo: modeloRef.current.value,
             cobertura: coberturaRef.current.value,
-            estado: 1
+            estado: 1,
+            operador: user
         }
 
-        console.log(car.vencimiento)
 
         if (car.patente === "") {
             guardarErrores("Debes ingresar la patente")
@@ -77,6 +88,10 @@ const nuevo = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("El auto se registro con exito", "ATENCION")
+
+                        setTimeout(() => {
+                            Router.push('/sepelio/autos/listado')
+                        }, 500);
                     }
                 })
                 .catch(error => {
