@@ -1,5 +1,9 @@
 /* WERCHOW && MUTUAL LOGO */
 
+@page {
+  size: auto !important;
+}
+
 .verticalScroll {
   height: 500px !important;
   overflow-y: scroll !important;
@@ -36,7 +40,7 @@ tr {
 
 .solic {
   width: 100% !important;
-  height: 100% !important ;
+  height: 100% !important;
 }
 
 .descr {
@@ -81,7 +85,6 @@ input {
   text-transform: uppercase;
   font-size: 0.6rem !important;
   height: 20px;
-
   /* background: rgba(3, 36, 66, 0.685) !important; */
 }
 
@@ -103,7 +106,7 @@ input {
   position: relative;
 }
 
-.dropdown-submenu > .dropdown-menu {
+.dropdown-submenu>.dropdown-menu {
   top: 0;
   left: 100%;
   margin-top: -6px;
@@ -113,11 +116,11 @@ input {
   border-radius: 0 6px 6px 6px;
 }
 
-.dropdown-submenu:hover > .dropdown-menu {
+.dropdown-submenu:hover>.dropdown-menu {
   display: block;
 }
 
-.dropdown-submenu > a:after {
+.dropdown-submenu>a:after {
   display: block;
   content: " ";
   float: right;
@@ -131,7 +134,7 @@ input {
   margin-right: -10px;
 }
 
-.dropdown-submenu:hover > a:after {
+.dropdown-submenu:hover>a:after {
   border-left-color: #fff;
 }
 
@@ -139,7 +142,7 @@ input {
   float: none;
 }
 
-.dropdown-submenu.pull-left > .dropdown-menu {
+.dropdown-submenu.pull-left>.dropdown-menu {
   left: -100%;
   margin-left: 10px;
   -webkit-border-radius: 6px 0 6px 6px;
@@ -155,11 +158,10 @@ input {
   text-align: center;
 }
 
-.spinner > div {
+.spinner>div {
   width: 18px;
   height: 18px;
   background-color: #333;
-
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -177,9 +179,7 @@ input {
 }
 
 @-webkit-keyframes sk-bouncedelay {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     -webkit-transform: scale(0);
   }
   40% {
@@ -188,9 +188,7 @@ input {
 }
 
 @keyframes sk-bouncedelay {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     -webkit-transform: scale(0);
     transform: scale(0);
   }
@@ -201,7 +199,6 @@ input {
 }
 
 .print-soli {
-  orientation: landscape !important;
   size: A4 !important;
   margin-top: 50pt;
 }
@@ -239,17 +236,19 @@ input {
 
 .archivos {
   padding: 50px;
-  transition: transform 0.2s; /* Animation */
+  transition: transform 0.2s;
+  /* Animation */
   width: 200px;
   height: 200px;
   margin: 0 auto;
   align-items: center;
 }
+
 .archivos:hover {
-  transform: scale(
-    2.5
-  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale( 2.5);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
 .archimodal {
   padding: 50px;
   width: 100%;
@@ -258,14 +257,17 @@ input {
   align-items: center !important;
   justify-items: center !important;
 }
+
 .conform {
-  font-size: 1.2em !important; /* 40px/16=2.5em */
+  font-size: 1.2em !important;
+  /* 40px/16=2.5em */
   font-weight: bold !important;
   line-height: 30px !important;
 }
 
 .conformnovell {
-  font-size: 1em !important; /* 40px/16=2.5em */
+  font-size: 1em !important;
+  /* 40px/16=2.5em */
   font-weight: bold !important;
   line-height: 30px !important;
 }

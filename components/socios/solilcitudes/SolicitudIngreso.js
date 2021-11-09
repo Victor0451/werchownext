@@ -5,7 +5,7 @@ import SolicitudLegales from "./SolicitudLegales";
 const SolicitudIngreso = ({ ficha, adhs, empresa }) => {
 
   return (
-    <div className=" mt-4  border border-dark p-4 container">
+    <div className=" mt-4   p-2 ">
       <div className="row ">
         <div className="col-md-6">
           <h3>
@@ -28,43 +28,35 @@ const SolicitudIngreso = ({ ficha, adhs, empresa }) => {
         <div className="col-md-3">
           <label>
             <strong>
-              <u>Afiliado N°</u>
+              <u>Afiliado N°</u>: {ficha.CONTRATO}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.CONTRATO} />
         </div>
         <div className="col-md-3">
           <label>
             <strong>
-              <u>Fecha</u>
+              <u>Fecha</u>: {moment().format("DD/MM/YYYY")}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={moment().format("DD/MM/YYYY")} />
+        </div>
+        <div className="col-md-2">
+          <label>
+            <strong>
+              <u>Cod</u>: {ficha.PRODUCTOR}
+            </strong>
+          </label>
         </div>
         <div className="col-md-3">
           <label>
             <strong>
-              <u>Cod</u>
+              <u>Procesado</u>:
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.PRODUCTOR} />
-        </div>
-        <div className="col-md-3">
-          <label>
-            <strong>
-              <u>Procesado</u>
-            </strong>
-          </label>
-          <input
-            type="text"
-            className=" border border-dark form-control"
 
-
-          />
         </div>
       </div>
 
-      <div className="row mt-4">
+      <div className="row mt-2">
         <table className="table table-sm table-striped border border-dark p-1">
           <thead className="tenca">
             <tr>
@@ -120,224 +112,220 @@ const SolicitudIngreso = ({ ficha, adhs, empresa }) => {
         </table>
       </div>
 
-      <div className="row mt-2 border p-2 alert-primary">
+      <div className="row  border border-dark p-2 text-dark">
         <div className="col-md-4">
           <label>
             <strong>
-              <u>Domicilio</u>
+              <u>Domicilio</u>: {ficha.CALLE}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.CALLE} />
         </div>
-        <div className="col-md-2">
+        <div className="col-md-1">
           <label>
             <strong>
-              <u>N°</u>
+              <u>N°</u>: {ficha.NRO_CALLE}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.NRO_CALLE} />
-        </div>
-        <div className="col-md-3">
-          <label>
-            <strong>
-              <u>Barrio</u>
-            </strong>
-          </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.BARRIO} />
+
         </div>
         <div className="col-md-3">
           <label>
             <strong>
-              <u>Localidad</u>
+              <u>Barrio</u>: {ficha.BARRIO}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.LOCALIDAD} />
+
+        </div>
+        <div className="col-md-3">
+          <label>
+            <strong>
+              <u>Localidad</u>: {ficha.LOCALIDAD}
+            </strong>
+          </label>
+
         </div>
       </div>
 
-      <div className="row mt-2 border p-2 alert-primary">
-        <div class="form-group mt-3">
-          <div class="custom-control custom-radio">
+      <div className="row mt-2 border border-dark text-dark p-2 ">
+        <div className="form-group">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Propietario
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Alquila
             </label>
           </div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           <label>
             <strong>
-              <u>Celular</u>
+              <u>Celular</u>: {ficha.MOVIL}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.MOVIL} />
         </div>
-        <div class="form-group mt-3">
-          <div class="custom-control custom-radio">
+        <div className="form-group ">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Personal
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Claro
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Movistar
             </label>
           </div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 ">
           <label>
             <strong>
-              <u>Domicilio Laboral</u>
+              <u>Domicilio Laboral</u>: {ficha.DOMI_LAB}
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" defaultValue={ficha.DOMI_LAB} />
         </div>
-        <div class="form-group mt-1">
-          <div class="custom-control custom-radio">
+        <div className="form-group mt-1">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Debito Bancario
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Tarjeta
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Convenio
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Cob. a Domicilio
             </label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input
               type="radio"
               id="customRadio1"
               name="customRadio"
-              class="custom-control-input"
+              className="custom-control-input"
               checked=""
             />
-            <label class="custom-control-label" for="customRadio1">
+            <label className="custom-control-label" for="customRadio1">
               Oficina
             </label>
           </div>
         </div>
       </div>
 
-      <div className="row mt-2 border p-2 alert-primary">
+      <div className="row mt-2 border border-dark text-dark p-2 ">
         <div className="col-md-4">
           <label>
             <strong>
-              <u>Domicilio de Cobranza</u>
+              <u>Domicilio de Cobranza</u>:
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" />
+
         </div>
         <div className="col-md-1">
           <label>
             <strong>
-              <u>N°</u>
+              <u>N°</u>:
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" />
+
         </div>
         <div className="col-md-3">
           <label>
             <strong>
-              <u>Barrio</u>
+              <u>Barrio</u>:
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" />
+
         </div>
         <div className="col-md-4">
           <label>
             <strong>
-              <u>Dia y hs de Cobranza</u>
+              <u>Dia y hs de Cobranza</u>:
             </strong>
           </label>
-          <input type="text" className="form-control border border-dark" />
         </div>
       </div>
 
       {
         empresa == 'W' ? (
-          <div className="mt-2">
+          <div className=" mt-2">
             <SolicitudLegales />
           </div>
         ) : null

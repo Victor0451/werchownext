@@ -63,7 +63,7 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
 
           <div className="row d-flex justify-content-center col-md-12 mt-4 mb-4">
             <h3 className="text-center mt-4">
-              <u>REHABILITACION DE SERVICIOS</u>
+              <u>Solicitud de ingreso</u>
             </h3>
           </div>
 
@@ -71,7 +71,7 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
             <font size="5">
               {cuotas === 1 ? (
                 <>
-                  Por la presente solicito la reafiliación a la Empresa Werchow
+                  Por la presente solicito la solicitud de ingreso a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
                   pago de las cuotas de la cual me encuentro en mora por cuanto
                   su pago debía realizarse hasta el día 15 de cada mes. Asimismo
@@ -80,12 +80,12 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
                   cada mes de atraso, a contar desde el pago de la cuota en
                   mora, en lo que se refiere al servicio de sepelio no así en lo
                   que se refiere a otros servicios que me brinda la empresa.
-                  Tambien tomo conocimiento que es la ultima rehabilitacion que
+                  Tambien tomo conocimiento que es la ultima solicitud de ingreso que
                   se me otorga-
                 </>
               ) : cuotas > 1 ? (
                 <>
-                  Por la presente solicito la reafiliación a la Empresa Werchow
+                  Por la presente solicito la solicitud de ingreso a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
                   pago de las cuotas de la cual me encuentro en mora por cuanto
                   su pago debía realizarse hasta el día 15 de cada mes. Asimismo
@@ -94,7 +94,7 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
                   cada mes de atraso, a contar desde el pago de la cuota en
                   mora, en lo que se refiere al servicio de sepelio no así en lo
                   que se refiere a otros servicios que me brinda la empresa.
-                  Tambien tomo conocimiento que es la ultima rehabilitacion que
+                  Tambien tomo conocimiento que es la ultima solicitud de ingreso que
                   se me otorga-
                 </>
               ) : null}

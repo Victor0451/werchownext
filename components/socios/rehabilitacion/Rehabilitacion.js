@@ -26,7 +26,7 @@ const Rehabilitacion = ({
       <form className="mt-4 border border-dark p-4 alert alert-primary">
         <h2 className=" mb-4">
           <strong>
-            <u>Notificacion De Rehabilitacion De Servicios</u>
+            <u>Notificacion De Solicitud de Ingreso</u>
           </strong>
         </h2>
 

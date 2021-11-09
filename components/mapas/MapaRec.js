@@ -3,19 +3,27 @@ import moment from "moment";
 
 const MapaRec = ({ mapa, mapaM, desde, hasta, ano, mora, moraM }) => {
   const totalVentas = (array) => {
-    let total = 0;
-    for (let i = 0; i < array.length; i++) {
-      total += array[i].cantidad;
+
+    if (array) {
+
+      let total = 0;
+      for (let i = 0; i < array.length; i++) {
+        total += array[i].cantidad;
+      }
+      return total;
     }
-    return total;
+
   };
 
   const totalMonto = (array) => {
-    let total = 0;
-    for (let i = 0; i < array.length; i++) {
-      total += parseFloat(array[i].monto);
+    if (array) {
+
+      let total = 0;
+      for (let i = 0; i < array.length; i++) {
+        total += parseFloat(array[i].monto);
+      }
+      return total;
     }
-    return total;
   };
 
   const mesNombre = (mes) => {
@@ -50,6 +58,9 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano, mora, moraM }) => {
   };
 
   const efectividadMora = (mora, liq) => {
+  
+    if(mora){
+  
     let mor = 0;
     let rec = 0;
 
@@ -64,7 +75,11 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano, mora, moraM }) => {
     let efec = (rec * 100) / mor;
 
     return efec.toFixed(2);
+
+  }
   };
+
+
 
   return (
     <div className="container border border-dark alert alert-primary p-4">

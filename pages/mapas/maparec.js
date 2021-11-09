@@ -220,7 +220,7 @@ const maparec = () => {
         error={error}
         datatoggle={"modal"}
         datatarget={"#exampleModal"}
-      
+
       />
 
       <div

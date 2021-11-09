@@ -108,7 +108,7 @@ const solicitud = () => {
   const traerAdhs = async (contrato) => {
     await axios
       .get(
-        `${ip}api/werchow/adherent/adherentestit/${contrato}`
+        `${ip}api/werchow/adherent/adherentestitsoli/${contrato}`
       )
       .then((res) => {
         guardarAdhs(res.data);
@@ -159,7 +159,7 @@ const solicitud = () => {
               <strong>
                 <u>
                   Opciones
-               </u>
+                </u>
               </strong>
             </h2>
             <div className="mt-4 row">
