@@ -2,9 +2,10 @@ import React from "react";
 import moment from "moment";
 
 const AdhPrint = ({ adhs }) => {
-  if (!adhs)
+  console.log(adhs)
+  if (!adhs || adhs.length === 0)
     return (
-      <div className="alert alert-danger text-center text-uppercase">
+      <div className="border border-dark alert alert-info text-center text-uppercase">
         El socio no posee adherentes
       </div>
     );
@@ -16,7 +17,7 @@ const AdhPrint = ({ adhs }) => {
           <u>Adherentes</u>
         </strong>
       </h2>
-      <table className="table table-sm border border-dark list text-dark">
+      <table className="mt-4 table table-sm border border-dark list text-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

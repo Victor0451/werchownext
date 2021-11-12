@@ -187,12 +187,34 @@ const Print = ({
               </button>
             </div>
             <div className="modal-body ">
+
+              {ficha ? (
+                <>
+                  {ficha.GRUPO === 1001 ||
+                    ficha.GRUPO === 1005 ||
+                    ficha.GRUPO === 1006 ||
+                    ficha.GRUPO === 3444 ||
+                    ficha.GRUPO === 3666 ||
+                    ficha.GRUPO === 3777 ||
+                    ficha.GRUPO === 3888 ||
+                    ficha.GRUPO === 3999 ||
+                    ficha.GRUPO === 4004 ||
+                    ficha.GRUPO === 7777 ||
+                    ficha.GRUPO === 8500 ? (
+                    <div className="alert alert-warning text-center text-uppercase border border-dark mb-4">
+                      ESTA FICHA PERTENECE A UN GRUPO MOROSO
+                    </div>
+                  ) : null}
+                </>
+              ) : null}
+
+
               <div id="solicitud" className="mt-4 container ">
                 <div>
                   <div id="leg">
                     <Legajo ficha={ficha} empresa={empresa} />
 
-                    <hr className="mt-4 mb-4" />
+                    <hr className="mt-4 mb-4 border border-dark" />
                     <AdhPrint adhs={adhs} />
                   </div>
                   <button
@@ -202,7 +224,7 @@ const Print = ({
                     Imprimir Legajo
                   </button>
 
-                  <hr className="mt-4 mb-4" />
+                  <hr className="mt-4 mb-4 border border-dark" />
                   <div id="pag">
                     <PagosPrint pagos={pagos} ficha={ficha} empresa={empresa} />
                   </div>

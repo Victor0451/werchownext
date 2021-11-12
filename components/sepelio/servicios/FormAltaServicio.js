@@ -133,6 +133,7 @@ const FormAltaServicio = ({
       contrato: ficha.CONTRATO,
       empresa: empresaRef.current.value,
       dni: dniRef.current.value,
+      obra_soc: ficha.OBRA_SOC,
       apellido: apellidoRef.current.value,
       nombre: nombreRef.current.value,
       edad: edadRef.current.value,
@@ -260,12 +261,12 @@ const FormAltaServicio = ({
       {grupo ? (
         <div className="">
           {grupo.CODIGO === 1001 ||
-          grupo.CODIGO === 3444 ||
-          grupo.CODIGO === 3666 ||
-          grupo.CODIGO === 3777 ||
-          grupo.CODIGO === 3888 ||
-          grupo.CODIGO === 3999 ||
-          grupo.CODIGO === 4004 ? (
+            grupo.CODIGO === 3444 ||
+            grupo.CODIGO === 3666 ||
+            grupo.CODIGO === 3777 ||
+            grupo.CODIGO === 3888 ||
+            grupo.CODIGO === 3999 ||
+            grupo.CODIGO === 4004 ? (
             <div
               className="mt-4 alert alert-danger alert-dismissible border border-dark fade show container"
               role="alert"
@@ -394,6 +395,23 @@ const FormAltaServicio = ({
                 readOnly
               />
             </div>
+
+            <div className="form-group col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Obra Social</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Obra Social"
+                name="obra_soc"
+                defaultValue={ficha.OBRA_SOC}
+                readOnly
+              />
+            </div>
+
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>

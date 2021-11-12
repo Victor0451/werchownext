@@ -63,17 +63,29 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
 
           <div className="row d-flex justify-content-center col-md-12 mt-4 mb-4">
             <h3 className="text-center mt-4">
-              <u>Solicitud de ingreso</u>
+              <u>Solicitud de afiliacion</u>
             </h3>
           </div>
 
+
           <p className="text-justify mt-2 p-2">
+            <font size="5">
+
+              Por la presente solicito la afiliación a la Empresa Werchow Medicina Privada S.A, a
+              los efectos de poder efectivizar el pago de la cuota de inscripción. Asimismo acepto
+              que de conformidad a las condiciones de la contratación, afrontaré un periodo de
+              carencia de 15/30/60 días a contar desde el pago de la cuota de afiliación, en lo que se
+              refiere al servicio de sepelio, para los servicios médicos la vigencia es de 48 hs .
+            </font>
+          </p>
+
+          {/* <p className="text-justify mt-2 p-2">
             <font size="5">
               {cuotas === 1 ? (
                 <>
-                  Por la presente solicito la solicitud de ingreso a la Empresa Werchow
+                  Por la presente solicito afiliarme a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
-                  pago de las cuotas de la cual me encuentro en mora por cuanto
+                  pago de la cuota de inscripción por cuanto
                   su pago debía realizarse hasta el día 15 de cada mes. Asimismo
                   acepto que de conformidad a las condiciones de la
                   contratación, afrontaré un periodo de carencia de 15 días por
@@ -82,10 +94,12 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
                   que se refiere a otros servicios que me brinda la empresa.
                   Tambien tomo conocimiento que es la ultima solicitud de ingreso que
                   se me otorga-
+
+                  
                 </>
               ) : cuotas > 1 ? (
                 <>
-                  Por la presente solicito la solicitud de ingreso a la Empresa Werchow
+                  Por la presente solicito afiliarme a la Empresa Werchow
                   Medicina Privada S.A, a los efectos de poder efectivizar el
                   pago de las cuotas de la cual me encuentro en mora por cuanto
                   su pago debía realizarse hasta el día 15 de cada mes. Asimismo
@@ -99,7 +113,7 @@ const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
                 </>
               ) : null}
             </font>
-          </p>
+          </p> */}
 
           <div className="d-flex justify-content-center mt-4">
             <div className="row d-flex justify-content-center">

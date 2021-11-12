@@ -902,7 +902,6 @@ const Adimn = () => {
           Ventas
         </a>
         <ul className="dropdown-menu">
-          <hr />
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -1191,7 +1190,7 @@ const Adimn = () => {
                   href="/socios/rehabilitacion/rehabilitacion"
                   className="dropdown-item text-dark"
                 >
-                  Rehabilitacion
+                  Solicitud de Afiliacion
                 </a>
               </li>
               <hr />

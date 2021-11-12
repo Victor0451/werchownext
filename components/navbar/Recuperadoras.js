@@ -170,8 +170,8 @@ const Recuperadoras = ({ usuario, perfil }) => {
       </li>
 
       {usuario === "mcarrizo" ||
-      usuario === "sjuarez" ||
-      usuario === "vgorosito" ? (
+        usuario === "sjuarez" ||
+        usuario === "vgorosito" ? (
         <li className="nav-item dropdown ">
           <a
             href="#"
@@ -412,7 +412,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
                   href="/socios/rehabilitacion/rehabilitacion"
                   className="dropdown-item text-dark"
                 >
-                  Rehabilitacion
+                  Solicitud de Afiliacion
                 </a>
               </li>
               <hr />

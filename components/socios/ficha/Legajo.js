@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const Legajo = ({ ficha, empresa }) => {
   if (!ficha)
@@ -9,12 +10,9 @@ const Legajo = ({ ficha, empresa }) => {
     );
 
   return (
-    <div
-      className="mt-4 container alert alert-primary border border-dark
-    "
-    >
+    <div className="mt-4 container alert alert-primary border border-dark">
       <div className="row d-felx justify-content-between p-2">
-        <h2 className="  mb-4 text-center">
+        <h2 className=" mt-3 mb-4 text-center">
           <strong>
             <u>Legajo Virtual</u>
           </strong>
@@ -25,178 +23,187 @@ const Legajo = ({ ficha, empresa }) => {
           <img src="/img/logom.jpg" className="mutuallogo" />
         ) : null}
       </div>
-
-      <hr />
-      <div className="row mt-4 d-flex justify-content-center  ">
+      
+      <div className=" mt-2 d-flex border border-dark justify-content-center  p-4 list">
         <div className="col-md-4">
-          <h3>
-            <u>N° Ficha</u>: {ficha.CONTRATO}
-          </h3>
+          <h4>
+            <u>Socio</u>: {ficha.CONTRATO}
+          </h4>
         </div>
 
-        <div className="col-md-3">
-          <h3>
+        <div className="col-md-4">
+          <h4>
             {" "}
             <u>Grupo</u>:{""} {ficha.GRUPO}
-          </h3>
+          </h4>
         </div>
 
-        <div className="col-md-3">
-          <h3>
+        <div className="col-md-4">
+          <h4>
             <u>Cuota</u>: {ficha.IMPORTE}
-          </h3>
+          </h4>
         </div>
       </div>
-      <hr className="mt-4 mb-4" />
-      <div className="row">
-        <div className="col-md-12 ">
-          <h2 className="display-3">
+      <hr className="mt-4 mb-4 border border-dark" />
+
+      <div className="">
+        <div className="col-md-12 list border border-dark p-4">
+          <h2 className="display-4">
             {" "}
             {ficha.APELLIDOS}, {ficha.NOMBRES}
           </h2>
         </div>
       </div>
 
-      <hr className="my-4" />
-      <h3>
-        <u>DATOS DE FICHA</u>
-      </h3>
-      <div className="row mt-4">
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>ALTA</u>:
-            </span>{" "}
-            {""}
-            {ficha.ALTA}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>VIGENCIA</u>:
-            </span>{" "}
-            {""}
-            {ficha.VIGENCIA}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>DOM. LABORAL</u>:
-            </span>{" "}
-            {""}
-            {ficha.DOM_LAB}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>DOM. COBRANZA</u>:
-            </span>{" "}
-            {""}
-            {ficha.DOMI_COBR}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>PLAN</u>:
-            </span>{" "}
-            {""}
-            {ficha.PLAN}
-          </p>
+      <hr className="my-4 border border-dark" />
+
+      <div className="mt-4 border border-dark list p-4">
+        <h3>
+          <u>DATOS DE FICHA</u>
+        </h3>
+        <div className="row mt-4">
+          <div className="col-md-4">
+            <p>
+              <span className="font-weight-bold">
+                <u>PLAN</u>:
+              </span>{" "}
+              {""}
+              {ficha.PLAN}{ficha.SUB_PLAN}
+            </p>
+          </div>
+
+          <div className="col-md-4">
+            <p>
+              <span className="font-weight-bold">
+                <u>ALTA</u>:
+              </span>{" "}
+              {""}
+              {moment(ficha.ALTA).format('DD/MM/YYYY')}
+            </p>
+          </div>
+          <div className="col-md-4">
+            <p>
+              <span className="font-weight-bold">
+                <u>VIGENCIA</u>:
+              </span>{" "}
+              {""}
+              {moment(ficha.VIGENCIA).format('DD/MM/YYYY')}
+            </p>
+          </div>
+          <div className="col-md-6">
+            <p>
+              <span className="font-weight-bold">
+                <u>DOM. LABORAL</u>:
+              </span>{" "}
+              {""}
+              {ficha.DOM_LAB}
+            </p>
+          </div>
+          <div className="col-md-6">
+            <p>
+              <span className="font-weight-bold">
+                <u>DOM. COBRANZA</u>:
+              </span>{" "}
+              {""}
+              {ficha.DOMI_COBR}
+            </p>
+          </div>
+
         </div>
       </div>
 
-      <hr className="my-4" />
+      <hr className="my-4 border border-dark" />
 
-      <h3>
-        <u>DATOS PERSONALES</u>
-      </h3>
 
-      <div className="row mt-4">
-        <div className="col-md-3">
-          <span className="font-weight-bold">
-            <u>DNI</u>:
-          </span>{" "}
-          {""}
-          {ficha.NRO_DOC}
-        </div>
+      <div className="border border-dark p-4 list">
+        <h3>
+          <u>DATOS PERSONALES</u>
+        </h3>
 
-        <div className="col-md-3 ">
-          <p>
-            <span className="font-weight-bold">
-              <u>OBRA SOC.</u>:
-            </span>{" "}
-            {""}
-            {ficha.OBRA_SOC}
-          </p>
-        </div>
-        <div className="col-md-3 ">
-          <p>
-            <span className="font-weight-bold">
-              <u>NACIMIENTO</u>:
-            </span>{" "}
-            {""}
-            {ficha.NACIMIENTO}
-          </p>
-        </div>
 
-        <div className="col-md-3">
-          <p>
+        <div className="row mt-4">
+          <div className="col-md-3">
             <span className="font-weight-bold">
-              <u>CALLE</u>:
+              <u>DNI</u>:
             </span>{" "}
             {""}
-            {ficha.CALLE}
-          </p>
-        </div>
+            {ficha.NRO_DOC}
+          </div>
 
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>N° DE CALLE</u>:
-            </span>{" "}
-            {""}
-            {ficha.NRO_CALLE}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>BARRIO</u>:
-            </span>{" "}
-            {""}
-            {ficha.BARRIO}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>TELEFONO</u>:
-            </span>{" "}
-            {""}
-            {ficha.TELEFONO}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>MOVIL</u>:
-            </span>{" "}
-            {""}
-            {ficha.MOVIL}
-          </p>
-        </div>
-        <div className="col-md-3">
-          <p>
-            <span className="font-weight-bold">
-              <u>MAIL</u>:
-            </span>{" "}
-            {""}
-            {ficha.MAIL}
-          </p>
+          <div className="col-md-4 ">
+            <p>
+              <span className="font-weight-bold">
+                <u>OBRA SOC.</u>:
+              </span>{" "}
+              {""}
+              {ficha.OBRA_SOC}
+            </p>
+          </div>
+          <div className="col-md-5 ">
+            <p>
+              <span className="font-weight-bold">
+                <u>NACIMIENTO</u>:
+              </span>{" "}
+              {""}
+              {moment(ficha.NACIMIENTO).format('DD/MM/YYYY')}
+            </p>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>CALLE</u>:
+              </span>{" "}
+              {""}
+              {ficha.CALLE}
+            </p>
+          </div>
+
+          <div className="col-md-3 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>N° DE CALLE</u>:
+              </span>{" "}
+              {""}
+              {ficha.NRO_CALLE}
+            </p>
+          </div>
+          <div className="col-md-6 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>BARRIO</u>:
+              </span>{" "}
+              {""}
+              {ficha.BARRIO}
+            </p>
+          </div>
+          <div className="col-md-4 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>TELEFONO</u>:
+              </span>{" "}
+              {""}
+              {ficha.TELEFONO}
+            </p>
+          </div>
+          <div className="col-md-4 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>MOVIL</u>:
+              </span>{" "}
+              {""}
+              {ficha.MOVIL}
+            </p>
+          </div>
+          <div className="col-md-6 mt-2">
+            <p>
+              <span className="font-weight-bold">
+                <u>MAIL</u>:
+              </span>{" "}
+              {""}
+              {ficha.MAIL}
+            </p>
+          </div>
         </div>
       </div>
     </div>

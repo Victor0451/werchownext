@@ -3,7 +3,7 @@ import FormAltaServicio from "./FormAltaServicio";
 import FormAltaServicioPart from "./FormAltaServicioPart";
 import toastr from "toastr";
 import axios from "axios";
-import {ip} from '../../../config/config'
+import { ip } from '../../../config/config'
 
 const AltaServicio = ({
   empresaRef,

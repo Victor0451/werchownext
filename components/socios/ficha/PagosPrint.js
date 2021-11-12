@@ -2,10 +2,10 @@ import React from "react";
 import moment from "moment";
 
 const PagosPrint = ({ pagos, ficha, empresa }) => {
-  if (!pagos)
+  if (!pagos || pagos.length === 0)
     return (
       <div className="container">
-        <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
+        <div className=" mt-2 form-group alert alert-info col-md-12 text-center text-uppercase border border-dark">
           EL SOCIO NO REGISTRA PAGOS
         </div>
       </div>
@@ -26,15 +26,15 @@ const PagosPrint = ({ pagos, ficha, empresa }) => {
         ) : null}
       </div>
 
-      <h2 className="mt-2 mb-4">
+      <h3 className=" mb-4">
         <strong>
           <u>
             Socio: {ficha.CONTRATO} - {ficha.APELLIDOS}, {ficha.NOMBRES}
           </u>
         </strong>
-      </h2>
+      </h3>
 
-      <table className="table table-sm border border-dark list text-dark">
+      <table className="mt-4 table table-sm border border-dark list text-dark">
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>

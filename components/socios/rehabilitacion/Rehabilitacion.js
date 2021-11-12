@@ -26,7 +26,7 @@ const Rehabilitacion = ({
       <form className="mt-4 border border-dark p-4 alert alert-primary">
         <h2 className=" mb-4">
           <strong>
-            <u>Notificacion De Solicitud de Ingreso</u>
+            <u>Solicitud de Afiliacion</u>
           </strong>
         </h2>
 
@@ -325,7 +325,7 @@ const Rehabilitacion = ({
                   <div className="modal-header alert alert-primary">
                     <h2 className="modal-title" id="exampleModalLabel">
                       <strong>
-                        <u>Notificacion De Rehabilitacion</u>
+                        <u>Solicitud de Afiliacion</u>
                       </strong>
                     </h2>
                     <button

@@ -145,7 +145,7 @@ export default class Ventas extends Component {
                     href="/socios/rehabilitacion/rehabilitacion"
                     className="dropdown-item text-dark"
                   >
-                    Rehabilitacion
+                    Solicitud de Afiliacion
                   </a>
                 </li>
               </ul>
