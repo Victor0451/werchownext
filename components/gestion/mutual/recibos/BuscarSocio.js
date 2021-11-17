@@ -1,4 +1,5 @@
 import React from "react";
+import ListadoSocios from "./ListadoSocios";
 
 const BuscarSocio = ({
   contratoRef,
@@ -6,7 +7,10 @@ const BuscarSocio = ({
   buscarTitularM,
   buscarTitularDniM,
   errores,
-  titulo
+  titulo,
+  listado,
+  listSocios,
+  Seleccionar
 }) => {
   return (
     <div className="container border border-dark alert alert-primary mt-4">
@@ -93,7 +97,7 @@ const BuscarSocio = ({
                   </strong>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   placeholder="DNI"
                   name="contrato"
@@ -117,7 +121,40 @@ const BuscarSocio = ({
             </div>
           </div>
         </form>
+
+        <hr className="mt-4 mb-4" />
+
+        <div className="">
+          <div className="border border-dark p-4">
+            <div className="row mb-4 d-flex justify-content-center">
+              <div className="col-md-3">
+                <h5 className=" mt-4 mb-4">
+                  <strong>
+                    <u>Buscar Por Apllido</u>
+                  </strong>
+                </h5>
+              </div>
+
+
+              <div className="form-group col-md-4 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  onClick={() => listSocios()}
+
+                >
+                  Ver Socios
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
+
+      <ListadoSocios listado={listado} Seleccionar={Seleccionar}/>
+
     </div>
   );
 };

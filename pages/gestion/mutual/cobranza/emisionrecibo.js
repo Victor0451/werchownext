@@ -6,6 +6,7 @@ import jsCookie from "js-cookie";
 import toastr from "toastr";
 import Router from "next/router";
 import { ip } from "../../../../config/config";
+import { confirmAlert } from 'react-confirm-alert';
 import BuscarSocio from "../../../../components/gestion/mutual/recibos/BuscarSocio";
 import EmitirRecibo from "../../../../components/gestion/mutual/recibos/EmitirRecibo";
 
@@ -25,6 +26,8 @@ const emisionrecibo = () => {
   const [nupagos, guardarNuPagos] = useState([]);
   const [flag, guardarFlag] = useState(false);
   const [recibo, guardarRecibo] = useState(null);
+  const [listado, guardarListSocios] = useState(null);
+
 
   const traerPagosM = async (contrato) => {
     await axios
@@ -104,7 +107,9 @@ const emisionrecibo = () => {
               ficha.GRUPO === 3777 ||
               ficha.GRUPO === 3888 ||
               ficha.GRUPO === 3999 ||
-              ficha.GRUPO === 4004
+              ficha.GRUPO === 4004 ||
+              ficha.GRUPO === 7777 ||
+              ficha.GRUPO === 8500
             ) {
               toastr.warning(
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
@@ -120,6 +125,14 @@ const emisionrecibo = () => {
             ) {
               toastr.warning(
                 `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+            } else if (
+              ficha.GRUPO >= 5000 &&
+              ficha.GRUPO < 7777
+            ) {
+              toastr.warning(
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
             }
@@ -177,7 +190,9 @@ const emisionrecibo = () => {
               ficha.GRUPO === 3777 ||
               ficha.GRUPO === 3888 ||
               ficha.GRUPO === 3999 ||
-              ficha.GRUPO === 4004
+              ficha.GRUPO === 4004 ||
+              ficha.GRUPO === 7777 ||
+              ficha.GRUPO === 8500
             ) {
               toastr.warning(
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
@@ -193,6 +208,14 @@ const emisionrecibo = () => {
             ) {
               toastr.warning(
                 `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+            } else if (
+              ficha.GRUPO >= 5000 &&
+              ficha.GRUPO < 7777
+            ) {
+              toastr.warning(
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
             }
@@ -222,25 +245,52 @@ const emisionrecibo = () => {
       CONTRATO: ficha.CONTRATO,
       MAN_COB: "X",
       MOVIM: "P",
-      OPERADOR: user.idoperador,
+      OPERADOR: user.codigo,
       PUESTO: user.puestom,
     };
 
-    if (prepago.mes === "") {
+    if (prepago.MES === "") {
       toastr.warning("Debes ingresar el mes a cobrar", "ATENCION");
-    } else if (prepago.ano === "") {
+    } else if (prepago.ANO === "") {
       toastr.warning("Debes ingresar el año a cobrar", "ATENCION");
     } else {
-      toastr.success("Pago pre cargado exitosamente", "ATENCION");
-      guardarNuPagos([...nupagos, prepago]);
+
+      let encontrado = false
+
+      if (nupagos.length === 0) {
+        toastr.success("Pago pre cargado exitosamente", "ATENCION");
+        guardarNuPagos([...nupagos, prepago]);
+      } else {
+
+        for (let i = 0; i < nupagos.length; i++) {
+          if (nupagos[i].MES === mesRef.current.value && nupagos[i].ANO === anoRef.current.value) {
+            encontrado = true;
+          }
+        }
+        if (encontrado === true) {
+          toastr.warning("El mes ingresado ya exitse", "ATENCION");
+        } else if (encontrado === false) {
+          toastr.success("Pago pre cargado exitosamente", "ATENCION");
+          guardarNuPagos([...nupagos, prepago]);
+
+          console.log(nupago)
+        }
+      }
+
+
     }
+
+
   };
 
   const totalPagosPrecargados = (arr) => {
+
+    console.log(arr)
+
     let total = 0;
 
     for (let i = 0; i < arr.length; i++) {
-      total += parseFloat(arr[i].importe);
+      total += parseFloat(arr[i].IMPORTE);
     }
 
     return total.toFixed(2);
@@ -280,6 +330,17 @@ const emisionrecibo = () => {
                     "Se registraron los pagos con exito",
                     "ATENCION"
                   );
+
+                  Router.push({
+                    pathname: `/gestion/mutual/cobranza/recibo`,
+                    query: {
+                      rec: nupagos.RECIBO,
+                      contrato: nupagos.CONTRATO,
+                      fecha: nupagos.DIA_PAG
+                    },
+                  });
+
+
                 }
               })
               .catch((error) => {
@@ -301,6 +362,93 @@ const emisionrecibo = () => {
     });
   };
 
+  const listSocios = async () => {
+    await axios.get(`${ip}api/werchow/maestro/titularesm`)
+      .then(res => {
+        guardarListSocios(res.data[0])
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de socios", "ATENCION")
+      })
+  }
+
+  const Seleccionar = async (contrato) => {
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+    guardarCuoFija(null);
+
+    await axios
+      .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
+      .then((res) => {
+        if (res.data[0].length === 0) {
+          toastr.error(
+            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+            "ATENCION"
+          );
+          const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+          guardarErrores(errores);
+        } else {
+          guardarFlag(true);
+
+          let ficha = res.data[0][0];
+          guardarFicha(ficha);
+
+          traerPagosM(ficha.CONTRATO);
+
+          traerAdhsM(ficha.CONTRATO);
+
+          traerCuoFijaM(ficha.CONTRATO);
+
+          if (
+            ficha.GRUPO === 1001 ||
+            ficha.GRUPO === 1005 ||
+            ficha.GRUPO === 1006 ||
+            ficha.GRUPO === 3444 ||
+            ficha.GRUPO === 3666 ||
+            ficha.GRUPO === 3777 ||
+            ficha.GRUPO === 3888 ||
+            ficha.GRUPO === 3999 ||
+            ficha.GRUPO === 4004 ||
+            ficha.GRUPO === 7777 ||
+            ficha.GRUPO === 8500
+          ) {
+            toastr.warning(
+              "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+              "ATENCION"
+            );
+          } else if (
+            ficha.GRUPO === 3400 ||
+            ficha.GRUPO === 3600 ||
+            ficha.GRUPO === 3700 ||
+            ficha.GRUPO === 3800 ||
+            ficha.GRUPO === 3900 ||
+            ficha.GRUPO === 4000
+          ) {
+            toastr.warning(
+              `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+          } else if (
+            ficha.GRUPO >= 5000 &&
+            ficha.GRUPO < 7777
+          ) {
+            toastr.warning(
+              `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -311,7 +459,7 @@ const emisionrecibo = () => {
 
       if (usuario) {
         let userData = JSON.parse(usuario);
-        guardarUsuario(userData.usuario);
+        guardarUsuario(userData);
         traerUltimoRecibo(userData.puestom);
       }
     }
@@ -328,6 +476,10 @@ const emisionrecibo = () => {
           buscarTitularDniM={buscarTitularDniM}
           errores={errores}
           titulo={"Recibos"}
+          listSocios={listSocios}
+          listado={listado}
+          Seleccionar={Seleccionar}
+
         />
       ) : flag === true ? (
         <>

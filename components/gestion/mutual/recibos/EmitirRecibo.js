@@ -22,7 +22,7 @@ const EmitirRecibo = ({
   return (
     <div className="container mt-4 border border-dark p-4 alert alert-primary">
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-10">
           <h4>
             <strong>
               <u>Emitir Recibo Afiliado</u>: {ficha.CONTRATO} -{" "}
@@ -30,17 +30,38 @@ const EmitirRecibo = ({
             </strong>
           </h4>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-2">
           <a
-            className="btn btn-block btn-danger"
+            className="btn btn-block btn-danger btn-sm"
             href="/gestion/mutual/cobranza/emisionrecibo"
           >
             Cancelar
           </a>
         </div>
       </div>
+
+
+
       <div className="border border-dark mt-4 p-4">
+
+        {ficha.GRUPO === 1001 ||
+          ficha.GRUPO === 1005 ||
+          ficha.GRUPO === 1006 ||
+          ficha.GRUPO === 3444 ||
+          ficha.GRUPO === 3666 ||
+          ficha.GRUPO === 3777 ||
+          ficha.GRUPO === 3888 ||
+          ficha.GRUPO === 3999 ||
+          ficha.GRUPO === 4004 ||
+          ficha.GRUPO === 7777 ||
+          ficha.GRUPO === 8500 ? (
+          <div className="mb-4 alert alert-info text-center text-uppercase border border-dark">
+            ATENCION!!!, La ficha pertenece a un grupo moroso
+          </div>
+        ) : null}
+
         <div className="row">
+
           <div className="col-md-6">
             <h4 className="mb-4 text-center">
               <strong>
@@ -189,11 +210,11 @@ const EmitirRecibo = ({
                       },
                       {
                         Header: "Fecha",
-                        id: "FECHA",
-                        accessor: (d) => d.FECHA,
+                        id: "DIA_PAG",
+                        accessor: (d) => d.DIA_PAG,
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
-                            keys: ["FECHA"],
+                            keys: ["DIA_PAG"],
                           }),
                         filterAll: true,
                       },
