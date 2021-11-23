@@ -273,7 +273,6 @@ const emisionrecibo = () => {
           toastr.success("Pago pre cargado exitosamente", "ATENCION");
           guardarNuPagos([...nupagos, prepago]);
 
-          console.log(nupago)
         }
       }
 
@@ -314,6 +313,19 @@ const emisionrecibo = () => {
       });
   };
 
+  const push = (q1, q2, q3) => {
+
+
+    Router.push({
+      pathname: `/gestion/mutual/cobranza/recibo`,
+      query: {
+        rec: q1,
+        contrato: q2,
+        fecha: q3
+      },
+    });
+  }
+
   const registrarPago = async () => {
     await confirmAlert({
       title: "ATENCION",
@@ -331,14 +343,7 @@ const emisionrecibo = () => {
                     "ATENCION"
                   );
 
-                  Router.push({
-                    pathname: `/gestion/mutual/cobranza/recibo`,
-                    query: {
-                      rec: nupagos.RECIBO,
-                      contrato: nupagos.CONTRATO,
-                      fecha: nupagos.DIA_PAG
-                    },
-                  });
+                  push(recibo.NRO_RECIBO, ficha.CONTRATO, moment().format("YYYY-MM-DD"))
 
 
                 }

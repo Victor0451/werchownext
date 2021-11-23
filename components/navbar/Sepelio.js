@@ -513,45 +513,6 @@ export default class Sepelio extends Component {
                 </li>
               </ul>
             </li>
-            <hr />
-            <li className="dropdown-submenu">
-              <a
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                className="  dropdown-toggle dropdown-item text-dark"
-              >
-                Tareas
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    href="/sepelio/tareas/nuevo"
-                    className="dropdown-item text-dark"
-                  >
-                    Nueva Tarea
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href="/sepelio/tareas/editar"
-                    className="dropdown-item text-dark"
-                  >
-                    Editar Tarea
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href="/sepelio/tareas/calendario"
-                    className="dropdown-item text-dark"
-                  >
-                    Tareas Programadas
-                  </a>
-                </li>
-              </ul>
-            </li>
           </ul>
         </li>
 
@@ -601,15 +562,33 @@ export default class Sepelio extends Component {
             data-toggle="dropdown"
             className="nav-link dropdown-toggle"
           >
-            Novedades
+            Tareas
           </a>
           <ul className="dropdown-menu">
             <li>
               <a
-                href="/sepelio/novedades/nuevo"
+                href="/sepelio/tareas/nuevo"
                 className="dropdown-item text-dark"
               >
-                Registrar Novedad
+                Nueva Tarea
+              </a>
+            </li>
+            <hr />
+            <li>
+              <a
+                href="/sepelio/tareas/editar"
+                className="dropdown-item text-dark"
+              >
+                Editar Tarea
+              </a>
+            </li>
+            <hr />
+            <li>
+              <a
+                href="/sepelio/tareas/calendario"
+                className="dropdown-item text-dark"
+              >
+                Tareas Programadas
               </a>
             </li>
           </ul>

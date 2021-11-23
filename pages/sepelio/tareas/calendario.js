@@ -55,7 +55,7 @@ const calendario = () => {
 
     const localizer = momentLocalizer(moment);
 
-    console.log(events)
+
     return (
         <Layout>
             <div className="container mt-4 border border-dark p-4 alert alert-dark">
@@ -78,6 +78,8 @@ const calendario = () => {
                 <div className="mt-4 border border-dark list">
 
                     <Calendar
+                        selectable
+                        popup
                         style={{ height: "80vh" }}
                         localizer={localizer}
                         events={events}

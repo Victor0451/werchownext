@@ -1,9 +1,24 @@
 import React from "react";
 import moment from "moment";
-const Recibo = () => {
+import Spinner from "../../../layout/Spinner";
+const Recibo = ({ datos }) => {
+
+  if (!datos) return <Spinner />
+
+  const totalCuotas = (arr) => {
+    let total = 0
+
+    for (let i = 0; i < arr.length; i++) {
+      total += parseFloat(arr[i].IMPORTE)
+    }
+
+    return total
+  }
+
   return (
     <div className="container p-4 mt-4">
       <div className="col-md-12 d-flex">
+
         {/* ORIGINAL */}
         <div className="border border-dark mr-1">
           <div className="col-md-12 border border-dark d-flex justify-content-between p-2">
@@ -18,48 +33,58 @@ const Recibo = () => {
               <div>
                 <strong>RECIBO</strong>: X
               </div>
-              <div>N: 22-45454</div>
-              <div>Fecha: {moment().format("DD/MM/YYYY")}</div>
+              <div>N: {datos[0].SERIE} - {datos[0].NRO_RECIBO}</div>
+              <div>Fecha: {moment(datos[0].DIA_PAG).format("DD/MM/YYYY")}</div>
             </div>
           </div>
 
           <div className="col-md-12 border border-dark alert alert-primary d-flex justify-content-between p-2">
-            <div>DNI:</div>
-            <div>HC:</div>
-            <div>NOMBRE:</div>
+            <div>DNI: {datos[0].NRO_DOC}</div>
+            <div>HC: {datos[0].CONTRATO}</div>
+            <div>NOMBRE: {datos[0].APELLIDOS}, {datos[0].NOMBRES}</div>
           </div>
 
-          <div className="col-md-12 border border-dark d-flex justify-content-between p-2">
-            <div>Cuotas:</div>
+          {/* <div className="col-md-12 border border-dark d-flex justify-content-between p-2">
+            <div>Cuotas: {datos.length}</div>
 
             <div>ORIGINAL</div>
-          </div>
+          </div> */}
 
           <div className="col-md-12 p-2">
-            <table class="table table-sm border border-dark  mt-2">
-              <thead class="thead-dark">
+            <table className="table table-sm border border-dark  ">
+              <thead className="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Cuota</th>
                   <th scope="col">Valor</th>
+                  <th scope="col">ORIGINAL</th>
+
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>1/2021</td>
-                  <td>$ 2500</td>
+
+                {datos.map((d, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{d.MES}/{d.ANO}</td>
+                    <td>{d.IMPORTE}</td>
+                  </tr>
+                ))}
+
+                <tr className="">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <strong>
+                      <u>
+                        TOTAL
+                      </u>: $ {totalCuotas(datos)}
+                    </strong>
+
+                  </td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>2/2021</td>
-                  <td>$ 2500</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>3/2021</td>
-                  <td>$ 2500</td>
-                </tr>
+
               </tbody>
             </table>
           </div>
@@ -109,48 +134,59 @@ const Recibo = () => {
               <div>
                 <strong>RECIBO</strong>: X
               </div>
-              <div>N: 22-45454</div>
-              <div>Fecha: {moment().format("DD/MM/YYYY")}</div>
+              <div>N: {datos[0].SERIE} - {datos[0].NRO_RECIBO}</div>
+              <div>Fecha: {moment(datos[0].DIA_PAG).format("DD/MM/YYYY")}</div>
             </div>
           </div>
 
           <div className="col-md-12 border border-dark alert alert-primary d-flex justify-content-between p-2">
-            <div>DNI:</div>
-            <div>HC:</div>
-            <div>NOMBRE:</div>
+            <div>DNI: {datos[0].NRO_DOC}</div>
+            <div>HC: {datos[0].CONTRATO}</div>
+            <div>NOMBRE: {datos[0].APELLIDOS}, {datos[0].NOMBRES}</div>
           </div>
 
-          <div className="col-md-12 border border-dark d-flex justify-content-between p-2">
-            <div>Cuotas:</div>
+          {/* <div className="col-md-12 border border-dark d-flex justify-content-between p-2">
+            <div>Cuotas: {datos.length}</div>
 
             <div>DUPLICADO</div>
-          </div>
+          </div> */}
+
 
           <div className="col-md-12 p-2">
-            <table class="table table-sm border border-dark  mt-2">
-              <thead class="thead-dark">
+            <table className="table table-sm border border-dark  ">
+              <thead className="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Cuota</th>
                   <th scope="col">Valor</th>
+                  <th scope="col">DUPLICADO</th>
+
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>1/2021</td>
-                  <td>$ 2500</td>
+
+                {datos.map((d, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{d.MES}/{d.ANO}</td>
+                    <td>{d.IMPORTE}</td>
+                  </tr>
+                ))}
+
+                <tr className="">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <strong>
+                      <u>
+                        TOTAL
+                      </u>: $ {totalCuotas(datos)}
+                    </strong>
+
+                  </td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>2/2021</td>
-                  <td>$ 2500</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>3/2021</td>
-                  <td>$ 2500</td>
-                </tr>
+
               </tbody>
             </table>
           </div>
@@ -185,7 +221,7 @@ const Recibo = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
