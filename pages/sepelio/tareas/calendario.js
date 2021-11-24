@@ -5,10 +5,13 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
 import { ip } from '../../../config/config'
+import ModalEvento from "../../../components/sepelio/tareas/ModalEvento";
 
 const calendario = () => {
 
     const [events, guardarEvents] = useState([]);
+    const [evento, guardarEvento] = useState(null);
+
 
     let token = jsCookie.get("token");
 
@@ -55,6 +58,19 @@ const calendario = () => {
 
     const localizer = momentLocalizer(moment);
 
+    const slotSelected = (slotInfo) => {
+        console.log(slotInfo);
+
+    }
+
+    const eventSelected = (eventInfo) => {
+        guardarEvento(eventInfo)
+
+        let myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+        myModal.show()
+
+
+    }
 
     return (
         <Layout>
@@ -78,8 +94,9 @@ const calendario = () => {
                 <div className="mt-4 border border-dark list">
 
                     <Calendar
-                        selectable
-                        popup
+                        selectable={true}
+                        onSelectSlot={slotSelected}
+                        onSelectEvent={eventSelected}
                         style={{ height: "80vh" }}
                         localizer={localizer}
                         events={events}
@@ -105,6 +122,8 @@ const calendario = () => {
                     />
                 </div>
             </div>
+
+            <ModalEvento evento={evento}/>
         </Layout>
     )
 }

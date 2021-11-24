@@ -66,7 +66,7 @@ const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, ope
                                 value="option1"
                                 ref={siRef}
                             />
-                            <label className="form-check-label" for="si">
+                            <label className="form-check-label" htmlFor="si">
                                 Si
                             </label>
                         </div>
@@ -80,7 +80,7 @@ const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, ope
                                 defaultChecked={true}
                                 ref={noRef}
                             />
-                            <label className="form-check-label" for="no">
+                            <label className="form-check-label" htmlFor="no">
                                 No
                             </label>
                         </div>
