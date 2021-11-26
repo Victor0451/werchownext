@@ -29,7 +29,7 @@ const ModalEvento = ({ evento }) => {
                                                 </u>
                                             </strong>
                                         </label>
-                                        <input className="form-control" value={moment(evento.start).format('DD/MM/YYYY HH:mm:ss')} />
+                                        <input className="form-control" readOnly value={moment(evento.start).format('DD/MM/YYYY HH:mm:ss')} />
                                     </div>
 
 
@@ -42,7 +42,7 @@ const ModalEvento = ({ evento }) => {
                                                 </u>
                                             </strong>
                                         </label>
-                                        <input className="form-control" value={moment(evento.end).format('DD/MM/YYYY HH:mm:ss')} />
+                                        <input className="form-control" readOnly value={moment(evento.end).format('DD/MM/YYYY HH:mm:ss')} />
                                     </div>
 
                                     <div className="col-md-2">
@@ -55,10 +55,10 @@ const ModalEvento = ({ evento }) => {
                                         </label>
 
                                         {evento.allDay === 1 ? (
-                                            <input className="form-control" value="Si" />
+                                            <input className="form-control" readOnly value="Si" />
 
                                         ) : (
-                                            <input className="form-control" value="No" />
+                                            <input className="form-control" readOnly value="No" />
                                         )}
 
                                     </div>
@@ -100,7 +100,7 @@ const ModalEvento = ({ evento }) => {
                                             </strong>
                                         </label>
 
-                                        <textarea rows="10" className="form-control text-dark" value={evento.title} />
+                                        <textarea rows="10" className="form-control text-dark" readOnly value={evento.title} />
                                     </div>
 
                                 </div>

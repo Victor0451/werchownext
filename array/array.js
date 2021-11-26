@@ -511,6 +511,14 @@ export const estadocartera = [
   { value: 5, label: "Morosos Tarjetas" },
 ];
 
+export const cartera = [
+  { value: 0, label: "Oficina y Cobrador" },
+  { value: 1, label: "Tarjetas" },
+  { value: 2, label: "Bancos" },
+  { value: 3, label: "Policia" },
+
+];
+
 export const zonas = [
   { value: 1, label: "Oficina Casa Central" },
   { value: 3, label: "Oficina Palpala" },

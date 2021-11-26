@@ -130,7 +130,7 @@ const BuscarSocio = ({
               <div className="col-md-3">
                 <h5 className=" mt-4 mb-4">
                   <strong>
-                    <u>Buscar Por Apllido</u>
+                    <u>Buscar Por Apellido</u>
                   </strong>
                 </h5>
               </div>
@@ -153,7 +153,7 @@ const BuscarSocio = ({
         </div>
       </div>
 
-      <ListadoSocios listado={listado} Seleccionar={Seleccionar}/>
+      <ListadoSocios listado={listado} Seleccionar={Seleccionar} />
 
     </div>
   );

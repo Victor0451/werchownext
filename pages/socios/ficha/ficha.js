@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../../components/layout/Layout";
-import SocioFicha from "../../../components/socios/ficha/SocioFicha";
-
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import { ip } from '../../../config/config'
+import SocioFicha from "../../../components/socios/ficha/SocioFicha";
+import Legajo from "../../../components/socios/ficha/Legajo";
+import Pagos from "../../../components/socios/ficha/Pagos";
+import LegajoArchivos from "../../../components/socios/legajoVirtual/LegajoArchivos";
+import Adherentes from "../../../components/socios/ficha/Adherentes";
+
 
 const ficha = () => {
   let contratoRef = React.createRef();
   let dniRef = React.createRef();
   let apellidoRef = React.createRef();
 
-  const [listado, guardarListado] = useState(null);
   const [adhs, guardarAdhs] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [flag, guardarFlag] = useState(null);
   const [archivos, guardarArchivos] = useState(null);
   const [empresa, guardarEmpresa] = useState(null);
-
+  const [listsocio, guardarListSocios] = useState(null);
   const [errores, guardarErrores] = useState(null);
 
   const traerArchivos = async (contrato) => {
@@ -176,9 +179,12 @@ const ficha = () => {
           traerArchivos(ficha.CONTRATO);
           traerAdhs(ficha.CONTRATO);
           guardarEmpresa("W");
+          toastr.success("Se encontro al socio con exito", "ATENCION")
+
         })
         .catch((error) => {
           console.log(error);
+          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
@@ -219,9 +225,11 @@ const ficha = () => {
           traerArchivosM(ficha.CONTRATO);
           guardarEmpresa("M");
           traerAdhsM(ficha.CONTRATO);
+          toastr.success("Se encontro al socio con exito", "ATENCION")
         })
         .catch((error) => {
           console.log(error);
+          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
@@ -261,9 +269,11 @@ const ficha = () => {
           }
           traerArchivos(ficha.CONTRATO);
           guardarEmpresa("W");
+          toastr.success("Se encontro al socio con exito", "ATENCION")
         })
         .catch((error) => {
           console.log(error);
+          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
@@ -305,15 +315,141 @@ const ficha = () => {
           }
           traerArchivosM(ficha.CONTRATO);
           guardarEmpresa("M");
+          toastr.success("Se encontro al socio con exito", "ATENCION")
+
         })
         .catch((error) => {
           console.log(error);
+          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
+
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
       guardarErrores(errores);
     }
   };
+
+  const listSociosM = async () => {
+    guardarListSocios(null)
+
+    guardarFlag('M')
+
+    toastr.info("Buscando y generando listado de socios", "ATENCION")
+
+
+    await axios.get(`${ip}api/werchow/maestro/titularesm`)
+      .then(res => {
+        guardarListSocios(res.data[0])
+        toastr.success("Se genero el listado de socios con exito", "ATENCION")
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al generar el listado de socios", "ATENCION")
+      })
+  }
+
+  const listSocios = async () => {
+    guardarFlag('W')
+
+    guardarListSocios(null)
+
+    toastr.info("Buscando y generando listado de socios", "ATENCION")
+
+
+    await axios.get(`${ip}api/werchow/maestro/titulares`)
+      .then(res => {
+        guardarListSocios(res.data[0])
+        toastr.success("Se genero el listado de socios con exito", "ATENCION")
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al generar el listado de socios", "ATENCION")
+      })
+  }
+
+  const Seleccionar = async (contrato) => {
+    if (flag === 'W') {
+      guardarArchivos(null);
+      guardarFicha(null);
+      guardarErrores(null);
+      guardarPagos(null);
+      guardarAdhs(null);
+
+      await axios
+        .get(
+          `${ip}api/werchow/maestro/titular/${contrato}`
+        )
+        .then((res) => {
+          let ficha = res.data[0][0];
+          guardarFicha(ficha);
+
+          traerPagos(ficha.CONTRATO);
+
+          if (ficha === "undefined") {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          }
+          traerArchivos(ficha.CONTRATO);
+          traerAdhs(ficha.CONTRATO);
+          guardarEmpresa("W");
+
+          toastr.success("Se busco al socio con exito", "ATENCION")
+        })
+        .catch((error) => {
+          console.log(error);
+          toastr.error("Ocurrio un error al buscar al socios", "ATENCION")
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+
+
+    } else if (flag === 'M') {
+      guardarArchivos(null);
+      guardarFicha(null);
+      guardarErrores(null);
+      guardarPagos(null);
+      guardarAdhs(null);
+
+      await axios
+        .get(
+          `${ip}api/werchow/maestro/titularm/${contrato}`
+        )
+        .then((res) => {
+          let ficha = res.data[0][0];
+          guardarFicha(ficha);
+
+          traerPagos(ficha.CONTRATO);
+
+          if (ficha === "undefined") {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          }
+          traerArchivos(ficha.CONTRATO);
+          traerAdhs(ficha.CONTRATO);
+          guardarEmpresa("M");
+          toastr.success("Se busco al socio con exito", "ATENCION")
+        })
+        .catch((error) => {
+          console.log(error);
+          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+    }
+
+  }
 
   let token = jsCookie.get("token");
 
@@ -334,15 +470,75 @@ const ficha = () => {
         buscarTitularM={buscarTitularM}
         buscarTitularDni={buscarTitularDni}
         buscarTitularDniM={buscarTitularDniM}
+        listSocios={listSocios}
+        listSociosM={listSociosM}
         errores={errores}
         ficha={ficha}
         pagos={pagos}
-        listado={listado}
-        flag={flag}
         empresa={empresa}
         archivos={archivos}
         adhs={adhs}
+        listsocio={listsocio}
+        Seleccionar={Seleccionar}
       />
+
+
+      <div
+        className="modal fade"
+        id="legajo"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl p-2">
+          <div className="modal-content border border-dark ">
+            <div className="modal-header alert alert-primary">
+              <h2 className="modal-title" id="exampleModalLabel">
+                <strong>
+                  <u>Legajo Del Socio</u>
+                </strong>
+              </h2>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body ">
+              <div id="solicitud" className="mt-4 container ">
+                <div>
+                  <Legajo ficha={ficha} empresa={empresa} />
+
+                  <hr className="mt-4 mb-4" />
+
+                  <Pagos pagos={pagos} />
+
+                  <hr className="mt-4 mb-4" />
+                  <Adherentes adhs={adhs} />
+
+                  <hr className="mt-4 mb-4" />
+                  <LegajoArchivos archivos={archivos} empresa={empresa} />
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </Layout>
   );
 };

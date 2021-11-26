@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../../components/layout/Layout";
 import BuscarPadron from "../../../components/socios/reportes/BuscarPadron";
-import ListadoPadron from "../../../components/socios/reportes/ListadoPadron";
 import axios from "axios";
-import ExportarPadron from "../../../components/socios/reportes/ExportarPadron";
 import jsCookie from "js-cookie";
 import Router from "next/router";
 import { zonaPer, zonaPal, zonaSP, zonaCC, zonas } from "../../../array/array";
 import { ip } from "../../../config/config";
+import ModalResultados from "../../../components/socios/reportes/ModalResultados";
 
 const estadopadron = () => {
   let desdeRef = React.createRef();
@@ -21,6 +20,35 @@ const estadopadron = () => {
   const [errorrango, guardarErrorRango] = useState(null);
   const [padron, guardarPadron] = useState(null);
   const [listZona, guardarListZona] = useState(null);
+  const [tipocartera, guardarTipoCartera] = useState(null);
+  const [sucursal, guardarSucursal] = useState(null);
+
+  const idPadron = () => {
+
+    if (cartera === 0) {
+      guardarTipoCartera("Atrasado Cobrador");
+    } else if (cartera === 1) {
+      guardarTipoCartera("Atrasado Oficina");
+    } else if (cartera === 2) {
+      guardarTipoCartera("Atrasado Tarjeta");
+    } else if (cartera === 3) {
+      guardarTipoCartera("Atrasado Banco");
+    } else if (cartera === 4) {
+      guardarTipoCartera("Moroso 1001");
+    } else if (cartera === 5) {
+      guardarTipoCartera("Morosos Tarjetas");
+    }
+
+    if (zona === 1) {
+      guardarSucursal("Casa Central");
+    } else if (zona === 3) {
+      guardarSucursal("Palpala");
+    } else if (zona === 5) {
+      guardarSucursal("Perico");
+    } else if (zona === 60) {
+      guardarSucursal("San Pedro");
+    }
+  };
 
   const handleChange = (value, flag) => {
     document.getElementById("cuotas").hidden = true;
@@ -42,6 +70,9 @@ const estadopadron = () => {
 
   const buscarCartera = async (e) => {
     e.preventDefault();
+
+    guardarErrores(null)
+
 
     if (cartera === null || mes === null || zona === null) {
       let errores = "Los Campos Mes, Cartera y Zona No Pueden Estar Vacios";
@@ -157,6 +188,8 @@ const estadopadron = () => {
         .then((res) => {
           let padron = res.data[0];
           guardarPadron(padron);
+
+          idPadron()
         })
         .catch((error) => {
           console.log(error);
@@ -166,6 +199,9 @@ const estadopadron = () => {
 
   const buscarCarteram = async (e) => {
     e.preventDefault();
+
+    guardarErrores(null)
+
 
     if (cartera === null || mes === null || zona === null) {
       let errores = "Los Campos Mes, Cartera y Zona No Pueden Estar Vacios";
@@ -275,12 +311,224 @@ const estadopadron = () => {
         .then((res) => {
           let padron = res.data[0];
           guardarPadron(padron);
+          idPadron()
         })
         .catch((error) => {
           console.log(error);
         });
     }
   };
+
+  const buscarCarteraSinTel = async () => {
+    guardarErrores(null)
+
+    if (cartera === null || zona === null) {
+      let errores = "Los Campos Cartera y Zona No Pueden Estar Vacios";
+      guardarErrores(errores);
+    } else {
+      const parametros = {
+        zona: zona,
+        grupo: "",
+        sucursal: "",
+        cartera: "",
+      };
+
+
+      //   1000
+      if (cartera === 0 && zona === 1) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 3) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 5) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 60) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      }
+
+
+      //   TJT
+      if (cartera === 1 && zona === 1) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "W";
+      } else if (cartera === 1 && zona === 3) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "L";
+      } else if (cartera === 1 && zona === 5) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "R";
+      } else if (cartera === 1 && zona === 60) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "P";
+      }
+
+      //   BANCO
+      if (cartera === 2 && zona === 1) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "W";
+      } else if (cartera === 2 && zona === 3) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "L";
+      } else if (cartera === 2 && zona === 5) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "R";
+      } else if (cartera === 2 && zona === 60) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "P";
+      }
+
+      // POLICIA
+      if (cartera === 3 && zona === 1) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 3) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 5) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 60) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      }
+
+
+      await axios
+        .get(`${ip}api/sgi/socios/carterasintelefono`, {
+          params: {
+            grupo: parametros.grupo,
+            zona: parametros.zona,
+            cartera: parametros.cartera,
+            sucursal: parametros.sucursal
+
+          },
+        })
+        .then((res) => {
+          let padron = res.data[0];
+          guardarPadron(padron);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const buscarCarteraSinTelM = async () => {
+    guardarErrores(null)
+
+    if (cartera === null || zona === null) {
+      let errores = "Los Campos Cartera y Zona No Pueden Estar Vacios";
+      guardarErrores(errores);
+    } else {
+      const parametros = {
+        zona: zona,
+        grupo: "",
+        sucursal: "",
+        cartera: "",
+      };
+
+
+      //   1000
+      if (cartera === 0 && zona === 1) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 3) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 5) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      } else if (cartera === 0 && zona === 60) {
+        parametros.grupo = 1000;
+        parametros.cartera = cartera;
+      }
+
+
+      //   TJT
+      if (cartera === 1 && zona === 1) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "W";
+      } else if (cartera === 1 && zona === 3) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "L";
+      } else if (cartera === 1 && zona === 5) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "R";
+      } else if (cartera === 1 && zona === 60) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "P";
+      }
+
+      //   BANCO
+      if (cartera === 2 && zona === 1) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "W";
+      } else if (cartera === 2 && zona === 3) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "L";
+      } else if (cartera === 2 && zona === 5) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "R";
+      } else if (cartera === 2 && zona === 60) {
+        parametros.grupo = 0;
+        parametros.cartera = cartera;
+        parametros.sucursal = "P";
+      }
+
+      // POLICIA
+      if (cartera === 3 && zona === 1) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 3) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 5) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      } else if (cartera === 3 && zona === 60) {
+        parametros.grupo = 6;
+        parametros.cartera = cartera;
+      }
+
+
+      await axios
+        .get(`${ip}api/sgi/socios/carterasintelefonom`, {
+          params: {
+            grupo: parametros.grupo,
+            zona: parametros.zona,
+            cartera: parametros.cartera,
+            sucursal: parametros.sucursal
+
+          },
+        })
+        .then((res) => {
+          let padron = res.data[0];
+          guardarPadron(padron);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
 
   let token = jsCookie.get("token");
 
@@ -323,22 +571,18 @@ const estadopadron = () => {
         errores={errores}
         errorrango={errorrango}
         listZona={listZona}
+        buscarCarteraSinTel={buscarCarteraSinTel}
+        buscarCarteraSinTelM={buscarCarteraSinTelM}
       />
 
-      {padron !== null ? (
-        <>
-          <ListadoPadron padron={padron} cartera={cartera} zona={zona} />
+      <ModalResultados
+        padron={padron}
+        cartera={cartera}
+        zona={zona}
+        tipocartera={tipocartera}
+        sucursal={sucursal}
+      />
 
-          <div className="container alert alert-primary mt-4">
-            <div className="mt-4 p-4 border">
-              <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
-              <div className="row d-flex justify-content-center">
-                <ExportarPadron padron={padron} cartera={cartera} zona={zona} />
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
     </Layout>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 const AdhPrint = ({ adhs }) => {
-  console.log(adhs)
+
   if (!adhs || adhs.length === 0)
     return (
       <div className="border border-dark alert alert-info text-center text-uppercase">

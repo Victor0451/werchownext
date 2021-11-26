@@ -1,24 +1,19 @@
 import React from "react";
-import Legajo from "../../../components/socios/ficha/Legajo";
-import Pagos from "../../../components/socios/ficha/Pagos";
-import LegajoArchivos from "../legajoVirtual/LegajoArchivos";
-import Adherentes from "./Adherentes";
+import ListadoSocios from "./ListadoSocios";
 
 const SocioFicha = ({
   buscarTitular,
   buscarTitularM,
   buscarTitularDni,
   buscarTitularDniM,
+  listSocios,
+  listSociosM,
   contratoRef,
   dniRef,
   errores,
   nomoro,
-  ficha,
-  pagos,
-  pagosbco,
-  empresa,
-  archivos,
-  adhs,
+  listsocio,
+  Seleccionar
 }) => {
   return (
     <div className="container border border-dark alert alert-primary mt-4">
@@ -62,7 +57,7 @@ const SocioFicha = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitular}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   WERCHOW
                 </button>
@@ -72,7 +67,7 @@ const SocioFicha = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularM}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   MUTUAL
                 </button>
@@ -121,7 +116,7 @@ const SocioFicha = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDni}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   WERCHOW
                 </button>
@@ -131,7 +126,7 @@ const SocioFicha = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDniM}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   MUTUAL
                 </button>
@@ -149,62 +144,56 @@ const SocioFicha = ({
             </div>
           </div>
         </form>
-      </div>
 
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl p-2">
-          <div className="modal-content border border-dark ">
-            <div className="modal-header alert alert-primary">
-              <h2 className="modal-title" id="exampleModalLabel">
-                <strong>
-                  <u>Legajo Del Socio</u>
-                </strong>
-              </h2>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body ">
-              <div id="solicitud" className="mt-4 container ">
-                <div>
-                  <Legajo ficha={ficha} empresa={empresa} />
+        <hr className="mt-4 mb-4" />
 
-                  <hr className="mt-4 mb-4" />
+        <div className="">
+          <div className="border border-dark p-4">
 
-                  <Pagos pagos={pagos} />
 
-                  <hr className="mt-4 mb-4" />
-                  <Adherentes adhs={adhs} />
+            <h3 className=" mt-4 mb-4">
+              <strong>
+                <u>Buscar Por Apellido</u>
+              </strong>
+            </h3>
 
-                  <hr className="mt-4 mb-4" />
-                  <LegajoArchivos archivos={archivos} empresa={empresa} />
-                </div>
+
+            <div className="row mb-4 d-flex justify-content-center">
+              <div className="form-group col-md-4 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  data-toggle="modal"
+                  data-target="#listadoSocio"
+                  onClick={() => listSocios()}
+
+                >
+                  WERCHOW
+                </button>
               </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Cerrar
-              </button>
+
+              <div className="form-group col-md-4 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  data-toggle="modal"
+                  data-target="#listadoSocio"
+                  onClick={() => listSociosM()}
+
+                >
+                  MUTUAL
+                </button>
+              </div>
+
+              {!listsocio ? null
+                : (
+                  <ListadoSocios listado={listsocio} Seleccionar={Seleccionar} />
+                )}
+
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
   );
 };
