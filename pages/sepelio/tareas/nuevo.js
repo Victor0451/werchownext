@@ -69,9 +69,11 @@ const nuevo = () => {
                     if (res.status === 200)
                         toastr.success("La tarea se registro con exito", "Atencion")
 
+                    mandarMail(task)
+
                     setTimeout(() => {
                         Router.reload()
-                    }, 500);
+                    }, 1000);
                 })
                 .catch((error) => {
                     toastr.error("Ocurrio un error", "Atencion")
@@ -79,6 +81,28 @@ const nuevo = () => {
                 });
         }
     }
+
+    const mandarMail = (array) => {
+        fetch("/api/mail", {
+            method: "POST",
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(array),
+        })
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.info(
+                        "Se envio un email con la notificacion de la novedad",
+                        "ATENCION"
+                    );
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const traerOperador = async () => {
         await axios
