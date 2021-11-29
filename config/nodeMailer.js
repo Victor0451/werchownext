@@ -1,5 +1,5 @@
 
-import nodemailer from "nodemailer  ";
+import nodemailer from "nodemailer";
 
 const username = process.env.NODEMAILER_USERNAME;
 const password = process.env.NODEMAILER_PASSWORD;
