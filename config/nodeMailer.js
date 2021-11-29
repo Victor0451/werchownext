@@ -1,8 +1,8 @@
 
 import nodemailer from "nodemailer";
 
-const username = process.env.NODEMAILER_USERNAME;
-const password = process.env.NODEMAILER_PASSWORD;
+const username = "victor.m.longo@gmail.com";
+const password = "victor33749769";
 
 export const transporter = nodemailer.createTransport({
   pool: true,
