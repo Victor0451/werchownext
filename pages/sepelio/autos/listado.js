@@ -95,7 +95,6 @@ const listado = () => {
         }
     }
 
-
     return (
         <Layout>
             <ListadoAutos

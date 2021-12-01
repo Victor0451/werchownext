@@ -1,14 +1,14 @@
 const moment = require("moment");
 
-let { transporter } = require("../../config/nodeMailer");
+let { transporter } = require("../../../../config/nodeMailer");
 
 export default async function sendMail(req, res) {
   const mailData = {
-    from: "victor.m.longo@gmail.com",
+    from: "werchowsgi@gmail.com",
     to: `vmlongo@werchow.com`,
     cc: ["otero464@gmail.com", "grhumanos45@yahoo.com.ar", "Sjiriarte@hotmail.com"],
-    subject: `Notificacion Tarea Registrada - WERCHOW SGI`,
-    text: `descripcion: ${req.body.title}, inicia: ${req.body.start}, termina:${req.body.end}, prioridad: ${req.body.priority}, expediente: ${req.body.expediente}`,
+    subject: `Notificacion Novedades de Autos - WERCHOW SGI`,
+    text: `novedad: ${req.body.novedad}, patente: ${req.body.patente}, operador:${req.body.operador}, fecha: ${req.body.fecha}`,
     html: `
 
     <html>
@@ -21,7 +21,7 @@ export default async function sendMail(req, res) {
     <h2>
     <strong>
     <u>
-    Registro de Tarea del Area de Sepelio
+    Registro de Novedades Sobre los Autos - Sepelio
     </u>
     </strong>
     </h2>
@@ -29,24 +29,17 @@ export default async function sendMail(req, res) {
     </br>
 
     <div>
-    <p><strong><u>Asunto</strong></u>: ${req.body.title}</P> 
-    <p><strong><u>Inicia</strong></u>: ${moment(req.body.start).format(
-      "DD/MM/YYYY HH:mm:ss"
-    )}</p>
-    <p><strong><u>Termina</strong></u> :${moment(req.body.end).format(
+    <p><strong><u>Novedad</strong></u>: ${req.body.novedad}</P> 
+    <p><strong><u>Patente</strong></u>: ${req.body.patente}</p>
+    <p><strong><u>Auto</strong></u>: ${req.body.auto}</p>
+    <p><strong><u>Fecha</strong></u> :${moment(req.body.fecha).format(
       "DD/MM/YYYY HH:mm:ss"
     )}</p> 
-    <p><strong><u>Prioridad</strong></u>: ${req.body.priority == 1
-        ? "Normal"
-        : req.body.priority == 2
-          ? "Importante"
-          : req.body.priority == 3
-            ? "Urgente"
-            : null
-      }</p> 
+    <p><strong><u>Operador</strong></u>: ${req.body.operador}</p>
+    
     
     </div>
-    <p>Email enviado desde: WERCHOW SGI.
+    <p>Email enviado desde: WERCHOW SGI - http://sgi.werchow.com
      </p>
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

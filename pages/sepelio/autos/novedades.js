@@ -35,9 +35,15 @@ const novedades = () => {
     const regNovedad = async () => {
         guardarErrores(null)
 
+        let car = patenteRef.current.value;
+        let fields = car.split("-");
+        const chapa = `${fields[0]}-${fields[1]}`;
+        const modelo = fields[2];
+
         const nov = {
             novedad: novedadRef.current.value,
-            patente: patenteRef.current.value,
+            patente: chapa,
+            auto: modelo,
             operador: user,
             fecha: moment().format('YYYY-MM-DD')
         }
@@ -53,6 +59,8 @@ const novedades = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("La novedad se registro con exito", "ATENCION")
+
+                        mandarMail(nov)
                     }
                 })
                 .catch(error => {
@@ -62,6 +70,27 @@ const novedades = () => {
         }
     }
 
+    const mandarMail = (array) => {
+        fetch("/api/mail/sepelio/mailnovedades", {
+            method: "POST",
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(array),
+        })
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.info(
+                        "Se envio un email con la notificacion de la novedad",
+                        "ATENCION"
+                    );
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
 
     let token = jsCookie.get("token");

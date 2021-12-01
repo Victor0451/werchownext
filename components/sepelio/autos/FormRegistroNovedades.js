@@ -33,8 +33,10 @@ const FormRegistroNovedades = ({
                                 <option value="no" >Selecciona el auto...</option>
 
                                 {autos.map((a, index) => (
-                                    <option key={index} value={a.patente}>{a.patente} - {a.auto}</option>
+                                    <>
+                                        <option key={index} value={`${a.patente} - ${a.auto}`}>{a.patente} - {a.auto}</option>
 
+                                    </>
                                 ))}
 
 

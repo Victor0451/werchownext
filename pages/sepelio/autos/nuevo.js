@@ -40,6 +40,27 @@ const nuevo = () => {
         }
     }, []);
 
+    const regHistorial = async (idauto, patente) => {
+        const historial = {
+            patente: patente,
+            idauto: idauto,
+            operador: user,
+            fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
+            accion: "ALTA DE DATOS"
+        }
+
+        await axios.post(`${ip}api/sepelio/autos/registrarhistorial`, historial)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+                    toastr.info("Se registro este movimiento en el historial", "ATENCION")
+                }
+            }).catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al registrar el historial", "ATENCION")
+            })
+
+    }
 
     const registrarAuto = async () => {
 
@@ -88,6 +109,7 @@ const nuevo = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("El auto se registro con exito", "ATENCION")
+                        regHistorial(car.idauto, car.patente)
 
                         setTimeout(() => {
                             Router.push('/sepelio/autos/listado')

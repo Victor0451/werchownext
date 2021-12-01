@@ -25,7 +25,7 @@ const ModalOpciones = ({ push, row }) => {
                                         data-placement="top"
                                         title="Editar"
                                         data-dismiss="modal"
-                                        onClick={() => push(row.dni, row.idservicio, "/sepelio/servicios/editar")}
+                                        onClick={() => push(row.patente, row.idauto, "/sepelio/autos/editar")}
                                     >
                                         <i
                                             className="fa fa-pencil-square-o"
@@ -35,7 +35,7 @@ const ModalOpciones = ({ push, row }) => {
 
                                 </div>
 
-                                <div className="col-md-3">
+                                {/* <div className="col-md-3">
 
                                     <button
                                         className="btn btn-block btn-danger mr-1"
@@ -48,7 +48,7 @@ const ModalOpciones = ({ push, row }) => {
                                         <i className="fa fa-print" aria-hidden="true"> Eliminar</i>
                                     </button>
 
-                                </div>
+                                </div> */}
 
 
                                 <div className="col-md-3 ">

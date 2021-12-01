@@ -83,7 +83,7 @@ const nuevo = () => {
     }
 
     const mandarMail = (array) => {
-        fetch("/api/mail", {
+        fetch("/api/mail/sepelio/mailtareas", {
             method: "POST",
             headers: {
                 Accept: "application/json, text/plain, */*",
