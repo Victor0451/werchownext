@@ -87,6 +87,47 @@ export default class Gerencia extends Component {
                 </li>
               </ul>
             </li>
+            <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Tareas en Sucursales
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/gestion/sucursales/tareas/nuevo"
+                    className="dropdown-item text-dark"
+                  >
+                    Nueva Tarea
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/sucursales/tareas/calendario"
+                    className="dropdown-item text-dark"
+                  >
+                    Calendario
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/sucursales/tareas/editar"
+                    className="dropdown-item text-dark"
+                  >
+                    Editar Tarea
+                  </a>
+                </li>
+              </ul>
+            </li>
+
           </ul>
         </li>
         <li className="nav-item dropdown ">

@@ -45,7 +45,7 @@ const AccesosRapidos = ({ user }) => {
             </div>
           </div>
           <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
-            <div className="card-header">Ficha Del Socio</div>
+            <div className="card-header">Prints</div>
             <div className="card-body">
               <a
                 className="btn btn-secondary btn-block text-dark"
@@ -58,7 +58,35 @@ const AccesosRapidos = ({ user }) => {
                 print de la ficha con sus adherentes y/o de sus pagos
               </p>
             </div>
-          </div>{" "}
+          </div>
+          <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
+            <div className="card-header">Tareas Programadas</div>
+            <div className="card-body">
+              <a
+                className="btn btn-secondary btn-block text-dark"
+                href="/gestion/sucursales/tareas/nuevo"
+              >
+                Tareas de Sucursales
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido al calendario de tareas registradas por las distintas sucursales
+              </p>
+            </div>
+          </div>
+          <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
+            <div className="card-header">Tareas Programadas</div>
+            <div className="card-body">
+              <a
+                className="btn btn-secondary btn-block text-dark"
+                href="/sepelio/tareas/calendario"
+              >
+                Tareas de Sepelio
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido al calendario de tareas registradas por el depto de sepelio
+              </p>
+            </div>
+          </div>
         </div>
 
         {user === 4 ? (
