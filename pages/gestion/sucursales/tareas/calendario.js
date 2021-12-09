@@ -116,8 +116,12 @@ const calendario = () => {
                                 backgroundColor: events.priority === 1 ? "#3FD503"
                                     : events.priority === 2 ? "#E6F82F"
                                         : events.priority === 3 ? "#F82F2F"
-                                            : null
+                                            : null,
+                                color: 'black'
+
                             }
+
+
                         })}
                     />
                 </div>

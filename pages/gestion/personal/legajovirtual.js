@@ -23,8 +23,8 @@ const legajovirtual = () => {
     }
   }, []);
 
-  const traerAsesores = () => {
-    axios
+  const traerAsesores = async () => {
+    await axios
       .get(`${ip}api/sgi/personal/traerpersonal`)
       .then((res) => {
         guardarPersonal(res.data);
@@ -36,14 +36,14 @@ const legajovirtual = () => {
       });
   };
 
-  const traerDetalle = (id, apellido, nombre) => {
+  const traerDetalle = async (id, apellido, nombre) => {
     guardarDetalle(null);
 
     let asesor = `${apellido}, ${nombre}`;
 
     guardarTitulo(asesor);
 
-    axios
+    await axios
       .get(`${ip}api/sgi/personal/detallespersonal/${id}`)
       .then((res) => {
         guardarDetalle(res.data);
