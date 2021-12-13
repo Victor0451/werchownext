@@ -13,11 +13,13 @@ const listado = () => {
     const [cajas, guardarCajas] = useState(null)
     const [archivos, guardarArchivos] = useState(null)
     const [row, guardarRow] = useState(null)
+    const [user, guardarUsuario] = useState(null)
 
 
-    const traerCajas = async () => {
 
-        await axios.get(`${ip}api/archivos/legajovirtualcajasucursales/listadocajas`)
+    const traerCajas = async (id) => {
+
+        await axios.get(`${ip}api/archivos/legajovirtualcajasucursales/listadocajas/${id}`)
             .then(res => {
 
                 guardarCajas(res.data)
@@ -66,7 +68,16 @@ const listado = () => {
         if (!token) {
             Router.push("/redirect");
         } else {
-            traerCajas()
+
+            let usuario = jsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+                traerCajas(userData.usuario)
+            }
+
+            
         }
     }, []);
 
