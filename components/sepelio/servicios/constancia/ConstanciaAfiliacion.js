@@ -6,7 +6,7 @@ const ConstanciaAfiliacion = ({ consta, servicio, cancelarReg }) => {
 
     if (!consta) return <Spinner />
     return (
-        <div className="container mt-4 border border-dark p-4 alert alert-primary">
+        <div className="container mt-4 border border-dark p-4 list">
 
             <div className="mt-4 list border border-dark p-4">
                 <div className="row  p-4">

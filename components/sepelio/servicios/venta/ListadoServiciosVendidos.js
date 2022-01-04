@@ -12,7 +12,7 @@ const ListadoServiciosVendidos = ({ listado, traerDetalles, detalleServicio, det
 
 
     return (
-        <div className="mt-4 container alert alert-primary">
+        <div className="mt-4 container list">
             <div className="list border border-dark ">
                 <ReactTable
                     data={listado}

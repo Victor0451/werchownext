@@ -11,6 +11,7 @@ import Spinner from "../../../components/layout/Spinner";
 import { ip } from "../../../config/config";
 import ListadoCajaGastosCargados from "../../../components/sepelio/caja/ListadoCajaGastosCargados";
 import { confirmAlert } from "react-confirm-alert";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const gastoscaja = () => {
   let fechaRef = React.createRef();
@@ -169,6 +170,10 @@ const gastoscaja = () => {
           updateFechaCierre();
 
           toastr.success("Se cerro la caja correctamente", "Atencion");
+
+          let accion = `Se cerro la caja ${res.data.idcaja}`
+
+          registrarHistoria(accion, user)
         }
 
         setTimeout(() => {
@@ -187,6 +192,10 @@ const gastoscaja = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("Los gastos se cargaron correctamente", "ATENCION");
+
+          let accion = `Se registro gastos en la caja ${gastos.idcaja}`
+
+          registrarHistoria(accion, user)
 
           updateTotales();
           updateUltimaCarga();

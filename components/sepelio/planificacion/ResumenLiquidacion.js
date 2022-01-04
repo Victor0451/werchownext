@@ -18,7 +18,7 @@ const ResumenLiquidacion = ({ resumenG, resumenT, mes, ano }) => {
 
     return (
 
-        <div className="container mt-4 border border-dark alert alert-primary p-4" >
+        <div className="container mt-4 border border-dark list p-4" >
 
             <h3>
                 <strong>

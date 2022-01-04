@@ -19,8 +19,8 @@ const FormEditarGastosServ = ({
 
 
   return (
-    <div className="container mt-4">
-      <div className="alert alert-primary border border-dark  p-4">
+    <div className="container list mt-4">
+      <div className=" border border-dark  p-4">
         <h2 className="mb-4">
           <strong>
             <u>Gastos del Servicio N° {row.idservicio}</u>:{" "}

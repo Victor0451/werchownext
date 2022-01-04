@@ -10,7 +10,7 @@ const CarteraSinTelefono = ({
     buscarCarteraSinTelM
 }) => {
     return (
-        <div className=" border border-dark alert alert-primary">
+        <div className=" border border-dark ">
             <h3 className=" mb-4">
                 <strong>
                     <u>Cartera sin telefono</u>

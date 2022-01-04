@@ -74,7 +74,7 @@ const calendario = () => {
 
     return (
         <Layout>
-            <div className="container mt-4 border border-dark p-4 alert alert-dark">
+            <div className="container mt-4 border border-dark p-4 list">
                 <div className="row">
                     <div className="col-md-8">
                         <h3 className="">
@@ -91,7 +91,7 @@ const calendario = () => {
                 </div>
 
 
-                <div className="mt-4 border border-dark list">
+                <div className="mt-4 border border-dark">
 
                     <Calendar
                         selectable={true}

@@ -6,7 +6,7 @@ import { meses, anos } from "../../../array/array";
 
 const FromLiquidacion = ({ handleChange, buscarTareasALiquidar }) => {
     return (
-        <div className="container mt-4 border border-dark alert alert-primary p-4">
+        <div className="container mt-4 border border-dark list p-4">
             <h2 className=" mb-4 ">
                 <strong>
                     <u>Seleccione El Periodo A Liquidar</u>

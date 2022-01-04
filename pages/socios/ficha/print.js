@@ -5,10 +5,8 @@ import jsCookie from "js-cookie";
 import Router from "next/router";
 import toastr from "toastr";
 import Print from "../../../components/socios/ficha/Print";
-import Legajo from "../../../components/socios/ficha/Legajo";
-import AdhPrint from "../../../components/socios/ficha/AdhPrint";
-import PagosPrint from "../../../components/socios/ficha/PagosPrint";
 import { ip } from '../../../config/config'
+import ModalLegajoPrint from "../../../components/socios/ficha/ModalLegajoPrint";
 
 const print = () => {
   let contratoRef = React.createRef();
@@ -133,14 +131,16 @@ const print = () => {
     guardarPagos(null);
     guardarAdhs(null);
 
+
+
+
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
 
       await axios
-        .get(
-          `${ip}api/werchow/maestro/titular/${contrato}`
-        )
+        .get(`${ip}api/werchow/maestro/titular/${contrato}`)
         .then((res) => {
+
           let ficha = res.data[0][0];
           guardarFicha(ficha);
 
@@ -435,95 +435,14 @@ const print = () => {
         Seleccionar={Seleccionar}
       />
 
+      <ModalLegajoPrint
+        empresa={empresa}
+        ficha={ficha}
+        pagos={pagos}
+        adhs={adhs}
+        imprimir={imprimir}
+      />
 
-      <div
-        className="modal fade"
-        id="legajo"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl p-2">
-          <div className="modal-content border border-dark ">
-            <div className="modal-header alert alert-primary">
-              <h2 className="modal-title" id="exampleModalLabel">
-                <strong>
-                  <u>Legajo Del Socio</u>
-                </strong>
-              </h2>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body ">
-
-              {ficha ? (
-                <>
-                  {ficha.GRUPO === 1001 ||
-                    ficha.GRUPO === 1005 ||
-                    ficha.GRUPO === 1006 ||
-                    ficha.GRUPO === 3444 ||
-                    ficha.GRUPO === 3666 ||
-                    ficha.GRUPO === 3777 ||
-                    ficha.GRUPO === 3888 ||
-                    ficha.GRUPO === 3999 ||
-                    ficha.GRUPO === 4004 ||
-                    ficha.GRUPO === 7777 ||
-                    ficha.GRUPO === 8500 ? (
-                    <div className="alert alert-warning text-center text-uppercase border border-dark mb-4">
-                      ESTA FICHA PERTENECE A UN GRUPO MOROSO
-                    </div>
-                  ) : null}
-                </>
-              ) : null}
-
-
-              <div id="solicitud" className="mt-4 container ">
-                <div>
-                  <div id="leg">
-                    <Legajo ficha={ficha} empresa={empresa} />
-
-                    <hr className="mt-4 mb-4 border border-dark" />
-                    <AdhPrint adhs={adhs} />
-                  </div>
-                  <button
-                    className="btn btn-info"
-                    onClick={() => imprimir("leg")}
-                  >
-                    Imprimir Legajo
-                  </button>
-
-                  <hr className="mt-4 mb-4 border border-dark" />
-                  <div id="pag">
-                    <PagosPrint pagos={pagos} ficha={ficha} empresa={empresa} />
-                  </div>
-                  <button
-                    className="btn btn-info"
-                    onClick={() => imprimir("pag")}
-                  >
-                    Imprimir Pagos
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </Layout>
   );

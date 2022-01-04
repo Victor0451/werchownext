@@ -16,7 +16,7 @@ const Simulador = ({
   mesf,
 }) => {
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <h2 className="mb-4">
         <strong>
           <u>Simulacion de Subsidio para contencion familiar</u>
@@ -75,7 +75,7 @@ const Simulador = ({
       >
         <div className="modal-dialog modal-xl p-2">
           <div className="modal-content border border-dark ">
-            <div className="modal-header alert alert-primary">
+            <div className="modal-header ">
               <h2 className="mt-4 mb-4">
                 <strong>
                   <u>Informacion Del Sub. Cont. Familiar Solicitado</u>
@@ -93,7 +93,7 @@ const Simulador = ({
             <div className="modal-body ">
               {flag === true ? (
                 <div className=" mb-4 p-4">
-                  <div className="row d-flex alert alert-primary border border-dark p-4">
+                  <div className="row d-flex  border border-dark p-4">
                     <div className="form-group col-md-3">
                       <label>
                         <strong>

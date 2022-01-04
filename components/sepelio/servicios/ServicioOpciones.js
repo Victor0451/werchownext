@@ -27,7 +27,7 @@ const ServicioOpciones = ({ push, row }) => {
           <div className="modal-body">
             {row ? (
               <div className="p-4">
-                <div className=" border border-dark alert alert-primary p-4 row">
+                <div className=" border border-dark  p-4 row">
                   <div className="col-md-3">
                     <button
                       className="btn btn-block btn-primary mr-1"

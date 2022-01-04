@@ -35,8 +35,8 @@ const FormSubirArchivo = ({ id, traerArchivos }) => {
   };
 
   return (
-    <div className="container border border-dark alert alerft-primary mt-4">
-      <form className=" mt-4 alert alert-primary border border-dark p-4">
+    <div className="container border border-dark  mt-4">
+      <form className=" mt-4 p-4">
         {error && (
           <div className="mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
             {error}
@@ -45,7 +45,7 @@ const FormSubirArchivo = ({ id, traerArchivos }) => {
 
         <h2>
           <strong>
-            <u>Subir Archivos</u>
+            Subir Archivos
           </strong>
         </h2>
 

@@ -15,7 +15,7 @@ const ListadoCajaSepelio = ({ turnos, datatoggle, datatarget, getId }) => {
             </div>
         );
     return (
-        <div className="container mt-4 border border-dark alert alert-primary">
+        <div className="container mt-4 border border-dark list">
 
             <div className="row">
                 <div className="col-md-6">

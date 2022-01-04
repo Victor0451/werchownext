@@ -12,7 +12,7 @@ const PagosPrint = ({ pagos, ficha, empresa }) => {
     );
 
   return (
-    <div className="mt-4 container alert alert-primary p-4 border border-dark">
+    <div className="mt-4 container list p-4 border border-dark">
       <div className="row d-felx justify-content-between p-2">
         <h2 className="  mb-4 text-center">
           <strong>

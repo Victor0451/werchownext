@@ -8,7 +8,7 @@ const EmitirServicio = ({ pagos, adhs, ficha, socio, selectSocio }) => {
   if (!ficha) return <Spinner />;
 
   return (
-    <div className="container border border-dark alert alert-primary p-4 mt-4">
+    <div className="container border border-dark list p-4 mt-4">
       <div className="row">
         <div className="col-md-8">
           <h3>

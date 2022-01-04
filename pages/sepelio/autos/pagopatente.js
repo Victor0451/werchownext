@@ -8,6 +8,7 @@ import toastr from 'toastr'
 import { ip } from '../../../config/config'
 import { confirmAlert } from 'react-confirm-alert'
 import FormPagosPatente from "../../../components/sepelio/autos/FormPagosPatente";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const pagopatente = () => {
 
@@ -39,10 +40,7 @@ const pagopatente = () => {
 
             const idauto = router.query.idauto;
 
-
             traerAuto(idauto)
-
-
 
         }
     }, []);
@@ -104,7 +102,11 @@ const pagopatente = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Se registro el pago correctamente", "ATENCION")
-                        console.log(res.data)
+
+                        let accion = `Se registro el pago de patente del auto modelo: ${auto.auto} - patente: ${auto.patente}`
+
+                        registrarHistoria(accion, user)
+
                         setTimeout(() => {
                             tarerPagos(pago.idauto)
                         }, 500);
@@ -118,7 +120,7 @@ const pagopatente = () => {
 
     }
 
-    const eliminarPago = async (id) => {
+    const eliminarPago = async (row) => {
         await confirmAlert({
             title: 'ATENCION',
             message: '¿Seguro quieres eliminar el pago?',
@@ -126,11 +128,15 @@ const pagopatente = () => {
                 {
                     label: 'Si',
                     onClick: () => {
-                        axios.delete(`${ip}api/sepelio/autos/eliminarpagopatente/${id}`)
+                        axios.delete(`${ip}api/sepelio/autos/eliminarpagopatente/${row.idpago}`)
                             .then(res => {
                                 if (res.status === 200) {
                                     toastr.success("Se elimino el pago con exito", "ATENCION")
                                 }
+
+                                let accion = `Se elimino el pago de patente del auto modelo: ${auto.auto} - patente: ${auto.patente}`
+
+                                registrarHistoria(accion, user)
 
                                 setTimeout(() => {
                                     tarerPagos(auto.idauto)

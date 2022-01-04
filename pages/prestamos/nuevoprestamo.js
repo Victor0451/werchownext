@@ -7,11 +7,9 @@ import axios from "axios";
 import toastr from "toastr";
 import moment from "moment-timezone";
 import { ip } from '../../config/config'
-
-// Validaciones
 import useValidacion from "../../hooks/useValidacion";
 import validarAltaPrestamo from "../../validacion/validarAltaPrestamo";
-import { cuotasprest, renovaprest } from "../../array/array";
+import { registrarHistoria } from '../../utils/funciones'
 
 const STATE_INICIAL = {
   contrato: "",
@@ -88,7 +86,7 @@ const nuevoprestamo = () => {
       ptm_afi: `${apellidoRef.current.value}, ${nombreRef.current.value}`,
     };
 
-    
+
     if (prestamo.renova === null) {
       const renoverror = "Debes indicar si es renovacion o no";
       guardarRenoverror(renoverror);
@@ -120,7 +118,13 @@ const nuevoprestamo = () => {
           prestamo
         )
         .then((res) => {
-          console.log(res.status);
+          if (res.status === 200) {
+            toastr.success("El prestamo se registro correctamente", "ATENCION")
+
+            let accion = `Se confecciono un prestamo al afiliado ${prestamo.ficha} - ${prestamo.ptm_afi}`
+
+            registrarHistoria(accion, prestamo.operador)
+          }
         })
         .catch((error) => {
           console.log(error);

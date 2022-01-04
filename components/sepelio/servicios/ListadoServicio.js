@@ -16,30 +16,44 @@ const ListadoServicios = ({
   if (!listado) return <Spinner />;
 
   return (
-    <div className="container border border-dark alert alert-primary mt-4 p-4">
-      <h2>
-        <strong>
-          <u>Listado De Servicios:</u> desde:{" "}
-          {moment(desde).format("DD/MM/YYYY")} hasta:{" "}
-          {moment(hasta).format("DD/MM/YYYY")}
-        </strong>
-      </h2>
-
-      <div className="row mt-4 mb-4 border border-dark p-4">
-        <div className="col-md-6">
-          <h4 className="">
+    <div className="container border border-dark list mt-4 p-4">
+      {
+        !desde ? (
+          <h2>
             <strong>
-              <u>Total de servicios:</u> {listado.length}
+              <u>Listado De Servicios</u>
             </strong>
-          </h4>
-        </div>
-        <div className="col-md-6">
-          <a
-            href="/sepelio/servicios/listado"
-            className="btn btn-sm btn-block btn-danger"
-          >
-            Seleccionar otro periodo
-          </a>
+          </h2>
+        ) :
+          (<h2>
+            <strong>
+              <u>Listado De Servicios:</u> desde:{" "}
+              {moment(desde).format("DD/MM/YYYY")} hasta:{" "}
+              {moment(hasta).format("DD/MM/YYYY")}
+            </strong>
+          </h2>)
+      }
+
+
+      <div className="mt-4 mb-4 border border-dark p-4">
+        <div className="row" >
+
+
+          <div className="col-md-6">
+            <h4 className="">
+              <strong>
+                <u>Total de servicios:</u> {listado.length}
+              </strong>
+            </h4>
+          </div>
+          <div className="col-md-6 d-flex justify-content-end">
+            <a
+              href="/sepelio/servicios/listado"
+              className="btn btn-sm  btn-info"
+            >
+              Seleccionar Periodo
+            </a>
+          </div>
         </div>
       </div>
 

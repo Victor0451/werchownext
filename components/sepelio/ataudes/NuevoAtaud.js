@@ -18,7 +18,7 @@ const NuevoAtaud = ({
   fabri,
 }) => {
   return (
-    <div className="container mt-4 border border-dark p-4 alert alert-primary">
+    <div className="container mt-4 border border-dark p-4 list">
       <h2 className="mb-4">
         <strong>
           <u>Agregar Nuevo ataud</u>

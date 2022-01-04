@@ -7,7 +7,7 @@ import SucursalSelect from "react-select";
 
 const ResumenSucursales = ({ buscarNumeros, buscarNumerosMutual, handleChange }) => {
   return (
-    <div className="container mt-4 alert alert-primary border border-dark p-4">
+    <div className="container mt-4 list border border-dark p-4">
       <h2 className=" mb-4 ">
         <strong>
           <u>Seleccione El Periodo y Sucursal </u>

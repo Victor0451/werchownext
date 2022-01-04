@@ -17,7 +17,6 @@ const listadohistorico = () => {
       .then((res) => {
         const listado = res.data;
         guardarListado(listado);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

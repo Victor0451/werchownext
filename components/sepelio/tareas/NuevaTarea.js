@@ -2,7 +2,7 @@ import React from 'react'
 
 const NuevaTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, nuevaTarea, operadorsep, opRef, prioridadRef, error }) => {
     return (
-        <div className="container mt-4 border border-dark alert alert-primary p-4">
+        <div className="container mt-4 border border-dark list p-4">
 
 
             <div className="row">

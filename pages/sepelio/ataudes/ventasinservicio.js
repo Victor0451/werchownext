@@ -7,6 +7,7 @@ import moment from "moment";
 import toastr from "toastr";
 import FormVentaSinServicio from "../../../components/sepelio/ataudes/FormVentaSinServicio";
 import { ip } from "../../../config/config";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const ventasinservicio = () => {
   let contratoRef = React.createRef();
@@ -243,6 +244,10 @@ const ventasinservicio = () => {
                       );
 
                       updateStockAtaud(ataud.idataud, ataud.stock);
+
+                      let accion = `Se realizo la venta de un ataud sin otorgar un servicio. Ataud: ${venta.idataud}, Fallecido: ${venta.apellido_fall}, ${venta.nombre_fall}, DNI: ${venta.dni_fall}.`
+
+                      registrarHistoria(accion, venta.operador)
 
                       setTimeout(() => {
                         Router.push(

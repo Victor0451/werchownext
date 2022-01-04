@@ -7,6 +7,8 @@ import moment from "moment";
 import toastr from 'toastr'
 import { ip } from '../../../config/config'
 import FormEditarAuto from '../../../components/sepelio/autos/FormEditarAuto';
+import { registrarHistoria } from '../../../utils/funciones'
+
 
 const editar = () => {
 
@@ -133,6 +135,10 @@ const editar = () => {
                         toastr.success("La edicion se realizo con exito", "ATENCION")
 
                         regHistorial()
+
+                        let accion = `Se edito el registro del auto modelo: ${car.auto} - patente:${patente.patente}`
+
+                        registrarHistoria(accion, user)
                     }
                 })
                 .catch(error => {

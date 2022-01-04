@@ -8,8 +8,8 @@ const ListadoMovimientos = ({ listado }) => {
   if (!listado) return <Spinner />
 
   return (
-    <div className="container border border-dark alert alert-primary p-4 mt-4">
-      <div className="list">
+    <div className="container border border-dark list p-4 mt-4">
+      <div className="">
         <ReactTable
           data={listado}
           filterable

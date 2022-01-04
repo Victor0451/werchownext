@@ -3,13 +3,13 @@ import Stock from "../../ataudes/Stock";
 
 const GestionarAtaud = ({ idataudRef, selcasofrm, ataud, registrarAtaud }) => {
   return (
-    <div className="container border border-dark alert alert-primary mt-4 p-4">
+    <div className="container border border-dark list mt-4 p-4">
       <h2>
         <strong>
           <u>Gestionar ataud asignado</u>
         </strong>
       </h2>
-      <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+      <div className="mt-4 mb-4 border border-dark  p-4">
         {ataud ? (
           <h4 className="mt-2">
             <strong>

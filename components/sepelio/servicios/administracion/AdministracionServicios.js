@@ -10,7 +10,7 @@ const AdministracionServicios = ({ listado, actualizar }) => {
     );
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <div className="row">
         <div className="col-md-6">
           <h3>
@@ -19,9 +19,9 @@ const AdministracionServicios = ({ listado, actualizar }) => {
             </strong>
           </h3>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 d-flex justify-content-end">
           <button
-            className="btn btn-block btn-sm btn-info"
+            className="btn  btn-sm btn-info"
             onClick={actualizar}
           >
             Actualizar Listado

@@ -16,12 +16,12 @@ const NuevaNoticia = ({
   let userData = JSON.parse(usuario);
 
   return (
-    <div className="container mt-4 border border-dark p-4 alert alert-primary">
+    <div className="container mt-4 border border-dark p-4 list">
       <div className="">
-        <h2 className="mt-4">
+        <h2 className="">
           <u>Ingresar Noticia</u>
         </h2>
-        <form className="" onSubmit={handleSubmit}>
+        <form className="mt-4" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-4">
               <label>Fecha</label>

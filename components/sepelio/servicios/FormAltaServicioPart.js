@@ -108,6 +108,10 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             toastr.success("Servicio cargado con exito", "ATENCION");
             updateStockAtaud(servicio.idataud, stock);
 
+            let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni_extinto}`
+
+            registrarHistoria(accion, usuario)
+
             Router.push({
               pathname: "/sepelio/servicios/impresion",
               query: { id: servicio.dni },
@@ -170,7 +174,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   let tiposervicio = `Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
   return (
-    <div className="mt-4 alert alert-primary border border-dark p-4">
+    <div className="mt-4 list border border-dark p-4">
       <form className=" p-4" onSubmit={handleSubmit}>
         <div className="d-flex justify-content-between">
           <h1 className=" mb-4">
@@ -726,7 +730,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
         </div>
         <hr />
 
-        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+        <div className="mt-4 mb-4 border border-dark  p-4">
           <h2 className="mt-2">
             <strong>
               <u>Ataud</u>

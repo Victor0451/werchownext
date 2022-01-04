@@ -4,7 +4,7 @@ import { ip } from '../../../config/config';
 import FormSubirArchivo from './FormSubirArchivo';
 import axios from 'axios';
 
-const LegajoVirtual = ({ auto, archivos, traerAchivos }) => {
+const LegajoVirtual = ({ auto, archivos, traerAchivos, user }) => {
     if (!auto) {
         return <Spinner />;
     } else if (!archivos) {
@@ -38,7 +38,7 @@ const LegajoVirtual = ({ auto, archivos, traerAchivos }) => {
 
 
     return (
-        <div className="container alert alert-primary border border-dark p-4 mt-4">
+        <div className="container list border border-dark p-4 mt-4">
             <div className=" border border-dark p-4">
                 <div className="row d-felx justify-content-between p-2">
                     <h3 className="  mb-4 text-center">
@@ -57,7 +57,7 @@ const LegajoVirtual = ({ auto, archivos, traerAchivos }) => {
                     </div>
                 </div>
 
-                <div className="mt-4 alert alert-primary border border-dark p-4">
+                <div className="mt-4  border border-dark p-4">
                     <div className="d-flex justify-content-between">
                         <h2 className="  col-8">
                             <strong>
@@ -137,7 +137,7 @@ const LegajoVirtual = ({ auto, archivos, traerAchivos }) => {
                 </div>
             </div>
 
-            <FormSubirArchivo auto={auto} traerAchivos={traerAchivos} />
+            <FormSubirArchivo auto={auto} traerAchivos={traerAchivos}   user={user} />
 
             <div className=" col-md-12 mt-4 mb-4 border border-dark p-4">
                 <h2 className="mt-4 mb-4 col-8">

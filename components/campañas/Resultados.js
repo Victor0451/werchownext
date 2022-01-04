@@ -26,7 +26,7 @@ const Resultados = ({
 
   return (
     <div className="container ">
-      <div className="mt-4 border border-dark alert alert-primary p-4">
+      <div className="mt-4 border border-dark list p-4">
         <h2 className="mt-4 mb-4">
           <strong>
             <u>Estadisticas de campañas Werchow</u>

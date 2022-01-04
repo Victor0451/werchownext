@@ -21,7 +21,7 @@ const AltaDatos = ({
   if (!user) return <Spinner />;
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <h2>
         <strong>
           <u>Carga de datos recolectados en campo</u>

@@ -19,7 +19,7 @@ const FormPagosPatente = ({
     if (!row) return <Spinner />
 
     return (
-        <div className="container mt-4 mb-4 border border-dark alert alert-primary">
+        <div className="container mt-4 mb-4 border border-dark list">
 
             <div className="row">
 
@@ -100,7 +100,7 @@ const FormPagosPatente = ({
                             </button>
                         </div>
                         <div className="modal-body">
-                            <div className="border border-dark p-4 alert alert-primary" >
+                            <div className="border border-dark p-4 " >
 
                                 {errores ? (
                                     <div className="mt-4 mb-4 alert alert-danger border border-dark text-center text-uppercase">

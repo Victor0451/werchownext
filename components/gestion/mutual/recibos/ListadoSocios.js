@@ -29,7 +29,7 @@ const ListadoSocios = ({ listado, Seleccionar }) => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <div className="mt-4 container border border-dark alert alert-primary p-4">
+                        <div className="mt-4 container border border-dark list p-4">
                             <h2>
                                 <strong>
                                     <u>Listado de Socios</u>

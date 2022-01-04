@@ -15,7 +15,7 @@ const Pagos = ({ pagos }) => {
   }
   
   return (
-    <div className="container border border-dark alert alert-primary ">
+    <div className="container border border-dark list ">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>Pagos Realizados</u>

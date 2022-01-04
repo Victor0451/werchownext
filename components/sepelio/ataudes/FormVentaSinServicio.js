@@ -44,7 +44,7 @@ const FormVentaSinServicio = ({
   };
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <div className="row">
         <div className="col-md-8">
           <h2>
@@ -403,7 +403,7 @@ const FormVentaSinServicio = ({
               </button>
             </div>
             <div className="modal-body">
-              <div className="border border-dark alert alert-primary p-4">
+              <div className="border border-dark  p-4">
                 {socio ? (
                   <div className="row">
                     <div className="col-md-4 mt-4 ">
@@ -555,7 +555,7 @@ const FormVentaSinServicio = ({
               </button>
             </div>
             <div className="modal-body">
-              <div className="border border-dark alert alert-primary p-4">
+              <div className="border border-dark  p-4">
                 <div className="row">
                   <div className="col-md-4 mt-4">
                     <label>

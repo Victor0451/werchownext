@@ -27,7 +27,7 @@ const ListadoSolicitudes = ({ listsolicitudes }) => {
   };
 
   return (
-    <div className="container alert alert-primary border border-dark p-2 mt-4">
+    <div className="container list border border-dark p-2 mt-4">
       <h2 className="mt-4 mb-4 ">
         <strong>
           <u>Listado De Solicitudes</u> - Total: {listsolicitudes.length}

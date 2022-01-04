@@ -16,13 +16,13 @@ const SocioFicha = ({
   Seleccionar
 }) => {
   return (
-    <div className="container border border-dark alert alert-primary mt-4">
+    <div className="container border border-dark list mt-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Legajo Virtual</u>
         </strong>
       </h1>
-      <div className="mt-4 border border-dark p-4 alert alert-primary">
+      <div className="mt-4 border border-dark p-4 ">
         <form>
           <h2 className=" mb-4">
             <strong>

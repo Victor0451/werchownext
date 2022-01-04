@@ -14,7 +14,7 @@ const PlanificacionGuardias = ({
 }) => {
   let mes = moment().locale("es-es").format("MMMM");
   return (
-    <div className="container border border-dark alert alert-primary p-4 mt-4">
+    <div className="container border border-dark list p-4 mt-4">
       <h2 className="mb-4">
         <strong>
           <u>Planificacion de Guardias de Sepelio</u>

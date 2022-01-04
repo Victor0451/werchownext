@@ -21,7 +21,7 @@ const ListadoAutos = ({
 
 
     return (
-        <div className="mt-4 container border border-dark p-4 alert alert-primary">
+        <div className="mt-4 container border border-dark p-4 list">
 
             <div className="row">
                 <div className="col-md-8">
@@ -29,7 +29,7 @@ const ListadoAutos = ({
                         <strong>
                             <u>
                                 Listado de Pagos Registrados
-                    </u>
+                            </u>
                         </strong>
                     </h3>
                 </div>
@@ -47,7 +47,7 @@ const ListadoAutos = ({
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
                     columns={[
                         {
-                            Header: "Listado De Autos",
+                            Header: "Pagos",
                             columns: [
                                 {
                                     Header: "#",
@@ -111,7 +111,7 @@ const ListadoAutos = ({
                                                 title="Opciones"
                                                 data-toggle='modal'
                                                 data-target='#opciones'
-                                                onClick={() => eliminarPago(row.original.idpago)}
+                                                onClick={() => eliminarPago(row.original)}
                                             >
                                                 Eliminar
                                             </button>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
-import {ip} from '../../../config/config'
+import { ip } from '../../../config/config'
+import { registrarHistoria } from '../../../utils/funciones'
 
-const FormSubirArchivo = ({ contrato }) => {
+const FormSubirArchivo = ({ contrato, user }) => {
+
   const [archivos, guardarArchivos] = useState(null);
   const [error, guardarError] = useState(null);
 
@@ -33,8 +35,15 @@ const FormSubirArchivo = ({ contrato }) => {
           upload
         )
         .then((res) => {
-          console.log(res);
-          toastr.success("Archivo Subido Con Exito", "Atencion");
+          if (res.status === 200) {
+            toastr.success("Archivo Subido Con Exito", "Atencion");
+
+            let accion = `Se subio un archivo al legajo virtual del prestamo perteneciente al socio ${contrato}`
+
+            registrarHistoria(accion, user.usuario)
+
+          }
+
         })
         .catch((error) => {
           console.log(error);
@@ -43,20 +52,20 @@ const FormSubirArchivo = ({ contrato }) => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>
+    <div className="container border border-dark p-4 mt-4">
+      <h4>
         <strong>
           <u>Crear Legajo Virtual Del Sub. Cont. Familiar</u>
         </strong>
-      </h1>
+      </h4>
 
-      <form className=" mt-4 alert alert-primary border border-dark p-4">
+      <form className=" mt-4  border border-dark p-4">
         <div className="d-flex justify-content-between mb-4">
-          <h2>
+          <h4>
             <strong>
               <u>Subir Archivos</u>
             </strong>
-          </h2>
+          </h4>
           <a
             href="/prestamos/imprimircaratula"
             className="btn btn-danger text-white"

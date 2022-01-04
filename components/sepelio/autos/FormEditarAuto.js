@@ -18,7 +18,7 @@ const FormEditarAuto = ({
     if (!auto) return <Spinner />
 
     return (
-        <div className="container mt-4 border border-dark alert alert-primary ">
+        <div className="container mt-4 border border-dark list ">
 
             <h2>
                 <strong>

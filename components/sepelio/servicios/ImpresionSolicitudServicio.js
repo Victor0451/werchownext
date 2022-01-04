@@ -6,7 +6,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
   if (!servicio || !ataud) return <Spinner />;
 
   return (
-    <div className="container  ">
+    <div className="container  list">
       <div className="  p-1">
         <div className="row d-felx justify-content-between p-2">
           <h1 className="   text-center">
@@ -24,7 +24,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
           o crematorio.-
         </div>
 
-        <div className="mt-4 alert alert-primary border border-dark p-4">
+        <div className="mt-4  border border-dark p-4">
           <div className="d-flex justify-content-between">
             <h2 className="  col-8">
               <strong>
@@ -211,7 +211,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
 
         <hr />
 
-        <div className="alert alert-primary border border-dark p-4">
+        <div className=" border border-dark p-4">
           <h2 className="">
             <strong>
               <u>Detalles del Servicio</u>
@@ -394,7 +394,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
           </div>
         </div>
         <hr />
-        <div className="alert alert-primary border border-dark p-4">
+        <div className=" border border-dark p-4">
           <h2 className=" ">
             <strong>
               <u>Detalles del ataud</u>
@@ -455,7 +455,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
           </div>
         </div>
         <hr />
-        <div className="alert alert-primary border border-dark">
+        <div className=" border border-dark">
           <div className="row d-flex justify-content-between ">
             <div className="col-4 text-center ">
               <br />

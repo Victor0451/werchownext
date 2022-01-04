@@ -11,7 +11,7 @@ const AdhPrint = ({ adhs }) => {
     );
 
   return (
-    <div className="mt-4 container alert alert-primary p-4 border border-dark">
+    <div className="mt-4 container list p-4 border border-dark">
       <h2 className="mt-2 mb-2">
         <strong>
           <u>Adherentes</u>

@@ -7,6 +7,7 @@ import NuevoAtaud from "../../../components/sepelio/ataudes/NuevoAtaud";
 import moment from "moment";
 import toastr from "toastr";
 import { ip } from "../../../config/config";
+import { registrarHistoria } from '../../../utils/funciones'
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -77,6 +78,11 @@ const nuevo = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("Ataud Registrado", "ATENCION");
+
+          let accion = `Se registro un nuevo ataud ${ataud.nombre}, tipo ${ataud.tipo}, uso ${ataud.uso}, stock ${ataud.stock}`
+
+          registrarHistoria(accion, userData.usuario)
+
         }
       })
       .catch((error) => {

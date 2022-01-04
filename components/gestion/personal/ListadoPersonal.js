@@ -16,14 +16,14 @@ const ListadoPersonal = ({
   if (!personal) return <Spinner />;
 
   return (
-    <div className="mt-4 container border border-dark alert alert-primary p-4">
+    <div className="mt-4 container border border-dark list p-4">
       <h2>
         <strong>
           <u>Personal Activo</u>
         </strong>
       </h2>
 
-      <div className="border border-dark list">
+      <div className="border border-dark mt-4">
         <ReactTable
           data={personal}
           filterable

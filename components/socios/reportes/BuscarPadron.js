@@ -17,7 +17,7 @@ const BuscarPadron = ({
   buscarCarteraSinTelM
 }) => {
   return (
-    <div className="container">
+    <div className="container list">
 
       <CarteraMorosa
         errores={errores}

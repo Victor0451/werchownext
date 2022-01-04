@@ -81,8 +81,8 @@ const administracion = () => {
     <Layout>
       <AdministracionServicios listado={servicio} actualizar={traerServicio} />
 
-      <div className="container alert alert-primary border border-dark p-4">
-        <h4 className="mt-4 mb-4">
+      <div className="mt-4 container list border border-dark p-4">
+        <h4 className="mb-4">
           <strong>
             <u>Opciones</u>
           </strong>

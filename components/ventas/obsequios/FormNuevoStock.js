@@ -14,7 +14,7 @@ const FormNuevoStock = ({
 
 }) => {
     return (
-        <div className="mt-4 container border border-dark alert alert-primary">
+        <div className="mt-4 container border border-dark list">
 
             <div className="row">
                 <div className="col-md-6">

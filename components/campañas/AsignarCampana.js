@@ -65,8 +65,8 @@ const AsignarCampana = ({
   };
 
   return (
-    <div className="container border border-dark p-2 mt-4">
-      <div className="mt-4 mb-4 border border-dark alert alert-primary text-dark text-center">
+    <div className="container border border-dark list p-2 mt-4">
+      <div className="mt-4 mb-4 border border-dark  text-dark text-center">
         <strong>
           <h4>
             <u>
@@ -85,7 +85,7 @@ const AsignarCampana = ({
       </div>
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
@@ -209,7 +209,7 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
@@ -335,7 +335,7 @@ const AsignarCampana = ({
       {/* <hr className="mt-4 mb-4 border border-dark" /> */}
 
       {/* <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
@@ -445,7 +445,7 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
@@ -577,7 +577,7 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
@@ -701,7 +701,7 @@ const AsignarCampana = ({
       <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between alert alert-primary border border-dark p-4">
+        <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>

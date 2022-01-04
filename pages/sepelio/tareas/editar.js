@@ -8,12 +8,15 @@ import Router from "next/router";
 import ListadoTareas from "../../../components/sepelio/tareas/ListadoTareas";
 import { confirmAlert } from 'react-confirm-alert'
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 
 const editar = () => {
 
     const [operadorsep, guardarOperadorSep] = useState(null)
     const [error, guardarError] = useState(null)
+    const [user, guardarUsuario] = useState(null)
+
 
     let inicioRef = React.createRef()
     let finRef = React.createRef()
@@ -33,6 +36,14 @@ const editar = () => {
         if (!token) {
             Router.push("/redirect");
         } else {
+
+            let usuario = JsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
+
             traerEventos();
             traerOperador()
         }
@@ -96,6 +107,10 @@ const editar = () => {
                 if (res.status === 200) {
                     toastr.success("La tarea se edito con exito", "ATENCION")
 
+                    let accion = `Se edito la planificacion de tarea ID: ${task.idevents}`
+
+                    registrarHistoria(accion, user)
+
                     setTimeout(() => {
                         traerEventos()
                         guardarTask(null)
@@ -124,6 +139,11 @@ const editar = () => {
 
                                 if (res.status === 200)
                                     toastr.success("La tarea se elimino con exito", "Atencion")
+
+                                let accion = `Se elimino la planificacion de tarea ID: ${id}`
+
+                                registrarHistoria(accion, user)
+
                                 setTimeout(() => {
                                     traerEventos()
                                 }, 500);

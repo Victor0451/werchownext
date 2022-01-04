@@ -7,8 +7,9 @@ import Spinner from "../../layout/Spinner";
 import Stock from "../ataudes/Stock";
 
 import { ip } from "../../../config/config";
+import { registrarHistoria } from "../../../utils/funciones";
 
-const FormEditarServicio = ({ servicio }) => {
+const FormEditarServicio = ({ servicio, usuario }) => {
   if (!servicio) return <Spinner />;
 
   let contratoRef = React.createRef();
@@ -68,8 +69,12 @@ const FormEditarServicio = ({ servicio }) => {
       )
       .then((res) => {
         if ((res.status = 200)) {
-          console.log(res);
+
           toastr.success("Servicio editado con exito", "ATENCION");
+
+          let accion = `Se edito el servicio ID: ${servicio.idservicio}`
+
+          registrarHistoria(accion, usuario)
 
           Router.push({
             pathname: "/sepelio/servicios/impresion",
@@ -83,7 +88,7 @@ const FormEditarServicio = ({ servicio }) => {
   };
 
   return (
-    <div className="container mt-4 alert alert-primary border border-dark p-4">
+    <div className="container mt-4 list border border-dark p-4">
       <form className=" p-4" onSubmit={editarServicio}>
         <h1 className="mt-4 mb-4">
           <strong>

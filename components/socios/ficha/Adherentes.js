@@ -12,7 +12,7 @@ const Adherentes = ({ adhs }) => {
     );
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark list">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>Adherentes</u>

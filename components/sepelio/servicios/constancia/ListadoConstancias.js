@@ -11,7 +11,7 @@ const ListadoConstancias = ({ listado }) => {
     </div>
 
     return (
-        <div className="container border border-dark alert alert-primary p-4 mt-4">
+        <div className="container border border-dark list p-4 mt-4">
 
             <h4>
                 <strong>

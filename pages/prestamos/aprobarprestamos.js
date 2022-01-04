@@ -7,6 +7,7 @@ import axios from "axios";
 import { ip } from "../../config/config";
 import moment from "moment";
 import toastr from "toastr";
+import { registrarHistoria, registrarHistorialAprobacion } from '../../utils/funciones'
 
 const aprobarprestamos = () => {
   const [prestamospen, guardarPrestamosPen] = useState(null);
@@ -82,7 +83,13 @@ const aprobarprestamos = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("Se aprobo el prestamo con exito", "Atencion");
+
           registrarHistorialAprobacion(row);
+
+          let accion = `Se aprobo el prestamo ${row.original.idprestamo}, del socio ${row.original.ptm_ficha}`
+
+          registrarHistoria(accion, user.usuario)
+
           setTimeout(() => {
             Router.reload();
           }, 1500);
@@ -93,28 +100,7 @@ const aprobarprestamos = () => {
       });
   };
 
-  const registrarHistorialAprobacion = async (data) => {
-    const historial = {
-      operador: user.usuario,
-      idprestamo: data.original.ptm_id,
-      contrato: data.original.ptm_ficha,
-      afiliado: data.original.ptm_afi,
-      fecha: moment().format("YYYY-MM-DD HH:mm:ss"),
-      productor: data.original.ptm_op,
-    };
 
-    await axios
-      .post(`${ip}api/sgi/prestamos/reghistorial`, historial)
-      .then((res) => {
-        if (res.status === 200) {
-          toastr.info("Esta accion se registrara en el historial", "ATENCION");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toastr.error("Ocurrio un error al registrar el historial", "ATENCION");
-      });
-  };
 
   return (
     <Layout>

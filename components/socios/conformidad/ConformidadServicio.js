@@ -6,9 +6,9 @@ const ConformidadServicio = ({ socio, buscarTitular, buscarTitularM, errores, co
     if (!servicio) return <Spinner />
 
     return (
-        <div className="container mt-4 border border-dark alert alert-primary">
+        <div className="container mt-4 border border-dark list">
 
-            <form className="mt-4 border border-dark p-4 alert alert-primary">
+            <form className="mt-4 border border-dark p-4 ">
                 <h3 className=" mb-4">
                     <strong>
                         <u>Conformidad de no servicio, Extinto</u>: {servicio.apellido}, {servicio.nombre}
@@ -211,7 +211,7 @@ const ConformidadServicio = ({ socio, buscarTitular, buscarTitularM, errores, co
                     </div>
 
 
-                    <div className="alert alert-primary mt-4">
+                    <div className=" mt-4">
                         <div className="mt-4 p-4 border">
                             <h3 className="text-center mb-4 font-weight-bold">
                                 Opciones

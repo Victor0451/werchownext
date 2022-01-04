@@ -4,7 +4,7 @@ import matchSorter from "match-sorter";
 
 const MapeoCampañas = ({ casos, getTrProps, traerAccionesReg }) => {
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark list">
       <h2 className="mb-4">
         <strong>
           <u>Casos Asignados</u>: {casos.length}

@@ -31,7 +31,7 @@ const ListadoParcelas = ({ selcasoparcela }) => {
     );
 
   return (
-    <div className="container border border-dark alert alert-primary mt-4 p-4">
+    <div className="container border border-dark list mt-4 p-4">
       <div className="row mt-4 mb-4 border border-dark p-4">
         <div className="col-md-12">
           <h4 className="">

@@ -26,7 +26,7 @@ const ListadoPadron = ({
   };
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary ">
+    <div className="container list mt-4 border border-dark list ">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>
@@ -40,7 +40,7 @@ const ListadoPadron = ({
           venta de Adherentes
         </div>
 
-        <div className="border border-dark alert alert-primary p-4">
+        <div className="border border-dark p-4">
           <div className="d-flex justify-content-between border border-dark alert alert-info mt-4 mb-4 p-4">
             <div className="col-md-6">
               <strong>

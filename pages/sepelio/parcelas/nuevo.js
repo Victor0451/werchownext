@@ -11,6 +11,7 @@ import NuevaParcela from "../../../components/sepelio/parcelas/NuevaParcela";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaParcela from "../../../validacion/validarAltaParcela";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 
 const STATE_INICIAL = {
@@ -69,6 +70,10 @@ const nuevo = () => {
             .then((res) => {
                 if (res.status === 200) {
                     toastr.success("Parcela Registrada", "ATENCION")
+
+                    let accion = `Se registro una nueva parcela: ${nuparcela.parcela}, mza: ${nuparcela.mza}, lote: ${nuparcela.lote} en el cementerio: ${nuparcela.cementerio}`
+
+                    registrarHistoria(accion, userData.usuario)
 
                     setTimeout(() => {
                         Router.reload()

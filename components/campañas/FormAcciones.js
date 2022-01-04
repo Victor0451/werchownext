@@ -20,8 +20,8 @@ const FormAcciones = ({
   let fecha = moment().format("DD/MM/YYYY");
   let fecha1 = moment().format("DD/MM/YYYY");
   return (
-    <div className="container">
-      <div className="alert alert-primary border border-dark p-4">
+    <div className="container list">
+      <div className="border border-dark p-4">
         {caso.edad >= 65 ? (
           <div className="row">
             <div className="col-md-4">
@@ -213,7 +213,7 @@ const FormAcciones = ({
       </div>
 
       {!gestion ? null : (
-        <div className="alert alert-primary border border-dark">
+        <div className=" border border-dark">
           <h3>
             <u>Acciones Anterior</u>
           </h3>
@@ -246,7 +246,7 @@ const FormAcciones = ({
       <hr />
 
       <div>
-        <div className="alert alert-primary border border-dark">
+        <div className=" border border-dark p-4">
           <h3>
             <u>Acciones</u>
           </h3>
@@ -285,7 +285,7 @@ const FormAcciones = ({
         </div>
 
         {accion > 0 && accion < 4 ? (
-          <div className="alert alert-primary border border-dark">
+          <div className="mt-4 p-4 border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -312,7 +312,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion > 3 && accion < 7 ? (
-          <div className="alert alert-primary border border-dark">
+          <div className=" border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -339,7 +339,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 7 ? (
-          <div className="alert alert-primary border border-dark">
+          <div className="mt-4 p-4 border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -364,7 +364,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 8 || accion === 9 ? (
-          <div className="alert alert-primary border border-dark">
+          <div className="mt-4 p-4 border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>
@@ -393,7 +393,7 @@ const FormAcciones = ({
             </div>
           </div>
         ) : accion === 10 ? (
-          <div className="alert alert-primary border border-dark">
+          <div className="mt-4 p-4 border border-dark">
             <h3>
               <u>Nueva Accion</u>
             </h3>

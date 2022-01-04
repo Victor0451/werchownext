@@ -13,7 +13,7 @@ const FormNuevoVisitante = ({
   if (!servicio) return <Spinner />;
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark list">
       <h2 className="">
         <strong>
           <u>Ingresar Visitantes del servicio:</u> {servicio.idservicio} -{" "}

@@ -23,7 +23,7 @@ const Rehabilitacion = ({
 
   return (
     <div className="container">
-      <form className="mt-4 border border-dark p-4 alert alert-primary">
+      <form className="mt-4 border border-dark p-4 list">
         <h2 className=" mb-4">
           <strong>
             <u>Solicitud de Afiliacion</u>

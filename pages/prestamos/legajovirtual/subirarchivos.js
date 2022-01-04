@@ -7,6 +7,8 @@ import toastr from "toastr";
 import FormSubirArchivo from "../../../components/prestamos/legajovirtual/FormSubirArchivo";
 
 const subirarchivos = () => {
+  const [user, guardarUsuario] = useState({});
+
   let token = jsCookie.get("token");
 
   const router = useRouter();
@@ -14,12 +16,19 @@ const subirarchivos = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData);
+      }
     }
   }, []);
 
   return (
     <Layout>
-      <FormSubirArchivo contrato={router.query.ficha} />
+      <FormSubirArchivo contrato={router.query.ficha} user={user} />
     </Layout>
   );
 };

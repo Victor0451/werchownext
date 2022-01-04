@@ -95,8 +95,8 @@ const AltaPrestamos = ({
   let fecha = moment().format("DD/MM/YYYY");
 
   return (
-    <div className="container">
-      <div className=" mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark p-4 list">
+      <div className="  border border-dark p-4">
         <h2 className=" mb-4">
           <strong>
             <u>Alta de Sub. Cont. Familiar: Datos del Operador</u>
@@ -198,7 +198,7 @@ const AltaPrestamos = ({
             <>
               <hr className="mt-4 mb-4" />
 
-              <div className="alert alert-primary border border-dark p-4 mt-4 mb-4">
+              <div className=" border border-dark p-4 mt-4 mb-4">
                 <div className="mt-4 mb-4 alert alert-warning border border-dark text-uppercase text-center">
                   <strong>
                     {" "}

@@ -2,7 +2,7 @@ import React from "react";
 
 const BuscarUsuario = ({ erroruser, userRef, buscarUserName }) => {
   return (
-    <div className="container border border-dark alert alert-primary p-4 mt-4">
+    <div className="container border border-dark list p-4 mt-4">
       <h2 className="mb-4">
         <strong>
           <u>Buscar Usuario</u>

@@ -7,6 +7,7 @@ import axios from "axios";
 import { ip } from '../../../config/config'
 import toastr from 'toastr'
 import FormNuevoProveedor from "../../../components/sepelio/proveedores/FormNuevoProveedor";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const nuevo = () => {
 
@@ -54,6 +55,10 @@ const nuevo = () => {
                     if (res.status === 200) {
                         toastr.success("Se registro el nuevo proveedor con exito", "ATENCION")
                     }
+
+                    let accion = `Se registro nuevo proveedor: ${prov.razon}, cuit: ${prov.cuit}`
+
+                    registrarHistoria(accion, user)
 
                     setTimeout(() => {
                         Router.push(`/sepelio/proveedores/nuevo`)

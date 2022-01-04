@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from '../../../utils/funciones'
 
-const FormSubirArchivo = ({ auto, traerAchivos }) => {
+const FormSubirArchivo = ({ auto, traerAchivos, user }) => {
   const [archivos, guardarArchivos] = useState(null);
   const [error, guardarError] = useState(null);
 
@@ -36,6 +37,10 @@ const FormSubirArchivo = ({ auto, traerAchivos }) => {
           console.log(res);
           toastr.success("Archivo Subido Con Exito", "Atencion");
 
+          let accion = `Se subio un archivo al legajo virtual del auto modelo: ${auto.auto} - patente: ${auto.patente}}`
+
+          registrarHistoria(accion, user)
+
           setTimeout(() => {
             traerAchivos(auto.idpatente)
 
@@ -48,7 +53,7 @@ const FormSubirArchivo = ({ auto, traerAchivos }) => {
   };
 
   return (
-    <div className="container mt-4 alert-primary border border-dark ">
+    <div className="container mt-4 list border border-dark ">
 
       <form className=" mt-4 alert ">
         <div className="d-flex justify-content-between mb-4">

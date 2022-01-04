@@ -8,7 +8,7 @@ const FormDetallesServicioVendido = ({ detalleServicio, detalleVenta, detalleAta
 
     console.log(detalleServicio)
     return (
-        <div className="mt-4 container alert alert-primary border border-dark p-4">
+        <div className="mt-4 container list border border-dark p-4">
 
             <div className="">
                 <h3>

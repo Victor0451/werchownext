@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 const ListadoVentasSinServicio = ({ listado, eliminarVentaSinServ }) => {
   if (!listado) return <Spinner />;
   return (
-    <div className="mt-4 container borde border-dark alert alert-primary p-4">
+    <div className="mt-4 container borde border-dark list p-4">
       <div className="row">
         <div className="col-md-6">
           <h2>

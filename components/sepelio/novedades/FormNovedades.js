@@ -8,7 +8,7 @@ const FormNovedades = ({
   errores,
 }) => {
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <h2>
         <strong>
           <u>Ingresar Novedades</u>
@@ -59,12 +59,14 @@ const FormNovedades = ({
         </div>
 
         <div className="mt-4 col-md-3">
+
           <button
             onClick={registrarNovedad}
             className=" mt-4 btn btn-block btn-primary"
           >
             Registrar
           </button>
+
         </div>
 
         <div className="mt-4 col-md-3">

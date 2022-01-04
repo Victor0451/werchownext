@@ -12,7 +12,7 @@ const RegistrarUsuario = ({
   error,
 }) => {
   return (
-    <div className="container border border-dark alert alert-primary mt-4 p-4">
+    <div className="container border border-dark list mt-4 p-4">
       <h1 className="  mb-4">
         <strong>
           <u>Registro de Usuarios</u>

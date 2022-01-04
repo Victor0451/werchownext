@@ -11,7 +11,7 @@ const TablaPrestamosCaratula = ({
   capconint,
 }) => {
   return (
-    <div className="mt-4 mb-4">
+    <div className="mt-4 list mb-4">
       <hr />
       <div className=" d-fex justify-content-between alert alert-secondary text-dark border border-dark p-4">
         <h4 className="mb-4 ">

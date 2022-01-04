@@ -45,7 +45,7 @@ const ImprimirCaja = ({ caja, gastos, ingresos }) => {
   };
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <div className="row">
         <div className="col-md-6">
           <h2>

@@ -15,10 +15,10 @@ const TablaPrestamos = ({
   hasta,
 }) => {
   return (
-    <div className="mt-4 container">
+    <div className="mt-4 list container">
       <hr className="mt-4 mb-4" />
 
-      <div className="alert alert-primary border border-dark p-4">
+      <div className=" border border-dark p-4">
         <h2 className="mb-4">
           <strong>
             <u>Resumen</u>

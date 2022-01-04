@@ -7,6 +7,8 @@ import toastr from "toastr";
 import { ip } from "../../../config/config";
 import FormHojaRuta from "../../../components/sepelio/autos/FormHojaRuta";
 import moment from "moment";
+import { registrarHistoria } from '../../../utils/funciones'
+
 
 const hojaruta = () => {
 
@@ -126,6 +128,10 @@ const hojaruta = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Se registro la hoja de ruta con exito", "ATENCION")
+
+                        let accion = `Se registro hoja de ruta para el auto modelo: ${hojaruta.auto} - patente:${hojaruta.patente} `
+
+                        registrarHistoria(accion, user)
                     }
                 })
                 .catch(error => {

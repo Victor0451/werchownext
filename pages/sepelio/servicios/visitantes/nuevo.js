@@ -9,6 +9,7 @@ import toastr from "toastr";
 import ListadoVisitantes from "../../../../components/sepelio/servicios/visitantes/ListadoVisitantes";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert"; // Import
+import { registrarHistoria } from "../../../../utils/funciones";
 
 const nuevo = () => {
   let apellidoRef = React.createRef();
@@ -74,6 +75,11 @@ const nuevo = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("Se registro el visitante correctamente", "ATENCION");
+
+          let accion = `Se registro visitante al servicio ID ${servicio.idservicio}`
+
+          registrarHistoria(accion, usuario)
+
           traerVisitantes(servicio.idservicio);
         }
       })
@@ -100,6 +106,10 @@ const nuevo = () => {
                     "ATENCION"
                   );
 
+                  let accion = `Se elimino visitante del servicio ID ${servicio.idservicio}`
+
+                  registrarHistoria(accion, usuario)
+
                   traerVisitantes(servicio.idservicio);
                 }
               })
@@ -114,7 +124,7 @@ const nuevo = () => {
         },
         {
           label: "No",
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });

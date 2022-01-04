@@ -33,7 +33,7 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
   };
 
   return (
-    <div className="container alert alert-primary border border-dark p-4 mt-4">
+    <div className="container list border border-dark p-4 mt-4">
       <div className=" border border-dark p-4">
         <div className="row d-felx justify-content-between p-2">
           <h3 className="  mb-4 text-center">
@@ -52,7 +52,7 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
           </div>
         </div>
 
-        <div className="mt-4 alert alert-primary border border-dark p-4">
+        <div className="mt-4  border border-dark p-4">
           <div className="d-flex justify-content-between">
             <h2 className="  col-8">
               <strong>
@@ -239,7 +239,7 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
 
         <hr />
 
-        <div className="alert alert-primary border border-dark p-4">
+        <div className=" border border-dark p-4">
           <h2 className="">
             <strong>
               <u>Detalles del Servicio</u>
@@ -389,7 +389,7 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
           </div>
         </div>
         <hr />
-        <div className="alert alert-primary border border-dark p-4">
+        <div className=" border border-dark p-4">
           <h2 className=" ">
             <strong>
               <u>Detalles del ataud</u>

@@ -7,10 +7,13 @@ import NuevaTarea from "../../../components/sepelio/tareas/NuevaTarea";
 import toastr from "toastr";
 import Router from "next/router";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const nuevo = () => {
     const [operadorsep, guardarOperadorSep] = useState(null)
     const [error, guardarError] = useState(null)
+    const [user, guardarUsuario] = useState(null)
+
 
     let tareaRef = React.createRef()
     let siRef = React.createRef()
@@ -26,6 +29,14 @@ const nuevo = () => {
         if (!token) {
             Router.push("/redirect");
         } else {
+
+            let usuario = JsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
+
             traerOperador()
         }
     }, []);
@@ -68,6 +79,9 @@ const nuevo = () => {
 
                     if (res.status === 200)
                         toastr.success("La tarea se registro con exito", "Atencion")
+                    let accion = `Se registro la programacion de una tarea en sepelio: ${res.data.idevents}`
+
+                    registrarHistoria(accion, user)
 
                     mandarMail(task)
 

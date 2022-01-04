@@ -46,7 +46,7 @@ const AltaNovell = ({
   handleSubmit,
 }) => {
   return (
-    <div className="container mt-4 alert alert-dark border border-dark p-4">
+    <div className="container list mt-4 alert alert-dark border border-dark p-4">
       <div className="row">
         <div className="col-md-3 border border-dark p-2 text-center">
           <img src="/img/logo.png" className="werchowlogo" />

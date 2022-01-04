@@ -10,6 +10,7 @@ import FromLiquidacion from "../../../components/sepelio/planificacion/FromLiqui
 import Liquidacion from "../../../components/sepelio/planificacion/Liquidacion";
 import ReactToPrint from "react-to-print";
 import ResumenLiquidacion from "../../../components/sepelio/planificacion/ResumenLiquidacion";
+import { registrarHistoria } from '../../../utils/funciones'
 
 const liquidacion = () => {
   let componentRef = useRef();
@@ -177,6 +178,10 @@ const liquidacion = () => {
         if (res.status === 200) {
           toastr.success("La guardia se liquido correctamente", "ATENCION");
 
+          let accion = `Se registro la liquidacion de guardia ID: ${id}`
+
+          registrarHistoria(accion, usnom)
+
           setTimeout(() => {
             buscarTareasALiquidar();
           }, 500);
@@ -198,6 +203,10 @@ const liquidacion = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("La tarea se liquido correctamente", "ATENCION");
+
+          let accion = `Se registro la liquidacion de tarea ID: ${id}`
+
+          registrarHistoria(accion, usnom)
 
           setTimeout(() => {
             buscarTareasALiquidar();
@@ -222,6 +231,10 @@ const liquidacion = () => {
           if (res.status === 200) {
             toastr.success("Liquidacion de tarea aprobada", "ATENCION");
 
+            let accion = `Se aprobo la liquidacion de tarea ID: ${id}`
+
+            registrarHistoria(accion, usnom)
+
             setTimeout(() => {
               buscarTareasALiquidar();
             }, 500);
@@ -241,6 +254,10 @@ const liquidacion = () => {
         .then((res) => {
           if (res.status === 200) {
             toastr.success("Liquidacion de tarea rechazada", "ATENCION");
+
+            let accion = `Se rechazo la liquidacion de tarea ID: ${id}`
+
+            registrarHistoria(accion, usnom)
 
             setTimeout(() => {
               buscarTareasALiquidar();
@@ -266,6 +283,10 @@ const liquidacion = () => {
           if (res.status === 200) {
             toastr.success("Liquidacion de guardia aprobada", "ATENCION");
 
+            let accion = `Se aprobo la liquidacion de guardia ID: ${id}`
+
+            registrarHistoria(accion, usnom)
+
             setTimeout(() => {
               buscarTareasALiquidar();
             }, 500);
@@ -285,6 +306,10 @@ const liquidacion = () => {
         .then((res) => {
           if (res.status === 200) {
             toastr.success("Liquidacion de guardia rechazada", "ATENCION");
+
+            let accion = `Se rechazo la liquidacion de guardia ID: ${id}`
+
+            registrarHistoria(accion, usnom)
 
             setTimeout(() => {
               buscarTareasALiquidar();

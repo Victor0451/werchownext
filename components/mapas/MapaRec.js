@@ -58,31 +58,31 @@ const MapaRec = ({ mapa, mapaM, desde, hasta, ano, mora, moraM }) => {
   };
 
   const efectividadMora = (mora, liq) => {
-  
-    if(mora){
-  
-    let mor = 0;
-    let rec = 0;
 
-    for (let i = 0; i < mora.length; i++) {
-      mor += parseFloat(mora[i].monto);
+    if (mora) {
+
+      let mor = 0;
+      let rec = 0;
+
+      for (let i = 0; i < mora.length; i++) {
+        mor += parseFloat(mora[i].monto);
+      }
+
+      for (let i = 0; i < liq.length; i++) {
+        rec += parseFloat(liq[i].monto);
+      }
+
+      let efec = (rec * 100) / mor;
+
+      return efec.toFixed(2);
+
     }
-
-    for (let i = 0; i < liq.length; i++) {
-      rec += parseFloat(liq[i].monto);
-    }
-
-    let efec = (rec * 100) / mor;
-
-    return efec.toFixed(2);
-
-  }
   };
 
 
 
   return (
-    <div className="container border border-dark alert alert-primary p-4">
+    <div className="container border border-dark list p-4">
       {ano ? (
         <h2>
           <strong>

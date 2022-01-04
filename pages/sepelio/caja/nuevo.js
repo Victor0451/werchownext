@@ -7,6 +7,7 @@ import Router, { useRouter } from "next/router";
 import NuevaCaja from "../../../components/sepelio/caja/NuevaCaja";
 import toastr from "toastr";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const nuevo = () => {
   let montoRef = React.createRef();
@@ -84,6 +85,10 @@ const nuevo = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("Se habilito la caja con exito", "ATENCION");
+
+          let accion = `Se habilito caja de sepelio N° ${res.data.idcaja} por $ ${res.data.monto}`
+
+          registrarHistoria(accion, user)
         }
       })
       .catch((error) => {

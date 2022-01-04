@@ -398,7 +398,7 @@ const estadosocio = () => {
         />
       ) : (
         <div className="container">
-          <div className=" mt-4 border border-dark alert alert-info text-dark text-center text-uppercase p-4">
+          <div className=" mt-4 border border-dark alert alert-info  text-center text-uppercase p-4">
             <u>Busca si existen casos disponibles para asignar</u>
           </div>
         </div>

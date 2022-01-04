@@ -9,7 +9,7 @@ const ListadoCumpleanos = ({ data, fecha }) => {
   if (!data) return <Spinner />;
 
   return (
-    <div className="mt-4 container p-4 border border-dark alert alert-primary">
+    <div className="mt-4 container p-4 border border-dark list">
       <h5 className=" mb-4">
         <strong>
           <u>Socios que cumplen años el {fecha}</u>: {data.length}

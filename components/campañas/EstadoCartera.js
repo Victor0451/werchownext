@@ -16,7 +16,7 @@ const EstadoCartera = ({
   array,
 }) => {
   return (
-    <div className="container  mt-4  alert alert-primary border border-dark p-4">
+    <div className="container  mt-4 list border border-dark p-4">
       <h2 className="mt-4 mb-4 ">
         <strong>
           {" "}
@@ -120,7 +120,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-home-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -135,7 +135,7 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -158,7 +158,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-at2-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -173,7 +173,7 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -199,7 +199,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -219,7 +219,7 @@ const EstadoCartera = ({
             ) : null}
           </div>
 
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -243,7 +243,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-contact-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -261,7 +261,7 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -286,7 +286,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-blanqueo-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -304,7 +304,7 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -328,7 +328,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-poli-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -353,7 +353,7 @@ const EstadoCartera = ({
           role="tabpanel"
           aria-labelledby="nav-aux-tab"
         >
-          <div className="border border-dark alert alert-primary p-4 row mt-4">
+          <div className="border border-dark p-4 row mt-4">
             <div className="col-md-6">
               <h4>
                 <strong>
@@ -368,7 +368,7 @@ const EstadoCartera = ({
             </div>
           </div>
 
-          {/* <div className="border border-dark alert alert-primary p-4 row mt-4">
+          {/* <div className="border border-dark p-4 row mt-4">
                         <div className="col-md-6">
                             <h2>Buscar Cartera Auxiliar - MUTUAL</h2>
                         </div>

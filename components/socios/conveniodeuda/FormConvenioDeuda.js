@@ -26,7 +26,7 @@ const FormConvenioDeuda = ({
 
 
     return (
-        <div className="mt-4 p-4 container border border-dark alert alert-primary">
+        <div className="mt-4 p-4 container border border-dark list">
 
             <h2>
                 <strong>

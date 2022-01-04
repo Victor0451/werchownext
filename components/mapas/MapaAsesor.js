@@ -26,7 +26,7 @@ const MapaAsesor = ({ mapa }) => {
   };
 
   return (
-    <div className="container border border-dark alert alert-primary p-4">
+    <div className="container border border-dark list p-4">
       <h2>
         <strong>
           <u>Mapeo de ventas por mes</u>

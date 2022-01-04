@@ -3,7 +3,7 @@ import React from 'react'
 const BuscarSocio = ({ contratoRef, buscarTitular, buscarTitularM, errores, nomoro }) => {
     return (
         <div className="container">
-            <form className="mt-4 border border-dark p-4 alert alert-primary">
+            <form className="mt-4 border border-dark p-4 list">
                 <h2 className=" mb-4">
                     <strong>
                         <u>Buscar Socio </u>

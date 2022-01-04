@@ -14,7 +14,7 @@ const ModalOpciones = ({ push, row }) => {
                     <div className="modal-body">
 
                         <div className="p-4">
-                            <div className=" border border-dark alert alert-primary p-4 row">
+                            <div className=" border border-dark list p-4 row">
 
 
                                 <div className="col-md-3">

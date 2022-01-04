@@ -25,7 +25,7 @@ const ListadoPlanificacion = ({
   if (!plani) return <div>No Hay Planificacion Aun</div>;
 
   return (
-    <div className="container mt-4 border border-dark p-4 alert alert-primary">
+    <div className="container mt-4 border border-dark p-4 list">
       <h2 className=" mb-4">
         <strong>
           <u>Planificacion de {mes}</u>

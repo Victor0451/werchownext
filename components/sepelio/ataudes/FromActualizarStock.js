@@ -14,7 +14,7 @@ const FromActualizarStock = ({
   if (!ataud) return <Spinner />;
 
   return (
-    <div className="container border border-dark alert alert-primary p-4">
+    <div className="container border border-dark list p-4">
       <div className="row">
         <input
           type="hidden"

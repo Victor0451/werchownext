@@ -11,6 +11,8 @@ const legajo = () => {
 
     const [archivos, guardarArchivos] = useState(null);
     const [auto, guardarAuto] = useState(null);
+    const [user, guardarUsuario] = useState(null)
+
 
     let token = jsCookie.get("token");
     const router = useRouter();
@@ -54,6 +56,13 @@ const legajo = () => {
             Router.push("/redirect");
         } else {
 
+            let usuario = jsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
+
             traerAchivos(router.query.idpatente);
             traerAuto(router.query.idauto);
         }
@@ -65,6 +74,7 @@ const legajo = () => {
                 auto={auto}
                 archivos={archivos}
                 traerAchivos={traerAchivos}
+                user={user}
             />
         </Layout>
     )

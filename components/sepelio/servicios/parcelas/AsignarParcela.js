@@ -8,7 +8,7 @@ const AsignarParcela = ({
   regParcela,
 }) => {
   return (
-    <div className="container border border-dark mt-4 alert alert-primary p-4">
+    <div className="container border border-dark mt-4 list p-4">
       {servicio ? (
         <h2>
           <strong>

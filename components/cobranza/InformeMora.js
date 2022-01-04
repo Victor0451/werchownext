@@ -27,7 +27,7 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
     }
 
     return (
-        <div className="mt-4 container border border-dark alert alert-primary">
+        <div className="mt-4 container border border-dark list">
             <h2><strong><u>Informe de Mora</u></strong></h2>
 
 

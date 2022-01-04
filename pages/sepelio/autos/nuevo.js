@@ -7,6 +7,7 @@ import moment from "moment";
 import toastr from 'toastr'
 import { ip } from '../../../config/config'
 import FormNuevoAuto from "../../../components/sepelio/autos/FormNuevoAuto";
+import { registrarHistoria } from '../../../utils/funciones'
 
 const nuevo = () => {
 
@@ -110,6 +111,10 @@ const nuevo = () => {
                     if (res.status === 200) {
                         toastr.success("El auto se registro con exito", "ATENCION")
                         regHistorial(car.idauto, car.patente)
+
+                        let accion = `Se registro un nuevo auto en el sistema, patente:${car.patente} - modelo: ${car.auto}`
+
+                        registrarHistoria(accion, user)
 
                         setTimeout(() => {
                             Router.push('/sepelio/autos/listado')

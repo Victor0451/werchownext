@@ -3,7 +3,7 @@ import React from "react";
 const RedirectToLogin = () => {
   return (
     <div className="container d-flex justify-content-center ">
-      <div className=" border border-dark p-4 mt-4 mb-4 alert alert-primary ">
+      <div className=" border border-dark p-4 mt-4 mb-4 list ">
         <h1 className="text-center">
           <strong>
             <u>

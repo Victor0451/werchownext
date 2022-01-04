@@ -8,6 +8,8 @@ import { ip } from "../../../config/config";
 
 const editar = () => {
   const [servicio, guardarServicio] = useState(null);
+  const [usuario, guardarUsuario] = useState(null);
+
 
   let token = jsCookie.get("token");
   let router = useRouter();
@@ -27,13 +29,20 @@ const editar = () => {
     if (!token) {
       Router.push("/redirect");
     } else {
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+      }
+
       traerServicio(router.query.id);
     }
   }, []);
 
   return (
     <Layout>
-      <FormEditarServicio servicio={servicio} />
+      <FormEditarServicio servicio={servicio} usuario={usuario} />
     </Layout>
   );
 };

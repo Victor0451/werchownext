@@ -19,7 +19,7 @@ const ListadoPadron = ({ padron, tipocartera, sucursal }) => {
   if (!padron) return <Spinner />;
 
   return (
-    <div className="container mt-4 alert alert-primary border border-dark ">
+    <div className="container mt-4 list border border-dark ">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>
@@ -27,7 +27,7 @@ const ListadoPadron = ({ padron, tipocartera, sucursal }) => {
           </u>
         </strong>
       </h2>
-      <div className="border border-dark alert alert-primary p-2">
+      <div className="border border-dark  p-2">
 
         <div className="mt-4 mb-4 alert alert-info text-center text-uppercase">
           <div className="d-flex justify-content-between">

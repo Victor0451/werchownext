@@ -226,7 +226,7 @@ const ListadoCasos = ({
   }
 
   return (
-    <div className="mt-4 mb-4 border border-dark alert alert-primary">
+    <div className="mt-2 mb-4 border border-dark list p-2">
       <div className="d-flex justify-content-end">
         <div>
           <button

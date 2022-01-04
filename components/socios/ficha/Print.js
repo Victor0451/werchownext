@@ -12,18 +12,18 @@ const Print = ({
   nomoro,
   listsocio,
   listSocios,
-  listSociosM, 
+  listSociosM,
   Seleccionar
 }) => {
 
   return (
-    <div className="container border border-dark alert alert-primary mt-4">
+    <div className="container border border-dark list mt-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Impresion de Fichas y Pagos (print)</u>
         </strong>
       </h1>
-      <div className="mt-4 border border-dark p-4 alert alert-primary">
+      <div className="mt-4 border border-dark p-4 ">
         <form>
           <h2 className=" mb-4">
             <strong>
@@ -58,7 +58,7 @@ const Print = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitular}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   WERCHOW
                 </button>
@@ -68,7 +68,7 @@ const Print = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularM}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   MUTUAL
                 </button>

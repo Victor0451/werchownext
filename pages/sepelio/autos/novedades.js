@@ -7,6 +7,7 @@ import moment from "moment";
 import toastr from 'toastr'
 import { ip } from '../../../config/config'
 import FormRegistroNovedades from "../../../components/sepelio/autos/FormRegistroNovedades";
+import { registrarHistoria } from "../../../utils/funciones";
 
 
 const novedades = () => {
@@ -61,6 +62,10 @@ const novedades = () => {
                         toastr.success("La novedad se registro con exito", "ATENCION")
 
                         mandarMail(nov)
+
+                        let accion = `Se registraron novedades en el auto modelo: ${nov.auto} - patente: ${nov.patente}`
+
+                        registrarHistoria(accion, user)
                     }
                 })
                 .catch(error => {

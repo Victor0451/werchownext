@@ -25,7 +25,7 @@ const Stock = ({ stock }) => {
     }
 
     return (
-        <div className="container mt-4 border border-dark alert alert-primary">
+        <div className="container mt-4 border border-dark list">
             <h3 className="mt-4 mb-4">
                 <strong>
                     <u>Stock de productos</u>: Cantidad Actual {calcularTotal(stock)}

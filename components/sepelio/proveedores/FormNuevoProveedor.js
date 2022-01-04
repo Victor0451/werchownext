@@ -2,7 +2,7 @@ import React from 'react'
 
 const FormNuevoProveedor = ({ proveedorRef, cuitRef, telefonoRef, domicilioRef, registrarProv, errores }) => {
     return (
-        <div className="mt-4 container border border-dark alert alert-primary p-4">
+        <div className="mt-4 container border border-dark list p-4">
             <div className="row">
                 <div className="col-md-6">
                     <h2>

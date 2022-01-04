@@ -53,7 +53,7 @@ const FormAltaPrestamo = ({
   let mesf = moment().add(cuotas, "months").format("MM/YYYY");
 
   return (
-    <div className="alert alert-primary border border-dark p-4">
+    <div className="list border border-dark p-4">
       <h2 className="mb-4">
         <strong>
           <u>Informacion Del Afiliado</u>
@@ -264,7 +264,7 @@ const FormAltaPrestamo = ({
         >
           <div className="modal-dialog modal-xl p-2">
             <div className="modal-content border border-dark ">
-              <div className="modal-header alert alert-primary">
+              <div className="modal-header ">
                 <h2 className="mt-4 mb-4">
                   <strong>
                     <u>Informacion Del Sub. Cont. Familiar Solicitado</u>
@@ -282,7 +282,7 @@ const FormAltaPrestamo = ({
               <div className="modal-body ">
                 {flag === true ? (
                   <div className=" mb-4 p-4">
-                    <div className="row d-flex alert alert-primary border border-dark p-4">
+                    <div className="row d-flex  border border-dark p-4">
                       <div className="form-group col-md-3">
                         <label>
                           <strong>
@@ -439,7 +439,7 @@ const FormAltaPrestamo = ({
                       <div className="form-group col-md-12">
                         <button
                           className="btn btn-primary btn-block"
-                          //onClick={this.cargarPrestamos}
+                        //onClick={this.cargarPrestamos}
                         >
                           Cargar Sub. Cont. Familiar
                         </button>

@@ -43,14 +43,14 @@ const FormSubirArchivo = ({ contrato }) => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container list mt-4">
       <h1>
         <strong>
           <u>Crear Legajo Virtual</u>
         </strong>
       </h1>
 
-      <form className=" mt-4 alert alert-primary border border-dark p-4">
+      <form className=" mt-4 border border-dark p-4">
         <div className="d-flex justify-content-between mb-4">
           <h2>
             <strong>

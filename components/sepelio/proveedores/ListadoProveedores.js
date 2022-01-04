@@ -11,7 +11,7 @@ const ListadoProveedores = ({ provs, eliminarProv }) => {
             </div>
         );
     return (
-        <div className="mt-4 container border border-dark p-4 alert alert-primary">
+        <div className="mt-4 container border border-dark p-4 list">
 
             <div className="row">
                 <div className="col-md-6">

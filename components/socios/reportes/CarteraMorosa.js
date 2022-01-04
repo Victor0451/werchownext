@@ -19,7 +19,7 @@ const CarteraMorosa = ({
 
 }) => {
     return (
-        <form className="mt-4 border border-dark p-4 alert alert-primary">
+        <form className="mt-4 border border-dark p-4 ">
             <h3 className=" mb-4">
                 <strong>
                     <u>Filtrar Cartera Morosa Por Estado</u>

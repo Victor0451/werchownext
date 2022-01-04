@@ -22,7 +22,7 @@ const ListadoCajaSepelio = ({ cajas }) => {
       </div>
     );
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark list">
       <h4 className="mt-4 mb-4">
         <strong>
           <u>Cajas De Sepelio</u>

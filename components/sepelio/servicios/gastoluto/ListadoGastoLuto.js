@@ -16,7 +16,7 @@ const ListadoGastoLuto = ({ listado, eliminarGasto }) => {
 
     return (
 
-        <div className="container border border-dark alert alert-primary mt-4 p-4">
+        <div className="container border border-dark list mt-4 p-4">
 
             <div className="row">
 

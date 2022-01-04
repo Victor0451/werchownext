@@ -9,6 +9,7 @@ import toastr from "toastr";
 import ActualizarStock from "../../../components/sepelio/ataudes/ActualizarStock";
 import { ip } from "../../../config/config";
 import { confirmAlert } from "react-confirm-alert";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const actualizar = () => {
   let nuevoStockRef = React.createRef();
@@ -74,6 +75,7 @@ const actualizar = () => {
                       "El stock se actualizo correctamente",
                       "ATENCION"
                     );
+
                   }
 
                   regHistorial();
@@ -89,7 +91,7 @@ const actualizar = () => {
           },
           {
             label: "No",
-            onClick: () => {},
+            onClick: () => { },
           },
         ],
       });
@@ -111,8 +113,13 @@ const actualizar = () => {
       .post(`${ip}api/sepelio/ataudes/reghistorial`, historial)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
+
           toastr.info("Se registro el movimiento en el historial", "ATENCION");
+
+          let accion = `Se actualizo el stock del ataud ${historial.idataud}, stock anterior: ${historial.stock_anterior}, nuevo stock: ${historial.stock_nuevo}`
+
+          registrarHistoria(accion, user)
+
         }
       })
       .catch((error) => {

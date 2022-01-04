@@ -25,7 +25,7 @@ const ModalFarmacia = () => {
             </button>
           </div>
           <div className="modal-body">
-            <div className="row border border-dark alert alert-primary p-4"></div>
+            <div className="row border border-dark list p-4"></div>
           </div>
           <div className="modal-footer">
             <button

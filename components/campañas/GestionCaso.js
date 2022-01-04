@@ -19,14 +19,14 @@ const GestionCaso = ({
   let modalnoti = "lgnoti";
 
   return (
-    <div className="mt-4 container border border-dark alert alert-primary">
-      <h1 className="mb-4">
+    <div className="mt-4 container border border-dark p-4 list">
+      <h2 className="mb-4">
         <u>
           {" "}
           Gestion Casos de {camp} - Casos asignados:{" "}
           {campanaOp.length + campanaOpTrab.length + campanaOpNoti.length}
         </u>
-      </h1>
+      </h2>
 
       <nav className="">
         <div className="nav nav-tabs border border-dark p-1" id="nav-tab" role="tablist">

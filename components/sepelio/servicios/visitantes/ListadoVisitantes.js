@@ -10,7 +10,7 @@ const ListadoVisitantes = ({
 }) => {
   if (listado.length === 0)
     return (
-      <div className="container alert alert-info border border-dark mt-4 text-center text-uppercase">
+      <div className="container list alert alert-info border border-dark mt-4 text-center text-uppercase">
         --- Este Servicio no posee visitantes registrados --- {""}
         <button
           className="btn btn-primary btn-sm"
@@ -23,7 +23,7 @@ const ListadoVisitantes = ({
     );
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark ">
       <div className="row">
         <div className="col-md-10">
           <h2 className="mt-4">

@@ -2,8 +2,8 @@ import React from "react";
 
 const BuscarCumple = ({ fn, fnM, fechaRef, error }) => {
   return (
-    <div className="container ">
-      <form className=" border border-dark alert alert-primary p-4">
+    <div className="container list">
+      <form className=" border border-dark p-4">
         <h3 className="mb-4">
           <strong>
             <u>Seleccione una fecha</u>

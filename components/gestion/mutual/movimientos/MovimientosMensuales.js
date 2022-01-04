@@ -2,7 +2,7 @@ import React from "react";
 
 const MovimientosMensuales = ({ desdeRef, hastaRef, error, traerPeriodo }) => {
   return (
-    <div className="container mt-4 alert alert-primary border border-dark p-4">
+    <div className="container mt-4 list border border-dark p-4">
       <h2 className=" mb-4 ">
         <strong>
           <u>Movimientos Mutual</u>: Seleccione El Periodo

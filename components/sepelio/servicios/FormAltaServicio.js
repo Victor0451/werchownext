@@ -12,6 +12,7 @@ import Router from "next/router";
 import ListadoAdherentes from "./ListadoAdherentes";
 import ListadoParcelas from "../parcelas/ListadoParcelas";
 import { ip } from "../../../config/config";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -83,7 +84,11 @@ const FormAltaServicio = ({
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
 
-          console.log(res.data);
+          let accion = `Se registro un nuevo servicio ${servicio.tipo_servicio} ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni_extinto}`
+
+          registrarHistoria(accion, usuario)
+
+
           if (parcela) {
             Router.push({
               pathname: "/sepelio/servicios/impresion",
@@ -174,7 +179,7 @@ const FormAltaServicio = ({
         servicio.dni_nuevotitular = dninuevotitRef.current.value;
         postServicio(servicio);
         updateStockAtaud(servicio.idataud, stock);
-        console.log(servicio);
+
       }
     } else if (ficha.GRUPO && ficha.PLAN === "P") {
       if (motivoRef.current.value === "") {
@@ -185,7 +190,7 @@ const FormAltaServicio = ({
         servicio.dni_nuevotitular = 11111111;
         postServicio(servicio);
         updateStockAtaud(servicio.idataud, stock);
-        console.log(servicio);
+
       }
     } else if (!ficha.GRUPO) {
       if (motivoRef.current.value === "") {
@@ -195,7 +200,7 @@ const FormAltaServicio = ({
       } else if (idataudRef.current.value !== "") {
         postServicio(servicio);
         updateStockAtaud(servicio.idataud, stock);
-        console.log(servicio);
+
       }
     }
   }
@@ -257,7 +262,7 @@ const FormAltaServicio = ({
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
 
   return (
-    <div className="alert alert-primary border border-dark p-4">
+    <div className="border border-dark p-4">
       {grupo ? (
         <div className="">
           {grupo.CODIGO === 1001 ||
@@ -870,7 +875,7 @@ const FormAltaServicio = ({
 
         <hr />
 
-        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+        <div className="mt-4 mb-4 border border-dark  p-4">
           <h2 className="mt-2">
             <strong>
               <u>Ataud</u>
@@ -944,7 +949,7 @@ const FormAltaServicio = ({
           </div>
         </div>
 
-        <div className="mt-4 mb-4 border border-dark alert alert-primary p-4">
+        <div className="mt-4 mb-4 border border-dark  p-4">
           <h2 className="mt-2">
             <strong>
               <u>Parcela</u>

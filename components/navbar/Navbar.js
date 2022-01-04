@@ -17,23 +17,17 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a href={"/home/home"} className="navbar-brand">
-        Werchow{" "}
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarColor02"
-        aria-controls="navbarColor02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
 
-      {userData.id ? <AuthLinks userData={userData} /> : <GuestLinks />}
+      <div className="container-fluid">
+        <a className="navbar-brand" href="/home/home">Werchow</a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {userData.id ? <AuthLinks userData={userData} /> : <GuestLinks />}
+      </div>
+
     </nav>
   );
 };

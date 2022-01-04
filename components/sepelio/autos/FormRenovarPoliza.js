@@ -7,7 +7,7 @@ const FormRenovarPoliza = ({ row, nuevaPolRef, nuevoVencimientoRef, nuevaEmpresa
     if (!row) return <Spinner />
 
     return (
-        <div className="container mt-4 border border-dark alert alert-primary">
+        <div className="container mt-4 border border-dark list">
 
             <h2>
                 <strong>

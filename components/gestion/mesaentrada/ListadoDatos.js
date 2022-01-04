@@ -37,7 +37,7 @@ const ListadoDatos = ({ listado }) => {
                 No se registraron datos
               </div>
             ) : (
-              <div className="container mt-4 border border-dark p-4 alert alert-primary">
+              <div className="container mt-4 border border-dark p-4 ">
                 <div className="list">
                   <ReactTable
                     data={listado}

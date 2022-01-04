@@ -28,7 +28,7 @@ const ModalDetalles = ({ detalle, titulo, archivos, eliminarArchivos, traerArchi
             </button>
           </div>
           <div className="modal-body">
-            <div className="border border-dark p-4 alert alert-primary">
+            <div className="border border-dark p-4 ">
               {!detalle ? (
                 <Spinner />
               ) : (
@@ -85,7 +85,7 @@ const ModalDetalles = ({ detalle, titulo, archivos, eliminarArchivos, traerArchi
                     eliminarArchivos={eliminarArchivos}
                   />
 
-                  <FormSubirArchivo id={detalle.idpersonal} traerArchivos={traerArchivos}/>
+                  <FormSubirArchivo id={detalle.idpersonal} traerArchivos={traerArchivos} />
                 </>
               )}
             </div>

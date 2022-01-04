@@ -9,6 +9,7 @@ import AltaNovell from "../../../components/ventas/ventaplan/novell/AltaNovell";
 import useValidacion from "../../../hooks/useValidacion";
 import validarAltaNovell from "../../../validacion/validarAltaNovell";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const STATE_INICIAL = {
   servicio: "",
@@ -159,9 +160,17 @@ const novell = () => {
     await axios
       .post(`${ip}api/sgi/socios/nuevonovell`, novell)
       .then((res) => {
-        console.log(res);
+
         toastr.success("El novell se cargo correctamente", "ATENCION");
-        window.location.replace("/ventas/ventaplan/listadonovell");
+
+        let accion = `Se registro la venta de un plan novell ID ${res.data.idnovell}`
+
+        registrarHistoria(accion, userData.usuario)
+
+        setTimeout(() => {
+          window.location.replace("/ventas/ventaplan/listadonovell");
+        }, 500);
+
       })
       .catch((error) => {
         console.log(error);

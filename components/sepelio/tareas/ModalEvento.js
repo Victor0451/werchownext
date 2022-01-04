@@ -19,7 +19,7 @@ const ModalEvento = ({ evento }) => {
                         {!evento ? (<Spinner />) :
 
                             (
-                                <div className="row alert alert-primary border border-dark p-4">
+                                <div className="row list border border-dark p-4">
 
                                     <div className="col-md-4">
                                         <label>

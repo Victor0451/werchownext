@@ -37,7 +37,7 @@ const InformeBalance = ({ mes, ano, gastos, cajas, ventas }) => {
     }
 
     return (
-        <div className="container border border-dark alert alert-primary">
+        <div className="container border border-dark list">
 
             <h2 className="text-center">
                 <strong>

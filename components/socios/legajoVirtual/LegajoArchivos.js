@@ -12,7 +12,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
     );
   console.log(archivos, empresa);
   return (
-    <div className="container border border-dark p-4">
+    <div className="container list border border-dark p-4">
       <h2 className="mb-4">
         <strong>
           <u>Archivos</u>

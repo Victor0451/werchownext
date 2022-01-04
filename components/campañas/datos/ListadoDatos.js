@@ -6,9 +6,9 @@ import Spinner from "../../layout/Spinner";
 const ListadoDatos = ({ datos }) => {
   if (!datos) return <Spinner />;
   return (
-    <div className="container border border-dark alert alert-primary p-4 mt-4">
+    <div className="container border border-dark list p-4 mt-4">
       <h2 className="">Listado de Datos recolectados</h2>
-      <div className="mt-4 list">
+      <div className="mt-4 ">
         <ReactTable
           data={datos}
           filterable

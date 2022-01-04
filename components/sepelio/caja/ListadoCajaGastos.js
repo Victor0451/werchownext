@@ -18,7 +18,7 @@ const ListadoCajaGastos = ({
   eliminarGastos,
 }) => {
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container mt-4 border border-dark list">
       {caja.estado === 1 ? (
         <div className="mt-4  alert alert-success col-md-12 d-flex justify-content-between border border-dark p-2">
           <div className="col-md-5 mt-2">

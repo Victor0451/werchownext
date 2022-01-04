@@ -17,8 +17,8 @@ const FormTareasAdicionales = ({
 
 
   return (
-    <div className="container mt-4">
-      <div className="alert alert-primary border border-dark  p-4">
+    <div className="container mt-4 list">
+      <div className=" border border-dark  p-4">
         <div className="mt-4 border border-dark p-4">
           <h4 className="mb-4">
             <strong>

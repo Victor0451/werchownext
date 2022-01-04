@@ -8,6 +8,7 @@ import Router, { useRouter } from "next/router";
 import toastr from "toastr";
 import IngresoCaja from "../../../components/sepelio/caja/IngresoCaja";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const ingresoscaja = () => {
   let fechaRef = React.createRef();
@@ -129,6 +130,11 @@ const ingresoscaja = () => {
         .then((res) => {
           if (res.status === 200) {
             toastr.success("Se registro el ingreso con exito", "ATENCION");
+
+            let accion = `se registro ingreso en la caja ${res.data.idcaja}`
+
+            registrarHistoria(accion, userData.usuario)
+
             setTimeout(() => {
               window.location.replace("/sepelio/caja/listado");
             }, 500);

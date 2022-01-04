@@ -9,6 +9,7 @@ import ListadoPlanificacion from "../../../components/sepelio/planificacion/List
 import FormTareasAdicionales from "../../../components/sepelio/planificacion/FormTareasAdicionales"
 import { ip } from '../../../config/config'
 import toastr from 'toastr'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const guardias = () => {
   let lugarRef = React.createRef();
@@ -37,6 +38,8 @@ const guardias = () => {
   const [gastliq, guardarGastLiq] = useState(null);
   const [operadorsep, guardarOperadorSep] = useState(null)
   const [idturno, guardarIdTurno] = useState(null)
+  const [user, guardarUsuario] = useState(null)
+
 
 
   let token = JsCookie.get("token");
@@ -45,6 +48,14 @@ const guardias = () => {
     if (!token) {
       Router.push("/redirect");
     } else {
+
+      let usuario = jsCookie.get("usuario");
+
+      if (usuario) {
+        let userData = JSON.parse(usuario);
+        guardarUsuario(userData.usuario);
+      }
+
       listPlani();
       traerOperador()
       traerGastLiq()
@@ -137,6 +148,10 @@ const guardias = () => {
           if (res.status === 200) {
             toastr.success("La guardia se registro correctamente", "ATENCION")
 
+            let accion = `se registro la planificacion de guardia: ID ${res.data.idturno}, para: ${planificacion.operador}, inicia ${planificacion.inicio}, termina ${planificacion.fin}, correspondiente al mes ${planificacion.mes_planificacion}`
+
+            registrarHistoria(accion, user)
+
             setTimeout(() => {
               Router.reload()
             }, 500);
@@ -177,8 +192,12 @@ const guardias = () => {
         if (res.status === 200) {
           toastr.success("La tarea se registro correctamente", "ATENCION")
 
+          let accion = `Se registro tarea: ID ${res.data.idtarea} adicional para el operador: ${task.operador}, tarea: ${task.tarea}, inicio ${task.inicio}, fin ${task.fin}, correspontiente al mes: ${task.mes_planificacion}`
+
+          registrarHistoria(accion, user)
+
         }
-        console.log(res.data)
+
       })
       .catch(error => {
         toastr.error("Ocurrio un error", "ATENCION")
@@ -220,7 +239,7 @@ const guardias = () => {
     if (planificacion.fin === '') {
       planificacion.fin = moment(planiID.fin).format('YYYY-MM-DD HH:mm:ss')
     }
-    
+
     if (planificacion.operador === 'no') {
       planificacion.operador = planiID.operador
     }
@@ -234,6 +253,10 @@ const guardias = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.success("La guardia se registro correctamente", "ATENCION")
+
+          let accion = `se edito la planificacion de guardia ID: ${id}`
+
+          registrarHistoria(accion, user)
 
           setTimeout(() => {
             Router.reload()
@@ -257,21 +280,28 @@ const guardias = () => {
 
   const deleteCaso = async (id) => {
     await axios.delete(`${ip}api/sepelio/planificacion/eliminarturno/${id}`)
-    .then(res => {
-      if (res.status === 200) {
-        toastr.success("La guardia se eliminio con exito", "ATENCION")
-        setTimeout(() => {
-          Router.reload()
-        }, 500);
-      }
-    })
-    .catch(error => {
-      toastr.error("Ocurrio un error al eliminar la guardia", "ATENCION")
-      console.log(error)
-    })
+      .then(res => {
+        if (res.status === 200) {
+
+          toastr.success("La guardia se eliminio con exito", "ATENCION")
+
+          let accion = `se elimino la planificacion de guardia ID: ${id}`
+
+          registrarHistoria(accion, user)
+
+
+          setTimeout(() => {
+            Router.reload()
+          }, 500);
+        }
+      })
+      .catch(error => {
+        toastr.error("Ocurrio un error al eliminar la guardia", "ATENCION")
+        console.log(error)
+      })
   }
 
-  const delCaso =  (id) => {
+  const delCaso = (id) => {
     confirmAlert({
       title: 'ATENCION',
       message: '¿Seguro quieres eliminar el gasto?',
@@ -284,7 +314,7 @@ const guardias = () => {
         },
         {
           label: 'No',
-          onClick: () => {}
+          onClick: () => { }
         }
       ]
     });
@@ -315,7 +345,7 @@ const guardias = () => {
               <strong>
                 <u>
                   Cargar Tareas Adicionales
-    </u>
+                </u>
               </strong>
             </h2>
           </div>

@@ -10,7 +10,7 @@ const ListadoServicios = ({ listado, traerGastos, datatoggle, datatarget }) => {
   if (!listado) return <Spinner />;
 
   return (
-    <div className="container border border-dark alert alert-primary mt-4 p-4">
+    <div className="container border border-dark list mt-4 p-4">
       <h2>
         <strong>
           <u>Costos totales por servicio</u>

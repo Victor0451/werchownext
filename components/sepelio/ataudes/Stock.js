@@ -47,7 +47,7 @@ const Stock = ({ selcaso, selcasofrm, fl, traerHistorial, historial }) => {
   };
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary">
+    <div className="container list mt-4 border border-dark ">
       <div className="row">
         <div className="col-md-8">
           <h3 className="mt-4 mb-4">

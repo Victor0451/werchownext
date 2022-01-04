@@ -5,8 +5,8 @@ import { mesventas, anosventas } from "../../array/array";
 
 const ConsultaVentas = ({ errores, ventas, buscarVentas, handleChange }) => {
   return (
-    <div className="container">
-      <div className="mt-4 alert alert-primary border border-dark p-4">
+    <div className="container list">
+      <div className="mt-4  border border-dark p-4">
         <h2 className="mb-4">
           <strong>
             <u> Consutas de ventas realizadas por periodo</u>:

@@ -267,7 +267,7 @@ const AltaServicio = ({
   };
 
   return (
-    <div className="container">
+    <div className="container list">
       {ficha !== null ? (
         <div className="mt-4">
           <FormAltaServicio

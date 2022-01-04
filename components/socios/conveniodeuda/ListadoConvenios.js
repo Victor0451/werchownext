@@ -8,7 +8,7 @@ const ListadoConvenios = ({ listado }) => {
 
     if (!listado) return <Spinner />
     return (
-        <div className="mt-4 container alert alert-primary border border-dark p-4">
+        <div className="mt-4 container list border border-dark p-4">
 
             <h2>
                 <strong><u>

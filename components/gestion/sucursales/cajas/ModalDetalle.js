@@ -31,7 +31,7 @@ const ModalDetalle = ({ archivos, row, traerArchivos, eliminarArchivos }) => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <div className="border border-dark p-4 alert alert-primary">
+                        <div className="border border-dark p-4 list">
                             <LegajoArchivos archivos={archivos} eliminarArchivos={eliminarArchivos} />
 
                             <FormSubirArchivo row={row} traerArchivos={traerArchivos} />

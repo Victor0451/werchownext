@@ -13,7 +13,7 @@ const ListadoCajaGastosCargados = ({
   if (!listado) return <Spinner />
 
   return (
-    <div className="container mt-4 border border-dark">
+    <div className="container list mt-4 border border-dark">
 
       <ReactTable
         data={listado}

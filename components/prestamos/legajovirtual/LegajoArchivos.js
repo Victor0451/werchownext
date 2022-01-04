@@ -30,7 +30,7 @@ const LegajoArchivos = ({ archivos, id, ficha, prestamo, fl }) => {
   };
 
   return (
-    <div className="container alert alert-primary border border-dark p-4 mt-4">
+    <div className="container list border border-dark p-4 mt-4">
       <div className="row border border-dark p-4">
         <h2 className="mt-4 mb-4 col-8">
           <strong>

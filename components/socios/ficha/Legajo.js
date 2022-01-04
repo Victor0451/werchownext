@@ -10,7 +10,7 @@ const Legajo = ({ ficha, empresa }) => {
     );
 
   return (
-    <div className="mt-4 container alert alert-primary border border-dark">
+    <div className="mt-4 container list border border-dark">
       <div className="row d-felx justify-content-between p-2">
         <h2 className=" mt-3 mb-4 text-center">
           <strong>

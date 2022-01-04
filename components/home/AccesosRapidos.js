@@ -14,11 +14,12 @@ const AccesosRapidos = ({ user }) => {
 
       <div className="container">
         <div className="row d-flex justify-content-center">
-          <div className="card col-md-3 text-white bg-primary mb-3 mr-1">
+
+          <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
             <div className="card-header">Ficha Del Socio</div>
             <div className="card-body">
               <a
-                className="btn btn-secondary btn-block text-dark"
+                className="btn btn-primary btn-block "
                 href="/socios/ficha/ficha"
               >
                 Buscar Ficha
@@ -29,11 +30,12 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>{" "}
-          <div className="card col-md-4 text-white bg-primary mb-3">
+
+          <div className="card col-md-3 text-dark bg-light border border-dark  ml-1 mb-3">
             <div className="card-header">Subir Archivos</div>
             <div className="card-body">
               <a
-                className="btn btn-secondary btn-block text-dark"
+                className="btn btn-primary btn-block "
                 href="/socios/legajovirtual/subirarchivo"
               >
                 Subir Archivos Al Legajo Virtual
@@ -44,11 +46,12 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-          <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
+
+          <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
             <div className="card-header">Prints</div>
             <div className="card-body">
               <a
-                className="btn btn-secondary btn-block text-dark"
+                className="btn btn-primary btn-block "
                 href="/socios/ficha/print"
               >
                 Print De Ficha y Pagos
@@ -59,11 +62,12 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-          <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
+
+          <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
             <div className="card-header">Tareas Programadas</div>
             <div className="card-body">
               <a
-                className="btn btn-secondary btn-block text-dark"
+                className="btn btn-primary btn-block "
                 href="/gestion/sucursales/tareas/nuevo"
               >
                 Tareas de Sucursales
@@ -73,11 +77,12 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-          <div className="card col-md-3 text-white bg-primary mb-3 ml-1">
+
+          <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
             <div className="card-header">Tareas Programadas</div>
             <div className="card-body">
               <a
-                className="btn btn-secondary btn-block text-dark"
+                className="btn btn-primary btn-block "
                 href="/sepelio/tareas/calendario"
               >
                 Tareas de Sepelio
@@ -92,11 +97,11 @@ const AccesosRapidos = ({ user }) => {
         {user === 4 ? (
           <>
             <div className="row d-flex justify-content-center">
-              <div className="card col-md-3 text-white bg-info mb-3 mr-1">
+              <div className="card col-md-3 text-dark bg-light border border-dark bg-info mb-3 ">
                 <div className="card-header">Nuevo Servicio</div>
                 <div className="card-body">
                   <a
-                    className="btn btn-secondary btn-block text-dark"
+                    className="btn btn-primary btn-block "
                     href="/sepelio/servicios/nuevo"
                   >
                     Cargar Servicio
@@ -107,11 +112,12 @@ const AccesosRapidos = ({ user }) => {
                   </p>
                 </div>
               </div>{" "}
-              <div className="card col-md-4 text-white bg-info mb-3">
+
+              <div className="card col-md-4 border border-dark bg-info mb-3">
                 <div className="card-header">Nueva Caja de Sepelio</div>
                 <div className="card-body">
                   <a
-                    className="btn btn-secondary btn-block text-dark"
+                    className="btn btn-primary btn-block "
                     href="/sepelio/caja/nuevo"
                   >
                     Cargar Caja Sepelio
@@ -121,11 +127,12 @@ const AccesosRapidos = ({ user }) => {
                   </p>
                 </div>
               </div>
-              <div className="card col-md-3 text-white bg-info mb-3 ml-1">
+
+              <div className="card col-md-3 text-dark bg-light border border-dark bg-info mb-3 ml-1">
                 <div className="card-header">Stock Ataudes</div>
                 <div className="card-body">
                   <a
-                    className="btn btn-secondary btn-block text-dark"
+                    className="btn btn-primary btn-block "
                     href="/sepelio/ataudes/stock"
                   >
                     Ver Stock Ataudes

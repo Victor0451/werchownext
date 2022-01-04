@@ -10,8 +10,8 @@ const ImprimirCaratula = ({
   capconint,
   codigo,
 }) => {
-    return (
-    <div className="container mt-4 alert alert-primary border border-dark p-4">
+  return (
+    <div className="container mt-4 list border border-dark p-4">
       <h2 className=" mb-4">
         <strong>
           <u>Sub. Cont. Familiar Realizados</u>

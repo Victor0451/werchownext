@@ -7,7 +7,7 @@ const LegajoVirtual = ({ archivos, eliminarArchivos }) => {
     return (
         <>
             {!archivos ? <Spinner /> : (
-                <div className="container border border-dark p-4">
+                <div className="container border border-dark list p-4">
                     <h2 className="mb-4">
                         <strong>
                             <u>Archivos</u>

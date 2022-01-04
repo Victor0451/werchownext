@@ -45,7 +45,6 @@ const listado = () => {
         .then((res) => {
           const listado = res.data;
           guardarListado(listado);
-          console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
@@ -54,7 +53,6 @@ const listado = () => {
   };
 
   const todoLosServicios = async () => {
-    console.log("toy");
     await axios
       .get(`${ip}api/sepelio/servicio/todoslosservicios`)
       .then((res) => {

@@ -20,7 +20,7 @@ const EmitirRecibo = ({
   if (!ficha) return <Spinner />;
 
   return (
-    <div className="container mt-4 border border-dark p-4 alert alert-primary">
+    <div className="container mt-4 border border-dark p-4 list">
       <div className="row">
         <div className="col-md-10">
           <h4>
@@ -270,7 +270,7 @@ const EmitirRecibo = ({
       >
         <div className="modal-dialog modal-xl p-2">
           <div className="modal-content border border-dark ">
-            <div className="modal-header alert alert-primary">
+            <div className="modal-header ">
               <h4 className="modal-title" id="exampleModalLabel">
                 <strong>
                   <u>Generar Pago</u>

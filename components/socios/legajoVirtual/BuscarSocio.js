@@ -18,13 +18,13 @@ const BuscarSocio = ({
   ficha,
 }) => {
   return (
-    <div className="container alert alert-dark border border-primary mt-4">
+    <div className="container list alert alert-dark border border-primary mt-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Subir Archivos Al Legajo Virtual</u>
         </strong>
       </h1>
-      <div className="mt-4 border border-dark p-4 alert alert-primary">
+      <div className="mt-4 border border-dark p-4 ">
         <form>
           <h2 className=" mb-4">
             <strong>
@@ -172,7 +172,7 @@ const BuscarSocio = ({
             </div>
             <div class="modal-body">
               {ficha !== null ? (
-                <div className="container mt-4 alert alert-primary border border-dark p-4">
+                <div className="container mt-4  border border-dark p-4">
                   <h2 className=" mb-4">
                     <strong>
                       <u>Legajo Virtual</u>

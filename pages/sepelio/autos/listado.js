@@ -7,6 +7,7 @@ import moment from "moment";
 import toastr from 'toastr'
 import { ip } from '../../../config/config'
 import ListadoAutos from "../../../components/sepelio/autos/ListadoAutos";
+import { registrarHistoria } from "../../../utils/funciones";
 
 const listado = () => {
 
@@ -17,6 +18,8 @@ const listado = () => {
     const [autos, guardarAutos] = useState(null)
     const [row, guardarRow] = useState(null)
     const [errores, guardarErrores] = useState(null)
+    const [user, guardarUsuario] = useState(null)
+
 
 
 
@@ -26,6 +29,13 @@ const listado = () => {
         if (!token) {
             Router.push("/redirect");
         } else {
+            let usuario = jsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+            }
+
             traerAutos()
         }
     }, []);
@@ -82,6 +92,10 @@ const listado = () => {
                 .then(res => {
                     if (res.status === 200) {
                         toastr.success("Se renovo la poliza con exito", "ATENCNION")
+
+                        let accion = `Se renovo poliza al auto modelo: ${row.auto} - patente: ${row.patente}. Poliza vencida ${row.nro_poliza} - empresa ${row.empresa}. Nueva Poliza ${nupol.nro_poliza} - empresa: ${nupol.empresa}`
+
+                        registrarHistoria(accion, user)
 
                         setTimeout(() => {
                             traerAutos()

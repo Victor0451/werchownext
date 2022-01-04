@@ -31,7 +31,7 @@ const FormLiquidarServicio = ({
 
   return (
     <div>
-      <div className="container border border-dark alert alert-primary p-4">
+      <div className="container border border-dark list p-4">
         {servicio ? (
           <>
             <h2>
@@ -273,7 +273,7 @@ const FormLiquidarServicio = ({
       <hr className="mt-4 mb-4" />
 
       {liqop ? (
-        <div className=" border border-dark alert alert-primary mt-4 p-4">
+        <div className=" border border-dark  mt-4 p-4">
           <div className="row">
             <div className="col-md-7">
               <h4>
@@ -554,7 +554,7 @@ const FormLiquidarServicio = ({
           No hay Gastos registrados
         </div>
       ) : (
-        <div className=" border border-dark alert alert-primary mt-4 p-4">
+        <div className=" border border-dark  mt-4 p-4">
           <h4>
             <strong>
               <u>Gastos Por Caja de Sepelio</u>

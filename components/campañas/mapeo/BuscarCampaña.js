@@ -9,7 +9,7 @@ const BuscarCampaña = ({
   errores,
 }) => {
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <h2 className="mb-4">
         <strong>
           <u>Mapeo de Campañas Activas</u>

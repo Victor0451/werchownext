@@ -43,7 +43,7 @@ const FormGenerarPago = ({
 
 
   return (
-    <div className="container mt-4 border border-dark alert alert-primary p-4">
+    <div className="container mt-4 border border-dark list p-4">
       <div className="row d-flex justify-content-center">
 
         <div className="col-md-3">
