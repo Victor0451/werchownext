@@ -9,6 +9,7 @@ import Router from "next/router";
 import { ip } from '../../../config/config'
 import { registrarHistoria } from "../../../utils/funciones";
 
+
 const nuevo = () => {
     const [operadorsep, guardarOperadorSep] = useState(null)
     const [error, guardarError] = useState(null)
@@ -30,7 +31,7 @@ const nuevo = () => {
             Router.push("/redirect");
         } else {
 
-            let usuario = JsCookie.get("usuario");
+            let usuario = jsCookie.get("usuario");
 
             if (usuario) {
                 let userData = JSON.parse(usuario);

@@ -37,7 +37,7 @@ const editar = () => {
             Router.push("/redirect");
         } else {
 
-            let usuario = JsCookie.get("usuario");
+            let usuario = jsCookie.get("usuario");
 
             if (usuario) {
                 let userData = JSON.parse(usuario);
