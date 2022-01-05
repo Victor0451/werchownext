@@ -1,19 +1,19 @@
 import React from "react";
-import Novedades from "../sepelio/novedades/Novedades";
 
 const AccesosRapidos = ({ user }) => {
   if (!user) return null;
 
   return (
     <>
-      {user === 4 ? (
-        <>
-          <Novedades />
-        </>
-      ) : null}
+      <div className="container p-4 border border-dark list">
 
-      <div className="container">
-        <div className="row d-flex justify-content-center">
+        <h2>
+          <u>
+            Accesos Directos
+          </u>
+        </h2>
+
+        <div className="row mt-4 border border-dark p-4 d-flex justify-content-center">
 
           <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
             <div className="card-header">Ficha Del Socio</div>
@@ -64,7 +64,7 @@ const AccesosRapidos = ({ user }) => {
           </div>
 
           <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
-            <div className="card-header">Tareas Programadas</div>
+            <div className="card-header">Tareas Prog. Sucursales</div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -79,7 +79,7 @@ const AccesosRapidos = ({ user }) => {
           </div>
 
           <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
-            <div className="card-header">Tareas Programadas</div>
+            <div className="card-header">Tareas Prog. Sepelio</div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -92,12 +92,12 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-        </div>
 
-        {user === 4 ? (
-          <>
-            <div className="row d-flex justify-content-center">
-              <div className="card col-md-3 text-dark bg-light border border-dark bg-info mb-3 ">
+
+          {user === 4 ? (
+            <>
+
+              <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1 ">
                 <div className="card-header">Nuevo Servicio</div>
                 <div className="card-body">
                   <a
@@ -113,7 +113,7 @@ const AccesosRapidos = ({ user }) => {
                 </div>
               </div>{" "}
 
-              <div className="card col-md-4 border border-dark bg-info mb-3">
+              <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
                 <div className="card-header">Nueva Caja de Sepelio</div>
                 <div className="card-body">
                   <a
@@ -128,7 +128,7 @@ const AccesosRapidos = ({ user }) => {
                 </div>
               </div>
 
-              <div className="card col-md-3 text-dark bg-light border border-dark bg-info mb-3 ml-1">
+              <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
                 <div className="card-header">Stock Ataudes</div>
                 <div className="card-body">
                   <a
@@ -141,11 +141,12 @@ const AccesosRapidos = ({ user }) => {
                     Este es un acceso rapido al Stock de ataudes para poder ver
                     y gestinar la exitencia de los mismos.
                   </p>
+
                 </div>
-              </div>{" "}
-            </div>
-          </>
-        ) : null}
+              </div>
+            </>
+          ) : null}
+        </div>
       </div>
     </>
   );

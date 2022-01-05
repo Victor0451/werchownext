@@ -12,6 +12,9 @@ body {
   background-color: gainsboro;
 }
 
+hr{
+  border-color: black !important;
+}
 
 .verticalScroll {
   height: 500px !important;

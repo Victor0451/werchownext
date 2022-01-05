@@ -16,7 +16,7 @@ const SocioFicha = ({
   Seleccionar
 }) => {
   return (
-    <div className="container border border-dark list mt-4">
+    <div className="container border border-dark list mt-4 p-4 mb-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Legajo Virtual</u>
@@ -147,48 +147,48 @@ const SocioFicha = ({
 
         <hr className="mt-4 mb-4" />
 
-        <div className="">
-          <div className="border border-dark p-4">
+
+        <div className="border border-dark p-4">
 
 
-            <h3 className=" mt-4 mb-4">
-              <strong>
-                <u>Buscar Por Apellido</u>
-              </strong>
-            </h3>
+          <h3 className=" mt-4 mb-4">
+            <strong>
+              <u>Buscar Por Apellido</u>
+            </strong>
+          </h3>
 
 
-            <div className="row mb-4 d-flex justify-content-center">
-              <div className="form-group col-md-4 mt-4">
-                <button
-                  className="btn btn-block btn-primary"
-                  data-toggle="modal"
-                  data-target="#listadoSocio"
-                  onClick={() => listSocios()}
+          <div className="row mb-4 d-flex justify-content-center">
+            <div className="form-group col-md-4 mt-4">
+              <button
+                className="btn btn-block btn-primary"
+                data-toggle="modal"
+                data-target="#listadoSocio"
+                onClick={() => listSocios()}
 
-                >
-                  WERCHOW
-                </button>
-              </div>
-
-              <div className="form-group col-md-4 mt-4">
-                <button
-                  className="btn btn-block btn-primary"
-                  data-toggle="modal"
-                  data-target="#listadoSocio"
-                  onClick={() => listSociosM()}
-
-                >
-                  MUTUAL
-                </button>
-              </div>
-
-              {!listsocio ? null
-                : (
-                  <ListadoSocios listado={listsocio} Seleccionar={Seleccionar} />
-                )}
-
+              >
+                WERCHOW
+              </button>
             </div>
+
+            <div className="form-group col-md-4 mt-4">
+              <button
+                className="btn btn-block btn-primary"
+                data-toggle="modal"
+                data-target="#listadoSocio"
+                onClick={() => listSociosM()}
+
+              >
+                MUTUAL
+              </button>
+            </div>
+
+            {!listsocio ? null
+              : (
+                <ListadoSocios listado={listsocio} Seleccionar={Seleccionar} />
+              )}
+
+
           </div>
         </div>
       </div>

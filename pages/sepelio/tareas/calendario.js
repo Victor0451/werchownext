@@ -6,6 +6,7 @@ import moment from "moment";
 import axios from "axios";
 import { ip } from '../../../config/config'
 import ModalEvento from "../../../components/sepelio/tareas/ModalEvento";
+import Spinner from "../../../components/layout/Spinner";
 
 const calendario = () => {
 
@@ -59,7 +60,7 @@ const calendario = () => {
     const localizer = momentLocalizer(moment);
 
     const slotSelected = (slotInfo) => {
-        console.log(slotInfo);
+
 
     }
 
@@ -68,7 +69,6 @@ const calendario = () => {
 
         let myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
         myModal.show()
-
 
     }
 
@@ -93,34 +93,40 @@ const calendario = () => {
 
                 <div className="mt-4 border border-dark">
 
-                    <Calendar
-                        selectable={true}
-                        onSelectSlot={slotSelected}
-                        onSelectEvent={eventSelected}
-                        style={{ height: "80vh" }}
-                        localizer={localizer}
-                        events={events}
-                        startAccessor="start"
-                        endAccessor="end"
-                        messages={{
-                            next: "Sig",
-                            previous: "Ant",
-                            today: "Hoy",
-                            month: "Mes",
-                            week: "Semana",
-                            day: "Día",
-                        }}
-                        defaultView="week"
-                        eventPropGetter={events => ({
-                            style: {
-                                backgroundColor: events.priority === 1 ? "#3FD503"
-                                    : events.priority === 2 ? "#E6F82F"
-                                        : events.priority === 3 ? "#F82F2F"
-                                            : null,
-                                color: 'black'
-                            }
-                        })}
-                    />
+                    {events.length !== 0 ? (
+                        <Calendar
+                            selectable={true}
+                            onSelectSlot={slotSelected}
+                            onSelectEvent={eventSelected}
+                            style={{ height: "80vh" }}
+                            localizer={localizer}
+                            events={events}
+                            startAccessor="start"
+                            endAccessor="end"
+                            messages={{
+                                next: "Sig",
+                                previous: "Ant",
+                                today: "Hoy",
+                                month: "Mes",
+                                week: "Semana",
+                                day: "Día",
+                            }}
+                            defaultView="week"
+                            eventPropGetter={events => ({
+                                style: {
+                                    backgroundColor: events.priority === 1 ? "#3FD503"
+                                        : events.priority === 2 ? "#E6F82F"
+                                            : events.priority === 3 ? "#F82F2F"
+                                                : null,
+                                    color: 'black'
+                                }
+                            })}
+                        />
+                    ) : <div className="mt-4 mb-4">
+                        <Spinner />
+                    </div>
+                    }
+
                 </div>
             </div>
 

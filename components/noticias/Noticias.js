@@ -32,7 +32,7 @@ const Noticias = (user) => {
         </div>
       ) : (
         <div
-          className="mt-4 alert alert-info alert-dismissible fade show container"
+          className="mt-4 alert alert-info alert-dismissible border border-dark fade show container"
           role="alert"
         >
           <h3 className="alert-heading mb-4">
