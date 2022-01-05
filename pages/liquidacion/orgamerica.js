@@ -9,6 +9,7 @@ import ListadoPagos from "../../components/liquidacion/orgamerica/ListadoPagos";
 import ExportarPadron from "../../components/liquidacion/orgamerica/ExportarPadron";
 import { ip } from "../../config/config";
 import toastr from "toastr";
+import { registrarHistoria } from "../../utils/funciones";
 
 const orgamerica = () => {
   let componentRef = useRef();
@@ -102,6 +103,11 @@ const orgamerica = () => {
       .then((res) => {
         if (res.status === 200) {
           toastr.info("Se registro la liquidacion en el historial", "ATENCION");
+
+          let accion = `Se registro liquidacion ID: ${res.data.idliquidacion} de Org. America del periodo: ${historial.mes}/${historial.ano}.`
+
+          registrarHistoria(accion, user.usuario)
+
         }
         setTimeout(() => {
           verificarLiquidacion();
@@ -166,7 +172,7 @@ const orgamerica = () => {
       <SelecLiqu handleChange={handleChange} buscarNumeros={buscarNumeros} />
 
       {sindato === null ? null : (
-        <div className="container mt-4 mb-4 border border-dark p-2">
+        <div className="container list mt-4 mb-4 border border-dark p-2">
           {sindato === true ? (
             <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
               <strong>No hay datos generados aun. Intente mas tarde</strong>
@@ -183,7 +189,7 @@ const orgamerica = () => {
                 </div>
               )}
 
-              <div className="print-efect p-4" ref={componentRef}>
+              <div className="print-efect border border-dark p-4 " ref={componentRef}>
                 <h3 className="">
                   <strong>
                     <u>
@@ -194,12 +200,12 @@ const orgamerica = () => {
                 </h3>
 
                 <ListadoPagos listado={pagos} totales={totales} />
-              </div>
 
-              <div className="container">
-                <hr className="mt-4 mb-4" />
 
-                <div className="alert alert-primary border border-dark p-4">
+                <hr className="mt-4 mb-4 border border-dark" />
+
+
+                <div className="border border-dark p-4">
                   <h3 className="text-center mb-4 font-weight-bold">
                     <u>Opciones</u>
                   </h3>
@@ -226,9 +232,11 @@ const orgamerica = () => {
                   </div>
                 </div>
               </div>
+
             </>
           )}
         </div>
+
       )}
     </Layout>
   );

@@ -334,14 +334,14 @@ const liquidacion = () => {
       />
 
       {sindato === null ? null : (
-        <div className="container mt-4 mb-4 border border-dark p-2">
+        <div className="container list mt-4 mb-4 border border-dark p-2">
           {sindato === true ? (
             <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
               <strong>No hay datos generados aun. Intente mas tarde</strong>
             </div>
           ) : (
             <>
-              <div className="print-efect" ref={componentRef}>
+              <div className="print-efect mt-4" ref={componentRef}>
                 <div className="row">
                   <div className="col-md-9">
                     <h3>

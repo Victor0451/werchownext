@@ -9,6 +9,7 @@ import axios from "axios";
 import toastr from "toastr";
 import { ip } from "../../config/config";
 import ModalNotificaciones from "./ModalNotificaciones";
+import { registrarHistoria } from '../../utils/funciones'
 
 
 const ListadoCasos = ({
@@ -72,7 +73,16 @@ const ListadoCasos = ({
     await axios
       .put(`${ip}api/sgi/campanas/cerrarcaso/${id}`)
       .then((res) => {
-        console.log(res);
+
+        if (res.status === 200) {
+          toastr.success("Se cerro el caso con exito", "ANTENCION");
+
+          let accion = `Se realizo el cierra del caso ID: ${res.data.idcaso}, socio: ${res.data.contrato} asignado en campaña`
+
+          registrarHistoria(accion, operador)
+
+        }
+
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +93,16 @@ const ListadoCasos = ({
     await axios
       .post(`${ip}api/sgi/campanas/gestioncaso`, datos)
       .then((res) => {
-        console.log(res);
-        toastr.success("Se registro la accion con exito", "ANTENCION");
+
+        if (res.status === 200) {
+          toastr.success("Se registro la accion con exito", "ANTENCION");
+
+          let accion = `Se realizo la gestion ID: ${res.data.idgestion} del caso: ${datos.idcaso} - socio: ${datos.contrato} asignado en campaña`
+
+          registrarHistoria(accion, operador)
+
+        }
+
       })
       .catch((error) => {
         console.log(error);
