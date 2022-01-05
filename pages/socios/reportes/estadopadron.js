@@ -4,7 +4,7 @@ import BuscarPadron from "../../../components/socios/reportes/BuscarPadron";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import Router from "next/router";
-import { zonaPer, zonaPal, zonaSP, zonaCC, zonas } from "../../../array/array";
+import { zonaPer, zonaPal, zonaSP, zonaCC, zonas, anos } from "../../../array/array";
 import { ip } from "../../../config/config";
 import ModalResultados from "../../../components/socios/reportes/ModalResultados";
 
@@ -16,6 +16,7 @@ const estadopadron = () => {
   const [cartera, guardarCartera] = useState(null);
   const [zona, guardarZona] = useState(null);
   const [mes, guardarMes] = useState(null);
+  const [ano, guardarAno] = useState(null);
   const [errores, guardarErrores] = useState(null);
   const [errorrango, guardarErrorRango] = useState(null);
   const [padron, guardarPadron] = useState(null);
@@ -65,6 +66,9 @@ const estadopadron = () => {
     } else if (flag === "mes") {
       const mes = value.value;
       guardarMes(mes);
+    } else if (flag === "ano") {
+      const ano = value.value;
+      guardarAno(ano);
     }
   };
 
@@ -74,12 +78,14 @@ const estadopadron = () => {
     guardarErrores(null)
 
 
-    if (cartera === null || mes === null || zona === null) {
-      let errores = "Los Campos Mes, Cartera y Zona No Pueden Estar Vacios";
+
+    if (cartera === null || mes === null || zona === null || ano === null) {
+      let errores = "Los Campos Mes, Cartera, zona y año No Pueden Estar Vacios";
       guardarErrores(errores);
     } else {
       const parametros = {
         mes: mes,
+        ano: ano,
         zona: zona,
         grupo: "",
         flag: "",
@@ -177,6 +183,7 @@ const estadopadron = () => {
         .get(`${ip}api/sgi/socios/estadocarteraw`, {
           params: {
             mes: parametros.mes,
+            ano: parametros.ano,
             grupo: parametros.grupo,
             zona: parametros.zona,
             flag: parametros.flag,
@@ -209,6 +216,7 @@ const estadopadron = () => {
     } else {
       const parametros = {
         mes: mes,
+        ano: ano,
         zona: zona,
         grupo: "",
         flag: "",
@@ -300,6 +308,7 @@ const estadopadron = () => {
         .get(`${ip}api/sgi/socios/estadocarteram`, {
           params: {
             mes: parametros.mes,
+            ano: parametros.ano,
             grupo: parametros.grupo,
             zona: parametros.zona,
             flag: parametros.flag,
@@ -571,6 +580,7 @@ const estadopadron = () => {
         errores={errores}
         errorrango={errorrango}
         listZona={listZona}
+        anos={anos}
         buscarCarteraSinTel={buscarCarteraSinTel}
         buscarCarteraSinTelM={buscarCarteraSinTelM}
       />

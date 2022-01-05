@@ -1,6 +1,7 @@
 import React from 'react'
 import ZonaSelect from "react-select";
 import MesSelect from "react-select";
+import AnoSelect from "react-select";
 import CarteraSelect from "react-select";
 
 
@@ -15,6 +16,7 @@ const CarteraMorosa = ({
     meses,
     estadocartera,
     listZona,
+    anos,
     handleChange,
 
 }) => {
@@ -33,7 +35,7 @@ const CarteraMorosa = ({
                     </strong>
                 </h3>
                 <div className="row mb-4">
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
                         <label>
                             <strong>
                                 {" "}
@@ -46,7 +48,7 @@ const CarteraMorosa = ({
                             onChange={(value) => handleChange(value, "zona")}
                         />
                     </div>
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
                         <label>
                             <strong>
                                 {" "}
@@ -59,7 +61,20 @@ const CarteraMorosa = ({
                             onChange={(value) => handleChange(value, "mes")}
                         />
                     </div>
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Año: </u>
+                            </strong>
+                        </label>
+                        <AnoSelect
+                            options={anos}
+                            placeholder={"Seleccionar Mes"}
+                            onChange={(value) => handleChange(value, "ano")}
+                        />
+                    </div>
+                    <div className="form-group col-md-3">
                         <label>
                             <strong>
                                 {" "}

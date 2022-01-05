@@ -12,7 +12,7 @@ export const registrarHistoria = async (accion, user) => {
         accion: accion
     }
 
-    await axios.post(`${ip}api/sgi/historialaccionesreghistorial`, historial)
+    await axios.post(`${ip}api/sgi/historialacciones/reghistorial`, historial)
         .then(res => {
 
             if (res.status === 200) {

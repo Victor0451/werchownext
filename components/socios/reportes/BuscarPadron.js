@@ -13,11 +13,12 @@ const BuscarPadron = ({
   buscarCarteram,
   errorrango,
   listZona,
+  anos,
   buscarCarteraSinTel,
   buscarCarteraSinTelM
 }) => {
   return (
-    <div className="container list">
+    <div className="container border border-dark mt-4 p-4 list">
 
       <CarteraMorosa
         errores={errores}
@@ -30,6 +31,7 @@ const BuscarPadron = ({
         meses={meses}
         estadocartera={estadocartera}
         listZona={listZona}
+        anos={anos}
         handleChange={handleChange}
 
       />
