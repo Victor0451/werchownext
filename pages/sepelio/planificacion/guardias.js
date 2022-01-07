@@ -49,7 +49,7 @@ const guardias = () => {
       Router.push("/redirect");
     } else {
 
-      let usuario = jsCookie.get("usuario");
+      let usuario = JsCookie.get("usuario");
 
       if (usuario) {
         let userData = JSON.parse(usuario);
@@ -322,99 +322,102 @@ const guardias = () => {
 
   return (
     <Layout>
-      <PlanificacionGuardias
-        fn={registroPlanificacion}
-        lugarRef={lugarRef}
-        siRef={siRef}
-        noRef={noRef}
-        hsInicioRef={hsInicioRef}
-        hsFinRef={hsFinRef}
-        operadorRef={operadorRef}
-        error={error}
-        operadorsep={operadorsep}
-
-      />
-
-      <hr className="container mt-4 mb-4" />
-
-      <div className="container border border-dark alert alert-dark p-4">
-
-        <div className="row">
-          <div className="col-md-6">
-            <h2>
-              <strong>
-                <u>
-                  Cargar Tareas Adicionales
-                </u>
-              </strong>
-            </h2>
-          </div>
-
-          <div className="col-md-6">
-            <button
-              className="btn btn-primary btn-block"
-              data-toggle="modal" data-target="#modalformtask"
-            >
-              Cargar Tareas
-            </button>
-          </div>
-
-        </div>
+      <div className="mt-4 container border border-dark p-4 list">
 
 
-      </div>
+        <PlanificacionGuardias
+          fn={registroPlanificacion}
+          lugarRef={lugarRef}
+          siRef={siRef}
+          noRef={noRef}
+          hsInicioRef={hsInicioRef}
+          hsFinRef={hsFinRef}
+          operadorRef={operadorRef}
+          error={error}
+          operadorsep={operadorsep}
 
-      <hr className="container mt-4 mb-4" />
+        />
 
+        <hr className="container mt-4 mb-4" />
 
-      <ListadoPlanificacion
-        plani={plani}
-        mes={moment().locale("es-es").format("MMMM")}
-        editarPlanificacion={editarPlanificacion}
-        lugarERef={lugarERef}
-        siERef={siERef}
-        noERef={noERef}
-        hsInicioERef={hsInicioERef}
-        hsFinERef={hsFinERef}
-        operadorERef={operadorERef}
-        error={error}
-        operadorsep={operadorsep}
-        delCaso={delCaso}
-        planiID={planiID}
-        selcaso={selcaso}
-      />
+        <div className="container border border-dark list p-4">
 
-      <div className="modal" id="modalformtask" tabIndex="-1">
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Tareas Adicionales</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+          <div className="row">
+            <div className="col-md-6">
+              <h2>
+                <strong>
+                  <u>
+                    Cargar Tareas Adicionales
+                  </u>
+                </strong>
+              </h2>
+            </div>
+
+            <div className="col-md-6">
+              <button
+                className="btn btn-primary btn-block"
+                data-toggle="modal" data-target="#modalformtask"
+              >
+                Cargar Tareas
               </button>
             </div>
-            <div className="modal-body">
-              <FormTareasAdicionales
-                gastliq={gastliq}
-                idturno={idturno}
-                operadorsep={operadorsep}
-                hsInicioTRef={hsInicioTRef}
-                hsFinTRef={hsFinTRef}
-                tareaRef={tareaRef}
-                observacionesTRef={observacionesTRef}
-                siTRef={siTRef}
-                noTRef={noTRef}
-                opRef={opRef}
-              />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
-              <button type="button" className="btn btn-primary btn-sm" onClick={registrarTareaAdicional}>Registrar</button>
+
+          </div>
+
+
+        </div>
+
+        <hr className="container mt-4 mb-4" />
+
+
+        <ListadoPlanificacion
+          plani={plani}
+          mes={moment().locale("es-es").format("MMMM")}
+          editarPlanificacion={editarPlanificacion}
+          lugarERef={lugarERef}
+          siERef={siERef}
+          noERef={noERef}
+          hsInicioERef={hsInicioERef}
+          hsFinERef={hsFinERef}
+          operadorERef={operadorERef}
+          error={error}
+          operadorsep={operadorsep}
+          delCaso={delCaso}
+          planiID={planiID}
+          selcaso={selcaso}
+        />
+
+        <div className="modal" id="modalformtask" tabIndex="-1">
+          <div className="modal-dialog modal-xl">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Tareas Adicionales</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <FormTareasAdicionales
+                  gastliq={gastliq}
+                  idturno={idturno}
+                  operadorsep={operadorsep}
+                  hsInicioTRef={hsInicioTRef}
+                  hsFinTRef={hsFinTRef}
+                  tareaRef={tareaRef}
+                  observacionesTRef={observacionesTRef}
+                  siTRef={siTRef}
+                  noTRef={noTRef}
+                  opRef={opRef}
+                />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                <button type="button" className="btn btn-primary btn-sm" onClick={registrarTareaAdicional}>Registrar</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
 
 
     </Layout>

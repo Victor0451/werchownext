@@ -140,7 +140,7 @@ const ListadoPadron = ({
           </div>
         </div>
 
-        <div className="border border-dark list">
+        <div className="mt-4 border border-dark list">
           <ReactTable
             data={ventas}
             filterable

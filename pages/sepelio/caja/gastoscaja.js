@@ -171,7 +171,7 @@ const gastoscaja = () => {
 
           toastr.success("Se cerro la caja correctamente", "Atencion");
 
-          let accion = `Se cerro la caja ${res.data.idcaja}`
+          let accion = `Se cerro la caja ID: ${id}`
 
           registrarHistoria(accion, user)
         }
@@ -193,7 +193,7 @@ const gastoscaja = () => {
         if (res.status === 200) {
           toastr.success("Los gastos se cargaron correctamente", "ATENCION");
 
-          let accion = `Se registro gastos en la caja ${gastos.idcaja}`
+          let accion = `Se registraron gastos en la caja ID: ${caja.idcaja}`
 
           registrarHistoria(accion, user)
 

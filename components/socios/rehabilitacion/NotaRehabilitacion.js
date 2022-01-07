@@ -3,8 +3,8 @@ import moment from "moment-timezone";
 
 const NotaRehabilitacion = ({ ficha, fecha, vigencia, empresa, cuotas }) => {
   return (
-    <div className=" p-1">
-      <div className="border border-dark p-4">
+    <div className="container mt-2 p-1">
+      <div className=" p-4">
         <div className="row   mb-4 p-2">
           {empresa === "W" ? (
             <div className="col-md-6 d-flex justify-content-start">

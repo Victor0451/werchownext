@@ -5,8 +5,8 @@ const CondicionesNovell = ({ novell }) => {
   if (!novell) return <Spinner />;
 
   return (
-    <div className="container">
-      <div className=" mt-4 border border-dark p-2">
+    <div className="list">
+      <div className=" mt-4 p-2">
         <h4 className=" text-center mt-2">
           <strong>
             <u>Condiciones que integran el contrato de adhesion</u>
@@ -112,7 +112,7 @@ const CondicionesNovell = ({ novell }) => {
             presente cláusula, será nula de nulidad absoluta y totalmente
             inoponible a la empresa.-
           </p>
-          <div className="border border-dark mt-2">
+          <div className=" mt-2">
             <div className="row d-flex justify-content-between p-2">
               <div className="col-4 text-center mt-4">
                 <br />
@@ -139,7 +139,7 @@ const CondicionesNovell = ({ novell }) => {
       <br />
       <br />
 
-      <div className=" mt-4 border border-dark p-2">
+      <div className=" mt-4  p-2">
         <div className="mt-4 conformnovell">
           <p className="text-justify mt-2">
             <strong>
@@ -265,7 +265,7 @@ const CondicionesNovell = ({ novell }) => {
             comprometidos por WERCHOW SERVICIOS SOCIALES SRL. - - - - - - - - -
           </p>
         </div>
-        <div className="border border-dark mt-4">
+        <div className=" mt-4">
           <div className="row d-flex justify-content-between p-2">
             <div className="col-4 text-center mt-4">
               <br />

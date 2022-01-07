@@ -22,8 +22,8 @@ const Rehabilitacion = ({
   let fecha = moment().format("DD/MM/YYYY");
 
   return (
-    <div className="container">
-      <form className="mt-4 border border-dark p-4 list">
+    <div className="mt-4 mb-4 container border border-dark p-4 list">
+      <form className="">
         <h2 className=" mb-4">
           <strong>
             <u>Solicitud de Afiliacion</u>
@@ -85,7 +85,7 @@ const Rehabilitacion = ({
       {ficha ? (
         <>
           <hr className="mt-4 mb-4" />
-          <div className="alert alert-primary">
+          <div className="border border-dark p-4">
             <h2 className="mt-4 mb-4">
               <strong>
                 <u>Informacion Del Afiliado</u>
@@ -322,7 +322,7 @@ const Rehabilitacion = ({
             >
               <div className="modal-dialog modal-xl p-2">
                 <div className="modal-content border border-dark ">
-                  <div className="modal-header alert alert-primary">
+                  <div className="modal-header">
                     <h2 className="modal-title" id="exampleModalLabel">
                       <strong>
                         <u>Solicitud de Afiliacion</u>
@@ -338,7 +338,7 @@ const Rehabilitacion = ({
                     </button>
                   </div>
                   <div className="modal-body ">
-                    <div id="solicitud" className="mt-4 container ">
+                    <div id="solicitud" className="mt-4 ">
                       <NotaRehabilitacion
                         ficha={ficha}
                         fecha={fecha}
@@ -348,19 +348,19 @@ const Rehabilitacion = ({
                       />
                     </div>
 
-                    <div className="alert alert-primary mt-4">
-                      <div className="mt-4 p-4 border">
-                        <h3 className="text-center mb-4 font-weight-bold">
-                          Opciones
-                        </h3>
-                        <div className="row d-flex justify-content-center">
-                          <button
-                            className="btn btn-primary"
-                            onClick={imprimir}
-                          >
-                            Imprimir
-                          </button>
-                        </div>
+                    <div className="border border-dark mt-4 p-4">
+
+                      <h3 className="text-center mb-4 font-weight-bold">
+                        Opciones
+                      </h3>
+                      <div className="row d-flex justify-content-center">
+                        <button
+                          className="btn btn-primary"
+                          onClick={imprimir}
+                        >
+                          Imprimir
+                        </button>
+
                       </div>
                     </div>
                   </div>

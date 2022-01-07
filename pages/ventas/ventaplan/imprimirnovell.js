@@ -57,15 +57,15 @@ const imprimirnovell = () => {
         <CondicionesNovel novell={novell} />
       </div>
 
-      <div className="container alert alert-primary mt-4">
-        <div className="mt-4 p-4 border">
-          <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
-          <div className="row d-flex justify-content-center">
-            <button className="btn btn-primary" onClick={imprimir}>
-              Imprimir
-            </button>
-          </div>
+      <div className="container list border border-dark mt-4 p-4">
+
+        <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+        <div className="row d-flex justify-content-center">
+          <button className="btn btn-primary" onClick={imprimir}>
+            Imprimir
+          </button>
         </div>
+
       </div>
     </Layout>
   );

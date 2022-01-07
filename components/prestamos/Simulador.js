@@ -144,7 +144,7 @@ const Simulador = ({
                       <label>
                         <strong>
                           {" "}
-                          <u> Capital A Devolver: </u>
+                          <u> Cap. A Devolver: </u>
                         </strong>
                       </label>
                       <input
@@ -156,7 +156,7 @@ const Simulador = ({
                     </div>
                   </div>
 
-                  <div className="row mt-2 d-flex justify-content-center alert alert-info text-center text-uppercase">
+                  <div className="mt-4 border border-dark row mt-2 d-flex justify-content-center alert alert-info text-center text-uppercase">
                     {" "}
                     EL Sub. Cont. Familiar EMPEZARA A DEBITARSE EN{"   "}
                     <strong>

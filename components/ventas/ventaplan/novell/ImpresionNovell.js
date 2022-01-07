@@ -6,13 +6,13 @@ const ImpresionNovell = ({ novell }) => {
   if (!novell) return <Spinner />;
 
   return (
-    <div className="container mt-2 alert alert-dark border border-dark p-4">
+    <div className="mt-2 alert alert-dark borderImp list p-4">
       <div className="row">
-        <div className="col-md-3 border border-dark p-2 text-center">
+        <div className="col-md-3 borderImp  p-2 text-center">
           <img src="/img/logo.png" className="werchowlogo" />
         </div>
 
-        <div className="col-md-5 border border-dark p-2 text-center">
+        <div className="col-md-5 borderImp  p-2 text-center">
           <h4>
             <strong>
               <u>Solicitud de adhesion al plan novell</u>
@@ -20,7 +20,7 @@ const ImpresionNovell = ({ novell }) => {
           </h4>
         </div>
 
-        <div className="col-md-4 border border-dark p-2">
+        <div className="col-md-4 borderImp  p-2">
           <h6 className=" mt-1">
             <strong>
               <u>Fecha de Recepcion</u>: {novell.fecha_recepcion}
@@ -33,7 +33,7 @@ const ImpresionNovell = ({ novell }) => {
           </h6>
         </div>
 
-        <div className="col-md-12 mt-2 border border-dark p-2">
+        <div className="col-md-12 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -51,7 +51,7 @@ const ImpresionNovell = ({ novell }) => {
       </div>
 
       <div className="row">
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -67,7 +67,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -83,7 +83,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -98,7 +98,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.anticipo}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -114,7 +114,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -130,7 +130,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -145,7 +145,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.cuotasaldo}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -160,7 +160,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.cuotasaldo_letra}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -175,7 +175,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.gastos_adm}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -200,7 +200,7 @@ const ImpresionNovell = ({ novell }) => {
         </strong>
       </h4>
       <div className="row ">
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -216,7 +216,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -232,7 +232,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -249,7 +249,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -265,7 +265,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-3 mt-2 border border-dark p-2">
+        <div className="col-md-3 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -280,7 +280,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -296,7 +296,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -312,7 +312,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -328,7 +328,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -344,7 +344,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -359,7 +359,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.localidad_sol}
           />
         </div>
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -374,7 +374,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.nacionalidad_sol}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -390,7 +390,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -406,7 +406,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -432,7 +432,7 @@ const ImpresionNovell = ({ novell }) => {
       </h4>
 
       <div className="row">
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -448,7 +448,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -464,7 +464,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -481,7 +481,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -497,7 +497,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-3 mt-2 border border-dark p-2">
+        <div className="col-md-3 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -512,7 +512,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -528,7 +528,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -544,7 +544,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -560,7 +560,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -576,7 +576,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -591,7 +591,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.localidad_ben}
           />
         </div>
-        <div className="col-md-4 mt-2 border border-dark p-2">
+        <div className="col-md-4 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -606,7 +606,7 @@ const ImpresionNovell = ({ novell }) => {
             defaultValue={novell.nacionalidad_ben}
           />
         </div>
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -622,7 +622,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -638,7 +638,7 @@ const ImpresionNovell = ({ novell }) => {
           />
         </div>
 
-        <div className="col-md-2 mt-2 border border-dark p-2">
+        <div className="col-md-2 mt-2 borderImp  p-2">
           <label>
             {" "}
             <strong>
@@ -655,7 +655,7 @@ const ImpresionNovell = ({ novell }) => {
         </div>
       </div>
 
-      <div className="border border-dark mt-4">
+      <div className="borderImp  mt-4">
         <div className="row d-flex justify-content-between p-2">
           <div className="col-4 text-center mt-4">
             <br />

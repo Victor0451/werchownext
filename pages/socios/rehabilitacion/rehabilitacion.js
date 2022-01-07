@@ -7,6 +7,7 @@ import jsCookie from "js-cookie";
 import axios from "axios";
 import toastr from "toastr";
 import { ip } from '../../../config/config'
+import { registrarHistoria } from "../../../utils/funciones";
 
 const rehabilitacion = () => {
   let contratoRef = React.createRef();
@@ -238,11 +239,18 @@ const rehabilitacion = () => {
     await axios
       .post(`${ip}api/sgi/socios/nuevarehab`, rehab)
       .then((res) => {
-        console.log(res.data, res.status);
-        toastr.success(
-          "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
-          "ATENCION"
-        );
+        if (res.status === 200) {
+
+          toastr.success(
+            "La rehabilitacion del socio fue registrada, puede imprimir la notificacion",
+            "ATENCION"
+          );
+
+          let accion = `Se emitio una notificacion de rehabilitacion de servicios ID: ${res.data.idrehab} al socio: ${rehab.contrato} - ${rehab.apellido}, ${rehab.nombre} perteneciente a: ${rehab.empresa}`
+
+          registrarHistoria(accion, userData.usuario)
+
+        }
       })
       .catch((err) => {
         console.log(err);

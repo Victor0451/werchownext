@@ -344,24 +344,21 @@ const informeprestamos = () => {
               />
             </div>
 
-            <div className="container">
-              <hr className="mt-4 mb-4" />
-
-              <div className=" alert alert-primary border border-dark p-4">
-                <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
-                <div className="row d-flex justify-content-center">
-                  <ReactToPrint
-                    trigger={() => (
-                      <a href="#" className="btn btn-primary">
-                        imprimir{" "}
-                      </a>
-                    )}
-                    content={() => componentRef.current}
-                  />
-                </div>
+            <div className="mb-4 container border border-dark p-4 list mt-4">
+              <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
+              <div className="row d-flex justify-content-center">
+                <ReactToPrint
+                  trigger={() => (
+                    <a href="#" className="btn btn-primary">
+                      imprimir{" "}
+                    </a>
+                  )}
+                  content={() => componentRef.current}
+                />
               </div>
             </div>
           </div>
+
         ) : null}
       </>
     </Layout>

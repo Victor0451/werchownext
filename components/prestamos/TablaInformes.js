@@ -21,7 +21,7 @@ const TablaInformes = ({
   cancelado,
 }) => {
   return (
-    <div className="container list ">
+    <div className="container border border-dark p-4 mt-4 list ">
       <hr className="mt-4 mb-4" />
       <div className="mt-4 mb-4 border border-dark  p-4">
         <h2 className="mt-4 mb-4">

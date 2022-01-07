@@ -18,9 +18,9 @@ const FormNuevoAuto = ({
 
 }) => {
     return (
-        <div className="container mt-4 border border-dark list">
+        <div className="container mt-4 border border-dark list p-4">
 
-            <h2>
+            <h2 className=''>
                 <strong>
                     <u>
                         Nuevo Auto

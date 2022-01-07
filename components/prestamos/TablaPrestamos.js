@@ -15,7 +15,7 @@ const TablaPrestamos = ({
   hasta,
 }) => {
   return (
-    <div className="mt-4 list container">
+    <div className="mt-4 list container border border-dark p-4">
       <hr className="mt-4 mb-4" />
 
       <div className=" border border-dark p-4">
