@@ -17,8 +17,8 @@ const Print = ({
 }) => {
 
   return (
-    <div className="container border border-dark list mt-4">
-      <h1 className="mt-4 mb-4">
+    <div className="container border border-dark list mt-4 mb-4 p-4">
+      <h1 className=" mb-4">
         <strong>
           <u>Impresion de Fichas y Pagos (print)</u>
         </strong>

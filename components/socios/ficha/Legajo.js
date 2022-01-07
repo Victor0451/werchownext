@@ -4,7 +4,7 @@ import moment from "moment";
 const Legajo = ({ ficha, empresa }) => {
   if (!ficha)
     return (
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         EL SOCIO NO EXISTE O ESTA DADO DE BAJA
       </div>
     );

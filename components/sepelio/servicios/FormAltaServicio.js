@@ -84,10 +84,9 @@ const FormAltaServicio = ({
         if ((res.status = 200)) {
           toastr.success("Servicio cargado con exito", "ATENCION");
 
-          let accion = `Se registro un nuevo servicio ${servicio.tipo_servicio} ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni_extinto}`
+          let accion = `Se registro un nuevo servicio ${servicio.tipo_servicio} ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni}`
 
           registrarHistoria(accion, usuario)
-
 
           if (parcela) {
             Router.push({

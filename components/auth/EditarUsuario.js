@@ -14,7 +14,7 @@ const EditarUsuario = ({
   if (!username) return <Spinner />;
 
   return (
-    <div className="container border border-dark list mt-4 p-4">
+    <div className="container border border-dark list mt-4 p-4 col-md-10">
       <h1 className="  mb-4">
         <strong>
           <u>Editar de Usuarios</u>

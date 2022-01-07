@@ -95,7 +95,7 @@ const AltaPrestamos = ({
   let fecha = moment().format("DD/MM/YYYY");
 
   return (
-    <div className="container mt-4 border border-dark p-4 list">
+    <div className="container mt-4 mb-4 border border-dark p-4 list">
       <div className="  border border-dark p-4">
         <h2 className=" mb-4">
           <strong>

@@ -6,14 +6,14 @@ import moment from "moment";
 const Pagos = ({ pagos }) => {
   if (!pagos) {
     return (
-      <div className="container">
-        <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
-          EL SOCIO NO REGISTRA PAGOS
-        </div>
+
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+        EL SOCIO NO REGISTRA PAGOS
       </div>
+
     );
   }
-  
+
   return (
     <div className="container border border-dark list ">
       <h2 className="mt-4 mb-4">

@@ -4,11 +4,11 @@ import moment from "moment";
 const PagosPrint = ({ pagos, ficha, empresa }) => {
   if (!pagos || pagos.length === 0)
     return (
-      <div className="container">
-        <div className=" mt-2 form-group alert alert-info col-md-12 text-center text-uppercase border border-dark">
-          EL SOCIO NO REGISTRA PAGOS
-        </div>
+
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+        EL SOCIO NO REGISTRA PAGOS
       </div>
+
     );
 
   return (

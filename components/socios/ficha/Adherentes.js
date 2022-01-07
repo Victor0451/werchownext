@@ -6,7 +6,7 @@ import moment from "moment";
 const Adherentes = ({ adhs }) => {
   if (!adhs)
     return (
-      <div className="alert alert-danger text-center text-uppercase">
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         El socio no posee adherentes
       </div>
     );

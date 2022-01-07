@@ -12,9 +12,9 @@ const LoginUsuario = ({
   error,
 }) => {
   return (
-    <div className="container ">
+    <div className="container border border-dark mt-4  p-5 col-md-4 list">
       <form
-        className=" container mt-4 border border-dark p-5 col-md-6 list "
+        className="  "
         onSubmit={handleSubmit}
       >
         <h1 className="mb-4">

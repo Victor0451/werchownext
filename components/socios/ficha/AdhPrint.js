@@ -5,7 +5,7 @@ const AdhPrint = ({ adhs }) => {
 
   if (!adhs || adhs.length === 0)
     return (
-      <div className="border border-dark alert alert-info text-center text-uppercase">
+      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         El socio no posee adherentes
       </div>
     );

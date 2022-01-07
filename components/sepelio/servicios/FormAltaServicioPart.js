@@ -99,7 +99,6 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     } else if (idataudRef.current.value === "") {
       guardarErrIdAtaud("Debes seleccionar un ataud");
     } else {
-      console.log(servicio);
 
       await axios
         .post(`${ip}api/sepelio/servicio/nuevoservicio`, servicio)
@@ -108,7 +107,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             toastr.success("Servicio cargado con exito", "ATENCION");
             updateStockAtaud(servicio.idataud, stock);
 
-            let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni_extinto}`
+            let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni}`
 
             registrarHistoria(accion, usuario)
 

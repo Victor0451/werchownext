@@ -493,7 +493,7 @@ const ficha = () => {
       >
         <div className="modal-dialog modal-xl p-2">
           <div className="modal-content border border-dark ">
-            <div className="modal-header alert alert-primary">
+            <div className="modal-header">
               <h2 className="modal-title" id="exampleModalLabel">
                 <strong>
                   <u>Legajo Del Socio</u>
@@ -509,7 +509,7 @@ const ficha = () => {
               </button>
             </div>
             <div className="modal-body ">
-              <div id="solicitud" className="mt-4 container ">
+              <div id="solicitud" className="mt-4 container border border-dark p-4">
                 <div>
                   <Legajo ficha={ficha} empresa={empresa} />
 

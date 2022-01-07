@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
 import { ip } from "../../config/config";
+import Spinner from "../../components/layout/Spinner";
 
 const calendario = () => {
   const [events, guardarEvents] = useState([]);
@@ -57,31 +58,36 @@ const calendario = () => {
 
   return (
     <Layout>
-      <div className="container mt-4 border border-dark p-4 alert alert-dark">
+      <div className="container list mt-4 border border-dark p-4 alert alert-dark">
         <h1 className="">
           <strong>
             <u> Calendario de dias Festivos</u>
           </strong>
         </h1>
 
-        <div className="mt-4 border border-dark list">
-          <Calendar
-            style={{ height: "80vh" }}
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            messages={{
-              next: "Sig",
-              previous: "Ant",
-              today: "Hoy",
-              month: "Mes",
-              week: "Semana",
-              day: "Día",
-            }}
-            defaultView="week"
-          />
-        </div>
+        {!events ? (<Spinner />)
+          : (
+            <div className="mt-4 border border-dark list">
+              <Calendar
+                style={{ height: "80vh" }}
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                messages={{
+                  next: "Sig",
+                  previous: "Ant",
+                  today: "Hoy",
+                  month: "Mes",
+                  week: "Semana",
+                  day: "Día",
+                }}
+                defaultView="week"
+              />
+            </div>
+          )}
+
+
       </div>
     </Layout>
   );

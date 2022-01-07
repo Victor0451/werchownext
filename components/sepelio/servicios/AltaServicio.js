@@ -267,7 +267,7 @@ const AltaServicio = ({
   };
 
   return (
-    <div className="container list">
+    <div className="mt-4 container border border-dark list">
       {ficha !== null ? (
         <div className="mt-4">
           <FormAltaServicio
@@ -287,13 +287,13 @@ const AltaServicio = ({
       ) : particular !== null ? (
         <FormAltaServicioPart usuario={usuario} />
       ) : (
-        <div className="alert alert-primary border border-dark mt-4 p-4 text-center text-uppercase">
+        <div className="p-4">
           {errexiste && (
             <div className="mt-2 form-group  alert alert-warning">
               {errexiste}
             </div>
           )}
-          <h2 className="mt-4 mb-4">
+          <h2 className="">
             <strong>
               <u>Ingrese N° de Documento del Fallecido </u>
             </strong>
@@ -346,7 +346,7 @@ const AltaServicio = ({
 
           <hr className="mt-4 mb-4" />
 
-          <div className="alert alert-primary border border-dark mt-4 p-4">
+          <div className=" border border-dark mt-4 p-4">
             <div className="row">
               <div className="col-md-6">
                 <h2 className="mt-4 mb-4">

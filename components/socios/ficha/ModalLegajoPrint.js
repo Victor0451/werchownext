@@ -59,7 +59,7 @@ const ModalLegajoPrint = ({
                         ) : null}
 
 
-                        <div id="solicitud" className="mt-4 container ">
+                        <div id="solicitud" className="mt-4 container p-4 border border-dark">
                             <div>
                                 <div id="leg">
                                     <Legajo ficha={ficha} empresa={empresa} />
@@ -79,7 +79,7 @@ const ModalLegajoPrint = ({
                                     <PagosPrint pagos={pagos} ficha={ficha} empresa={empresa} />
                                 </div>
                                 <button
-                                    className="btn btn-info"
+                                    className="mt-4 btn btn-info"
                                     onClick={() => imprimir("pag")}
                                 >
                                     Imprimir Pagos

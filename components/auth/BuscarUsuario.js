@@ -2,20 +2,19 @@ import React from "react";
 
 const BuscarUsuario = ({ erroruser, userRef, buscarUserName }) => {
   return (
-    <div className="container border border-dark list p-4 mt-4">
+    <div className="container border border-dark list p-4 mt-4 col-md-8">
       <h2 className="mb-4">
         <strong>
           <u>Buscar Usuario</u>
         </strong>
       </h2>
 
-      <div className="row border border-dark p-4 mt-4 ">
+      <div className="row border border-dark p-4 mt-4">
         <div className="form-group col-md-6">
-          <label>Nombre de Usuario</label>
           <input
             type="text"
-            className="form-control"
-            placeholder="Usuario"
+            className="mt-4 form-control"
+            placeholder="Ingrese Nombre de Usuario"
             name="usuario"
             ref={userRef}
           />
