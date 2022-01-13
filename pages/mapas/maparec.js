@@ -256,7 +256,7 @@ const maparec = () => {
                       moraM={moraM}
                     />
                   </div>
-                  <div className=" container alert alert-primary border border-dark p-4">
+                  <div className=" container list mt-4 border border-dark p-4">
                     <h3>
                       <strong>
                         <u>Opciones</u>

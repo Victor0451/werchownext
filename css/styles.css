@@ -12,6 +12,10 @@ body {
   background-color: gainsboro;
 }
 
+.card-img-top {
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+}
 
 
 .container {
@@ -25,16 +29,19 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+
 @media (min-width: 768px) {
   .containerImp {
     width: 750px;
   }
 }
+
 @media (min-width: 992px) {
   .containerImp {
     width: 970px;
   }
 }
+
 @media (min-width: 1200px) {
   .containerImp {
     width: 1170px;

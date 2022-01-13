@@ -8,19 +8,31 @@ import Router from "next/router";
 import { ip } from "../../../../config/config";
 import BuscarSocio from "../../../../components/gestion/mutual/recibos/BuscarSocio";
 import EmitirServicio from "../../../../components/gestion/werchow/servicios/EmitirServicio";
+import { registrarHistoria } from '../../../../utils/funciones'
 
 const Emision = () => {
   let contratoRef = React.createRef();
   let dniRef = React.createRef();
-
-  const [user, guardarUsuario] = useState(null);
-  const [ficha, guardarFicha] = useState(null);
-  const [pagos, guardarPagos] = useState(null);
-  const [adhs, guardarAdhs] = useState(null);
+  let farmaciaRef = React.createRef();
+  let modalidadRef = React.createRef();
+  let descuentoRef = React.createRef();
+  let especialidadRef = React.createRef();
+  let sucursalRef = React.createRef();
+  let medicoRef = React.createRef();
 
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
+  const [user, guardarUsuario] = useState(null);
   const [socio, guardarSocio] = useState(null);
+  const [ficha, guardarFicha] = useState(null);
+  const [pagos, guardarPagos] = useState(null);
+  const [adhs, guardarAdhs] = useState(null);
+  const [sucursales, guardarSucursales] = useState(null);
+  const [espec, guardarEspec] = useState(null);
+  const [medicos, guardarMedicos] = useState(null);
+  const [detalleMed, guardarDetalleMed] = useState(null);
+
+
 
   const buscarTitular = async (e) => {
     e.preventDefault();
@@ -80,7 +92,14 @@ const Emision = () => {
                 "ATENCION"
               );
               traerPagosBco(ficha[0].CONTRATO);
-            } else if (ficha[0].GRUPO === 1000) {
+            } else if (ficha[0].GRUPO === 6) {
+              toastr.warning(
+                `El socio es policia - grupo ${ficha[0].GRUPO}`,
+                "ATENCION"
+              );
+              traerPagosBco(ficha[0].CONTRATO);
+            }
+            else if (ficha[0].GRUPO === 1000) {
               traerPagos(ficha[0].CONTRATO);
             }
           }
@@ -205,6 +224,109 @@ const Emision = () => {
     guardarSocio(row);
   };
 
+  const traerSucursales = async () => {
+    await axios.get(`${ip}api/sgi/servicios/traersucursales`)
+      .then(res => {
+        guardarSucursales(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de sucursales", "ATENCION")
+      })
+  }
+
+  const traerEspecialidades = async () => {
+    await axios.get(`${ip}api/sgi/servicios/traerespecialidades`)
+      .then(res => {
+        guardarEspec(res.data)
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de sucursales", "ATENCION")
+      })
+  }
+
+  const traerMedicosPorSuc = async () => {
+
+    if (especialidadRef.current.value !== null) {
+      await axios.get(`${ip}api/sgi/servicios/traermedporsuc`,
+        {
+          params: {
+            suc: sucursalRef.current.value,
+            esp: especialidadRef.current.value
+          }
+        })
+        .then(res => {
+          guardarMedicos(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
+    }
+
+
+  }
+
+  const traerDetalleMedSelec = async () => {
+
+    if (medicoRef.current.value !== null) {
+      await axios.get(`${ip}api/sgi/servicios/traerdetallemedico/${medicoRef.current.value}`)
+        .then(res => {
+          guardarDetalleMed(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
+    }
+  }
+
+  const registrarOrdenConsulta = async () => {
+
+    let consulta = {
+      SUC: 'O',
+      ORDEN: "",
+      CONTRATO: socio.CONTRATO,
+      NRO_ADH: socio.ADHERENTES,
+      NRO_DOC: socio.NRO_DOC,
+      PLAN: socio.PLAN,
+      EDAD: socio.EDAD,
+      SEXO: socio.SEXO,
+      OBRA_SOC: socio.OBRA_SOC,
+      FECHA: moment().format('YYYY-MM-DD'),
+      FECHA_CAJA: moment().format('YYYY-MM-DD'),
+      HORA: moment().format('HH:mm:ss'),
+      SERVICIO: "",
+      IMPORTE: detalleMed.PRECIO_99,
+      PUESTO: "",
+      PRESTADO: detalleMed.COD_PRES,
+      OPERADOR: user,
+      EMPRESA: socio.EMPRESA
+
+    }
+
+    await axios.post(`${ip}api/servicios/regusos`, consulta)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Se registro la orden de consulta con exito", "ATENCION")
+
+          let accion = `Se registro una orden de consulta para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el medico: ${detalleMed.NOMBRE}. Coseguro a pagar: ${detalleMed.PRECIO_99}`
+
+          registrarHistoria(accion, user)
+
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar la orden de consulta", "ATENCION")
+      })
+
+
+  }
+
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -217,6 +339,9 @@ const Emision = () => {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.usuario);
       }
+      traerSucursales()
+      traerEspecialidades()
+
     }
   }, []);
 
@@ -241,6 +366,18 @@ const Emision = () => {
               ficha={ficha}
               selectSocio={selectSocio}
               socio={socio}
+              farmaciaRef={farmaciaRef}
+              modalidadRef={modalidadRef}
+              descuentoRef={descuentoRef}
+              especialidadRef={especialidadRef}
+              sucursalRef={sucursalRef}
+              medicoRef={medicoRef}
+              traerDetalleMedSelec={traerDetalleMedSelec}
+              detalleMed={detalleMed}
+              sucursales={sucursales}
+              espec={espec}
+              medicos={medicos}
+              traerMedicosPorSuc={traerMedicosPorSuc}
             />
           ) : null}
         </>

@@ -19,6 +19,8 @@ const FormAcciones = ({
 }) => {
   let fecha = moment().format("DD/MM/YYYY");
   let fecha1 = moment().format("DD/MM/YYYY");
+  let cuoSinBonf = caso.cuota * 1.10
+
   return (
     <div className="container list">
       <div className="border border-dark p-4">
@@ -195,20 +197,31 @@ const FormAcciones = ({
                 readOnly
               />
             </div>
+          </div>
 
-            <div className="container form-group col-md-8 mt-4 text-center alert alert-danger rounded-pill">
+          <div className="row d-flex justify-content-center">
+
+            <div className="border border-dark form-group col-md-5 mt-4 text-center alert alert-danger rounded-pill mr-2">
               <label>
                 <strong>
                   {" "}
-                  <u> Deuda: {""}</u>
+                  <u> Cuota Bonificada: {""}</u>
                 </strong>
               </label>
-
               {" "}{caso.cuota}
+            </div>
 
-
+            <div className="border border-dark form-group col-md-5 mt-4 text-center alert alert-danger rounded-pill">
+              <label>
+                <strong>
+                  {" "}
+                  <u> Cuota Sin Bonificar: {""}</u>
+                </strong>
+              </label>
+              {" "}{cuoSinBonf.toFixed(2)}
             </div>
           </div>
+
         </form>
       </div>
 

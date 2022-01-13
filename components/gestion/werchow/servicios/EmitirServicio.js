@@ -4,7 +4,26 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import OpcionesServicios from "./OpcionesServicios";
 
-const EmitirServicio = ({ pagos, adhs, ficha, socio, selectSocio }) => {
+const EmitirServicio = ({
+  pagos,
+  adhs,
+  ficha,
+  socio,
+  sucursales,
+  selectSocio,
+  espec,
+  medicos,
+  traerMedicosPorSuc,
+  farmaciaRef,
+  modalidadRef,
+  descuentoRef,
+  especialidadRef,
+  sucursalRef,
+  medicoRef,
+  traerDetalleMedSelec,
+  detalleMed,
+
+}) => {
   if (!ficha) return <Spinner />;
 
   return (
@@ -220,7 +239,21 @@ const EmitirServicio = ({ pagos, adhs, ficha, socio, selectSocio }) => {
           Debes seleccionar un socio
         </div>
       ) : (
-        <OpcionesServicios socio={socio} />
+        <OpcionesServicios
+          socio={socio}
+          farmaciaRef={farmaciaRef}
+          modalidadRef={modalidadRef}
+          descuentoRef={descuentoRef}
+          especialidadRef={especialidadRef}
+          sucursalRef={sucursalRef}
+          sucursales={sucursales}
+          espec={espec}
+          medicos={medicos}
+          traerMedicosPorSuc={traerMedicosPorSuc}
+          medicoRef={medicoRef}
+          traerDetalleMedSelec={traerDetalleMedSelec}
+          detalleMed={detalleMed}
+        />
       )}
     </div>
   );

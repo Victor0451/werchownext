@@ -42,12 +42,45 @@ const recibo = () => {
         toastr.error("Ocurrio un error al traer los datos del recibo", "ATENCION")
       })
   }
+  const imprimir = () => {
+    let contenido = document.getElementById("recibo").innerHTML;
+    let contenidoOrg = document.body.innerHTML;
 
+    document.body.innerHTML = contenido;
+
+    window.print();
+
+    document.body.innerHTML = contenidoOrg;
+
+    window.location.reload();
+  };
 
   return (
 
     <Layout>
-      <Recibo datos={datos} />
+
+      <div id="recibo">
+        <Recibo datos={datos} />
+      </div>
+      <div className=" container list mt-4 border border-dark p-4">
+        <h3>
+          <strong>
+            <u>Opciones</u>
+          </strong>
+        </h3>
+        <div className="row border border-dark p-4 mt-4">
+          <div className="col-md-12 d-flex justify-content-center">
+            <button
+              className=" btn btn-primary "
+              onClick={imprimir}
+            >
+              Imprimir
+            </button>
+          </div>
+        </div>
+      </div>
+
+
     </Layout>
   );
 };

@@ -16,13 +16,15 @@ const EmitirRecibo = ({
   totalPagosPrecargados,
   cuofija,
   registrarPago,
+  cuoInt,
+              cuo,
 }) => {
   if (!ficha) return <Spinner />;
 
   return (
     <div className="container mt-4 border border-dark p-4 list">
       <div className="row">
-        <div className="col-md-10">
+        <div className="col-md-8">
           <h4>
             <strong>
               <u>Emitir Recibo Afiliado</u>: {ficha.CONTRATO} -{" "}
@@ -30,14 +32,11 @@ const EmitirRecibo = ({
             </strong>
           </h4>
         </div>
-        <div className="col-md-2">
-          <a
-            className="btn btn-block btn-danger btn-sm"
-            href="/gestion/mutual/cobranza/emisionrecibo"
-          >
-            Cancelar
-          </a>
+
+        <div className="col-md-4 d-flex justify-content-end">
+          <img src="/img/logom.jpg" className="mutuallogo" />
         </div>
+
       </div>
 
 
@@ -55,7 +54,7 @@ const EmitirRecibo = ({
           ficha.GRUPO === 4004 ||
           ficha.GRUPO === 7777 ||
           ficha.GRUPO === 8500 ? (
-          <div className="mb-4 alert alert-info text-center text-uppercase border border-dark">
+          <div className="mb-4 alert alert-warning text-center text-uppercase border border-dark">
             ATENCION!!!, La ficha pertenece a un grupo moroso
           </div>
         ) : null}
@@ -154,15 +153,23 @@ const EmitirRecibo = ({
             ) : null}
           </div>
 
+
           <div className="col-md-6">
-            <div className="mb-3">
-              <button
-                className="btn btn-primary btn-block btn-sm"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                Generar Pago
-              </button>
+            <div className="row mb-3">
+              <div className="col-md-6 border border-dark text-center">
+                <strong><u>Cuota Actual </u>: $ {ficha.IMPORTE}</strong>
+              </div>
+
+              <div className="col-md-6">
+                <button
+                  className="btn btn-primary btn-block btn-sm"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Generar Pago
+                </button>
+              </div>
+
             </div>
 
             <div className="list">
@@ -246,13 +253,23 @@ const EmitirRecibo = ({
                 Total a Pagar: $ {totalPagosPrecargados(nupagos)}
               </div>
 
-              <div className="col-md-6">
-                <button
-                  className="btn btn-primary btn-block"
-                  onClick={registrarPago}
-                >
-                  Registrar Pagos
-                </button>
+              <div className="row mt-4">
+                <div className="col-md-6">
+                  <button
+                    className="btn btn-primary btn-block"
+                    onClick={registrarPago}
+                  >
+                    Registrar Pagos
+                  </button>
+                </div>
+                <div className="col-md-6">
+                  <a
+                    className="btn btn-block btn-danger"
+                    href="/gestion/mutual/cobranza/emisionrecibo"
+                  >
+                    Cancelar
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -292,6 +309,8 @@ const EmitirRecibo = ({
                 importeRef={importeRef}
                 preCargarPago={preCargarPago}
                 cuofija={cuofija}
+                cuoInt={cuoInt}
+              cuo={cuo}
               />
             </div>
             <div className="modal-footer">

@@ -8,38 +8,10 @@ const FormGenerarPago = ({
   importeRef,
   cuofija,
   preCargarPago,
+  cuoInt,
+  cuo,
 
 }) => {
-
-  const [cuo, guardarCuo] = useState(null)
-
-
-  const cuoInt = () => {
-
-    let fecha = moment().format("DD");
-    let month = moment().format("MM");
-
-    if (mesRef.current.value === month) {
-      if (fecha <= 15) {
-        guardarCuo(cuofija.IMPORTE);
-      } else if (fecha > 15 && fecha <= 28) {
-        let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.1;
-        guardarCuo(cuoint);
-      } else if (fecha > 28 && fecha <= 31) {
-        let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.2;
-        guardarCuo(cuoint);
-      }
-    } else if (parseInt(mesRef.current.value) < parseInt(month)) {
-      let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.2;
-      guardarCuo(cuoint)
-    } else if (parseInt(mesRef.current.value) > parseInt(month)) {
-      guardarCuo(cuofija.IMPORTE)
-    }
-
-
-  };
-
-
 
 
   return (
@@ -58,7 +30,7 @@ const FormGenerarPago = ({
 
         <div className="col-md-3">
           <label>Año</label>
-          <input className="form-control" defaultValue={moment().format("YYYY")} type="number" ref={anoRef} />
+          <input className="form-control" defaultValue={moment().format("YYYY")} type="number" ref={anoRef} onChange={cuoInt} />
         </div>
 
         {cuofija ? (
@@ -69,7 +41,7 @@ const FormGenerarPago = ({
               type="number"
               ref={importeRef}
               value={cuo}
-              readOnly
+
             />
           </div>
         ) : null}

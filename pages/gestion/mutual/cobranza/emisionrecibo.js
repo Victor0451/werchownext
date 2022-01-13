@@ -9,6 +9,7 @@ import { ip } from "../../../../config/config";
 import { confirmAlert } from 'react-confirm-alert';
 import BuscarSocio from "../../../../components/gestion/mutual/recibos/BuscarSocio";
 import EmitirRecibo from "../../../../components/gestion/mutual/recibos/EmitirRecibo";
+import { registrarHistoria } from '../../../../utils/funciones'
 
 const emisionrecibo = () => {
   let contratoRef = React.createRef();
@@ -27,6 +28,8 @@ const emisionrecibo = () => {
   const [flag, guardarFlag] = useState(false);
   const [recibo, guardarRecibo] = useState(null);
   const [listado, guardarListSocios] = useState(null);
+  const [cuo, guardarCuo] = useState(null)
+
 
 
   const traerPagosM = async (contrato) => {
@@ -231,6 +234,7 @@ const emisionrecibo = () => {
   };
 
   const preCargarPago = () => {
+
     const prepago = {
       SERIE: recibo.SERIE,
       NRO_RECIBO: recibo.NRO_RECIBO + 1,
@@ -258,8 +262,10 @@ const emisionrecibo = () => {
       let encontrado = false
 
       if (nupagos.length === 0) {
+
         toastr.success("Pago pre cargado exitosamente", "ATENCION");
         guardarNuPagos([...nupagos, prepago]);
+
       } else {
 
         for (let i = 0; i < nupagos.length; i++) {
@@ -283,8 +289,6 @@ const emisionrecibo = () => {
   };
 
   const totalPagosPrecargados = (arr) => {
-
-    console.log(arr)
 
     let total = 0;
 
@@ -343,8 +347,13 @@ const emisionrecibo = () => {
                     "ATENCION"
                   );
 
-                  push(recibo.NRO_RECIBO, ficha.CONTRATO, moment().format("YYYY-MM-DD"))
+                  let accion = `Se registro cobro de cuota del socio: ${ficha.CONTRATO} - ${ficha.APELLIDOS}, ${ficha.NOMBRES}. Recibo: ${nupagos[0].SERIE} - ${nupagos[0].NRO_RECIBO}, monto: $ ${totalPagosPrecargados(nupagos)}`
 
+                  registrarHistoria(accion, user.usuario)
+
+                  setTimeout(() => {
+                    push(recibo.NRO_RECIBO, ficha.CONTRATO, moment().format("YYYY-MM-DD"))
+                  }, 500);
 
                 }
               })
@@ -453,6 +462,37 @@ const emisionrecibo = () => {
       });
   }
 
+  const cuoInt = () => {
+
+    let day = moment().format("DD");
+    let month = moment().format("M");
+    let year = moment().format("YYYY");
+
+    if (anoRef.current.value === year) {
+      if (mesRef.current.value === month) {
+        if (day <= 15) {
+          guardarCuo(cuofija.IMPORTE);
+        } else if (day > 15 && day <= 20) {
+          let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.1;
+          guardarCuo(cuoint);
+        } else if (day > 20) {
+          let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.2;
+          guardarCuo(cuoint);
+        }
+      } else if (parseInt(mesRef.current.value) < parseInt(month)) {
+        let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.2;
+        guardarCuo(cuoint)
+      } else if (parseInt(mesRef.current.value) > parseInt(month)) {
+        guardarCuo(cuofija.IMPORTE)
+      }
+    } else if (anoRef.current.value < year) {
+      let cuoint = cuofija.IMPORTE + cuofija.IMPORTE * 0.2;
+      guardarCuo(cuoint);
+    } else if (anoRef.current.value < year) {
+      let cuoint = cuofija.IMPORTE;
+      guardarCuo(cuoint);
+    }
+  }
 
   let token = jsCookie.get("token");
 
@@ -502,6 +542,8 @@ const emisionrecibo = () => {
               cuofija={cuofija}
               totalPagosPrecargados={totalPagosPrecargados}
               registrarPago={registrarPago}
+              cuoInt={cuoInt}
+              cuo={cuo}
             />
           ) : null}
         </>
