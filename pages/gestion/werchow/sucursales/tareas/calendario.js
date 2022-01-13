@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../../components/layout/Layout";
+import Layout from "../../../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
-import { ip } from '../../../../config/config'
-import ModalEvento from "../../../../components/gestion/sucursales/tareas/ModalEvento";
+import { ip } from '../../../../../config/config'
+import ModalEvento from "../../../../../components/gestion/sucursales/tareas/ModalEvento";
 
 const calendario = () => {
 
