@@ -31,6 +31,7 @@ const Emision = () => {
   const [espec, guardarEspec] = useState(null);
   const [medicos, guardarMedicos] = useState(null);
   const [detalleMed, guardarDetalleMed] = useState(null);
+  const [nOrden, guardarNorden] = useState(null)
 
 
 
@@ -283,10 +284,12 @@ const Emision = () => {
     }
   }
 
-  const registrarOrdenConsulta = async () => {
+  const registrarOrdenUsos = async () => {
 
-    let consulta = {
-      SUC: 'O',
+    traerNOrden()
+
+    const uso = {
+      SUC: "O",
       ORDEN: "",
       CONTRATO: socio.CONTRATO,
       NRO_ADH: socio.ADHERENTES,
@@ -294,29 +297,33 @@ const Emision = () => {
       PLAN: socio.PLAN,
       EDAD: socio.EDAD,
       SEXO: socio.SEXO,
-      OBRA_SOC: socio.OBRA_SOC,
+      OBRA_SOC: socio.COD_OBRA,
       FECHA: moment().format('YYYY-MM-DD'),
-      FECHA_CAJA: moment().format('YYYY-MM-DD'),
-      HORA: moment().format('HH:mm:ss'),
+      FEC_CAJA: moment().format('YYYY-MM-DD'),
+      HORA: moment().format('HH:mm'),
       SERVICIO: "",
-      IMPORTE: detalleMed.PRECIO_99,
+      IMPORTE: detalleMed.MAX_DESC,
       PUESTO: "",
       PRESTADO: detalleMed.COD_PRES,
-      OPERADOR: user,
-      EMPRESA: socio.EMPRESA
+      OPERADOR: 55,
+      EMPRESA: "W"
 
     }
 
-    await axios.post(`${ip}api/servicios/regusos`, consulta)
+    if (nOrden) {
+      uso.ORDEN = `O-${nOrden + 1}`
+
+    } else {
+      uso.ORDEN = `O-${1}`
+    }
+
+    await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
+
         if (res.status === 200) {
-          toastr.success("Se registro la orden de consulta con exito", "ATENCION")
-
-          let accion = `Se registro una orden de consulta para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el medico: ${detalleMed.NOMBRE}. Coseguro a pagar: ${detalleMed.PRECIO_99}`
-
-          registrarHistoria(accion, user)
-
+          regOrdenConsulta(uso.ORDEN)
         }
+
       })
       .catch(error => {
         console.log(error)
@@ -324,6 +331,54 @@ const Emision = () => {
       })
 
 
+
+  }
+
+  const regOrdenConsulta = async (orden) => {
+    const consul = {
+
+      CONTRATO: socio.CONTRATO,
+      FECHA: moment().format('YYYY-MM-DD'),
+      HORA: moment().format('HH:mm'),
+      NRO_ORDEN: orden,
+      DESTINO: "",
+      COD_PRES: detalleMed.COD_PRES,
+      IMPORTE: detalleMed.PRECIO_99,
+      ANULADO: 0,
+      OPERADOR: 55,
+      OPE_ANU: 0,
+      DIAGNOSTIC: "",
+      ATENCION: 0,
+      NRO_DNI: socio.NRO_DOC,
+
+    }
+
+    await axios.post(`${ip}api/sgi/servicios/regconsulta`, consul)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Se registro la orden de consulta con exito", "ATENCION")
+
+          let accion = `Se registro una orden de consulta para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el medico: ${detalleMed.NOMBRE}. Coseguro a pagar: ${detalleMed.MAX_DESC}`
+
+          registrarHistoria(accion, user)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar la orden de consulta", "ATENCION")
+      })
+  }
+
+  const traerNOrden = async () => {
+    await axios.get(`${ip}api/sgi/servicios/norden`)
+      .then(res => {
+        guardarNorden(res.data.iduso)
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el N° de Orden", "ATENCION")
+      })
   }
 
 
@@ -378,6 +433,7 @@ const Emision = () => {
               espec={espec}
               medicos={medicos}
               traerMedicosPorSuc={traerMedicosPorSuc}
+              registrarOrdenUsos={registrarOrdenUsos}
             />
           ) : null}
         </>

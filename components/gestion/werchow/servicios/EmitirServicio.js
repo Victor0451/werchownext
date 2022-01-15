@@ -22,6 +22,7 @@ const EmitirServicio = ({
   medicoRef,
   traerDetalleMedSelec,
   detalleMed,
+  registrarOrdenUsos,
 
 }) => {
   if (!ficha) return <Spinner />;
@@ -253,6 +254,7 @@ const EmitirServicio = ({
           medicoRef={medicoRef}
           traerDetalleMedSelec={traerDetalleMedSelec}
           detalleMed={detalleMed}
+          registrarOrdenUsos={registrarOrdenUsos}
         />
       )}
     </div>

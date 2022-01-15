@@ -30,10 +30,10 @@ export default async function sendMail(req, res) {
 
     <div>
     <p><strong><u>Asunto</strong></u>: ${req.body.title}</P> 
-    <p><strong><u>Inicia</strong></u>: ${moment(req.body.start).format(
+    <p><strong><u>Inicia</strong></u>: ${moment(req.body.start).utcOffset("-300").locale("es").format(
       "DD/MM/YYYY HH:mm:ss"
     )}</p>
-    <p><strong><u>Termina</strong></u> :${moment(req.body.end).format(
+    <p><strong><u>Termina</strong></u> :${moment(req.body.end).utcOffset("-300").locale("es").format(
       "DD/MM/YYYY HH:mm:ss"
     )}</p> 
     <p><strong><u>Prioridad</strong></u>: ${req.body.priority == 1

@@ -14,8 +14,9 @@ const OpcionesServicios = ({
   especialidadRef,
   sucursalRef,
   medicoRef,
-              traerDetalleMedSelec,
-              detalleMed,
+  traerDetalleMedSelec,
+  detalleMed,
+  registrarOrdenUsos,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -109,8 +110,9 @@ const OpcionesServicios = ({
         especialidadRef={especialidadRef}
         sucursalRef={sucursalRef}
         medicoRef={medicoRef}
-              traerDetalleMedSelec={traerDetalleMedSelec}
-              detalleMed={detalleMed}
+        traerDetalleMedSelec={traerDetalleMedSelec}
+        detalleMed={detalleMed}
+        registrarOrdenUsos={registrarOrdenUsos}
       />
 
     </div>

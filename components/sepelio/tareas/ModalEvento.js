@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from "moment-timezone";
 import React from 'react'
 import Spinner from '../../layout/Spinner'
 
@@ -29,7 +29,7 @@ const ModalEvento = ({ evento }) => {
                                                 </u>
                                             </strong>
                                         </label>
-                                        <input className="form-control" readOnly value={moment(evento.start).format('DD/MM/YYYY HH:mm:ss')} />
+                                        <input className="form-control" readOnly value={moment(evento.start).utcOffset("-300").locale("es").format('DD/MM/YYYY HH:mm:ss')} />
                                     </div>
 
 
@@ -42,7 +42,7 @@ const ModalEvento = ({ evento }) => {
                                                 </u>
                                             </strong>
                                         </label>
-                                        <input className="form-control" readOnly value={moment(evento.end).format('DD/MM/YYYY HH:mm:ss')} />
+                                        <input className="form-control" readOnly value={moment(evento.end).utcOffset("-300").locale("es").format('DD/MM/YYYY HH:mm:ss')} />
                                     </div>
 
                                     <div className="col-md-2">

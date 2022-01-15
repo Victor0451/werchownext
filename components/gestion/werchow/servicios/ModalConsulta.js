@@ -11,9 +11,8 @@ const ModalConsulta = ({
   medicoRef,
   traerDetalleMedSelec,
   detalleMed,
+  registrarOrdenUsos,
 }) => {
-
-  console.log(detalleMed)
 
   return (
     <div
@@ -116,7 +115,7 @@ const ModalConsulta = ({
                           Dr
                         </u>
                       </label>
-                      <input type="text" className="form-control" value={detalleMed[0].NOMBRE} />
+                      <input type="text" className="form-control" value={detalleMed.NOMBRE} />
                     </div>
 
                     <div className="col-md-8">
@@ -125,7 +124,7 @@ const ModalConsulta = ({
                           Horarios
                         </u>
                       </label>
-                      <input type="text" className="form-control" value={`${detalleMed[0].HORARIO1} - ${detalleMed[0].HORARIO2}`} />
+                      <input type="text" className="form-control" value={`${detalleMed.HORARIO1} - ${detalleMed.HORARIO2}`} />
                     </div>
 
                     <div className="col-md-4 mt-4">
@@ -134,7 +133,7 @@ const ModalConsulta = ({
                           Telefono
                         </u>
                       </label>
-                      <input type="text" className="form-control" value={detalleMed[0].TELEFONOS} />
+                      <input type="text" className="form-control" value={detalleMed.TELEFONOS} />
                     </div>
 
                     <div className="col-md-8 mt-4">
@@ -143,12 +142,12 @@ const ModalConsulta = ({
                           Direccion
                         </u>
                       </label>
-                      <input type="text" className="form-control" value={detalleMed[0].DIRECCION} />
+                      <input type="text" className="form-control" value={detalleMed.DIRECCION} />
                     </div>
 
                     <div className="col-md-12 d-flex justify-content-end mt-4">
                       <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                        <u>Coseguro</u>: ${detalleMed[0].MAX_DESC}
+                        <u>Coseguro</u>: ${detalleMed.MAX_DESC}
                       </div>
                     </div>
 
@@ -161,7 +160,7 @@ const ModalConsulta = ({
 
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={() => registrarOrdenUsos()}>
               Imprimir
             </button>
             <button
