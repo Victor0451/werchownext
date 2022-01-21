@@ -524,6 +524,7 @@ const emisionrecibo = () => {
           listSocios={listSocios}
           listado={listado}
           Seleccionar={Seleccionar}
+          emp={"M"}
 
         />
       ) : flag === true ? (

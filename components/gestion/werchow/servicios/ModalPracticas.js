@@ -1,24 +1,30 @@
 import React from "react";
+import ListadoPracticas from "./ListadoPracticas";
+import ListadoPracticasAgregadas from "./ListadoPracticasAgregadas";
 
-const ModalConsulta = ({
+const ModalPractica = ({
   socio,
   sucursales,
   espec,
   medicos,
+  especialidadRefP,
+  sucursalRefP,
+  medicoRefP,
   traerMedicosPorSuc,
-  especialidadRef,
-  sucursalRef,
-  medicoRef,
   traerDetalleMedSelec,
   detalleMed,
-  registrarOrdenUsos,
-
+  practicas,
+  agregarPractica,
+  pracSocio,
+  eliminarPracticaPrecargado,
+  calcularTotalPracticas,
+  registrarPracticaUso,
 }) => {
 
   return (
     <div
       className="modal fade"
-      id="modalConsulta"
+      id="modalPractica"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -50,7 +56,7 @@ const ModalConsulta = ({
                       Sucursal:
                     </label>
 
-                    <select className="custom-select" ref={sucursalRef}>
+                    <select className="custom-select" ref={sucursalRefP}>
                       <option value="no" >Selecciona una opcion</option>
                       {sucursales.map((s, index) => (
                         <option key={index} value={s.codigo}>{s.sucursal}</option>
@@ -68,7 +74,7 @@ const ModalConsulta = ({
                       Especialidades:
                     </label>
 
-                    <select className="custom-select" ref={especialidadRef} onChange={()=>traerMedicosPorSuc('C')}>
+                    <select className="custom-select" ref={especialidadRefP} onChange={() => traerMedicosPorSuc('P')}>
                       <option selected value="no">Selecciona una opcion</option>
                       {espec.map((s, index) => (
                         <option key={index} value={s.ESPECIAL}>{s.NOMBRE}</option>
@@ -85,7 +91,7 @@ const ModalConsulta = ({
                     <label>
                       Medicos:
                     </label>
-                    <select className="custom-select" ref={medicoRef} onChange={() => traerDetalleMedSelec('C')}>
+                    <select className="custom-select" ref={medicoRefP} onChange={() => traerDetalleMedSelec('P')} >
                       <option selected value="no">Selecciona una opcion</option>
                       {medicos.map((s, index) => (
                         <option key={index} value={s.COD_PRES}>{s.NOMBRE}</option>
@@ -102,58 +108,76 @@ const ModalConsulta = ({
               <>
                 <hr className="mt-4 mb-4" />
 
-                <div className="border border-dark p-4">
+                <div className="row">
 
-                  <h4>
-                    <u>Detalle del Medico</u>
-                  </h4>
+                  <div className=" border border-dark p-4 col-md-6">
 
-                  <div className="row border border-dark p-4 mt-4">
+                    <h4>
+                      <u>Detalle del Medico</u>
+                    </h4>
 
-                    <div className="col-md-4">
-                      <label>
-                        <u>
-                          Dr
-                        </u>
-                      </label>
-                      <input type="text" className="form-control" value={detalleMed.NOMBRE} />
-                    </div>
+                    <div className="row border border-dark p-4 mt-4">
 
-                    <div className="col-md-8">
-                      <label>
-                        <u>
-                          Horarios
-                        </u>
-                      </label>
-                      <input type="text" className="form-control" value={`${detalleMed.HORARIO1} - ${detalleMed.HORARIO2}`} />
-                    </div>
-
-                    <div className="col-md-4 mt-4">
-                      <label>
-                        <u>
-                          Telefono
-                        </u>
-                      </label>
-                      <input type="text" className="form-control" value={detalleMed.TELEFONOS} />
-                    </div>
-
-                    <div className="col-md-8 mt-4">
-                      <label>
-                        <u>
-                          Direccion
-                        </u>
-                      </label>
-                      <input type="text" className="form-control" value={detalleMed.DIRECCION} />
-                    </div>
-
-                    <div className="col-md-12 d-flex justify-content-end mt-4">
-                      <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                        <u>Coseguro</u>: ${detalleMed.MAX_DESC}
+                      <div className="col-md-12">
+                        <label>
+                          <u>
+                            Dr
+                          </u>
+                        </label>
+                        <input type="text" className="form-control" value={detalleMed.NOMBRE} />
                       </div>
-                    </div>
 
+                      <div className="mt-4 col-md-12">
+                        <label>
+                          <u>
+                            Horarios
+                          </u>
+                        </label>
+                        <input type="text" className="form-control" value={`${detalleMed.HORARIO1} - ${detalleMed.HORARIO2}`} />
+                      </div>
+
+                      <div className="col-md-12 mt-4">
+                        <label>
+                          <u>
+                            Telefono
+                          </u>
+                        </label>
+                        <input type="text" className="form-control" value={detalleMed.TELEFONOS} />
+                      </div>
+
+                      <div className="col-md-12 mt-4">
+                        <label>
+                          <u>
+                            Direccion
+                          </u>
+                        </label>
+                        <input type="text" className="form-control" value={detalleMed.DIRECCION} />
+                      </div>
+
+                    </div>
                   </div>
+
+
+                  <ListadoPracticas
+                    listado={practicas}
+                    agregarPractica={agregarPractica}
+
+                  />
+
                 </div>
+
+
+                <div className="mt-4 border border-dark p-1">
+                  <ListadoPracticasAgregadas
+                    listado={pracSocio}
+                    eliminarPracticaPrecargado={eliminarPracticaPrecargado}
+                  />
+                </div>
+
+                <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                  Total Practicas: ${calcularTotalPracticas(pracSocio)}
+                </div>
+
               </>
             ) : null}
 
@@ -161,7 +185,12 @@ const ModalConsulta = ({
 
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => registrarOrdenUsos()}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-dismiss="modal"
+              onClick={registrarPracticaUso}
+            >
               Imprimir
             </button>
             <button
@@ -175,8 +204,10 @@ const ModalConsulta = ({
           </div>
         </div>
       </div>
-    </div >
+    </div>
+
+
   );
 };
 
-export default ModalConsulta;
+export default ModalPractica;

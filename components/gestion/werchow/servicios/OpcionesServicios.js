@@ -1,6 +1,7 @@
 import React from "react";
 import ModalConsulta from "./ModalConsulta";
 import ModalFarmacia from "./ModalFarmacia";
+import ModalPractica from "./ModalPracticas";
 
 const OpcionesServicios = ({
   socio,
@@ -12,11 +13,24 @@ const OpcionesServicios = ({
   modalidadRef,
   descuentoRef,
   especialidadRef,
+  especialidadRefP,
   sucursalRef,
+  sucursalRefP,
   medicoRef,
+  medicoRefP,
   traerDetalleMedSelec,
   detalleMed,
   registrarOrdenUsos,
+  practicas,
+  agregarPractica,
+  pracSocio,
+  eliminarPracticaPrecargado,
+  calcularTotalPracticas,
+  registrarPracticaUso,
+  farmacias,
+  gestionDescuento,
+  descFarma,
+  registrarFarmaciaUso,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -62,12 +76,12 @@ const OpcionesServicios = ({
               <h5 className="card-title">Practicas</h5>
               <p className="card-text">Emitir Orden de Practicas</p>
               <button className="btn btn-primary btn-sm rounded"
-                data-toggle="modal" data-target="#modalFarmacia"
+                data-toggle="modal" data-target="#modalPractica"
               >Generar</button>
             </div>
           </div>
         </div>
-        <div className="col mb-4">
+        {/* <div className="col mb-4">
           <div className="card border border-dark">
             <img src="/img/emision/enfermeria.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
@@ -90,15 +104,21 @@ const OpcionesServicios = ({
               >Generar</button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
 
+      {/* MODALES */}
+
       <ModalFarmacia
         socio={socio}
+        farmacias={farmacias}
         farmaciaRef={farmaciaRef}
         modalidadRef={modalidadRef}
         descuentoRef={descuentoRef}
+        gestionDescuento={gestionDescuento}
+        descFarma={descFarma}
+        registrarFarmaciaUso={registrarFarmaciaUso}
       />
 
       <ModalConsulta
@@ -113,7 +133,30 @@ const OpcionesServicios = ({
         traerDetalleMedSelec={traerDetalleMedSelec}
         detalleMed={detalleMed}
         registrarOrdenUsos={registrarOrdenUsos}
+
       />
+
+      <ModalPractica
+        socio={socio}
+        sucursales={sucursales}
+        espec={espec}
+        medicos={medicos}
+        especialidadRefP={especialidadRefP}
+        sucursalRefP={sucursalRefP}
+        medicoRefP={medicoRefP}
+        traerMedicosPorSuc={traerMedicosPorSuc}
+        traerDetalleMedSelec={traerDetalleMedSelec}
+        detalleMed={detalleMed}
+        practicas={practicas}
+        agregarPractica={agregarPractica}
+        pracSocio={pracSocio}
+        eliminarPracticaPrecargado={eliminarPracticaPrecargado}
+        calcularTotalPracticas={calcularTotalPracticas}
+        registrarPracticaUso={registrarPracticaUso}
+      />
+
+
+      {/* --------------------------- */}
 
     </div>
   );

@@ -2,9 +2,13 @@ import React from "react";
 
 const ModalFarmacia = ({
   socio,
+  farmacias,
   farmaciaRef,
   modalidadRef,
   descuentoRef,
+  gestionDescuento,
+  descFarma,
+  registrarFarmaciaUso,
 }) => {
 
   return (
@@ -32,59 +36,67 @@ const ModalFarmacia = ({
           </div>
           <div className="modal-body p-4">
             <div className="row border border-dark list p-4">
-              <div className="col-md-4">
-                <label>
-                  Farmacia:
-                </label>
 
-                <select className="custom-select" ref={farmaciaRef}>
-                  <option selected value="no">Selecciona una opcion</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
+              {farmacias ? (
+                <div className="col-md-4">
+                  <label>
+                    Farmacias:
+                  </label>
+
+                  <select className="custom-select" ref={farmaciaRef}>
+                    <option selected value="no">Selecciona una opcion</option>
+
+                    {farmacias.map((f, index) => (
+                      <option key={index} value={f.CODIGO}>{f.NOMBRE}</option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <div className="alert alert-info border border-dark col-md-4 text-center text-uppercase">Cargando las farmacias..</div>
+              )}
+
 
               <div className="col-md-4">
                 <label>
                   Modalidad:
                 </label>
 
-                <select className="custom-select" ref={modalidadRef}>
+                <select className="custom-select" ref={modalidadRef} onChange={gestionDescuento}>
                   <option selected value="no">Selecciona una opcion</option>
                   <option value="1">Particular</option>
                   <option value="2">Complemento</option>
                 </select>
               </div>
 
-              <div className="col-md-4">
-                <label>
-                  Descuento:
-                </label>
 
-                <select className="custom-select" ref={descuentoRef}>
-                  <option selected value="no">Selecciona una opcion</option>
-                  <option value="1">20</option>
-                  <option value="2">30</option>
-                  <option value="3">35</option>
+              {descFarma ? (
+                <div className="col-md-4">
+                  <label>
+                    Descuento:
+                  </label>
 
-                  {/* {modalidadRef.current.value === "1" ? (
-                    <>
-                      <option value="1">20</option>
-                      <option value="2">30</option>
-                      <option value="3">35</option>
-                    </>
-                  ) : modalidadRef.current.value === "2" ? (
-                    <option value="1">20</option>
+                  <select className="custom-select" ref={descuentoRef}>
 
-                  ) : (<option selected value="no">Selecciona una opcion</option>)} */}
+                    {descFarma.map((d, index) => (
+                      <option key={index} value={d.value}>{d.label}</option>
+                    ))}
 
-                </select>
-              </div>
+                  </select>
+                </div>
+              ) : (
+                <div className="alert alert-info border border-dark col-md-4 text-center text-uppercase">Selecciones una modalidad para generar los descuentos</div>
+              )}
+
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={registrarFarmaciaUso}
+              data-dismiss="modal"
+            >
+
               Imprimir
             </button>
             <button

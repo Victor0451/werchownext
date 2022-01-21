@@ -146,6 +146,45 @@ const Recuperadoras = ({ usuario, perfil }) => {
           Gestion
         </a>
         <ul className="dropdown-menu">
+
+          {
+            usuario === "pjerez" ? (
+              <>
+                <li className="dropdown-submenu">
+                  <a
+                    href="#"
+                    role="button"
+                    data-toggle="dropdown"
+                    className="  dropdown-toggle dropdown-item text-dark"
+                  >
+                    Servicios
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/emision"
+                        className="dropdown-item text-dark"
+                      >
+                        Emision de Ordenes
+                      </a>
+                    </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/caja"
+                        className="dropdown-item text-dark"
+                      >
+                        Caja Otero
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <hr />
+              </>
+
+            ) : null
+          }
+
           <li className="dropdown-submenu">
             <a
               href="#"
@@ -206,7 +245,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
             <ul className="dropdown-menu">
               <li>
                 <a
-                  href="/gestion/sucursales/tareas/nuevo"
+                  href="/gestion/werchow/sucursales/tareas/nuevo"
                   className="dropdown-item text-dark"
                 >
                   Nueva Tarea
@@ -215,7 +254,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
               <hr />
               <li>
                 <a
-                  href="/gestion/sucursales/tareas/calendario"
+                  href="/gestion/werchow/sucursales/tareas/calendario"
                   className="dropdown-item text-dark"
                 >
                   Calendario
@@ -224,7 +263,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
               <hr />
               <li>
                 <a
-                  href="/gestion/sucursales/tareas/editar"
+                  href="/gestion/werchow/sucursales/tareas/editar"
                   className="dropdown-item text-dark"
                 >
                   Editar Tarea

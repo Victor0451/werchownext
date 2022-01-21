@@ -10,7 +10,9 @@ const BuscarSocio = ({
   titulo,
   listado,
   listSocios,
-  Seleccionar
+  Seleccionar,
+  emp,
+
 }) => {
   return (
     <div className="container border border-dark list mt-4">
@@ -23,7 +25,14 @@ const BuscarSocio = ({
           </h1>
         </div>
         <div className="col-md-4 d-flex justify-content-end">
-          <img src="/img/logom.jpg" className="mutuallogo" />
+          {emp && emp === 'W' ? (
+            <img src="/img/logo.png" className="mt-2 werchowlogo" />
+
+          ) : emp && emp === 'M' ? (
+            <img src="/img/logom.jpg" className="mutuallogo" />
+
+          ) : null}
+
         </div>
       </div>
 
