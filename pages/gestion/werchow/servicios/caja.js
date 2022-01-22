@@ -11,7 +11,7 @@ import NuevaCaja from "../../../../components/gestion/werchow/caja/NuevaCaja";
 import FormCaja from "../../../../components/gestion/werchow/caja/FormCaja";
 
 
-const caja = () => {
+const Caja = () => {
 
     let descripcionIRef = React.createRef()
     let cantidadIRef = React.createRef()
@@ -26,7 +26,8 @@ const caja = () => {
     const [ingresos, guardarIngresos] = useState([]);
     const [egresos, guardarEgresos] = useState([])
     const [errores, guadrarErrores] = useState(null);
-
+    const [fechaOrd, guadrarFechaOrd] = useState(null);
+    const [flag, guardarFlag] = useState(false);
 
 
     const traerOrdenesSinRendir = async () => {
@@ -46,6 +47,7 @@ const caja = () => {
         await axios.get(`${ip}api/sgi/servicios/ordenespordia/${fecha}`)
             .then(res => {
                 guardarIngresos([...ingresos, res.data[0]])
+                guadrarFechaOrd(fecha)
             })
             .catch(error => {
                 console.log(error)
@@ -127,61 +129,97 @@ const caja = () => {
 
     }
 
-
     const regCaja = async () => {
 
-        let caja = {
-            SUCURSAL: 'O',
-            PUESTO: 30,
-            CODIGO: 0,
-            MOVIM: '',
-            CUENTA: '',
-            IMPORTE: '',
-            TIPO: '',
-            SERIE: 0,
-            NUMERO: 0,
-            CUIT: '',
-            DETALLE: '',
-            DET_AUX: '',
-            FECHA: moment().format('YYYY-MM-DD'),
-            FEC_COMP: '',
-            HORA: moment().format('HH:mm'),
-            ORIGEN: '',
-            OPERADOR: user.codigo,
-            ASIENTO: 0,
-            EXENTO: '',
-            CANT_AFIL: 0,
-            CAE: '',
-            VTO_CAE: '',
-        }
+        if (flag === false) {
 
-        for (let i = 0; i < ingresos.length; i++) {
 
-            caja.CODIGO = 53
-            caja.CUENTA = '0201020200'
-            caja.MOVIM = 'I'
-            caja.IMPORTE = ingresos[i].IMPORTE
+
+            let totI = 0
+            let totE = 0
+
+            let caja = {
+                SUCURSAL: 'O',
+                PUESTO: 30,
+                CODIGO: 0,
+                MOVIM: '',
+                CUENTA: '',
+                IMPORTE: '',
+                TIPO: '',
+                SERIE: 0,
+                NUMERO: 0,
+                CUIT: '',
+                DETALLE: '',
+                DET_AUX: '',
+                FECHA: moment().format('YYYY-MM-DD'),
+                FEC_COMP: '',
+                HORA: moment().format('HH:mm'),
+                ORIGEN: '',
+                OPERADOR: user.codigo,
+                ASIENTO: 0,
+                EXENTO: '',
+                CANT_AFIL: 0,
+                CAE: '',
+                VTO_CAE: '',
+            }
+
+            for (let i = 0; i < ingresos.length; i++) {
+
+                caja.CODIGO = 53
+                caja.CUENTA = '0201020200'
+                caja.MOVIM = 'I'
+                caja.IMPORTE = ingresos[i].IMPORTE
+                caja.TIPO = 'X'
+                caja.DETALLE = ingresos[i].SERVICIO
+                caja.NUMERO = 1
+
+                totI += parseFloat(ingresos[i].IMPORTE)
+
+                postCaja(caja, 0)
+
+
+            }
+
+            for (let j = 0; j < egresos.length; j++) {
+                caja.CODIGO = 60
+                caja.CUENTA = '0505060600'
+                caja.MOVIM = 'E'
+                caja.IMPORTE = egresos[j].importe
+                caja.TIPO = 'A'
+                caja.DETALLE = egresos[j].detalle
+                caja.NUMERO = 1
+
+                totE += parseFloat(egresos[j].importe)
+
+                postCaja(caja, 0)
+
+            }
+
+            caja.CODIGO = 718
+            caja.CUENTA = '0101010700'
+            caja.MOVIM = 'E'
+            caja.IMPORTE = totI - totE
             caja.TIPO = 'X'
-            caja.DETALLE = ingresos[i].SERVICIO
+            caja.DETALLE = 'VALORES A DEPOSITAR'
             caja.NUMERO = 1
 
             postCaja(caja, 0)
 
 
-        }
-
-        for (let j = 0; j < egresos.length; j++) {
-            caja.CODIGO = 60
-            caja.CUENTA = '0505060600'
-            caja.MOVIM = 'E'
-            caja.IMPORTE = egresos[j].importe
-            caja.TIPO = 'A'
-            caja.DETALLE = egresos[j].detalle
-            caja.NUMERO = 1
+            caja.CODIGO = -1
+            caja.CUENTA = ''
+            caja.MOVIM = 'I'
+            caja.IMPORTE = 0
+            caja.TIPO = ''
+            caja.DETALLE = 'SALDO INICIAL'
+            caja.NUMERO = 0
 
             postCaja(caja, 1)
 
+        } else if (flag === true) {
+            toastr.warning(`Ya se genero una caja con la fecha en el dia de hoy (${moment().format('DD/MM/YYYY')})`, "ATENCION")
         }
+
     }
 
     const postCaja = async (caja, f) => {
@@ -189,12 +227,55 @@ const caja = () => {
             .then(res => {
                 if (f === 1 && res.status === 200) {
                     toastr.success("Se registraron los movimientos en la caja correctamente", "ATENCION")
+
+                    updateRendido()
+
+                    setTimeout(() => {
+
+                        Router.push(`/gestion/werchow/servicios/listadocajas`)
+
+                    }, 500);
+
                 }
             })
             .catch(error => {
                 console.log(error)
                 toastr.error("Ocurrio un error al reg la caja", "ATENCION")
             })
+    }
+
+    const updateRendido = async () => {
+        await axios.put(`${ip}api/sgi/servicios/updaterendido/${fechaOrd}`)
+            .then(res => {
+                if (res.data) {
+                    toastr.info(`Se marcaron como rendidas los movimientos del dia ${moment(fechaOrd).format('DD/MM/YYYY')}`, "ATENCION")
+
+                    traerOrdenesSinRendir()
+                }
+            })
+            .catch(error => {
+                console.log(error)
+
+                toastr.error("Ocurrio un error al impactar como rendido los movimientos", "ATENCION")
+            })
+    }
+
+    const chekCaja = async () => {
+
+        let fecha = moment().format('YYYY-MM-DD')
+
+        await axios.get(`${ip}api/sgi/servicios/chekcaja/${fecha}`)
+            .then(res => {
+
+                if (res.data.length > 0) {
+                    guardarFlag(true)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al chequear la caja", "ATENCION")
+            })
+
     }
 
     let token = jsCookie.get("token");
@@ -211,6 +292,7 @@ const caja = () => {
             }
 
             traerOrdenesSinRendir()
+            chekCaja()
         }
     }, []);
 
@@ -221,6 +303,7 @@ const caja = () => {
             <NuevaCaja
                 listado={ordenes}
                 traerOrdenesPorDia={traerOrdenesPorDia}
+                flag={flag}
             />
 
             {ingresos ? (
@@ -275,4 +358,4 @@ const caja = () => {
     )
 }
 
-export default caja
+export default Caja

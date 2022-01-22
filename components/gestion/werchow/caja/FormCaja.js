@@ -16,15 +16,19 @@ const FormCaja = ({
     importeERef,
     regEgreso,
     regIngreso,
-    calcTotalMovimientos
+    calcTotalMovimientos,
+
 
 }) => {
     return (
         <div className='mt-4 container border border-dark list p-4'>
 
+
+
+
             <h4>
                 <strong>
-                    <u>Caja Ortero</u>: {moment().format('DD/MM/YYYY')}
+                    <u>Caja Otero</u>: {moment().format('DD/MM/YYYY')}
                 </strong>
             </h4>
 

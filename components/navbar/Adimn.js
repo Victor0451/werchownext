@@ -266,6 +266,15 @@ const Adimn = () => {
                       Caja Otero
                     </a>
                   </li>
+                  <hr />
+                  <li>
+                    <a
+                      href="/gestion/werchow/servicios/listadocajas"
+                      className="dropdown-item text-dark"
+                    >
+                      Listado de Cajas Generadas
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>

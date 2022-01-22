@@ -39,8 +39,50 @@ const EmitirServicio = ({
 }) => {
   if (!ficha) return <Spinner />;
 
+
+
   return (
     <div className="container border border-dark list p-4 mt-4">
+
+      {ficha[0].GRUPO === 1001 ||
+        ficha[0].GRUPO === 3444 ||
+        ficha[0].GRUPO === 3666 ||
+        ficha[0].GRUPO === 3777 ||
+        ficha[0].GRUPO === 3888 ||
+        ficha[0].GRUPO === 3999 ||
+        ficha[0].GRUPO === 4004 ||
+        ficha[0].GRUPO === 7777 ||
+        ficha[0].GRUPO === 8500
+        ? (
+          <div
+            className="mt-4 mb-4 alert alert-danger alert-dismissible border border-dark fade show container"
+            role="alert"
+          >
+            <h3 className="alert-heading mb-4">
+              <strong>
+                <u>ATENCION!!</u>
+              </strong>
+            </h3>
+            <button
+              type="button"
+              className="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5>
+              El afiliado esta en estado de morosidad!!!.
+            </h5>
+          </div>
+        ) :
+        (
+          <div className="alert alert-info border border-dark text-center text-uppercase">
+            El afiliado no es moroso, pero igual verifica si esta al dia con sus pagos!
+          </div>
+        )
+      }
+
       <div className="row">
         <div className="col-md-8">
           <h3>

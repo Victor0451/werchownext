@@ -8,7 +8,7 @@ import Router, { useRouter } from "next/router";
 import { ip } from "../../../../config/config";
 import ImpOrdenConsulta from '../../../../components/gestion/werchow/servicios/ImpOrdenConsulta';
 
-const orden = () => {
+const Orden = () => {
 
     const [orden, guardarOrden] = useState(null)
     const [socio, guardarSocio] = useState(null)
@@ -192,4 +192,4 @@ const orden = () => {
     )
 }
 
-export default orden
+export default Orden

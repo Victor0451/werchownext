@@ -4,6 +4,7 @@ import ListadoOrdenesSinRendir from './ListadoOrdenesSinRendir'
 const NuevaCaja = ({
     listado,
     traerOrdenesPorDia,
+    flag
 
 }) => {
     return (
@@ -15,6 +16,15 @@ const NuevaCaja = ({
                 </strong>
             </h2>
 
+            {
+                flag === true ? (
+                    <div className="mt-4 mb-4 alert alert-warning border border-dark text-center text-uppercase">
+                        Ya se genero una caja con la fecha de hoy
+                    </div>
+
+                ) : null
+            }
+
             <div className='mt-4 border border-dark p-4'>
 
                 <h4>
@@ -25,7 +35,7 @@ const NuevaCaja = ({
 
                 <ListadoOrdenesSinRendir
                     listado={listado}
-                traerOrdenesPorDia={traerOrdenesPorDia}
+                    traerOrdenesPorDia={traerOrdenesPorDia}
 
                 />
 
