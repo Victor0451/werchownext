@@ -270,34 +270,37 @@ const FormAltaServicio = ({
             grupo.CODIGO === 3777 ||
             grupo.CODIGO === 3888 ||
             grupo.CODIGO === 3999 ||
-            grupo.CODIGO === 4004 ? (
-            <div
-              className="mt-4 alert alert-danger alert-dismissible border border-dark fade show container"
-              role="alert"
-            >
-              <h3 className="alert-heading mb-4">
-                <strong>
-                  <u>ATENCION!!</u>
-                </strong>
-              </h3>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="alert"
-                aria-label="Close"
+            grupo.CODIGO === 4004 ||
+            grupo.CODIGO === 7777 ||
+            grupo.CODIGO === 8500
+            ? (
+              <div
+                className="mt-4 alert alert-danger alert-dismissible border border-dark fade show container"
+                role="alert"
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h5>
-                El afiliado esta en estado de morosidad!!!. GRUPO:{" "}
-                {grupo.CODIGO} - {grupo.DESCRIP}
-              </h5>
-            </div>
-          ) : (
-            <div className="alert alert-info border border-dark text-center text-uppercase">
-              GRUPO: {grupo.CODIGO} - {grupo.DESCRIP}
-            </div>
-          )}
+                <h3 className="alert-heading mb-4">
+                  <strong>
+                    <u>ATENCION!!</u>
+                  </strong>
+                </h3>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h5>
+                  El afiliado esta en estado de morosidad!!!. GRUPO:{" "}
+                  {grupo.CODIGO} - {grupo.DESCRIP}
+                </h5>
+              </div>
+            ) : (
+              <div className="alert alert-info border border-dark text-center text-uppercase">
+                GRUPO: {grupo.CODIGO} - {grupo.DESCRIP}
+              </div>
+            )}
         </div>
       ) : null}
       <div className="row border border-dark p-4 d-flex justify-content-center">
@@ -1087,7 +1090,7 @@ const FormAltaServicio = ({
           </div>
         ) : null}
 
-        <div className="container row  p-4 d-flex justify-content-center">
+        <div className="row border border-dark p-4 d-flex justify-content-center">
           <button type="submit" className="btn btn-primary col-5 mr-1">
             Registrar
           </button>

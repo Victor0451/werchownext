@@ -32,16 +32,30 @@ const emisionrecibo = () => {
 
 
 
-  const traerPagosM = async (contrato) => {
-    await axios
-      .get(`${ip}api/werchow/pagos/pagosmutual/${contrato}`)
-      .then((res) => {
-        guardarPagos(res.data);
-      })
-      .catch((error) => {
-        toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
-        console.log(error);
-      });
+  const traerPagosM = async (contrato, f) => {
+
+
+    if (f === 'P') {
+      await axios
+        .get(`${ip}api/werchow/pagos/pagosmutual/${contrato}`)
+        .then((res) => {
+          guardarPagos(res.data);
+        })
+        .catch((error) => {
+          toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+          console.log(error);
+        });
+    } else if (f === 'B') {
+      await axios
+        .get(`${ip}api/werchow/pagosbco/pagosbcom/${contrato}`)
+        .then((res) => {
+          guardarPagos(res.data);
+        })
+        .catch((error) => {
+          toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+          console.log(error);
+        });
+    }
   };
 
   const traerAdhsM = async (contrato) => {
@@ -66,6 +80,57 @@ const emisionrecibo = () => {
         console.log(error);
       });
   };
+
+  const traerPagos = async (contrato, f) => {
+
+    if (f === 'P') {
+      await axios
+        .get(`${ip}api/werchow/pagos/pagos/${contrato}`)
+        .then((res) => {
+          guardarPagos(res.data);
+        })
+        .catch((error) => {
+          toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+          console.log(error);
+        });
+    } else if (f === 'B') {
+      await axios
+        .get(`${ip}api/werchow/pagobco/pagosbco/${contrato}`)
+        .then((res) => {
+          guardarPagos(res.data);
+        })
+        .catch((error) => {
+          toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+          console.log(error);
+        });
+    }
+
+
+  };
+
+  const traerAdhs = async (contrato) => {
+    await axios
+      .get(`${ip}api/werchow/maestro/adherentesm/${contrato}`)
+      .then((res) => {
+        guardarAdhs(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const traerCuoFija = async (contrato) => {
+    await axios
+      .get(`${ip}api/werchow/cuofija/cuowerchow/${contrato}`)
+      .then((res) => {
+        guardarCuoFija(res.data);
+      })
+      .catch((error) => {
+        toastr.error("Ocurrio un error al tarer la cuota", "ATENCION");
+        console.log(error);
+      });
+  };
+
 
   const buscarTitularM = async (e) => {
     e.preventDefault();
@@ -94,8 +159,6 @@ const emisionrecibo = () => {
 
             let ficha = res.data[0][0];
             guardarFicha(ficha);
-
-            traerPagosM(ficha.CONTRATO);
 
             traerAdhsM(ficha.CONTRATO);
 
@@ -126,6 +189,9 @@ const emisionrecibo = () => {
               ficha.GRUPO === 3900 ||
               ficha.GRUPO === 4000
             ) {
+
+              traerPagosM(ficha.CONTRATO, 'B');
+
               toastr.warning(
                 `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
@@ -138,6 +204,13 @@ const emisionrecibo = () => {
                 `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
+
+              traerPagosM(ficha.CONTRATO, 'B');
+
+            } else {
+
+              traerPagosM(ficha.CONTRATO, 'P');
+
             }
           }
         })
@@ -178,7 +251,6 @@ const emisionrecibo = () => {
             let ficha = res.data[0][0];
             guardarFicha(ficha);
 
-            traerPagosM(ficha.CONTRATO);
 
             traerAdhsM(ficha.CONTRATO);
 
@@ -213,6 +285,8 @@ const emisionrecibo = () => {
                 `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
+              traerPagosM(ficha.CONTRATO, 'B');
+
             } else if (
               ficha.GRUPO >= 5000 &&
               ficha.GRUPO < 7777
@@ -221,6 +295,188 @@ const emisionrecibo = () => {
                 `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
+              traerPagosM(ficha.CONTRATO, 'B');
+
+            } else {
+              traerPagosM(ficha.CONTRATO, 'P');
+
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+    }
+  };
+
+  const buscarTitular = async (e) => {
+    e.preventDefault();
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+    guardarCuoFija(null);
+
+    if (contratoRef.current.value !== "") {
+      let contrato = contratoRef.current.value;
+
+      await axios
+        .get(`${ip}api/werchow/maestro/titular/${contrato}`)
+        .then((res) => {
+          if (res.data[0].length === 0) {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          } else {
+            guardarFlag(true);
+
+            let ficha = res.data[0][0];
+            guardarFicha(ficha);
+
+            traerAdhs(ficha.CONTRATO);
+
+            traerCuoFija(ficha.CONTRATO);
+
+            if (
+              ficha.GRUPO === 1001 ||
+              ficha.GRUPO === 1005 ||
+              ficha.GRUPO === 1006 ||
+              ficha.GRUPO === 3444 ||
+              ficha.GRUPO === 3666 ||
+              ficha.GRUPO === 3777 ||
+              ficha.GRUPO === 3888 ||
+              ficha.GRUPO === 3999 ||
+              ficha.GRUPO === 4004 ||
+              ficha.GRUPO === 7777 ||
+              ficha.GRUPO === 8500
+            ) {
+              toastr.warning(
+                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                "ATENCION"
+              );
+            } else if (
+              ficha.GRUPO === 3400 ||
+              ficha.GRUPO === 3600 ||
+              ficha.GRUPO === 3700 ||
+              ficha.GRUPO === 3800 ||
+              ficha.GRUPO === 3900 ||
+              ficha.GRUPO === 4000
+            ) {
+              toastr.warning(
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+
+              traerPagos(ficha.CONTRATO, 'B');
+
+
+            } else if (
+              ficha.GRUPO >= 5000 &&
+              ficha.GRUPO < 7777
+            ) {
+              toastr.warning(
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+              traerPagos(ficha.CONTRATO, 'B');
+            } else {
+              traerPagos(ficha.CONTRATO, 'P');
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+    }
+  };
+
+  const buscarTitularDni = async (e) => {
+    e.preventDefault();
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+    guardarCuoFija(null);
+
+    if (dniRef.current.value !== "") {
+      let dni = dniRef.current.value;
+
+      await axios
+        .get(`${ip}api/werchow/maestro/titulardni/${dni}`)
+        .then((res) => {
+          if (res.data[0].length === 0) {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          } else {
+            guardarFlag(true);
+
+            let ficha = res.data[0][0];
+            guardarFicha(ficha);
+
+
+            traerAdhs(ficha.CONTRATO);
+
+            traerCuoFija(ficha.CONTRATO);
+
+            if (
+              ficha.GRUPO === 1001 ||
+              ficha.GRUPO === 1005 ||
+              ficha.GRUPO === 1006 ||
+              ficha.GRUPO === 3444 ||
+              ficha.GRUPO === 3666 ||
+              ficha.GRUPO === 3777 ||
+              ficha.GRUPO === 3888 ||
+              ficha.GRUPO === 3999 ||
+              ficha.GRUPO === 4004 ||
+              ficha.GRUPO === 7777 ||
+              ficha.GRUPO === 8500
+            ) {
+              toastr.warning(
+                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                "ATENCION"
+              );
+            } else if (
+              ficha.GRUPO === 3400 ||
+              ficha.GRUPO === 3600 ||
+              ficha.GRUPO === 3700 ||
+              ficha.GRUPO === 3800 ||
+              ficha.GRUPO === 3900 ||
+              ficha.GRUPO === 4000
+            ) {
+              toastr.warning(
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+              traerPagos(ficha.CONTRATO, 'B');
+
+            } else if (
+              ficha.GRUPO >= 5000 &&
+              ficha.GRUPO < 7777
+            ) {
+              toastr.warning(
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+              traerPagos(ficha.CONTRATO, 'B');
+
+            } else {
+              traerPagos(ficha.CONTRATO, 'P');
+
             }
           }
         })
@@ -377,6 +633,17 @@ const emisionrecibo = () => {
   };
 
   const listSocios = async () => {
+    await axios.get(`${ip}api/werchow/maestro/titulares`)
+      .then(res => {
+        guardarListSocios(res.data[0])
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de socios", "ATENCION")
+      })
+  }
+
+  const listSociosM = async () => {
     await axios.get(`${ip}api/werchow/maestro/titularesm`)
       .then(res => {
         guardarListSocios(res.data[0])
@@ -387,7 +654,7 @@ const emisionrecibo = () => {
       })
   }
 
-  const Seleccionar = async (contrato) => {
+  const SeleccionarM = async (contrato) => {
 
     guardarFicha(null);
     guardarErrores(null);
@@ -411,7 +678,7 @@ const emisionrecibo = () => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
 
-          traerPagosM(ficha.CONTRATO);
+
 
           traerAdhsM(ficha.CONTRATO);
 
@@ -446,6 +713,7 @@ const emisionrecibo = () => {
               `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
               "ATENCION"
             );
+            traerPagosM(ficha.CONTRATO, 'B');
           } else if (
             ficha.GRUPO >= 5000 &&
             ficha.GRUPO < 7777
@@ -454,6 +722,92 @@ const emisionrecibo = () => {
               `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
               "ATENCION"
             );
+            traerPagosM(ficha.CONTRATO, 'B');
+
+          } else {
+            traerPagosM(ficha.CONTRATO, 'P');
+
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const Seleccionar = async (contrato) => {
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+    guardarCuoFija(null);
+
+    await axios
+      .get(`${ip}api/werchow/maestro/titular/${contrato}`)
+      .then((res) => {
+        if (res.data[0].length === 0) {
+          toastr.error(
+            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+            "ATENCION"
+          );
+          const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+          guardarErrores(errores);
+        } else {
+          guardarFlag(true);
+
+          let ficha = res.data[0][0];
+          guardarFicha(ficha);
+
+
+
+          traerAdhs(ficha.CONTRATO);
+
+          traerCuoFija(ficha.CONTRATO);
+
+          if (
+            ficha.GRUPO === 1001 ||
+            ficha.GRUPO === 1005 ||
+            ficha.GRUPO === 1006 ||
+            ficha.GRUPO === 3444 ||
+            ficha.GRUPO === 3666 ||
+            ficha.GRUPO === 3777 ||
+            ficha.GRUPO === 3888 ||
+            ficha.GRUPO === 3999 ||
+            ficha.GRUPO === 4004 ||
+            ficha.GRUPO === 7777 ||
+            ficha.GRUPO === 8500
+          ) {
+            toastr.warning(
+              "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+              "ATENCION"
+            );
+          } else if (
+            ficha.GRUPO === 3400 ||
+            ficha.GRUPO === 3600 ||
+            ficha.GRUPO === 3700 ||
+            ficha.GRUPO === 3800 ||
+            ficha.GRUPO === 3900 ||
+            ficha.GRUPO === 4000
+          ) {
+            toastr.warning(
+              `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+            traerPagos(ficha.CONTRATO, 'B');
+          } else if (
+            ficha.GRUPO >= 5000 &&
+            ficha.GRUPO < 7777
+          ) {
+            toastr.warning(
+              `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+            traerPagos(ficha.CONTRATO, 'B');
+
+          } else {
+            traerPagos(ficha.CONTRATO, 'P');
+
           }
         }
       })
@@ -519,12 +873,16 @@ const emisionrecibo = () => {
           dniRef={dniRef}
           buscarTitularM={buscarTitularM}
           buscarTitularDniM={buscarTitularDniM}
+          buscarTitular={buscarTitular}
+          buscarTitularDni={buscarTitularDni}
           errores={errores}
           titulo={"Recibos"}
           listSocios={listSocios}
+          listSociosM={listSociosM}
           listado={listado}
           Seleccionar={Seleccionar}
-          emp={"M"}
+          SeleccionarM={SeleccionarM}
+          emp={"W"}
 
         />
       ) : flag === true ? (

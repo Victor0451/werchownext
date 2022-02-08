@@ -212,70 +212,19 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
-              WERCHOW
+              Caja
             </a>
             <ul className="dropdown-menu">
-              <li className="dropdown-submenu">
-                <a
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  className="  dropdown-toggle dropdown-item text-dark"
-                >
-                  Caja
+              <li>
+                <a href="/gestion/werchow/sucursales/caja/nueva" className="dropdown-item text-dark">
+                  Registrar Caja
                 </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a href="/gestion/werchow/sucursales/caja/nueva" className="dropdown-item text-dark">
-                      Registrar Caja
-                    </a>
-                  </li>
-                  <hr />
-                  <li>
-                    <a href="/gestion/werchow/sucursales/caja/listado" className="dropdown-item text-dark">
-                      Listado de Cajas
-                    </a>
-                  </li>
-                </ul>
               </li>
               <hr />
-              <li className="dropdown-submenu">
-                <a
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  className="  dropdown-toggle dropdown-item text-dark"
-                >
-                  Servicios
+              <li>
+                <a href="/gestion/werchow/sucursales/caja/listado" className="dropdown-item text-dark">
+                  Listado de Cajas
                 </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a
-                      href="/gestion/werchow/servicios/emision"
-                      className="dropdown-item text-dark"
-                    >
-                      Emision de Ordenes
-                    </a>
-                  </li>
-                  <hr />
-                  <li>
-                    <a
-                      href="/gestion/werchow/servicios/caja"
-                      className="dropdown-item text-dark"
-                    >
-                      Caja Otero
-                    </a>
-                  </li>
-                  <hr />
-                  <li>
-                    <a
-                      href="/gestion/werchow/servicios/listadocajas"
-                      className="dropdown-item text-dark"
-                    >
-                      Listado de Cajas Generadas
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </li>
@@ -287,19 +236,47 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
-              MUTUAL
+              Servicios
             </a>
             <ul className="dropdown-menu">
               <li>
                 <a
-                  href="/gestion/mutual/cobranza/emisionrecibo"
+                  href="/gestion/werchow/servicios/emision"
                   className="dropdown-item text-dark"
                 >
-                  Emision de Recibo
+                  Emision de Ordenes
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/werchow/servicios/caja"
+                  className="dropdown-item text-dark"
+                >
+                  Caja Otero
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/werchow/servicios/listadocajas"
+                  className="dropdown-item text-dark"
+                >
+                  Listado de Cajas Generadas
                 </a>
               </li>
             </ul>
           </li>
+          <hr />
+          <li>
+            <a
+              href="/gestion/mutual/cobranza/emisionrecibo"
+              className="dropdown-item text-dark"
+            >
+              Recibo
+            </a>
+          </li>
+
           <hr />
           <li className="dropdown-submenu">
             <a

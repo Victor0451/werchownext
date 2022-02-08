@@ -6,16 +6,20 @@ const BuscarSocio = ({
   dniRef,
   buscarTitularM,
   buscarTitularDniM,
+  buscarTitular,
+  buscarTitularDni,
   errores,
   titulo,
   listado,
   listSocios,
+  listSociosM,
   Seleccionar,
+  SeleccionarM,
   emp,
 
 }) => {
   return (
-    <div className="container border border-dark list mt-4">
+    <div className="container border border-dark list mt-4 p-4">
       <div className="row">
         <div className="col-md-8">
           <h1 className="mt-2 mb-4">
@@ -69,12 +73,20 @@ const BuscarSocio = ({
                 />
               </div>
 
-              <div className="form-group col-md-4 mt-4">
+              <div className="form-group col-md-2 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  onClick={buscarTitular}
+                >
+                  Werchow
+                </button>
+              </div>
+              <div className="form-group col-md-2 mt-4">
                 <button
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularM}
                 >
-                  Buscar Socio
+                  Mutual
                 </button>
               </div>
               {errores && (
@@ -114,12 +126,20 @@ const BuscarSocio = ({
                 />
               </div>
 
-              <div className="form-group col-md-4 mt-4">
+              <div className="form-group col-md-2 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  onClick={buscarTitularDni}
+                >
+                  Werchow
+                </button>
+              </div>
+              <div className="form-group col-md-2 mt-4">
                 <button
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDniM}
                 >
-                  Buscar Socio
+                  Mutual
                 </button>
               </div>
               {errores && (
@@ -153,7 +173,18 @@ const BuscarSocio = ({
                   onClick={() => listSocios()}
 
                 >
-                  Ver Socios
+                  Werchow
+                </button>
+              </div>
+              <div className="form-group col-md-4 mt-4">
+                <button
+                  className="btn btn-block btn-primary"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  onClick={() => listSociosM()}
+
+                >
+                  Mutual
                 </button>
               </div>
 
@@ -162,7 +193,12 @@ const BuscarSocio = ({
         </div>
       </div>
 
-      <ListadoSocios listado={listado} Seleccionar={Seleccionar} />
+      <ListadoSocios
+        listado={listado}
+        Seleccionar={Seleccionar}
+        SeleccionarM={SeleccionarM}
+
+      />
 
     </div>
   );

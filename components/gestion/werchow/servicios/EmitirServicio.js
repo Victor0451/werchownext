@@ -83,7 +83,7 @@ const EmitirServicio = ({
         )
       }
 
-      <div className="row">
+      <div className="row mt-4 border border-dark p-4">
         <div className="col-md-8">
           <h3>
             <strong>

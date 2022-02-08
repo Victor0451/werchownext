@@ -5,7 +5,7 @@ import Spinner from "../../../layout/Spinner";
 import moment from "moment";
 
 
-const ListadoSocios = ({ listado, Seleccionar }) => {
+const ListadoSocios = ({ listado, Seleccionar, SeleccionarM }) => {
 
     return (
         <div
@@ -113,14 +113,26 @@ const ListadoSocios = ({ listado, Seleccionar }) => {
 
                                                     Cell: (row) => (
                                                         <div>
-                                                            <button
-                                                                className="btn btn-sm btn-info"
-                                                                data-toggle="modal"
-                                                                data-target="#exampleModal"
-                                                                onClick={() => Seleccionar(row.original.CONTRATO)}
-                                                            >
-                                                                Seleccionar
-                                                            </button>
+                                                            {row.original.EMP === 'W' ? (
+                                                                <button
+                                                                    className="btn btn-sm btn-info"
+                                                                    data-toggle="modal"
+                                                                    data-target="#exampleModal"
+                                                                    onClick={() => Seleccionar(row.original.CONTRATO)}
+                                                                >
+                                                                    Seleccionar
+                                                                </button>
+                                                            ) : row.original.EMP === 'M' ? (
+                                                                <button
+                                                                    className="btn btn-sm btn-info"
+                                                                    data-toggle="modal"
+                                                                    data-target="#exampleModal"
+                                                                    onClick={() => SeleccionarM(row.original.CONTRATO)}
+                                                                >
+                                                                    Seleccionar
+                                                                </button>
+                                                            ) : null}
+
                                                         </div>
                                                     ),
                                                 },

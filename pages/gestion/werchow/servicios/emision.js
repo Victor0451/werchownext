@@ -151,40 +151,199 @@ const Emision = () => {
 
             traerNOrden()
 
-            let ficha = res.data[0][0];
+            let ficha = res.data[0];
             guardarFicha(ficha);
 
-            traerPagos(ficha.CONTRATO);
-
-            traerAdhs(ficha.CONTRATO);
+            traerAdhs(ficha[0].CONTRATO);
 
             if (
-              ficha.GRUPO === 1001 ||
-              ficha.GRUPO === 1005 ||
-              ficha.GRUPO === 1006 ||
-              ficha.GRUPO === 3444 ||
-              ficha.GRUPO === 3666 ||
-              ficha.GRUPO === 3777 ||
-              ficha.GRUPO === 3888 ||
-              ficha.GRUPO === 3999 ||
-              ficha.GRUPO === 4004
+              ficha[0].GRUPO === 1001 ||
+              ficha[0].GRUPO === 1005 ||
+              ficha[0].GRUPO === 1006 ||
+              ficha[0].GRUPO === 3444 ||
+              ficha[0].GRUPO === 3666 ||
+              ficha[0].GRUPO === 3777 ||
+              ficha[0].GRUPO === 3888 ||
+              ficha[0].GRUPO === 3999 ||
+              ficha[0].GRUPO === 4004 ||
+              ficha[0].GRUPO === 7777 ||
+              ficha[0].GRUPO === 8500
             ) {
               toastr.warning(
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
                 "ATENCION"
               );
             } else if (
-              ficha.GRUPO === 3400 ||
-              ficha.GRUPO === 3600 ||
-              ficha.GRUPO === 3700 ||
-              ficha.GRUPO === 3800 ||
-              ficha.GRUPO === 3900 ||
-              ficha.GRUPO === 4000
+              ficha[0].GRUPO === 3400 ||
+              ficha[0].GRUPO === 3600 ||
+              ficha[0].GRUPO === 3700 ||
+              ficha[0].GRUPO === 3800 ||
+              ficha[0].GRUPO === 3900 ||
+              ficha[0].GRUPO === 4000 ||
+              ficha[0].GRUPO > 5000
+
             ) {
               toastr.warning(
                 `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
                 "ATENCION"
               );
+              traerPagosBco(ficha[0].CONTRATO);
+            } else {
+              traerPagos(ficha[0].CONTRATO);
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+    }
+  };
+
+  const buscarTitularM = async (e) => {
+    e.preventDefault();
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+
+    if (contratoRef.current.value !== "") {
+      let contrato = contratoRef.current.value;
+
+      await axios
+        .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
+        .then((res) => {
+          if (res.data[0].length === 0) {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          } else {
+            guardarFlag(true);
+
+            traerNOrden()
+
+            let ficha = res.data[0];
+            guardarFicha(ficha);
+
+            traerAdhs(ficha[0].CONTRATO);
+
+            if (
+              ficha[0].GRUPO === 1001 ||
+              ficha[0].GRUPO === 1005 ||
+              ficha[0].GRUPO === 1006 ||
+              ficha[0].GRUPO === 3444 ||
+              ficha[0].GRUPO === 3666 ||
+              ficha[0].GRUPO === 3777 ||
+              ficha[0].GRUPO === 3888 ||
+              ficha[0].GRUPO === 3999 ||
+              ficha[0].GRUPO === 4004
+            ) {
+              toastr.warning(
+                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                "ATENCION"
+              );
+            } else if (
+              ficha[0].GRUPO === 3400 ||
+              ficha[0].GRUPO === 3600 ||
+              ficha[0].GRUPO === 3700 ||
+              ficha[0].GRUPO === 3800 ||
+              ficha[0].GRUPO === 3900 ||
+              ficha[0].GRUPO === 4000 ||
+              ficha[0].GRUPO > 5000
+            ) {
+              toastr.warning(
+                `El socio usa tarjeta como medio de pago - grupo ${ficha[0].GRUPO}`,
+                "ATENCION"
+              );
+              traerPagosBcoM(ficha[0].CONTRATO);
+            } else if (ficha[0].GRUPO === 6) {
+              toastr.warning(
+                `El socio es policia - grupo ${ficha[0].GRUPO}`,
+                "ATENCION"
+              );
+              traerPagosBcoM(ficha[0].CONTRATO);
+            }
+            else if (ficha[0].GRUPO === 1000) {
+              traerPagosM(ficha[0].CONTRATO);
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (contratoRef.current.value === "") {
+      const errores = "Debes Ingresar Un Numero De Contrato";
+      guardarErrores(errores);
+    }
+  };
+
+  const buscarTitularDniM = async (e) => {
+    e.preventDefault();
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+
+    if (dniRef.current.value !== "") {
+      let dni = dniRef.current.value;
+
+      await axios
+        .get(`${ip}api/werchow/maestro/titulardnim/${dni}`)
+        .then((res) => {
+          if (res.data[0].length === 0) {
+            toastr.error(
+              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+              "ATENCION"
+            );
+            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+            guardarErrores(errores);
+          } else {
+            guardarFlag(true);
+
+            traerNOrden()
+
+            let ficha = res.data[0];
+            guardarFicha(ficha);
+
+            traerAdhsM(ficha[0].CONTRATO);
+
+            if (
+              ficha[0].GRUPO === 1001 ||
+              ficha[0].GRUPO === 1005 ||
+              ficha[0].GRUPO === 1006 ||
+              ficha[0].GRUPO === 3444 ||
+              ficha[0].GRUPO === 3666 ||
+              ficha[0].GRUPO === 3777 ||
+              ficha[0].GRUPO === 3888 ||
+              ficha[0].GRUPO === 3999 ||
+              ficha[0].GRUPO === 4004
+            ) {
+              toastr.warning(
+                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                "ATENCION"
+              );
+            } else if (
+              ficha[0].GRUPO === 3400 ||
+              ficha[0].GRUPO === 3600 ||
+              ficha[0].GRUPO === 3700 ||
+              ficha[0].GRUPO === 3800 ||
+              ficha[0].GRUPO === 3900 ||
+              ficha[0].GRUPO === 4000
+            ) {
+              toastr.warning(
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                "ATENCION"
+              );
+              traerPagosBcoM(ficha[0].CONTRATO);
+            } else {
+              traerPagosM(ficha[0].CONTRATO);
             }
           }
         })
@@ -209,9 +368,33 @@ const Emision = () => {
       });
   };
 
+  const traerPagosM = async (contrato) => {
+    await axios
+      .get(`${ip}api/werchow/pagos/pagosmutual/${contrato}`)
+      .then((res) => {
+        guardarPagos(res.data);
+      })
+      .catch((error) => {
+        toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+        console.log(error);
+      });
+  };
+
   const traerPagosBco = async (contrato) => {
     await axios
       .get(`${ip}api/werchow/pagobco/pagobco/${contrato}`)
+      .then((res) => {
+        guardarPagos(res.data);
+      })
+      .catch((error) => {
+        toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+        console.log(error);
+      });
+  };
+
+  const traerPagosBcoM = async (contrato) => {
+    await axios
+      .get(`${ip}api/werchow/pagobco/pagobcom/${contrato}`)
       .then((res) => {
         guardarPagos(res.data);
       })
@@ -232,6 +415,17 @@ const Emision = () => {
       });
   };
 
+  const traerAdhsM = async (contrato) => {
+    await axios
+      .get(`${ip}api/werchow/maestro/adherentesm/${contrato}`)
+      .then((res) => {
+        guardarAdhs(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const selectSocio = (row) => {
     guardarSocio(null);
 
@@ -240,6 +434,17 @@ const Emision = () => {
 
   const listSocios = async () => {
     await axios.get(`${ip}api/werchow/maestro/titulares`)
+      .then(res => {
+        guardarListSocios(res.data[0])
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de socios", "ATENCION")
+      })
+  }
+
+  const listSociosM = async () => {
+    await axios.get(`${ip}api/werchow/maestro/titularesm`)
       .then(res => {
         guardarListSocios(res.data[0])
       })
@@ -275,52 +480,134 @@ const Emision = () => {
 
           guardarFicha(ficha);
 
-          traerPagos(ficha[0].CONTRATO);
-
           traerAdhs(ficha[0].CONTRATO);
 
           if (
-            ficha.GRUPO === 1001 ||
-            ficha.GRUPO === 1005 ||
-            ficha.GRUPO === 1006 ||
-            ficha.GRUPO === 3444 ||
-            ficha.GRUPO === 3666 ||
-            ficha.GRUPO === 3777 ||
-            ficha.GRUPO === 3888 ||
-            ficha.GRUPO === 3999 ||
-            ficha.GRUPO === 4004 ||
-            ficha.GRUPO === 7777 ||
-            ficha.GRUPO === 8500
+            ficha[0].GRUPO === 1001 ||
+            ficha[0].GRUPO === 1005 ||
+            ficha[0].GRUPO === 1006 ||
+            ficha[0].GRUPO === 3444 ||
+            ficha[0].GRUPO === 3666 ||
+            ficha[0].GRUPO === 3777 ||
+            ficha[0].GRUPO === 3888 ||
+            ficha[0].GRUPO === 3999 ||
+            ficha[0].GRUPO === 4004 ||
+            ficha[0].GRUPO === 7777 ||
+            ficha[0].GRUPO === 8500
           ) {
             toastr.warning(
               "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
               "ATENCION"
             );
+            traerPagosBco(ficha[0].CONTRATO)
+
           } else if (
-            ficha.GRUPO === 3400 ||
-            ficha.GRUPO === 3600 ||
-            ficha.GRUPO === 3700 ||
-            ficha.GRUPO === 3800 ||
-            ficha.GRUPO === 3900 ||
-            ficha.GRUPO === 4000
+            ficha[0].GRUPO === 3400 ||
+            ficha[0].GRUPO === 3600 ||
+            ficha[0].GRUPO === 3700 ||
+            ficha[0].GRUPO === 3800 ||
+            ficha[0].GRUPO === 3900 ||
+            ficha[0].GRUPO === 4000
           ) {
             toastr.warning(
               `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
               "ATENCION"
             );
           } else if (
-            ficha.GRUPO >= 5000 &&
-            ficha.GRUPO < 7777
+            ficha[0].GRUPO >= 5000
           ) {
             toastr.warning(
               `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
               "ATENCION"
             );
+            traerPagosBco(ficha[0].CONTRATO)
+          } else {
+            traerPagos(ficha[0].CONTRATO)
           }
         }
       })
       .catch((error) => {
         console.log(error);
+        toastr.error("Ocurrio un error al seleccionar y traer los datos del socio", "ATENCION")
+      });
+  }
+
+  const SeleccionarM = async (contrato) => {
+
+    guardarFicha(null);
+    guardarErrores(null);
+    guardarPagos(null);
+    guardarAdhs(null);
+
+    await axios
+      .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
+      .then((res) => {
+        if (res.data[0].length === 0) {
+          toastr.error(
+            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
+            "ATENCION"
+          );
+          const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
+          guardarErrores(errores);
+        } else {
+          guardarFlag(true);
+
+          traerNOrden()
+
+          let ficha = res.data[0];
+
+          guardarFicha(ficha);
+
+          traerAdhsM(ficha[0].CONTRATO);
+
+          if (
+            ficha[0].GRUPO === 1001 ||
+            ficha[0].GRUPO === 1005 ||
+            ficha[0].GRUPO === 1006 ||
+            ficha[0].GRUPO === 3444 ||
+            ficha[0].GRUPO === 3666 ||
+            ficha[0].GRUPO === 3777 ||
+            ficha[0].GRUPO === 3888 ||
+            ficha[0].GRUPO === 3999 ||
+            ficha[0].GRUPO === 4004 ||
+            ficha[0].GRUPO === 7777 ||
+            ficha[0].GRUPO === 8500
+          ) {
+            toastr.warning(
+              "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+              "ATENCION"
+            );
+          } else if (
+            ficha[0].GRUPO === 3400 ||
+            ficha[0].GRUPO === 3600 ||
+            ficha[0].GRUPO === 3700 ||
+            ficha[0].GRUPO === 3800 ||
+            ficha[0].GRUPO === 3900 ||
+            ficha[0].GRUPO === 4000
+          ) {
+            toastr.warning(
+              `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+            traerPagosBcoM(ficha[0].CONTRATO);
+
+          } else if (
+            ficha[0].GRUPO >= 5000
+
+          ) {
+            toastr.warning(
+              `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+              "ATENCION"
+            );
+            traerPagosBcoM(ficha[0].CONTRATO);
+          } else {
+            traerPagosM(ficha[0].CONTRATO);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toastr.error("Ocurrio un error al seleccionar y traer los datos del socio", "ATENCION")
       });
   }
 
@@ -907,7 +1194,7 @@ const Emision = () => {
     }
   }, []);
 
-  
+
 
   return (
     <Layout>
@@ -916,14 +1203,18 @@ const Emision = () => {
           ficha={ficha}
           contratoRef={contratoRef}
           dniRef={dniRef}
-          buscarTitularM={buscarTitular}
-          buscarTitularDniM={buscarTitularDni}
+          buscarTitularM={buscarTitularM}
+          buscarTitularDniM={buscarTitularDniM}
+          buscarTitular={buscarTitular}
+          buscarTitularDni={buscarTitularDni}
           errores={errores}
           titulo={"Ordenes, consultas y farmacia"}
           emp={"W"}
           listSocios={listSocios}
+          listSociosM={listSociosM}
           listado={listado}
           Seleccionar={Seleccionar}
+          SeleccionarM={SeleccionarM}
         />
       ) : flag === true ? (
         <>

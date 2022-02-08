@@ -17,7 +17,7 @@ const EmitirRecibo = ({
   cuofija,
   registrarPago,
   cuoInt,
-              cuo,
+  cuo,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -310,7 +310,7 @@ const EmitirRecibo = ({
                 preCargarPago={preCargarPago}
                 cuofija={cuofija}
                 cuoInt={cuoInt}
-              cuo={cuo}
+                cuo={cuo}
               />
             </div>
             <div className="modal-footer">
