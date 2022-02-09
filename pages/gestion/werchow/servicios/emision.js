@@ -787,7 +787,7 @@ const Emision = () => {
       PLAN: socio.PLAN,
       EDAD: socio.EDAD,
       SEXO: socio.SEXO,
-      OBRA_SOC: socio.OBRA_SOC,
+      OBRA_SOC: socio.COD_OBRA,
       FECHA: moment().format('YYYY-MM-DD'),
       FEC_CAJA: moment().format('YYYY-MM-DD'),
       HORA: moment().format('HH:mm'),
@@ -803,6 +803,7 @@ const Emision = () => {
 
 
     }
+
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
@@ -936,7 +937,7 @@ const Emision = () => {
       PLAN: socio.PLAN,
       EDAD: socio.EDAD,
       SEXO: socio.SEXO,
-      OBRA_SOC: socio.OBRA_SOC,
+      OBRA_SOC: socio.COD_OBRA,
       FECHA: moment().format('YYYY-MM-DD'),
       FEC_CAJA: moment().format('YYYY-MM-DD'),
       HORA: moment().format('HH:mm'),
