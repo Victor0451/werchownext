@@ -26,9 +26,9 @@ export const registrarHistoria = async (accion, user) => {
 
 }
 
-export const registrarHistorialAprobacion = async (data) => {
+export const registrarHistorialAprobacion = async (data, user) => {
     const historial = {
-        operador: user.usuario,
+        operador: user,
         idprestamo: data.original.ptm_id,
         contrato: data.original.ptm_ficha,
         afiliado: data.original.ptm_afi,

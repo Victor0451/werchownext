@@ -84,9 +84,9 @@ const aprobarprestamos = () => {
         if (res.status === 200) {
           toastr.success("Se aprobo el prestamo con exito", "Atencion");
 
-          registrarHistorialAprobacion(row);
+          registrarHistorialAprobacion(row, user.usuario);
 
-          let accion = `Se aprobo el prestamo ${row.original.idprestamo}, del socio ${row.original.ptm_ficha}`
+          let accion = `Se aprobo el prestamo ${row.original.ptm_id}, del socio ${row.original.ptm_ficha} - ${row.original.ptm_afi}`
 
           registrarHistoria(accion, user.usuario)
 
@@ -118,9 +118,9 @@ const aprobarprestamos = () => {
           />
         ) : (
           <>
-            <div className="container">
+            <div className="mt-4 container list border border-dark">
               <hr className="mt-4 mb-4" />
-              <div className=" mt-4 alert alert-primary text-center text-uppercase">
+              <div className="border border-dark mt-4 alert alert-primary text-center text-uppercase">
                 <strong> No hay prestamos pendientes de aprobacion</strong>
               </div>
               <hr className="mt-4 mb-4" />
