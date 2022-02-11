@@ -1,5 +1,6 @@
 import React from "react";
 import ModalConsulta from "./ModalConsulta";
+import ModalEnfermeria from "./ModalEnfermeria";
 import ModalFarmacia from "./ModalFarmacia";
 import ModalPractica from "./ModalPracticas";
 
@@ -31,6 +32,15 @@ const OpcionesServicios = ({
   gestionDescuento,
   descFarma,
   registrarFarmaciaUso,
+  enfer,
+  sucursalRefE,
+  traerEnfer,
+  detEnf,
+  medicoRefE,
+  practEnfer,
+  prestacionRefE,
+  cantidadRefE,
+  registrarEnfermeriaUso,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -88,11 +98,12 @@ const OpcionesServicios = ({
               <h5 className="card-title">Enfermeria</h5>
               <p className="card-text">Emitir Orden de Enfermeria</p>
               <button className="btn btn-primary btn-sm rounded"
-                data-toggle="modal" data-target="#modalFarmacia"
+                data-toggle="modal" data-target="#modalEnfermeria"
               >Generar</button>
             </div>
           </div>
-        </div>
+        </div> */}
+        {/*
         <div className="col mb-4 ">
           <div className="card border border-dark">
             <img src="/img/emision/reintegro.jpg" className="card-img-top" alt="..." />
@@ -104,7 +115,8 @@ const OpcionesServicios = ({
               >Generar</button>
             </div>
           </div>
-        </div> */}
+        </div> 
+        */}
       </div>
 
 
@@ -155,6 +167,21 @@ const OpcionesServicios = ({
         registrarPracticaUso={registrarPracticaUso}
       />
 
+
+      <ModalEnfermeria
+        socio={socio}
+        sucursales={sucursales}
+        enfer={enfer}
+        sucursalRefE={sucursalRefE}
+        traerEnfer={traerEnfer}
+        detEnf={detEnf}
+        traerDetalleMedSelec={traerDetalleMedSelec}
+        medicoRefE={medicoRefE}
+        practEnfer={practEnfer}
+        prestacionRefE={prestacionRefE}
+        cantidadRefE={cantidadRefE}
+        registrarEnfermeriaUso={registrarEnfermeriaUso}
+      />
 
       {/* --------------------------- */}
 

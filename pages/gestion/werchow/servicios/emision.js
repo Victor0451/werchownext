@@ -20,8 +20,13 @@ const Emision = () => {
   let especialidadRefP = React.createRef();
   let sucursalRef = React.createRef();
   let sucursalRefP = React.createRef();
+  let sucursalRefE = React.createRef();
   let medicoRef = React.createRef();
   let medicoRefP = React.createRef();
+  let medicoRefE = React.createRef();
+  let prestacionRefE = React.createRef();
+  let cantidadRefE = React.createRef();
+
 
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
@@ -40,6 +45,10 @@ const Emision = () => {
   const [listado, guardarListSocios] = useState(null);
   const [farmacias, guardarFarmacias] = useState(null);
   const [descFarma, guardarDescFarma] = useState(null);
+  const [enfer, guadrarEnfer] = useState(null);
+  const [detEnf, guardarDetalleEnfer] = useState(null);
+  const [practEnfer, guadrarPractEnfer] = useState(null);
+
 
 
   // FUNCIONES SOCIO
@@ -694,7 +703,7 @@ const Emision = () => {
         if (res.status === 200) {
           toastr.success("Se registro la orden de consulta con exito", "ATENCION")
 
-          let accion = `Se registro una orden de consulta ID: ${NRO_ORDEN}, para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el medico: ${detalleMed.NOMBRE}. Coseguro a pagar: ${detalleMed.MAX_DESC}`
+          let accion = `Se registro una orden de consulta ID: ${consul.NRO_ORDEN}, para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el medico: ${detalleMed.NOMBRE}. Coseguro a pagar: ${detalleMed.MAX_DESC}`
 
           registrarHistoria(accion, user)
         }
@@ -1020,7 +1029,127 @@ const Emision = () => {
 
   // ---------------------------------------------
 
+  // FUNCIONES ENFERMERIA
 
+  const traerEnfer = async () => {
+
+    await axios.get(`${ip}api/sgi/servicios/traerefermporsuc`,
+      {
+        params: {
+          suc: sucursalRefE.current.value,
+        }
+      })
+      .then(res => {
+        guadrarEnfer(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+      })
+
+  }
+
+  const traerPractEnfer = async () => {
+    await axios.get(`${ip}api/sgi/servicios/traerpractenfer`)
+      .then(res => {
+        guadrarPractEnfer(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de Practicas de enfermeria", "ATENCION")
+      })
+  }
+
+  const registrarEnfermeriaUso = async () => {
+
+    const uso = {
+      SUC: "O",
+      ORDEN: nOrden,
+      CONTRATO: socio.CONTRATO,
+      NRO_ADH: socio.ADHERENTES,
+      NRO_DOC: socio.NRO_DOC,
+      PLAN: socio.PLAN,
+      EDAD: socio.EDAD,
+      SEXO: socio.SEXO,
+      OBRA_SOC: socio.COD_OBRA,
+      FECHA: moment().format('YYYY-MM-DD'),
+      FEC_CAJA: moment().format('YYYY-MM-DD'),
+      HORA: moment().format('HH:mm'),
+      VALOR: parseFloat(descuentoRef.current.value),
+      SERVICIO: `ENFE`,
+      IMPORTE: 0,
+      PUESTO: "",
+      PRESTADO: detEnf.COD_PRES,
+      OPERADOR: user.codigo,
+      EMPRESA: "W",
+      RENDIDO: 0,
+      ANULADO: 0,
+
+
+    }
+
+    await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
+      .then(res => {
+        if (res.status === 200) {
+
+          regEnfermeria(uso.ORDEN)
+
+          // setTimeout(() => {
+
+          //   push('/gestion/werchow/servicios/orden', res.data.iduso, res.data.NRO_DOC, res.data.ORDEN, 'F')
+
+          // }, 500);
+
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar la orden de farmacia", "ATENCION")
+      })
+
+  }
+
+  let regEnfermeria = async (orden) => {
+
+    const enfer = {
+
+
+      CONTRATO: socio.CONTRATO,
+      FECHA: moment().format('YYYY-MM-DD'),
+      HORA: moment().format('HH:mm'),
+      NRO_ORDEN: orden,
+      DESTINO: detEnf.COD_PRES,
+      IMPORTE: 0,
+      ANULADO: 0,
+      PRACTICA: prestacionRefE.current.value,
+      CANTIDAD: cantidadRefE.current.value,
+      OPERADOR: user.codigo,
+      OPE_ANU: 0,
+      NRO_DNI: socio.NRO_DOC,
+
+    }
+
+    await axios.post(`${ip}api/sgi/servicios/regenfermeria`, enfer)
+      .then(res => {
+        if (res.status === 200) {
+          toastr.success("Se registro la orden de enfermeria con exito", "ATENCION")
+
+          let accion = `Se registro una orden de enfermeria ID:${enfer.NRO_ORDEN}, para el socio: ${socio.APELLIDOS}, ${socio.NOMBRES}, contrato: ${socio.CONTRATO}, para el prestador: ${enfer.DESTINO} `
+
+          registrarHistoria(accion, user)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar la orden de enfermeria", "ATENCION")
+      })
+
+
+
+
+  }
+
+  // -------------------------------------------------
 
   // FUNCIONES GENERALES
 
@@ -1117,23 +1246,24 @@ const Emision = () => {
           toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
         })
 
-    } else if (f === 'P' && especialidadRefP.current.value !== null) { }
+    } else if (f === 'P' && especialidadRefP.current.value !== null) {
 
-    await axios.get(`${ip}api/sgi/servicios/traermedporsuc`,
-      {
-        params: {
-          suc: sucursalRefP.current.value,
-          esp: especialidadRefP.current.value
-        }
-      })
-      .then(res => {
-        guardarMedicos(res.data)
-      })
-      .catch(error => {
-        console.log(error)
-        toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
-      })
+      await axios.get(`${ip}api/sgi/servicios/traermedporsuc`,
+        {
+          params: {
+            suc: sucursalRefP.current.value,
+            esp: especialidadRefP.current.value
+          }
+        })
+        .then(res => {
+          guardarMedicos(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
 
+    }
   }
 
   const traerDetalleMedSelec = async (f) => {
@@ -1166,12 +1296,28 @@ const Emision = () => {
           console.log(error)
           toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
         })
+    } else if (f === 'E' && medicoRefE.current.value !== null) {
+
+
+      await axios.get(`${ip}api/sgi/servicios/traerdetallemedico/${medicoRefE.current.value}`)
+        .then(res => {
+
+          guardarDetalleEnfer(res.data)
+
+          traerPractEnfer()
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
     }
   }
 
 
 
   // ----------------------------------------------
+
 
 
 
@@ -1252,6 +1398,15 @@ const Emision = () => {
               gestionDescuento={gestionDescuento}
               descFarma={descFarma}
               registrarFarmaciaUso={registrarFarmaciaUso}
+              enfer={enfer}
+              sucursalRefE={sucursalRefE}
+              traerEnfer={traerEnfer}
+              detEnf={detEnf}
+              medicoRefE={medicoRefE}
+              practEnfer={practEnfer}
+              prestacionRefE={prestacionRefE}
+              cantidadRefE={cantidadRefE}
+              registrarEnfermeriaUso={registrarEnfermeriaUso}
             />
           ) : null}
         </>

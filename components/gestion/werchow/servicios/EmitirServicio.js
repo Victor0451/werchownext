@@ -36,6 +36,15 @@ const EmitirServicio = ({
   gestionDescuento,
   descFarma,
   registrarFarmaciaUso,
+  enfer,
+  sucursalRefE,
+  traerEnfer,
+  detEnf,
+  medicoRefE,
+  practEnfer,
+  prestacionRefE,
+  cantidadRefE,
+  registrarEnfermeriaUso,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -322,6 +331,15 @@ const EmitirServicio = ({
           gestionDescuento={gestionDescuento}
           descFarma={descFarma}
           registrarFarmaciaUso={registrarFarmaciaUso}
+          enfer={enfer}
+          sucursalRefE={sucursalRefE}
+          traerEnfer={traerEnfer}
+          detEnf={detEnf}
+          medicoRefE={medicoRefE}
+          practEnfer={practEnfer}
+          prestacionRefE={prestacionRefE}
+          cantidadRefE={cantidadRefE}
+          registrarEnfermeriaUso={registrarEnfermeriaUso}
         />
       )}
     </div>

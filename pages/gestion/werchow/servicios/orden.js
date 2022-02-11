@@ -34,19 +34,57 @@ const Orden = () => {
                 } else if (!res.data[0][0]) {
 
                     axios
-                        .get(`${ip}api/werchow/maestro/adherente/${dni}`)
-                        .then(res1 => {
+                        .get(`${ip}api/werchow/maestro/titulardnim/${dni}`)
+                        .then(resM => {
 
-                            if (res1.data[0][0]) {
-                                guardarSocio(res1.data[0][0])
-                            } else if (!res1.data[0][0]) {
-                                toastr.warning("No se encuentra el beneficiario", "ATENCION")
+                            if (resM.data[0][0]) {
+
+                                guardarSocio(resM.data[0][0])
+
+                            } else if (!resM.data[0][0]) {
+
+                                axios
+                                    .get(`${ip}api/werchow/maestro/adherentes/${dni}`)
+                                    .then(resA => {
+
+                                        if (resA.data[0][0]) {
+
+                                            guardarSocio(resA.data[0][0])
+
+                                        } else if (!resA.data[0][0]) {
+
+                                            axios
+                                                .get(`${ip}api/werchow/maestro/adherentesm/${dni}`)
+                                                .then(resAM => {
+
+                                                    if (resAM.data[0][0]) {
+
+                                                        guardarSocio(resAM.data[0][0])
+
+                                                    } else if (!resAM.data[0][0]) {
+                                                        toastr.warning("No se encuentra el beneficiario", "ATENCION")
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.log(error)
+                                                    toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                                })
+
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                        toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                    })
                             }
                         })
                         .catch(error => {
                             console.log(error)
                             toastr.error("Ocurrio un error al traer al socio", "ATENCION")
                         })
+
+
+
                 }
             })
             .catch(error => {
