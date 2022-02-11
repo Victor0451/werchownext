@@ -19,6 +19,8 @@ const ModalPractica = ({
   eliminarPracticaPrecargado,
   calcularTotalPracticas,
   registrarPracticaUso,
+  cantidadRefP,
+
 }) => {
 
   return (
@@ -110,7 +112,7 @@ const ModalPractica = ({
 
                 <div className="row">
 
-                  <div className=" border border-dark p-4 col-md-6">
+                  <div className=" border border-dark p-4 col-md-12">
 
                     <h4>
                       <u>Detalle del Medico</u>
@@ -156,21 +158,22 @@ const ModalPractica = ({
 
                     </div>
                   </div>
-
-
-                  <ListadoPracticas
-                    listado={practicas}
-                    agregarPractica={agregarPractica}
-
-                  />
-
                 </div>
 
+                <ListadoPracticas
+                  listado={practicas}
+                  agregarPractica={agregarPractica}
+                  cantidadRefP={cantidadRefP}
+
+
+                />
 
                 <div className="mt-4 border border-dark p-1">
                   <ListadoPracticasAgregadas
                     listado={pracSocio}
                     eliminarPracticaPrecargado={eliminarPracticaPrecargado}
+                    cantidadRefP={cantidadRefP}
+
                   />
                 </div>
 

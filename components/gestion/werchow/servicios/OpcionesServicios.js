@@ -41,6 +41,7 @@ const OpcionesServicios = ({
   prestacionRefE,
   cantidadRefE,
   registrarEnfermeriaUso,
+  cantidadRefP,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -165,6 +166,8 @@ const OpcionesServicios = ({
         eliminarPracticaPrecargado={eliminarPracticaPrecargado}
         calcularTotalPracticas={calcularTotalPracticas}
         registrarPracticaUso={registrarPracticaUso}
+        cantidadRefP={cantidadRefP}
+        
       />
 
 
@@ -181,6 +184,7 @@ const OpcionesServicios = ({
         prestacionRefE={prestacionRefE}
         cantidadRefE={cantidadRefE}
         registrarEnfermeriaUso={registrarEnfermeriaUso}
+
       />
 
       {/* --------------------------- */}

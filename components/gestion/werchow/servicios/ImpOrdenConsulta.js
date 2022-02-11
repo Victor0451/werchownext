@@ -180,7 +180,7 @@ const ImpOrdenConsulta = ({
                                     {" "}
                                     <strong>#</strong>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-2">
                                     {" "}
                                     <strong>Codigo</strong>
                                 </div>
@@ -190,14 +190,18 @@ const ImpOrdenConsulta = ({
                                 <div className="col-2">
                                     <strong>Importe</strong>
                                 </div>
+                                <div className="col-1">
+                                    <strong>Cantidad</strong>
+                                </div>
                             </div>
 
                             {practicas.map((p, index) => (
                                 <div className="d-flex justify-content-between border-bottom text-center descr">
                                     <div className="col-1" key={index}>{index + 1}</div>
-                                    <div className="col-3 descr">{p.COD_PRAC}</div>
+                                    <div className="col-2 descr">{p.COD_PRAC}</div>
                                     <div className="col-6">{p.DESCRIP}</div>
                                     <div className="col-2">$ {p.IMPORTE}</div>
+                                    <div className="col-1">{p.CANT_PRA}</div>
                                 </div>
                             ))}
 

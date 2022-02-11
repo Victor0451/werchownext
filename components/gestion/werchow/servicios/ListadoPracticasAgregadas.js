@@ -39,6 +39,16 @@ const ListadoPracticasAgregadas = ({
                             filterAll: true,
                             width: 750
                         },
+
+                        {
+                            Header: "Cantidad",
+                            id: "CANTIDAD",
+                            accessor: (d) => d.CANTIDAD,
+                            filterMethod: (filter, rows) =>
+                                matchSorter(rows, filter.value, { keys: ["CANTIDAD"] }),
+                            filterAll: true,
+                        },
+
                         {
                             Header: "Importe",
                             id: "IMPORTE",
@@ -47,6 +57,9 @@ const ListadoPracticasAgregadas = ({
                                 matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
                             filterAll: true,
                         },
+
+
+
 
                         {
                             Header: "Acciones",

@@ -26,6 +26,7 @@ const Emision = () => {
   let medicoRefE = React.createRef();
   let prestacionRefE = React.createRef();
   let cantidadRefE = React.createRef();
+  let cantidadRefP = React.createRef();
 
 
   const [errores, guardarErrores] = useState(null);
@@ -738,18 +739,26 @@ const Emision = () => {
 
   const agregarPractica = (row) => {
 
+    let pra = {
+      CODIGOS: row.CODIGOS,
+      DESCRIP: row.DESCRIP,
+      CANTIDAD: cantidadRefP.current.value,
+      IMPORTE: parseFloat(row.IMPORTE) * parseFloat(cantidadRefP.current.value),
+      idpractica: row.idpractica
+
+    }
 
     let encontrado = false
 
     if (pracSocio.length === 0) {
 
       toastr.success("Pago pre cargado exitosamente", "ATENCION");
-      guardarPracSocio([...pracSocio, row]);
+      guardarPracSocio([...pracSocio, pra]);
 
     } else {
 
       for (let i = 0; i < pracSocio.length; i++) {
-        if (pracSocio[i].idpractica === row.idpractica) {
+        if (pracSocio[i].idpractica === pra.idpractica) {
           encontrado = true;
         }
       }
@@ -757,7 +766,8 @@ const Emision = () => {
         toastr.warning("El codigo ingresado ya exitse", "ATENCION");
       } else if (encontrado === false) {
         toastr.success("Practica cargada exitosamente", "ATENCION");
-        guardarPracSocio([...pracSocio, row]);
+
+        guardarPracSocio([...pracSocio, pra]);
 
       }
     }
@@ -849,7 +859,7 @@ const Emision = () => {
         HORA: moment().format('HH:mm'),
         NRO_ORDEN: orden,
         PRAC_REA: detalleMed.SERVICIO,
-        CANT_PRA: 1,
+        CANT_PRA: pracSocio[i].CANTIDAD,
         IMPORTE: pracSocio[i].IMPORTE,
         ANULADO: 0,
         OPERADOR: user.codigo,
@@ -1407,6 +1417,7 @@ const Emision = () => {
               prestacionRefE={prestacionRefE}
               cantidadRefE={cantidadRefE}
               registrarEnfermeriaUso={registrarEnfermeriaUso}
+              cantidadRefP={cantidadRefP}
             />
           ) : null}
         </>
