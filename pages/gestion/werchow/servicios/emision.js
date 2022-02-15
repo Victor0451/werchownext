@@ -1085,7 +1085,7 @@ const Emision = () => {
       FECHA: moment().format('YYYY-MM-DD'),
       FEC_CAJA: moment().format('YYYY-MM-DD'),
       HORA: moment().format('HH:mm'),
-      VALOR: parseFloat(descuentoRef.current.value),
+      VALOR: 0,
       SERVICIO: `ENFE`,
       IMPORTE: 0,
       PUESTO: "",
@@ -1104,11 +1104,11 @@ const Emision = () => {
 
           regEnfermeria(uso.ORDEN)
 
-          // setTimeout(() => {
+          setTimeout(() => {
 
-          //   push('/gestion/werchow/servicios/orden', res.data.iduso, res.data.NRO_DOC, res.data.ORDEN, 'F')
+            push('/gestion/werchow/servicios/orden', res.data.iduso, res.data.NRO_DOC, res.data.ORDEN, 'E')
 
-          // }, 500);
+          }, 500);
 
         }
       })

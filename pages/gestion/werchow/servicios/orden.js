@@ -15,7 +15,7 @@ const Orden = () => {
     const [medico, guardarMedico] = useState(null)
     const [practicas, guardarPracticas] = useState(null)
     const [farmacia, guardarFarmacia] = useState(null)
-
+    const [enfermeria, guardarEnfermeria] = useState(null)
 
 
 
@@ -157,6 +157,18 @@ const Orden = () => {
 
     }
 
+    const traerEnfermeria = async (orden) => {
+
+        await axios.get(`${ip}api/sgi/servicios/traerenfermeria/${orden}`)
+            .then(res => {
+                guardarEnfermeria(res.data)
+            })
+            .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al traer la orden de enfermeria", "ATENCION")
+            })
+    }
+
     const calcularTotalPracticas = (arr) => {
 
         let total = 0
@@ -179,14 +191,13 @@ const Orden = () => {
             let iduso = router.query.iduso
             let orden = router.query.orden
 
-
-
             traerSocio(dni)
             traerOrden(iduso)
 
             if (orden) {
                 traerPracticas(orden)
                 traerFarmacia(orden)
+                traerEnfermeria(orden)
             }
         }
     }, []);
@@ -204,6 +215,7 @@ const Orden = () => {
                     medico={medico}
                     practicas={practicas}
                     farmacia={farmacia}
+                    enfermeria={enfermeria}
                     calcularTotalPracticas={calcularTotalPracticas}
                     flag={router.query.flag}
                 />

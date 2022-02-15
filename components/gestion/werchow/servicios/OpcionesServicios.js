@@ -92,7 +92,7 @@ const OpcionesServicios = ({
             </div>
           </div>
         </div>
-        {/* <div className="col mb-4">
+        <div className="col mb-4">
           <div className="card border border-dark">
             <img src="/img/emision/enfermeria.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
@@ -103,7 +103,7 @@ const OpcionesServicios = ({
               >Generar</button>
             </div>
           </div>
-        </div> */}
+        </div>
         {/*
         <div className="col mb-4 ">
           <div className="card border border-dark">
@@ -167,7 +167,7 @@ const OpcionesServicios = ({
         calcularTotalPracticas={calcularTotalPracticas}
         registrarPracticaUso={registrarPracticaUso}
         cantidadRefP={cantidadRefP}
-        
+
       />
 
 

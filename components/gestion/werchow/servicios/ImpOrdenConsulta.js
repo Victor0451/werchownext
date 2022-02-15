@@ -9,27 +9,46 @@ const ImpOrdenConsulta = ({
     medico,
     practicas,
     farmacia,
+    enfermeria,
     calcularTotalPracticas,
     flag
 
 }) => {
 
-
-
     if (!socio) return <Spinner />
-
-    console.log(farmacia)
 
     return (
         <div className=' p-4 borderImp list'>
 
             <div className="row">
                 <div className="col-md-8">
-                    <h2 className="mt-4 mb-4">
-                        <strong>
-                            <u>Subsidio Medico</u>
-                        </strong>
-                    </h2>
+
+                    {flag && flag === 'E' ?
+                        (
+                            <h2 className="mt-4 mb-4">
+                                <strong>
+                                    <u>Subsidio Enfermeria</u>
+                                </strong>
+                            </h2>
+
+                        ) : flag && flag === 'F' ?
+                            (
+                                <h2 className="mt-4 mb-4">
+                                    <strong>
+                                        <u>Subsidio Farmacia</u>
+                                    </strong>
+                                </h2>
+
+                            ) : (
+
+                                <h2 className="mt-4 mb-4">
+                                    <strong>
+                                        <u>Subsidio Medico</u>
+                                    </strong>
+                                </h2>
+
+                            )}
+
                 </div>
                 <div className="mt-4 col-md-4 d-flex justify-content-end">
                     <img src="/img/logo.png" className="werchowlogo" />
@@ -123,14 +142,40 @@ const ImpOrdenConsulta = ({
 
                     </div>
                 </>
+            ) : flag && flag === 'E' ? (
+                <>
+                    <div className="mt-4 d-flex justify-content-between text-center border-bottom  border-dark descr">
+
+                        <div className="col-4">
+                            <strong>DNI Beneficiario</strong>
+                        </div>
+                        <div className="col-4">
+                            <strong>Prestacion:</strong>
+                        </div>
+                        <div className="col-4">
+                            <strong>Prestador</strong>
+                        </div>
+                    </div>
+
+                    <div className="d-flex justify-content-between border-bottom text-center descr">
+                        <div className="col-4 ">{socio.NRO_DOC}</div>
+                        {enfermeria ? (
+                            <div className="col-4"> {enfermeria[0].practica}</div>
+                        ) : null}
+
+                        <div className="col-4">{enfermeria[0].NOMBRE}</div>
+
+
+                    </div>
+                </>
             ) : (
 
                 <>
                     <h4 className="mt-4 mb-4">
                         <strong>
                             <u>Prestador</u>
-                        </strong>
-                    </h4>
+                        </strong >
+                    </h4 >
 
 
                     <div className="d-flex justify-content-between text-center border-bottom  border-dark descr">
@@ -152,65 +197,69 @@ const ImpOrdenConsulta = ({
                         </div>
                     </div>
 
-                    {!medico ? null
-                        : (
+                    {
+                        !medico ? null
+                            : (
 
-                            <div className="d-flex justify-content-between border-bottom text-center descr">
-                                <div className="col-1 ">{orden.NRO_DOC}</div>
-                                <div className="col-1">{medico.NOMBRE}</div>
-                                <div className="col-4">{medico.DIRECCION}</div>
-                                <div className="col-2">{medico.TELEFONOS}</div>
-                                <div className="col-5">{medico.HORARIO1} - {medico.HORARIO2}</div>
-                            </div>
-
-                        )}
-
-
-                    {practicas ? (
-
-                        <>
-                            <h4 className="mt-4 mb-4">
-                                <strong>
-                                    <u>Listado De Practicas</u>
-                                </strong>
-                            </h4>
-
-                            <div className="d-flex justify-content-between text-center border-bottom  border-dark descr ">
-                                <div className="col-1">
-                                    {" "}
-                                    <strong>#</strong>
-                                </div>
-                                <div className="col-2">
-                                    {" "}
-                                    <strong>Codigo</strong>
-                                </div>
-                                <div className="col-6">
-                                    <strong>Descripcion</strong>
-                                </div>
-                                <div className="col-2">
-                                    <strong>Importe</strong>
-                                </div>
-                                <div className="col-1">
-                                    <strong>Cantidad</strong>
-                                </div>
-                            </div>
-
-                            {practicas.map((p, index) => (
                                 <div className="d-flex justify-content-between border-bottom text-center descr">
-                                    <div className="col-1" key={index}>{index + 1}</div>
-                                    <div className="col-2 descr">{p.COD_PRAC}</div>
-                                    <div className="col-6">{p.DESCRIP}</div>
-                                    <div className="col-2">$ {p.IMPORTE}</div>
-                                    <div className="col-1">{p.CANT_PRA}</div>
+                                    <div className="col-1 ">{orden.NRO_DOC}</div>
+                                    <div className="col-1">{medico.NOMBRE}</div>
+                                    <div className="col-4">{medico.DIRECCION}</div>
+                                    <div className="col-2">{medico.TELEFONOS}</div>
+                                    <div className="col-5">{medico.HORARIO1} - {medico.HORARIO2}</div>
                                 </div>
-                            ))}
 
-                            <div className=' mt-4 border border-dark alert alert-info text-center text-uppercase'>
-                                $ {calcularTotalPracticas(practicas)}
-                            </div>
+                            )
+                    }
 
-                        </>
-                    ) : null}
+
+                    {
+                        practicas ? (
+
+                            <>
+                                <h4 className="mt-4 mb-4">
+                                    <strong>
+                                        <u>Listado De Practicas</u>
+                                    </strong>
+                                </h4>
+
+                                <div className="d-flex justify-content-between text-center border-bottom  border-dark descr ">
+                                    <div className="col-1">
+                                        {" "}
+                                        <strong>#</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        {" "}
+                                        <strong>Codigo</strong>
+                                    </div>
+                                    <div className="col-6">
+                                        <strong>Descripcion</strong>
+                                    </div>
+                                    <div className="col-2">
+                                        <strong>Importe</strong>
+                                    </div>
+                                    <div className="col-1">
+                                        <strong>Cantidad</strong>
+                                    </div>
+                                </div>
+
+                                {practicas.map((p, index) => (
+                                    <div className="d-flex justify-content-between border-bottom text-center descr">
+                                        <div className="col-1" key={index}>{index + 1}</div>
+                                        <div className="col-2 descr">{p.COD_PRAC}</div>
+                                        <div className="col-6">{p.DESCRIP}</div>
+                                        <div className="col-2">$ {p.IMPORTE}</div>
+                                        <div className="col-1">{p.CANT_PRA}</div>
+                                    </div>
+                                ))}
+
+                                <div className=' mt-4 border border-dark alert alert-info text-center text-uppercase'>
+                                    $ {calcularTotalPracticas(practicas)}
+                                </div>
+
+                            </>
+                        ) : null
+                    }
                 </>
 
             )}
@@ -263,7 +312,7 @@ const ImpOrdenConsulta = ({
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 
