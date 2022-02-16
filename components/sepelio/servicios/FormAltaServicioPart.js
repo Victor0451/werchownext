@@ -28,6 +28,7 @@ const STATE_INICIAL = {
   solicitado: "",
   parentesco: "",
   dni_solicitante: "",
+  importe: ""
 };
 
 const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
@@ -61,6 +62,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     solicitado,
     parentesco,
     dni_solicitante,
+    importe
   } = valores;
 
   async function nuevoServicio() {
@@ -92,6 +94,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       dni_solicitante: dni_solicitante,
       cremacion: crem,
       liquidado: 0,
+      importe: importe
     };
 
     if (motivoRef.current.value === "") {
@@ -643,6 +646,29 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
                 </label>
               </div>
             </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Valor del Servicio</u>
+                </strong>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Valor del Servicio"
+                name="importe"
+                defaultValue={importe}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.importe && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.importe}
+                </div>
+              )}
+            </div>
+
           </div>{" "}
         </div>
 

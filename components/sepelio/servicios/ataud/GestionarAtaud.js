@@ -137,7 +137,7 @@ const GestionarAtaud = ({ idataudRef, selcasofrm, ataud, registrarAtaud }) => {
               </button>
             </div>
             <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} />
+              <Stock selcasofrm={selcasofrm} historial={[]} />
             </div>
             <div className="modal-footer">
               <button

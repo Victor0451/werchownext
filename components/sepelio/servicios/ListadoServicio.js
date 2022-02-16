@@ -46,14 +46,7 @@ const ListadoServicios = ({
               </strong>
             </h4>
           </div>
-          <div className="col-md-6 d-flex justify-content-end">
-            <a
-              href="/sepelio/servicios/listado"
-              className="btn btn-sm  btn-info"
-            >
-              Seleccionar Periodo
-            </a>
-          </div>
+
         </div>
       </div>
 

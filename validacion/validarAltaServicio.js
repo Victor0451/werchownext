@@ -23,13 +23,13 @@ export default function validarAltaServicio(valores) {
     errores.parentesco = "El parentesco es obligatorio";
   }
 
-  if (!valores.fechainhumacion) {
-    errores.fechainhumacion = "La fecha de inhumacion es obligatorio";
-  }
+  // if (!valores.fechainhumacion) {
+  //   errores.fechainhumacion = "La fecha de inhumacion es obligatorio";
+  // }
 
-  if (!valores.horainhumacion) {
-    errores.horainhumacion = "La hora de inhumacion es obligatorio";
-  }
+  // if (!valores.horainhumacion) {
+  //   errores.horainhumacion = "La hora de inhumacion es obligatorio";
+  // }
 
   if (!valores.cementerio) {
     errores.cementerio = "Este campo es obligatorio";

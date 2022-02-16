@@ -72,6 +72,8 @@ const listado = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+      todoLosServicios()
     }
   }, []);
 
@@ -98,30 +100,30 @@ const listado = () => {
 
   return (
     <Layout>
-      {listado === null ? (
-        <PeriodoServicios
-          desdeRef={desdeRef}
-          hastaRef={hastaRef}
-          buscarServicios={buscarServicios}
-          todoLosServicios={todoLosServicios}
-          error={error}
-        />
-      ) : (
-        <>
-          <ListadoServicios
-            listado={listado}
-            desde={desde}
-            hasta={hasta}
-            datatoggle="modal"
-            datatarget="#opciones"
-            getRow={getRow}
-          />
 
-          {/* <!-- Modal --> */}
+      <PeriodoServicios
+        desdeRef={desdeRef}
+        hastaRef={hastaRef}
+        buscarServicios={buscarServicios}
+        todoLosServicios={todoLosServicios}
+        error={error}
+      />
 
-          <ServicioOpciones push={push} row={row} />
-        </>
-      )}
+
+      <ListadoServicios
+        listado={listado}
+        desde={desde}
+        hasta={hasta}
+        datatoggle="modal"
+        datatarget="#opciones"
+        getRow={getRow}
+      />
+
+      {/* <!-- Modal --> */}
+
+      <ServicioOpciones push={push} row={row} />
+
+
     </Layout>
   );
 };

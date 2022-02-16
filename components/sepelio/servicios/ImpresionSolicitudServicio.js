@@ -6,7 +6,7 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
   if (!servicio || !ataud) return <Spinner />;
 
   return (
-    <div className="container  list">
+    <div className="  list">
       <div className="  p-1">
         <div className="row d-felx justify-content-between p-2">
           <h1 className="   text-center">
