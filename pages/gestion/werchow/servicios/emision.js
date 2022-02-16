@@ -628,7 +628,6 @@ const Emision = () => {
 
   // FUNCIONES CONSULTAS
 
-
   const registrarOrdenUsos = async () => {
 
     const uso = {
@@ -834,7 +833,7 @@ const Emision = () => {
 
             push('/gestion/werchow/servicios/orden', res.data.iduso, res.data.NRO_DOC, res.data.ORDEN)
 
-          }, 500);
+          }, 5000);
 
         }
       })

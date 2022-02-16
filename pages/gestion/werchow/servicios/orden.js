@@ -44,7 +44,7 @@ const Orden = () => {
                             } else if (!resM.data[0][0]) {
 
                                 axios
-                                    .get(`${ip}api/werchow/maestro/adherentes/${dni}`)
+                                    .get(`${ip}api/werchow/maestro/adherente/${dni}`)
                                     .then(resA => {
 
                                         if (resA.data[0][0]) {
@@ -54,7 +54,7 @@ const Orden = () => {
                                         } else if (!resA.data[0][0]) {
 
                                             axios
-                                                .get(`${ip}api/werchow/maestro/adherentesm/${dni}`)
+                                                .get(`${ip}api/werchow/maestro/adherentem/${dni}`)
                                                 .then(resAM => {
 
                                                     if (resAM.data[0][0]) {
@@ -195,9 +195,14 @@ const Orden = () => {
             traerOrden(iduso)
 
             if (orden) {
-                traerPracticas(orden)
-                traerFarmacia(orden)
-                traerEnfermeria(orden)
+
+                setTimeout(() => {
+
+                    traerPracticas(orden)
+                    traerFarmacia(orden)
+                    traerEnfermeria(orden)
+
+                }, 1000);
             }
         }
     }, []);
@@ -235,6 +240,18 @@ const Orden = () => {
                         >
                             Imprimir
                         </button>
+                        <a
+                            className="ml-1 btn btn-secondary "
+                            href="/gestion/werchow/servicios/listadoordenes"
+                        >
+                            Listado De Ordenes
+                        </a>
+                        <a
+                            className="ml-1 btn btn-success "
+                            href="/gestion/werchow/servicios/emision"
+                        >
+                            Generar Orden
+                        </a>
                     </div>
                 </div>
             </div>

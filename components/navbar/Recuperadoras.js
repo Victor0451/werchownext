@@ -171,6 +171,15 @@ const Recuperadoras = ({ usuario, perfil }) => {
                     <hr />
                     <li>
                       <a
+                        href="/gestion/werchow/servicios/listadoordenes"
+                        className="dropdown-item text-dark"
+                      >
+                        Listado de Ordenes Emitidas
+                      </a>
+                    </li>
+                    <hr />
+                    <li>
+                      <a
                         href="/gestion/werchow/servicios/caja"
                         className="dropdown-item text-dark"
                       >
