@@ -13,15 +13,26 @@ const SocioFicha = ({
   errores,
   nomoro,
   listsocio,
-  Seleccionar
+  Seleccionar,
+  titulo
 }) => {
   return (
     <div className="container border border-dark list mt-4 p-4 mb-4">
-      <h1 className="mt-4 mb-4">
-        <strong>
-          <u>Legajo Virtual</u>
-        </strong>
-      </h1>
+
+      {titulo ? (
+        <h1 className="mb-4">
+          <strong>
+            <u>{titulo}</u>
+          </strong>
+        </h1>
+      ) : (
+        <h1 className="mb-4">
+          <strong>
+            <u>Legajo Virtual</u>
+          </strong>
+        </h1>
+      )}
+
       <div className="mt-4 border border-dark p-4 ">
         <form>
           <h2 className=" mb-4">

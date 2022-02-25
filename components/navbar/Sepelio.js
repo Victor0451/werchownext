@@ -94,6 +94,16 @@ export default class Sepelio extends Component {
               </a>
             </li>
           </ul>
+          <hr />
+          <li>
+            <a
+              href="/socios/carnet/emitir"
+              className="dropdown-item text-dark"
+            >
+              Emitir Carnet
+            </a>
+          </li>
+          <hr />
         </li>
 
         <li className="nav-item dropdown ">

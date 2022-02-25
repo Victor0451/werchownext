@@ -1,5 +1,6 @@
 import React from "react";
 import matchSorter from "match-sorter";
+import moment from "moment";
 
 // Import React Table
 import ReactTable from "react-table";
@@ -12,7 +13,7 @@ const ListadoCumpleanos = ({ data, fecha }) => {
     <div className="mt-4 container p-4 border border-dark list">
       <h5 className=" mb-4">
         <strong>
-          <u>Socios que cumplen años el {fecha}</u>: {data.length}
+          <u>Socios que cumplen años el {moment(fecha).format('DD/MM/YYYY')}</u>: {data.length}
         </strong>
       </h5>
       <div className="border border-dark mt-4 list">

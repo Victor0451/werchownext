@@ -916,6 +916,15 @@ export default class Gerencia extends Component {
             </li>
 
             <hr />
+            <li>
+              <a
+                href="/socios/carnet/emitir"
+                className="dropdown-item text-dark"
+              >
+                Emitir Carnet
+              </a>
+            </li>
+            <hr />
 
             <li className="dropdown-submenu">
               <a

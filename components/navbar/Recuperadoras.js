@@ -590,7 +590,18 @@ const Recuperadoras = ({ usuario, perfil }) => {
               </li>
             </ul>
           </li>
+
           <hr />
+          <li>
+            <a
+              href="/socios/carnet/emitir"
+              className="dropdown-item text-dark"
+            >
+              Emitir Carnet
+            </a>
+          </li>
+          <hr />
+
           <li className="dropdown-submenu">
             <a
               href="#"

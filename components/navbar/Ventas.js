@@ -99,6 +99,15 @@ export default class Ventas extends Component {
               </ul>
             </li>
             <hr />
+            <li>
+              <a
+                href="/socios/carnet/emitir"
+                className="dropdown-item text-dark"
+              >
+                Emitir Carnet
+              </a>
+            </li>
+            <hr />
 
             <li className="dropdown-submenu">
               <a

@@ -75,8 +75,8 @@ const cumpleanos = () => {
 
   return (
     <Layout>
-      <div className="container mt-4">
-        <div className="alert alert-primary border border-dark p-4">
+      <div className="container list border border-dark p-4 mt-4">
+        <div className="border border-dark p-4">
           <h2 className="mb-4">
             <strong>
               <u>Buscar Cumpleaños</u>
