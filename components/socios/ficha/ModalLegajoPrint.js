@@ -1,6 +1,5 @@
 import React from 'react'
 import Legajo from './Legajo'
-import AdhPrint from './AdhPrint'
 import PagosPrint from './PagosPrint'
 
 const ModalLegajoPrint = ({
@@ -61,29 +60,34 @@ const ModalLegajoPrint = ({
 
                         <div id="solicitud" className="mt-4 container p-4 border border-dark">
                             <div>
-                                <div id="leg">
-                                    <Legajo ficha={ficha} empresa={empresa} />
-
-                                    <hr className="mt-4 mb-4 border border-dark" />
-                                    <AdhPrint adhs={adhs} />
+                                <div className='d-flex justify-content-end'>
+                                    <button
+                                        className="btn btn-info "
+                                        onClick={() => imprimir("leg")}
+                                    >
+                                        Imprimir Legajo
+                                    </button>
                                 </div>
-                                <button
-                                    className="btn btn-info"
-                                    onClick={() => imprimir("leg")}
-                                >
-                                    Imprimir Legajo
-                                </button>
 
-                                <hr className="mt-4 mb-4 border border-dark" />
+                                <div id="leg">
+                                    <Legajo ficha={ficha} empresa={empresa} adhs={adhs} />
+                                </div>
+
+                                <hr className="mt-4 border border-dark" />
+
+                                <div className='d-flex justify-content-end mt-4'>
+                                    <button
+                                        className="mt-4 btn btn-info"
+                                        onClick={() => imprimir("pag")}
+                                    >
+                                        Imprimir Pagos
+                                    </button>
+                                </div>
+
                                 <div id="pag">
                                     <PagosPrint pagos={pagos} ficha={ficha} empresa={empresa} />
                                 </div>
-                                <button
-                                    className="mt-4 btn btn-info"
-                                    onClick={() => imprimir("pag")}
-                                >
-                                    Imprimir Pagos
-                                </button>
+
                             </div>
                         </div>
                     </div>

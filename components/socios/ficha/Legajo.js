@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
+import AdhPrint from "./AdhPrint";
 
-const Legajo = ({ ficha, empresa }) => {
+const Legajo = ({ ficha, empresa, adhs }) => {
   if (!ficha)
     return (
       <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
@@ -10,7 +11,7 @@ const Legajo = ({ ficha, empresa }) => {
     );
 
   return (
-    <div className="mt-4 container list border border-dark">
+    <div className="mt-4 container list border border-dark p-4">
       <div className="row d-felx justify-content-between p-2">
         <h2 className=" mt-3 mb-4 text-center">
           <strong>
@@ -23,7 +24,7 @@ const Legajo = ({ ficha, empresa }) => {
           <img src="/img/logom.jpg" className="mutuallogo" />
         ) : null}
       </div>
-      
+
       <div className=" mt-2 d-flex border border-dark justify-content-center  p-4 list">
         <div className="col-md-4">
           <h4>
@@ -206,6 +207,10 @@ const Legajo = ({ ficha, empresa }) => {
           </div>
         </div>
       </div>
+
+      <hr className="mt-4 mb-4 border border-dark" />
+
+      <AdhPrint adhs={adhs} />
     </div>
   );
 };

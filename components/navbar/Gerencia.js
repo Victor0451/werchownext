@@ -518,6 +518,15 @@ export default class Gerencia extends Component {
                 <hr />
                 <li>
                   <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/conformidad_servicio_moroso.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Conformidad de Servicio Para Morosos
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
                     href={`${ip}api/archivos/sepelio/descargararchivo/prot-inst-domicilio.pdf`}
                     className="dropdown-item text-dark"
                   >
