@@ -14,6 +14,7 @@ const ListadoCajas = () => {
     const [cajas, guardarCajas] = useState(null)
     const [ingresos, guardarIngresos] = useState(null)
     const [egresos, guardarEgresos] = useState(null)
+    const [fec, guardarFec] = useState(null)
 
 
     let token = jsCookie.get("token");
@@ -46,6 +47,8 @@ const ListadoCajas = () => {
     }
 
     const traerMovimientos = async (fecha) => {
+
+        guardarFec(fecha)
 
         await axios.get(`${ip}api/sgi/servicios/traeringresos/${fecha}`)
             .then(res => {
@@ -112,6 +115,7 @@ const ListadoCajas = () => {
                 egresos={egresos}
                 calcTotal={calcTotal}
                 imprimir={imprimir}
+                fec={fec}
             />
 
         </Layout>

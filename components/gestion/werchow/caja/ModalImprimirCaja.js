@@ -1,10 +1,12 @@
 import React from 'react'
+import moment from 'moment'
 
 const ModalImprimirCaja = ({
     ingresos,
     egresos,
     calcTotal,
-    imprimir
+    imprimir,
+    fec
 }) => {
     return (
 
@@ -38,7 +40,9 @@ const ModalImprimirCaja = ({
                                     <strong>
                                         <u>
                                             Caja Otero
-                                        </u>:
+                                        </u>: {
+                                            fec ? (moment(fec).format('DD/MM/YYYY')) : null
+                                        }
                                     </strong>
                                 </h2>
 
