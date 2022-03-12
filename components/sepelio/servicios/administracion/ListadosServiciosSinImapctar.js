@@ -60,6 +60,15 @@ const ListadoServiciosSinImpactar = ({ listado }) => {
                   filterAll: true,
                   width: 100,
                 },
+                {
+                  Header: "Seguro",
+                  id: "seguro",
+                  accessor: (d) => d.seguro,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["seguro"] }),
+                  filterAll: true,
+                  width: 100,
+                },
 
                 {
                   Header: "Estado Ficha",
