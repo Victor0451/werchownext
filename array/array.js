@@ -486,6 +486,8 @@ export const capitalaprest = [
   { value: "12000", label: "12000" },
   { value: "15000", label: "15000" },
   { value: "20000", label: "20000" },
+  { value: "30000", label: "30000" },
+
 ];
 
 export const cuotasprest = [
