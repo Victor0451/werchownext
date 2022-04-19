@@ -23,9 +23,6 @@ const FormCaja = ({
     return (
         <div className='mt-4 container border border-dark list p-4'>
 
-
-
-
             <h4>
                 <strong>
                     <u>Caja Otero</u>: {moment().format('DD/MM/YYYY')}

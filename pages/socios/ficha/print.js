@@ -425,7 +425,6 @@ const print = () => {
         buscarTitularDni={buscarTitularDni}
         buscarTitularDniM={buscarTitularDniM}
         errores={errores}
-        ficha={ficha}
         pagos={pagos}
         listado={listado}
         flag={flag}

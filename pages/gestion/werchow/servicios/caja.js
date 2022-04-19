@@ -46,7 +46,19 @@ const Caja = () => {
     const traerOrdenesPorDia = async (fecha) => {
         await axios.get(`${ip}api/sgi/servicios/ordenespordia/${fecha}`)
             .then(res => {
-                guardarIngresos([...ingresos, res.data[0]])
+
+                let ing = []
+
+                let arr = res.data
+
+                for (let i = 0; i < arr.length; i++) {
+
+                    ing.push(arr[i])
+
+                    guardarIngresos([...ing])
+
+                }
+
                 guadrarFechaOrd(fecha)
             })
             .catch(error => {
