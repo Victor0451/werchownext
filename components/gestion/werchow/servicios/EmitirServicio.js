@@ -46,6 +46,8 @@ const EmitirServicio = ({
   cantidadRefE,
   registrarEnfermeriaUso,
   cantidadRefP,
+  priUso,
+  nFisio,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -85,12 +87,16 @@ const EmitirServicio = ({
               El afiliado esta en estado de morosidad!!!.
             </h5>
           </div>
-        ) :
-        (
+        ) : ficha[0].GRUPO === 66 ? (
           <div className="alert alert-info border border-dark text-center text-uppercase">
-            El afiliado no es moroso, pero igual verifica si esta al dia con sus pagos!
+            El afiliado es un estudiante de policia, el sistema verificara si es su primer orden y le bonificara al 100%
           </div>
-        )
+        ) :
+          (
+            <div className="alert alert-info border border-dark text-center text-uppercase">
+              El afiliado no es moroso, pero igual verifica si esta al dia con sus pagos!
+            </div>
+          )
       }
 
       <div className="row mt-4 border border-dark p-4">
@@ -342,6 +348,8 @@ const EmitirServicio = ({
           cantidadRefE={cantidadRefE}
           registrarEnfermeriaUso={registrarEnfermeriaUso}
           cantidadRefP={cantidadRefP}
+          priUso={priUso}
+          nFisio={nFisio}
         />
       )}
     </div>

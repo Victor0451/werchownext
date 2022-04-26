@@ -49,6 +49,10 @@ const Emision = () => {
   const [enfer, guadrarEnfer] = useState(null);
   const [detEnf, guardarDetalleEnfer] = useState(null);
   const [practEnfer, guadrarPractEnfer] = useState(null);
+  const [priUso, guardarPriUso] = useState(false);
+  const [nFisio, guardarNFisio] = useState(0);
+
+
 
 
 
@@ -76,12 +80,18 @@ const Emision = () => {
             const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
             guardarErrores(errores);
           } else {
+
+
+
             guardarFlag(true);
 
             traerNOrden()
 
             let ficha = res.data[0];
+
             guardarFicha(ficha);
+
+            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhs(ficha[0].CONTRATO);
 
@@ -162,7 +172,10 @@ const Emision = () => {
             traerNOrden()
 
             let ficha = res.data[0];
+
             guardarFicha(ficha);
+
+            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhs(ficha[0].CONTRATO);
 
@@ -239,7 +252,10 @@ const Emision = () => {
             traerNOrden()
 
             let ficha = res.data[0];
+
             guardarFicha(ficha);
+
+            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhs(ficha[0].CONTRATO);
 
@@ -320,7 +336,10 @@ const Emision = () => {
             traerNOrden()
 
             let ficha = res.data[0];
+
             guardarFicha(ficha);
+
+            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhsM(ficha[0].CONTRATO);
 
@@ -490,6 +509,8 @@ const Emision = () => {
 
           guardarFicha(ficha);
 
+          verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
+
           traerAdhs(ficha[0].CONTRATO);
 
           if (
@@ -568,6 +589,8 @@ const Emision = () => {
 
           guardarFicha(ficha);
 
+          verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
+
           traerAdhsM(ficha[0].CONTRATO);
 
           if (
@@ -621,6 +644,45 @@ const Emision = () => {
       });
   }
 
+  const contarFisios = async (contrato) => {
+
+    await axios.get(`${ip}api/sgi/servicios/contarfisio/${contrato}`)
+      .then(res => {
+        guardarNFisio(parseInt(res.data[0].N))
+      })
+      .catch(error => {
+        console.log(error)
+
+        toastr.error("Ocurrio un error al verificar el numero de fisios", "ATENCION")
+      })
+
+  }
+
+  const verificarUso = async (grupo, contrato) => {
+
+
+    if (grupo === 66) {
+
+      await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
+        .then(res => {
+
+          if (res.data.length === 0) {
+            guardarPriUso(true)
+          }
+
+          contarFisios(contrato)
+
+        })
+        .catch(error => {
+          console.log(error)
+
+          toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
+        })
+
+    }
+
+  }
+
   // --------------------------------------------------------------
 
 
@@ -653,6 +715,10 @@ const Emision = () => {
       RENDIDO: 0,
       ANULADO: 0,
 
+    }
+
+    if (priUso === true) {
+      uso.IMPORTE = 0
     }
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
@@ -822,6 +888,14 @@ const Emision = () => {
 
     }
 
+    if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66) {
+
+      if (nFisio >= 0 && nFisio <= 8) {
+        uso.IMPORTE = 0
+      }
+
+    }
+
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
@@ -865,6 +939,14 @@ const Emision = () => {
         OPE_ANU: 0,
         COD_PRAC: pracSocio[i].CODIGOS,
         DESCRIP: pracSocio[i].DESCRIP,
+
+      }
+
+      if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66) {
+
+        if (nFisio >= 0 && nFisio < 8) {
+          practi.IMPORTE = 0
+        }
 
       }
 
@@ -1417,6 +1499,8 @@ const Emision = () => {
               cantidadRefE={cantidadRefE}
               registrarEnfermeriaUso={registrarEnfermeriaUso}
               cantidadRefP={cantidadRefP}
+              priUso={priUso}
+              nFisio={nFisio}
             />
           ) : null}
         </>

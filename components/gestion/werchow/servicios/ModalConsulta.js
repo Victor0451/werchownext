@@ -12,6 +12,7 @@ const ModalConsulta = ({
   traerDetalleMedSelec,
   detalleMed,
   registrarOrdenUsos,
+  priUso
 
 }) => {
 
@@ -68,7 +69,7 @@ const ModalConsulta = ({
                       Especialidades:
                     </label>
 
-                    <select className="custom-select" ref={especialidadRef} onChange={()=>traerMedicosPorSuc('C')}>
+                    <select className="custom-select" ref={especialidadRef} onChange={() => traerMedicosPorSuc('C')}>
                       <option selected value="no">Selecciona una opcion</option>
                       {espec.map((s, index) => (
                         <option key={index} value={s.ESPECIAL}>{s.NOMBRE}</option>
@@ -146,11 +147,21 @@ const ModalConsulta = ({
                       <input type="text" className="form-control" value={detalleMed.DIRECCION} />
                     </div>
 
-                    <div className="col-md-12 d-flex justify-content-end mt-4">
-                      <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                        <u>Coseguro</u>: ${detalleMed.MAX_DESC}
+                    {priUso === true ? (
+                      <div className="col-md-12 d-flex justify-content-end mt-4">
+                        <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                          <u>Coseguro</u>: 100% Bonificado
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="col-md-12 d-flex justify-content-end mt-4">
+                        <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                          <u>Coseguro</u>: ${detalleMed.MAX_DESC}
+                        </div>
+                      </div>
+                    )}
+
+
 
                   </div>
                 </div>

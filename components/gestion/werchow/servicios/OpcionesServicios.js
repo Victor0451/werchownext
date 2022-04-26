@@ -42,6 +42,9 @@ const OpcionesServicios = ({
   cantidadRefE,
   registrarEnfermeriaUso,
   cantidadRefP,
+  priUso,
+  nFisio
+
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -132,6 +135,7 @@ const OpcionesServicios = ({
         gestionDescuento={gestionDescuento}
         descFarma={descFarma}
         registrarFarmaciaUso={registrarFarmaciaUso}
+        priUso={priUso}
       />
 
       <ModalConsulta
@@ -146,7 +150,7 @@ const OpcionesServicios = ({
         traerDetalleMedSelec={traerDetalleMedSelec}
         detalleMed={detalleMed}
         registrarOrdenUsos={registrarOrdenUsos}
-
+        priUso={priUso}
       />
 
       <ModalPractica
@@ -167,7 +171,8 @@ const OpcionesServicios = ({
         calcularTotalPracticas={calcularTotalPracticas}
         registrarPracticaUso={registrarPracticaUso}
         cantidadRefP={cantidadRefP}
-
+        priUso={priUso}
+        nFisio={nFisio}
       />
 
 
@@ -184,7 +189,7 @@ const OpcionesServicios = ({
         prestacionRefE={prestacionRefE}
         cantidadRefE={cantidadRefE}
         registrarEnfermeriaUso={registrarEnfermeriaUso}
-
+        priUso={priUso}
       />
 
       {/* --------------------------- */}

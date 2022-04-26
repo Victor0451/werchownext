@@ -20,7 +20,7 @@ const ModalPractica = ({
   calcularTotalPracticas,
   registrarPracticaUso,
   cantidadRefP,
-
+  nFisio
 }) => {
 
   return (
@@ -160,6 +160,16 @@ const ModalPractica = ({
                   </div>
                 </div>
 
+                {
+                  socio.GRUPO === 66 ? (
+
+                    <div className="alert alert-info text-center text-uppercase mt-4 mb-4 border border-dark">
+                      Este socio dispone de {8 - nFisio} sesiones de fisioterapia bonificadas al 100%
+                    </div>
+
+                  ) : null
+                }
+
                 <ListadoPracticas
                   listado={practicas}
                   agregarPractica={agregarPractica}
@@ -167,6 +177,7 @@ const ModalPractica = ({
 
 
                 />
+
 
                 <div className="mt-4 border border-dark p-1">
                   <ListadoPracticasAgregadas
@@ -177,9 +188,21 @@ const ModalPractica = ({
                   />
                 </div>
 
-                <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
-                  Total Practicas: ${calcularTotalPracticas(pracSocio)}
-                </div>
+                {socio.GRUPO === 66 && nFisio >= 0 && nFisio < 8 ? (
+                  <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                    Total Practicas: 100% Bonificadas
+                  </div>
+                ) : socio.GRUPO === 66 && nFisio === 8 ? (
+                  <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                    Total Practicas: ${calcularTotalPracticas(pracSocio)}
+                  </div>
+                ) : (
+                  <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                    Total Practicas: ${calcularTotalPracticas(pracSocio)}
+                  </div>
+                )}
+
+
 
               </>
             ) : null}
