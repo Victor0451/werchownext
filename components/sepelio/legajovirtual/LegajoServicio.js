@@ -4,6 +4,7 @@ import axios from "axios";
 import toastr from "toastr";
 import moment from "moment";
 import { ip } from "../../../config/config";
+import FormSubirArchivo from "./FormSubirArchivo";
 
 const LegajoServicio = ({ archivos, servicio, ataud }) => {
   if (!servicio) {
@@ -29,7 +30,7 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
         console.log(error);
       });
 
-    guardarFlag(true);
+
   };
 
   return (
@@ -433,6 +434,8 @@ const LegajoServicio = ({ archivos, servicio, ataud }) => {
           </div>
         </div>
       </div>
+
+      <FormSubirArchivo contrato={servicio.dni} />
 
       <div className=" col-md-12 mt-4 mb-4 border border-dark p-4">
         <h2 className="mt-4 mb-4 col-8">

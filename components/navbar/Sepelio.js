@@ -182,6 +182,15 @@ export default class Sepelio extends Component {
                 <hr />
                 <li>
                   <a
+                    href={`${ip}api/archivos/sepelio/descargararchivo/sol-crem-divina-misericordia.pdf`}
+                    className="dropdown-item text-dark"
+                  >
+                    Solicitud Cremacion Divina Misericordia
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
                     href={`${ip}api/archivos/ventas/descargararchivo/solicitud-novell.pdf`}
                     className="dropdown-item text-dark"
                   >

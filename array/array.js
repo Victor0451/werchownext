@@ -8,12 +8,16 @@ export const acciones = [
   { value: 7, label: "COMPROMISO DE PAGO" },
   { value: 8, label: "NO PAGA" },
   { value: 9, label: "CUOTA AL DIA" },
-  { value: 10, label: "NOTIFICAR" },
+  { value: 10, label: "NOTIFICACION EN MANO" },
   { value: 13, label: "CARTERA ROJA" },
   { value: 14, label: "SOCIO FALLECIDO" },
   { value: 15, label: "RECORDATORIO DE PAGO" },
   { value: 18, label: "COMP. PAGO EFECTIVO" },
   { value: 19, label: "COMP. PAGO NO EFECTIVO" },
+  { value: 20, label: "DOMICILIO INEXISTENTE" },
+  { value: 21, label: "NOTIFICACION BAJO PUERTA" },
+
+
 ];
 
 export const nueavaaccion = [
