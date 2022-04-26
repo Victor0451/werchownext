@@ -228,7 +228,12 @@ const ListadoCasos = ({
     if (rowInfo) {
       return {
         style: {
-          "background-color": rowInfo.original.edad >= 65 ? "yellow" : null,
+          "background-color": rowInfo.original.edad >= 65 && rowInfo.original.adherentes !== 0 ? "yellow"
+            : rowInfo.original.edad >= 65 && rowInfo.original.adherentes === 0 ? "blue"
+              : null,
+
+          "color": rowInfo.original.edad >= 65 && rowInfo.original.adherentes === 0 ? "white"
+            : null,
         },
       };
     }
@@ -280,7 +285,8 @@ const ListadoCasos = ({
 
       <div className="mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase">
         las columnas resaltadas en amarillo, indica que el afiliado es mayor a
-        65 años por lo que se debe consutar con gerencia como se debe proceder.
+        65 años y las resaltadas en azul, tambien son mayores a 65 años pero sin adherentes
+        por lo que se debe consutar con gerencia como se debe proceder.
       </div>
 
       <div className="list border border-dark">
@@ -374,12 +380,12 @@ const ListadoCasos = ({
                   width: 60,
                 },
                 {
-                  Header: "Deuda Total",
-                  id: "montoadeudado",
-                  accessor: (d) => d.montoadeudado,
+                  Header: "Edad",
+                  id: "edad",
+                  accessor: (d) => d.edad,
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, {
-                      keys: ["montoadeudado"],
+                      keys: ["edad"],
                     }),
                   filterAll: true,
                   width: 100,
