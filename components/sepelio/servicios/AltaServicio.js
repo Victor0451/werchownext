@@ -23,6 +23,7 @@ const AltaServicio = ({
   const [pagos, guardarPagos] = useState(null);
   const [particular, guardarParticular] = useState(null);
   const [grupo, guardarGrupo] = useState(null);
+  const [cantadh, guardarCantAdh] = useState(null);
 
   const adherentesTit = async (contrato) => {
     await axios
@@ -84,6 +85,7 @@ const AltaServicio = ({
                   guardarFicha(ficha);
                   traerPagos(ficha.CONTRATO);
                   adherentesTit(ficha.CONTRATO);
+                  cantAdh(ficha.CONTRATO)
                   traerGrupo(ficha.GRUPO);
                 } else if (!res.data) {
                   axios
@@ -158,6 +160,7 @@ const AltaServicio = ({
                   guardarFicha(ficha);
                   traerPagosM(ficha.CONTRATO);
                   adherentesTitMut(ficha.CONTRATO);
+                  cantAdhM(ficha.CONTRATO)
                   traerGrupo(ficha.GRUPO);
                 } else if (!res.data) {
                   axios
@@ -266,6 +269,33 @@ const AltaServicio = ({
     guardarFicha(null);
   };
 
+  const cantAdh = async (contrato) => {
+
+    await axios
+      .get(`${ip}api/sepelio/servicio/cantadh/${contrato}`)
+      .then((res) => {
+        guardarCantAdh(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
+
+  const cantAdhM = async (contrato) => {
+
+    await axios
+      .get(`${ip}api/sepelio/servicio/cantadhm/${contrato}`)
+      .then((res) => {
+        guardarCantAdh(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
+  
+
   return (
     <div className="mt-4 container border border-dark list">
       {ficha !== null ? (
@@ -282,6 +312,7 @@ const AltaServicio = ({
             usuario={usuario}
             adhs={adhs}
             grupo={grupo}
+            cantadh={cantadh}
           />
         </div>
       ) : particular !== null ? (

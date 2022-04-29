@@ -44,6 +44,7 @@ const FormAltaServicio = ({
   usuario,
   adhs,
   grupo,
+  cantadh,
 }) => {
   let dninuevotitRef = React.createRef();
   let motivoRef = React.createRef();
@@ -264,6 +265,7 @@ const FormAltaServicio = ({
 
     let gl = 0
 
+    let glf = 0
 
     if (plan === "F" || plan === "MA" || plan === "MB" || plan === "MC") {
 
@@ -291,7 +293,23 @@ const FormAltaServicio = ({
 
       }
 
-      return gl
+
+      if (cantadh <= 4) {
+
+        glf = gl + 500
+
+      } else if (cantadh = 5) {
+
+        glf = gl + 1000
+
+      } else if (cantadh >= 6) {
+
+        glf = gl + 2000
+
+      }
+
+
+      return glf
 
 
 
@@ -319,7 +337,24 @@ const FormAltaServicio = ({
 
       }
 
-      return gl
+
+
+      if (cantadh <= 4) {
+
+        glf = gl + 500
+
+      } else if (cantadh = 5) {
+
+        glf = gl + 1000
+
+      } else if (cantadh >= 6) {
+
+        glf = gl + 2000
+
+      }
+
+
+      return glf
 
 
     } else if (plan === "MN") {
@@ -347,7 +382,23 @@ const FormAltaServicio = ({
 
       }
 
-      return gl
+      if (cantadh <= 4) {
+
+        glf = gl + 500
+
+      } else if (cantadh = 5) {
+
+        glf = gl + 1000
+
+      } else if (cantadh >= 6) {
+
+        glf = gl + 2000
+
+      }
+
+
+      return glf
+
 
     } else if (plan === "MO" || plan === "A" || plan === "AB" || plan === "G0" || plan === "U0") {
 
@@ -374,7 +425,22 @@ const FormAltaServicio = ({
 
       }
 
-      return gl
+      if (cantadh <= 4) {
+
+        glf = gl + 500
+
+      } else if (cantadh = 5) {
+
+        glf = gl + 1000
+
+      } else if (cantadh >= 6) {
+
+        glf = gl + 2000
+
+      }
+
+
+      return glf
 
 
     } else if (plan === "G1" || plan === "U1") {
@@ -403,7 +469,22 @@ const FormAltaServicio = ({
 
       }
 
-      return gl
+      if (cantadh <= 4) {
+
+        glf = gl + 500
+
+      } else if (cantadh = 5) {
+
+        glf = gl + 1000
+
+      } else if (cantadh >= 6) {
+
+        glf = gl + 2000
+
+      }
+
+
+      return glf
 
 
     } else {
@@ -477,7 +558,7 @@ const FormAltaServicio = ({
           Cancelar
         </a>
       </div>
-      
+
       {
         gastoLuto(`${ficha.PLAN}${ficha.SUB_PLAN}`, ficha.ALTA) === "no" ? null
           : (
