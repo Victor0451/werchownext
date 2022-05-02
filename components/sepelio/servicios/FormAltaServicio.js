@@ -13,6 +13,7 @@ import ListadoAdherentes from "./ListadoAdherentes";
 import ListadoParcelas from "../parcelas/ListadoParcelas";
 import { ip } from "../../../config/config";
 import { registrarHistoria } from "../../../utils/funciones";
+import GastoLuto from "../../layout/GastoLuto";
 
 const STATE_INICIAL = {
   fechafallecimiento: "",
@@ -258,244 +259,7 @@ const FormAltaServicio = ({
     document.getElementById("nuevotitular").value = `${row.original.NRO_DOC}`;
   };
 
-  const gastoLuto = (plan, alta) => {
 
-
-    const anti = parseInt(moment().format('YYYY') - moment(alta).format("YYYY"))
-
-    let gl = 0
-
-    let glf = 0
-
-    if (plan === "F" || plan === "MA" || plan === "MB" || plan === "MC") {
-
-      gl = 1000
-
-      if (anti <= 2) {
-
-        gl = 1000 + 1000
-
-      } else if (anti > 2 && anti <= 4) {
-
-        gl = 1000 + 2000
-
-      } else if (anti > 4 && anti <= 6) {
-
-        gl = 1000 + 3000
-
-      } else if (anti > 6 && anti <= 8) {
-
-        gl = 1000 + 4000
-
-      } else if (anti > 8) {
-
-        gl = 1000 + 5000
-
-      }
-
-
-      if (cantadh <= 4) {
-
-        glf = gl + 500
-
-      } else if (cantadh = 5) {
-
-        glf = gl + 1000
-
-      } else if (cantadh >= 6) {
-
-        glf = gl + 2000
-
-      }
-
-
-      return glf
-
-
-
-    } else if (plan === "MP") {
-
-      if (anti <= 2) {
-
-        gl = 2000 + 1000
-
-      } else if (anti > 2 && anti <= 4) {
-
-        gl = 2000 + 2000
-
-      } else if (anti > 4 && anti <= 6) {
-
-        gl = 2000 + 3000
-
-      } else if (anti > 6 && anti <= 8) {
-
-        gl = 2000 + 4000
-
-      } else if (anti > 8) {
-
-        gl = 2000 + 5000
-
-      }
-
-
-
-      if (cantadh <= 4) {
-
-        glf = gl + 500
-
-      } else if (cantadh = 5) {
-
-        glf = gl + 1000
-
-      } else if (cantadh >= 6) {
-
-        glf = gl + 2000
-
-      }
-
-
-      return glf
-
-
-    } else if (plan === "MN") {
-
-
-      if (anti <= 2) {
-
-        gl = 2500 + 1000
-
-      } else if (anti > 2 && anti <= 4) {
-
-        gl = 2500 + 2000
-
-      } else if (anti > 4 && anti <= 6) {
-
-        gl = 2500 + 3000
-
-      } else if (anti > 6 && anti <= 8) {
-
-        gl = 2500 + 4000
-
-      } else if (anti > 8) {
-
-        gl = 2500 + 5000
-
-      }
-
-      if (cantadh <= 4) {
-
-        glf = gl + 500
-
-      } else if (cantadh = 5) {
-
-        glf = gl + 1000
-
-      } else if (cantadh >= 6) {
-
-        glf = gl + 2000
-
-      }
-
-
-      return glf
-
-
-    } else if (plan === "MO" || plan === "A" || plan === "AB" || plan === "G0" || plan === "U0") {
-
-
-      if (anti <= 2) {
-
-        gl = 3000 + 1000
-
-      } else if (anti > 2 && anti <= 4) {
-
-        gl = 3000 + 2000
-
-      } else if (anti > 4 && anti <= 6) {
-
-        gl = 3000 + 3000
-
-      } else if (anti > 6 && anti <= 8) {
-
-        gl = 3000 + 4000
-
-      } else if (anti > 8) {
-
-        gl = 3000 + 5000
-
-      }
-
-      if (cantadh <= 4) {
-
-        glf = gl + 500
-
-      } else if (cantadh = 5) {
-
-        glf = gl + 1000
-
-      } else if (cantadh >= 6) {
-
-        glf = gl + 2000
-
-      }
-
-
-      return glf
-
-
-    } else if (plan === "G1" || plan === "U1") {
-
-
-
-      if (anti <= 2) {
-
-        gl = 5000 + 1000
-
-      } else if (anti > 2 && anti <= 4) {
-
-        gl = 5000 + 2000
-
-      } else if (anti > 4 && anti <= 6) {
-
-        gl = 5000 + 3000
-
-      } else if (anti > 6 && anti <= 8) {
-
-        gl = 5000 + 4000
-
-      } else if (anti > 8) {
-
-        gl = 5000 + 5000
-
-      }
-
-      if (cantadh <= 4) {
-
-        glf = gl + 500
-
-      } else if (cantadh = 5) {
-
-        glf = gl + 1000
-
-      } else if (cantadh >= 6) {
-
-        glf = gl + 2000
-
-      }
-
-
-      return glf
-
-
-    } else {
-
-      gl = "no"
-
-      return gl
-
-    }
-
-  }
 
   let tiposervicio = `Plan ${ficha.PLAN}`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
@@ -559,14 +323,12 @@ const FormAltaServicio = ({
         </a>
       </div>
 
-      {
-        gastoLuto(`${ficha.PLAN}${ficha.SUB_PLAN}`, ficha.ALTA) === "no" ? null
-          : (
-            <div className="alert alert-info text-center text-uppercase border border-dark mt-4 mb-4">
-              El gasto de luto por este fallecido es de: ${gastoLuto(`${ficha.PLAN}${ficha.SUB_PLAN}`, ficha.ALTA)}
-            </div>
-          )
-      }
+      <GastoLuto
+        plan={`${ficha.PLAN}${ficha.SUB_PLAN}`}
+        alta={ficha.ALTA}
+        cantadh={cantadh}
+
+      />
 
 
       <form className=" border border-dark mt-4 p-4" onSubmit={handleSubmit}>

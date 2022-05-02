@@ -10,6 +10,8 @@ import Legajo from "../../../components/socios/ficha/Legajo";
 import Pagos from "../../../components/socios/ficha/Pagos";
 import LegajoArchivos from "../../../components/socios/legajoVirtual/LegajoArchivos";
 import Adherentes from "../../../components/socios/ficha/Adherentes";
+import { gastoLuto } from '../../../utils/funciones'
+import GastoLuto from "../../../components/layout/GastoLuto";
 
 
 const ficha = () => {
@@ -25,6 +27,8 @@ const ficha = () => {
   const [empresa, guardarEmpresa] = useState(null);
   const [listsocio, guardarListSocios] = useState(null);
   const [errores, guardarErrores] = useState(null);
+  const [cantadh, guardarCantAdh] = useState(null);
+
 
   const traerArchivos = async (contrato) => {
     await axios
@@ -165,7 +169,7 @@ const ficha = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-
+          cantAdh(ficha.CONTRATO)
           traerPagos(ficha.CONTRATO);
 
           if (ficha === "undefined") {
@@ -211,7 +215,7 @@ const ficha = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-
+          cantAdhM(ficha.CONTRATO)
           traerPagosM(ficha.CONTRATO);
 
           if (ficha === "undefined") {
@@ -253,7 +257,7 @@ const ficha = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-          console.log(ficha);
+          cantAdh(ficha.CONTRATO)
 
           if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
             traerPagos(ficha.CONTRATO);
@@ -299,7 +303,7 @@ const ficha = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-          console.log(ficha);
+          cantAdhM(ficha.CONTRATO)
 
           if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
             traerPagos(ficha.CONTRATO);
@@ -384,7 +388,7 @@ const ficha = () => {
         .then((res) => {
           let ficha = res.data[0][0];
           guardarFicha(ficha);
-
+          cantAdh(ficha.CONTRATO)
           traerPagos(ficha.CONTRATO);
 
           if (ficha === "undefined") {
@@ -426,6 +430,7 @@ const ficha = () => {
           guardarFicha(ficha);
 
           traerPagos(ficha.CONTRATO);
+          cantAdhM(ficha.CONTRATO)
 
           if (ficha === "undefined") {
             toastr.error(
@@ -451,6 +456,34 @@ const ficha = () => {
 
   }
 
+  const cantAdh = async (contrato) => {
+
+    await axios
+      .get(`${ip}api/sepelio/servicio/cantadh/${contrato}`)
+      .then((res) => {
+        guardarCantAdh(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
+
+  const cantAdhM = async (contrato) => {
+
+    await axios
+      .get(`${ip}api/sepelio/servicio/cantadhm/${contrato}`)
+      .then((res) => {
+        guardarCantAdh(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
+
+
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -473,13 +506,13 @@ const ficha = () => {
         listSocios={listSocios}
         listSociosM={listSociosM}
         errores={errores}
-        ficha={ficha}
         pagos={pagos}
         empresa={empresa}
         archivos={archivos}
         adhs={adhs}
         listsocio={listsocio}
         Seleccionar={Seleccionar}
+        cantadh={cantadh}
       />
 
 
@@ -511,17 +544,63 @@ const ficha = () => {
             <div className="modal-body ">
               <div id="solicitud" className="mt-4 container border border-dark p-4">
                 <div>
+
+
+                  {ficha ? (
+                    <GastoLuto
+                      plan={`${ficha.PLAN}${ficha.SUB_PLAN}`}
+                      alta={ficha.ALTA}
+                      cantadh={cantadh}
+
+                    />
+                  ) : null}
+
+
                   <Legajo ficha={ficha} empresa={empresa} />
 
                   <hr className="mt-4 mb-4" />
 
-                  <Pagos pagos={pagos} />
+                  <div className="border border-dark p-4">
 
-                  <hr className="mt-4 mb-4" />
-                  <Adherentes adhs={adhs} />
+                    <h2 className="text-center">
+                      Opciones
+                    </h2>
 
-                  <hr className="mt-4 mb-4" />
-                  <LegajoArchivos archivos={archivos} empresa={empresa} />
+                    <p className="mt-4 d-flex justify-content-center">
+                      <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#pagos" aria-expanded="false" aria-controls="collapseExample">
+                        Mostrar Pagos
+                      </button>
+                      <button className="ml-1 btn btn-primary" type="button" data-toggle="collapse" data-target="#adhs" aria-expanded="false" aria-controls="collapseExample">
+                        Mostrar Adherentes
+                      </button>
+                      <button className="ml-1 btn btn-primary" type="button" data-toggle="collapse" data-target="#archi" aria-expanded="false" aria-controls="collapseExample">
+                        Mostrar Archivos
+                      </button>
+                    </p>
+
+                  </div>
+
+                  <div className="collapse" id="pagos">
+                    <hr className="mt-4 mb-4" />
+
+                    <Pagos pagos={pagos} />
+
+                  </div>
+
+                  <div className="collapse" id="adhs">
+                    <hr className="mt-4 mb-4" />
+
+                    <Adherentes adhs={adhs} />
+
+                  </div>
+
+                  <div className="collapse" id="archi">
+                    <hr className="mt-4 mb-4" />
+
+                    <LegajoArchivos archivos={archivos} empresa={empresa} />
+
+                  </div>
+
                 </div>
               </div>
             </div>

@@ -208,9 +208,6 @@ const Legajo = ({ ficha, empresa, adhs }) => {
         </div>
       </div>
 
-      <hr className="mt-4 mb-4 border border-dark" />
-
-      <AdhPrint adhs={adhs} />
     </div>
   );
 };

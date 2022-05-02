@@ -14,7 +14,8 @@ const SocioFicha = ({
   nomoro,
   listsocio,
   Seleccionar,
-  titulo
+  titulo,
+  
 }) => {
   return (
     <div className="container border border-dark list mt-4 p-4 mb-4">
