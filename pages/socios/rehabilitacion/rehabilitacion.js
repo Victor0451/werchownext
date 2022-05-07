@@ -33,7 +33,9 @@ const rehabilitacion = () => {
       document.getElementById("btn").hidden = false;
 
       guardarVigencia(vigencia);
+
     } else if (cuotas > 1) {
+
       guardarCuotas(cuotas)
 
       let carencia = cuotas * 30;
@@ -98,7 +100,10 @@ const rehabilitacion = () => {
             res.data.GRUPO === 3777 ||
             res.data.GRUPO === 3888 ||
             res.data.GRUPO === 3999 ||
-            res.data.GRUPO === 4004
+            res.data.GRUPO === 4004 ||
+            res.data.GRUPO === 7777 ||
+            res.data.GRUPO === 8500
+
           ) {
             guardarFicha(ficha);
             guardarEmpresa("W");
@@ -141,7 +146,7 @@ const rehabilitacion = () => {
     }
   };
 
-  const buscarTitularM = async (e) => {
+  const buscarTitularM = async (e) => { 
     e.preventDefault();
 
     guardarFicha(null);
@@ -166,10 +171,14 @@ const rehabilitacion = () => {
             res.data.GRUPO === 3777 ||
             res.data.GRUPO === 3888 ||
             res.data.GRUPO === 3999 ||
-            res.data.GRUPO === 4004
+            res.data.GRUPO === 4004 ||
+            res.data.GRUPO === 7777 ||
+            res.data.GRUPO === 8500
           ) {
+
             guardarFicha(ficha);
             guardarEmpresa("M");
+
           } else if (
             res.data.GRUPO !== 1001 ||
             res.data.GRUPO !== 3444 ||
@@ -178,6 +187,7 @@ const rehabilitacion = () => {
             res.data.GRUPO !== 3888 ||
             res.data.GRUPO !== 3999 ||
             res.data.GRUPO !== 4004
+
           ) {
             toastr.warning(
               "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO",
