@@ -257,7 +257,7 @@ const Emision = () => {
 
             verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
-            traerAdhs(ficha[0].CONTRATO);
+            traerAdhsM(ficha[0].CONTRATO);
 
             if (
               ficha[0].GRUPO === 1001 ||
