@@ -329,6 +329,15 @@ export default class Gerencia extends Component {
                 Liquidacion Ventas de Servicios
               </a>
             </li>
+            <hr />
+            <li>
+              <a
+                href="/gestion/werchow/servicios/liquidacion"
+                className="dropdown-item text-dark"
+              >
+                Liquidacion Medicos
+              </a>
+            </li>
           </ul>
         </li>
 
