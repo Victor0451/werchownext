@@ -96,12 +96,11 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                         <div>
                                             <button
                                                 className="btn btn-sm btn-warning border mr-1"
-                                                data-toggle="tooltip"
                                                 data-toggle="modal"
                                                 data-placement="top"
                                                 title="Editar"
                                                 data-target="#staticBackdrop"
-                                                
+
                                                 onClick={() => traerTarea(row.original)}
                                             >
                                                 <i

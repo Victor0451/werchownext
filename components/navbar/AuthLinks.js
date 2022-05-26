@@ -2,16 +2,15 @@ import React from "react";
 import Adimn from "./Adimn";
 import Recuperadoras from "./Recuperadoras";
 import Gerencia from "./Gerencia";
-import Logout from "./Logout";
 import Ventas from "./Ventas";
 import Sepelio from "./Sepelio";
+import Opciones from "./Opciones";
 
-const AuthLinks = ({ userData }) => {
+const AuthLinks = ({ userData, msj }) => {
   return (
     <>
       <div
-        className="collapse navbar-collapse d-flex justify-content-start"
-        id="navbarColor02"
+        className=" d-flex justify-content-start"
       >
         {userData.perfil === 1 ? (
           <Adimn />
@@ -25,10 +24,12 @@ const AuthLinks = ({ userData }) => {
           <Sepelio />
         ) : null}
       </div>
-      <span className="badge badge-light text-uppercase mr-2 ">
-        Bienvenido {userData.usuario}
-      </span>
-      <Logout />
+
+      <Opciones
+        userData={userData}
+        msj={msj}
+      />
+
     </>
   );
 };

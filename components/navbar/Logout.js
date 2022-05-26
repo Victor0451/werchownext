@@ -8,7 +8,7 @@ const Logout = () => {
   };
   return (
     <>
-      <a className="nav-item text-white" onClick={logout} href="/">
+      <a className="dropdown-item text-dark" onClick={logout} href="/">
         Cerrar Sesion
       </a>
     </>

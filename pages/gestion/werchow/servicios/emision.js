@@ -660,8 +660,7 @@ const Emision = () => {
 
   const verificarUso = async (grupo, contrato) => {
 
-
-    if (grupo === 66) {
+    if (grupo === 66 || grupo === 55) {
 
       await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
         .then(res => {

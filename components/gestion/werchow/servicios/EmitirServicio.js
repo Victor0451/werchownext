@@ -87,9 +87,9 @@ const EmitirServicio = ({
               El afiliado esta en estado de morosidad!!!.
             </h5>
           </div>
-        ) : ficha[0].GRUPO === 66 ? (
+        ) : ficha[0].GRUPO === 66 || ficha[0].GRUPO === 55 ? (
           <div className="alert alert-info border border-dark text-center text-uppercase">
-            El afiliado es un estudiante de policia, el sistema verificara si es su primer orden y le bonificara al 100%
+            El afiliado es un estudiante de policia o penintenciaria, el sistema verificara si es su primer orden y le bonificara al 100%
           </div>
         ) :
           (

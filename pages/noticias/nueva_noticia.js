@@ -78,7 +78,6 @@ const nueva_noticia = () => {
             today={today}
             usuario={usuario}
             perfilRef={perfilRef}
-            error={error}
           />
         </div>
       )}
