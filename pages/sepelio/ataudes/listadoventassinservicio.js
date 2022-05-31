@@ -49,7 +49,7 @@ const listadoventassinservicio = () => {
     await axios
       .put(`${ip}api/sepelio/ataudventa/updatestock/${idataud}`)
       .then((res) => {
-        console.log(res);
+
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +57,7 @@ const listadoventassinservicio = () => {
   };
 
   const eliminarVentaSinServ = async (row) => {
-    console.log(row);
+
 
     await confirmAlert({
       title: "ATENCION",
@@ -90,7 +90,7 @@ const listadoventassinservicio = () => {
         },
         {
           label: "No",
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });

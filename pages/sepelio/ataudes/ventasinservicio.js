@@ -47,7 +47,7 @@ const ventasinservicio = () => {
 
   const selcasofrm = (row) => {
     guardarStock(row.original);
-    console.log(ataud);
+    
   };
 
   const buscarTitular = async (e) => {

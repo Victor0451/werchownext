@@ -197,7 +197,6 @@ const Stock = ({ selcaso, selcasofrm, fl, traerHistorial, historial }) => {
                           <button
                             type="button"
                             className="btn btn-warning btn-sm mr-1"
-                            data-toggle="tooltip"
                             data-toggle="modal"
                             data-target="#historial"
                             data-placement="top"

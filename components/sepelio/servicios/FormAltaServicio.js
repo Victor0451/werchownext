@@ -58,6 +58,7 @@ const FormAltaServicio = ({
   const [error, guardarError] = useState(null);
   const [parcela, guardarParcela] = useState(null);
   const [crem, guardarCrem] = useState(0);
+  const [don, guardarDon] = useState(0);
   const [stock, guardarStock] = useState(null);
 
   const { valores, errores, handleChange, handleSubmit, handleBlur } =
@@ -165,6 +166,7 @@ const FormAltaServicio = ({
       dni_solicitante: dni_solicitante,
       cremacion: crem,
       liquidado: 0,
+      donacion: don
     };
 
     if (ficha.GRUPO && ficha.PLAN !== "P") {
@@ -228,6 +230,14 @@ const FormAltaServicio = ({
       guardarCrem(1);
     } else if (flag === "no") {
       guardarCrem(0);
+    }
+  };
+
+  const donacion = (flag) => {
+    if (flag === "si") {
+      guardarDon(1);
+    } else if (flag === "no") {
+      guardarDon(0);
     }
   };
 
@@ -797,6 +807,41 @@ const FormAltaServicio = ({
                   defaultChecked={true}
                 />
                 <label className="form-check-label" for="cremno">
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Donacion de Serv.</u>
+                </strong>
+              </label>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  id="donsi"
+                  name="donacion"
+                  value="option1"
+                  onClick={() => donacion("si")}
+                />
+                <label className="form-check-label" for="donsi">
+                  Si
+                </label>
+              </div>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="donacion"
+                  id="donno"
+                  value="option1"
+                  onClick={() => donacion("no")}
+                  defaultChecked={true}
+                />
+                <label className="form-check-label" for="donno">
                   No
                 </label>
               </div>

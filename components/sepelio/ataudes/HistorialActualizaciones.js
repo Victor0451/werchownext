@@ -4,7 +4,7 @@ import ReactTable from "react-table";
 import moment from "moment";
 
 const HistorialActualizaciones = ({ historial }) => {
-  console.log(historial)
+
   if (historial.length === 0)
     return (
       <div className="alert alert-warning text-center text-uppercase border border-dark">

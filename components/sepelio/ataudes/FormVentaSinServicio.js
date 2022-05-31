@@ -49,7 +49,7 @@ const FormVentaSinServicio = ({
         <div className="col-md-8">
           <h2>
             <strong>
-              <u>Venta de Ataudes sin servicio</u>
+              <u>Venta de Ataudes Sin Servicio</u>
             </strong>
           </h2>
         </div>
@@ -207,7 +207,7 @@ const FormVentaSinServicio = ({
             ) : null}
           </div>
 
-          <div className="border border-dark col-md-5 ml-1">
+          <div className="border border-dark col-md-5 ml-4">
             <div className="col-md-12">
               <button
                 className="mt-4 btn btn-primary btn-block"
@@ -363,7 +363,7 @@ const FormVentaSinServicio = ({
               </button>
             </div>
             <div className="modal-body">
-              <Stock selcasofrm={selcasofrm} fl={0} />
+              <Stock selcasofrm={selcasofrm} fl={0} historial={[]} />
             </div>
             <div className="modal-footer">
               <button
