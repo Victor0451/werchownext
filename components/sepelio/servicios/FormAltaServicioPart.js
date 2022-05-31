@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import Stock from "../ataudes/Stock";
+import { registrarHistoria } from "../../../utils/funciones";
+
 
 // Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -39,6 +41,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   const [errmotiv, guardarErrMotiv] = useState(null);
   const [erridataud, guardarErrIdAtaud] = useState(null);
   const [crem, guardarCrem] = useState(0);
+  const [don, guardarDon] = useState(0);
   const [stock, guardarStock] = useState(null);
 
   const { valores, errores, handleChange, handleSubmit, handleBlur } =
@@ -94,7 +97,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       dni_solicitante: dni_solicitante,
       cremacion: crem,
       liquidado: 0,
-      importe: importe
+      importe: importe,
+      donacion: don
     };
 
     if (motivoRef.current.value === "") {
@@ -106,14 +110,15 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       await axios
         .post(`${ip}api/sepelio/servicio/nuevoservicio`, servicio)
         .then((res) => {
-          if ((res.status = 200)) {
+          console.log(res.status)
+          if ((res.status === 200)) {
             toastr.success("Servicio cargado con exito", "ATENCION");
             updateStockAtaud(servicio.idataud, stock);
 
-            let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni}`
+            let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni}, ataud: ${servicio.idataud}, cremacion: ${servicio.cremacion}, donacion: ${servicio.donacion}.`
 
             registrarHistoria(accion, usuario)
-
+            console.log("ok")
             Router.push({
               pathname: "/sepelio/servicios/impresion",
               query: { id: servicio.dni },
@@ -131,6 +136,14 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       guardarCrem(1);
     } else if (flag === "no") {
       guardarCrem(0);
+    }
+  };
+
+  const donacion = (flag) => {
+    if (flag === "si") {
+      guardarDon(1);
+    } else if (flag === "no") {
+      guardarDon(0);
     }
   };
 
@@ -162,7 +175,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
 
   const updateStockAtaud = async (idataud, stock) => {
     let nustock = stock - 1;
-    console.log(nustock);
+
     await axios
       .put(`${ip}api/sepelio/ataudes/updatestock/${idataud}`, { nustock })
       .then((res) => {
@@ -176,8 +189,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
   let tiposervicio = `Particular`;
   let fecha = moment().format("DD/MM/YYYY HH:mm:ss");
   return (
-    <div className="mt-4 list border border-dark p-4">
-      <form className=" p-4" onSubmit={handleSubmit}>
+    <div className=" list border border-dark p-4">
+      <form className="p-4" onSubmit={handleSubmit}>
         <div className="d-flex justify-content-between">
           <h1 className=" mb-4">
             <strong>
@@ -650,6 +663,41 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             <div className="col-md-4 mt-4 mb-4">
               <label>
                 <strong>
+                  <u>Donacion de Serv.</u>
+                </strong>
+              </label>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  id="donsi"
+                  name="donacion"
+                  value="option1"
+                  onClick={() => donacion("si")}
+                />
+                <label className="form-check-label" for="donsi">
+                  Si
+                </label>
+              </div>
+              <div className="form-check ">
+                <input
+                  className="form-check-input "
+                  type="radio"
+                  name="donacion"
+                  id="donno"
+                  value="option1"
+                  onClick={() => donacion("no")}
+                  defaultChecked={true}
+                />
+                <label className="form-check-label" for="donno">
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div className="col-md-4 mt-4 mb-4">
+              <label>
+                <strong>
                   <u>Valor del Servicio</u>
                 </strong>
               </label>
@@ -829,7 +877,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
           </div>
         </div>
 
-        <div className="container row  p-4 d-flex justify-content-center">
+        <div className="container border border-dark row  p-4 d-flex justify-content-center">
           <button type="submit" className="btn btn-primary col-5 mr-1">
             Registrar
           </button>
@@ -841,6 +889,8 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
           </a>
         </div>
       </form>
+
+      {/* MODAL */}
 
       <div
         className="modal fade"

@@ -297,7 +297,7 @@ const AltaServicio = ({
   
 
   return (
-    <div className="mt-4 container border border-dark list">
+    <div className="mt-4 container border border-dark list p-4">
       {ficha !== null ? (
         <div className="mt-4">
           <FormAltaServicio
