@@ -461,7 +461,7 @@ const ficha = () => {
     await axios
       .get(`${ip}api/sepelio/servicio/cantadh/${contrato}`)
       .then((res) => {
-        guardarCantAdh(res.data);
+        guardarCantAdh(res.data.adh);
       })
       .catch((error) => {
         console.log(error);
@@ -474,7 +474,7 @@ const ficha = () => {
     await axios
       .get(`${ip}api/sepelio/servicio/cantadhm/${contrato}`)
       .then((res) => {
-        guardarCantAdh(res.data);
+        guardarCantAdh(res.data.adh);
       })
       .catch((error) => {
         console.log(error);

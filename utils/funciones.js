@@ -49,6 +49,272 @@ export const registrarHistorialAprobacion = async (data, user) => {
         });
 };
 
+
+// CALCULO GASTO LUTO VIEJO
+// export const gastoLuto = (plan, alta, cantadh) => {
+
+
+//     const anti = parseInt(moment().format('YYYY') - moment(alta).format("YYYY"))
+
+//     let gl = 0
+
+//     let glf = 0
+
+//     if (plan === "F" || plan === "MA" || plan === "MB" || plan === "MC") {
+
+//         gl = 1000
+
+//         if (anti <= 2) {
+
+//             gl = 1000 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 1000 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 1000 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 1000 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 1000 + 5000
+
+//         }
+
+
+//         if (cantadh <= 4) {
+
+//             glf = gl + 1000
+
+//         } else if (cantadh = 5) {
+
+//             glf = gl + 1500
+
+//         } else if (cantadh >= 6) {
+
+//             glf = gl + 2000
+
+//         }
+
+
+//         return glf
+
+
+
+//     } else if (plan === "MP") {
+
+//         if (anti <= 2) {
+
+//             gl = 2000 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 2000 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 2000 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 2000 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 2000 + 5000
+
+//         }
+
+
+//         if (cantadh <= 4) {
+
+//             glf = gl + 1000
+
+//         } else if (cantadh = 5) {
+
+//             glf = gl + 1500
+
+//         } else if (cantadh >= 6) {
+
+//             glf = gl + 2000
+
+//         }
+
+//         return glf
+
+
+//     } else if (plan === "MN") {
+
+
+//         if (anti <= 2) {
+
+//             gl = 2500 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 2500 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 2500 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 2500 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 2500 + 5000
+
+//         }
+
+//         if (cantadh <= 4) {
+
+//             glf = gl + 1000
+
+//         } else if (cantadh = 5) {
+
+//             glf = gl + 1500
+
+//         } else if (cantadh >= 6) {
+
+//             glf = gl + 2000
+
+//         }
+
+
+//         return glf
+
+
+//     } else if (plan === "MO" || plan === "A" || plan === "AB" || plan === "G0" || plan === "U0") {
+
+
+//         if (anti <= 2) {
+
+//             gl = 3000 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 3000 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 3000 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 3000 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 3000 + 5000
+
+//         }
+
+//         if (cantadh <= 4) {
+
+//             glf = gl + 1000
+
+//         } else if (cantadh = 5) {
+
+//             glf = gl + 1500
+
+//         } else if (cantadh >= 6) {
+
+//             glf = gl + 2000
+
+//         }
+
+
+//         return glf
+
+
+//     } else if (plan === "G1" || plan === "U1") {
+
+
+
+//         if (anti <= 2) {
+
+//             gl = 5000 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 5000 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 5000 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 5000 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 5000 + 5000
+
+//         }
+
+//         if (cantadh <= 4) {
+
+//             glf = gl + 1000
+
+//         } else if (cantadh = 5) {
+
+//             glf = gl + 1500
+
+//         } else if (cantadh >= 6) {
+
+//             glf = gl + 2000
+
+//         }
+
+
+//         return glf
+
+
+//     } else {
+
+//         // gl = "no"
+
+//         if (anti <= 2) {
+
+//             gl = 1000 + 1000
+
+//         } else if (anti > 2 && anti <= 4) {
+
+//             gl = 1000 + 2000
+
+//         } else if (anti > 4 && anti <= 6) {
+
+//             gl = 1000 + 3000
+
+//         } else if (anti > 6 && anti <= 8) {
+
+//             gl = 1000 + 4000
+
+//         } else if (anti > 8) {
+
+//             gl = 1000 + 5000
+
+//         }
+
+//         return gl
+
+//     }
+
+// }
+
+
+
+// CALCULO GASTO LUTO NUEVO
+
+
 export const gastoLuto = (plan, alta, cantadh) => {
 
 
@@ -58,252 +324,32 @@ export const gastoLuto = (plan, alta, cantadh) => {
 
     let glf = 0
 
-    if (plan === "F" || plan === "MA" || plan === "MB" || plan === "MC") {
+    let inte = cantadh + 1
 
-        gl = 1000
+    
 
-        if (anti <= 2) {
+    gl = 2000
 
-            gl = 1000 + 1000
 
-        } else if (anti > 2 && anti <= 4) {
+    if (inte < 4) {
 
-            gl = 1000 + 2000
+        glf = gl
 
-        } else if (anti > 4 && anti <= 6) {
+    } else if (inte >= 4 && inte <= 6) {
 
-            gl = 1000 + 3000
+        glf = gl + 1500
 
-        } else if (anti > 6 && anti <= 8) {
+    } else if (inte >= 7) {
 
-            gl = 1000 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 1000 + 5000
-
-        }
-
-
-        if (cantadh <= 4) {
-
-            glf = gl + 1000
-
-        } else if (cantadh = 5) {
-
-            glf = gl + 1500
-
-        } else if (cantadh >= 6) {
-
-            glf = gl + 2000
-
-        }
-
-
-        return glf
-
-
-
-    } else if (plan === "MP") {
-
-        if (anti <= 2) {
-
-            gl = 2000 + 1000
-
-        } else if (anti > 2 && anti <= 4) {
-
-            gl = 2000 + 2000
-
-        } else if (anti > 4 && anti <= 6) {
-
-            gl = 2000 + 3000
-
-        } else if (anti > 6 && anti <= 8) {
-
-            gl = 2000 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 2000 + 5000
-
-        }
-
-
-        if (cantadh <= 4) {
-
-            glf = gl + 1000
-
-        } else if (cantadh = 5) {
-
-            glf = gl + 1500
-
-        } else if (cantadh >= 6) {
-
-            glf = gl + 2000
-
-        }
-
-        return glf
-
-
-    } else if (plan === "MN") {
-
-
-        if (anti <= 2) {
-
-            gl = 2500 + 1000
-
-        } else if (anti > 2 && anti <= 4) {
-
-            gl = 2500 + 2000
-
-        } else if (anti > 4 && anti <= 6) {
-
-            gl = 2500 + 3000
-
-        } else if (anti > 6 && anti <= 8) {
-
-            gl = 2500 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 2500 + 5000
-
-        }
-
-        if (cantadh <= 4) {
-
-            glf = gl + 1000
-
-        } else if (cantadh = 5) {
-
-            glf = gl + 1500
-
-        } else if (cantadh >= 6) {
-
-            glf = gl + 2000
-
-        }
-
-
-        return glf
-
-
-    } else if (plan === "MO" || plan === "A" || plan === "AB" || plan === "G0" || plan === "U0") {
-
-
-        if (anti <= 2) {
-
-            gl = 3000 + 1000
-
-        } else if (anti > 2 && anti <= 4) {
-
-            gl = 3000 + 2000
-
-        } else if (anti > 4 && anti <= 6) {
-
-            gl = 3000 + 3000
-
-        } else if (anti > 6 && anti <= 8) {
-
-            gl = 3000 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 3000 + 5000
-
-        }
-
-        if (cantadh <= 4) {
-
-            glf = gl + 1000
-
-        } else if (cantadh = 5) {
-
-            glf = gl + 1500
-
-        } else if (cantadh >= 6) {
-
-            glf = gl + 2000
-
-        }
-
-
-        return glf
-
-
-    } else if (plan === "G1" || plan === "U1") {
-
-
-
-        if (anti <= 2) {
-
-            gl = 5000 + 1000
-
-        } else if (anti > 2 && anti <= 4) {
-
-            gl = 5000 + 2000
-
-        } else if (anti > 4 && anti <= 6) {
-
-            gl = 5000 + 3000
-
-        } else if (anti > 6 && anti <= 8) {
-
-            gl = 5000 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 5000 + 5000
-
-        }
-
-        if (cantadh <= 4) {
-
-            glf = gl + 1000
-
-        } else if (cantadh = 5) {
-
-            glf = gl + 1500
-
-        } else if (cantadh >= 6) {
-
-            glf = gl + 2000
-
-        }
-
-
-        return glf
-
-
-    } else {
-
-        // gl = "no"
-
-        if (anti <= 2) {
-
-            gl = 1000 + 1000
-
-        } else if (anti > 2 && anti <= 4) {
-
-            gl = 1000 + 2000
-
-        } else if (anti > 4 && anti <= 6) {
-
-            gl = 1000 + 3000
-
-        } else if (anti > 6 && anti <= 8) {
-
-            gl = 1000 + 4000
-
-        } else if (anti > 8) {
-
-            gl = 1000 + 5000
-
-        }
-
-        return gl
+        glf = gl + 2000
 
     }
+
+
+    return glf
+
+
+
+
 
 }
