@@ -137,7 +137,9 @@ const NuevaTarea = ({
                             ref={sucursalRef}
                         >
                             <option selected value="no"> Elige una Opcion </option>
-
+                            <option value="Casa Central">
+                                Casa Central
+                            </option>
                             <option value="Palpala">
                                 Palpala
                             </option>

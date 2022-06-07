@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../../../components/layout/Layout";
+import Layout from "../../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import axios from "axios";
-import { ip } from '../../../../../config/config'
-import ModalEvento from "../../../../../components/gestion/sucursales/tareas/ModalEvento";
+import { ip } from '../../../../config/config'
+import ModalEvento from "../../../../components/gestion/sucursales/tareas/ModalEvento";
+import Spinner from "../../../../components/layout/Spinner";
 
 const calendario = () => {
 
@@ -74,7 +75,7 @@ const calendario = () => {
 
     return (
         <Layout>
-            <div className="container mt-4 border border-dark p-4 alert alert-dark">
+            <div className="container list mt-4 border border-dark p-4 alert alert-dark">
                 <div className="row">
                     <div className="col-md-8">
                         <h3 className="">
@@ -93,37 +94,43 @@ const calendario = () => {
 
                 <div className="mt-4 border border-dark list">
 
-                    <Calendar
-                        selectable={true}
-                        onSelectSlot={slotSelected}
-                        onSelectEvent={eventSelected}
-                        style={{ height: "80vh" }}
-                        localizer={localizer}
-                        events={events}
-                        startAccessor="start"
-                        endAccessor="end"
-                        messages={{
-                            next: "Sig",
-                            previous: "Ant",
-                            today: "Hoy",
-                            month: "Mes",
-                            week: "Semana",
-                            day: "Día",
-                        }}
-                        defaultView="week"
-                        eventPropGetter={events => ({
-                            style: {
-                                backgroundColor: events.priority === 1 ? "#3FD503"
-                                    : events.priority === 2 ? "#E6F82F"
-                                        : events.priority === 3 ? "#F82F2F"
-                                            : null,
-                                color: 'black'
+                    {events.length !== 0 ? (
+                        <Calendar
+                            selectable={true}
+                            onSelectSlot={slotSelected}
+                            onSelectEvent={eventSelected}
+                            style={{ height: "80vh" }}
+                            localizer={localizer}
+                            events={events}
+                            startAccessor="start"
+                            endAccessor="end"
+                            messages={{
+                                next: "Sig",
+                                previous: "Ant",
+                                today: "Hoy",
+                                month: "Mes",
+                                week: "Semana",
+                                day: "Día",
+                            }}
+                            defaultView="week"
+                            eventPropGetter={events => ({
+                                style: {
+                                    backgroundColor: events.priority === 1 ? "#3FD503"
+                                        : events.priority === 2 ? "#E6F82F"
+                                            : events.priority === 3 ? "#F82F2F"
+                                                : null,
+                                    color: 'black'
 
-                            }
+                                }
 
 
-                        })}
-                    />
+                            })}
+                        />
+                    ) : <div className="mt-4 mb-4">
+                        <Spinner />
+                    </div>
+                    }
+
                 </div>
             </div>
 

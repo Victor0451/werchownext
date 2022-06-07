@@ -9,6 +9,8 @@ import toastr from "toastr";
 const Navbar = () => {
   const [userData, guardarUsuario] = useState({});
   const [msj, guardarMensajes] = useState(0);
+  const [events, guardarEvents] = useState(0)
+
 
   useEffect(() => {
     let usuario = jsCookies.get("usuario");
@@ -18,6 +20,7 @@ const Navbar = () => {
       guardarUsuario(userData);
 
       traerMensajes(userData.usuario)
+      traerTareasSuc()
 
     }
   }, []);
@@ -28,8 +31,6 @@ const Navbar = () => {
       .then(res => {
 
         if (res.status === 200) {
-
-          console.log(res.data.length)
 
           guardarMensajes(res.data.length)
 
@@ -45,6 +46,23 @@ const Navbar = () => {
 
   }
 
+  const traerTareasSuc = async (id) => {
+
+    await axios
+      .get(`${ip}api/sgi/tareas/traertareasopnl`)
+      .then((res) => {
+
+        if (res.status === 200) {
+          guardarEvents(res.data.length);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
+
+
   return (
 
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,8 +73,7 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
 
-        {userData.id ? <AuthLinks userData={userData} msj={msj} /> : <GuestLinks />}
-
+        {userData.id ? <AuthLinks userData={userData} msj={msj} events={events} /> : <GuestLinks />}
 
       </div>
     </nav>

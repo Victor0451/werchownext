@@ -3,7 +3,8 @@ import Logout from './Logout'
 
 const Opciones = ({
   userData,
-  msj
+  msj,
+  events
 }) => {
   return (
     <ul className="navbar-nav ">
@@ -15,17 +16,13 @@ const Opciones = ({
           className="nav-link dropdown-toggle"
         >
 
-          {msj > 0 ? (
-            <>
-              <span className="badge badge-light text-uppercase mr-2 ">
-                Bienvenido {userData.usuario}
-              </span> <span className="badge badge-danger">{msj}</span>
-            </>
-          ) : (
-            <span className="badge badge-light text-uppercase mr-2 ">
-              Bienvenido {userData.usuario}
-            </span>
-          )}
+          <span className="badge badge-light text-uppercase mr-2 ">
+            Bienvenido {userData.usuario}
+          </span>
+
+          {msj > 0 ? (<span className="badge badge-danger">{msj}</span>) : null}
+
+          {events > 0 ? (<span className="ml-1 badge badge-info">{events}</span>) : null}
 
         </a>
         <ul className="dropdown-menu">
@@ -46,6 +43,27 @@ const Opciones = ({
                 </>
               )}
 
+
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a
+              href="/gestion/sucursales/tareas/calendario"
+              className="dropdown-item text-dark"
+            >
+              {events > 0 ?
+                (
+                  <>
+                    Calendario <span className="badge badge-info">{events}</span>
+                  </>
+                ) : (
+                  <>
+                    Caledario
+                  </>
+                )
+
+              }
 
             </a>
           </li>

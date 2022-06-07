@@ -299,7 +299,7 @@ const Adimn = () => {
             <ul className="dropdown-menu">
               <li>
                 <a
-                  href="/gestion/werchow/sucursales/tareas/nuevo"
+                  href="/gestion/sucursales/tareas/nuevo"
                   className="dropdown-item text-dark"
                 >
                   Nueva Tarea
@@ -308,7 +308,7 @@ const Adimn = () => {
               <hr />
               <li>
                 <a
-                  href="/gestion/werchow/sucursales/tareas/calendario"
+                  href="/gestion/sucursales/tareas/calendario"
                   className="dropdown-item text-dark"
                 >
                   Calendario
@@ -317,7 +317,7 @@ const Adimn = () => {
               <hr />
               <li>
                 <a
-                  href="/gestion/werchow/sucursales/tareas/editar"
+                  href="/gestion/sucursales/tareas/editar"
                   className="dropdown-item text-dark"
                 >
                   Editar Tarea

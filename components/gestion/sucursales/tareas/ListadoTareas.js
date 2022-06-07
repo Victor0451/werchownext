@@ -5,7 +5,22 @@ import Spinner from "../../../layout/Spinner";
 import moment from "moment";
 import EditarTareas from './EditarTarea'
 
-const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, tareaRef, task, editarTarea, eliminarTarea, operadorsep, error, opRef, priorityRef }) => {
+const ListadoTareas = ({
+    listado,
+    traerTarea,
+    inicioRef,
+    finRef,
+    siRef,
+    noRef,
+    tareaRef,
+    task,
+    editarTarea,
+    eliminarTarea,
+    error,
+    priorityRef,
+    sucursalRef
+
+}) => {
     if (!listado) return <Spinner />;
 
     return (
@@ -96,12 +111,11 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                         <div>
                                             <button
                                                 className="btn btn-sm btn-warning border mr-1"
-                                                data-toggle="tooltip"
                                                 data-toggle="modal"
                                                 data-placement="top"
                                                 title="Editar"
                                                 data-target="#staticBackdrop"
-                                                
+
                                                 onClick={() => traerTarea(row.original)}
                                             >
                                                 <i
@@ -151,10 +165,9 @@ const ListadoTareas = ({ listado, traerTarea, inicioRef, finRef, siRef, noRef, t
                                         siRef={siRef}
                                         noRef={noRef}
                                         tareaRef={tareaRef}
-                                        opRef={opRef}
                                         priorityRef={priorityRef}
                                         task={task}
-                                        operadorsep={operadorsep}
+                                        sucursalRef={sucursalRef}
                                         error={error}
                                     />
                                 ) : (<Spinner />)

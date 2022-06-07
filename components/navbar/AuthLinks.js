@@ -6,7 +6,7 @@ import Ventas from "./Ventas";
 import Sepelio from "./Sepelio";
 import Opciones from "./Opciones";
 
-const AuthLinks = ({ userData, msj }) => {
+const AuthLinks = ({ userData, msj, events }) => {
   return (
     <>
       <div
@@ -28,6 +28,7 @@ const AuthLinks = ({ userData, msj }) => {
       <Opciones
         userData={userData}
         msj={msj}
+        events={events}
       />
 
     </>

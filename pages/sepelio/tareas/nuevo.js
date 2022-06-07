@@ -81,7 +81,7 @@ const nuevo = () => {
                     if (res.status === 200)
                         toastr.success("La tarea se registro con exito", "Atencion")
 
-                    let accion = `Se registro la programacion de una tarea ID: ${res.data.idevents} en sepelio: `
+                    let accion = `Se registro la programacion de una tarea ID: ${res.data.idevents} en sepelio.`
 
                     registrarHistoria(accion, user)
 

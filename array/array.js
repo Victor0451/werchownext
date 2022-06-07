@@ -534,6 +534,7 @@ export const zonas = [
   { value: 1, label: "Oficina Casa Central" },
   { value: 3, label: "Oficina Palpala" },
   { value: 5, label: "Oficina Perico" },
+  { value: 30, label: "Oficina El Carmen" },
   { value: 60, label: "Oficina San Pedro" },
 ];
 

@@ -4,6 +4,164 @@ import { ip } from "../../config/config";
 const Recuperadoras = ({ usuario, perfil }) => {
   return (
     <ul className="navbar-nav">
+
+      <li className="nav-item dropdown ">
+        <a
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          className="nav-link dropdown-toggle"
+        >
+          Gestion
+        </a>
+        <ul className="dropdown-menu">
+
+          {
+            usuario === "pjerez" ? (
+              <>
+                <li className="dropdown-submenu">
+                  <a
+                    href="#"
+                    role="button"
+                    data-toggle="dropdown"
+                    className="  dropdown-toggle dropdown-item text-dark"
+                  >
+                    Servicios
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/emision"
+                        className="dropdown-item text-dark"
+                      >
+                        Emision de Ordenes
+                      </a>
+                    </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/listadoordenes"
+                        className="dropdown-item text-dark"
+                      >
+                        Listado de Ordenes Emitidas
+                      </a>
+                    </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/caja"
+                        className="dropdown-item text-dark"
+                      >
+                        Caja Otero
+                      </a>
+                    </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/listadocajas"
+                        className="dropdown-item text-dark"
+                      >
+                        Listado de Cajas Generadas
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <hr />
+              </>
+
+            ) : null
+          }
+
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Caja
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a href="/gestion/werchow/sucursales/caja/nueva" className="dropdown-item text-dark">
+                  Registrar Caja
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a href="/gestion/werchow/sucursales/caja/listado" className="dropdown-item text-dark">
+                  Listado de Cajas
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Mesa de Entrada
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/mesaentrada/datos"
+                  className="dropdown-item text-dark"
+                >
+                  Registrar Datos
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <hr />
+
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
+              Tareas
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/sucursales/tareas/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Nueva Tarea
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/sucursales/tareas/calendario"
+                  className="dropdown-item text-dark"
+                >
+                  Calendario
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/sucursales/tareas/editar"
+                  className="dropdown-item text-dark"
+                >
+                  Editar Tarea
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </li>
+
       <li className="nav-item dropdown ">
         <a
           href="#"
@@ -136,162 +294,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
         </ul>
       </li>
 
-      <li className="nav-item dropdown ">
-        <a
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          className="nav-link dropdown-toggle"
-        >
-          Gestion
-        </a>
-        <ul className="dropdown-menu">
 
-          {
-            usuario === "pjerez" ? (
-              <>
-                <li className="dropdown-submenu">
-                  <a
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                    className="  dropdown-toggle dropdown-item text-dark"
-                  >
-                    Servicios
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/emision"
-                        className="dropdown-item text-dark"
-                      >
-                        Emision de Ordenes
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/listadoordenes"
-                        className="dropdown-item text-dark"
-                      >
-                        Listado de Ordenes Emitidas
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/caja"
-                        className="dropdown-item text-dark"
-                      >
-                        Caja Otero
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/listadocajas"
-                        className="dropdown-item text-dark"
-                      >
-                        Listado de Cajas Generadas
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <hr />
-              </>
-
-            ) : null
-          }
-
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Caja
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="/gestion/werchow/sucursales/caja/nueva" className="dropdown-item text-dark">
-                  Registrar Caja
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a href="/gestion/werchow/sucursales/caja/listado" className="dropdown-item text-dark">
-                  Listado de Cajas
-                </a>
-              </li>
-            </ul>
-          </li>
-          <hr />
-
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Mesa de Entrada
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/gestion/mesaentrada/datos"
-                  className="dropdown-item text-dark"
-                >
-                  Registrar Datos
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <hr />
-
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Tareas
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/gestion/werchow/sucursales/tareas/nuevo"
-                  className="dropdown-item text-dark"
-                >
-                  Nueva Tarea
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/sucursales/tareas/calendario"
-                  className="dropdown-item text-dark"
-                >
-                  Calendario
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/sucursales/tareas/editar"
-                  className="dropdown-item text-dark"
-                >
-                  Editar Tarea
-                </a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-      </li>
 
       {usuario === "mcarrizo" ||
         usuario === "sjuarez" ||

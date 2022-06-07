@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priorityRef, error, operadorsep, opRef }) => {
+const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priorityRef, error, sucursalRef }) => {
     return (
         <div className="container mt-4 border border-dark list p-4">
 
@@ -30,7 +30,7 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priority
                         <label>
                             <u>
                                 Tarea
-                        </u>
+                            </u>
                         </label>
                         <textarea rows="3" className="form-control" ref={tareaRef} defaultValue={task.title} />
                     </div>
@@ -68,7 +68,7 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priority
                             />
                             <label className="form-check-label" htmlFor="si">
                                 Si
-                        </label>
+                            </label>
                         </div>
                         <div className="form-check ">
                             <input
@@ -82,32 +82,10 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priority
                             />
                             <label className="form-check-label" htmlFor="no">
                                 No
-                        </label>
+                            </label>
                         </div>
                     </div>
 
-                    <div className="form-group col-md-4">
-                        <label>
-                            <strong>
-                                {" "}
-                                <u> Operador</u>:
-                            </strong>
-                        </label>
-                        <select
-                            className="custom-select"
-                            name="operador"
-                            ref={opRef}
-                        >
-                            <option selected value="no"> Elige una Opcion </option>
-                            {operadorsep
-                                ? operadorsep.map((operador, index) => (
-                                    <option key={index} value={operador.value}>
-                                        {operador.label}
-                                    </option>
-                                ))
-                                : null}
-                        </select>
-                    </div>
                     <div className="form-group col-md-4">
                         <label>
                             <strong>
@@ -124,13 +102,44 @@ const EditarTarea = ({ inicioRef, finRef, siRef, noRef, tareaRef, task, priority
 
                             <option value="1">
                                 Normal
-                                    </option>
+                            </option>
                             <option value="2">
                                 Importante
-                                    </option>
+                            </option>
                             <option value="3">
                                 Urgente
-                                    </option>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div className="form-group col-md-4">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Sucursal: </u> {task.sucursal}
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="operador"
+                            ref={sucursalRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+                            <option value="Casa Central">
+                                Casa Central
+                            </option>
+                            <option value="Palpala">
+                                Palpala
+                            </option>
+                            <option value="Perico">
+                                Perico
+                            </option>
+                            <option value="El Carmen">
+                                El Carmen
+                            </option>
+                            <option value="San Pedro">
+                                San Pedro
+                            </option>
                         </select>
                     </div>
                 </div>

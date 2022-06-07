@@ -12,7 +12,7 @@ export default class Gerencia extends Component {
             data-toggle="dropdown"
             className="nav-link dropdown-toggle"
           >
-            Administracion
+            Gestion
           </a>
           <ul className="dropdown-menu">
             <li className="dropdown-submenu">
@@ -120,7 +120,7 @@ export default class Gerencia extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
-                Tareas en Sucursales
+                Tareas
               </a>
               <ul className="dropdown-menu">
                 <li>

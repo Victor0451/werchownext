@@ -11,6 +11,7 @@ import useValidacion from "../../hooks/useValidacion";
 import validarBuscarSocio from "../../validacion/validarBuscarSocio";
 import Router from "next/router";
 import AccesosRapidos from "../../components/home/AccesosRapidos";
+import ModalNovedades from "../../components/layout/ModalNovedades";
 
 const STATE_INICIAL = {
   socio: "",
@@ -31,11 +32,18 @@ const home = () => {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.perfil);
       }
+
+      traerNovs()
+
+
+
     }
   }, []);
 
-  const [error, guardarError] = useState(false);
 
+
+  const [error, guardarError] = useState(false);
+  const [novedades, guardarNovedades] = useState(null);
   const [socioRes, guardarSocio] = useState(null);
   const [socioGest, guardarGestion] = useState(null);
   const [listSocio, guardarListSocio] = useState(null);
@@ -115,6 +123,28 @@ const home = () => {
     }
   }
 
+  const ShowModalNovs = () => {
+    document.getElementById('showModal').click()
+
+  }
+
+  const traerNovs = async () => {
+
+    await axios.get(`${ip}api/sgi/novedades/traernovedades`)
+      .then(res => {
+
+        if (res.status === 200) {
+          guardarNovedades(res.data)
+          ShowModalNovs()
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
+
+
   return (
     <Layout>
       <div>
@@ -135,7 +165,18 @@ const home = () => {
             listSocio={listSocio}
           />
         ) : null}
+
+
       </div>
+
+
+      <ModalNovedades novedades={novedades} />
+
+
+      <button hidden type="button" id="showModal" className="btn btn-primary" data-toggle="modal" data-target="#novedades">
+        Launch demo modal
+      </button>
+
     </Layout>
   );
 };

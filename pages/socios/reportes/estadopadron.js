@@ -46,6 +46,8 @@ const estadopadron = () => {
       guardarSucursal("Palpala");
     } else if (zona === 5) {
       guardarSucursal("Perico");
+    } else if (zona === 30) {
+      guardarSucursal("El Carmen");
     } else if (zona === 60) {
       guardarSucursal("San Pedro");
     }
@@ -102,6 +104,9 @@ const estadopadron = () => {
       } else if (cartera === 0 && zona === 5) {
         parametros.grupo = 1000;
         parametros.flag = "R";
+      } else if (cartera === 0 && zona === 30) {
+        parametros.grupo = 1000;
+        parametros.flag = "C";
       } else if (cartera === 0 && zona === 60) {
         parametros.grupo = 1000;
         parametros.flag = "P";
@@ -120,6 +125,8 @@ const estadopadron = () => {
           parametros.sucursal = "L";
         } else if (zona === 5) {
           parametros.sucursal = "R";
+        } else if (zona === 30) {
+          parametros.sucursal = "C";
         } else if (zona === 60) {
           parametros.sucursal = "P";
         }

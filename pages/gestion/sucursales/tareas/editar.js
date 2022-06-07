@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../../../components/layout/Layout";
+import Layout from "../../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import moment from "moment";
 import axios from "axios";
 import toastr from "toastr";
 import Router from "next/router";
-import ListadoTareas from "../../../../../components/gestion/sucursales/tareas/ListadoTareas";
+import ListadoTareas from "../../../../components/gestion/sucursales/tareas/ListadoTareas";
 import { confirmAlert } from 'react-confirm-alert'
-import { ip } from '../../../../../config/config'
+import { ip } from '../../../../config/config'
+import { registrarHistoria } from '../../../../utils/funciones'
 
 
 const editar = () => {
 
-    const [operadorsep, guardarOperadorSep] = useState(null)
     const [error, guardarError] = useState(null)
 
     let inicioRef = React.createRef()
@@ -20,10 +20,10 @@ const editar = () => {
     let siRef = React.createRef()
     let noRef = React.createRef()
     let tareaRef = React.createRef()
-    let opRef = React.createRef()
     let priorityRef = React.createRef()
+    let sucursalRef = React.createRef()
 
-
+    const [user, guardarUsuario] = useState(null)
     const [events, guardarEvents] = useState(null)
     const [task, guardarTask] = useState(null)
 
@@ -33,16 +33,26 @@ const editar = () => {
         if (!token) {
             Router.push("/redirect");
         } else {
-            traerEventos();
-            traerOperador()
+
+            let usuario = jsCookie.get("usuario");
+
+            if (usuario) {
+                let userData = JSON.parse(usuario);
+                guardarUsuario(userData.usuario);
+
+                traerEventos(userData.usuario);
+
+
+            }
+
         }
     }, []);
 
 
 
-    const traerEventos = async () => {
+    const traerEventos = async (id) => {
         await axios
-            .get(` ${ip}api/sgi/tareas/traertareas`)
+            .get(`${ip}api/sgi/tareas/traertareasop/${id}`)
             .then((res) => {
                 guardarEvents(res.data);
             })
@@ -60,17 +70,18 @@ const editar = () => {
     const editarTarea = async () => {
 
         const taskedit = {
-            title: `${tareaRef.current.value} - ${opRef.current.value}`,
+            title: `${tareaRef.current.value} - ${user}`,
             allDay: "",
             start: moment(inicioRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
             end: moment(finRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
-            priority: priorityRef.current.value
+            priority: priorityRef.current.value,
+            sucursal: sucursalRef.current.value
         }
 
         if (siRef.current.checked === true && noRef.current.checked === false) {
-            task.allDay = 1
+            taskedit.allDay = 1
         } else if (siRef.current.checked === false && noRef.current.checked === true) {
-            task.allDay = 0
+            taskedit.allDay = 0
         }
 
 
@@ -86,19 +97,31 @@ const editar = () => {
             taskedit.allDay = task.allDay
         }
 
-        if (taskedit.priority === "") {
+        if (taskedit.priority === "no") {
             taskedit.priority = task.priority
         }
+
+        if (taskedit.sucursal === "no") {
+            taskedit.sucursal = task.sucursal
+        }
+
 
         await axios
             .put(` ${ip}api/sgi/tareas/editartarea/${task.idevents}`, taskedit)
             .then((res) => {
+                console.log(res.data)
                 if (res.status === 200) {
                     toastr.success("La tarea se edito con exito", "ATENCION")
 
                     setTimeout(() => {
-                        traerEventos()
+
+                        traerEventos(user)
+
                         guardarTask(null)
+
+                        let accion = `Se edito la tarea ID: ${task.idevents} del personal administrativo: ${user}. `
+
+                        registrarHistoria(accion, user)
                     }, 500);
 
                 }
@@ -144,19 +167,6 @@ const editar = () => {
 
     }
 
-    const traerOperador = async () => {
-        await axios
-            .get(
-                `${ip}api/sgi/serviciogastos/operadoressep`
-            )
-            .then((res) => {
-                guardarOperadorSep(res.data[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
 
 
     return (
@@ -169,12 +179,11 @@ const editar = () => {
                 siRef={siRef}
                 noRef={noRef}
                 tareaRef={tareaRef}
-                opRef={opRef}
+                sucursalRef={sucursalRef}
                 priorityRef={priorityRef}
                 task={task}
                 editarTarea={editarTarea}
                 eliminarTarea={eliminarTarea}
-                operadorsep={operadorsep}
                 error={error}
             />
         </Layout>

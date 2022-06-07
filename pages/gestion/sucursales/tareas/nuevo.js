@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../../../components/layout/Layout";
+import Layout from "../../../../components/layout/Layout";
 import jsCookie from "js-cookie";
 import moment from "moment";
 import axios from "axios";
-import NuevaTarea from "../../../../../components/gestion/sucursales/tareas/NuevaTarea";
+import NuevaTarea from "../../../../components/gestion/sucursales/tareas/NuevaTarea";
 import toastr from "toastr";
 import Router from "next/router";
-import { ip } from '../../../../../config/config'
+import { ip } from '../../../../config/config'
+import { registrarHistoria } from '../../../../utils/funciones'
+
 
 const nuevo = () => {
 
@@ -49,7 +51,9 @@ const nuevo = () => {
             start: moment(inicioRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
             end: moment(finRef.current.value).format('YYYY-MM-DD HH:mm:ss'),
             priority: prioridadRef.current.value,
-            sucursal: sucursalRef.current.value
+            sucursal: sucursalRef.current.value,
+            operador: user,
+            leido: 0
         }
 
         if (siRef.current.checked === true && noRef.current.checked === false) {
@@ -80,9 +84,13 @@ const nuevo = () => {
 
                     mandarMail(task)
 
-                    // setTimeout(() => {
-                    //     Router.reload()
-                    // }, 1000);
+                    let accion = `Se registro la programacion de una tarea ID: ${res.data.idevents} correspondiente al personal administrativo: ${user}`
+
+                    registrarHistoria(accion, user)
+
+                    setTimeout(() => {
+                        Router.reload()
+                    }, 1000);
                 })
                 .catch((error) => {
                     toastr.error("Ocurrio un error", "Atencion")
