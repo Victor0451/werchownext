@@ -83,13 +83,13 @@ const Recuperadoras = ({ usuario, perfil }) => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/gestion/werchow/sucursales/caja/nueva" className="dropdown-item text-dark">
+                <a href="/gestion/sucursales/caja/nueva" className="dropdown-item text-dark">
                   Registrar Caja
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/sucursales/caja/listado" className="dropdown-item text-dark">
+                <a href="/gestion/sucursales/caja/listado" className="dropdown-item text-dark">
                   Listado de Cajas
                 </a>
               </li>
