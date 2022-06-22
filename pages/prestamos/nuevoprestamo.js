@@ -25,6 +25,9 @@ const nuevoprestamo = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+      tarerCapPrestamo()
+
     }
   }, []);
 
@@ -38,6 +41,7 @@ const nuevoprestamo = () => {
   const [cuotas, guardarCuotas] = useState(null);
   const [capital, guardarCapital] = useState(null);
   const [renovapres, guardarRenovaprest] = useState(null);
+  const [capiPrest, guardarCapiPrest] = useState(null);
 
   const handleChanges = (value, flag) => {
     // guardarCapital(null);
@@ -132,6 +136,18 @@ const nuevoprestamo = () => {
     }
   }
 
+  const tarerCapPrestamo = async () => {
+
+    await axios.get(`${ip}api/sgi/prestamos/capitalaprest`)
+      .then(res => {
+        guardarCapiPrest(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
+
   let usuario = jsCookie.get("usuario");
 
   return (
@@ -157,6 +173,7 @@ const nuevoprestamo = () => {
         renoverror={renoverror}
         nombreRef={nombreRef}
         apellidoRef={apellidoRef}
+        capiPrest={capiPrest}
       />
     </Layout>
   );

@@ -9,11 +9,11 @@ const Simulador = ({
   capital,
   cuoprest,
   cuotas,
-  capadev,
-  capitalaprest,
+  capadev,  
   cuotasprest,
   mesi,
   mesf,
+  capiPrest
 }) => {
   return (
     <div className="container mt-4 border border-dark list p-4">
@@ -39,7 +39,7 @@ const Simulador = ({
       <div className="row border border-dark p-4 mb-4">
         <div className="col-md-4">
           <CapitalSelect
-            options={capitalaprest}
+            options={capiPrest}
             placeholder={"Capital a Prestar"}
             onChange={(value) => handleChanges(value, "capital")}
           />

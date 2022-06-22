@@ -8,7 +8,7 @@ import toastr from "toastr";
 import moment from "moment-timezone";
 import { ip } from "../../config/config";
 import Simulador from "../../components/prestamos/Simulador";
-import { capitalaprest, cuotasprest } from "../../array/array";
+import { cuotasprest } from "../../array/array";
 import { interest } from "../../utils/variables";
 
 const simulador = () => {
@@ -17,6 +17,8 @@ const simulador = () => {
   const [flag, guardarFlag] = useState(false);
   const [cuotas, guardarCuotas] = useState(null);
   const [capital, guardarCapital] = useState(null);
+  const [capiPrest, guardarCapiPrest] = useState(null);
+
 
   const calculoPrestamo = () => {
     //e.preventDefault();
@@ -46,6 +48,19 @@ const simulador = () => {
     }
   };
 
+  const tarerCapPrestamo = async () => {
+
+    await axios.get(`${ip}api/sgi/prestamos/capitalaprest`)
+      .then(res => {
+        guardarCapiPrest(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
+
+
   let mesi = moment().add(1, "months").format("MM/YYYY");
   let mesf = moment().add(cuotas, "months").format("MM/YYYY");
 
@@ -54,6 +69,10 @@ const simulador = () => {
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
+    } else {
+
+      tarerCapPrestamo()
+
     }
   }, []);
 
@@ -69,8 +88,8 @@ const simulador = () => {
         cuotas={cuotas}
         capadev={capadev}
         flag={flag}
-        capitalaprest={capitalaprest}
         cuotasprest={cuotasprest}
+        capiPrest={capiPrest}
       />
     </Layout>
   );

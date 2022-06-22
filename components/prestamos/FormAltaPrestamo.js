@@ -4,7 +4,7 @@ import CapitalSelect from "react-select";
 import CuotasSelect from "react-select";
 import moment from "moment-timezone";
 
-import { capitalaprest, cuotasprest, renovaprest } from "../../array/array";
+import { cuotasprest, renovaprest } from "../../array/array";
 import FormSubirArchivo from "./legajovirtual/FormSubirArchivo";
 import { interest } from "../../utils/variables";
 
@@ -24,6 +24,8 @@ const FormAltaPrestamo = ({
   renoverror,
   nombreRef,
   apellidoRef,
+  capiPrest,
+
 }) => {
   const [cuoprest, guardarCuoprest] = useState(null);
   const [capadev, guardarCapadev] = useState(null);
@@ -228,7 +230,7 @@ const FormAltaPrestamo = ({
         <div className="row border border-dark p-2 mb-4">
           <div className="col-md-4">
             <CapitalSelect
-              options={capitalaprest}
+              options={capiPrest}
               placeholder={"Capital a Prestar"}
               onChange={(value) => handleChanges(value, "capital")}
             />
