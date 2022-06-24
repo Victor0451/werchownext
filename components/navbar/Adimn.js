@@ -274,6 +274,15 @@ const Adimn = () => {
                   Listado de Cajas Generadas
                 </a>
               </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/werchow/servicios/gestionturnos"
+                  className="dropdown-item text-dark"
+                >
+                  Gestion de Turnos Medicos
+                </a>
+              </li>
             </ul>
           </li>
           <hr />
