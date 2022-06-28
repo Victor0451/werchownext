@@ -46,11 +46,11 @@ const estadosocio = () => {
 
     // DIVIDIR EN DOS
 
-    let CCmitad = Math.floor(CasaCentral.length / 2);
+    // let CCmitad = Math.floor(CasaCentral.length / 2);
 
-    let CasaCentralGG = CasaCentral.slice(0, CCmitad);
+    // let CasaCentralGG = CasaCentral.slice(0, CCmitad);
 
-    let CasaCentralMG = CasaCentral.slice(CCmitad, CasaCentral.length);
+    // let CasaCentralMG = CasaCentral.slice(CCmitad, CasaCentral.length);
 
     // -------------------
 
@@ -70,8 +70,12 @@ const estadosocio = () => {
     guardarPerico(perico);
     guardarPalpala(palpala);
     guardarSanPedro(sanPedro);
-    guardarCCMG(CasaCentralMG);
-    guardarCCGG(CasaCentralGG);
+    guardarCCMG(CasaCentral)  // AHORA VA TODO A MARIA
+
+    // CUANDO SE DIVIDIA POR 2 O POR 3
+
+    //guardarCCMG(CasaCentralMG);    
+    //guardarCCGG(CasaCentralGG);
     //guardarCCVF(CasaCentralVF);
   };
 
@@ -388,7 +392,7 @@ const estadosocio = () => {
       {Object.values(array).length > 0 ? (
         <AsignarCampana
           CasaCentralMG={CasaCentralMG}
-          CasaCentralGG={CasaCentralGG}
+          //  CasaCentralGG={CasaCentralGG}
           // CasaCentralVF={CasaCentralVF}
           perico={perico}
           palpala={palpala}

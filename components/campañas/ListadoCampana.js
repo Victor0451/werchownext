@@ -24,6 +24,14 @@ const ListadoCampana = ({ listado }) => {
                 filterAll: true,
               },
               {
+                Header: "Edad",
+                id: "EDAD",
+                accessor: (d) => d.EDAD,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["EDAD"] }),
+                filterAll: true,
+              },
+              {
                 Header: "Apellido",
                 id: "APELLIDOS",
                 accessor: (d) => d.APELLIDOS,

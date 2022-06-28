@@ -75,7 +75,7 @@ const AsignarCampana = ({
             </u>
             : {""}
             {CasaCentralMG.length +
-              CasaCentralGG.length +
+              //CasaCentralGG.length +
               // CasaCentralVF.length +
               perico.length +
               palpala.length +
@@ -206,7 +206,7 @@ const AsignarCampana = ({
         <ListadoCampana listado={CasaCentralMG} />
       </div>
 
-      <hr className="mt-4 mb-4 border border-dark" />
+      {/* <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
         <div className="d-flex justify-content-between  border border-dark p-4">
@@ -328,7 +328,7 @@ const AsignarCampana = ({
           ) : null}
         </div>
         <ListadoCampana listado={CasaCentralGG} />
-      </div>
+      </div> */}
 
       {/* VISUALIZAR CAMP DE LA TERCERA RECUPERADORA */}
 

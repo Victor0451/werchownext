@@ -4,6 +4,7 @@ import matchSorter from "match-sorter";
 import ExportarPadron from "./ExportarPadron";
 import ModalAcciones from "./ModalAcciones";
 import ModalNotificacion from "./ModalNotificacion";
+import ModalHistorial from './ModalHistorial'
 import moment from "moment-timezone";
 import axios from "axios";
 import toastr from "toastr";
@@ -37,14 +38,39 @@ const ListadoCasos = ({
   const [accion, guardarAccion] = useState({});
   const [nuevaaccion, guardarNuevaAccion] = useState({});
   const [gestion, guardarGestion] = useState({});
+  const [historia, guardarHistoria] = useState({});
 
-  const selcaso = (index) => {
+  const selcaso = (index, f) => {
+    guardarHistoria([])
+
     campana;
+
     const caso = campana[index];
+
     guardarCaso(caso);
 
     getGestionCaso(caso.idcaso);
+
+    if (f && f === "h") {
+
+      traerHistoria(caso.contrato)
+
+    }
   };
+
+  const traerHistoria = async (id) => {
+
+    await axios.get(`${ip}api/sgi/campanas/traerhistoria/${id}`)
+      .then(res => {
+
+        guardarHistoria(res.data)
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
 
   const handleChange = (value, flag) => {
     if (flag === "accion") {
@@ -60,7 +86,7 @@ const ListadoCasos = ({
     await axios
       .get(`${ip}api/sgi/campanas/getgestioncaso/${id}`)
       .then((res) => {
-        console.log(res);
+
         const gestion = res.data[0];
         guardarGestion(gestion);
       })
@@ -289,6 +315,11 @@ const ListadoCasos = ({
         por lo que se debe consutar con gerencia como se debe proceder.
       </div>
 
+      <div className="mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase">
+        el icono gris con una flecha redondeada extrae dentro del historial de movimientos del socio,
+        el registro de cuotas bonificadas (pago 0).
+      </div>
+
       <div className="list border border-dark">
         <ReactTable
           getTrProps={getTrProps}
@@ -410,13 +441,26 @@ const ListadoCasos = ({
                       </a>
                       <a
                         href={"#"}
-                        className="btn btn-warning btn-sm"
+                        className="btn btn-warning btn-sm mr-1"
                         data-toggle="modal"
                         data-target={`.bd-example-modal-xl${modal}`}
                         onClick={() => selcaso(row.index)}
                       >
                         <i
                           className="fa fa-envelope"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+
+                      <a
+                        href={"#"}
+                        className="btn btn-secondary btn-sm"
+                        data-toggle="modal"
+                        data-target={`.bd-example-modal-xl-historial`}
+                        onClick={() => selcaso(row.index, "h")}
+                      >
+                        <i
+                          className="fa fa-history"
                           aria-hidden="true"
                         ></i>
                       </a>
@@ -469,6 +513,14 @@ const ListadoCasos = ({
       />
 
       {/* -------------*/}
+
+      {/* MODAL HISTORIAL*/}
+      <ModalHistorial
+        historia={historia}
+      />
+      {/* -------------*/}
+
+
     </div>
   );
 };
