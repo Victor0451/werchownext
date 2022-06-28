@@ -24,12 +24,14 @@ const ModalNotificaciones = ({
                     <div class="modal-body">
 
                         {
-                            historia.length === 0 ? (
+                            historia && historia.length === 0 ? (
                                 <div className='mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase'>
                                     El socio no registra bonificaciones
                                 </div>
-                            ) : (
+                            ) : historia && historia.length > 0 ? (
+
                                 <>
+
 
                                     <div className='mt-4 mb-4 alert alert-info border border-dark text-center text-uppercase'>
                                         El socio registra un total de <strong><u>{historia.length}</u></strong> bonificaciones de cuota.
@@ -88,7 +90,7 @@ const ModalNotificaciones = ({
                                         />
                                     </div>
                                 </>
-                            )
+                            ) : null
                         }
 
                     </div>
