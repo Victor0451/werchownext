@@ -51,6 +51,7 @@ const Emision = () => {
   const [practEnfer, guadrarPractEnfer] = useState(null);
   const [priUso, guardarPriUso] = useState(false);
   const [nFisio, guardarNFisio] = useState(0);
+  const [isj, guardarISJ] = useState(false)
 
 
 
@@ -1404,6 +1405,18 @@ const Emision = () => {
     }
   }
 
+  const selector = (flag) => {
+
+    if (flag === "si") {
+
+      guardarISJ(true)
+
+    } else if (flag === "no") {
+
+      guardarISJ(false)
+
+    }
+  };
 
 
   // ----------------------------------------------
@@ -1500,6 +1513,8 @@ const Emision = () => {
               cantidadRefP={cantidadRefP}
               priUso={priUso}
               nFisio={nFisio}
+              selector={selector}
+              isj={isj}
             />
           ) : null}
         </>

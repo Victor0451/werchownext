@@ -43,8 +43,9 @@ const OpcionesServicios = ({
   registrarEnfermeriaUso,
   cantidadRefP,
   priUso,
-  nFisio
-
+  nFisio,
+  selector,
+  isj,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -151,6 +152,8 @@ const OpcionesServicios = ({
         detalleMed={detalleMed}
         registrarOrdenUsos={registrarOrdenUsos}
         priUso={priUso}
+        selector={selector}
+        isj={isj}
       />
 
       <ModalPractica

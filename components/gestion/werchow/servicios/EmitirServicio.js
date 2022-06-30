@@ -48,6 +48,8 @@ const EmitirServicio = ({
   cantidadRefP,
   priUso,
   nFisio,
+  selector,
+  isj,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -350,6 +352,8 @@ const EmitirServicio = ({
           cantidadRefP={cantidadRefP}
           priUso={priUso}
           nFisio={nFisio}
+          selector={selector}
+          isj={isj}
         />
       )}
     </div>

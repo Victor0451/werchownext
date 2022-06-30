@@ -12,7 +12,9 @@ const ModalConsulta = ({
   traerDetalleMedSelec,
   detalleMed,
   registrarOrdenUsos,
-  priUso
+  priUso,
+  selector,
+  isj,
 
 }) => {
 
@@ -147,7 +149,46 @@ const ModalConsulta = ({
                       <input type="text" className="form-control" value={detalleMed.DIRECCION} />
                     </div>
 
-                    {priUso === true ? (
+
+                    <div className="col-md-2 mt-4 mb-4">
+                      <label>
+                        <strong>
+                          <u>¿ Tiene I.S.J ?</u>
+                        </strong>
+                      </label>
+                      <br />
+                      <div className="form-check ">
+                        <input
+                          className="form-check-input "
+                          type="radio"
+                          id="covid"
+                          name="motivo"
+                          value="option1"
+                          onClick={() => selector("si")}
+                        />
+                        <label className="form-check-label" for="covid">
+                          Si
+                        </label>
+                      </div>
+
+                      <div className="form-check ">
+                        <input
+                          className="form-check-input "
+                          type="radio"
+                          id="otro"
+                          name="motivo"
+                          value="option1"
+                          onClick={() => selector("no")}
+                          defaultChecked={true}
+                        />
+                        <label className="form-check-label" for="otro">
+                          No
+                        </label>
+                      </div>
+                    </div>
+
+
+                    {priUso === true || isj === true ? (
                       <div className="col-md-12 d-flex justify-content-end mt-4">
                         <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
                           <u>Coseguro</u>: 100% Bonificado
