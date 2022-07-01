@@ -719,6 +719,8 @@ const Emision = () => {
 
     if (priUso === true) {
       uso.IMPORTE = 0
+    } else if (isj === true) {
+      uso.IMPORTE = 0
     }
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
@@ -740,8 +742,6 @@ const Emision = () => {
         console.log(error)
         toastr.error("Ocurrio un error al registrar la orden de consulta", "ATENCION")
       })
-
-
 
   }
 
