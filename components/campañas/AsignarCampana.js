@@ -57,8 +57,10 @@ const AsignarCampana = ({
           cuotasadeudadas: 1,
           montoadeudado: array[i].IMPORTE * 3,
           estadocaso: true,
+          alta: array[i].ALTA,
+          vigencia: array[i].VIGENCIA
         };
-        console.log(caso);
+
         subirCamp(caso);
       }
     }
@@ -75,7 +77,7 @@ const AsignarCampana = ({
             </u>
             : {""}
             {CasaCentralMG.length +
-              //CasaCentralGG.length +
+              CasaCentralGG.length +
               // CasaCentralVF.length +
               perico.length +
               palpala.length +
@@ -206,14 +208,14 @@ const AsignarCampana = ({
         <ListadoCampana listado={CasaCentralMG} />
       </div>
 
-      {/* <hr className="mt-4 mb-4 border border-dark" />
+      <hr className="mt-4 mb-4 border border-dark" />
 
       <div className="mt-4">
         <div className="d-flex justify-content-between  border border-dark p-4">
           <h4>
             <strong>
               <u>
-                Campaña {campana} - {empresa}: Casa Central Gisela Gimenez{" "}
+                Campaña {campana} - {empresa}: Casa Central Lucia Adorno{" "}
                 <span className="badge badge-pill badge-dark text-white">
                   {CasaCentralGG.length}
                 </span>
@@ -328,7 +330,7 @@ const AsignarCampana = ({
           ) : null}
         </div>
         <ListadoCampana listado={CasaCentralGG} />
-      </div> */}
+      </div>
 
       {/* VISUALIZAR CAMP DE LA TERCERA RECUPERADORA */}
 
