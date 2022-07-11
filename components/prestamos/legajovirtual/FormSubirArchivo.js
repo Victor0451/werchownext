@@ -52,7 +52,7 @@ const FormSubirArchivo = ({ contrato, user }) => {
   };
 
   return (
-    <div className="container border border-dark p-4 mt-4">
+    <div className="container border border-dark p-4 mt-4 list">
       <h4>
         <strong>
           <u>Crear Legajo Virtual Del Sub. Cont. Familiar</u>

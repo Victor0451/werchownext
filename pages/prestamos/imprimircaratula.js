@@ -94,9 +94,9 @@ const imprimircaratula = () => {
           />
         ) : (
           <>
-            <div className="container">
+            <div className="mt-4 container border border-dark list">
               <hr className="mt-4 mb-4" />
-              <div className=" mt-4 alert alert-primary text-center text-uppercase">
+              <div className=" mt-4 alert alert-primary text-center text-uppercase border border-dark">
                 <strong> No tienes prestamos para imprimir caratula</strong>
               </div>
               <hr className="mt-4 mb-4" />

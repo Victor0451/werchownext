@@ -106,14 +106,14 @@ const GestionCampanas = () => {
 
                     <Campana
                       titulo="Vigencia Mayor 12 Meses"
-                      camp="Campana+12"
+                      camp="Vigencia+12"
                       empresa="mutual"
                       operador={operadorNom}
                     />
 
                     <Campana
                       titulo="Vigencia Menor 12 Meses"
-                      camp="Campana-12"
+                      camp="Vigencia-12"
                       empresa="mutual"
                       operador={operadorNom}
                     />
