@@ -117,7 +117,7 @@ const Print = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDni}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   WERCHOW
                 </button>
@@ -127,7 +127,7 @@ const Print = ({
                   className="btn btn-block btn-primary"
                   onClick={buscarTitularDniM}
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#legajo"
                 >
                   MUTUAL
                 </button>

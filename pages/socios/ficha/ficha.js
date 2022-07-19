@@ -12,6 +12,7 @@ import LegajoArchivos from "../../../components/socios/legajoVirtual/LegajoArchi
 import Adherentes from "../../../components/socios/ficha/Adherentes";
 import { gastoLuto } from '../../../utils/funciones'
 import GastoLuto from "../../../components/layout/GastoLuto";
+import moment from "moment";
 
 
 const ficha = () => {
@@ -28,9 +29,12 @@ const ficha = () => {
   const [listsocio, guardarListSocios] = useState(null);
   const [errores, guardarErrores] = useState(null);
   const [cantadh, guardarCantAdh] = useState(null);
+  const [baja, guardarBaja] = useState(false)
+
 
 
   const traerArchivos = async (contrato) => {
+
     await axios
       .get(
         `${ip}api/archivos/legajovirtual/listaarchivos/${contrato}`
@@ -153,101 +157,199 @@ const ficha = () => {
   const buscarTitular = async (e) => {
     e.preventDefault();
 
-    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
+    guardarBaja(false)
+
+
 
     if (contratoRef.current.value !== "") {
+
       let contrato = contratoRef.current.value;
 
       await axios
-        .get(
-          `${ip}api/werchow/maestro/titular/${contrato}`
-        )
+        .get(`${ip}api/werchow/maestro/titular/${contrato}`)
         .then((res) => {
-          let ficha = res.data[0][0];
-          guardarFicha(ficha);
-          cantAdh(ficha.CONTRATO)
-          traerPagos(ficha.CONTRATO);
 
-          if (ficha === "undefined") {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
+          let ficha = res.data[0][0];
+
+          if (!ficha) {
+
+            axios
+              .get(`${ip}api/werchow/maestro/titularbaja/${contrato}`)
+              .then(resB => {
+
+                let fichaB = resB.data[0][0];
+
+                if (!fichaB) {
+
+                  toastr.error(
+                    "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN",
+                    "ATENCION"
+                  );
+                  const errores = "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN";
+                  guardarErrores(errores);
+
+                } else {
+
+                  guardarFicha(fichaB);
+
+                  traerPagos(fichaB.CONTRATO);
+
+                  traerAdhs(fichaB.CONTRATO);
+
+                  guardarEmpresa("W");
+
+                  guardarBaja(true)
+
+                  traerArchivos(fichaB.CONTRATO)
+
+                  cantAdh(fichaB.CONTRATO)
+
+                }
+
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+          } else {
+
+            guardarFicha(ficha);
+
+            traerPagos(ficha.CONTRATO);
+
+            traerAdhs(ficha.CONTRATO);
+
+            guardarEmpresa("W");
+
+            guardarBaja(false)
+
+            traerArchivos(ficha.CONTRATO)
+
+            cantAdh(ficha.CONTRATO)
+
+
           }
-          traerArchivos(ficha.CONTRATO);
-          traerAdhs(ficha.CONTRATO);
-          guardarEmpresa("W");
-          toastr.success("Se encontro al socio con exito", "ATENCION")
+
 
         })
         .catch((error) => {
           console.log(error);
-          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
+
     } else if (contratoRef.current.value === "") {
+
       const errores = "Debes Ingresar Un Numero De Contrato";
       guardarErrores(errores);
+
     }
   };
 
   const buscarTitularM = async (e) => {
     e.preventDefault();
 
-    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
+    guardarBaja(false)
+
+
 
     if (contratoRef.current.value !== "") {
+
       let contrato = contratoRef.current.value;
 
       await axios
-        .get(
-          `${ip}api/werchow/maestro/titularm/${contrato}`
-        )
+        .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
         .then((res) => {
-          let ficha = res.data[0][0];
-          guardarFicha(ficha);
-          cantAdhM(ficha.CONTRATO)
-          traerPagosM(ficha.CONTRATO);
 
-          if (ficha === "undefined") {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
+          let ficha = res.data[0][0];
+
+          if (!ficha) {
+
+            axios
+              .get(`${ip}api/werchow/maestro/titularmbaja/${contrato}`)
+              .then(resB => {
+
+                let fichaB = resB.data[0][0];
+
+                if (!fichaB) {
+
+                  toastr.error(
+                    "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN",
+                    "ATENCION"
+                  );
+                  const errores = "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN";
+                  guardarErrores(errores);
+
+                } else {
+
+                  guardarFicha(fichaB);
+
+                  traerPagosM(fichaB.CONTRATO);
+
+                  traerAdhsM(fichaB.CONTRATO);
+
+                  guardarEmpresa("M");
+
+                  guardarBaja(true)
+
+                  traerArchivosM(fichaB.CONTRATO)
+
+                  cantAdhM(fichaB.CONTRATO)
+
+                }
+
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+          } else {
+
+            guardarFicha(ficha);
+
+            traerPagosM(ficha.CONTRATO);
+
+            traerAdhsM(ficha.CONTRATO);
+
+            guardarEmpresa("M");
+
+            guardarBaja(false)
+
+            traerArchivosM(fichaB.CONTRATO)
+
+            cantAdhM(ficha.CONTRATO)
+
           }
-          traerArchivosM(ficha.CONTRATO);
-          guardarEmpresa("M");
-          traerAdhsM(ficha.CONTRATO);
-          toastr.success("Se encontro al socio con exito", "ATENCION")
+
+
         })
         .catch((error) => {
           console.log(error);
-          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
+
     } else if (contratoRef.current.value === "") {
+
       const errores = "Debes Ingresar Un Numero De Contrato";
       guardarErrores(errores);
+
     }
+
   };
 
   const buscarTitularDni = async (e) => {
     e.preventDefault();
 
-    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
+    guardarBaja(false)
+
 
     if (dniRef.current.value !== "") {
       let dni = dniRef.current.value;
@@ -255,29 +357,89 @@ const ficha = () => {
       await axios
         .get(`${ip}api/werchow/maestro/titulardni/${dni}`)
         .then((res) => {
-          let ficha = res.data[0][0];
-          guardarFicha(ficha);
-          cantAdh(ficha.CONTRATO)
 
-          if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
-            traerPagos(ficha.CONTRATO);
-          } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
-            traerPagosBco(ficha.CONTRATO);
-          } else if (ficha === "undefined") {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
+          let ficha = res.data[0][0];
+          console.log(ficha)
+
+          if (!ficha) {
+
+            console.log("dentro")
+
+            axios
+              .get(`${ip}api/werchow/maestro/titularbajadni/${dni}`)
+              .then(resB => {
+
+                let fichaB = resB.data[0][0];
+
+                if (!fichaB) {
+
+                  toastr.error(
+                    "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN",
+                    "ATENCION"
+                  );
+                  const errores = "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN";
+                  guardarErrores(errores);
+
+                } else {
+
+                  guardarFicha(fichaB);
+
+                  if (fichaB.GRUPO === 1000 || fichaB.GRUPO === 1001) {
+
+                    traerPagos(fichaB.CONTRATO);
+
+                  } else if (fichaB.GRUPO === 6 || fichaB.GRUPO > 3000) {
+
+                    traerPagosBco(fichaB.CONTRATO);
+
+                  }
+
+                  traerAdhs(fichaB.CONTRATO);
+
+                  guardarEmpresa("W");
+
+                  guardarBaja(true)
+
+                  traerArchivos(fichaB.CONTRATO)
+
+                  cantAdh(fichaB.CONTRATO)
+
+                }
+
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+
+          } else {
+
+
+            guardarFicha(ficha);
+
+
+            if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
+
+              traerPagos(ficha.CONTRATO);
+
+            } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
+
+              traerPagosBco(ficha.CONTRATO);
+
+            }
+            guardarEmpresa("W");
+
+            guardarBaja(false)
+
+            traerArchivos(ficha.CONTRATO)
+
+            cantAdh(ficha.CONTRATO)
+
           }
-          traerArchivos(ficha.CONTRATO);
-          guardarEmpresa("W");
-          toastr.success("Se encontro al socio con exito", "ATENCION")
+
         })
         .catch((error) => {
           console.log(error);
-          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
@@ -288,44 +450,102 @@ const ficha = () => {
   const buscarTitularDniM = async (e) => {
     e.preventDefault();
 
-    guardarArchivos(null);
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
+    guardarBaja(false)
+
 
     if (dniRef.current.value !== "") {
       let dni = dniRef.current.value;
 
       await axios
-        .get(
-          `${ip}api/werchow/maestro/titulardnim/${dni}`
-        )
+        .get(`${ip}api/werchow/maestro/titulardnim/${dni}`)
         .then((res) => {
-          let ficha = res.data[0][0];
-          guardarFicha(ficha);
-          cantAdhM(ficha.CONTRATO)
 
-          if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
-            traerPagos(ficha.CONTRATO);
-          } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
-            traerPagosBco(ficha.CONTRATO);
-          } else if (ficha === "undefined") {
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
+          let ficha = res.data[0][0];
+          console.log(ficha)
+
+          if (!ficha) {
+
+            console.log("dentro")
+
+            axios
+              .get(`${ip}api/werchow/maestro/titularmbajadni/${dni}`)
+              .then(resB => {
+
+                let fichaB = resB.data[0][0];
+
+                if (!fichaB) {
+
+                  toastr.error(
+                    "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN",
+                    "ATENCION"
+                  );
+                  const errores = "EL NUMERO DE FICHA NO EXISTE O EL SOCIO ESTA ADHERIDO EN MUTUAL SAN VALENTIN";
+                  guardarErrores(errores);
+
+                } else {
+
+                  guardarFicha(fichaB);
+
+                  if (fichaB.GRUPO === 1000 || fichaB.GRUPO === 1001) {
+
+                    traerPagosM(fichaB.CONTRATO);
+
+                  } else if (fichaB.GRUPO === 6 || fichaB.GRUPO > 3000) {
+
+                    traerPagosBcoM(fichaB.CONTRATO);
+
+                  }
+
+                  traerAdhsM(fichaB.CONTRATO);
+
+                  guardarEmpresa("M");
+
+                  guardarBaja(true)
+
+                  traerArchivosM(fichaB.CONTRATO)
+
+                  cantAdhM(fichaB.CONTRATO)
+
+                }
+
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+
+          } else {
+
+
+            guardarFicha(ficha);
+
+
+            if (ficha.GRUPO === 1000 || ficha.GRUPO === 1001) {
+
+              traerPagosM(ficha.CONTRATO);
+
+            } else if (ficha.GRUPO === 6 || ficha.GRUPO > 3000) {
+
+              traerPagosBcoM(ficha.CONTRATO);
+
+            }
+            guardarEmpresa("M");
+
+            guardarBaja(false)
+
+            traerArchivosM(ficha.CONTRATO)
+
+            cantAdhM(ficha.CONTRATO)
+
+
           }
-          traerArchivosM(ficha.CONTRATO);
-          guardarEmpresa("M");
-          toastr.success("Se encontro al socio con exito", "ATENCION")
 
         })
         .catch((error) => {
           console.log(error);
-          toastr.error("Ocurrio un error al buscar al socio", "ATENCION")
-
         });
     } else if (contratoRef.current.value === "") {
       const errores = "Debes Ingresar Un Numero De Contrato";
@@ -542,7 +762,15 @@ const ficha = () => {
               </button>
             </div>
             <div className="modal-body ">
+
               <div id="solicitud" className="mt-4 container border border-dark p-4">
+
+                {baja === true ? (
+                  <div className="alert alert-danger text-center text-uppercase border border-dark mb-4">
+                    ESTA FICHA SE ENCUENTRA ACTUALMENTE DE BAJA DESDE: {moment(ficha.baja).format('DD/MM/YYYY')}
+                  </div>
+                ) : null}
+
                 <div>
 
 

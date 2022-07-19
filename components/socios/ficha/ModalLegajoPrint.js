@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 import Legajo from './Legajo'
 import PagosPrint from './PagosPrint'
@@ -7,8 +8,10 @@ const ModalLegajoPrint = ({
     pagos,
     ficha,
     empresa,
-    adhs
+    adhs,
+    baja
 }) => {
+
     return (
         <div
             className="modal fade"
@@ -37,6 +40,13 @@ const ModalLegajoPrint = ({
                     </div>
                     <div className="modal-body ">
 
+                        {baja === true ? (
+                            <div className="alert alert-danger text-center text-uppercase border border-dark mb-4">
+                                ESTA FICHA SE ENCUENTRA ACTUALMENTE DE BAJA DESDE: {moment(ficha.baja).format('DD/MM/YYYY')}
+                            </div>
+                        ) : null}
+
+
                         {ficha ? (
                             <>
                                 {ficha.GRUPO === 1001 ||
@@ -55,8 +65,8 @@ const ModalLegajoPrint = ({
                                     </div>
                                 ) : null}
                             </>
-                        ) : null}
-
+                        ) : null
+                        }
 
                         <div id="solicitud" className="mt-4 container p-4 border border-dark">
                             <div>

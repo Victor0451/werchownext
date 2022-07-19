@@ -10,7 +10,7 @@ const LegajoArchivos = ({ archivos, empresa }) => {
         No Hay Archivos
       </div>
     );
-  console.log(archivos, empresa);
+
   return (
     <div className="container list border border-dark p-4">
       <h2 className="mb-4">
@@ -30,7 +30,6 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               <img
                 src={`${ip}api/archivos/legajovirtual/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
-                className="archivos p-4 "
                 data-toggle="modal"
                 data-target="#exampleModal2"
                 onClick={(e) => {
@@ -41,7 +40,6 @@ const LegajoArchivos = ({ archivos, empresa }) => {
               <img
                 src={`${ip}api/archivos/legajovirtualm/archivo/${archivo.archivo}`}
                 className="archivos p-4 mb-4"
-                className="archivos p-4 "
                 data-toggle="modal"
                 data-target="#exampleModal2"
                 onClick={(e) => {
