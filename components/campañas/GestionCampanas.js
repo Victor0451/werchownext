@@ -89,6 +89,14 @@ const GestionCampanas = () => {
                       empresa="werchow"
                       operador={operadorNom}
                     />
+
+                    <Campana
+                      titulo="CAMPAÑA AUXILIAR"
+                      camp="Recordatorio"
+                      empresa="werchow"
+                      operador={operadorNom}
+                    />
+
                   </div>
                 </div>
               </div>
