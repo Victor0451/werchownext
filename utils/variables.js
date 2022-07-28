@@ -1,2 +1,2 @@
 // INTERES PRESTAMOS
-export const interest = 150 / 100 / 12;
+export const interest = 160 / 100 / 12;
