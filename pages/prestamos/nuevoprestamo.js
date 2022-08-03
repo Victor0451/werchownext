@@ -92,48 +92,71 @@ const nuevoprestamo = () => {
 
 
     if (prestamo.renova === null) {
+
       const renoverror = "Debes indicar si es renovacion o no";
       guardarRenoverror(renoverror);
+
     } else {
+
       guardarRenoverror(null);
 
       let porcentaje = Math.floor(prestamo.neto * 30) / 100;
 
       if (porcentaje > prestamo.valcuota) {
+
         toastr.success(
           "El 30% del sueldo neto supera al valor de la cuota del prestamo",
           "Atencion"
         );
+
         setTimeout(() => {
           // Router.push("/prestamos/imprimircaratula");
-          window.location.replace("/prestamos/imprimircaratula");
+
+          //   window.location.replace("/prestamos/imprimircaratula");
+
+          postPrest(prestamo)
+
         }, 500);
+
       } else {
+
         toastr.error(
           "El 30% del sueldo neto no supera al valor de la cuota del prestamo, su aprobacion queda sujeta a decision del los superiores",
           "Atencion"
         );
-        window.location.replace("/prestamos/imprimircaratula");
+
+        //window.location.replace("/prestamos/imprimircaratula");
+
+        postPrest(prestamo)
       }
 
-      await axios
-        .post(
-          `${ip}api/sgi/prestamos/altaprestamo`,
-          prestamo
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            toastr.success("El prestamo se registro correctamente", "ATENCION")
 
-            let accion = `Se confecciono un prestamo al afiliado ${prestamo.ficha} - ${prestamo.ptm_afi}`
-
-            registrarHistoria(accion, prestamo.operador)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
+  }
+
+  const postPrest = async (prestamo) => {
+    console.log(prestamo)
+
+    await axios
+      .post(
+        `${ip}api/sgi/prestamos/altaprestamo`,
+        prestamo
+      )
+      .then((res) => {
+
+        console.log(res)
+
+        if (res.status === 200) {
+          toastr.success("El prestamo se registro correctamente", "ATENCION")
+
+          let accion = `Se confecciono un prestamo al afiliado ${prestamo.ficha} - ${prestamo.ptm_afi}`
+
+          registrarHistoria(accion, prestamo.operador)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const tarerCapPrestamo = async () => {
