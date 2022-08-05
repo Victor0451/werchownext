@@ -6,7 +6,8 @@ import moment from "moment";
 
 const ListadoOrdenesEmitidas = ({
     listado,
-    generarImpresion
+    generarImpresion,
+    anularOrdenes
 }) => {
 
 
@@ -132,17 +133,35 @@ const ListadoOrdenesEmitidas = ({
                                                     Imprimir
                                                 </button>
                                             ) : (
-                                                <button
-                                                    className="btn btn-primary btn-sm"
-                                                    onClick={(e) => {
-                                                        e.preventDefault()
-                                                        generarImpresion(row.original.iduso, row.original.NRO_DOC, row.original.ORDEN)
-                                                    }
-                                                    }
-                                                >
-                                                    Imprimir
-                                                </button>
+
+                                                <>
+
+                                                    <button
+                                                        className="btn btn-primary btn-sm"
+                                                        onClick={(e) => {
+                                                            e.preventDefault()
+                                                            generarImpresion(row.original.iduso, row.original.NRO_DOC, row.original.ORDEN)
+                                                        }
+                                                        }
+                                                    >
+                                                        Imprimir
+                                                    </button>
+
+
+
+                                                </>
                                             )}
+
+                                            <button
+                                                className="btn btn-danger btn-sm ml-1"
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    anularOrdenes(row.original.ORDEN, row.original.SERVICIO)
+                                                }
+                                                }
+                                            >
+                                                Anular
+                                            </button>
 
                                         </div>
                                     ),

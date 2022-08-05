@@ -100,7 +100,7 @@ const ListadoCajasGeneradas = ({
                         },
 
                     ]}
-                    defaultPageSize={5}
+                    defaultPageSize={10}
                     className="-striped -highlight"
                 />
             </div>

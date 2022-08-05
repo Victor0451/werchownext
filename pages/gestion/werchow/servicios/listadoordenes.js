@@ -7,6 +7,7 @@ import toastr from "toastr";
 import Router, { useRouter } from "next/router";
 import { ip } from "../../../../config/config";
 import ListadoOrdenesEmitidas from '../../../../components/gestion/werchow/servicios/ListadoOrdenesEmitidas';
+import { confirmAlert } from 'react-confirm-alert';
 
 
 const listadoordenes = () => {
@@ -39,7 +40,7 @@ const listadoordenes = () => {
     await axios.get(`${ip}api/sgi/servicios/traerordenesemitidas`)
       .then(res => {
         guardarListado(res.data)
-        toastr.success("Se trajeron las ordenes con exito", "ATENCION")
+        //toastr.success("Se trajeron las ordenes con exito", "ATENCION")
       })
       .catch(error => {
         console.log(error)
@@ -82,12 +83,117 @@ const listadoordenes = () => {
     push('/gestion/werchow/servicios/orden', iduso, doc, orden)
   }
 
+  const anularOrdenes = (orden, servicio) => {
+    confirmAlert({
+      title: 'ANULACION DE ORDEN',
+      message: '¿Estas seguro de anular esta orden?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
+            putAnuUso(orden, servicio)
+
+            if (servicio !== 'ORDE') {
+              putAnuPract(orden, servicio)
+            }
+
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {
+            toastr.info("La orden emitida, no fue anulada", "ATENCION")
+          }
+        }
+      ]
+    });
+
+  }
+
+  const putAnuUso = async (orden, servicio) => {
+    await axios.put(`${ip}api/sgi/servicios/anularorden/${orden}`)
+      .then(res => {
+
+        if (res.status === 200) {
+          toastr.success("Se anulo la orden con exito", "ATENCION")
+          traerOrdenesEmitidas()
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al anular la orden", "ATENCION")
+      })
+
+  }
+
+  const putAnuPract = async (orden, servicio) => {
+
+    if (servicio === 'FARM') {
+
+      await axios.put(`${ip}api/sgi/servicios/anularordenfarm/${orden}`)
+        .then(res => {
+
+          if (res.status === 200) {
+            toastr.success("Se anulo los items de la orden con exito", "ATENCION")
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al anular la orden", "ATENCION")
+        })
+
+      traerOrdenesEmitidas()
+
+
+    } else if (servicio === 'ENFE') {
+
+      await axios.put(`${ip}api/sgi/servicios/anularordenenfe/${orden}`)
+        .then(res => {
+
+          if (res.status === 200) {
+            toastr.success("Se anulo los items de la orden con exito", "ATENCION")
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al anular la orden", "ATENCION")
+        })
+
+      traerOrdenesEmitidas()
+
+
+
+    } else {
+
+      await axios.put(`${ip}api/sgi/servicios/anularordenpract/${orden}`)
+        .then(res => {
+
+          if (res.status === 200) {
+            toastr.success("Se anulo los items de la orden con exito", "ATENCION")
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al anular la orden", "ATENCION")
+        })
+
+      traerOrdenesEmitidas()
+
+
+    }
+
+
+
+
+  }
+
   return (
     <Layout>
 
       <ListadoOrdenesEmitidas
         listado={listado}
         generarImpresion={generarImpresion}
+        anularOrdenes={anularOrdenes}
       />
 
     </Layout>
