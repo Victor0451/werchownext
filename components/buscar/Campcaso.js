@@ -145,7 +145,15 @@ const Campcaso = ({ socioRes }) => {
                                                                                                                                                   ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS 2 MUTUAL de MARIA GALIAN`
                                                                                                                                                   : socioRes.idcampana === 71
                                                                                                                                                     ? `El socio ${socioRes.contrato} pertenece a la campaña de ATRASADOS 2 WERCHOW de GISELA GIMENEZ`
-                                                                                                                                                    : null}
+                                                                                                                                                    : socioRes.idcampana === 79 ||
+                                                                                                                                                      socioRes.idcampana === 80 ||
+                                                                                                                                                      socioRes.idcampana === 81 ||
+                                                                                                                                                      socioRes.idcampana === 82 ||
+                                                                                                                                                      socioRes.idcampana === 83 ||
+                                                                                                                                                      socioRes.idcampana === 84
+                                                                                                                                                      ? `El socio ${socioRes.contrato} pertenece a la campaña de LUCIA ADORNO`
+
+                                                                                                                                                      : null}
     </div>
   );
 };

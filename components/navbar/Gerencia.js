@@ -39,6 +39,65 @@ export default class Gerencia extends Component {
               </ul>
             </li>
             <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Servicios
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/emision"
+                    className="dropdown-item text-dark"
+                  >
+                    Emision de Ordenes
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/listadoordenes"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado de Ordenes Emitidas
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/caja"
+                    className="dropdown-item text-dark"
+                  >
+                    Caja Otero
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/listadocajas"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado de Cajas Generadas
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/gestionturnos"
+                    className="dropdown-item text-dark"
+                  >
+                    Gestion de Turnos Medicos
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <hr />
             <li className="dropdown-submenu">
               <a
                 href="#"
