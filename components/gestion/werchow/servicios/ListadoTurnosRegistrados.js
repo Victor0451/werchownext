@@ -3,13 +3,13 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../layout/Spinner";
 import moment from "moment";
+import ExpotarTurnos from "./ExportarTurnos";
 
 const ListadoTurnosRegistrados = ({
     listado,
-    estadoTurno
-}) => {
+    estadoTurno,
 
-    console.log(listado)
+}) => {
 
     return (
         <div className="container list mt-4 border border-dark  p-4">
@@ -82,7 +82,14 @@ const ListadoTurnosRegistrados = ({
                 )
             }
 
-            <div className="border border-dark ">
+            <div className="border border-dark p-2">
+
+                <div className="mt-4 mb-4 d-flex justify-content-end">
+                    <ExpotarTurnos
+                        listado={listado}
+                    />
+                </div>
+
                 <ReactTable
                     data={listado}
                     filterable
