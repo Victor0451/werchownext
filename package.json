@@ -21,7 +21,7 @@
     "js-cookie": "^2.2.1",
     "match-sorter": "^4.2.0",
     "moment": "^2.27.0",
-    "moment-timezone": "^0.5.31",
+    "moment-timezone": "^0.5.35",
     "net": "^1.0.2",
     "next": "^10.2.0",
     "nodemailer": "^6.7.2",
