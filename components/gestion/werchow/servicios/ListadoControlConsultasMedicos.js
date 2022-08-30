@@ -2,10 +2,10 @@ import React from 'react'
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import moment from 'moment';
-import ExportarListadoControl from './ExportarListadoControl';
+import ExportarListadoConsultasMedicos from './ExportarListadoConsultasMedicos';
 
 
-const ListadoControlOrdenes = ({
+const ListadoControlConsultasMedicos = ({
     listado,
     rango,
     imprimir
@@ -35,15 +35,7 @@ const ListadoControlOrdenes = ({
                                     filterAll: true,
 
                                 },
-                                {
-                                    Header: "Hora",
-                                    id: "HORA",
-                                    accessor: (d) => d.HORA,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["HORA"] }),
-                                    filterAll: true,
 
-                                },
                                 {
                                     Header: "N° Orden",
                                     id: "ORDEN",
@@ -55,51 +47,42 @@ const ListadoControlOrdenes = ({
                                 },
 
                                 {
-                                    Header: "Servicio",
-                                    id: "SERVICIO",
-                                    accessor: (d) => d.SERVICIO,
+                                    Header: "Medico",
+                                    id: "NOMBRE",
+                                    accessor: (d) => d.NOMBRE,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["SERVICIO"] }),
+                                        matchSorter(rows, filter.value, { keys: ["NOMBRE"] }),
                                     filterAll: true,
 
                                 },
 
                                 {
-                                    Header: "HC",
-                                    id: "CONTRATO",
-                                    accessor: (d) => d.CONTRATO,
+                                    Header: "Valor Consulta",
+                                    id: "VALOR",
+                                    accessor: (d) => d.VALOR,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["CONTRATO"] }),
+                                        matchSorter(rows, filter.value, { keys: ["VALOR"] }),
                                     filterAll: true,
 
                                 },
 
 
                                 {
-                                    Header: "DNI",
-                                    id: "NRO_DOC",
-                                    accessor: (d) => d.NRO_DOC,
+                                    Header: "Coseguro",
+                                    id: "COSEGURO",
+                                    accessor: (d) => d.COSEGURO,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["NRO_DOC"] }),
+                                        matchSorter(rows, filter.value, { keys: ["COSEGURO"] }),
                                     filterAll: true,
 
                                 },
 
                                 {
-                                    Header: "Plan",
-                                    id: "PLAN",
-                                    accessor: (d) => d.PLAN,
+                                    Header: "Werchow",
+                                    id: "WERCHOW",
+                                    accessor: (d) => d.WERCHOW,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["PLAN"] }),
-                                    filterAll: true,
-                                },
-
-                                {
-                                    Header: "Importe",
-                                    id: "IMPORTE",
-                                    accessor: (d) => d.IMPORTE,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
+                                        matchSorter(rows, filter.value, { keys: ["WERCHOW"] }),
                                     filterAll: true,
                                 },
                             ],
@@ -123,7 +106,7 @@ const ListadoControlOrdenes = ({
                 <div className="row mt-4 n border border-dark p-4 d-flex justify-content-center">
 
 
-                    <ExportarListadoControl
+                    <ExportarListadoConsultasMedicos
                         listado={listado}
                         rango={rango}
                     />
@@ -151,4 +134,4 @@ const ListadoControlOrdenes = ({
     )
 }
 
-export default ListadoControlOrdenes
+export default ListadoControlConsultasMedicos
