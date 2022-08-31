@@ -8,15 +8,22 @@ import ExportarListadoConsultasMedicos from './ExportarListadoConsultasMedicos';
 const ListadoControlConsultasMedicos = ({
     listado,
     rango,
-    imprimir
+    imprimir,
+    titulo
 }) => {
 
     return (
-        <div>
+        <div className='container list mt-4 border border-dark p-4'>
+
+            <h3>
+                <u>
+                    {titulo}
+                </u>
+            </h3>
 
             <div
                 id="list"
-                className='container list border border-dark mt-4 p-4'>
+                className='border border-dark mt-4 p-4'>
 
                 <ReactTable
                     data={listado}

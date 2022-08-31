@@ -46,6 +46,25 @@ const Recuperadoras = ({ usuario, perfil }) => {
                         Caja Otero
                       </a>
                     </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/gestionturnos"
+                        className="dropdown-item text-dark"
+                      >
+                        Gestion de Turnos Medicos
+                      </a>
+                    </li>
+                    <hr />
+
+                    <li>
+                      <a
+                        href="/gestion/werchow/servicios/listadoordenes"
+                        className="dropdown-item text-dark"
+                      >
+                        Listado de Ordenes Emitidas
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <hr />

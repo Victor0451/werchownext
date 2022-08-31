@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../../../components/layout/Layout";
-import moment from "moment-timezone";
+import moment from "moment";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
@@ -22,7 +22,9 @@ const Control = () => {
     const [user, guardarUsuario] = useState(null);
     const [medicos, guardarMedicos] = useState(null);
     const [listado, guardarListado] = useState(null);
+    const [listadoFa, guardarListadoFa] = useState(null);
     const [listado2, guardarListado2] = useState(null);
+    const [listadoFa2, guardarListadoFa2] = useState(null);
     const [errores, guardarErrores] = useState(null);
     const [rango, guardarRango] = useState([])
 
@@ -31,6 +33,8 @@ const Control = () => {
 
         guardarListado(null)
         guardarListado2(null)
+        guardarListadoFa(null)
+        guardarListadoFa2(null)
 
         let desde = desdeRef.current.value
         let hasta = hastaRef.current.value
@@ -70,7 +74,38 @@ const Control = () => {
 
                     } else if (res.data.length === 0) {
 
-                        toastr.info("No se encuentran ordenes para este rango de fechas", "ATENCION")
+                        toastr.info("No se encuentran ordenes para este rango de fechas en el sistema de Otero", "ATENCION")
+
+                    }
+                })
+                .catch(error => {
+
+                    console.log(error)
+
+                    toastr.error("Ocurrio un error al buscar el listado", "ATENCION")
+
+                })
+
+
+            await axios.get(`${ip}api/sgi/servicios/buscarordenesfa`, {
+
+                params: {
+                    desde: desde,
+                    hasta: hasta
+                }
+
+            })
+                .then(res => {
+
+                    if (res.data.length > 0) {
+
+                        guardarListadoFa(res.data)
+
+                        toastr.success("Listado encontrado", "ATENCION")
+
+                    } else if (res.data.length === 0) {
+
+                        toastr.info("No se encuentran ordenes para este rango de fechas en el sistema de Casa Central", "ATENCION")
 
                     }
                 })
@@ -91,6 +126,8 @@ const Control = () => {
 
         guardarListado(null)
         guardarListado2(null)
+        guardarListadoFa(null)
+        guardarListadoFa2(null)
 
         let desde = desdeRef2.current.value
         let hasta = hastaRef2.current.value
@@ -137,7 +174,38 @@ const Control = () => {
 
                     } else if (res.data.length === 0) {
 
-                        toastr.info("No se encuentran ordenes para este rango de fechas", "ATENCION")
+                        toastr.info("No se encuentran ordenes para este rango de fechas en el sistema de Otero", "ATENCION")
+
+                    }
+                })
+                .catch(error => {
+
+                    console.log(error)
+
+                    toastr.error("Ocurrio un error al buscar el listado", "ATENCION")
+
+                })
+
+            await axios.get(`${ip}api/sgi/servicios/buscaconsultaspormedicofa`, {
+
+                params: {
+                    medico: medico,
+                    desde: desde,
+                    hasta: hasta
+                }
+
+            })
+                .then(res => {
+
+                    if (res.data.length > 0) {
+
+                        guardarListadoFa2(res.data)
+
+                        toastr.success("Listado encontrado", "ATENCION")
+
+                    } else if (res.data.length === 0) {
+
+                        toastr.info("No se encuentran ordenes para este rango de fechas en el sistema de Casa Central", "ATENCION")
 
                     }
                 })
@@ -155,7 +223,7 @@ const Control = () => {
 
     const traerMedicos = async (f) => {
 
-        await axios.get(`${ip}api/sgi/servicios/traermedicos`)
+        await axios.get(`${ip}api/sgi/servicios/traermedicostodos`)
             .then(res => {
                 guardarMedicos(res.data)
             })
@@ -218,7 +286,21 @@ const Control = () => {
                 listado ? (
 
                     < ListadoControlOrdenes
+                        titulo={"Listado de Ordenes Otero"}
                         listado={listado}
+                        rango={rango}
+                        imprimir={imprimir}
+                    />
+
+                ) : null
+            }
+
+            {
+                listadoFa ? (
+
+                    < ListadoControlOrdenes
+                        titulo={"Listado de Ordenes Casa Central"}
+                        listado={listadoFa}
                         rango={rango}
                         imprimir={imprimir}
                     />
@@ -230,7 +312,21 @@ const Control = () => {
                 listado2 ? (
 
                     < ListadoControlConsultasMedicos
+                        titulo={"Listado de Ordenes Otero"}
                         listado={listado2}
+                        rango={rango}
+                        imprimir={imprimir}
+                    />
+
+                ) : null
+            }
+
+            {
+                listadoFa2 ? (
+
+                    < ListadoControlConsultasMedicos
+                        titulo={"Listado de Ordenes Casa Central"}
+                        listado={listadoFa2}
                         rango={rango}
                         imprimir={imprimir}
                     />

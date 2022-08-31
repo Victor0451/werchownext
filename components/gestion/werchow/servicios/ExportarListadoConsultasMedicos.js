@@ -12,7 +12,7 @@ const ExportarListadoConsultasMedicos = ({
 }) => {
   const dataSet1 = listado;
 
-  let filename = `Listado de control de ordenes, periodo: ${moment(rango.desde).format("DD/MM/YYYY")} - ${moment(rango.hasta).format("DD/MM/YYYY")}`;
+  let filename = `Listado de control prestador: ${rango.medico}, periodo: ${moment(rango.desde).format("DD/MM/YYYY")} - ${moment(rango.hasta).format("DD/MM/YYYY")}`;
 
   return (
     <ExcelFile
@@ -27,7 +27,7 @@ const ExportarListadoConsultasMedicos = ({
         <ExcelColumn label="FECHA" value="FECHA" />
         <ExcelColumn label="N° ORDEN" value="ORDEN" />
         <ExcelColumn label="NOMBRE" value="NOMBRE" />
-        <ExcelColumn label="VALOR" value="VALOR CONSULTA" />
+        <ExcelColumn label="VALOR CONSULTA" value="VALOR" />
         <ExcelColumn label="COSEGURO" value="COSEGURO" />
         <ExcelColumn label="WERCHOW" value="WERCHOW" />
       </ExcelSheet>
