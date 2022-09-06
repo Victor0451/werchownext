@@ -249,6 +249,44 @@ const Control = () => {
         window.location.reload()
     };
 
+    const calcTotales = (arr, campo) => {
+
+        let total = 0
+
+        if (campo === 'VALOR') {
+
+            for (let i = 0; i < arr.length; i++) {
+
+                total += parseFloat(arr[i].VALOR)
+
+            }
+
+            return total.toFixed(2)
+
+        } else if (campo === 'COSEGURO') {
+
+            for (let i = 0; i < arr.length; i++) {
+
+                total += parseFloat(arr[i].COSEGURO)
+
+            }
+
+            return total.toFixed(2)
+
+        } if (campo === 'WERCHOW') {
+
+            for (let i = 0; i < arr.length; i++) {
+
+                total += parseFloat(arr[i].WERCHOW)
+
+            }
+
+            return total.toFixed(2)
+
+        }
+
+    }
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
@@ -282,6 +320,36 @@ const Control = () => {
                 hastaRef2={hastaRef2}
             />
 
+
+            {
+                listado && listadoFa ? (
+
+                    <div className='container alert alert-info mt-4 mb-4 border border-dark text-uppercase text-center'>
+                        <strong>
+                            Resumen Total: Ordenes = {listado.length + listadoFa.length} ||   Valor = ${parseFloat(calcTotales(listado, "VALOR")) + parseFloat(calcTotales(listadoFa, "VALOR"))}   ||   Coseguro = ${parseFloat(calcTotales(listado, "COSEGURO")) + parseFloat(calcTotales(listadoFa, "COSEGURO"))}   ||   Werchow = ${parseFloat(calcTotales(listado, "WERCHOW")) + parseFloat(calcTotales(listadoFa, "WERCHOW"))}
+                        </strong>
+                    </div>
+
+                )
+                    : null
+
+            }
+
+            {
+                listado2 && listadoFa2 ? (
+
+                    <div className='container alert alert-info mt-4 mb-4 border border-dark text-uppercase text-center'>
+                        <strong>
+                            Resumen Total: Ordenes = {listado2.length + listadoFa2.length} ||   Valor = ${parseFloat(calcTotales(listado2, "VALOR")) + parseFloat(calcTotales(listadoFa2, "VALOR"))}   ||   Coseguro = ${parseFloat(calcTotales(listado2, "COSEGURO")) + parseFloat(calcTotales(listadoFa2, "COSEGURO"))}   ||   Werchow = ${parseFloat(calcTotales(listado2, "WERCHOW")) + parseFloat(calcTotales(listadoFa2, "WERCHOW"))}
+                        </strong>
+                    </div>
+
+                )
+                    : null
+
+            }
+
+
             {
                 listado ? (
 
@@ -290,6 +358,7 @@ const Control = () => {
                         listado={listado}
                         rango={rango}
                         imprimir={imprimir}
+
                     />
 
                 ) : null
@@ -299,7 +368,7 @@ const Control = () => {
                 listadoFa ? (
 
                     < ListadoControlOrdenes
-                        titulo={"Listado de Ordenes Casa Central"}
+                        titulo={"Listado de Ordenes Casa Central y Sucursales"}
                         listado={listadoFa}
                         rango={rango}
                         imprimir={imprimir}
@@ -316,6 +385,7 @@ const Control = () => {
                         listado={listado2}
                         rango={rango}
                         imprimir={imprimir}
+                        calcTotales={calcTotales}
                     />
 
                 ) : null
@@ -325,14 +395,18 @@ const Control = () => {
                 listadoFa2 ? (
 
                     < ListadoControlConsultasMedicos
-                        titulo={"Listado de Ordenes Casa Central"}
+                        titulo={"Listado de Ordenes Casa Central y Sucursales"}
                         listado={listadoFa2}
                         rango={rango}
                         imprimir={imprimir}
+                        calcTotales={calcTotales}
+
                     />
 
                 ) : null
             }
+
+
 
         </Layout>
     )

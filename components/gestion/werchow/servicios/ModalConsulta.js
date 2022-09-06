@@ -188,19 +188,58 @@ const ModalConsulta = ({
                     </div>
 
 
-                    {priUso === true || isj === true ? (
-                      <div className="col-md-12 d-flex justify-content-end mt-4">
-                        <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                          <u>Coseguro</u>: 100% Bonificado
+                    {
+
+                      isj === false ? (
+                        <>
+
+                          {priUso === true && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
+
+                            <div className="col-md-12 d-flex justify-content-end mt-4">
+                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                                <u>Coseguro</u>: 100% Bonificado
+                              </div>
+                            </div>
+
+                          ) : priUso === false && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
+
+                            <div className="col-md-12 d-flex justify-content-end mt-4">
+                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                                <u>Coseguro</u>: $350
+                              </div>
+                            </div>
+
+                          ) : priUso === true ? (
+
+                            <div className="col-md-12 d-flex justify-content-end mt-4">
+                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                                <u>Coseguro</u>: $350
+                              </div>
+                            </div>
+
+                          ) : (
+
+                            <div className="col-md-12 d-flex justify-content-end mt-4">
+                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                                <u>Coseguro</u>: ${detalleMed.MAX_DESC}
+                              </div>
+                            </div>
+
+                          )}
+                        </>
+
+                      ) : isj === true ? (
+
+                        <div className="col-md-12 d-flex justify-content-end mt-4">
+                          <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                            <u>Coseguro</u>: 100% Bonificado
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="col-md-12 d-flex justify-content-end mt-4">
-                        <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                          <u>Coseguro</u>: ${detalleMed.MAX_DESC}
-                        </div>
-                      </div>
-                    )}
+
+                      ) : null
+
+                    }
+
 
 
 

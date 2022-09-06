@@ -34,9 +34,37 @@ const ListadoControlOrdenes = ({
                             Header: "Practicas",
                             columns: [
                                 {
+                                    Header: "Sucursal",
+                                    id: "SUC",
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["SUC"] }),
+                                    filterAll: true,
+                                    width: 120,
+                                    Cell: (row) => (
+                                        <div>
+                                            {
+                                                row.original.SUC === 'O' ?
+                                                    (<div>Otero</div>) :
+                                                    row.original.SUC === 'W' ?
+                                                        (<div>Casa Central</div>) :
+                                                        row.original.SUC === 'R' ?
+                                                            (<div>Perico</div>) :
+                                                            row.original.SUC === 'L' ?
+                                                                (<div>Palpala</div>) :
+                                                                row.original.SUC === 'P' ?
+                                                                    (<div>San Pedro</div>) :
+                                                                    row.original.SUC === 'C' ?
+                                                                        (<div>El Carmen</div>) :
+                                                                        null
+
+                                            }
+                                        </div>
+                                    ),
+                                },
+                                {
                                     Header: "Fecha",
                                     id: "FECHA",
-                                    accessor: (d) => moment(d.FECHA).format('DD/MM/YYYY'),
+                                    accessor: (d) => d.FECHA,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["FECHA"] }),
                                     filterAll: true,

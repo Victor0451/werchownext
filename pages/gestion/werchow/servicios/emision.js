@@ -661,25 +661,30 @@ const Emision = () => {
 
   const verificarUso = async (grupo, contrato) => {
 
-    if (grupo === 66 || grupo === 55) {
 
-      await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
-        .then(res => {
+    await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
+      .then(res => {
+        console.log(res.data)
+        if (res.data.length === 0) {
 
-          if (res.data.length === 0) {
-            guardarPriUso(true)
+          guardarPriUso(true)
+
+          if (grupo === 66 || grupo === 55) {
+
+            contarFisios(contrato)
+
           }
 
-          contarFisios(contrato)
+        }
 
-        })
-        .catch(error => {
-          console.log(error)
+      })
+      .catch(error => {
+        console.log(error)
 
-          toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
-        })
+        toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
+      })
 
-    }
+
 
   }
 
@@ -717,10 +722,19 @@ const Emision = () => {
 
     }
 
-    if (priUso === true) {
+
+    if (priUso === true && socio.GRUPO === 66 || socio.GRUPO === 55) {
+
       uso.IMPORTE = 0
+
+    } else if (priUso === true && socio.GRUPO !== 66 || socio.GRUPO !== 55) {
+
+      uso.IMPORTE = 350
+
     } else if (isj === true) {
+
       uso.IMPORTE = 0
+
     }
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
@@ -888,7 +902,7 @@ const Emision = () => {
 
     }
 
-    if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66) {
+    if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66 || socio.GRUPO === 55) {
 
       if (nFisio >= 0 && nFisio <= 8) {
         uso.IMPORTE = 0
@@ -942,7 +956,7 @@ const Emision = () => {
 
       }
 
-      if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66) {
+      if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66 || socio.GRUPO === 55) {
 
         if (nFisio >= 0 && nFisio < 8) {
           practi.IMPORTE = 0

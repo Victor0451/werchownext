@@ -9,7 +9,9 @@ const ListadoControlConsultasMedicos = ({
     listado,
     rango,
     imprimir,
-    titulo
+    titulo,
+    calcTotales
+
 }) => {
 
     return (
@@ -33,10 +35,40 @@ const ListadoControlConsultasMedicos = ({
                         {
                             Header: "Practicas",
                             columns: [
+
+                                {
+                                    Header: "Sucursal",
+                                    id: "SUC",
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["SUC"] }),
+                                    filterAll: true,
+                                    width: 120,
+                                    Cell: (row) => (
+                                        <div>
+                                            {
+                                                row.original.SUC === 'O' ?
+                                                    (<div>Otero</div>) :
+                                                    row.original.SUC === 'W' ?
+                                                        (<div>Casa Central</div>) :
+                                                        row.original.SUC === 'R' ?
+                                                            (<div>Perico</div>) :
+                                                            row.original.SUC === 'L' ?
+                                                                (<div>Palpala</div>) :
+                                                                row.original.SUC === 'P' ?
+                                                                    (<div>San Pedro</div>) :
+                                                                    row.original.SUC === 'C' ?
+                                                                        (<div>El Carmen</div>) :
+                                                                        null
+
+                                            }
+                                        </div>
+                                    ),
+                                },
+
                                 {
                                     Header: "Fecha",
                                     id: "FECHA",
-                                    accessor: (d) => moment(d.FECHA).format('DD/MM/YYYY'),
+                                    accessor: (d) => d.FECHA,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["FECHA"] }),
                                     filterAll: true,
@@ -99,7 +131,16 @@ const ListadoControlConsultasMedicos = ({
                     defaultPageSize={15}
                     className="-striped -highlight"
                 />
+
+                <div className='alert alert-info mt-4 mb-4 border border-dark text-uppercase text-center'>
+                    <strong>
+                        Resumen: Ordenes = {listado.length} ||   Valor = ${calcTotales(listado, "VALOR")}   ||   Coseguro = ${calcTotales(listado, "COSEGURO")}   ||   Werchow = ${calcTotales(listado, "WERCHOW")}
+                    </strong>
+                </div>
+
             </div>
+
+
 
 
             <div className='border border-dark mt-4 mb-4 container list p-4'>

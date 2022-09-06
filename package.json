@@ -1,6 +1,6 @@
 {
   "name": "werchowsgi",
-  "version": "3.6.1",
+  "version": "3.6.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,15 @@
   },
   "author": "Ing. Longo Victor Manuel <victor.m.longo@gmail.com>",
   "dependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "@fullcalendar/common": "^5.10.1",
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/interaction": "^5.10.1",
+    "@fullcalendar/react": "^5.10.1",
+    "@fullcalendar/timegrid": "^5.10.1",
     "@zeit/next-css": "^1.0.1",
+    "@zeit/next-less": "^1.0.1",
     "assert": "^2.0.0",
     "axios": "^0.21.1",
     "babel-plugin-emotion": "^10.0.33",
@@ -24,6 +32,8 @@
     "moment-timezone": "^0.5.31",
     "net": "^1.0.2",
     "next": "^10.2.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^9.0.0",
     "nodemailer": "^6.7.2",
     "promise-ftp": "^1.3.5",
     "react": "17.0.1",
@@ -45,6 +55,7 @@
   },
   "devDependencies": {
     "@editorjs/checklist": "^1.3.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "webpack": "^5.74.0"
   }
 }
