@@ -2,7 +2,7 @@
 import nodemailer from "nodemailer";
 
 const username = "werchowsgi@gmail.com";
-const password = "Lavalle123$";
+const password = "npcgvranidudekfd";
 
 export const transporter = nodemailer.createTransport({
   pool: true,
