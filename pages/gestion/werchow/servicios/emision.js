@@ -649,6 +649,7 @@ const Emision = () => {
 
     await axios.get(`${ip}api/sgi/servicios/contarfisio/${contrato}`)
       .then(res => {
+        console.log(res.data[0].N)
         guardarNFisio(parseInt(res.data[0].N))
       })
       .catch(error => {
@@ -664,16 +665,16 @@ const Emision = () => {
 
     await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
       .then(res => {
-        console.log(res.data)
+
         if (res.data.length === 0) {
 
           guardarPriUso(true)
 
-          if (grupo === 66 || grupo === 55) {
+        }
 
-            contarFisios(contrato)
+        if (grupo === 66 || grupo === 55) {
 
-          }
+          contarFisios(contrato)
 
         }
 

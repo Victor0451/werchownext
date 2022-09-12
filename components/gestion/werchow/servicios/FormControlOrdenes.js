@@ -3,6 +3,7 @@ import React from 'react'
 const FormControlOrdenes = ({
     traerListado,
     traerListadoConsultasMedicos,
+    traerUsosPorPrestador,
     desdeRef,
     hastaRef,
     errores,
@@ -10,6 +11,9 @@ const FormControlOrdenes = ({
     medicoRef,
     desdeRef2,
     hastaRef2,
+    desdeRef3,
+    hastaRef3,
+
 }) => {
     return (
         <div className='container border border-dark mt-4 p-4 list'>
@@ -202,20 +206,86 @@ const FormControlOrdenes = ({
                         </div>
                     </div>
                 </div>
-                {/* <div className="card">
+                <div className="card">
                     <div className="card-header" id="headingThree">
                         <h2 className="mb-0">
-                            <button className="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
+                            <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <strong>
+                                    Cantidad de Usos (ORDENES) por Prestador y Fecha
+                                </strong>
                             </button>
                         </h2>
                     </div>
                     <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div className="card-body">
-                            And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+
+                            <div className='alert alert-info border border-dark text-center text-uppercase mt-4 mb-4'>
+                                Selecciona un rango de fechas para visualizar las ordenes emitidas en el mismo.
+                            </div>
+
+                            <div className='border border-dark mt-4 mb-4 p-4'>
+
+                                <div className='row'>
+
+                                    <div className='col-md-4'>
+
+                                        <label>
+                                            Desde
+                                        </label>
+
+                                        <input
+                                            className='form-control'
+                                            type='date'
+                                            ref={desdeRef3}
+                                        />
+
+                                    </div>
+
+                                    <div className='col-md-4'>
+
+                                        <label>
+                                            Hasta
+                                        </label>
+
+                                        <input
+                                            className='form-control'
+                                            type='date'
+                                            ref={hastaRef3}
+                                        />
+
+                                    </div>
+
+
+
+                                    <div className='col-md-4 mt-2'>
+
+                                        <button
+                                            className='btn btn-primary mt-4'
+                                            onClick={traerUsosPorPrestador}
+                                        >
+                                            Buscar
+                                        </button>
+
+                                    </div>
+
+                                    <div className='col-md-12 mt-2'>
+
+                                        {errores ? (
+                                            <div className='border border-dark alert alert-danger text-center text-uppercase mt-4 mb-4'>
+                                                {errores}
+                                            </div>
+                                        )
+                                            : null}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
-                </div> */}
+                </div>
             </div>
 
         </div>
