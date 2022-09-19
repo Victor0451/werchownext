@@ -39,7 +39,7 @@ const GastoLuto = ({
                             </h5>
                             <hr />
                             <p >
-                                *Tener en cuenta que el tope maximo a pagar por gasto de luto para cualquier plan es de $4000
+                                *Tener en cuenta que el tope maximo a pagar por gasto de luto para cualquier plan es de $10000
                             </p>
 
                         </div>

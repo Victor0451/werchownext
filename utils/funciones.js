@@ -317,36 +317,59 @@ export const registrarHistorialAprobacion = async (data, user) => {
 
 export const gastoLuto = (plan, alta, cantadh) => {
 
-
-    const anti = parseInt(moment().format('YYYY') - moment(alta).format("YYYY"))
-
-    let gl = 0
-
-    let glf = 0
-
-    let inte = cantadh + 1
+    // NUEVO CALCULO 09/2022
 
 
+    let inicio = moment(alta).format('YYYY-MM-DD')
 
-    gl = 2000
+    let anti = moment().diff(inicio, 'years')
 
 
-    if (inte < 4) {
+    if (anti <= 3) {
 
-        glf = gl
+        return 5000
 
-    } else if (inte >= 4 && inte <= 6) {
+    } else if (anti > 3) {
 
-        glf = gl + 1500
-
-    } else if (inte >= 7) {
-
-        glf = gl + 2000
+        return 10000
 
     }
 
 
-    return glf
+
+    // ---------------------------
+
+    // CALCULO VIEJO  03/2022
+
+    // const anti = parseInt(moment().format('YYYY') - moment(alta).format("YYYY"))
+
+    // let gl = 0
+
+    // let glf = 0
+
+    // let inte = cantadh + 1
+
+
+
+    // gl = 2000
+
+
+    // if (inte < 4) {
+
+    //     glf = gl
+
+    // } else if (inte >= 4 && inte <= 6) {
+
+    //     glf = gl + 1500
+
+    // } else if (inte >= 7) {
+
+    //     glf = gl + 2000
+
+    // }
+
+
+    // return glf
 
 
 

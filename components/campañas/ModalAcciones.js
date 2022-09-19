@@ -1,5 +1,6 @@
 import React from 'react'
 import FormAcciones from './FormAcciones'
+import moment from 'moment'
 
 const ModalAcciones = ({ modal,
     gestion,
@@ -14,6 +15,10 @@ const ModalAcciones = ({ modal,
     handleChange,
     obtenerDatos,
 }) => {
+    let inicio = moment(caso.alta).format('YYYY-MM-DD')
+
+    let anti = moment().diff(inicio, 'years')
+
     return (
         <div
             className={`modal fade bd-example-modal-${modal}`}
@@ -36,7 +41,20 @@ const ModalAcciones = ({ modal,
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
+
                     <div className="modal-body">
+
+                        {
+                            anti > 3 ? (
+                                <div className=' alert alert-info mt-4 mb-4 border border-dark text-center text-uppercase'>
+                                    La antigüedad del socio en la empresa es de: {anti} años,
+                                    se habilito para estos casos consideraciones en las negociaciones
+                                </div>
+                            ) : null
+                        }
+
+
                         <FormAcciones
                             gestion={gestion}
                             caso={caso}
