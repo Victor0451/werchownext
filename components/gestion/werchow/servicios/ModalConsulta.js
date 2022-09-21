@@ -17,7 +17,7 @@ const ModalConsulta = ({
   isj,
 
 }) => {
-
+console.log(priUso)
   return (
     <div
       className="modal fade"
@@ -193,7 +193,7 @@ const ModalConsulta = ({
                       isj === false ? (
                         <>
 
-                          {priUso === true && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
+                          {priUso <= 2 && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
 
                             <div className="col-md-12 d-flex justify-content-end mt-4">
                               <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
@@ -201,7 +201,7 @@ const ModalConsulta = ({
                               </div>
                             </div>
 
-                          ) : priUso === false && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
+                          ) : priUso > 2 && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
 
                             <div className="col-md-12 d-flex justify-content-end mt-4">
                               <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
@@ -209,7 +209,7 @@ const ModalConsulta = ({
                               </div>
                             </div>
 
-                          ) : priUso === true ? (
+                          ) : priUso <= 2 ? (
 
                             <div className="col-md-12 d-flex justify-content-end mt-4">
                               <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">

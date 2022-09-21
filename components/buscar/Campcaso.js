@@ -102,7 +102,7 @@ const Campcaso = ({ socioRes }) => {
                                                                                                       : socioRes.idcampana === 50
                                                                                                         ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de MARIA GALIAN`
                                                                                                         : socioRes.idcampana === 51
-                                                                                                          ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de GISELA GIMENEZ`
+                                                                                                          ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de LUCIA ADORNO`
                                                                                                           : socioRes.idcampana === 52
                                                                                                             ? `El socio ${socioRes.contrato} pertenece a la campaña de POLICIAS WERCHOW de ALEJANDRA TEJERINA`
                                                                                                             : socioRes.idcampana === 53

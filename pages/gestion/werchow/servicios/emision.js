@@ -49,7 +49,7 @@ const Emision = () => {
   const [enfer, guadrarEnfer] = useState(null);
   const [detEnf, guardarDetalleEnfer] = useState(null);
   const [practEnfer, guadrarPractEnfer] = useState(null);
-  const [priUso, guardarPriUso] = useState(false);
+  const [priUso, guardarPriUso] = useState(0);
   const [nFisio, guardarNFisio] = useState(0);
   const [isj, guardarISJ] = useState(false)
 
@@ -666,11 +666,7 @@ const Emision = () => {
     await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
       .then(res => {
 
-        if (res.data.length === 0) {
-
-          guardarPriUso(true)
-
-        }
+        guardarPriUso(res.data.orde)
 
         if (grupo === 66 || grupo === 55) {
 
