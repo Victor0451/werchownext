@@ -20,7 +20,7 @@ const Online = ({ oficina,
 
 
     return (
-        <div className="container mt-4 border border-dark p-4">
+        <div className="container list mt-4 border border-dark p-4">
             <h5 className="mt-4 mb-4">
                 <strong>
                     <u>Cobradores</u>

@@ -25,6 +25,7 @@ const ExportarListadoConsultasMedicos = ({
     >
       <ExcelSheet data={dataSet1} name="PRACTICAS">
         <ExcelColumn label="FECHA" value="FECHA" />
+        <ExcelColumn label="SERVICIO" value="SERVICIO" />
         <ExcelColumn label="N° ORDEN" value="ORDEN" />
         <ExcelColumn label="NOMBRE" value="NOMBRE" />
         <ExcelColumn label="VALOR CONSULTA" value="VALOR" />

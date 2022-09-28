@@ -27,12 +27,12 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
     }
 
     return (
-        <div className="mt-4 container border border-dark list">
+        <div className="mt-4 container border border-dark list p-4">
             <h2><strong><u>Informe de Mora</u></strong></h2>
 
 
             {!mora ? (<Spinner />) : (
-                <div className="mt-4 border border-dark p-4 list">
+                <div className="list mt-4 border border-dark p-4 list">
                     <h4 className="mb-4"><strong><u>Mora Tarjetas</u></strong></h4>
 
                     <div className="row ">
@@ -83,8 +83,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                 <div className="col-2">$ {m.morainicial - m.moraactual}</div>
 
                                             ) : m.morainicial < m.moraactual ?
-                                                    (<div className="col-2">{m.moraactual}</div>)
-                                                    : <div className="col-2"></div>
+                                                (<div className="col-2">{m.moraactual}</div>)
+                                                : <div className="col-2"></div>
                                     }
 
 
@@ -95,8 +95,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                 <div className="col-1">{m.fichasinicial - m.fichasactual}</div>
 
                                             ) : m.fichasinicial < m.fichasactual ?
-                                                    (<div className="col-1">{m.fichasactual}</div>)
-                                                    : <div className="col-1"></div>
+                                                (<div className="col-1">{m.fichasactual}</div>)
+                                                : <div className="col-1"></div>
                                     }
 
                                     {!m.moraactual ? (<div className="col-2">100 %</div>)
@@ -208,8 +208,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                     <div className="col-2">$ {m.morainicial - m.moraactual}</div>
 
                                                 ) : m.morainicial < m.moraactual ?
-                                                        (<div className="col-2">{m.moraactual}</div>)
-                                                        : <div className="col-2"></div>
+                                                    (<div className="col-2">{m.moraactual}</div>)
+                                                    : <div className="col-2"></div>
                                         }
 
 
@@ -220,8 +220,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                     <div className="col-1">{m.fichasinicial - m.fichasactual}</div>
 
                                                 ) : m.fichasinicial < m.fichasactual ?
-                                                        (<div className="col-1">{m.fichasactual}</div>)
-                                                        : <div className="col-1"></div>
+                                                    (<div className="col-1">{m.fichasactual}</div>)
+                                                    : <div className="col-1"></div>
                                         }
 
                                         {!m.moraactual ? (<div className="col-2">100 %</div>)
@@ -334,8 +334,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                     <div className="col-2">$ {m.morainicial - m.moraactual}</div>
 
                                                 ) : m.morainicial < m.moraactual ?
-                                                        (<div className="col-2">{m.moraactual}</div>)
-                                                        : <div className="col-2"></div>
+                                                    (<div className="col-2">{m.moraactual}</div>)
+                                                    : <div className="col-2"></div>
                                         }
 
 
@@ -346,8 +346,8 @@ const InformeMora = ({ mora, moracob, moratjt, calcularTotal }) => {
                                                     <div className="col-1">{m.fichasinicial - m.fichasactual}</div>
 
                                                 ) : m.fichasinicial < m.fichasactual ?
-                                                        (<div className="col-1">{m.fichasactual}</div>)
-                                                        : <div className="col-1"></div>
+                                                    (<div className="col-1">{m.fichasactual}</div>)
+                                                    : <div className="col-1"></div>
                                         }
 
                                         {!m.moraactual ? (<div className="col-2">100 %</div>)

@@ -46,7 +46,7 @@ const Administracion = ({
                         aria-selected="true"
                     >
                         Insertar Datos Para Efectividad
-            </a>
+                    </a>
                 </li>
                 <li className="nav-item" role="presentation">
                     <a
@@ -59,7 +59,7 @@ const Administracion = ({
                         aria-selected="false"
                     >
                         Actualizar Datos Para Efectividad
-            </a>
+                    </a>
                 </li>
 
                 <li className="nav-item" role="presentation">
@@ -73,7 +73,7 @@ const Administracion = ({
                         aria-selected="false"
                     >
                         Actualizar Datos Para Mora
-            </a>
+                    </a>
                 </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
@@ -83,7 +83,7 @@ const Administracion = ({
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
                 >
-                    <div className=" alert alert-primary border border-dark p-4 mt-4">
+                    <div className="  border border-dark p-4 mt-4">
                         <h2 className=" mb-4">
                             <strong>
                                 <u>INSERTAR DATOS WERCHOW</u>
@@ -96,7 +96,7 @@ const Administracion = ({
                                     onClick={postC1000}
                                 >
                                     Insertar C1000
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4">
@@ -105,7 +105,7 @@ const Administracion = ({
                                     onClick={postCTjt}
                                 >
                                     Insertar Tarjetas
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4">
@@ -114,7 +114,7 @@ const Administracion = ({
                                     onClick={postCBanco}
                                 >
                                     Insertar Banco
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4 mt-2">
@@ -123,7 +123,7 @@ const Administracion = ({
                                     onClick={postCPolicia}
                                 >
                                     Insertar Policias
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4 mt-2">
@@ -132,12 +132,12 @@ const Administracion = ({
                                     onClick={postPrestamos}
                                 >
                                     Insertar Prestamos
-                  </button>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div className="container alert alert-primary border border-dark p-4 mt-4">
+                    <div className="container  border border-dark p-4 mt-4">
                         <h2 className=" mb-4">
                             <strong>
                                 <u>INSERTAR DATOS MUTUAL</u>
@@ -150,7 +150,7 @@ const Administracion = ({
                                     onClick={postC1000M}
                                 >
                                     Insertar C1000m
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4">
@@ -159,7 +159,7 @@ const Administracion = ({
                                     onClick={postCTjtM}
                                 >
                                     Insertar Tarjetas
-                  </button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@ const Administracion = ({
                     role="tabpanel"
                     aria-labelledby="pills-profile-tab"
                 >
-                    <div className=" alert alert-primary border border-dark p-4 mt-4">
+                    <div className="  border border-dark p-4 mt-4">
                         <h2 className=" mb-4">
                             <strong>
                                 <u>ACTUALIZAR DATOS WERCHOW</u>
@@ -183,7 +183,7 @@ const Administracion = ({
                                     onClick={putCobradores}
                                 >
                                     Actualizar Cobradores
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4">
                                 <button
@@ -191,7 +191,7 @@ const Administracion = ({
                                     onClick={putOficina}
                                 >
                                     Actualizar Oficina
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4">
                                 <button
@@ -199,7 +199,7 @@ const Administracion = ({
                                     onClick={putAdelantado}
                                 >
                                     Actualizar Adelantado
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4 mt-2">
                                 <button
@@ -207,7 +207,7 @@ const Administracion = ({
                                     onClick={putCtjt}
                                 >
                                     Actualizar Tarjetas
-                  </button>
+                                </button>
                                 <select
                                     className="form-control form-control-sm mt-1"
                                     ref={sucursalRefW}
@@ -226,7 +226,7 @@ const Administracion = ({
                                     onClick={putBanco}
                                 >
                                     Actualizar Banco
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4 mt-2">
@@ -235,7 +235,7 @@ const Administracion = ({
                                     onClick={putPolicia}
                                 >
                                     Actualizar Policias
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4 mt-4">
@@ -244,7 +244,7 @@ const Administracion = ({
                                     onClick={putPrestamos}
                                 >
                                     Actualizar Prestamos
-                  </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4 mt-4">
@@ -253,12 +253,12 @@ const Administracion = ({
                                     onClick={putNoNull}
                                 >
                                     Sacar Null
-                  </button>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div className="container alert alert-primary border border-dark p-4 mt-4">
+                    <div className="container  border border-dark p-4 mt-4">
                         <h2 className=" mb-4">
                             <strong>
                                 <u>ACTUALIZAR DATOS MUTUAL</u>
@@ -271,7 +271,7 @@ const Administracion = ({
                                     onClick={putCobradoresM}
                                 >
                                     Actualizar Cobradores
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4">
                                 <button
@@ -279,7 +279,7 @@ const Administracion = ({
                                     onClick={putOficinaM}
                                 >
                                     Actualizar Oficina
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4">
                                 <button
@@ -287,7 +287,7 @@ const Administracion = ({
                                     onClick={putAdelantadoM}
                                 >
                                     Actualizar Adelantado
-                  </button>
+                                </button>
                             </div>
                             <div className="col-md-4 mt-2">
                                 <button
@@ -295,7 +295,7 @@ const Administracion = ({
                                     onClick={putCtjtm}
                                 >
                                     Actualizar Tarjetas
-                  </button>
+                                </button>
                                 <select
                                     className="form-control form-control-sm mt-1"
                                     ref={sucursalRefM}
@@ -313,7 +313,7 @@ const Administracion = ({
                                     onClick={putNoNullM}
                                 >
                                     No Null
-                  </button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -326,7 +326,7 @@ const Administracion = ({
                 >
 
 
-                    <div className="container alert alert-primary border border-dark p-4 mt-4">
+                    <div className="container  border border-dark p-4 mt-4">
                         <h2 className=" mb-4">
                             <strong>
                                 <u>ACTUALIZAR DATOS MORA</u>
@@ -339,7 +339,7 @@ const Administracion = ({
                                 // onClick={postC1000}
                                 >
                                     Actualizar M1000
-                            </button>
+                                </button>
                             </div>
 
                             <div className="col-md-4">
@@ -348,7 +348,7 @@ const Administracion = ({
                                 // onClick={postC1000}
                                 >
                                     Actualizar MTJT
-                            </button>
+                                </button>
                             </div>
                         </div>
 

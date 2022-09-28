@@ -1154,7 +1154,7 @@ const sucursales = () => {
             <ResumenSucursales handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} flag={'E'} />
 
             {sindato === null ? null : (
-                <div className="container mt-4 mb-4 border border-dark p-2">
+                <div className="container list mt-4 mb-4 border border-dark p-2">
                     {sindato === true ? (
                         <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
                             <strong>No hay datos generados aun. Intente mas tarde</strong>
@@ -1204,7 +1204,7 @@ const sucursales = () => {
 
                                 </div>
                             </div>
-                            <div className="alert alert-primary border border-dark p-4">
+                            <div className="border border-dark p-4">
                                 <h3 className="text-center mb-4 font-weight-bold">
                                     <u>Opciones</u>
                                 </h3>

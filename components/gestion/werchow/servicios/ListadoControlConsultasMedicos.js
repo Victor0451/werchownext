@@ -76,6 +76,16 @@ const ListadoControlConsultasMedicos = ({
                                 },
 
                                 {
+                                    Header: "Servicio",
+                                    id: "SERVICIO",
+                                    accessor: (d) => d.SERVICIO,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["SERVICIO"] }),
+                                    filterAll: true,
+
+                                },
+
+                                {
                                     Header: "N° Orden",
                                     id: "ORDEN",
                                     accessor: (d) => d.ORDEN,

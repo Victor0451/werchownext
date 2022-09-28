@@ -121,7 +121,7 @@ const FormControlOrdenes = ({
                         <div className="card-body">
 
                             <div className='alert alert-info border border-dark text-center text-uppercase mt-4 mb-4'>
-                                Selecciona un prestador medico y un rango de fechas para visualizar las consultas emitidas en el mismo.
+                                Selecciona un prestador medico y un rango de fechas para visualizar las consultas y practicas emitidas en el mismo.
                             </div>
 
                             <div className='border border-dark mt-4 mb-4 p-4'>
@@ -211,7 +211,7 @@ const FormControlOrdenes = ({
                         <h2 className="mb-0">
                             <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <strong>
-                                    Cantidad de Usos (ORDENES) por Prestador y Fecha
+                                    Cantidad de Usos por Prestador y Fecha
                                 </strong>
                             </button>
                         </h2>

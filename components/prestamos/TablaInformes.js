@@ -7,6 +7,7 @@ const TablaInformes = ({
   vgorosito,
   mcarrizo,
   sjuarez,
+  ladorno,
   totalprestamos,
   totalcapital,
   totalinteres,
@@ -145,6 +146,7 @@ const TablaInformes = ({
               </div>
             </div>
           ) : null}
+
           {ggimenez ? (
             <div className="d-flex justify-content-between border-bottom text-center mt-4">
               <div className="col-2">
@@ -161,6 +163,26 @@ const TablaInformes = ({
               </div>
               <div className="col-3">
                 <strong>{ggimenez.capconint}</strong>
+              </div>
+            </div>
+          ) : null}
+
+          {ladorno ? (
+            <div className="d-flex justify-content-between border-bottom text-center mt-4">
+              <div className="col-2">
+                <strong>Lucia Adorno</strong>
+              </div>
+              <div className="col-2">
+                <strong>{ladorno.prestamos}</strong>
+              </div>
+              <div className="col-3">
+                <strong>{ladorno.capital}</strong>
+              </div>
+              <div className="col-2">
+                <strong>{ladorno.capconint - ladorno.capital}</strong>
+              </div>
+              <div className="col-3">
+                <strong>{ladorno.capconint}</strong>
               </div>
             </div>
           ) : null}

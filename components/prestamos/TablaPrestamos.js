@@ -149,8 +149,8 @@ const TablaPrestamos = ({
                         <div>Silvia Juarez</div>
                       ) : row.original.ptm_op === 3 ? (
                         <div>Alejandra Tejerina</div>
-                      ) : row.original.ptm_op === 118 ? (
-                        <div>Valeria Fidao</div>
+                      ) : row.original.ptm_op === 107 ? (
+                        <div>Lucia Adorno</div>
                       ) : null}
                     </div>
                   ),

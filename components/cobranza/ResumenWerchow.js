@@ -38,7 +38,7 @@ const ResumenWerchow = ({
     );
   else if (CasaCentralPOL)
     return (
-      <table className="container table border border-dark text-center mt-4">
+      <table className="container list table border border-dark text-center mt-4">
         <thead className="thead-dark">
           <th className="border border-dark border-bottom" colspan="8">
             WERCHOW

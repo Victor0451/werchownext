@@ -733,14 +733,14 @@ const general = () => {
             <Resumen handleChange={handleChange} buscarNumeros={buscarNumeros} buscarNumerosMutual={buscarNumerosMutual} titulo={'Cobranza'} flag={'E'} />
 
             {sindato === null ? null : (
-                <div className="container mt-4 mb-4 border border-dark p-2">
+                <div className="list container mt-4 mb-4 border border-dark p-2">
                     {sindato === true ? (
                         <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
                             <strong>No hay datos generados aun. Intente mas tarde</strong>
                         </div>
                     ) : (
                         <>
-                            <div className="print-efect p-4" ref={componentRef}>
+                            <div className=" print-efect p-4" ref={componentRef}>
                                 <h3 className="text-center">
                                     <strong>
                                         <u>
@@ -777,7 +777,7 @@ const general = () => {
 
                                 </div>
                             </div>
-                            <div className="alert alert-primary border border-dark p-4">
+                            <div className="container border border-dark p-4">
                                 <h3 className="text-center mb-4 font-weight-bold">
                                     <u>Opciones</u>
                                 </h3>

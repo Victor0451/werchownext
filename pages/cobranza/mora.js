@@ -334,10 +334,10 @@ const mora = () => {
 
       <Resumen buscarNumeros={buscarNumeros} handleChange={handleChange} titulo={'Mora'} flag={'E'} />
 
-      <div className=" container border border-dark mt-4 mb-4 alert alert-info text-center text-uppercase"><u>¡atencion!</u>: La mora a analizar, es la plata no cobrada del mes anterior con respecto al mes en curso</div>
+      <div className="list container border border-dark mt-4 mb-4 alert alert-info text-center text-uppercase"><u>¡atencion!</u>: La mora a analizar, es la plata no cobrada del mes anterior con respecto al mes en curso</div>
 
       {sindato === null ? null : (
-        <div className="container mt-4 mb-4 border border-dark p-2">
+        <div className="list container mt-4 mb-4 border border-dark p-2">
           {sindato === true ? (
             <div className="mt-4 container form-group text-center text-uppercase border border-dark alert alert-warning">
               <strong>No hay datos generados aun. Intente mas tarde</strong>
@@ -362,7 +362,7 @@ const mora = () => {
 
                 </div>
               </div>
-              <div className="alert alert-primary border border-dark p-4">
+              <div className="list border border-dark p-4">
                 <h3 className="text-center mb-4 font-weight-bold">
                   <u>Opciones</u>
                 </h3>

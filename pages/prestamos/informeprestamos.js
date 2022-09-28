@@ -35,6 +35,7 @@ const informeprestamos = () => {
   const [vgorosito, guardarVgorosito] = useState(null);
   const [sjuarez, guardarSjuarez] = useState(null);
   const [atejerina, guardarAtejerina] = useState(null);
+  const [ladorno, guardarLadorno] = useState(null);
 
   const [totalprestamos, guardarTotalprestamos] = useState(null);
   const [totalcapital, guardarTotalcapital] = useState(null);
@@ -133,6 +134,15 @@ const informeprestamos = () => {
           capconint: prestporop[i].capconint,
         };
         guardarGgimenez(ggimenez);
+      }
+      if (prestporop[i].operador === 107) {
+        const ladorno = {
+          prestamos: prestporop[i].prestamos,
+          capital: prestporop[i].capital,
+          interes: prestporop[i].interes,
+          capconint: prestporop[i].capconint,
+        };
+        guardarLadorno(ladorno);
       }
     }
   };
@@ -329,6 +339,7 @@ const informeprestamos = () => {
                 vgorosito={vgorosito}
                 mcarrizo={mcarrizo}
                 sjuarez={sjuarez}
+                ladorno={ladorno}
                 totalprestamos={totalprestamos}
                 totalcapital={totalcapital}
                 totalinteres={totalinteres}
