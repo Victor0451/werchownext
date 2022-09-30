@@ -720,17 +720,46 @@ const Emision = () => {
     }
 
 
-    if (priUso === true && socio.GRUPO === 66 || socio.GRUPO === 55) {
-
-      uso.IMPORTE = 0
-
-    } else if (priUso === true && socio.GRUPO !== 66 || socio.GRUPO !== 55) {
+    if (priUso <= 1) {
 
       uso.IMPORTE = 350
 
-    } else if (isj === true) {
+    } else if (priUso === 2) {
 
-      uso.IMPORTE = 0
+      if (isj === true) {
+
+        uso.IMPORTE = 550 - 350
+
+      } else {
+
+        uso.IMPORTE = 550
+
+      }
+
+    } else if (priUso === 3) {
+
+
+      if (isj === true) {
+
+        uso.IMPORTE = 750 - 350
+
+      } else {
+
+        uso.IMPORTE = 750
+
+      }
+
+    } else if (priUso > 3) {
+
+      if (isj === true) {
+
+        uso.IMPORTE = parseFloat(detalleMed.CON_PAGA) - 350
+
+      } else {
+
+        uso.IMPORTE = detalleMed.CON_PAGA
+
+      }
 
     }
 
@@ -1429,6 +1458,36 @@ const Emision = () => {
     }
   };
 
+  const importeOrden = () => {
+
+
+    if (priUso <= 1) {
+
+      const importe = 350
+
+      return importe
+
+    } else if (priUso === 2) {
+
+      const importe = 550
+
+      return importe
+
+    } else if (priUso === 3) {
+
+      const importe = 750
+
+      return importe
+
+
+    } else if (priUso > 3) {
+
+      const importe = detalleMed.CON_PAGA
+
+      return importe
+
+    }
+  }
 
   // ----------------------------------------------
 
@@ -1526,6 +1585,7 @@ const Emision = () => {
               nFisio={nFisio}
               selector={selector}
               isj={isj}
+              importeOrden={importeOrden}
             />
           ) : null}
         </>

@@ -3,10 +3,13 @@ import Spinner from "../../../layout/Spinner";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import FormGenerarPago from "./FormGenerarPago";
+import moment from "moment";
 
 const EmitirRecibo = ({
   ficha,
   pagos,
+  pagosB,
+  allPagos,
   nupagos,
   mesRef,
   anoRef,
@@ -19,6 +22,7 @@ const EmitirRecibo = ({
   cuoInt,
   cuo,
 }) => {
+
   if (!ficha) return <Spinner />;
 
   return (
@@ -55,7 +59,7 @@ const EmitirRecibo = ({
           ficha.GRUPO === 7777 ||
           ficha.GRUPO === 8500 ? (
           <div className="mb-4 alert alert-warning text-center text-uppercase border border-dark">
-            ATENCION!!!, La ficha pertenece a un grupo moroso
+            ATENCION!!!, La ficha pertenece a un grupo moroso - grupo: {ficha.GRUPO}
           </div>
         ) : null}
 
@@ -68,10 +72,10 @@ const EmitirRecibo = ({
               </strong>
             </h4>
 
-            {pagos ? (
+            {allPagos ? (
               <div className="list">
                 <ReactTable
-                  data={pagos}
+                  data={allPagos}
                   filterable
                   defaultFilterMethod={(filter, row) =>
                     row[filter.id] === filter.value
@@ -136,7 +140,7 @@ const EmitirRecibo = ({
                         {
                           Header: "Fecha",
                           id: "DIA_PAG",
-                          accessor: (d) => d.DIA_PAG,
+                          accessor: (d) => moment(d.DIA_PAG).format('DD/MM/YYYY'),
                           filterMethod: (filter, rows) =>
                             matchSorter(rows, filter.value, {
                               keys: ["DIA_PAG"],
@@ -218,7 +222,7 @@ const EmitirRecibo = ({
                       {
                         Header: "Fecha",
                         id: "DIA_PAG",
-                        accessor: (d) => d.DIA_PAG,
+                        accessor: (d) => moment(d.DIA_PAG).format('DD/MM/YYYY'),
                         filterMethod: (filter, rows) =>
                           matchSorter(rows, filter.value, {
                             keys: ["DIA_PAG"],

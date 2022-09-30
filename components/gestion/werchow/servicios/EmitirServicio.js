@@ -50,6 +50,7 @@ const EmitirServicio = ({
   nFisio,
   selector,
   isj,
+  importeOrden,
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -354,6 +355,7 @@ const EmitirServicio = ({
           nFisio={nFisio}
           selector={selector}
           isj={isj}
+          importeOrden={importeOrden}
         />
       )}
     </div>

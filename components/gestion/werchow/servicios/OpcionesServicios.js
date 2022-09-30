@@ -46,6 +46,7 @@ const OpcionesServicios = ({
   nFisio,
   selector,
   isj,
+  importeOrden,
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -154,6 +155,7 @@ const OpcionesServicios = ({
         priUso={priUso}
         selector={selector}
         isj={isj}
+        importeOrden={importeOrden}
       />
 
       <ModalPractica

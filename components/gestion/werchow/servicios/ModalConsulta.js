@@ -15,9 +15,9 @@ const ModalConsulta = ({
   priUso,
   selector,
   isj,
-
+  importeOrden,
 }) => {
-console.log(priUso)
+
   return (
     <div
       className="modal fade"
@@ -42,6 +42,12 @@ console.log(priUso)
             </button>
           </div>
           <div className="modal-body p-4">
+
+            <div className="alert alert-info border border-dark text-center text-uppercase mb-4">
+              Esta es la orden de consulta n° {priUso} del mes
+            </div>
+
+
             <div className="row border border-dark list p-4">
 
               {!sucursales ? (
@@ -98,6 +104,7 @@ console.log(priUso)
                 )}
 
             </div>
+
 
 
             {detalleMed ? (
@@ -188,57 +195,37 @@ console.log(priUso)
                     </div>
 
 
+                    {isj === true ? (
+
+                      <div className="border border-dark alert alert-info text-center text-uppercase col-md-12">
+
+                        Al presentar la orden de I.S.J. se le descontara $350 al monto total de esta orden de consulta.
+
+                      </div>
+
+                    ) : null}
+
                     {
 
-                      isj === false ? (
-                        <>
-
-                          {priUso <= 2 && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
-
-                            <div className="col-md-12 d-flex justify-content-end mt-4">
-                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                                <u>Coseguro</u>: 100% Bonificado
-                              </div>
-                            </div>
-
-                          ) : priUso > 2 && socio.GRUPO === 66 || socio.GRUPO === 55 ? (
-
-                            <div className="col-md-12 d-flex justify-content-end mt-4">
-                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                                <u>Coseguro</u>: $350
-                              </div>
-                            </div>
-
-                          ) : priUso <= 2 ? (
-
-                            <div className="col-md-12 d-flex justify-content-end mt-4">
-                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                                <u>Coseguro</u>: $350
-                              </div>
-                            </div>
-
-                          ) : (
-
-                            <div className="col-md-12 d-flex justify-content-end mt-4">
-                              <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                                <u>Coseguro</u>: ${detalleMed.MAX_DESC}
-                              </div>
-                            </div>
-
-                          )}
-                        </>
-
-                      ) : isj === true ? (
-
+                      isj === true && priUso > 1 ? (
                         <div className="col-md-12 d-flex justify-content-end mt-4">
                           <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                            <u>Coseguro</u>: 100% Bonificado
+                            <u>Coseguro</u>: ${importeOrden() - 350}
                           </div>
                         </div>
-
-                      ) : null
+                      ) : (
+                        <div className="col-md-12 d-flex justify-content-end mt-4">
+                          <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
+                            <u>Coseguro</u>: ${importeOrden()}
+                          </div>
+                        </div>
+                      )
 
                     }
+
+
+
+
 
 
 

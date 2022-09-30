@@ -21,6 +21,8 @@ const emisionrecibo = () => {
   const [user, guardarUsuario] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
+  const [pagosB, guardarPagosB] = useState(null);
+  const [allPagos, guardarAllPagos] = useState(null);
   const [adhs, guardarAdhs] = useState(null);
   const [cuofija, guardarCuoFija] = useState(null);
   const [errores, guardarErrores] = useState(null);
@@ -36,26 +38,55 @@ const emisionrecibo = () => {
 
 
     if (f === 'P') {
+
       await axios
         .get(`${ip}api/werchow/pagos/pagosmutual/${contrato}`)
         .then((res) => {
-          guardarPagos(res.data);
+
+          const pag = res.data
+
+          guardarAllPagos(pag);
+
+          axios
+            .get(`${ip}api/werchow/pagobco/pagobcom/${contrato}`)
+            .then((res2) => {
+
+              if (res2.data.length > 0) {
+
+                const pagB = res2.data
+
+                const allP = pag.concat(pagB)
+
+                guardarAllPagos(allP)
+
+              }
+
+
+            })
+            .catch((error) => {
+              toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
+              console.log(error);
+            });
+
+
         })
         .catch((error) => {
           toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
           console.log(error);
         });
-    } else if (f === 'B') {
-      await axios
-        .get(`${ip}api/werchow/pagosbco/pagosbcom/${contrato}`)
-        .then((res) => {
-          guardarPagos(res.data);
-        })
-        .catch((error) => {
-          toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
-          console.log(error);
-        });
+
     }
+
+    // if (pagos && pagosB) {
+
+    //   const allPagos = pagos.concat(pagosB)
+
+    //   guardarAllPagos(allPagos)
+
+    // } 
+
+
+
   };
 
   const traerAdhsM = async (contrato) => {
@@ -95,9 +126,9 @@ const emisionrecibo = () => {
         });
     } else if (f === 'B') {
       await axios
-        .get(`${ip}api/werchow/pagobco/pagosbco/${contrato}`)
+        .get(`${ip}api/werchow/pagobco/pagobco/${contrato}`)
         .then((res) => {
-          guardarPagos(res.data);
+          guardarPagosB(res.data);
         })
         .catch((error) => {
           toastr.error("Ocurrio un error al traer los pagos", "ATENCION");
@@ -130,7 +161,6 @@ const emisionrecibo = () => {
         console.log(error);
       });
   };
-
 
   const buscarTitularM = async (e) => {
     e.preventDefault();
@@ -178,9 +208,10 @@ const emisionrecibo = () => {
               ficha.GRUPO === 8500
             ) {
               toastr.warning(
-                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                `¡¡CUIDADO!!, El socio pertenece a un grupo moroso - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
+
             } else if (
               ficha.GRUPO === 3400 ||
               ficha.GRUPO === 3600 ||
@@ -190,10 +221,9 @@ const emisionrecibo = () => {
               ficha.GRUPO === 4000
             ) {
 
-              traerPagosM(ficha.CONTRATO, 'B');
 
               toastr.warning(
-                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
             } else if (
@@ -201,17 +231,14 @@ const emisionrecibo = () => {
               ficha.GRUPO < 7777
             ) {
               toastr.warning(
-                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
 
-              traerPagosM(ficha.CONTRATO, 'B');
-
-            } else {
-
-              traerPagosM(ficha.CONTRATO, 'P');
-
             }
+
+            traerPagosM(ficha.CONTRATO, 'P');
+            traerPagosM(ficha.CONTRATO, 'B');
           }
         })
         .catch((error) => {
@@ -269,38 +296,46 @@ const emisionrecibo = () => {
               ficha.GRUPO === 7777 ||
               ficha.GRUPO === 8500
             ) {
+
               toastr.warning(
-                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                `¡¡CUIDADO!!, El socio pertenece a un grupo moroso - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
+
             } else if (
+
               ficha.GRUPO === 3400 ||
               ficha.GRUPO === 3600 ||
               ficha.GRUPO === 3700 ||
               ficha.GRUPO === 3800 ||
               ficha.GRUPO === 3900 ||
               ficha.GRUPO === 4000
+
             ) {
+
               toastr.warning(
-                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
-              traerPagosM(ficha.CONTRATO, 'B');
+
 
             } else if (
+
               ficha.GRUPO >= 5000 &&
               ficha.GRUPO < 7777
+
             ) {
               toastr.warning(
-                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
-              traerPagosM(ficha.CONTRATO, 'B');
-
-            } else {
-              traerPagosM(ficha.CONTRATO, 'P');
 
             }
+
+            traerPagosM(ficha.CONTRATO, 'P');
+            traerPagosM(ficha.CONTRATO, 'B');
+
+
           }
         })
         .catch((error) => {
@@ -338,6 +373,7 @@ const emisionrecibo = () => {
             guardarFlag(true);
 
             let ficha = res.data[0][0];
+
             guardarFicha(ficha);
 
             traerAdhs(ficha.CONTRATO);
@@ -345,6 +381,7 @@ const emisionrecibo = () => {
             traerCuoFija(ficha.CONTRATO);
 
             if (
+
               ficha.GRUPO === 1001 ||
               ficha.GRUPO === 1005 ||
               ficha.GRUPO === 1006 ||
@@ -356,39 +393,47 @@ const emisionrecibo = () => {
               ficha.GRUPO === 4004 ||
               ficha.GRUPO === 7777 ||
               ficha.GRUPO === 8500
+
             ) {
+
               toastr.warning(
-                "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
+                `¡¡CUIDADO!!, El socio pertenece a un grupo moroso - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
+
             } else if (
+
               ficha.GRUPO === 3400 ||
               ficha.GRUPO === 3600 ||
               ficha.GRUPO === 3700 ||
               ficha.GRUPO === 3800 ||
               ficha.GRUPO === 3900 ||
               ficha.GRUPO === 4000
+
             ) {
+
               toastr.warning(
-                `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa tarjeta como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
-
-              traerPagos(ficha.CONTRATO, 'B');
-
 
             } else if (
+
               ficha.GRUPO >= 5000 &&
               ficha.GRUPO < 7777
+
             ) {
+
               toastr.warning(
-                `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
+                `El socio usa debito banco macro como medio de pago - grupo ${ficha.GRUPO}`,
                 "ATENCION"
               );
-              traerPagos(ficha.CONTRATO, 'B');
-            } else {
-              traerPagos(ficha.CONTRATO, 'P');
+
             }
+
+            traerPagosM(ficha.CONTRATO, 'P');
+            traerPagosM(ficha.CONTRATO, 'B');
+
           }
         })
         .catch((error) => {
@@ -891,6 +936,8 @@ const emisionrecibo = () => {
             <EmitirRecibo
               ficha={ficha}
               pagos={pagos}
+              pagosB={pagosB}
+              allPagos={allPagos}
               adhs={adhs}
               nupagos={nupagos}
               mesRef={mesRef}
