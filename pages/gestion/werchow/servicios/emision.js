@@ -720,11 +720,19 @@ const Emision = () => {
     }
 
 
-    if (priUso <= 1) {
+    if (priUso === 0) {
 
-      uso.IMPORTE = 350
+      if (socio.GRUPO === 55 || socio.GRUPO === 66) {
 
-    } else if (priUso === 2) {
+        uso.IMPORTE = 0
+
+      } else {
+
+        uso.IMPORTE = 350
+
+      }
+
+    } else if (priUso === 1) {
 
       if (isj === true) {
 
@@ -736,7 +744,7 @@ const Emision = () => {
 
       }
 
-    } else if (priUso === 3) {
+    } else if (priUso === 2) {
 
 
       if (isj === true) {
@@ -749,7 +757,7 @@ const Emision = () => {
 
       }
 
-    } else if (priUso > 3) {
+    } else if (priUso > 2) {
 
       if (isj === true) {
 
@@ -1461,26 +1469,36 @@ const Emision = () => {
   const importeOrden = () => {
 
 
-    if (priUso <= 1) {
+    if (priUso === 0) {
 
-      const importe = 350
+      if (socio.GRUPO === 55 || socio.GRUPO === 66) {
 
-      return importe
+        const importe = 0
 
-    } else if (priUso === 2) {
+        return importe
+
+      } else {
+
+        const importe = 350
+
+        return importe
+
+      }
+
+    } else if (priUso === 1) {
 
       const importe = 550
 
       return importe
 
-    } else if (priUso === 3) {
+    } else if (priUso === 2) {
 
       const importe = 750
 
       return importe
 
 
-    } else if (priUso > 3) {
+    } else if (priUso > 2) {
 
       const importe = detalleMed.CON_PAGA
 
