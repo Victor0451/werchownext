@@ -1238,7 +1238,16 @@ const Adimn = () => {
                   href="/socios/clubwerchow/solicitudes"
                   className="dropdown-item text-dark"
                 >
-                  Solicitudes
+                  Solicitudes de tarjeta
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/socios/clubwerchow/solicitudsorteo"
+                  className="dropdown-item text-dark"
+                >
+                  Solicitudes de sorteo
                 </a>
               </li>
               <hr />

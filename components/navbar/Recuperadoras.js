@@ -532,6 +532,45 @@ const Recuperadoras = ({ usuario, perfil }) => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Club Werchow
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/socios/clubwerchow/solicitudes"
+                  className="dropdown-item text-dark"
+                >
+                  Solicitudes de tarjeta
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/socios/clubwerchow/solicitudsorteo"
+                  className="dropdown-item text-dark"
+                >
+                  Solicitudes de sorteo
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/socios/clubwerchow/realizarsorteo"
+                  className="dropdown-item text-dark"
+                >
+                  Realizar Sorteo
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Notificaciones
             </a>
             <ul className="dropdown-menu">

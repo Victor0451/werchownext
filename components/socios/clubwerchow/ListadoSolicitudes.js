@@ -36,7 +36,10 @@ const ListadoSolicitudes = ({ listsolicitudes }) => {
 
       <hr className="mt-4 mb-4" />
 
-      <div className="border border-dark p-4 list">
+      <div
+        className="border border-dark p-4 list"
+        id="list"
+      >
         <ReactTable
           data={listsolicitudes}
           filterable
