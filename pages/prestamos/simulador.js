@@ -9,7 +9,7 @@ import moment from "moment-timezone";
 import { ip } from "../../config/config";
 import Simulador from "../../components/prestamos/Simulador";
 import { cuotasprest } from "../../array/array";
-import { interest } from "../../utils/variables";
+import { tp3, tp6, tp10, tp12 } from "../../utils/variables";
 
 const simulador = () => {
   const [cuoprest, guardarCuoprest] = useState(null);
@@ -28,8 +28,32 @@ const simulador = () => {
     let principal = parseInt(capital);
 
     let payments = parseInt(cuotas);
-    let x = Math.pow(1 + interest, payments);
-    let monthly = ((principal * x * interest) / (x - 1)).toFixed(0);
+
+    let x = 0
+    let monthly = 0
+
+    if (cuotas === "3") {
+
+      x = Math.pow(1 + tp3, payments);
+      monthly = ((principal * x * tp3) / (x - 1)).toFixed(0);
+
+    } else if (cuotas === "6") {
+
+      x = Math.pow(1 + tp6, payments);
+      monthly = ((principal * x * tp6) / (x - 1)).toFixed(0);
+
+    } else if (cuotas === "10") {
+
+      x = Math.pow(1 + tp10, payments);
+      monthly = ((principal * x * tp10) / (x - 1)).toFixed(0);
+
+    } else if (cuotas === "12") {
+
+      x = Math.pow(1 + tp12, payments);
+      monthly = ((principal * x * tp12) / (x - 1)).toFixed(0);
+
+    }
+
 
     guardarCuoprest(monthly);
 

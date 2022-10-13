@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import AdhPrint from "./AdhPrint";
 
-const Legajo = ({ ficha, empresa, adhs }) => {
+const Legajo = ({ ficha, empresa }) => {
   if (!ficha)
     return (
       <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">

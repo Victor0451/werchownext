@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import AdhPrint from './AdhPrint'
 import Legajo from './Legajo'
 import PagosPrint from './PagosPrint'
 
@@ -81,6 +82,10 @@ const ModalLegajoPrint = ({
 
                                 <div id="leg">
                                     <Legajo ficha={ficha} empresa={empresa} adhs={adhs} />
+
+                                    <hr className="my-4 border border-dark" />
+
+                                    <AdhPrint adhs={adhs} />
                                 </div>
 
                                 <hr className="mt-4 border border-dark" />
