@@ -91,6 +91,11 @@ body {
   height: 50px !important;
 }
 
+.clublogo {
+  width: 250px !important;
+  height: 150px !important;
+}
+
 .table {
   font-size: 10px !important;
 }
@@ -140,6 +145,11 @@ tr {
 .list {
   background: white;
 }
+
+.listcw {
+  background: rgba(42, 76, 143, 0.76);
+}
+
 
 input:read-only {
   background: rgb(151, 148, 148) !important;

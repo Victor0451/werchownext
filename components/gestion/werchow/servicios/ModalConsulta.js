@@ -44,7 +44,7 @@ const ModalConsulta = ({
           <div className="modal-body p-4">
 
             <div className="alert alert-info border border-dark text-center text-uppercase mb-4">
-              Esta es la orden de consulta n° {priUso} del mes
+              Esta es la orden de consulta n° {priUso + 1} del mes
             </div>
 
 

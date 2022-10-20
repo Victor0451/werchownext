@@ -102,7 +102,8 @@ const rehabilitacion = () => {
             res.data.GRUPO === 3999 ||
             res.data.GRUPO === 4004 ||
             res.data.GRUPO === 7777 ||
-            res.data.GRUPO === 8500
+            res.data.GRUPO === 8500 ||
+            res.data.GRUPO === 8888
 
           ) {
             guardarFicha(ficha);
@@ -146,7 +147,7 @@ const rehabilitacion = () => {
     }
   };
 
-  const buscarTitularM = async (e) => { 
+  const buscarTitularM = async (e) => {
     e.preventDefault();
 
     guardarFicha(null);
@@ -173,7 +174,8 @@ const rehabilitacion = () => {
             res.data.GRUPO === 3999 ||
             res.data.GRUPO === 4004 ||
             res.data.GRUPO === 7777 ||
-            res.data.GRUPO === 8500
+            res.data.GRUPO === 8500 ||
+            res.data.GRUPO === 8888
           ) {
 
             guardarFicha(ficha);

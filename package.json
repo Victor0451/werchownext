@@ -1,6 +1,6 @@
 {
   "name": "werchowsgi",
-  "version": "3.6.9",
+  "version": "3.7",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -44,6 +44,7 @@
     "react-editor-js": "^2.0.6",
     "react-export-excel": "^0.5.3",
     "react-froala-wysiwyg": "^4.0.11",
+    "react-pdf": "^5.7.2",
     "react-select": "^3.0.8",
     "react-table": "^6.11.5",
     "react-to-print": "^2.9.0",
