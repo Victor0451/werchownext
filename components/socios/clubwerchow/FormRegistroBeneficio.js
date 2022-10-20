@@ -33,50 +33,55 @@ const FormRegistroBeneficio = ({
                     </strong>
                 </h3>
 
-                <div className='row'>
 
-                    <div className='col-md-6'>
-                        <label>
-                            <u>
-                                Beneficio para:
-                            </u>
-                        </label>
 
-                        <input type={"text"} className="form-control" value={empresa.comercio} />
+                {empresa ? (
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <label>
+                                <u>
+                                    Beneficio para:
+                                </u>
+                            </label>
 
+                            <input type={"text"} className="form-control" value={empresa.comercio} />
+
+                        </div>
+
+
+                        <div className='col-md-4'>
+                            <label>
+                                <u>
+                                    Ingresa el DNI:
+                                </u>
+                            </label>
+
+                            <input
+                                type={"text"}
+                                className="form-control"
+                                ref={dniRef}
+                            />
+
+                        </div>
+
+
+                        <div className='col-md-2'>
+
+                            <label>
+                            </label>
+
+                            <button
+                                className='mt-4 btn btn-primary'
+                                onClick={buscarSocio}
+                            >
+                                Buscar
+                            </button>
+
+                        </div>
                     </div>
+                ) : null}
 
 
-                    <div className='col-md-4'>
-                        <label>
-                            <u>
-                                Ingresa el DNI:
-                            </u>
-                        </label>
-
-                        <input
-                            type={"text"}
-                            className="form-control"
-                            ref={dniRef}
-                        />
-
-                    </div>
-
-
-                    <div className='col-md-2'>
-
-                        <label>
-                        </label>
-
-                        <button
-                            className='mt-4 btn btn-primary'
-                            onClick={buscarSocio}
-                        >
-                            Buscar
-                        </button>
-
-                    </div>
-                </div>
 
                 {errores ? (
                     <div className='mt-4 mb-4 alert alert-danger text-center text-uppercase border border-dark'>
