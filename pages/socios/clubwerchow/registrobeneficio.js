@@ -198,7 +198,11 @@ const registrobeneficio = () => {
 
         let idcom = jsCookie.get("idcom")
 
-        buscarEmpresa(idcom)
+        if (idcom) {
+            buscarEmpresa(idcom)
+
+        }
+
 
     }, []);
 
