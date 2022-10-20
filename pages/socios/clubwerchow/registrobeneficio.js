@@ -194,20 +194,14 @@ const registrobeneficio = () => {
 
     }
 
-    useEffect(() => {
+    let idcom = jsCookie.get("idcom")
 
-        let idcom = jsCookie.get("idcom")
-
+    setTimeout(() => {
         if (idcom) {
             buscarEmpresa(idcom)
 
         }
-
-
-    }, []);
-
-
-
+    }, 800);
 
 
     return (
