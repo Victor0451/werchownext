@@ -13,108 +13,118 @@ const FormComprobanteBeneficio = ({
 
     return (
 
-        
-            <div className='container border border-dark mt-4 p-4 listcw' id="comprobante" >
 
-                <div className="col-md-12 d-flex justify-content-center">
+        <div className='container border border-dark mt-4 p-4 listcw'  >
 
-                    <img src="/img/logocw2.png" className="clublogo" />
+            <div className="col-md-12 d-flex justify-content-center">
 
-                </div>
+                <img src="/img/logocw2.png" className="clublogo" />
 
-                <div className='border border-dark mt-4 p-4 list'>
-                    <h3 className="mb-4">
-                        <strong>
-                            <u>Comprobante del Beneficio</u>
-                        </strong>
-                    </h3>
-                    <div className='row mt-5'>
+            </div>
 
-                        <div className='col-md-3 mt-4'>
-                            <label>
+            <div className='border border-dark mt-4 p-4 list'>
+                <h4 className="">
+                    <strong>
+                        <u>Comprobante del Beneficio</u>
+                    </strong>
+                </h4>
+                <div className='row '>
+
+                    <div className='col-md-3 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
-                                    Socio N°
+                                    Socio N°:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"text"} className="form-control" value={beneficio.socio} />
+                        {""} {beneficio.socio}
 
-                        </div>
+                    </div>
 
-                        <div className='col-md-3 mt-4'>
-                            <label>
+                    <div className='col-md-3 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
-                                    DNI del Beneficiario:
+                                    Beneficiario:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"text"} className="form-control" value={beneficio.dni} />
+                        {""} {beneficio.dni}
 
-                        </div>
+                    </div>
 
-                        <div className='col-md-6 mt-4'>
-                            <label>
+                    <div className='col-md-3 mt-4'>
+                        <label>
+                            <strong>
+                                <u>
+                                    Apellido y Nombre:
+                                </u>
+                            </strong>
+                        </label>
+
+                        {""} {beneficio.ape_nom}
+
+                    </div>
+
+                    <div className='col-md-6 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
                                     Beneficio para:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"text"} className="form-control" value={beneficio.nombre} />
+                        {""} {beneficio.nombre}
 
-                        </div>
+                    </div>
 
-                        <div className='col-md-4 mt-4'>
-                            <label>
+                    <div className='col-md-4 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
                                     Monto de la compra:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"number"} className="form-control" value={beneficio.monto_compra} />
+                        {""} ${beneficio.monto_compra}
 
+                    </div>
 
-                        </div>
-
-                        <div className='col-md-4 mt-4'>
-                            <label>
+                    <div className='col-md-4 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
-                                    Descuento (%):
+                                    Descuento Sugerido:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"text"} className="form-control" value={beneficio.beneficio} />
+                        {" "} ${beneficio.monto_compra - beneficio.monto_final}
 
+                    </div>
 
-                        </div>
-
-                        <div className='col-md-4 mt-4'>
-                            <label>
-                                <u>
-                                    Monto Final:
-                                </u>
-                            </label>
-
-                            <input type={"number"} className="form-control" value={beneficio.monto_final} />
-
-
-                        </div>
-
-                        <div className='col-md-12 mt-4'>
-                            <label>
+                    <div className='col-md-12 mt-4'>
+                        <label>
+                            <strong>
                                 <u>
                                     Transaccion N°:
                                 </u>
-                            </label>
+                            </strong>
+                        </label>
 
-                            <input type={"text"} className="form-control" value={beneficio.n_trans} />
+                        {""} {beneficio.n_trans}
 
-
-                        </div>
                     </div>
                 </div>
-
             </div>
-       
+
+        </div>
+
 
     )
 }

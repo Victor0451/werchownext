@@ -31,7 +31,8 @@ const Layout = (props) => {
         <title>WERCHOW - S.G.I.</title>
       </Head>
 
-      <Navbar />
+      {props.f === "nonav" ? null
+        : (<Navbar />)}
 
 
       <main className="mb-4">{props.children}</main>

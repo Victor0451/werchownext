@@ -146,6 +146,7 @@ const registrobeneficio = () => {
         const benef = {
 
             socio: socio.CONTRATO,
+            ape_nom: `${socio.APELLIDOS}, ${socio.NOMBRES}`,
             dni: socio.NRO_DOC,
             idcomercio: empresa.idcomercio,
             nombre: empresa.comercio,
@@ -205,7 +206,7 @@ const registrobeneficio = () => {
 
 
     return (
-        <Layout>
+        <Layout f={"nonav"}>
             <FormRegistroBeneficio
                 errores={errores}
                 buscarSocio={buscarSocio}
