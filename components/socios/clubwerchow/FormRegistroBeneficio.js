@@ -28,11 +28,11 @@ const FormRegistroBeneficio = ({
 
             <div className='border border-dark mt-4 p-4 list'>
 
-                <h3 className="mb-4">
+                <h4 className="mb-4">
                     <strong>
-                        <u>Registro de Beneficios</u>
+                        Registro de Beneficios
                     </strong>
-                </h3>
+                </h4>
 
 
 
@@ -40,21 +40,21 @@ const FormRegistroBeneficio = ({
                     <div className='row'>
                         <div className='col-md-6'>
                             <label>
-                                <u>
-                                    Beneficio para:
-                                </u>
+
+                                Beneficio para: {""} <strong> <text className='text-uppercase'>{empresa.comercio}</text></strong>
+
                             </label>
 
-                            <input type={"text"} className="form-control" value={empresa.comercio} />
+                            {/* <input type={"text"} className="form-control" value={empresa.comercio} /> */}
 
                         </div>
 
 
-                        <div className='col-md-4'>
+                        <div className='col-md-4 mt-4'>
                             <label>
-                                <u>
-                                    Ingresa el DNI:
-                                </u>
+
+                                Ingresa el DNI: {" "}
+
                             </label>
 
                             <input
@@ -101,48 +101,14 @@ const FormRegistroBeneficio = ({
 
                                 <div className='col-md-6'>
                                     <label>
-                                        <u>
-                                            Afiliado:
-                                        </u>
+
+                                        Afiliado: {" "} {`${socio.APELLIDOS}, ${socio.NOMBRES}`}
+
                                     </label>
 
-                                    <input type={"text"} className="form-control" value={`${socio.APELLIDOS}, ${socio.NOMBRES}`} />
+                                    {/* <input type={"text"} className="form-control" value={`${socio.APELLIDOS}, ${socio.NOMBRES}`} /> */}
 
                                 </div>
-
-                                <div className='col-md-4'>
-                                    <label>
-                                        <u>
-                                            Es:
-                                        </u>
-                                    </label>
-
-                                    {
-                                        socio.perfil === "T" ? (
-                                            <input type={"text"} className="form-control" value={"Titular"} />
-
-                                        ) : socio.perfil === "A" || !socio.perfil ? (
-                                            <input type={"text"} className="form-control" value={"Adherente"} />
-
-                                        ) : null
-                                    }
-
-
-                                </div>
-
-                                <div className='col-md-4 mt-4'>
-                                    <label>
-                                        <u>
-                                            Fecha de Alta:
-                                        </u>
-                                    </label>
-
-                                    <input type={"text"} className="form-control" value={moment(socio.ALTA).format(`DD/MM/YYYY`)} />
-
-
-                                </div>
-
-
 
                             </div>
 
@@ -163,11 +129,11 @@ const FormRegistroBeneficio = ({
 
                                             <div className='row mt-4'>
 
-                                                <div className='col-md-4 mt-4'>
+                                                <div className='col-md-4'>
                                                     <label>
-                                                        <u>
-                                                            Monto de la compra:
-                                                        </u>
+
+                                                        Monto de la compra:
+
                                                     </label>
 
                                                     <input type={"number"} className="form-control" ref={montoRef} onChange={calcMontoFinal} defaultValue={0} />
@@ -177,21 +143,9 @@ const FormRegistroBeneficio = ({
 
                                                 <div className='col-md-4 mt-4'>
                                                     <label>
-                                                        <u>
-                                                            Descuento (%):
-                                                        </u>
-                                                    </label>
 
-                                                    <input type={"text"} className="form-control" value={`${empresa.descuento}`} ref={descuentoRef} />
+                                                        Monto Final:
 
-
-                                                </div>
-
-                                                <div className='col-md-4 mt-4'>
-                                                    <label>
-                                                        <u>
-                                                            Monto Final:
-                                                        </u>
                                                     </label>
 
                                                     <input type={"number"} className="form-control" value={montoFinal} />
@@ -209,7 +163,7 @@ const FormRegistroBeneficio = ({
                             {
                                 moro === true ? null
                                     : moro === false ? (
-                                        <div className='row mt-5 d-flex justify-content-center'>
+                                        <div className='row  d-flex justify-content-center'>
                                             <div className='col-md-4'>
                                                 <button className='btn btn-primary btn-block mt-4' onClick={registrarDescuento}>
                                                     Registrar
@@ -234,7 +188,7 @@ const FormRegistroBeneficio = ({
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
