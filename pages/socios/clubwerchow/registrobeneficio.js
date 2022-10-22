@@ -23,6 +23,7 @@ const registrobeneficio = () => {
     const [socio, guardarSocio] = useState(null)
     const [empresa, guardarEmpresa] = useState([])
     const [montoFinal, guardarMontoFinal] = useState(0)
+    const [moro, guardarMoro] = useState(false)
 
 
     const buscarEmpresa = async (emp) => {
@@ -41,6 +42,7 @@ const registrobeneficio = () => {
     const buscarSocio = async () => {
 
         guardarErrores(null)
+        guardarMoro(false)
 
         let dni = dniRef.current.value
 
@@ -56,9 +58,32 @@ const registrobeneficio = () => {
 
                     if (res.data[0][0]) {
 
-                        guardarSocio(res.data[0][0])
+                        if (res.data[0][0].GRUPO === 1001 ||
+                            res.data[0][0].GRUPO === 1000 ||
+                            res.data[0][0].GRUPO === 3444 ||
+                            res.data[0][0].GRUPO === 3666 ||
+                            res.data[0][0].GRUPO === 3777 ||
+                            res.data[0][0].GRUPO === 3888 ||
+                            res.data[0][0].GRUPO === 3999 ||
+                            res.data[0][0].GRUPO === 4004 ||
+                            res.data[0][0].GRUPO === 7777 ||
+                            res.data[0][0].GRUPO === 8500 ||
+                            res.data[0][0].GRUPO === 8888
+                        ) {
 
-                    } else if (!res.data[0][0]) {
+                            toastr.error("Estas en estado de mora, acercate a nuestras sucursales y regulariza tu situacion", "ATENCION")
+                            guardarSocio(res.data[0][0])
+                            guardarMoro(true)
+
+                        } else {
+
+                            guardarSocio(res.data[0][0])
+
+                        }
+
+
+                    }
+                    else if (!res.data[0][0]) {
 
                         axios
                             .get(`${ip}api/werchow/maestro/titulardnim/${dni}`)
@@ -66,7 +91,28 @@ const registrobeneficio = () => {
 
                                 if (resM.data[0][0]) {
 
-                                    guardarSocio(resM.data[0][0])
+                                    if (resM.data[0][0].GRUPO === 1001 ||
+                                        resM.data[0][0].GRUPO === 1000 ||
+                                        resM.data[0][0].GRUPO === 3444 ||
+                                        resM.data[0][0].GRUPO === 3666 ||
+                                        resM.data[0][0].GRUPO === 3777 ||
+                                        resM.data[0][0].GRUPO === 3888 ||
+                                        resM.data[0][0].GRUPO === 3999 ||
+                                        resM.data[0][0].GRUPO === 4004 ||
+                                        resM.data[0][0].GRUPO === 7777 ||
+                                        resM.data[0][0].GRUPO === 8500 ||
+                                        resM.data[0][0].GRUPO === 8888
+                                    ) {
+
+                                        toastr.error("Estas en estado de mora, acercate a nuestras sucursales y regulariza tu situacion", "ATENCION")
+                                        guardarSocio(resM.data[0][0])
+                                        guardarMoro(true)
+
+                                    } else {
+
+                                        guardarSocio(resM.data[0][0])
+
+                                    }
 
                                 } else if (!resM.data[0][0]) {
 
@@ -76,7 +122,28 @@ const registrobeneficio = () => {
 
                                             if (resA.data[0][0]) {
 
-                                                guardarSocio(resA.data[0][0])
+                                                if (resA.data[0][0].GRUPO === 1001 ||
+                                                    resA.data[0][0].GRUPO === 1000 ||
+                                                    resA.data[0][0].GRUPO === 3444 ||
+                                                    resA.data[0][0].GRUPO === 3666 ||
+                                                    resA.data[0][0].GRUPO === 3777 ||
+                                                    resA.data[0][0].GRUPO === 3888 ||
+                                                    resA.data[0][0].GRUPO === 3999 ||
+                                                    resA.data[0][0].GRUPO === 4004 ||
+                                                    resA.data[0][0].GRUPO === 7777 ||
+                                                    resA.data[0][0].GRUPO === 8500 ||
+                                                    resA.data[0][0].GRUPO === 8888
+                                                ) {
+
+                                                    toastr.error("Estas en estado de mora, acercate a nuestras sucursales y regulariza tu situacion", "ATENCION")
+                                                    guardarSocio(resA.data[0][0])
+                                                    guardarMoro(true)
+
+                                                } else {
+
+                                                    guardarSocio(resA.data[0][0])
+
+                                                }
 
                                             } else if (!resA.data[0][0]) {
 
@@ -84,12 +151,35 @@ const registrobeneficio = () => {
                                                     .get(`${ip}api/werchow/maestro/adherentem/${dni}`)
                                                     .then(resAM => {
 
+
+
                                                         if (resAM.data[0][0]) {
 
-                                                            guardarSocio(resAM.data[0][0])
+                                                            if (resAM.data[0][0].GRUPO === 1001 ||
+                                                                resAM.data[0][0].GRUPO === 1000 ||
+                                                                resAM.data[0][0].GRUPO === 3444 ||
+                                                                resAM.data[0][0].GRUPO === 3666 ||
+                                                                resAM.data[0][0].GRUPO === 3777 ||
+                                                                resAM.data[0][0].GRUPO === 3888 ||
+                                                                resAM.data[0][0].GRUPO === 3999 ||
+                                                                resAM.data[0][0].GRUPO === 4004 ||
+                                                                resAM.data[0][0].GRUPO === 7777 ||
+                                                                resAM.data[0][0].GRUPO === 8500 ||
+                                                                resAM.data[0][0].GRUPO === 8888
+                                                            ) {
+
+                                                                toastr.error("Estas en estado de mora, acercate a nuestras sucursales y regulariza tu situacion", "ATENCION")
+                                                                guardarSocio(resAM.data[0][0])
+                                                                guardarMoro(true)
+
+                                                            } else {
+
+                                                                guardarSocio(resAM.data[0][0])
+
+                                                            }
 
                                                         } else if (!resAM.data[0][0]) {
-                                                            toastr.warning("No se encuentra el beneficiario", "ATENCION")
+                                                            toastr.warning("El DNI ingresado no se encuentra registrado", "ATENCION")
                                                         }
                                                     })
                                                     .catch(error => {
@@ -218,6 +308,7 @@ const registrobeneficio = () => {
                 calcMontoFinal={calcMontoFinal}
                 descuentoRef={descuentoRef}
                 registrarDescuento={registrarDescuento}
+                moro={moro}
             />
         </Layout>
     )

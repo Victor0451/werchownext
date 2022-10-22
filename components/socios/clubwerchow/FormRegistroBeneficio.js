@@ -11,7 +11,8 @@ const FormRegistroBeneficio = ({
     montoFinal,
     calcMontoFinal,
     descuentoRef,
-    registrarDescuento
+    registrarDescuento,
+    moro
 }) => {
 
 
@@ -72,7 +73,7 @@ const FormRegistroBeneficio = ({
 
                             <button
                                 className='mt-4 btn btn-primary'
-                                onClick={buscarSocio}
+                                onClick={() => buscarSocio()}
                             >
                                 Buscar
                             </button>
@@ -145,58 +146,85 @@ const FormRegistroBeneficio = ({
 
                             </div>
 
-                            <div className='row mt-4'>
+                            {
 
-                                <div className='col-md-4 mt-4'>
-                                    <label>
-                                        <u>
-                                            Monto de la compra:
-                                        </u>
-                                    </label>
+                                moro === true ?
 
-                                    <input type={"number"} className="form-control" ref={montoRef} onChange={calcMontoFinal} defaultValue={0} />
+                                    (
+                                        <div className='mt-4 mb-4 alert alert-danger border border-dark text-center text-uppercase'>
+                                            Tu ficha registra deuda y esta en estado de mora. No podras acceder a los beneficios del Club Werchow,
+                                            acercate a tu sucursal mas cercana y regulariza tu situacion. Gracias!
+                                        </div>
 
-
-                                </div>
-
-                                <div className='col-md-4 mt-4'>
-                                    <label>
-                                        <u>
-                                            Descuento (%):
-                                        </u>
-                                    </label>
-
-                                    <input type={"text"} className="form-control" value={`${empresa.descuento}`} ref={descuentoRef} />
+                                    ) : moro === false ?
+                                        (
 
 
-                                </div>
 
-                                <div className='col-md-4 mt-4'>
-                                    <label>
-                                        <u>
-                                            Monto Final:
-                                        </u>
-                                    </label>
+                                            <div className='row mt-4'>
 
-                                    <input type={"number"} className="form-control" value={montoFinal} />
+                                                <div className='col-md-4 mt-4'>
+                                                    <label>
+                                                        <u>
+                                                            Monto de la compra:
+                                                        </u>
+                                                    </label>
+
+                                                    <input type={"number"} className="form-control" ref={montoRef} onChange={calcMontoFinal} defaultValue={0} />
 
 
-                                </div>
+                                                </div>
 
-                            </div>
+                                                <div className='col-md-4 mt-4'>
+                                                    <label>
+                                                        <u>
+                                                            Descuento (%):
+                                                        </u>
+                                                    </label>
 
-                            <div className='row mt-5 d-flex justify-content-center'>
-                                <div className='col-md-4'>
-                                    <button className='btn btn-primary btn-block mt-4' onClick={registrarDescuento}>
-                                        Registrar
-                                    </button>
-                                </div>
-                                <div className='col-md-4'>
-                                    <button className='btn btn-danger btn-block mt-4'>
-                                        Cancelar
-                                    </button>
-                                </div>
-                            </div>
+                                                    <input type={"text"} className="form-control" value={`${empresa.descuento}`} ref={descuentoRef} />
+
+
+                                                </div>
+
+                                                <div className='col-md-4 mt-4'>
+                                                    <label>
+                                                        <u>
+                                                            Monto Final:
+                                                        </u>
+                                                    </label>
+
+                                                    <input type={"number"} className="form-control" value={montoFinal} />
+
+
+                                                </div>
+                                            </div>
+
+
+                                        ) : null
+                            }
+
+
+
+                            {
+                                moro === true ? null
+                                    : moro === false ? (
+                                        <div className='row mt-5 d-flex justify-content-center'>
+                                            <div className='col-md-4'>
+                                                <button className='btn btn-primary btn-block mt-4' onClick={registrarDescuento}>
+                                                    Registrar
+                                                </button>
+                                            </div>
+                                            <div className='col-md-4'>
+                                                <button className='btn btn-danger btn-block mt-4'>
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ) : null
+                            }
+
+
                         </>
                     ) : null
 
