@@ -30,6 +30,45 @@ const FormComprobanteBeneficio = ({
                 </h4>
                 <div className='row '>
 
+                    <div className='col-md-4 mt-4'>
+                        <label>
+                            <strong>
+                                <u>
+                                    Monto de la compra:
+                                </u>
+                            </strong>
+                        </label>
+
+                        {""} ${beneficio.monto_compra}
+
+                    </div>
+
+                    <div className='col-md-4 mt-4'>
+                        <label>
+                            <strong>
+                                <u>
+                                    Descuento Sugerido:
+                                </u>
+                            </strong>
+                        </label>
+
+                        {" "} ${beneficio.monto_compra - beneficio.monto_final}
+
+                    </div>
+
+                    <div className='col-md-12 mt-4'>
+                        <label>
+                            <strong>
+                                <u>
+                                    Transaccion N°:
+                                </u>
+                            </strong>
+                        </label>
+
+                        {""} {beneficio.n_trans}
+
+                    </div>
+
                     <div className='col-md-3 mt-4'>
                         <label>
                             <strong>
@@ -82,44 +121,7 @@ const FormComprobanteBeneficio = ({
 
                     </div>
 
-                    <div className='col-md-4 mt-4'>
-                        <label>
-                            <strong>
-                                <u>
-                                    Monto de la compra:
-                                </u>
-                            </strong>
-                        </label>
 
-                        {""} ${beneficio.monto_compra}
-
-                    </div>
-
-                    <div className='col-md-4 mt-4'>
-                        <label>
-                            <strong>
-                                <u>
-                                    Descuento Sugerido:
-                                </u>
-                            </strong>
-                        </label>
-
-                        {" "} ${beneficio.monto_compra - beneficio.monto_final}
-
-                    </div>
-
-                    <div className='col-md-12 mt-4'>
-                        <label>
-                            <strong>
-                                <u>
-                                    Transaccion N°:
-                                </u>
-                            </strong>
-                        </label>
-
-                        {""} {beneficio.n_trans}
-
-                    </div>
                 </div>
             </div>
 

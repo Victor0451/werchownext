@@ -8,9 +8,6 @@ const FormRegistroBeneficio = ({
     buscarSocio,
     empresa,
     montoRef,
-    montoFinal,
-    calcMontoFinal,
-    descuentoRef,
     registrarDescuento,
     moro
 }) => {
@@ -28,11 +25,11 @@ const FormRegistroBeneficio = ({
 
             <div className='border border-dark mt-4 p-4 list'>
 
-                <h4 className="mb-4">
-                    <strong>
+                <h5 className="mb-4">
+                    <strong className='text-uppercase'>
                         Registro de Beneficios
                     </strong>
-                </h4>
+                </h5>
 
 
 
@@ -41,7 +38,7 @@ const FormRegistroBeneficio = ({
                         <div className='col-md-6'>
                             <label>
 
-                                Beneficio para: {""} <strong> <text className='text-uppercase'>{empresa.comercio}</text></strong>
+                                Beneficio para: {""} <strong className='text-uppercase'> {empresa.comercio}</strong>
 
                             </label>
 
@@ -50,7 +47,7 @@ const FormRegistroBeneficio = ({
                         </div>
 
 
-                        <div className='col-md-4 mt-4'>
+                        <div className='col-md-4'>
                             <label>
 
                                 Ingresa el DNI: {" "}
@@ -102,7 +99,7 @@ const FormRegistroBeneficio = ({
                                 <div className='col-md-6'>
                                     <label>
 
-                                        Afiliado: {" "} {`${socio.APELLIDOS}, ${socio.NOMBRES}`}
+                                        Afiliado: {" "} <strong>{`${socio.APELLIDOS}, ${socio.NOMBRES}`}</strong>
 
                                     </label>
 
@@ -127,7 +124,7 @@ const FormRegistroBeneficio = ({
 
 
 
-                                            <div className='row mt-4'>
+                                            <div className='row '>
 
                                                 <div className='col-md-4'>
                                                     <label>
@@ -136,19 +133,7 @@ const FormRegistroBeneficio = ({
 
                                                     </label>
 
-                                                    <input type={"number"} className="form-control" ref={montoRef} onChange={calcMontoFinal} defaultValue={0} />
-
-
-                                                </div>
-
-                                                <div className='col-md-4 mt-4'>
-                                                    <label>
-
-                                                        Monto Final:
-
-                                                    </label>
-
-                                                    <input type={"number"} className="form-control" value={montoFinal} />
+                                                    <input type={"number"} className="form-control" ref={montoRef} defaultValue={0} />
 
 
                                                 </div>

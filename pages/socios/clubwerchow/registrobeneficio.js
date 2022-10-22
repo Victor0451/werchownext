@@ -16,13 +16,11 @@ const registrobeneficio = () => {
 
     let dniRef = React.createRef()
     let montoRef = React.createRef()
-    let descuentoRef = React.createRef()
 
 
     const [errores, guardarErrores] = useState(null)
     const [socio, guardarSocio] = useState(null)
     const [empresa, guardarEmpresa] = useState([])
-    const [montoFinal, guardarMontoFinal] = useState(0)
     const [moro, guardarMoro] = useState(false)
 
 
@@ -217,21 +215,19 @@ const registrobeneficio = () => {
 
     }
 
-    const calcMontoFinal = () => {
+
+    const registrarDescuento = async () => {
+
 
         let monto = parseInt(montoRef.current.value)
 
-        let descuento = parseInt(descuentoRef.current.value) / 100
+        let descuento = empresa.descuento / 100
 
         let montoDesc = monto * descuento
 
         let montoFinal = monto - montoDesc
 
-        guardarMontoFinal(montoFinal)
 
-    }
-
-    const registrarDescuento = async () => {
 
         const benef = {
 
@@ -271,7 +267,6 @@ const registrobeneficio = () => {
             })
 
 
-
     }
 
     let router = useRouter();
@@ -304,9 +299,6 @@ const registrobeneficio = () => {
                 dniRef={dniRef}
                 empresa={empresa}
                 montoRef={montoRef}
-                montoFinal={montoFinal}
-                calcMontoFinal={calcMontoFinal}
-                descuentoRef={descuentoRef}
                 registrarDescuento={registrarDescuento}
                 moro={moro}
             />
