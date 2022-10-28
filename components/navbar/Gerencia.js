@@ -38,6 +38,37 @@ export default class Gerencia extends Component {
                 </li>
               </ul>
             </li>
+
+            <hr />
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Orden de Pago
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                    Generar Orden
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="/gestion/werchow/orden/autorizacionordenes" className="dropdown-item text-dark">
+                    Autorizar Orden
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                    Listado ordenes
+                  </a>
+                </li>
+              </ul>
+            </li>
             <hr />
 
             <li className="dropdown-submenu">
