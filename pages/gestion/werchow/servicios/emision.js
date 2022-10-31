@@ -92,8 +92,6 @@ const Emision = () => {
 
             guardarFicha(ficha);
 
-            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
-
             traerAdhs(ficha[0].CONTRATO);
 
             if (
@@ -176,8 +174,6 @@ const Emision = () => {
 
             guardarFicha(ficha);
 
-            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
-
             traerAdhs(ficha[0].CONTRATO);
 
             if (
@@ -255,8 +251,6 @@ const Emision = () => {
             let ficha = res.data[0];
 
             guardarFicha(ficha);
-
-            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhsM(ficha[0].CONTRATO);
 
@@ -339,8 +333,6 @@ const Emision = () => {
             let ficha = res.data[0];
 
             guardarFicha(ficha);
-
-            verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
 
             traerAdhsM(ficha[0].CONTRATO);
 
@@ -510,8 +502,6 @@ const Emision = () => {
 
           guardarFicha(ficha);
 
-          verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
-
           traerAdhs(ficha[0].CONTRATO);
 
           if (
@@ -590,8 +580,6 @@ const Emision = () => {
 
           guardarFicha(ficha);
 
-          verificarUso(ficha[0].GRUPO, ficha[0].CONTRATO)
-
           traerAdhsM(ficha[0].CONTRATO);
 
           if (
@@ -660,26 +648,45 @@ const Emision = () => {
 
   }
 
-  const verificarUso = async (grupo, contrato) => {
+  const verificarUso = async (f, grupo, contrato) => {
 
 
-    await axios.get(`${ip}api/sgi/servicios/verificaruso/${contrato}`)
-      .then(res => {
+    if (f === "C") {
 
-        guardarPriUso(res.data.orde)
+      await axios.get(`${ip}api/sgi/servicios/verificarconsultas/${contrato}`)
+        .then(res => {
 
-        if (grupo === 66 || grupo === 55) {
+          guardarPriUso(res.data.orde)
 
-          contarFisios(contrato)
+        })
+        .catch(error => {
+          console.log(error)
 
-        }
+          toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
+        })
 
-      })
-      .catch(error => {
-        console.log(error)
+    } else if (f === "P") {
 
-        toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
-      })
+      await axios.get(`${ip}api/sgi/servicios/verificarpracticas/${contrato}`)
+        .then(res => {
+
+          guardarPriUso(res.data.orde)
+
+          if (grupo === 66 || grupo === 55) {
+
+            contarFisios(contrato)
+
+          }
+
+        })
+        .catch(error => {
+          console.log(error)
+
+          toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
+        })
+    }
+
+console.log(priUso)
 
 
 
@@ -1642,6 +1649,7 @@ const Emision = () => {
               selector={selector}
               isj={isj}
               importeOrden={importeOrden}
+              verificarUso={verificarUso}
             />
           ) : null}
         </>

@@ -51,6 +51,7 @@ const EmitirServicio = ({
   selector,
   isj,
   importeOrden,
+  verificarUso
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -356,6 +357,7 @@ const EmitirServicio = ({
           selector={selector}
           isj={isj}
           importeOrden={importeOrden}
+          verificarUso={verificarUso}
         />
       )}
     </div>

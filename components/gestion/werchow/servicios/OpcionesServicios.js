@@ -47,6 +47,7 @@ const OpcionesServicios = ({
   selector,
   isj,
   importeOrden,
+  verificarUso
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -79,8 +80,11 @@ const OpcionesServicios = ({
             <div className="card-body">
               <h5 className="card-title">Consultas</h5>
               <p className="card-text">Emitir Consulta Medica</p>
-              <button className="btn btn-primary btn-sm rounded"
-                data-toggle="modal" data-target="#modalConsulta"
+              <button
+                className="btn btn-primary btn-sm rounded"
+                data-toggle="modal"
+                data-target="#modalConsulta"
+                onClick={() => verificarUso("C", socio.GRUPO, socio.CONTRATO)}
               >Generar</button>
             </div>
           </div>
@@ -91,8 +95,11 @@ const OpcionesServicios = ({
             <div className="card-body">
               <h5 className="card-title">Practicas</h5>
               <p className="card-text">Emitir Orden de Practicas</p>
-              <button className="btn btn-primary btn-sm rounded"
-                data-toggle="modal" data-target="#modalPractica"
+              <button
+                className="btn btn-primary btn-sm rounded"
+                data-toggle="modal"
+                data-target="#modalPractica"
+                onClick={() => verificarUso("P", socio.GRUPO, socio.CONTRATO)}
               >Generar</button>
             </div>
           </div>

@@ -50,7 +50,7 @@ const ModalPractica = ({
           <div className="modal-body p-4">
 
             <div className="alert alert-info border border-dark text-center text-uppercase mb-4">
-              Esta es la orden de consulta n° {priUso + 1} del mes
+              Esta es la Practica Bioquimica n° {priUso + 1} del mes
             </div>
 
             <div className="row border border-dark list p-4">
