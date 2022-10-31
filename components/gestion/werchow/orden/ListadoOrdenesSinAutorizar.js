@@ -90,6 +90,8 @@ const ListadoOrdenesSinAutorizar = ({
 
                                 },
 
+
+
                                 {
                                     Header: "Operador",
                                     id: "operador_carga",
@@ -122,7 +124,7 @@ const ListadoOrdenesSinAutorizar = ({
 
 
 
-                                            {user === 'joaquini' || user === 'vlongo' || user === 'jcmorales' || user === 'rquispe' ?
+                                            {user === 'joaquini' || user === 'vlongo' || user === 'jcmorales' || user === 'rquispe' || user === 'emoreno' ?
 
                                                 (
                                                     <button

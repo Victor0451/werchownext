@@ -945,8 +945,27 @@ const Emision = () => {
     }
 
 
+    // AUMENTO POR CANTIDAD DE USOS
+
+    if (priUso === 1) {
+
+      uso.IMPORTE = uso.IMPORTE * 1.15
+
+    } else if (priUso === 2) {
+
+      uso.IMPORTE = uso.IMPORTE * 1.20
+
+    } else if (priUso > 2) {
+
+      uso.IMPORTE = uso.IMPORTE * 1.25
+
+    }
+
+    // --------------------------------------------
+
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
+
         if (res.status === 200) {
 
           regPractica(uso.ORDEN)
@@ -997,6 +1016,25 @@ const Emision = () => {
         }
 
       }
+
+
+      // AUMENTO POR CANTIDAD DE USOS
+
+      if (priUso === 1) {
+
+        practi.IMPORTE = practi.IMPORTE * 1.15
+
+      } else if (priUso === 2) {
+
+        practi.IMPORTE = practi.IMPORTE * 1.20
+
+      } else if (priUso > 2) {
+
+        practi.IMPORTE = practi.IMPORTE * 1.25
+
+      }
+
+      // -----------------------------------------      
 
       await axios.post(`${ip}api/sgi/servicios/regpractica`, practi)
         .then(res => {

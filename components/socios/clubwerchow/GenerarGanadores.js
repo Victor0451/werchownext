@@ -104,7 +104,12 @@ const GenerarGanadores = ({
                   </div>
                 </>
               ) : null}
-              <img src="/img/premios.jpg" className="premios " />
+
+              {/* IMAGEN DE PREMIOS */}
+
+              {/* <img src="/img/premios.jpg" className="premios " /> */}
+
+              {/* ------------------------  */}
             </div>
           </div>
 

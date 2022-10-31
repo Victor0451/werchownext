@@ -1,11 +1,14 @@
 import React from 'react'
 import FormOrdenContable from './FormOrdenContable'
 import FormOrdenMedica from './FormOrdenMedica'
+import FormOrdenPractica from './FormOrdenPracticas'
 
 const FormOrdenPago = ({
     medicos,
     medicoRef,
     cuitRef,
+    medicoPracRef,
+    cuitPracRef,
     cuitContRef,
     provContRef,
     nfacturaContRef,
@@ -108,7 +111,7 @@ const FormOrdenPago = ({
                         <h2 className="mb-0">
                             <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <strong>
-                                    Cantidad de Usos por Prestador y Fecha
+                                    Orden de pago para practicas medicas.
                                 </strong>
                             </button>
                         </h2>
@@ -117,9 +120,15 @@ const FormOrdenPago = ({
                         <div className="card-body">
 
                             <div className='alert alert-info border border-dark text-center text-uppercase mt-4 mb-4'>
-                                Selecciona un rango de fechas para visualizar las ordenes emitidas en el mismo.
+                                Selecciona un prestador medico para visualizar sus practicas y poder punterlas con las practicas fisicas presentadas.
                             </div>
 
+                            <FormOrdenPractica
+                                medicos={medicos}
+                                medicoPracRef={medicoPracRef}
+                                cuitPracRef={cuitPracRef}
+                                buscarOrdenes={buscarOrdenes}
+                            />
 
 
                         </div>

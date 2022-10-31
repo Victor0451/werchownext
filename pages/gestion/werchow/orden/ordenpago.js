@@ -15,6 +15,9 @@ const OrdenPago = () => {
   let medicoRef = React.createRef()
   let cuitRef = React.createRef()
   let observacionRef = React.createRef()
+  let medicoPracRef = React.createRef()
+  let cuitPracRef = React.createRef()
+  let observacionPracRef = React.createRef()
   let cuitContRef = React.createRef()
   let provContRef = React.createRef()
   let nfacturaContRef = React.createRef()
@@ -30,6 +33,7 @@ const OrdenPago = () => {
   const [listadoCheck, guardarListadoCheck] = useState([])
   const [nomPres, guardarNomPrest] = useState(null)
   const [codPres, guardarCodPres] = useState(null)
+  const [priUso, guardarPriUso] = useState(0);
 
 
 
@@ -74,58 +78,112 @@ const OrdenPago = () => {
 
   }
 
-  const buscarOrdenes = async () => {
+  const buscarOrdenes = async (f) => {
 
-    if (medicoRef.current.value === "no") {
+    if (f === 'orden') {
 
-      guardarErrores("Debes selecionar a un medico para generar la orden")
+      if (medicoRef.current.value === "no") {
 
-    } else {
+        guardarErrores("Debes selecionar a un medico para generar la orden")
 
-
-      let ref = medicoRef.current.value;
-      let codigo = ref.substr(0, 5);
-      let prestado = ref.substr(6, 20);
-
-      guardarNomPrest(prestado)
-      guardarCodPres(codigo)
-
-      await axios.get(`${ip}api/sgi/ordenpago/ordenesprestador/${codigo}`)
-        .then(res => {
-
-          toastr.success("Listado de ordenes generadas", "ATENCION")
-
-          let otero = res.data
-
-          axios.get(`${ip}api/sgi/ordenpago/ordenesprestadorfa/${codigo}`)
-            .then(res1 => {
-
-              let resto = res1.data
-
-              let todo = otero.concat(resto)
-
-              guardarListado(todo)
-
-            })
-            .catch(error => {
-              console.log(error)
-              toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
-            })
+      } else {
 
 
-        })
-        .catch(error => {
-          console.log(error)
-          toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
-        })
+        let ref = medicoRef.current.value;
+        let codigo = ref.substr(0, 5);
+        let prestado = ref.substr(6, 20);
 
+        guardarNomPrest(prestado)
+        guardarCodPres(codigo)
+
+        await axios.get(`${ip}api/sgi/ordenpago/ordenesprestador/${codigo}`)
+          .then(res => {
+
+            toastr.success("Listado de ordenes generadas", "ATENCION")
+
+            let otero = res.data
+
+            axios.get(`${ip}api/sgi/ordenpago/ordenesprestadorfa/${codigo}`)
+              .then(res1 => {
+
+                let resto = res1.data
+
+                let todo = otero.concat(resto)
+
+                guardarListado(todo)
+
+              })
+              .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
+              })
+
+
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
+          })
+
+
+      }
+    } else if (f === 'practica') {
+
+      if (medicoPracRef.current.value === "no") {
+
+        guardarErrores("Debes selecionar a un medico para generar la orden")
+
+      } else {
+
+
+        let ref = medicoPracRef.current.value;
+        let codigo = ref.substr(0, 5);
+        let prestado = ref.substr(6, 20);
+
+        guardarNomPrest(prestado)
+        guardarCodPres(codigo)
+
+        await axios.get(`${ip}api/sgi/ordenpago/practicasprestador/${codigo}`)
+          .then(res => {
+
+            toastr.success("Listado de ordenes generadas", "ATENCION")
+
+            let otero = res.data
+
+            axios.get(`${ip}api/sgi/ordenpago/practicasprestadorfa/${codigo}`)
+              .then(res1 => {
+
+                let resto = res1.data
+
+                let todo = otero.concat(resto)
+
+                guardarListado(todo)
+
+              })
+              .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
+              })
+
+
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al generar las ordenes", "ATENCION")
+          })
+
+
+      }
 
     }
+
+
 
   }
 
   const checkOrden = (orden) => {
 
+    verificarUso(orden.CONTRATO)
 
     let encontrado = false
 
@@ -322,7 +380,8 @@ const OrdenPago = () => {
 
       for (let i = 0; i < arr.length; i++) {
 
-        total += arr[i].WERCHOW
+        total += parseFloat(arr[i].WERCHOW)
+
       }
 
       return total.toFixed(2)
@@ -364,6 +423,26 @@ const OrdenPago = () => {
 
   }
 
+  const verificarUso = async (contrato) => {
+
+    console.log(contrato)
+    await axios.get(`${ip}api/sgi/servicios/verificarusopra/${contrato}`)
+      .then(res => {
+
+        guardarPriUso(res.data.orde)
+        console.log(res.data.orde)
+
+      })
+      .catch(error => {
+        console.log(error)
+
+        toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
+      })
+
+
+
+  }
+
 
   let token = jsCookie.get("token");
 
@@ -395,11 +474,11 @@ const OrdenPago = () => {
         medicos={medicos}
         medicoRef={medicoRef}
         cuitRef={cuitRef}
-        observacionRef={observacionRef}
+        medicoPracRef={medicoPracRef}
+        cuitPracRef={cuitPracRef}
         cuitContRef={cuitContRef}
         provContRef={provContRef}
         nfacturaContRef={nfacturaContRef}
-        observacionContRef={observacionContRef}
         totalContRef={totalContRef}
         norden={norden}
         buscarOrdenes={buscarOrdenes}

@@ -2,10 +2,10 @@ import React from 'react'
 import moment from 'moment'
 import Router from 'next/router'
 
-const FormOrdenMedica = ({
+const FormOrdenPractica = ({
     medicos,
-    medicoRef,
-    cuitRef,
+    medicoPracRef,
+    cuitPracRef,
     norden,
     buscarOrdenes,
 }) => {
@@ -45,7 +45,7 @@ const FormOrdenMedica = ({
                             Doctor:
                         </label>
 
-                        <select className="custom-select" ref={medicoRef}>
+                        <select className="custom-select" ref={medicoPracRef}>
                             <option value="no" >Selecciona una opcion</option>
                             {medicos.map((m, index) => (
                                 <option key={index} value={`${m.COD_PRES}-${m.NOMBRE}`}>{m.NOMBRE}</option>
@@ -65,7 +65,7 @@ const FormOrdenMedica = ({
                         </u>
                     </label>
 
-                    <input type={"text"} className='form-control' ref={cuitRef} />
+                    <input type={"text"} className='form-control' ref={cuitPracRef} />
 
                 </div>
 
@@ -80,7 +80,7 @@ const FormOrdenMedica = ({
                     <label>
 
                     </label>
-                    <button className='btn btn-primary btn-block mt-2' onClick={() => buscarOrdenes("orden")}>
+                    <button className='btn btn-primary btn-block mt-2' onClick={() => buscarOrdenes("practica")}>
                         buscar
                     </button>
                 </div>
@@ -99,4 +99,4 @@ const FormOrdenMedica = ({
     )
 }
 
-export default FormOrdenMedica
+export default FormOrdenPractica
