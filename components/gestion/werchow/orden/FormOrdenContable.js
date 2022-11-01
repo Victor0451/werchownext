@@ -9,8 +9,13 @@ const FormOrdenContable = ({
     nfacturaContRef,
     observacionContRef,
     totalContRef,
-    generarOrdenPago
+    generarOrdenPago,
+    tipoFacturaContRef,
+    fechaPagoContRef,
+    tipoFac
 }) => {
+
+
     return (
         <div className=' border border-dark p-4 mt-4'>
 
@@ -73,6 +78,25 @@ const FormOrdenContable = ({
 
                 </div>
 
+                {tipoFac ? (
+                    <div className="col-md-4 mt-4">
+                        <label>
+                            Tipo Factura:
+                        </label>
+
+                        <select className="custom-select" ref={tipoFacturaContRef}>
+                            <option value="no" >Selecciona una opcion</option>
+                            {tipoFac.map((m, index) => (
+                                <option key={index} value={m.value}>{m.label}</option>
+                            ))}
+                        </select>
+                    </div>
+                ) : (
+                    <div className="col-md-4 alert alert-info  border border-dark text-center text-uppercase">
+                        No hay facturas registrados
+                    </div>
+                )}
+
                 <div className='col-md-3 mt-4'>
                     <label>
                         <u>
@@ -81,6 +105,17 @@ const FormOrdenContable = ({
                     </label>
 
                     <input type={"number"} className='form-control' ref={totalContRef} />
+
+                </div>
+
+                <div className='col-md-3 mt-4'>
+                    <label>
+                        <u>
+                            Fecha a Pagar
+                        </u>
+                    </label>
+
+                    <input type={"date"} className='form-control' ref={fechaPagoContRef} />
 
                 </div>
 

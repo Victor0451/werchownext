@@ -15,9 +15,12 @@ const OrdenPago = () => {
   let medicoRef = React.createRef()
   let cuitRef = React.createRef()
   let observacionRef = React.createRef()
+  let fechaPagRef = React.createRef()
   let medicoPracRef = React.createRef()
   let cuitPracRef = React.createRef()
-  let observacionPracRef = React.createRef()
+  let fechaPagPracRef = React.createRef()
+  let tipoFacturaContRef = React.createRef()
+  let fechaPagoContRef = React.createRef()
   let cuitContRef = React.createRef()
   let provContRef = React.createRef()
   let nfacturaContRef = React.createRef()
@@ -34,9 +37,24 @@ const OrdenPago = () => {
   const [nomPres, guardarNomPrest] = useState(null)
   const [codPres, guardarCodPres] = useState(null)
   const [priUso, guardarPriUso] = useState(0);
+  const [tipoFac, guardarTipoFac] = useState(null)
 
 
 
+
+  const traerTipoFac = async () => {
+
+    await axios.get(`${ip}api/sgi/ordenpago/tipofacturas`)
+      .then(res => {
+
+        guardarTipoFac(res.data)
+
+      }).catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer los tipos de facturas", "ATENCION")
+      })
+
+  }
 
   const traerMedicos = async (f) => {
 
@@ -243,62 +261,75 @@ const OrdenPago = () => {
         observacion: observacionRef.current.value,
         autorizado: 0,
         tipo_orden: 'Medica',
-        nfactura: "0"
+        nfactura: "0",
+        tipo_factura: "0",
+        fecha_pago: fechaPagRef.current.value
+
 
       }
 
 
-      await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
-        .then(res => {
-          if (res.status === 200) {
+      if (orPag.fecha_pago === "") {
 
-            toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
+        guardarErrores("Debes ingresar una fecha de pago")
+
+      } else {
+
+        await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
+          .then(res => {
+            if (res.status === 200) {
+
+              toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
 
 
 
-            for (let i = 0; i < listadoCheck.length; i++) {
+              for (let i = 0; i < listadoCheck.length; i++) {
 
 
-              const detOrdenPag = {
+                const detOrdenPag = {
 
-                norden: norden,
-                nconsulta: listadoCheck[i].ORDEN,
-                sucursal: listadoCheck[i].SUC,
-                prestador: listadoCheck[i].COD_PRES,
-                importe: listadoCheck[i].WERCHOW,
-                operador_carga: user,
-                fecha: moment().format('YYYY-MM-DD')
+                  norden: norden,
+                  nconsulta: listadoCheck[i].ORDEN,
+                  sucursal: listadoCheck[i].SUC,
+                  prestador: listadoCheck[i].COD_PRES,
+                  importe: listadoCheck[i].WERCHOW,
+                  operador_carga: user,
+                  fecha: moment().format('YYYY-MM-DD')
+
+                }
+
+                axios.post(`${ip}api/sgi/ordenpago/nuevodetalle`, detOrdenPag)
+
+                updateCheckUsos(detOrdenPag.nconsulta, detOrdenPag.norden, detOrdenPag.fecha,)
 
               }
 
-              axios.post(`${ip}api/sgi/ordenpago/nuevodetalle`, detOrdenPag)
-
-              updateCheckUsos(detOrdenPag.nconsulta, detOrdenPag.norden, detOrdenPag.fecha,)
-
-            }
-
-
-            setTimeout(() => {
-              toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
-
-              let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
-
-              registrarHistoria(accion, user)
 
               setTimeout(() => {
+                toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
 
-                Router.reload()
+                let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
 
-              }, 500);
+                registrarHistoria(accion, user)
 
-            }, 1000);
+                setTimeout(() => {
 
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
-        })
+                  Router.reload()
+
+                }, 500);
+
+              }, 1000);
+
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
+          })
+
+      }
+
+
 
     } else if (f === "contable") {
 
@@ -315,7 +346,9 @@ const OrdenPago = () => {
         observacion: observacionContRef.current.value,
         autorizado: 0,
         tipo_orden: 'Contable',
-        nfactura: nfacturaContRef.current.value
+        nfactura: nfacturaContRef.current.value,
+        tipo_factura: tipoFacturaContRef.current.value,
+        fecha_pago: fechaPagoContRef.current.value,
 
       }
 
@@ -327,9 +360,17 @@ const OrdenPago = () => {
 
         guardarErrores("Debes ingresar el numero de factura")
 
+      } else if (orPag.tipo_factura === "no") {
+
+        guardarErrores("Debes ingresar el tipo de factura")
+
       } else if (orPag.total === "") {
 
         guardarErrores("Debes ingresar el monto de la factura")
+
+      } else if (orPag.fecha_pago === "") {
+
+        guardarErrores("Debes ingresar la fecha de pago")
 
       } else {
 
@@ -370,7 +411,6 @@ const OrdenPago = () => {
     }
 
   }
-
 
   const totales = (arr, f) => {
 
@@ -461,6 +501,7 @@ const OrdenPago = () => {
 
       nOrden()
       traerMedicos()
+      traerTipoFac()
 
     }
   }, []);
@@ -474,16 +515,22 @@ const OrdenPago = () => {
         medicos={medicos}
         medicoRef={medicoRef}
         cuitRef={cuitRef}
+        fechaPagRef={fechaPagRef}
         medicoPracRef={medicoPracRef}
         cuitPracRef={cuitPracRef}
         cuitContRef={cuitContRef}
         provContRef={provContRef}
+        fechaPagPracRef={fechaPagPracRef}
         nfacturaContRef={nfacturaContRef}
+        tipoFacturaContRef={tipoFacturaContRef}
+        fechaPagoContRef={fechaPagoContRef}
         totalContRef={totalContRef}
+        observacionContRef={observacionContRef}
         norden={norden}
         buscarOrdenes={buscarOrdenes}
         generarOrdenPago={generarOrdenPago}
         errores={errores}
+        tipoFac={tipoFac}
       />
 
 
@@ -495,7 +542,7 @@ const OrdenPago = () => {
         deleteCheckOrden={deleteCheckOrden}
         observacionRef={observacionRef}
         generarOrdenPago={generarOrdenPago}
-
+        errores={errores}
       />
 
 

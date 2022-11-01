@@ -6,6 +6,7 @@ const FormOrdenPractica = ({
     medicos,
     medicoPracRef,
     cuitPracRef,
+    fechaPagPracRef,
     norden,
     buscarOrdenes,
 }) => {
@@ -66,6 +67,17 @@ const FormOrdenPractica = ({
                     </label>
 
                     <input type={"text"} className='form-control' ref={cuitPracRef} />
+
+                </div>
+
+                <div className='col-md-3 mt-4'>
+                    <label>
+                        <u>
+                            Fecha a Pagar
+                        </u>
+                    </label>
+
+                    <input type={"date"} className='form-control' ref={fechaPagPracRef} />
 
                 </div>
 

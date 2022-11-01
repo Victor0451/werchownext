@@ -7,17 +7,22 @@ const FormOrdenPago = ({
     medicos,
     medicoRef,
     cuitRef,
+    fechaPagRef,
     medicoPracRef,
+    fechaPagPracRef,
     cuitPracRef,
     cuitContRef,
     provContRef,
     nfacturaContRef,
     observacionContRef,
+    tipoFacturaContRef,
+    fechaPagoContRef,
     totalContRef,
     norden,
     buscarOrdenes,
     generarOrdenPago,
-    errores
+    errores,
+    tipoFac
 }) => {
     return (
         <div className='container mt-4 border border-dark p-4 list'>
@@ -67,6 +72,9 @@ const FormOrdenPago = ({
                                 totalContRef={totalContRef}
                                 norden={norden}
                                 generarOrdenPago={generarOrdenPago}
+                                tipoFacturaContRef={tipoFacturaContRef}
+                                fechaPagoContRef={fechaPagoContRef}
+                                tipoFac={tipoFac}
                             />
 
                         </div>
@@ -96,6 +104,7 @@ const FormOrdenPago = ({
                                 medicos={medicos}
                                 medicoRef={medicoRef}
                                 cuitRef={cuitRef}
+                                fechaPagRef={fechaPagRef}
                                 norden={norden}
                                 buscarOrdenes={buscarOrdenes}
                             />
@@ -128,6 +137,7 @@ const FormOrdenPago = ({
                                 medicoPracRef={medicoPracRef}
                                 cuitPracRef={cuitPracRef}
                                 buscarOrdenes={buscarOrdenes}
+                                fechaPagPracRef={fechaPagPracRef}
                             />
 
 
