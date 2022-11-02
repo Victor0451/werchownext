@@ -8,6 +8,8 @@ const ListadoOrdenesSinAutorizar = ({
     detalleOrdenPago,
     autorizarOrden,
     user,
+    traerAchivos
+
 }) => {
 
     if (listado.length === 0) return <div className='container border border-dark alert alert-info text-center text-uppercase mt-4 mb-4'>No hay ordenes para autorizar</div>
@@ -45,7 +47,16 @@ const ListadoOrdenesSinAutorizar = ({
                                     filterAll: true,
 
                                 },
+                                {
+                                    Header: "Orden Tipo",
+                                    id: "tipo_orden",
+                                    accessor: (d) => d.tipo_orden,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["tipo_orden"] }),
+                                    filterAll: true,
 
+
+                                },
                                 {
                                     Header: "N° Orden",
                                     id: "norden",
@@ -57,17 +68,15 @@ const ListadoOrdenesSinAutorizar = ({
 
                                 },
                                 {
-                                    Header: "Orden Tipo",
-                                    id: "tipo_orden",
-                                    accessor: (d) => d.tipo_orden,
+                                    Header: "N° Factura",
+                                    id: "nfactura",
+                                    accessor: (d) => d.nfactura,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["tipo_orden"] }),
+                                        matchSorter(rows, filter.value, { keys: ["nfactura"] }),
                                     filterAll: true,
 
 
                                 },
-
-
                                 {
                                     Header: "Proveedor",
                                     id: "nombre",
@@ -90,7 +99,21 @@ const ListadoOrdenesSinAutorizar = ({
 
                                 },
 
+                                {
+                                    Header: "Estado",
+                                    id: "estado",
+                                    filterAll: true,
 
+                                    Cell: (row) => (
+                                        <div>
+                                            {row.original.autorizado === 0 ?
+                                                ("Pendiente")
+                                                : row.original.autorizado === 1 ?
+                                                    ("Autorizada")
+                                                    : null}
+                                        </div>
+                                    ),
+                                },
 
                                 {
                                     Header: "Operador",
@@ -122,13 +145,22 @@ const ListadoOrdenesSinAutorizar = ({
                                                 </button>
                                             ) : null}
 
+                                            <button
+                                                className="btn btn-warning btn-sm ml-1"
+                                                data-toggle="modal"
+                                                data-target="#ModalLegajoOrden"
+                                                onClick={() => traerAchivos(row.original.idorden)}
+                                            >
+                                                <i className="fa fa-folder-open-o" aria-hidden="true"></i>
+
+                                            </button>
 
 
                                             {user === 'joaquini' || user === 'vlongo' || user === 'jcmorales' || user === 'rquispe' || user === 'emoreno' ?
 
                                                 (
                                                     <button
-                                                        className="btn btn-success btn-sm"
+                                                        className="btn btn-success btn-sm ml-1"
                                                         onClick={() => autorizarOrden(row.original.norden)}
                                                     >
                                                         <i className="fa fa-check-circle-o" aria-hidden="true"></i>

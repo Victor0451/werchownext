@@ -6,7 +6,8 @@ import moment from 'moment';
 const ListadoEstadoOrdenes = ({
     listado,
     detalleOrdenPago,
-    guardarOrde
+    guardarOrde,
+    traerAchivos
 }) => {
 
     if (listado.length === 0) return <div className='container border border-dark alert alert-info text-center text-uppercase mt-4 mb-4'>No hay ordenes registradas</div>
@@ -32,7 +33,7 @@ const ListadoEstadoOrdenes = ({
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
                     columns={[
                         {
-                            Header: "Ordenes Sin Autorizar",
+                            Header: "Ordenes Generadas",
                             columns: [
 
                                 {
@@ -42,17 +43,6 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["fecha"] }),
                                     filterAll: true,
-
-                                },
-
-                                {
-                                    Header: "N° Orden",
-                                    id: "norden",
-                                    accessor: (d) => d.norden,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["norden"] }),
-                                    filterAll: true,
-
 
                                 },
                                 {
@@ -65,8 +55,26 @@ const ListadoEstadoOrdenes = ({
 
 
                                 },
+                                {
+                                    Header: "N° Orden",
+                                    id: "norden",
+                                    accessor: (d) => d.norden,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["norden"] }),
+                                    filterAll: true,
 
 
+                                },
+                                {
+                                    Header: "N° Factura",
+                                    id: "nfactura",
+                                    accessor: (d) => d.nfactura,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["nfactura"] }),
+                                    filterAll: true,
+
+
+                                },
                                 {
                                     Header: "Proveedor",
                                     id: "nombre",
@@ -149,6 +157,26 @@ const ListadoEstadoOrdenes = ({
                                                 }}
                                             >
                                                 <i className="fa fa-print" aria-hidden="true"></i>
+
+                                            </button>
+
+                                            <button
+                                                className="btn btn-success btn-sm ml-1"
+                                                data-toggle="modal"
+                                                data-target="#ModalSubirArchivo"
+                                                onClick={() => guardarOrde(row.original)}
+                                            >
+                                                <i className="fa fa-upload" aria-hidden="true"></i>
+
+                                            </button>
+
+                                            <button
+                                                className="btn btn-warning btn-sm ml-1"
+                                                data-toggle="modal"
+                                                data-target="#ModalLegajoOrden"
+                                                onClick={() => traerAchivos(row.original.idorden)}
+                                            >
+                                                <i className="fa fa-folder-open-o" aria-hidden="true"></i>
 
                                             </button>
 

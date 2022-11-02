@@ -465,8 +465,8 @@ const OrdenPago = () => {
 
   const verificarUso = async (contrato) => {
 
-    console.log(contrato)
-    await axios.get(`${ip}api/sgi/servicios/verificarusopra/${contrato}`)
+    
+    await axios.get(`${ip}api/sgi/servicios/verificarpracticas/${contrato}`)
       .then(res => {
 
         guardarPriUso(res.data.orde)

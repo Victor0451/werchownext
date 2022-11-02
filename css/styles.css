@@ -313,10 +313,10 @@ input {
 
 .archivos {
   padding: 50px;
-  transition: transform 0.2s;
+  transition: transform 0.5s;
   /* Animation */
-  width: 200px;
-  height: 200px;
+  width: 380px;
+  height: 380px;
   margin: 0 auto;
   align-items: center;
 }

@@ -9,6 +9,9 @@ import { ip } from '../../../../config/config'
 import ListadoEstadoOrdenes from "../../../../components/gestion/werchow/orden/ListadoEstadoOrdenes";
 import ModalDetalleOrden from "../../../../components/gestion/werchow/orden/ModalDetalleOrden";
 import ModalImpresion from "../../../../components/gestion/werchow/orden/ModalImpresion";
+import ModalSubirArchivo from "../../../../components/gestion/werchow/orden/ModalSubirArchivo";
+import { registrarHistoria } from '../../../../utils/funciones'
+import ModalLegajoOrden from "../../../../components/gestion/werchow/orden/ModalLegajoOrden";
 
 
 const estadoordenes = () => {
@@ -17,6 +20,91 @@ const estadoordenes = () => {
     const [user, guardarUsuario] = useState(null)
     const [listDetalle, guardarListDetalle] = useState([])
     const [orde, guardarOrde] = useState(null)
+    const [archivos, guardarArchivos] = useState([]);
+    const [error, guardarError] = useState(null);
+    const [archi, guardarArchi] = useState(null);
+
+    const eliminarArchivos = async (id) => {
+
+        await axios
+            .delete(`${ip}api/archivos/legajovirtualordenes/eliminararchivos/${id}`)
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.success("El archivo se elimino", "ATENCION");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+    };
+
+    const traerAchivos = async (id) => {
+        console.log(id)
+        await axios
+            .get(`${ip}api/archivos/legajovirtualordenes/listaarchivos/${id}`)
+            .then((res) => {
+                let archivos = res.data;
+                console.log(res)
+                guardarArchivos(archivos);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const handlerArchivos = async (e) => {
+        e.preventDefault();
+
+        guardarArchivos(e.target.files[0]);
+
+    };
+
+    const uploadArchivos = async (e) => {
+        e.preventDefault();
+
+        const fil = document.getElementById("fil");
+
+        if (fil.files.length === 0) {
+
+            guardarError("Debes Seleccionar Un Archivo");
+
+        } else {
+            const upload = new FormData();
+
+            upload.append("file", archivos);
+
+            await axios
+                .post(
+                    `${ip}api/archivos/legajovirtualordenes/uploadfichalegajo/${orde.idorden}`, upload,
+                    {
+                        param: {
+                            norden: orde.norden,
+                            nfactura: orde.nfactura,
+                        },
+
+
+                    }
+                )
+                .then((res) => {
+
+                    if (res.status === 200) {
+
+                        toastr.success("Archivo Subido Con Exito", "Atencion");
+
+                        let accion = `Se subio un archivo al legajo virtual de la orden de pago ID: ${orde.norden}`
+
+                        registrarHistoria(accion, user.usuario)
+
+                    }
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
 
     const traerOrdenes = async () => {
 
@@ -93,6 +181,7 @@ const estadoordenes = () => {
                 listado={listado}
                 detalleOrdenPago={detalleOrdenPago}
                 guardarOrde={guardarOrde}
+                traerAchivos={traerAchivos}
             />
 
             <ModalDetalleOrden
@@ -104,6 +193,21 @@ const estadoordenes = () => {
                 listDetalle={listDetalle}
                 imprimir={imprimir}
             />
+
+            <ModalSubirArchivo
+                handlerArchivos={handlerArchivos}
+                uploadArchivos={uploadArchivos}
+                orde={orde}
+                error={error}
+            />
+
+            <ModalLegajoOrden
+                archi={archi}
+                archivos={archivos}
+                guardarArchi={guardarArchi}
+                eliminarArchivos={eliminarArchivos}
+            />
+
         </Layout>
     )
 }

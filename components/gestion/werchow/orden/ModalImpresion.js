@@ -66,7 +66,7 @@ const ModalImpresion = ({
                                         </u>
                                     </label>
 
-                                    <input type={"text"} className='form-control' value={orde.fecha} />
+                                    <input type={"text"} className='form-control' value={moment(orde.fecha).format('DD/MM/YYYY')} />
 
                                 </div>
 
@@ -107,6 +107,17 @@ const ModalImpresion = ({
                                 <div className='col-md-3 mt-4'>
                                     <label>
                                         <u>
+                                            Tipo Factura
+                                        </u>
+                                    </label>
+
+                                    <input type={"text"} className='form-control' value={orde.tipo_factura} />
+
+                                </div>
+
+                                <div className='col-md-3 mt-4'>
+                                    <label>
+                                        <u>
                                             Importe
                                         </u>
                                     </label>
@@ -115,6 +126,16 @@ const ModalImpresion = ({
 
                                 </div>
 
+                                <div className='col-md-3 mt-4'>
+                                    <label>
+                                        <u>
+                                            Fecha de Pago
+                                        </u>
+                                    </label>
+
+                                    <input type={"text"} className='form-control' value={moment(orde.fecha_pago).format('DD/MM/YYYY')} />
+
+                                </div>
 
                                 <div className='col-md-3 mt-4'>
                                     <label>

@@ -9,12 +9,45 @@ import { ip } from '../../../../config/config'
 import { registrarHistoria } from "../../../../utils/funciones";
 import ListadoOrdenesSinAutorizar from "../../../../components/gestion/werchow/orden/ListadoOrdenesSinAutorizar";
 import ModalDetalleOrden from "../../../../components/gestion/werchow/orden/ModalDetalleOrden";
+import ModalLegajoOrden from '../../../../components/gestion/werchow/orden/ModalLegajoOrden'
 
 const autorizacionordenes = () => {
 
     const [user, guardarUsuario] = useState(null)
     const [listado, guardarListado] = useState([])
     const [listDetalle, guardarListDetalle] = useState([])
+    const [archivos, guardarArchivos] = useState([]);    
+    const [archi, guardarArchi] = useState(null);
+
+    const eliminarArchivos = async (id) => {
+
+        await axios
+            .delete(`${ip}api/archivos/legajovirtualordenes/eliminararchivos/${id}`)
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.success("El archivo se elimino", "ATENCION");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+    };
+
+    const traerAchivos = async (id) => {
+        console.log(id)
+        await axios
+            .get(`${ip}api/archivos/legajovirtualordenes/listaarchivos/${id}`)
+            .then((res) => {
+                let archivos = res.data;
+                console.log(res)
+                guardarArchivos(archivos);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const ordenesSinAutorizar = async () => {
 
@@ -121,11 +154,19 @@ const autorizacionordenes = () => {
                 detalleOrdenPago={detalleOrdenPago}
                 autorizarOrden={autorizarOrden}
                 user={user}
+                traerAchivos={traerAchivos}
 
             />
 
             <ModalDetalleOrden
                 listDetalle={listDetalle}
+            />
+
+            <ModalLegajoOrden
+                archi={archi}
+                archivos={archivos}
+                guardarArchi={guardarArchi}
+                eliminarArchivos={eliminarArchivos}
             />
 
         </Layout>
