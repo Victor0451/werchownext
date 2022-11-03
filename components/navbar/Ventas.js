@@ -66,6 +66,32 @@ export default class Ventas extends Component {
                 data-toggle="dropdown"
                 className="  dropdown-toggle dropdown-item text-dark"
               >
+                Orden de Pago
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                    Generar Orden
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                    Listado ordenes
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <hr />
+
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
                 Tareas
               </a>
               <ul className="dropdown-menu">
@@ -99,7 +125,7 @@ export default class Ventas extends Component {
             </li>
 
           </ul>
-        </li>
+        </li >
 
         <li className="nav-item dropdown ">
           <a
@@ -372,7 +398,7 @@ export default class Ventas extends Component {
             </li>
           </ul>
         </li>
-      </ul>
+      </ul >
     );
   }
 }
