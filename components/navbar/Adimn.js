@@ -134,6 +134,36 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Historial del Sistema
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/historial/historialacciones"
+                  className="dropdown-item text-dark"
+                >
+                  Historial de acciones
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a
+                  href="/gestion/historial/historialprestamos"
+                  className="dropdown-item text-dark"
+                >
+                  Historial Aprobacion Prestamos
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Noticias
             </a>
             <ul className="dropdown-menu">

@@ -201,7 +201,7 @@ const OrdenPago = () => {
 
   const checkOrden = (orden) => {
 
-    verificarUso(orden.CONTRATO)
+    verificarUso(orden.CONTRATO, orden.FECHA)
 
     let encontrado = false
 
@@ -463,10 +463,14 @@ const OrdenPago = () => {
 
   }
 
-  const verificarUso = async (contrato) => {
+  const verificarUso = async (contrato, fecha) => {
 
-    
-    await axios.get(`${ip}api/sgi/servicios/verificarpracticas/${contrato}`)
+
+    await axios.get(`${ip}api/sgi/servicios/verificarusosenorden/${contrato}`, {
+      params: {
+        fecha: fecha
+      }
+    })
       .then(res => {
 
         guardarPriUso(res.data.orde)

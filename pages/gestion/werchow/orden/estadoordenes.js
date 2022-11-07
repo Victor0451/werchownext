@@ -95,7 +95,7 @@ const estadoordenes = () => {
 
                         let accion = `Se subio un archivo al legajo virtual de la orden de pago ID: ${orde.norden}`
 
-                        registrarHistoria(accion, user.usuario)
+                        registrarHistoria(accion, user)
 
                     }
 

@@ -60,210 +60,128 @@ const GestionCampanas = () => {
         </div>
       </nav>
       <div className="mt-4 tab-content" id="nav-tabContent">
-        {
-          operadorNom === 'ladorno' ? (
-            <>
-              <div
-                className="tab-pane fade show active"
-                id="nav-home"
-                role="tabpanel"
-                aria-labelledby="nav-home-tab"
-              >
 
-                <div className="list p-4 border border-dark">
-                  <h3 className="mt-2 mb-4 text-center">
-                    <u>GESTION DE CAMPAÑAS WERCHOW</u>
-                  </h3>
-                  <div className="row">
+        <div
+          className="tab-pane fade show active"
+          id="nav-home"
+          role="tabpanel"
+          aria-labelledby="nav-home-tab"
+        >
 
-                    <Campana
-                      titulo="Vigencia Mayor 12 Meses"
-                      camp="Vigencia+12"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+          <div className="list p-4 border border-dark">
+            <h3 className="mt-2 mb-4 text-center">
+              <u>GESTION DE CAMPAÑAS WERCHOW</u>
+            </h3>
+            <div className="row">
 
-                    <Campana
-                      titulo="Vigencia Menor 12 Meses"
-                      camp="Vigencia-12"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="ATRASADOS 1 CUOTA"
+                camp="Atrasados"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="POLICIAS"
-                      camp="Policia"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="ATRASADOS 2 CUOTAS"
+                camp="Atrasados2"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="CAMPAÑA AUXILIAR"
-                      camp="Recordatorio"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="RECUPERACIONES"
+                camp="Recuperacion"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                  </div>
-                </div>
-              </div>
-              <div
-                className="tab-pane fade"
-                id="nav-profile"
-                role="tabpanel"
-                aria-labelledby="nav-profile-tab"
-              >
-                <div className="list p-4 border border-dark">
-                  <h2 className="mt-4 mb-4 text-center">
-                    <u>GESTION DE CAMPAÑAS MUTUAL</u>
-                  </h2>
-                  <div className="row">
+              <Campana
+                titulo="REINCIDENTES"
+                camp="Reincidente"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="Vigencia Mayor 12 Meses"
-                      camp="Vigencia+12"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="BLANQUEOS"
+                camp="Blanqueo"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="Vigencia Menor 12 Meses"
-                      camp="Vigencia-12"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="POLICIAS"
+                camp="Policia"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                  </div>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                className="tab-pane fade show active"
-                id="nav-home"
-                role="tabpanel"
-                aria-labelledby="nav-home-tab"
-              >
+              <Campana
+                titulo="CAMPAÑA AUXILIAR"
+                camp="Recordatorio"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                <div className="list p-4 border border-dark">
-                  <h3 className="mt-2 mb-4 text-center">
-                    <u>GESTION DE CAMPAÑAS WERCHOW</u>
-                  </h3>
-                  <div className="row">
+              <Campana
+                titulo="CAMPAÑA AUXILIAR 2"
+                camp="Recordatorio2"
+                empresa="werchow"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="ATRASADOS 1 CUOTA"
-                      camp="Atrasados"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+            </div>
+          </div>
+        </div>
+        <div
+          className="tab-pane fade"
+          id="nav-profile"
+          role="tabpanel"
+          aria-labelledby="nav-profile-tab"
+        >
+          <div className="list p-4 border border-dark">
+            <h2 className="mt-4 mb-4 text-center">
+              <u>GESTION DE CAMPAÑAS MUTUAL</u>
+            </h2>
+            <div className="row">
+              <Campana
+                titulo="ATRASADOS 1 CUOTA"
+                camp="Atrasados"
+                empresa="mutual"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="ATRASADOS 2 CUOTAS"
-                      camp="Atrasados2"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="ATRASADOS 2 CUOTAS"
+                camp="Atrasados2"
+                empresa="mutual"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="RECUPERACIONES"
-                      camp="Recuperacion"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="RECUPERACIONES"
+                camp="Recuperacion"
+                empresa="mutual"
+                operador={operadorNom}
+              />
 
-                    <Campana
-                      titulo="REINCIDENTES"
-                      camp="Reincidente"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="BLANQUEOS"
-                      camp="Blanqueo"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="POLICIAS"
-                      camp="Policia"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="CAMPAÑA AUXILIAR"
-                      camp="Recordatorio"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="CAMPAÑA AUXILIAR 2"
-                      camp="Recordatorio2"
-                      empresa="werchow"
-                      operador={operadorNom}
-                    />
-
-                  </div>
-                </div>
-              </div>
-              <div
-                className="tab-pane fade"
-                id="nav-profile"
-                role="tabpanel"
-                aria-labelledby="nav-profile-tab"
-              >
-                <div className="list p-4 border border-dark">
-                  <h2 className="mt-4 mb-4 text-center">
-                    <u>GESTION DE CAMPAÑAS MUTUAL</u>
-                  </h2>
-                  <div className="row">
-                    <Campana
-                      titulo="ATRASADOS 1 CUOTA"
-                      camp="Atrasados"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="ATRASADOS 2 CUOTAS"
-                      camp="Atrasados2"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="RECUPERACIONES"
-                      camp="Recuperacion"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
-
-                    <Campana
-                      titulo="REINCIDENTES"
-                      camp="Reincidente"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
+              <Campana
+                titulo="REINCIDENTES"
+                camp="Reincidente"
+                empresa="mutual"
+                operador={operadorNom}
+              />
 
 
-                    <Campana
-                      titulo="BLANQUEOS"
-                      camp="Blanqueo"
-                      empresa="mutual"
-                      operador={operadorNom}
-                    />
-                  </div>
-                </div>
-              </div>
-            </>
-          )
-        }
-
+              <Campana
+                titulo="BLANQUEOS"
+                camp="Blanqueo"
+                empresa="mutual"
+                operador={operadorNom}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* <div
             className="tab-pane fade"

@@ -230,7 +230,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"At"}
                   emp={"Werchow"}
-                  id={0}
+                  id={12}
                   fn={crearCampana}
                 />
               ) : campana === '"Atrasados2"' ? (
@@ -238,7 +238,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"At2"}
                   emp={"Werchow"}
-                  id={0}
+                  id={68}
                   fn={crearCampana}
                 />
               ) : campana === '"Recuperacion"' ? (
@@ -246,7 +246,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"Rec"}
                   emp={"Werchow"}
-                  id={0}
+                  id={2}
                   fn={crearCampana}
                 />
               ) : campana === '"Reincidente"' ? (
@@ -254,7 +254,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"Rein"}
                   emp={"Werchow"}
-                  id={0}
+                  id={7}
                   fn={crearCampana}
                 />
               ) : campana === '"Policia"' ? (
@@ -262,7 +262,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"Poli"}
                   emp={"Werchow"}
-                  id={0}
+                  id={51}
                   fn={crearCampana}
                 />
               ) : campana === '"Blanqueo"' ? (
@@ -270,7 +270,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"Blan"}
                   emp={"Werchow"}
-                  id={0}
+                  id={17}
                   fn={crearCampana}
                 />
               ) : campana === '"Auxiliar"' ? (
@@ -278,7 +278,7 @@ const AsignarCampana = ({
                   array={CasaCentralGG}
                   camp={"Aux"}
                   emp={"Werchow"}
-                  id={83}
+                  id={23}
                   fn={crearCampana}
                 />
               ) : null}
