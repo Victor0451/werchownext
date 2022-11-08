@@ -22,7 +22,8 @@ const FormOrdenPago = ({
     buscarOrdenes,
     generarOrdenPago,
     errores,
-    tipoFac
+    tipoFac,
+    guardarFlag
 }) => {
     return (
         <div className='container mt-4 border border-dark p-4 list'>
@@ -48,7 +49,7 @@ const FormOrdenPago = ({
                 <div className="card">
                     <div className="card-header" id="headingOne">
                         <h2 className="mb-0">
-                            <button className="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button className="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
                                 <strong>
                                     Orden de pago contable.
                                 </strong>
@@ -86,7 +87,7 @@ const FormOrdenPago = ({
                 <div className="card">
                     <div className="card-header" id="headingTwo">
                         <h2 className="mb-0">
-                            <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onClick={() => { guardarFlag("medica") }}>
                                 <strong>
                                     Orden de pago para consultas medicas.
                                 </strong>
@@ -118,7 +119,7 @@ const FormOrdenPago = ({
                 <div className="card">
                     <div className="card-header" id="headingThree">
                         <h2 className="mb-0">
-                            <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button className="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onClick={() => { guardarFlag("practica") }}>
                                 <strong>
                                     Orden de pago para practicas medicas.
                                 </strong>

@@ -10,7 +10,8 @@ const GeneracionOrden = ({
     totales,
     observacionRef,
     generarOrdenPago,
-    errores
+    errores,
+    flag
 
 }) => {
 
@@ -59,9 +60,18 @@ const GeneracionOrden = ({
 
                 <div className="row mt-4 mb-4 d-flex justify-content-end">
                     <div className="col-md-3">
-                        <button className="btn btn-primary btn-block" onClick={() => generarOrdenPago("medica")}>
-                            Generar Orden de Pago
-                        </button>
+                        {
+                            flag === "medica" ? (
+                                <button className="btn btn-primary btn-block" onClick={() => generarOrdenPago("medica")}>
+                                    Generar Orden de Pago
+                                </button>
+                            ) : flag === "practica" ? (
+                                <button className="btn btn-primary btn-block" onClick={() => generarOrdenPago("practica")}>
+                                    Generar Orden de Pago
+                                </button>
+                            ) : null
+                        }
+
                     </div>
 
                     <div className="col-md-3">
