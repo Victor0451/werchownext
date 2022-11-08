@@ -162,7 +162,7 @@ const ListadoEstadoOrdenes = ({
                                             }
 
 
-                                            {row.original.tipo_orden === 'Medica' ? (
+                                            {row.original.tipo_orden === 'Ordenes Medica' || row.original.tipo_orden === 'Practicas Medica' ? (
                                                 <button
                                                     className="btn btn-primary btn-sm mr-1"
                                                     data-toggle="modal"
