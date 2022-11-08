@@ -13,6 +13,7 @@ const GeneracionOrden = ({
     errores
 
 }) => {
+
     return (
         <div> {listado ? (
 
@@ -51,10 +52,10 @@ const GeneracionOrden = ({
                 </div>
 
                 {errores ? (
-                <div className='alert alert-danger mt-4 mb-4 border border-dark text-center text-uppercase'>
-                    {errores}
-                </div>
-            ) : null}
+                    <div className='alert alert-danger mt-4 mb-4 border border-dark text-center text-uppercase'>
+                        {errores}
+                    </div>
+                ) : null}
 
                 <div className="row mt-4 mb-4 d-flex justify-content-end">
                     <div className="col-md-3">

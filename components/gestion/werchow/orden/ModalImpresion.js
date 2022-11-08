@@ -1,6 +1,5 @@
 import React from 'react'
 import ListadoDetalle from './ListadoDetalle'
-import Spinner from '../../../layout/Spinner'
 import moment from 'moment'
 
 const ModalImpresion = ({
@@ -9,7 +8,7 @@ const ModalImpresion = ({
     imprimir
 }) => {
 
-    if (!orde) return <Spinner />
+    if (!orde) return null
 
     return (
         <div className="modal fade" id="ModalImpresion" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

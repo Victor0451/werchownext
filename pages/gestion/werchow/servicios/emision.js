@@ -686,7 +686,7 @@ const Emision = () => {
         })
     }
 
-console.log(priUso)
+    console.log(priUso)
 
 
 
@@ -723,7 +723,7 @@ console.log(priUso)
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
-
+      NUSOS: priUso
     }
 
 
@@ -939,6 +939,7 @@ console.log(priUso)
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
+      NUSOS: priUso
 
 
     }

@@ -41,12 +41,12 @@ const estadoordenes = () => {
     };
 
     const traerAchivos = async (id) => {
-        console.log(id)
+
         await axios
             .get(`${ip}api/archivos/legajovirtualordenes/listaarchivos/${id}`)
             .then((res) => {
                 let archivos = res.data;
-                console.log(res)
+
                 guardarArchivos(archivos);
             })
             .catch((error) => {

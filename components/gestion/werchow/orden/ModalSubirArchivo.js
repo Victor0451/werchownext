@@ -1,6 +1,4 @@
 import React from 'react'
-import Spinner from '../../../layout/Spinner'
-
 
 const ModalSubirArchivo = ({
     orde,

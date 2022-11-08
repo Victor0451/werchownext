@@ -40,8 +40,6 @@ const OrdenPago = () => {
   const [tipoFac, guardarTipoFac] = useState(null)
 
 
-
-
   const traerTipoFac = async () => {
 
     await axios.get(`${ip}api/sgi/ordenpago/tipofacturas`)
@@ -200,8 +198,6 @@ const OrdenPago = () => {
   }
 
   const checkOrden = (orden) => {
-
-    verificarUso(orden.CONTRATO, orden.FECHA)
 
     let encontrado = false
 
@@ -460,30 +456,6 @@ const OrdenPago = () => {
         console.log(error)
         toastr.error("Ocurrio un error en el checkeo", "ATENCION")
       })
-
-  }
-
-  const verificarUso = async (contrato, fecha) => {
-
-
-    await axios.get(`${ip}api/sgi/servicios/verificarusosenorden/${contrato}`, {
-      params: {
-        fecha: fecha
-      }
-    })
-      .then(res => {
-
-        guardarPriUso(res.data.orde)
-        console.log(res.data.orde)
-
-      })
-      .catch(error => {
-        console.log(error)
-
-        toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
-      })
-
-
 
   }
 

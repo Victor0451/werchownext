@@ -138,6 +138,7 @@ const FormOrdenPago = ({
                                 cuitPracRef={cuitPracRef}
                                 buscarOrdenes={buscarOrdenes}
                                 fechaPagPracRef={fechaPagPracRef}
+                                norden={norden}
                             />
 
 
