@@ -7,7 +7,9 @@ const ListadoEstadoOrdenes = ({
     listado,
     detalleOrdenPago,
     guardarOrde,
-    traerAchivos
+    traerAchivos,
+    getTrProps,
+    updatePagadas
 }) => {
 
     if (listado.length === 0) return <div className='container border border-dark alert alert-info text-center text-uppercase mt-4 mb-4'>No hay ordenes registradas</div>
@@ -23,6 +25,13 @@ const ListadoEstadoOrdenes = ({
                 </strong>
             </h2>
 
+
+            <div className='alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase'>
+                Las ordenes de pago que no esten pagadas, saldran en color rojo. Por lo contrario, se pondran en color verde.
+                Para marcalas como pagadas, primero deben estar autorizadas. De esta manera aparecera un boton verde con un visto,
+                al cual haciendole click se tildara como pagada.
+            </div>
+
             <div
                 id="list"
                 className='border border-dark mt-4 p-1 mt-4'>
@@ -31,6 +40,7 @@ const ListadoEstadoOrdenes = ({
                     data={listado}
                     filterable
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+                    getTrProps={getTrProps}
                     columns={[
                         {
                             Header: "Ordenes Generadas",
@@ -43,6 +53,8 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["fecha"] }),
                                     filterAll: true,
+                                    width: 100,
+
 
                                 },
                                 {
@@ -52,6 +64,7 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["tipo_orden"] }),
                                     filterAll: true,
+                                    width: 100,
 
 
                                 },
@@ -62,6 +75,7 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["norden"] }),
                                     filterAll: true,
+                                    width: 100,
 
 
                                 },
@@ -72,6 +86,7 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["nfactura"] }),
                                     filterAll: true,
+                                    width: 100,
 
 
                                 },
@@ -93,6 +108,7 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["total"] }),
                                     filterAll: true,
+                                    width: 100,
 
 
                                 },
@@ -132,6 +148,20 @@ const ListadoEstadoOrdenes = ({
                                     Cell: (row) => (
                                         <div>
 
+                                            {row.original.pagado === 1 && row.original.autorizado === 1 ? null
+                                                : row.original.pagado === 0 && row.original.autorizado === 1 ? (
+                                                    <button
+                                                        className="btn btn-success btn-sm mr-1"
+                                                        onClick={() => { updatePagadas(row.original.idorden, row.original.norden) }}
+                                                    >
+                                                        <i className="fa fa-check-circle-o" aria-hidden="true"></i>
+
+                                                    </button>
+
+                                                ) : null
+                                            }
+
+
                                             {row.original.tipo_orden === 'Medica' ? (
                                                 <button
                                                     className="btn btn-primary btn-sm mr-1"
@@ -143,11 +173,8 @@ const ListadoEstadoOrdenes = ({
                                                 </button>
                                             ) : null}
 
-
-
-
                                             <button
-                                                className="btn btn-secondary btn-sm"
+                                                className="btn btn-secondary btn-sm "
                                                 data-toggle="modal"
                                                 data-target="#ModalImpresion"
                                                 onClick={() => {
@@ -161,7 +188,7 @@ const ListadoEstadoOrdenes = ({
                                             </button>
 
                                             <button
-                                                className="btn btn-success btn-sm ml-1"
+                                                className="btn btn-info btn-sm ml-1"
                                                 data-toggle="modal"
                                                 data-target="#ModalSubirArchivo"
                                                 onClick={() => guardarOrde(row.original)}

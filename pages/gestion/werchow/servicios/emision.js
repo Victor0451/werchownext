@@ -723,7 +723,7 @@ const Emision = () => {
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
-      NUSOS: priUso
+      NUSOS: (priUso + 1)
     }
 
 

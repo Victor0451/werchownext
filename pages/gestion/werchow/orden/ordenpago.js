@@ -259,7 +259,8 @@ const OrdenPago = () => {
         tipo_orden: 'Medica',
         nfactura: "0",
         tipo_factura: "0",
-        fecha_pago: fechaPagRef.current.value
+        fecha_pago: fechaPagRef.current.value,
+        pagado: 0
 
 
       }
@@ -345,6 +346,7 @@ const OrdenPago = () => {
         nfactura: nfacturaContRef.current.value,
         tipo_factura: tipoFacturaContRef.current.value,
         fecha_pago: fechaPagoContRef.current.value,
+        pagado: 0
 
       }
 
@@ -417,6 +419,16 @@ const OrdenPago = () => {
       for (let i = 0; i < arr.length; i++) {
 
         total += parseFloat(arr[i].WERCHOW)
+
+      }
+
+      return total.toFixed(2)
+
+    } else if (f === "co") {
+
+      for (let i = 0; i < arr.length; i++) {
+
+        total += parseFloat(arr[i].COSEGURO)
 
       }
 

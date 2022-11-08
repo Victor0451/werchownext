@@ -155,6 +155,50 @@ const estadoordenes = () => {
         window.location.reload()
     };
 
+    const updatePagadas = async (id, norden) => {
+
+        await axios.put(`${ip}api/sgi/ordenpago/pagarorden/${id}`)
+            .then(res => {
+
+                if (res.status === 200) {
+
+                    toastr.success("La orden fue marcada como pagada")
+
+                    let accion = `Se marco como pagada la orden de pago ID: ${norden}, por el usuario: ${user}`
+
+                    registrarHistoria(accion, user)
+
+
+                    setTimeout(() => {
+                        traerOrdenes()
+
+                    }, 500);
+
+                }
+
+            }).catch(error => {
+                console.log(error)
+
+                toastr.error("Ocurrio un error al marcar la orden")
+            })
+
+    }
+
+    const getTrProps = (state, rowInfo, instance) => {
+        if (rowInfo) {
+            return {
+                style: {
+                    "background-color": rowInfo.original.pagado === 0 ? "pink"
+                        : rowInfo.original.pagado === 1 ? "#90EE90"
+                            : null,
+
+                },
+            };
+        }
+        return {};
+    };
+
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
@@ -182,6 +226,8 @@ const estadoordenes = () => {
                 detalleOrdenPago={detalleOrdenPago}
                 guardarOrde={guardarOrde}
                 traerAchivos={traerAchivos}
+                getTrProps={getTrProps}
+                updatePagadas={updatePagadas}
             />
 
             <ModalDetalleOrden
