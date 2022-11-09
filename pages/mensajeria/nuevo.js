@@ -24,6 +24,8 @@ const Nuevo = () => {
     const [mensajes, guardarMensajes] = useState(null)
     const [msj, guardarMensaje] = useState(null)
     const [archivos, guardarArchivos] = useState(null)
+    const [destino, guardarDestino] = useState([])
+
 
 
 
@@ -86,12 +88,10 @@ const Nuevo = () => {
 
         } else {
 
-            console.log("first")
-
             const mail = {
                 fecha: moment().format('YYYY-MM-DD HH:mm:ss'),
                 envia: user,
-                recibe: destinatarioRef.current.value,
+                recibe: "",
                 descrip: descrip,
                 codmail: codmail,
                 asunto: asuntoRef.current.value,
@@ -99,28 +99,49 @@ const Nuevo = () => {
                 fecha_leido: null
             }
 
+            if (destino.length > 0) {
 
-            await axios.post(`${ip}api/sgi/mails/nuevomail`, mail)
-                .then(res => {
-                    console.log(res)
-                    if (res.status === 200) {
+                for (let i = 0; i < destino.length; i++) {
 
-                        toastr.info("Se envio el mail correctamente", "ATENCION");
+                    mail.recibe = destino[i]
 
-                        setTimeout(() => {
-                            Router.reload()
-                        }, 500);
-                    }
+                    postMSJ(mail)
 
-                })
-                .catch(error => {
+                }
 
-                    console.log(error)
-                    toastr.error("Ocurrio un error al enviar el mail", "ATENCION")
+            } else {
 
-                })
+                toastr.error("Debes seleccionar al menos un destinatario", "ATENCION")
+                guardarErrores("Debes seleccionar al menos un destinatario")
+
+            }
 
         }
+
+    }
+
+
+    const postMSJ = async (mail) => {
+
+        await axios.post(`${ip}api/sgi/mails/nuevomail`, mail)
+            .then(res => {
+                console.log(res)
+                if (res.status === 200) {
+
+                    toastr.info("Se envio el mail correctamente", "ATENCION");
+
+                    setTimeout(() => {
+                        Router.reload()
+                    }, 500);
+                }
+
+            })
+            .catch(error => {
+
+                console.log(error)
+                toastr.error("Ocurrio un error al enviar el mail", "ATENCION")
+
+            })
 
     }
 
@@ -178,6 +199,47 @@ const Nuevo = () => {
             });
     };
 
+    const agregarDestino = () => {
+
+        let dest = destinatarioRef.current.value
+
+        if (dest === "no") {
+
+            guardarErrores("Debes elegir un destinatario")
+
+        } else {
+
+            let encontrado = false
+
+            for (let i = 0; i < destino.length; i++) {
+                if (destino[i] === dest) {
+                    encontrado = true;
+                }
+            }
+            if (encontrado === true) {
+
+                toastr.warning("Este destinatario ya fue agregado", "ATENCION");
+
+            } else if (encontrado === false) {
+
+                guardarDestino([...destino, dest])
+
+            }
+
+        }
+
+    }
+
+    const eliminarDestino = (index) => {
+
+        destino.splice(index, 1);
+
+        guardarDestino([...destino])
+
+        toastr.success("El destinatario fue eliminado", "ATENCION");
+
+    }
+
     return (
         <Layout>
 
@@ -201,7 +263,9 @@ const Nuevo = () => {
                 asuntoRef={asuntoRef}
                 operadores={operadores}
                 codmail={codmail}
-
+                agregarDestino={agregarDestino}
+                destino={destino}
+                eliminarDestino={eliminarDestino}
             />
 
             <ModalLeerMensaje

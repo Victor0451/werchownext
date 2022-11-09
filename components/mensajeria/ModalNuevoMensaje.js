@@ -9,6 +9,9 @@ const ModalNuevoMensaje = ({
     asuntoRef,
     operadores,
     codmail,
+    agregarDestino,
+    destino,
+    eliminarDestino,
 }) => {
     return (
         <div className="modal fade" id="nuevomsj" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,6 +33,9 @@ const ModalNuevoMensaje = ({
                             asuntoRef={asuntoRef}
                             operadores={operadores}
                             codmail={codmail}
+                            agregarDestino={agregarDestino}
+                            destino={destino}
+                            eliminarDestino={eliminarDestino}
                         />
 
                     </div>

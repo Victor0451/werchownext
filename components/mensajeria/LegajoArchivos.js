@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { ip } from "../../config/config";
 
 const LegajoArchivos = ({ archivos }) => {
-
-  console.log(archivos)
-
+  
   if (!archivos) {
     return null
   }
