@@ -39,7 +39,7 @@ const ModalLeerMensaje = ({
 
                                 <div className='col-md-8'>
 
-                                    <label>Asutno:</label>
+                                    <label>Asunto:</label>
                                     <input
                                         type="text"
                                         className="form-control"

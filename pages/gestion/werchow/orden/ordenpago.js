@@ -243,113 +243,85 @@ const OrdenPago = () => {
 
   const generarOrdenPago = async (f) => {
 
+    const orPag = {
 
-    if (f === "medica") {
+      fecha: moment().format('YYYY-MM-DD'),
+      proveedor: codPres,
+      nombre: nomPres,
+      cuit_cuil: "",
+      total: totales(listadoCheck, "imp"),
+      operador_carga: user,
+      norden: norden,
+      observacion: "",
+      autorizado: 0,
+      tipo_orden: "",
+      nfactura: "0",
+      tipo_factura: "0",
+      fecha_pago: "",
+      pagado: 0
 
-      const orPag = {
-
-        fecha: moment().format('YYYY-MM-DD'),
-        proveedor: codPres,
-        nombre: nomPres,
-        cuit_cuil: cuitRef.current.value,
-        total: totales(listadoCheck, "imp"),
-        operador_carga: user,
-        norden: norden,
-        observacion: observacionRef.current.value,
-        autorizado: 0,
-        tipo_orden: 'Ordenes Medica',
-        nfactura: "0",
-        tipo_factura: "0",
-        fecha_pago: fechaPagRef.current.value,
-        pagado: 0
-
-
-      }
+    }
 
 
-      if (orPag.fecha_pago === "") {
+    if (f !== "contable") {
 
-        guardarErrores("Debes ingresar una fecha de pago")
+      if (f === "medica") {
 
-      } else {
+        orPag.cuit_cuil = cuitRef.current.value
 
-        await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
-          .then(res => {
-            if (res.status === 200) {
+        orPag.observacion = observacionRef.current.value
 
-              toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
+        orPag.tipo_orden = 'Ordenes Medica'
 
-
-
-              for (let i = 0; i < listadoCheck.length; i++) {
+        orPag.fecha_pago = fechaPagRef.current.value
 
 
-                const detOrdenPag = {
+        if (orPag.fecha_pago === "") {
 
-                  norden: norden,
-                  nconsulta: listadoCheck[i].ORDEN,
-                  sucursal: listadoCheck[i].SUC,
-                  prestador: listadoCheck[i].COD_PRES,
-                  importe: listadoCheck[i].WERCHOW,
-                  operador_carga: user,
-                  fecha: moment().format('YYYY-MM-DD')
+          guardarErrores("Debes ingresar una fecha de pago")
 
-                }
+        } else {
 
-                axios.post(`${ip}api/sgi/ordenpago/nuevodetalle`, detOrdenPag)
+          postOrdenMedicas(orPag)
 
-                updateCheckUsos(detOrdenPag.nconsulta, detOrdenPag.norden, detOrdenPag.fecha,)
+        }
 
-              }
+      } else if (f === "practica") {
 
 
-              setTimeout(() => {
-                toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
+        orPag.cuit_cuil = cuitPracRef.current.value
 
-                let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
+        orPag.observacion = observacionRef.current.value
 
-                registrarHistoria(accion, user)
+        orPag.tipo_orden = 'Practicas Medica'
 
-                setTimeout(() => {
+        orPag.fecha_pago = fechaPagPracRef.current.value
 
-                  Router.reload()
 
-                }, 500);
+        if (orPag.fecha_pago === "") {
 
-              }, 1000);
+          guardarErrores("Debes ingresar una fecha de pago")
 
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
-          })
+        } else {
+
+          postOrdenMedicas(orPag)
+
+        }
 
       }
-
 
 
     } else if (f === "contable") {
 
-
-      const orPag = {
-
-        fecha: moment().format('YYYY-MM-DD'),
-        proveedor: "CONT",
-        nombre: provContRef.current.value,
-        cuit_cuil: cuitContRef.current.value,
-        total: totalContRef.current.value,
-        operador_carga: user,
-        norden: norden,
-        observacion: observacionContRef.current.value,
-        autorizado: 0,
-        tipo_orden: 'Contable',
-        nfactura: nfacturaContRef.current.value,
-        tipo_factura: tipoFacturaContRef.current.value,
-        fecha_pago: fechaPagoContRef.current.value,
-        pagado: 0
-
-      }
+      orPag.proveedor = "CONT"
+      orPag.nombre = provContRef.current.value
+      orPag.cuit_cuil = cuitContRef.current.value
+      orPag.total = totalContRef.current.value
+      orPag.observacion = observacionContRef.current.value
+      orPag.tipo_orden = 'Contable'
+      orPag.nfactura = nfacturaContRef.current.value
+      orPag.tipo_factura = tipoFacturaContRef.current.value
+      orPag.fecha_pago = fechaPagoContRef.current.value
 
       if (orPag.nombre === "") {
 
@@ -373,124 +345,100 @@ const OrdenPago = () => {
 
       } else {
 
-        await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
-          .then(res => {
-
-            if (res.status === 200) {
-
-              toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
-
-              setTimeout(() => {
-                toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
-
-                let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
-
-                registrarHistoria(accion, user)
-
-                setTimeout(() => {
-
-                  Router.reload()
-
-                }, 500);
-
-              }, 1000);
-
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
-          })
-
-
+        postOrdenContable(orPag)
 
       }
 
-
-    } else if (f === "practica") {
-
-      const orPag = {
-
-        fecha: moment().format('YYYY-MM-DD'),
-        proveedor: codPres,
-        nombre: nomPres,
-        cuit_cuil: cuitPracRef.current.value,
-        total: totales(listadoCheck, "imp"),
-        operador_carga: user,
-        norden: norden,
-        observacion: observacionRef.current.value,
-        autorizado: 0,
-        tipo_orden: 'Practicas Medica',
-        nfactura: "0",
-        tipo_factura: "0",
-        fecha_pago: fechaPagPracRef.current.value,
-        pagado: 0
-
-
-      }
-
-
-      if (orPag.fecha_pago === "") {
-
-        guardarErrores("Debes ingresar una fecha de pago")
-
-      } else {
-
-        await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
-          .then(res => {
-            if (res.status === 200) {
-
-              toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
-
-
-              for (let i = 0; i < listadoCheck.length; i++) {
-
-
-                const detOrdenPag = {
-
-                  norden: norden,
-                  nconsulta: listadoCheck[i].ORDEN,
-                  sucursal: listadoCheck[i].SUC,
-                  prestador: listadoCheck[i].COD_PRES,
-                  importe: listadoCheck[i].WERCHOW,
-                  operador_carga: user,
-                  fecha: moment().format('YYYY-MM-DD')
-
-                }
-
-
-                axios.post(`${ip}api/sgi/ordenpago/nuevodetalle`, detOrdenPag)
-
-                updateCheckUsos(detOrdenPag.nconsulta, detOrdenPag.norden, detOrdenPag.fecha,)
-
-              }
-
-
-              setTimeout(() => {
-                toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
-
-                let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
-
-                registrarHistoria(accion, user)
-
-                setTimeout(() => {
-
-                  Router.reload()
-
-                }, 500);
-
-              }, 1000);
-
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
-          })
-
-      }
     }
 
+
+
+  }
+
+  const postOrdenMedicas = async (orPag) => {
+
+    await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
+      .then(res => {
+
+        if (res.status === 200) {
+
+          toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
+
+          for (let i = 0; i < listadoCheck.length; i++) {
+
+            const detOrdenPag = {
+
+              norden: norden,
+              nconsulta: listadoCheck[i].ORDEN,
+              sucursal: listadoCheck[i].SUC,
+              prestador: listadoCheck[i].COD_PRES,
+              importe: listadoCheck[i].WERCHOW,
+              operador_carga: user,
+              fecha: moment().format('YYYY-MM-DD')
+
+            }
+
+            axios.post(`${ip}api/sgi/ordenpago/nuevodetalle`, detOrdenPag)
+
+            updateCheckUsos(detOrdenPag.nconsulta, detOrdenPag.norden, detOrdenPag.fecha,)
+
+          }
+
+
+          setTimeout(() => {
+            toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
+
+            let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
+
+            registrarHistoria(accion, user)
+
+            setTimeout(() => {
+
+              Router.reload()
+
+            }, 500);
+
+          }, 1000);
+
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
+      })
+
+
+  }
+
+  const postOrdenContable = async (orPag) => {
+    await axios.post(`${ip}api/sgi/ordenpago/nuevaorden`, orPag)
+      .then(res => {
+
+        if (res.status === 200) {
+
+          toastr.info("La orden de pago se genero correctamente. Cargando los detalles", "ATENCION")
+
+          setTimeout(() => {
+            toastr.success("La orden fue generada, lista para ser revisada y autorizada", "ATENCION")
+
+            let accion = `Se registro una orden de Pago ID: ${orPag.norden}, por un monto de: ${orPag.total} al proveedor: ${orPag.proveedor}-${orPag.nombre} por el operador: ${orPag.operador_carga}.`
+
+            registrarHistoria(accion, user)
+
+            setTimeout(() => {
+
+              Router.reload()
+
+            }, 500);
+
+          }, 1000);
+
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al generar la orden de pago", "ATENCION")
+      })
   }
 
   const totales = (arr, f) => {

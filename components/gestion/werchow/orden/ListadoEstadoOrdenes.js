@@ -20,7 +20,7 @@ const ListadoEstadoOrdenes = ({
             <h2 >
                 <strong>
                     <u>
-                        Estado Ordenes de pago
+                        Estado Ordenes de Pago
                     </u>
                 </strong>
             </h2>
@@ -117,6 +117,8 @@ const ListadoEstadoOrdenes = ({
                                     Header: "Estado",
                                     id: "estado",
                                     filterAll: true,
+                                    width: 100,
+
 
                                     Cell: (row) => (
                                         <div>
@@ -136,7 +138,7 @@ const ListadoEstadoOrdenes = ({
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["operador_carga"] }),
                                     filterAll: true,
-
+                                    width: 100
 
                                 },
 
