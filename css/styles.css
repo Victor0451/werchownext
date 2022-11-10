@@ -12,6 +12,11 @@ body {
   background-color: gainsboro;
 }
 
+.doc {
+  width: 500px;
+  height: 500px;
+}
+
 .cardetalle {
   width: 100% !important;
   height: 100% !important;

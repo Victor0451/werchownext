@@ -8,8 +8,8 @@ import Router from "next/router";
 import { ip } from "../../config/config";
 import { v4 as uuidv4 } from 'uuid';
 import ModalNuevoMensaje from "../../components/mensajeria/ModalNuevoMensaje";
-import ListadoMensajes from "../../components/mensajeria/ListadoMensajes";
 import ModalLeerMensaje from "../../components/mensajeria/ModalLeerMensaje";
+import CentroDeMensajeria from "../../components/mensajeria/CentroDeMensajeria";
 
 const Nuevo = () => {
 
@@ -22,6 +22,7 @@ const Nuevo = () => {
     const [operadores, guardarOperadores] = useState(null);
     const [codmail, guardarCodmail] = useState(null)
     const [mensajes, guardarMensajes] = useState(null)
+    const [mensajesEnv, guardarMensajesEnv] = useState(null)
     const [msj, guardarMensaje] = useState(null)
     const [archivos, guardarArchivos] = useState(null)
     const [destino, guardarDestino] = useState([])
@@ -40,6 +41,8 @@ const Nuevo = () => {
                 let user = JSON.parse(usuario);
                 guardarUser(user.usuario);
                 traerMensajes(user.usuario)
+                traerMensajesEnviados(user.usuario)
+
 
             }
 
@@ -56,9 +59,30 @@ const Nuevo = () => {
         await axios.get(`${ip}api/sgi/mails/listmsj/${id}`)
             .then(res => {
 
-                if (res.status === 200) {
+                if (res.data) {
 
                     guardarMensajes(res.data)
+
+                }
+
+            })
+            .catch(error => {
+
+                console.log(error)
+                toastr.error("Ocurrio un error al traer los mensajes", "ATENCION")
+
+            })
+
+    }
+
+    const traerMensajesEnviados = async (id) => {
+
+        await axios.get(`${ip}api/sgi/mails/listmsjenv/${id}`)
+            .then(res => {
+
+                if (res.status === 200) {
+
+                    guardarMensajesEnv(res.data)
 
                 }
 
@@ -119,7 +143,6 @@ const Nuevo = () => {
         }
 
     }
-
 
     const postMSJ = async (mail) => {
 
@@ -243,16 +266,14 @@ const Nuevo = () => {
     return (
         <Layout>
 
-            {mensajes ? (
-                <ListadoMensajes
-                    mensajes={mensajes}
-                    guardarMensaje={guardarMensaje}
-                    msjLeido={msjLeido}
-                    traerAchivos={traerAchivos}
-                />
-            ) : (<div className="alert alert-info text-center text-uppercase border border-dark mt-4 mb-4 container">
-                No tienes mensajes en tu casilla
-            </div>)}
+            <CentroDeMensajeria
+                mensajes={mensajes}
+                guardarMensaje={guardarMensaje}
+                msjLeido={msjLeido}
+                traerAchivos={traerAchivos}
+                mensajesEnv={mensajesEnv}
+            />
+
 
 
             <ModalNuevoMensaje

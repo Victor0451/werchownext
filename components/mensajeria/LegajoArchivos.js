@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ip } from "../../config/config";
 
 const LegajoArchivos = ({ archivos }) => {
-  
+
   if (!archivos) {
     return null
   }
@@ -30,7 +30,7 @@ const LegajoArchivos = ({ archivos }) => {
                 </strong>
 
                 {/* <img
-                  src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archivo.adjunto}`}
+                  src={`${ip}api/archivos/mails/archivo/${archivo.adjunto}`}
                   className="archivos p-4 "
                   data-toggle="modal"
                   data-target="#exampleModal"
@@ -46,6 +46,9 @@ const LegajoArchivos = ({ archivos }) => {
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </a>
                 </div>
+
+                <iframe className="doc mt-4" src={`https://docs.google.com/gview?url=http://190.231.67.172:5002/api/archivos/mails/archivo/${archivo.adjunto}&embedded=true`}></iframe>
+
               </div>
             </div>
           ))}
@@ -77,10 +80,15 @@ const LegajoArchivos = ({ archivos }) => {
             </div>
             <div className="modal-body d-flex justify-content-center">
               <img
-                src={`${ip}api/archivos/legajovirtualprestamos/archivo/${archi}`}
+                src={`${ip}api/archivos/mails/archivo/${archi}`}
                 classNameName="archimodal p-4  "
               />
             </div>
+            {archi ? (
+              <iframe src={`http://docs.google.com/gview?url=${ip}api/archivos/mails/archivo/${archi}&embedded=true`} style="width:600px; height:500px;" frameborder="0"></iframe>
+
+            ) : null}
+
             <div className="modal-footer">
               <button
                 type="button"

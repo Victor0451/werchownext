@@ -4,8 +4,8 @@ import matchSorter from "match-sorter";
 import moment from 'moment';
 
 
-const ListadoMensajes = ({
-    mensajes,
+const ListadoMensajesEnviados = ({
+    mensajesEnv,
     guardarMensaje,
     msjLeido,
     traerAchivos
@@ -34,19 +34,11 @@ const ListadoMensajes = ({
                 <div className='col-md-4'>
                     <h4>
                         <strong>
-                       
-                                Bandeja de entrada
-                       
+
+                            Mensajes Enviados
+
                         </strong>
                     </h4>
-                </div>
-
-                <div className='col-md-8 d-flex justify-content-end'>
-
-                    <button className='btn btn-info' data-toggle="modal" data-target="#nuevomsj">
-                        Nuevo Mensaje
-                    </button>
-
                 </div>
 
             </div>
@@ -56,7 +48,7 @@ const ListadoMensajes = ({
 
 
                 <ReactTable
-                    data={mensajes}
+                    data={mensajesEnv}
                     getTrProps={getTrProps}
                     filterable
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
@@ -141,4 +133,4 @@ const ListadoMensajes = ({
     )
 }
 
-export default ListadoMensajes
+export default ListadoMensajesEnviados
