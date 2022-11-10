@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ModalNuevoMensaje from "../../components/mensajeria/ModalNuevoMensaje";
 import ModalLeerMensaje from "../../components/mensajeria/ModalLeerMensaje";
 import CentroDeMensajeria from "../../components/mensajeria/CentroDeMensajeria";
+import { registrarHistoria } from '../../utils/funciones'
 
 const Nuevo = () => {
 
@@ -131,6 +132,10 @@ const Nuevo = () => {
 
                     postMSJ(mail)
 
+                    let accion = `${mail.envia} envio un mail interno al destinatario ${destino[i]} el dia ${moment(mail.fecha).format('DD/MM/YYYY HH:mm:ss')}.`
+
+                    registrarHistoria(accion, user)
+
                 }
 
             } else {
@@ -148,7 +153,7 @@ const Nuevo = () => {
 
         await axios.post(`${ip}api/sgi/mails/nuevomail`, mail)
             .then(res => {
-                console.log(res)
+
                 if (res.status === 200) {
 
                     toastr.info("Se envio el mail correctamente", "ATENCION");
