@@ -19,11 +19,15 @@ const rehabilitacion = () => {
   const [error, guardarError] = useState(null);
 
   const handlechange = () => {
+    
     let cuotas = parseInt(vigenciaRef.current.value);
-    console.log(cuotas)
+    
     if (cuotas === "") {
+    
       document.getElementById("btn").hidden = true;
+
     } else if (cuotas === 1) {
+      
       guardarCuotas(cuotas)
 
       let carencia = cuotas * 15;

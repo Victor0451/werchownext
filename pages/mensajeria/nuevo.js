@@ -99,8 +99,6 @@ const Nuevo = () => {
 
     const registrarMsg = async () => {
 
-
-
         guardarErrores(null)
 
         if (destinatarioRef.current.value === 'no') {
@@ -278,8 +276,6 @@ const Nuevo = () => {
                 traerAchivos={traerAchivos}
                 mensajesEnv={mensajesEnv}
             />
-
-
 
             <ModalNuevoMensaje
                 guardarDescrip={guardarDescrip}

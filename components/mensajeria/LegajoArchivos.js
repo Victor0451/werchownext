@@ -29,13 +29,7 @@ const LegajoArchivos = ({ archivos }) => {
                   <u>{archivo.adjunto}</u>
                 </strong>
 
-                {/* <img
-                  src={`${ip}api/archivos/mails/archivo/${archivo.adjunto}`}
-                  className="archivos p-4 "
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={() => guardarArchi(archivo.adjunto)}
-                /> */}
+
 
                 <br />
                 <div className="">
@@ -47,7 +41,23 @@ const LegajoArchivos = ({ archivos }) => {
                   </a>
                 </div>
 
-                <iframe className="doc mt-4" src={`https://docs.google.com/gview?url=http://190.231.67.172:5002/api/archivos/mails/archivo/${archivo.adjunto}&embedded=true`}></iframe>
+                {
+                  archivo.tipo === 'image/jpeg' ? (
+
+                    <img
+                      src={`${ip}api/archivos/mails/archivo/${archivo.adjunto}`}
+                      className="archivos p-4 "
+                      data-toggle="modal"
+                      data-target="#imgModal"
+                      onClick={() => guardarArchi(archivo.adjunto)}
+                    />
+
+                  ) : (
+
+                    <iframe className="doc mt-4" src={`https://docs.google.com/gview?url=http://190.231.67.172:5002/api/archivos/mails/archivo/${archivo.adjunto}&embedded=true`}></iframe>
+
+                  )
+                }
 
               </div>
             </div>
@@ -58,7 +68,7 @@ const LegajoArchivos = ({ archivos }) => {
 
       <div
         className="modal fade"
-        id="exampleModal"
+        id="imgModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -84,19 +94,9 @@ const LegajoArchivos = ({ archivos }) => {
                 classNameName="archimodal p-4  "
               />
             </div>
-            {archi ? (
-              <iframe src={`http://docs.google.com/gview?url=${ip}api/archivos/mails/archivo/${archi}&embedded=true`} style="width:600px; height:500px;" frameborder="0"></iframe>
-
-            ) : null}
 
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Cerrar
-              </button>
+
             </div>
           </div>
         </div>
