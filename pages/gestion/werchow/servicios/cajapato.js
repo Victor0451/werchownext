@@ -242,6 +242,10 @@ const CajaPato = () => {
 
                     updateRendido()
 
+                    let accion = `El operador ${user} cerro caja de la otero con fecha: ${caja.FECHA}`
+
+                    registrarHistoria(accion, user)
+
                     setTimeout(() => {
 
                         Router.push(`/gestion/werchow/servicios/emision`)

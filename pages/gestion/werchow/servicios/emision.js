@@ -955,17 +955,21 @@ const Emision = () => {
 
     // AUMENTO POR CANTIDAD DE USOS
 
-    if (priUso === 1) {
+    if (detalleMed.COD_PRES === 'C_BIO') {
 
-      uso.IMPORTE = uso.IMPORTE * 1.15
+      if (priUso === 1) {
 
-    } else if (priUso === 2) {
+        uso.IMPORTE = uso.IMPORTE * 1.15
 
-      uso.IMPORTE = uso.IMPORTE * 1.20
+      } else if (priUso === 2) {
 
-    } else if (priUso > 2) {
+        uso.IMPORTE = uso.IMPORTE * 1.20
 
-      uso.IMPORTE = uso.IMPORTE * 1.25
+      } else if (priUso > 2) {
+
+        uso.IMPORTE = uso.IMPORTE * 1.25
+
+      }
 
     }
 
@@ -1026,20 +1030,22 @@ const Emision = () => {
       }
 
 
-      // AUMENTO POR CANTIDAD DE USOS
+      // AUMENTO POR CANTIDAD DE USOS 
+      if (detalleMed.COD_PRES === 'C_BIO') {
 
-      if (priUso === 1) {
+        if (priUso === 1) {
 
-        practi.IMPORTE = practi.IMPORTE * 1.15
+          practi.IMPORTE = practi.IMPORTE * 1.15
 
-      } else if (priUso === 2) {
+        } else if (priUso === 2) {
 
-        practi.IMPORTE = practi.IMPORTE * 1.20
+          practi.IMPORTE = practi.IMPORTE * 1.20
 
-      } else if (priUso > 2) {
+        } else if (priUso > 2) {
 
-        practi.IMPORTE = practi.IMPORTE * 1.25
+          practi.IMPORTE = practi.IMPORTE * 1.25
 
+        }
       }
 
       // -----------------------------------------      
