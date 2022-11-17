@@ -843,9 +843,28 @@ const Emision = () => {
 
   // FUNCIONES PRACTICAS
 
-  const traerPracticasPrest = async (id) => {
+  const traerPracticasPrest = async (id, lug) => {
 
-    await axios.get(`${ip}api/sgi/servicios/traerpracticaspresador/${id}`)
+
+
+    let lugar = ""
+
+    if (lug < 10) {
+
+      lugar = `0${lug}`
+
+    } else {
+
+      lugar = lug
+
+    }
+
+    await axios.get(`${ip}api/sgi/servicios/traerpracticaspresador/${id}`, {
+      params: {
+        lugar: lugar
+
+      }
+    })
       .then(res => {
         guardarPracticas(res.data)
 
@@ -854,6 +873,8 @@ const Emision = () => {
         console.log(error)
         toastr.error("Ocurrio un error al traer las practicas")
       })
+
+
 
   }
 
@@ -1480,7 +1501,7 @@ const Emision = () => {
 
           guardarDetalleMed(res.data)
 
-          traerPracticasPrest(id)
+          traerPracticasPrest(id, res.data.LUGAR)
 
         })
         .catch(error => {
@@ -1583,6 +1604,7 @@ const Emision = () => {
 
     }
   }, []);
+
 
 
 
