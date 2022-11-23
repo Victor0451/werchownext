@@ -71,7 +71,7 @@ export default class Sepelio extends Component {
                   <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
                     Generar Orden
                   </a>
-                </li>                                
+                </li>
                 <hr />
                 <li>
                   <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
@@ -370,6 +370,15 @@ export default class Sepelio extends Component {
                     className="dropdown-item text-dark"
                   >
                     Stock Actual
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/sepelio/ataudes/listadoprecios"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado Precios
                   </a>
                 </li>
                 <hr />

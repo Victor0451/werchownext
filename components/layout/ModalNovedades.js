@@ -17,7 +17,7 @@ const ModalNovedades = ({ novedades }) => {
                     <div className="modal-body">
 
                         <div className='border border-dark mt-4 p-4'>
-                            <table className="table borderImp">
+                            <table className="table borderImp table-responsive">
                                 <thead className="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>

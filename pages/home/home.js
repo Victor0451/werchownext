@@ -12,6 +12,7 @@ import validarBuscarSocio from "../../validacion/validarBuscarSocio";
 import Router from "next/router";
 import AccesosRapidos from "../../components/home/AccesosRapidos";
 import ModalNovedades from "../../components/layout/ModalNovedades";
+import Notificaciones from "../../components/home/Notificaciones";
 
 const STATE_INICIAL = {
   socio: "",
@@ -31,10 +32,15 @@ const home = () => {
       if (usuario) {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.perfil);
+
+        traerMensajes(userData.usuario)
       }
 
       traerNovs()
 
+      ordenesPendientes()
+
+      prestamosPendientes()
 
 
     }
@@ -48,6 +54,11 @@ const home = () => {
   const [socioGest, guardarGestion] = useState(null);
   const [listSocio, guardarListSocio] = useState(null);
   const [user, guardarUsuario] = useState(null);
+  const [msj, guardarMensajes] = useState(0);
+  const [prest, guardarPrest] = useState(0);
+  const [orde, guardarOrde] = useState(0);
+
+
 
   const { valores, errores, handleChange, handleSubmit, handleBlur } =
     useValidacion(STATE_INICIAL, validarBuscarSocio, buscarSocio);
@@ -144,12 +155,76 @@ const home = () => {
 
   }
 
+  const traerMensajes = async (id) => {
+
+    await axios.get(`${ip}api/sgi/mails/listmsjsinleer/${id}`)
+      .then(res => {
+
+        if (res.status === 200) {
+
+          guardarMensajes(res.data.length)
+
+        }
+
+      })
+      .catch(error => {
+
+        console.log(error)
+        toastr.error("Ocurrio un error al traer los mensajes", "ATENCION")
+
+      })
+
+  }
+
+  const prestamosPendientes = async () => {
+
+    await axios
+      .get(`${ip}api/sgi/prestamos/listadoprestamospendientes`)
+      .then((res) => {
+        if (res.data.length !== 0) {
+
+          guardarPrest(res.data.length);
+
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const ordenesPendientes = async () => {
+
+    await axios.get(`${ip}api/sgi/ordenpago/traerordenespendientes`)
+      .then(res => {
+
+        guardarOrde(res.data.length)
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al generar el listado", "ATENCION")
+
+      })
+
+  }
+
 
   return (
     <Layout>
       <div>
+
         <Noticias user={user} />
+
+        {user == 1 || user == 3 ? (
+          <Notificaciones
+            msj={msj}
+            prest={prest}
+            orde={orde}
+          />
+        ) : null}
+
         <AccesosRapidos user={user} />
+
         {user == 2 || user == 1 || user == 5 ? (
           <BuscarSocio
             socio={socio}

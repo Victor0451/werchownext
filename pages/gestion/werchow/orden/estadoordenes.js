@@ -106,9 +106,16 @@ const estadoordenes = () => {
         }
     };
 
-    const traerOrdenes = async () => {
+    const traerOrdenes = async (per, us) => {
 
-        await axios.get(`${ip}api/sgi/ordenpago/traerordenes`)
+
+
+        await axios.get(`${ip}api/sgi/ordenpago/traerordenes`, {
+            params: {
+                perfil: us,
+                user: per
+            }
+        })
             .then(res => {
 
                 guardarListado(res.data)
@@ -119,6 +126,7 @@ const estadoordenes = () => {
                 toastr.error("Ocurrio un error al generar el listado", "ATENCION")
 
             })
+
 
     }
 
@@ -212,9 +220,12 @@ const estadoordenes = () => {
             if (usuario) {
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
+
+                traerOrdenes(userData.usuario, userData.perfil)
+
             }
 
-            traerOrdenes()
+
 
         }
     }, []);

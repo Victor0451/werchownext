@@ -686,10 +686,6 @@ const Emision = () => {
         })
     }
 
-    console.log(priUso)
-
-
-
   }
 
   // --------------------------------------------------------------
@@ -845,34 +841,42 @@ const Emision = () => {
 
   const traerPracticasPrest = async (id, lug) => {
 
+    if (!lug) {
 
-
-    let lugar = ""
-
-    if (lug < 10) {
-
-      lugar = `0${lug}`
+      toastr.info("Selecciona un prestador para traer sus practicas", "ATENCION")
 
     } else {
 
-      lugar = lug
+      let lugar = ""
+
+      if (lug < 10) {
+
+        lugar = `0${lug}`
+
+      } else {
+
+        lugar = lug
+
+      }
+
+      await axios.get(`${ip}api/sgi/servicios/traerpracticaspresador/${id}`, {
+        params: {
+          lugar: lugar
+
+        }
+      })
+        .then(res => {
+          guardarPracticas(res.data)
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer las practicas")
+        })
+
 
     }
 
-    await axios.get(`${ip}api/sgi/servicios/traerpracticaspresador/${id}`, {
-      params: {
-        lugar: lugar
-
-      }
-    })
-      .then(res => {
-        guardarPracticas(res.data)
-
-      })
-      .catch(error => {
-        console.log(error)
-        toastr.error("Ocurrio un error al traer las practicas")
-      })
 
 
 
