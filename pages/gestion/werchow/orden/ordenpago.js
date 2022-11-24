@@ -284,6 +284,8 @@ const OrdenPago = () => {
 
           postOrdenMedicas(orPag)
 
+          mandarMail(orPag)
+
         }
 
       } else if (f === "practica") {
@@ -305,6 +307,9 @@ const OrdenPago = () => {
         } else {
 
           postOrdenMedicas(orPag)
+
+          mandarMail(orPag)
+
 
         }
 
@@ -346,6 +351,8 @@ const OrdenPago = () => {
       } else {
 
         postOrdenContable(orPag)
+
+        mandarMail(orPag)
 
       }
 
@@ -501,6 +508,28 @@ const OrdenPago = () => {
       })
 
   }
+
+  const mandarMail = (array) => {
+    fetch("/api/mail/sgi/ordenpago", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(array),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          toastr.info(
+            "Se envio un email con la notificacion de la novedad",
+            "ATENCION"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
 
   let token = jsCookie.get("token");
