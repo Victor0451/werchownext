@@ -25,7 +25,6 @@ const LegajoVirtual = ({ archivos, eliminarArchivos }) => {
                                 <img
                                     src={`${ip}api/archivos/legajovirtualcajasucursales/archivo/${archivo.archivo}`}
                                     className="archivos p-4 mb-4"
-                                    className="archivos p-4 "
                                     data-toggle="modal"
                                     data-target="#exampleModal2"
                                     onClick={(e) => {

@@ -176,7 +176,7 @@ const ListadoOrdenesSinAutorizar = ({
                         },
 
                     ]}
-                    defaultPageSize={15}
+                    defaultPageSize={50}
                     className="-striped -highlight"
                 />
 

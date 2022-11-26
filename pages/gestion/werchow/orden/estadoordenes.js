@@ -18,6 +18,7 @@ const estadoordenes = () => {
 
     const [listado, guardarListado] = useState([])
     const [user, guardarUsuario] = useState(null)
+    const [perfil, guardarPerfil] = useState(null)
     const [listDetalle, guardarListDetalle] = useState([])
     const [orde, guardarOrde] = useState(null)
     const [archivos, guardarArchivos] = useState([]);
@@ -106,14 +107,14 @@ const estadoordenes = () => {
         }
     };
 
-    const traerOrdenes = async (per, us) => {
+    const traerOrdenes = async (us, per) => {
 
 
 
         await axios.get(`${ip}api/sgi/ordenpago/traerordenes`, {
             params: {
-                perfil: us,
-                user: per
+                perfil: per,
+                user: us
             }
         })
             .then(res => {
@@ -178,7 +179,8 @@ const estadoordenes = () => {
 
 
                     setTimeout(() => {
-                        traerOrdenes()
+
+                        traerOrdenes(user, perfil)
 
                     }, 500);
 
@@ -220,6 +222,7 @@ const estadoordenes = () => {
             if (usuario) {
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
+                guardarPerfil(userData.perfil)
 
                 traerOrdenes(userData.usuario, userData.perfil)
 

@@ -1,16 +1,20 @@
 import moment from 'moment'
 import React, { useState } from 'react'
+import ListadoMovimientos from './ListadoMovimientos'
 
 const FormNuevaCaja = ({
     user,
-    handlerArchivos,
-    uploadArchivos,
     error,
-    entradaRef,
-    salidaRef,
-    valoresDepositarRef,
-    fechaCajaRef,
+    conceptoRef,
+    fechaMovRef,
+    importeRef,
+    tipoMovRef,
     sucursalRef,
+    precargaMovim,
+    ingreso,
+    egreso,
+    totales,
+    errores
 }) => {
 
 
@@ -56,42 +60,6 @@ const FormNuevaCaja = ({
                         <input type="text" className="form-control" value={moment().format('DD/MM/YYYY HH:mm:ss')} readOnly />
                     </div>
 
-                    <div className="col-md-4 mt-4 ">
-                        <label>
-                            <u>
-                                Total Entradas
-                            </u>
-                        </label>
-                        <input type="number" className="form-control" placeholder="Total Entradas" ref={entradaRef} />
-                    </div>
-
-                    <div className="col-md-4 mt-4">
-                        <label>
-                            <u>
-                                Total Salidas
-                            </u>
-                        </label>
-                        <input type="number" className="form-control" placeholder="Total Salidas" ref={salidaRef} />
-                    </div>
-
-                    <div className="col-md-4 mt-4">
-                        <label>
-                            <u>
-                                Valores a Depositar
-                            </u>
-                        </label>
-                        <input type="number" className="form-control" placeholder="Valores a Depositar" ref={valoresDepositarRef} />
-                    </div>
-
-                    <div className="col-md-4 mt-4">
-                        <label>
-                            <u>
-                                Fecha Caja
-                            </u>
-                        </label>
-                        <input type="datetime-local" className="form-control" ref={fechaCajaRef} />
-                    </div>
-
                     <div className="mt-4 form-group col-md-4">
                         <label>
                             <strong>
@@ -123,35 +91,135 @@ const FormNuevaCaja = ({
                         </select>
                     </div>
 
+                    <div className='mt-4 form-group col-md-4'>
 
-                    <div className="mt-4 form-group col-md-4">
                         <label>
                             <strong>
                                 {" "}
-                                <u> Subir Archivo: </u>
+                                <u> Fecha Movimiento: </u>
                             </strong>
                         </label>
-                        <input
-                            type="file"
-                            id="fil"
-                            accept=".png, .jpg, .jpeg"
-                            className="form-control"
-                            name="file"
-                            onChange={handlerArchivos}
-                        />
 
-                        {error && (
-                            <div className="mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
-                                {error}
-                            </div>
-                        )}
+                        <input type={"date"} className="form-control" ref={fechaMovRef} />
+
                     </div>
+
+                    <div className='mt-4 form-group col-md-8'>
+
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Concepto: </u>
+                            </strong>
+                        </label>
+
+                        <input type={"text"} className="form-control" ref={conceptoRef} />
+
+                    </div>
+
+                    <div className='mt-4 form-group col-md-4'>
+
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Tipo Movimiento: </u>
+                            </strong>
+                        </label>
+
+                        <select
+                            className="custom-select"
+                            ref={tipoMovRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+                            <option value="I">
+                                Ingreso
+                            </option>
+                            <option value="E">
+                                Egreso
+                            </option>
+                        </select>
+                    </div>
+
+                    <div className='mt-4 form-group col-md-4'>
+
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Importe: </u>
+                            </strong>
+                        </label>
+
+                        <input type={"number"} className="form-control" ref={importeRef} />
+
+                    </div>
+
+
+                    <div className='mt-4 form-group col-md-4'>
+
+                        <label>
+
+                        </label>
+
+                        <button className='btn btn-primary btn-block' onClick={precargaMovim}>Pre Cargar</button>
+
+                    </div>
+
+                    <div className='mt-4 form-group col-md-12'>
+
+                        {errores ? (
+
+                            <div className='mt-4 mb-4 alert alert-danger text-center text-uppercase border border-dark'>
+                                {errores}
+                            </div>
+
+                        ) : null}
+
+                    </div>
+
                 </div>
+
+            </div>
+
+            <div className='mt-4 border border-dark p-4'>
+
+                <div className='row'>
+
+                    <div className='col-md-6'>
+                        <h4 className='mb-4'>
+                            <u>
+                                Ingresos
+                            </u>
+                        </h4>
+
+                        <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
+                            Total Ingresos: $  {totales(ingreso, "I")}
+                        </div>
+
+                        <ListadoMovimientos listado={ingreso} />
+                    </div>
+
+                    <div className='col-md-6'>
+
+                        <h4 className='mb-4'>
+                            <u>
+                                Egresos
+                            </u>
+                        </h4>
+
+                        <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
+                            Total Egresos: $ {totales(egreso, "E")}
+                        </div>
+
+                        <ListadoMovimientos listado={egreso} />
+                    </div>
+
+                </div>
+
             </div>
 
             <div className="mt-4 row border border-dark p-4">
                 <div className=" col-md-6">
-                    <button className="btn btn-primary btn-block" onClick={uploadArchivos}>
+                    <button className="btn btn-primary btn-block">
                         Registrar
                     </button>
 

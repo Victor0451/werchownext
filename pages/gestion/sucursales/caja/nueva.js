@@ -8,78 +8,103 @@ import Router from "next/router";
 import { ip } from '../../../../config/config'
 import FormNuevaCaja from "../../../../components/gestion/sucursales/cajas/FormNuevaCaja";
 
+
 const nueva = () => {
 
-    let entradaRef = React.createRef()
-    let salidaRef = React.createRef()
-    let valoresDepositarRef = React.createRef()
-    let fechaCajaRef = React.createRef()
+    let conceptoRef = React.createRef()
+    let fechaMovRef = React.createRef()
+    let importeRef = React.createRef()
+    let tipoMovRef = React.createRef()
     let sucursalRef = React.createRef()
 
     const [user, guardarUsuario] = useState(null)
     const [archivos, guardarArchivos] = useState(null);
     const [error, guardarError] = useState(null);
+    const [errores, guardarErrores] = useState(null);
+    const [ingreso, guardarIngreso] = useState([]);
+    const [egreso, guardarEgreso] = useState([]);
 
-    const handlerArchivos = async (e) => {
-        e.preventDefault();
 
-        guardarArchivos(e.target.files[0]);
-    };
+    const precargaMovim = () => {
 
-    const uploadArchivos = async (e) => {
-        e.preventDefault();
+        guardarErrores(null)
 
-        const fil = document.getElementById("fil");
+        const mov = {
 
-        if (fil.files.length === 0) {
-            guardarError("Debes Seleccionar Un Archivo");
-        } else {
-            const upload = new FormData();
-
-            console.log(upload.values());
-
-            upload.append("file", archivos);
-
-            const caja = {
-                entrada: entradaRef.current.value,
-                salida: salidaRef.current.value,
-                valor_depositar: valoresDepositarRef.current.value,
-                fecha_caja: fechaCajaRef.current.value,
-                fecha_carga: moment().format('YYYY-MM-DD HH:mm:ss'),
-                operador: user,
-                sucursal: sucursalRef.current.value
-            }
-
-            await axios.post(`${ip}api/archivos/legajovirtualcajasucursales/registrarcaja`, caja)
-                .then(res => {
-                    console.log(res);
-                    if (res.status === 200) {
-                  
-                        setTimeout(() => {
-
-                            axios
-                                .post(
-                                    `${ip}api/archivos/legajovirtualcajasucursales/uploadarchivo/${res.data.idcaja}`, upload)
-                                .then((res) => {
-                                    console.log(res);
-                                    toastr.success("Archivo Subido Con Exito", "Atencion");
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                    toastr.error("Ocurrio un error al subir el archivo", "ATENCION")
-                                });
-
-                        }, 1000);
-                    }
-                }).catch(error => {
-                    console.log(error);
-                    toastr.error("Ocurrio un error al registrar la caja", "ATENCION")
-                })
-
+            sucursal: sucursalRef.current.value,
+            fecha_movimiento: fechaMovRef.current.value,
+            concepto: conceptoRef.current.value,
+            movimiento: tipoMovRef.current.value,
+            importe: importeRef.current.value
 
         }
-    };
 
+        if (mov.sucursal === "no") {
+
+            guardarErrores("Debes ingresar la sucursal de origen de la caja")
+
+        } else if (mov.fecha_movimiento === "") {
+
+            guardarErrores("Debes ingresar la fecha del movimiento")
+
+        } else if (mov.concepto === "") {
+
+            guardarErrores("Debes ingresar el concepto del movimiento")
+
+        } else if (mov.movimiento === "no") {
+
+            guardarErrores("Debes ingresar el tipo de movimiento")
+
+        } else if (mov.importe === "") {
+
+            guardarErrores("Debes ingresar el importe del movimiento")
+
+        } else {
+
+            if (mov.movimiento === 'I') {
+
+                guardarIngreso([...ingreso, mov])
+
+            } else if (mov.movimiento === 'E') {
+
+                guardarEgreso([...egreso, mov])
+
+            }
+
+            toastr.success("Movimiento Precargado", "ATENCION")
+
+        }
+
+    }
+ 
+    const totales = (arr, mov) => {
+
+        let total = 0
+
+        if (mov === "I") {
+
+            for (let i = 0; i < arr.length; i++) {
+
+                total += parseFloat(ingreso[i].importe)
+
+            }
+
+            return total.toFixed(2)
+
+        } else if (mov === "E") {
+
+            for (let i = 0; i < arr.length; i++) {
+
+                total += parseFloat(egreso[i].importe)
+
+            }
+
+            return total.toFixed(2)
+
+        }
+
+
+    }
 
     let token = jsCookie.get("token");
 
@@ -100,16 +125,20 @@ const nueva = () => {
     return (
         <Layout>
             <FormNuevaCaja
-                user={user}
-                handlerArchivos={handlerArchivos}
-                uploadArchivos={uploadArchivos}
+                user={user}             
                 error={error}
-                entradaRef={entradaRef}
-                salidaRef={salidaRef}
-                valoresDepositarRef={valoresDepositarRef}
-                fechaCajaRef={fechaCajaRef}
+                conceptoRef={conceptoRef}
+                fechaMovRef={fechaMovRef}
+                importeRef={importeRef}
+                tipoMovRef={tipoMovRef}
                 sucursalRef={sucursalRef}
+                precargaMovim={precargaMovim}
+                ingreso={ingreso}
+                egreso={egreso}
+                totales={totales}
+                errores={errores}
             />
+
         </Layout>
     )
 }
