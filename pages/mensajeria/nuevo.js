@@ -15,6 +15,7 @@ import { registrarHistoria } from '../../utils/funciones'
 const Nuevo = () => {
 
     let destinatarioRef = React.createRef()
+    let urlRef = React.createRef()
     let asuntoRef = React.createRef()
 
     const [errores, guardarErrores] = useState(null)
@@ -27,8 +28,8 @@ const Nuevo = () => {
     const [msj, guardarMensaje] = useState(null)
     const [archivos, guardarArchivos] = useState(null)
     const [destino, guardarDestino] = useState([])
-
-
+    const [cajas, guardarCajas] = useState([])
+    const [url, guardarUrl] = useState([])
 
 
     let token = jsCookie.get("token");
@@ -43,7 +44,7 @@ const Nuevo = () => {
                 guardarUser(user.usuario);
                 traerMensajes(user.usuario)
                 traerMensajesEnviados(user.usuario)
-
+                traerCajas(user.usuario)
 
             }
 
@@ -119,7 +120,8 @@ const Nuevo = () => {
                 codmail: codmail,
                 asunto: asuntoRef.current.value,
                 leido: 0,
-                fecha_leido: null
+                fecha_leido: null,
+                url_caja: url[0]
             }
 
             if (destino.length > 0) {
@@ -211,7 +213,6 @@ const Nuevo = () => {
             })
     }
 
-
     const traerAchivos = async (id) => {
         await axios
             .get(`${ip}api/archivos/mails/listaarchivos/${id}`)
@@ -266,6 +267,81 @@ const Nuevo = () => {
 
     }
 
+    const agregarURL = () => {
+
+        let url1 = urlRef.current.value
+
+        if (url1 === "no") {
+
+            guardarErrores("Debes elegir una caja")
+
+        } else {
+
+            if (url.length > 0) {
+
+                toastr.warning("Solo puedes adjuntar una caja por mail", "ATENCION")
+
+            } else {
+
+                guardarUrl([...url, url1])
+
+            }
+
+        }
+
+
+
+
+        // CODIGO PARA CARGAR VARIAS CAJAS 
+
+        // else {
+
+        //     let encontrado = false
+
+        //     for (let i = 0; i < url1.length; i++) {
+        //         if (url1[i] === url1) {
+        //             encontrado = true;
+        //         }
+        //     }
+        //     if (encontrado === true) {
+
+        //         toastr.warning("Esta caja ya fue agregado", "ATENCION");
+
+        //     } else if (encontrado === false) {
+
+        //         guardarUrl([...url, url1])
+
+        //     }
+
+        // }
+
+    }
+
+    const eliminarURL = (index) => {
+
+        url.splice(index, 1);
+
+        guardarUrl([...url])
+
+        toastr.success("La caja fue eliminado", "ATENCION");
+
+    }
+
+    const traerCajas = async (id) => {
+
+        await axios.get(`${ip}api/sgi/cajasucursales/traercajasmail/${id}`)
+            .then(res => {
+
+                guardarCajas(res.data)
+
+            })
+            .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al generar el listado", "ATENCION")
+            })
+
+    }
+
     return (
         <Layout>
 
@@ -288,11 +364,17 @@ const Nuevo = () => {
                 agregarDestino={agregarDestino}
                 destino={destino}
                 eliminarDestino={eliminarDestino}
+                cajas={cajas}
+                url={url}
+                urlRef={urlRef}
+                agregarURL={agregarURL}
+                eliminarURL={eliminarURL}
             />
 
             <ModalLeerMensaje
                 msj={msj}
                 archivos={archivos}
+                url={url}
             />
 
         </Layout>

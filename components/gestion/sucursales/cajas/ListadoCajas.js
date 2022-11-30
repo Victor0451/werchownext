@@ -3,14 +3,12 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Spinner from "../../../layout/Spinner";
 import moment from "moment";
-import ModalDetalles from "../cajas/ModalDetalle";
+import Router from "next/router";
+
 
 const ListadoCajas = ({
     cajas,
-    traerArchivos,
-    row,
-    archivos,
-    eliminarArchivos
+
 
 }) => {
 
@@ -72,22 +70,32 @@ const ListadoCajas = ({
                                     filterAll: true,
                                 },
                                 {
-                                    Header: "Total Entradas",
-                                    id: "entrada",
-                                    accessor: (d) => d.entrada,
+                                    Header: "Ingresos",
+                                    id: "ingresos",
+                                    accessor: (d) => d.ingresos,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, {
-                                            keys: ["entrada"],
+                                            keys: ["ingresos"],
                                         }),
                                     filterAll: true,
                                 },
                                 {
-                                    Header: "Total Salidas",
-                                    id: "salida",
-                                    accessor: (d) => d.salida,
+                                    Header: "Egresos",
+                                    id: "egresos",
+                                    accessor: (d) => d.egresos,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, {
-                                            keys: ["salida"],
+                                            keys: ["egresos"],
+                                        }),
+                                    filterAll: true,
+                                },
+                                {
+                                    Header: "Salgo",
+                                    id: "saldo",
+                                    accessor: (d) => d.saldo,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, {
+                                            keys: ["saldo"],
                                         }),
                                     filterAll: true,
                                 },
@@ -99,16 +107,18 @@ const ListadoCajas = ({
                             Cell: (row) => (
                                 <div>
                                     <button
-                                        className="btn btn-sm btn-info"
-                                        data-toggle="modal"
-                                        data-target="#exampleModal"
-                                        onClick={() =>
-                                            traerArchivos(
-                                                row.original
-                                            )
-                                        }
+                                        className="btn btn-sm btn-primary"
+                                        onClick={() => {
+                                            Router.push({
+                                                pathname: "/gestion/sucursales/caja/caja",
+                                                query: {
+                                                    id: row.original.idcaja
+
+                                                },
+                                            });
+                                        }}
                                     >
-                                        Ver Legajo
+                                        <i className="fa fa-info-circle" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             ),
@@ -119,14 +129,7 @@ const ListadoCajas = ({
                 />
             </div>
 
-            {/* MODAL */}
 
-            <ModalDetalles
-                row={row}
-                archivos={archivos}
-                traerArchivos={traerArchivos}
-                eliminarArchivos={eliminarArchivos}
-            />
         </div>
     )
 }

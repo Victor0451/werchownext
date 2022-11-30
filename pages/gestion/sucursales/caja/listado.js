@@ -8,18 +8,22 @@ import Router from "next/router";
 import { ip } from '../../../../config/config'
 import ListadoCajas from "../../../../components/gestion/sucursales/cajas/ListadoCajas";
 
+
 const listado = () => {
 
     const [cajas, guardarCajas] = useState(null)
-    const [archivos, guardarArchivos] = useState(null)
-    const [row, guardarRow] = useState(null)
+    const [row, guardarRow] = useState([])
     const [user, guardarUsuario] = useState(null)
 
+    const traerCajas = async (id, p) => {
 
-
-    const traerCajas = async (id) => {
-
-        await axios.get(`${ip}api/archivos/legajovirtualcajasucursales/listadocajas/${id}`)
+        await axios.get(`${ip}api/sgi/cajasucursales/traercajasop/${id}`,
+            {
+                params: {
+                    perfil: p
+                }
+            }
+        )
             .then(res => {
 
                 guardarCajas(res.data)
@@ -31,36 +35,6 @@ const listado = () => {
             })
 
     }
-
-    const traerArchivos = async (row) => {
-
-        guardarRow(row)
-
-        await axios
-            .get(`${ip}api/archivos/legajovirtualcajasucursales/listaarchivos/${row.idcaja}`)
-            .then((res) => {
-                let archivos = res.data;
-
-                guardarArchivos(archivos);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const eliminarArchivos = async (id) => {
-        await axios
-            .delete(`${ip}api/archivos/legajovirtualcajasucursales/eliminararchivos/${id}`)
-            .then((res) => {
-                console.log(res)
-                if (res.status === 200) {
-                    toastr.success("El archivo se elimino", "ATENCION");
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
 
     let token = jsCookie.get("token");
 
@@ -74,10 +48,10 @@ const listado = () => {
             if (usuario) {
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
-                traerCajas(userData.usuario)
+                traerCajas(userData.usuario, userData.perfil)
             }
 
-            
+
         }
     }, []);
 
@@ -85,11 +59,9 @@ const listado = () => {
         <Layout>
             <ListadoCajas
                 cajas={cajas}
-                traerArchivos={traerArchivos}
-                row={row}
-                archivos={archivos}
-                eliminarArchivos={eliminarArchivos}
+
             />
+
         </Layout>
     )
 }

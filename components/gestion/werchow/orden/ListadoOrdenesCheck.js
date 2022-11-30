@@ -15,7 +15,7 @@ const ListadoOrdenesCheck = ({
         <div className='container list mt-4 border border-dark p-2'>
 
             <div className='alert alert-info border border-dark mt-4 mb-4'>
-                Ord. check:  <strong>{totales(listadoCheck, "cant")}</strong>  ||  Coseguro: $<strong>{totales(listadoCheck, "co")}</strong>   ||  Werchow: $<strong>{totales(listadoCheck, "imp")}</strong>
+                Ord. check:  <strong>{totales(listadoCheck, "cant")}</strong>  ||  Total: $<strong>{totales(listadoCheck, "co")}</strong>
             </div>
 
             <div
@@ -131,21 +131,14 @@ const ListadoOrdenesCheck = ({
                                 // },
 
                                 {
-                                    Header: "Coseguro",
-                                    id: "COSEGURO",
-                                    accessor: (d) => d.COSEGURO,
+                                    Header: "Importe",
+                                    id: "IMPORTE",
+                                    accessor: (d) => d.IMPORTE,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["COSEGURO"] }),
+                                        matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
                                     filterAll: true,
                                 },
-                                {
-                                    Header: "Werchow",
-                                    id: "WERCHOW",
-                                    accessor: (d) => d.WERCHOW,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["WERCHOW"] }),
-                                    filterAll: true,
-                                },
+
                             ],
                         },
 

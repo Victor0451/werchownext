@@ -15,7 +15,7 @@ const ListadoOrdenesPrestador = ({
         <div className='container list mt-4 border border-dark p-2'>
 
             <div className='alert alert-info border border-dark mt-4 mb-4'>
-                Ord. sin check:  <strong>{totales(listado, "cant")}</strong>    ||  Coseguro: $<strong>{totales(listado, "co")}</strong>   ||   Werchow: $<strong>{totales(listado, "imp")}</strong>
+                Ord. sin check:  <strong>{totales(listado, "cant")}</strong>    ||  Total: $<strong>{totales(listado, "co")}</strong>
             </div>
 
             <div
@@ -131,21 +131,14 @@ const ListadoOrdenesPrestador = ({
                                 // },
 
                                 {
-                                    Header: "Coseguro",
-                                    id: "COSEGURO",
-                                    accessor: (d) => d.COSEGURO,
+                                    Header: "Importe",
+                                    id: "IMPORTE",
+                                    accessor: (d) => d.IMPORTE,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["COSEGURO"] }),
+                                        matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
                                     filterAll: true,
                                 },
-                                {
-                                    Header: "Werchow",
-                                    id: "WERCHOW",
-                                    accessor: (d) => d.WERCHOW,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["WERCHOW"] }),
-                                    filterAll: true,
-                                },
+
                             ],
                         },
 

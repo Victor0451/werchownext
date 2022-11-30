@@ -249,7 +249,7 @@ const OrdenPago = () => {
       proveedor: codPres,
       nombre: nomPres,
       cuit_cuil: "",
-      total: totales(listadoCheck, "imp"),
+      total: totales(listadoCheck, "co"),
       operador_carga: user,
       norden: norden,
       observacion: "",
@@ -466,7 +466,7 @@ const OrdenPago = () => {
 
       for (let i = 0; i < arr.length; i++) {
 
-        total += parseFloat(arr[i].COSEGURO)
+        total += parseFloat(arr[i].IMPORTE)
 
       }
 

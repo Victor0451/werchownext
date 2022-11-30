@@ -14,7 +14,9 @@ const FormNuevaCaja = ({
     ingreso,
     egreso,
     totales,
-    errores
+    errores,
+    postCaja,
+    eliminarPrecarga
 }) => {
 
 
@@ -184,6 +186,18 @@ const FormNuevaCaja = ({
 
                 <div className='row'>
 
+                    <div className='col-md-12'>
+                        <h4 className='mb-4'>
+                            <u>
+                                Saldo Caja:
+                            </u>
+                        </h4>
+
+                        <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
+                            Saldo: $  {totales(ingreso, "I") - totales(egreso, "E")}
+                        </div>
+                    </div>
+
                     <div className='col-md-6'>
                         <h4 className='mb-4'>
                             <u>
@@ -195,7 +209,10 @@ const FormNuevaCaja = ({
                             Total Ingresos: $  {totales(ingreso, "I")}
                         </div>
 
-                        <ListadoMovimientos listado={ingreso} />
+                        <ListadoMovimientos
+                            listado={ingreso}
+                            eliminarPrecarga={eliminarPrecarga}
+                        />
                     </div>
 
                     <div className='col-md-6'>
@@ -210,7 +227,10 @@ const FormNuevaCaja = ({
                             Total Egresos: $ {totales(egreso, "E")}
                         </div>
 
-                        <ListadoMovimientos listado={egreso} />
+                        <ListadoMovimientos
+                            listado={egreso}
+                            eliminarPrecarga={eliminarPrecarga}
+                        />
                     </div>
 
                 </div>
@@ -219,7 +239,7 @@ const FormNuevaCaja = ({
 
             <div className="mt-4 row border border-dark p-4">
                 <div className=" col-md-6">
-                    <button className="btn btn-primary btn-block">
+                    <button className="btn btn-primary btn-block" onClick={postCaja}>
                         Registrar
                     </button>
 

@@ -4,7 +4,9 @@ import matchSorter from "match-sorter";
 import moment from "moment";
 
 const ListadoMovimientos = ({
-    listado
+    listado,
+    eliminarPrecarga,
+    f
 }) => {
     return (
         <div className="mt-4 border border-dark list">
@@ -19,16 +21,37 @@ const ListadoMovimientos = ({
                             {
                                 Header: "#",
                                 filterAll: false,
-                                width: 50,
+                                width: 30,
                                 Cell: (row) => <div>{row.index + 1}</div>,
+                            },
+
+                            {
+                                Header: "X",
+                                filterAll: false,
+                                width: 35,
+                                Cell: (row) => (
+
+                                    <div>
+                                        {
+                                            f !== 'list' ? (
+                                                <button className="btn btn-sm btn-danger" onClick={() => { eliminarPrecarga(row.index, row.original.movimiento) }}>
+                                                    X
+                                                </button>
+                                            ) : null
+                                        }
+                                    </div>
+
+
+                                )
                             },
                             {
                                 Header: "Fecha",
                                 id: "fecha",
-                                accessor: (d) => moment(d.fecha_movimiento).format('DD/MM/YYYY HH:mm:ss'),
+                                accessor: (d) => moment(d.fecha_movimiento).format('DD/MM/YYYY'),
                                 filterMethod: (filter, rows) =>
                                     matchSorter(rows, filter.value, { keys: ["fecha"] }),
                                 filterAll: true,
+                                width: 100
                             },
 
                             {
@@ -42,14 +65,15 @@ const ListadoMovimientos = ({
                                 filterAll: true,
                             },
                             {
-                                Header: "Tipo Movimiento",
-                                id: "movim",
+                                Header: "Movimiento",
+                                id: "movimiento",
                                 accessor: (d) => d.movimiento,
                                 filterMethod: (filter, rows) =>
                                     matchSorter(rows, filter.value, {
-                                        keys: ["movim"],
+                                        keys: ["movimiento"],
                                     }),
                                 filterAll: true,
+                                width: 70
                             },
                             {
                                 Header: "Importe",
@@ -60,6 +84,7 @@ const ListadoMovimientos = ({
                                         keys: ["importe"],
                                     }),
                                 filterAll: true,
+                                width: 80
                             },
                         ],
                     },

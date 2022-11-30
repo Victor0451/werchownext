@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { ip } from "../../config/config";
+import URLLink from "./URLLink";
 
-const LegajoArchivos = ({ archivos }) => {
+const LegajoArchivos = ({
+  archivos,
+  
+}) => {
 
   if (!archivos) {
     return null

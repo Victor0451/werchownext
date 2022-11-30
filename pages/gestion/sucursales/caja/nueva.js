@@ -30,13 +30,14 @@ const nueva = () => {
         guardarErrores(null)
 
         const mov = {
-
+            idcaja: "",
+            fecha_carga: moment().format('YYYY-MM-DD'),
             sucursal: sucursalRef.current.value,
             fecha_movimiento: fechaMovRef.current.value,
             concepto: conceptoRef.current.value,
             movimiento: tipoMovRef.current.value,
-            importe: importeRef.current.value
-
+            importe: importeRef.current.value,
+            operador_carga: user
         }
 
         if (mov.sucursal === "no") {
@@ -71,12 +72,33 @@ const nueva = () => {
 
             }
 
-            toastr.success("Movimiento Precargado", "ATENCION")
+            toastr.info("Movimiento Precargado", "ATENCION")
 
         }
 
     }
- 
+
+    const eliminarPrecarga = (index, movim) => {
+
+        if (movim === 'I') {
+
+            ingreso.splice(index, 1);
+
+            guardarIngreso([...ingreso])
+
+            toastr.success("Orden eliminada del checkeo", "ATENCION");
+
+        } else if (movim === 'E') {
+
+            egreso.splice(index, 1);
+
+            guardarEgreso([...egreso])
+
+            toastr.success("Orden eliminada del checkeo", "ATENCION");
+
+        }
+    }
+
     const totales = (arr, mov) => {
 
         let total = 0
@@ -106,6 +128,106 @@ const nueva = () => {
 
     }
 
+    const postCaja = async () => {
+
+        const caja = {
+
+            fecha_carga: moment().format('YYYY-MM-DD'),
+            sucursal: sucursalRef.current.value,
+            ingresos: totales(ingreso, "I"),
+            egresos: totales(egreso, "E"),
+            saldo: totales(ingreso, "I") - totales(egreso, "E"),
+            operador_carga: user
+
+        }
+
+        await axios.post(`${ip}api/sgi/cajasucursales/nuevacaja`, caja)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+
+                    toastr.success("Caja generada, registrando movimientos", "ATENCION")
+
+                    postMov(res.data.idcaja)
+
+
+                    setTimeout(() => {
+
+                        Router.push("/gestion/sucursales/caja/listado")
+
+                    }, 500);
+
+                }
+
+            }).catch(error => {
+
+                console.log(error)
+                toastr.error("Ocurrio un error al generar la caja", "ATENCION")
+
+            })
+
+
+
+    }
+
+    const postMov = async (idcaja) => {
+
+        if (ingreso.length > 0) {
+
+            for (let i = 0; i < ingreso.length; i++) {
+
+                ingreso[i].idcaja = idcaja
+
+                await axios.post(`${ip}api/sgi/cajasucursales/nuevomov`, ingreso[i])
+                    .then(res => {
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        toastr.error("Ocurrio un error al generar la caja", "ATENCION")
+                    })
+
+                if (i === ingreso.length) {
+                    toastr.info("Ingresos registrados correctamente", "ATENCION")
+                }
+            }
+
+        } else {
+
+            toastr.info("No hay ingresos para registrar", "ATENCION")
+
+        }
+
+        if (egreso.length > 0) {
+
+
+            for (let i = 0; i < egreso.length; i++) {
+
+                egreso[i].idcaja = idcaja
+
+                await axios.post(`${ip}api/sgi/cajasucursales/nuevomov`, egreso[i])
+                    .then(res => {
+
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        toastr.error("Ocurrio un error al generar la caja", "ATENCION")
+                    })
+
+                if (i === egreso.length) {
+                    toastr.info("Egresos registrados correctamente", "ATENCION")
+                }
+            }
+
+        } else {
+
+            toastr.info("No hay egresos para registrar", "ATENCION")
+
+        }
+
+    }
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
@@ -125,7 +247,7 @@ const nueva = () => {
     return (
         <Layout>
             <FormNuevaCaja
-                user={user}             
+                user={user}
                 error={error}
                 conceptoRef={conceptoRef}
                 fechaMovRef={fechaMovRef}
@@ -137,6 +259,8 @@ const nueva = () => {
                 egreso={egreso}
                 totales={totales}
                 errores={errores}
+                postCaja={postCaja}
+                eliminarPrecarga={eliminarPrecarga}
             />
 
         </Layout>

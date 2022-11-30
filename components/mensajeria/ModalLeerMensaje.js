@@ -3,7 +3,8 @@ import LegajoArchivos from './LegajoArchivos'
 
 const ModalLeerMensaje = ({
     msj,
-    archivos
+    archivos,
+
 }) => {
 
     if (!msj) return null
@@ -62,8 +63,34 @@ const ModalLeerMensaje = ({
                                 </div>
 
                             </div>
+
+
+                            {msj.url_caja ? (
+                                <div className='mt-4'>
+
+                                    <h4>
+                                        <strong>
+                                            <u>
+                                                Caja adjuntada
+                                            </u>
+                                        </strong>
+                                    </h4>
+
+                                    <div className='col-md-12 mt-4'>
+
+                                        <a href={`${msj.url_caja}`} target="_blank">
+                                            <strong >Este enlace te lleva a la caja adjuntada.</strong>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            ) : null}
+
+
                             <LegajoArchivos
                                 archivos={archivos}
+
                             />
 
                         </div>
