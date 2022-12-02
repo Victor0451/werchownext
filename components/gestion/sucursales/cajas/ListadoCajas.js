@@ -42,13 +42,22 @@ const ListadoCajas = ({
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
                     columns={[
                         {
-                            Header: "Ventas En Produccion",
+                            Header: "Movimientos de caja",
                             columns: [
                                 {
                                     Header: "#",
                                     filterAll: false,
                                     width: 50,
                                     Cell: (row) => <div>{row.index + 1}</div>,
+                                },
+                                {
+                                    Header: "Empresa",
+                                    id: "empresa",
+                                    accessor: (d) => d.empresa,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["empresa"] }),
+                                    filterAll: true,
+                                    width: 80
                                 },
                                 {
                                     Header: "Sucursal",

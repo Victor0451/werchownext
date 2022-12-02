@@ -16,6 +16,7 @@ const nueva = () => {
     let importeRef = React.createRef()
     let tipoMovRef = React.createRef()
     let sucursalRef = React.createRef()
+    let empresaRef = React.createRef()
 
     const [user, guardarUsuario] = useState(null)
     const [archivos, guardarArchivos] = useState(null);
@@ -23,6 +24,7 @@ const nueva = () => {
     const [errores, guardarErrores] = useState(null);
     const [ingreso, guardarIngreso] = useState([]);
     const [egreso, guardarEgreso] = useState([]);
+    const [emp, guardarEmp] = useState(null)
 
 
     const precargaMovim = () => {
@@ -37,10 +39,15 @@ const nueva = () => {
             concepto: conceptoRef.current.value,
             movimiento: tipoMovRef.current.value,
             importe: importeRef.current.value,
-            operador_carga: user
+            operador_carga: user,
+            empresa: empresaRef.current.value
         }
 
-        if (mov.sucursal === "no") {
+        if (mov.empresa === "no") {
+
+            guardarErrores("Debes ingresar la sucursal de origen de la caja")
+
+        } else if (mov.sucursal === "no") {
 
             guardarErrores("Debes ingresar la sucursal de origen de la caja")
 
@@ -61,6 +68,17 @@ const nueva = () => {
             guardarErrores("Debes ingresar el importe del movimiento")
 
         } else {
+
+
+            if (mov.empresa === 'W') {
+
+                guardarEmp("Werchow")
+
+
+            } else {
+
+                guardarEmp("Mutual San Valentin")
+            }
 
             if (mov.movimiento === 'I') {
 
@@ -137,7 +155,8 @@ const nueva = () => {
             ingresos: totales(ingreso, "I"),
             egresos: totales(egreso, "E"),
             saldo: totales(ingreso, "I") - totales(egreso, "E"),
-            operador_carga: user
+            operador_carga: user,
+            empresa: empresaRef.current.value
 
         }
 
@@ -254,6 +273,7 @@ const nueva = () => {
                 importeRef={importeRef}
                 tipoMovRef={tipoMovRef}
                 sucursalRef={sucursalRef}
+                empresaRef={empresaRef}
                 precargaMovim={precargaMovim}
                 ingreso={ingreso}
                 egreso={egreso}
@@ -261,6 +281,7 @@ const nueva = () => {
                 errores={errores}
                 postCaja={postCaja}
                 eliminarPrecarga={eliminarPrecarga}
+                emp={emp}
             />
 
         </Layout>

@@ -11,12 +11,14 @@ const FormNuevaCaja = ({
     tipoMovRef,
     sucursalRef,
     precargaMovim,
+    empresaRef,
     ingreso,
     egreso,
     totales,
     errores,
     postCaja,
-    eliminarPrecarga
+    eliminarPrecarga,
+    emp
 }) => {
 
 
@@ -62,7 +64,29 @@ const FormNuevaCaja = ({
                         <input type="text" className="form-control" value={moment().format('DD/MM/YYYY HH:mm:ss')} readOnly />
                     </div>
 
-                    <div className="mt-4 form-group col-md-4">
+                    <div className="mt-4 form-group col-md-3">
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Empresa: </u>
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="empresa"
+                            ref={empresaRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+                            <option value="W">
+                                Werchow
+                            </option>
+                            <option value="M">
+                                Mutual San Valentin
+                            </option>
+                        </select>
+                    </div>
+
+                    <div className="mt-4 form-group col-md-3">
                         <label>
                             <strong>
                                 {" "}
@@ -184,7 +208,17 @@ const FormNuevaCaja = ({
 
             <div className='mt-4 border border-dark p-4'>
 
-                <div className='row'>
+                {
+                    emp ? (
+                        <h3 className='mb-4'>
+                            <u>
+                                Empresa
+                            </u>: {emp}
+                        </h3>
+                    ) : null
+                }
+
+                <div className='row mt-4'>
 
                     <div className='col-md-12'>
                         <h4 className='mb-4'>
