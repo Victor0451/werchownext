@@ -1,25 +1,21 @@
 import React from 'react'
 import ListadoMovimientos from './ListadoMovimientos'
 
-const CajaDetalles = ({
-    ingreso,
-    egreso,
-    totales,
+const GenerarAcumulado = ({
+    suc,
+    mes,
+    ano,
+    acumuladoI,
+    acumuladoE,
+    totales
 
 }) => {
-
     return (
         <div className='container list border border-dark mt-4 p-4'>
             <h3 className="modal-title" id="exampleModalLabel">
-                {
-                    ingreso.length > 0 ? (
-                        <strong>
-                            <u>
-                                Caja N°
-                            </u>: {ingreso[0].idcaja}, {ingreso[0].sucursal} - {ingreso[0].operador_carga}
-                        </strong>
-                    ) : null
-                }
+                <u>
+                    Acumulado:
+                </u>
             </h3>
 
             <div className='mt-4 border border-dark p-4'>
@@ -34,7 +30,7 @@ const CajaDetalles = ({
                         </h4>
 
                         <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
-                            Saldo: $  {totales(ingreso, "I") - totales(egreso, "E")}
+                            Saldo: $  {totales(acumuladoI, "I") - totales(acumuladoE, "E")}
                         </div>
                     </div>
 
@@ -46,14 +42,13 @@ const CajaDetalles = ({
                         </h4>
 
                         <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
-                            Total Ingresos: $  {totales(ingreso, "I")}
+                            Total Ingresos: $  {totales(acumuladoI, "I")}
                         </div>
 
                         <ListadoMovimientos
-                            listado={ingreso}
+                            listado={acumuladoI}
                             f={'list'}
-                        />
-
+                        />                     
 
                     </div>
 
@@ -66,11 +61,11 @@ const CajaDetalles = ({
                         </h4>
 
                         <div className='alert alert-info text-center text-uppercase border border-dark mt-4 mb-4'>
-                            Total Egresos: $ {totales(egreso, "E")}
+                            Total Egresos: $ {totales(acumuladoE, "E")}
                         </div>
 
                         <ListadoMovimientos
-                            listado={egreso}
+                            listado={acumuladoE}
                             f={'list'}
                         />
 
@@ -84,4 +79,4 @@ const CajaDetalles = ({
     )
 }
 
-export default CajaDetalles
+export default GenerarAcumulado

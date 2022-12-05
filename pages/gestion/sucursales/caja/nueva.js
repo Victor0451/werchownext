@@ -7,6 +7,7 @@ import toastr from "toastr";
 import Router from "next/router";
 import { ip } from '../../../../config/config'
 import FormNuevaCaja from "../../../../components/gestion/sucursales/cajas/FormNuevaCaja";
+import { registrarHistoria } from '../../../../utils/funciones'
 
 
 const nueva = () => {
@@ -162,13 +163,16 @@ const nueva = () => {
 
         await axios.post(`${ip}api/sgi/cajasucursales/nuevacaja`, caja)
             .then(res => {
-                console.log(res.data)
+
                 if (res.status === 200) {
 
                     toastr.success("Caja generada, registrando movimientos", "ATENCION")
 
                     postMov(res.data.idcaja)
 
+                    let accion = `Se registro caja de sucursal: ${caja.sucursal} del dia: ${moment(caja.fecha_carga).format('DD/MM/YYYY')}. Ingresos: $ ${caja.ingresos}, Egresos: $ ${caja.egresos}. Saldo Final: ${caja.saldo}`
+
+                    registrarHistoria(accion, user)
 
                     setTimeout(() => {
 

@@ -88,7 +88,8 @@ const caja = () => {
 
         document.body.innerHTML = contenidoOrg;
 
-        window.location.replace("/sepelio/caja/listado");
+        window.location.reload()
+
     };
 
     let token = jsCookie.get("token");

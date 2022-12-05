@@ -51,6 +51,21 @@ export const meses = [
   { value: 12, label: "DICIEMBRE" },
 ];
 
+export const meses2 = [
+  { value: "01", label: "ENERO" },
+  { value: "02", label: "FEBRERO" },
+  { value: "03", label: "MARZO" },
+  { value: "04", label: "ABRIL" },
+  { value: "05", label: "MAYO" },
+  { value: "06", label: "JUNIO" },
+  { value: "07", label: "JULIO" },
+  { value: "08", label: "AGOSTO" },
+  { value: "09", label: "SEPTIEMBRE" },
+  { value: "10", label: "OCTUBRE" },
+  { value: "11", label: "NOVIEMBRE" },
+  { value: "12", label: "DICIEMBRE" },
+];
+
 export const mesventas = [
   { value: "ENERO", label: "ENERO" },
   { value: "FEBRERO", label: "FEBRERO" },
