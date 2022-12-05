@@ -16,9 +16,11 @@ const Acumulado = () => {
     let anoRef = React.createRef()
 
     const [user, guardarUsuario] = useState(null)
+    const [perfil, guardarPerfil] = useState(null)
     const [errores, guardarErrores] = useState([])
     const [acumuladoI, guardarAcumuladoI] = useState([])
     const [acumuladoE, guardarAcumuladoE] = useState([])
+    const [flag, guardarFlag] = useState(false)
 
 
 
@@ -56,8 +58,9 @@ const Acumulado = () => {
 
                     if (res.data.length > 0) {
 
-                        guardarAcumuladoI(res.data)
+                        guardarFlag(true)
 
+                        guardarAcumuladoI(res.data)
 
                     } else if (res.data.length === 0) {
 
@@ -103,7 +106,7 @@ const Acumulado = () => {
 
         }
 
-
+        
 
     }
 
@@ -164,6 +167,7 @@ const Acumulado = () => {
             if (usuario) {
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
+                guardarPerfil(userData.perfil)
 
             }
 
@@ -180,32 +184,46 @@ const Acumulado = () => {
                 mesRef={mesRef}
                 anoRef={anoRef}
                 generarAcumulado={generarAcumulado}
+                perfil={perfil}
+                user={user}
             />
 
 
-            <div id="caja">
-                <GenerarAcumulado
-                    totales={totales}
-                    acumuladoI={acumuladoI}
-                    acumuladoE={acumuladoE}
-                />
-            </div>
-            <div className="container list border border-dark p-4 mt-4">
-                <h2 className="mb-4">
-                    <strong>
-                        <u>Opciones</u>
-                    </strong>
-                </h2>
+            {
+                flag === true ? (
 
-                <div className="d-flex justify-content-center border border-dark p-4">
-                    <button
-                        className="btn btn-primary  "
-                        onClick={() => imprimir("caja")}
-                    >
-                        Imprimir
-                    </button>
-                </div>
-            </div>
+                    <>
+
+                        <div id="caja">
+                            <GenerarAcumulado
+                                totales={totales}
+                                acumuladoI={acumuladoI}
+                                acumuladoE={acumuladoE}
+                            />
+                        </div>
+                        <div className="container list border border-dark p-4 mt-4">
+                            <h2 className="mb-4">
+                                <strong>
+                                    <u>Opciones</u>
+                                </strong>
+                            </h2>
+
+                            <div className="d-flex justify-content-center border border-dark p-4">
+                                <button
+                                    className="btn btn-primary  "
+                                    onClick={() => imprimir("caja")}
+                                >
+                                    Imprimir
+                                </button>
+                            </div>
+                        </div>
+
+                    </>
+
+                ) : null
+            }
+
+
 
         </Layout>
     )

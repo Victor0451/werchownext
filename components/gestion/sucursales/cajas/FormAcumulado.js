@@ -5,7 +5,9 @@ const FormAcumulado = ({
     sucursalRef,
     mesRef,
     anoRef,
-    generarAcumulado
+    generarAcumulado,
+    perfil,
+    user,
 }) => {
     return (
         <div className='container border border-dark mt-4 p-4 list'>
@@ -35,18 +37,43 @@ const FormAcumulado = ({
                             ref={sucursalRef}
                         >
                             <option selected value="no"> Elige una Opcion </option>
-                            <option value="Palpala">
-                                Palpala
-                            </option>
-                            <option value="Perico">
-                                Perico
-                            </option>
-                            <option value="El Carmen">
-                                El Carmen
-                            </option>
-                            <option value="San Pedro">
-                                San Pedro
-                            </option>
+                            {
+                                perfil === 1 || perfil === 3 ? (
+                                    <>
+                                        <option value="Palpala">
+                                            Palpala
+                                        </option>
+                                        <option value="Perico">
+                                            Perico
+                                        </option>
+                                        <option value="El Carmen">
+                                            El Carmen
+                                        </option>
+                                        <option value="San Pedro">
+                                            San Pedro
+                                        </option>
+                                    </>
+                                ) : perfil === 2 && user === 'sjuarez' ? (
+
+                                    <option value="San Pedro">
+                                        San Pedro
+                                    </option>
+
+                                ) : perfil === 2 && user === 'vgorosito' ? (
+
+                                    <option value="Perico">
+                                        Perico
+                                    </option>
+                                ) : perfil === 2 && user === 'mcarriso' ? (
+
+                                    <option value="Palpala">
+                                        Palpala
+                                    </option>
+
+                                ) : null
+                            }
+
+
                         </select>
                     </div>
 

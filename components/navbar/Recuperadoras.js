@@ -118,6 +118,12 @@ const Recuperadoras = ({ usuario, perfil }) => {
                   Listado de Cajas
                 </a>
               </li>
+              <hr />
+              <li>
+                <a href="/gestion/sucursales/caja/acumulado" className="dropdown-item text-dark">
+                  Generar Acumulado
+                </a>
+              </li>
             </ul>
           </li>
           <hr />
