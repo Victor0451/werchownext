@@ -14,41 +14,70 @@ const Acumulado = () => {
     let sucursalRef = React.createRef()
     let mesRef = React.createRef()
     let anoRef = React.createRef()
+    let empresaRef = React.createRef()
 
     const [user, guardarUsuario] = useState(null)
     const [perfil, guardarPerfil] = useState(null)
-    const [errores, guardarErrores] = useState([])
+    const [errores, guardarErrores] = useState(null)
     const [acumuladoI, guardarAcumuladoI] = useState([])
     const [acumuladoE, guardarAcumuladoE] = useState([])
     const [flag, guardarFlag] = useState(false)
+    const [empre, guardarEmpre] = useState(null)
+    const [sucu, guardarSucu] = useState(null)
 
 
 
 
     const generarAcumulado = async () => {
 
+        guardarErrores(null)
+        guardarAcumuladoI([])
+        guardarAcumuladoE([])
+        guardarEmpre(null)
+        guardarSucu(null)
+
+
+        let emp = empresaRef.current.value
         let suc = sucursalRef.current.value
         let mes = mesRef.current.value
         let ano = anoRef.current.value
 
 
-        if (suc === "") {
+        if (emp === "no") {
+
+            guardarErrores("Debes seleccionar una empresa")
+
+        } else if (suc === "no") {
 
             guardarErrores("Debes seleccionar una sucursal")
 
-        } else if (mes === "") {
+        } else if (mes === "no") {
 
             guardarErrores("Debes seleccionar un mes")
 
-        } else if (ano === "") {
+        } else if (ano === "no") {
 
             guardarErrores("Debes seleccionar un año")
 
         } else {
 
 
+            if (emp === "W") {
+
+                guardarEmpre("Werchow")
+
+            } else if (emp === "M") {
+
+                guardarEmpre("Mutual San Valentin")
+
+            }
+
+
+            guardarSucu(suc)
+
             await axios.get(`${ip}api/sgi/cajasucursales/generaracumuladoI`, {
                 params: {
+                    emp: emp,
                     suc: suc,
                     mes: mes,
                     ano: ano
@@ -78,6 +107,7 @@ const Acumulado = () => {
 
             await axios.get(`${ip}api/sgi/cajasucursales/generaracumuladoE`, {
                 params: {
+                    emp: emp,
                     suc: suc,
                     mes: mes,
                     ano: ano
@@ -106,7 +136,7 @@ const Acumulado = () => {
 
         }
 
-        
+
 
     }
 
@@ -183,9 +213,11 @@ const Acumulado = () => {
                 sucursalRef={sucursalRef}
                 mesRef={mesRef}
                 anoRef={anoRef}
+                empresaRef={empresaRef}
                 generarAcumulado={generarAcumulado}
                 perfil={perfil}
                 user={user}
+                errores={errores}
             />
 
 
@@ -196,6 +228,8 @@ const Acumulado = () => {
 
                         <div id="caja">
                             <GenerarAcumulado
+                                empre={empre}
+                                sucu={sucu}
                                 totales={totales}
                                 acumuladoI={acumuladoI}
                                 acumuladoE={acumuladoE}

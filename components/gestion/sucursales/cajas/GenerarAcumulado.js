@@ -2,9 +2,8 @@ import React from 'react'
 import ListadoMovimientos from './ListadoMovimientos'
 
 const GenerarAcumulado = ({
-    suc,
-    mes,
-    ano,
+    empre,
+    sucu,
     acumuladoI,
     acumuladoE,
     totales
@@ -14,8 +13,18 @@ const GenerarAcumulado = ({
         <div className='container list border border-dark mt-4 p-4'>
             <h3 className="modal-title" id="exampleModalLabel">
                 <u>
-                    Acumulado:
+                    Acumulado
                 </u>
+                :{" "}
+                {
+                    empre && sucu ? (
+                        <>
+                            {empre} - {sucu}
+                        </>
+                    ) : null
+                }
+
+
             </h3>
 
             <div className='mt-4 border border-dark p-4'>
@@ -48,7 +57,7 @@ const GenerarAcumulado = ({
                         <ListadoMovimientos
                             listado={acumuladoI}
                             f={'list'}
-                        />                     
+                        />
 
                     </div>
 

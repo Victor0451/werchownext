@@ -5,9 +5,11 @@ const FormAcumulado = ({
     sucursalRef,
     mesRef,
     anoRef,
+    empresaRef,
     generarAcumulado,
     perfil,
     user,
+    errores
 }) => {
     return (
         <div className='container border border-dark mt-4 p-4 list'>
@@ -22,6 +24,28 @@ const FormAcumulado = ({
             <div className='border border-dark p-4 mt-4'>
 
                 <div className='row'>
+
+                    <div className="mt-4 form-group col-md-3">
+
+                        <label>
+                            <strong>
+                                {" "}
+                                <u> Empresa: </u>
+                            </strong>
+                        </label>
+                        <select
+                            className="custom-select"
+                            name="operador"
+                            ref={empresaRef}
+                        >
+                            <option selected value="no"> Elige una Opcion </option>
+                            <option selected value="W"> Werchow </option>
+                            <option selected value="M"> Mutual </option>
+
+
+
+                        </select>
+                    </div>
 
                     <div className="mt-4 form-group col-md-3">
 
@@ -134,17 +158,33 @@ const FormAcumulado = ({
                         </select>
                     </div>
 
-                    <div className="mt-4 form-group col-md-3">
-                        <label>
+                </div>
 
-                        </label>
-                        <button
-                            className='btn btn-primary btn-block '
-                            onClick={generarAcumulado}
-                        >
-                            Generar
-                        </button>
-                    </div>
+
+                {
+                    errores ? (
+                        <div className='alert alert-danger mt-4 mb-4 text-uppercase text-center border border-dark'>
+                            {errores}
+                        </div>
+                    ) : null
+                }
+
+
+                <div className='row d-flex justify-content-end mt-4'>
+
+                    <button
+                        className='btn btn-primary  '
+                        onClick={generarAcumulado}
+                    >
+                        Generar
+                    </button>
+
+                    <a
+                        href='/gestion/sucursales/caja/listado'
+                        className='btn btn-danger  ml-1'
+                    >
+                        Cancelar
+                    </a>
 
                 </div>
 
