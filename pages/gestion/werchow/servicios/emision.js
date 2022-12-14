@@ -723,56 +723,67 @@ const Emision = () => {
     }
 
 
-    if (priUso === 0) {
+    if (detalleMed.COD_PRES === 'C_NJE') {
 
-      if (socio.GRUPO === 55 || socio.GRUPO === 66) {
+      uso.IMPORTE = detalleMed.CON_PAGA
 
-        uso.IMPORTE = 0
+    } else {
 
-      } else {
+      if (priUso === 0) {
 
-        uso.IMPORTE = 550
+        if (socio.GRUPO === 55 || socio.GRUPO === 66) {
+
+          uso.IMPORTE = 0
+
+        } else {
+
+          uso.IMPORTE = 550
+
+        }
+
+      } else if (priUso === 1) {
+
+        if (isj === true) {
+
+          uso.IMPORTE = 750 - 350
+
+        } else {
+
+          uso.IMPORTE = 750
+
+        }
+
+      } else if (priUso === 2) {
+
+
+        if (isj === true) {
+
+          uso.IMPORTE = 950 - 350
+
+        } else {
+
+          uso.IMPORTE = 950
+
+        }
+
+      } else if (priUso > 2) {
+
+        if (isj === true) {
+
+          uso.IMPORTE = parseFloat(detalleMed.CON_PAGA) - 350
+
+        } else {
+
+          uso.IMPORTE = detalleMed.CON_PAGA
+
+        }
 
       }
 
-    } else if (priUso === 1) {
-
-      if (isj === true) {
-
-        uso.IMPORTE = 750 - 350
-
-      } else {
-
-        uso.IMPORTE = 750
-
-      }
-
-    } else if (priUso === 2) {
-
-
-      if (isj === true) {
-
-        uso.IMPORTE = 950 - 350
-
-      } else {
-
-        uso.IMPORTE = 950
-
-      }
-
-    } else if (priUso > 2) {
-
-      if (isj === true) {
-
-        uso.IMPORTE = parseFloat(detalleMed.CON_PAGA) - 350
-
-      } else {
-
-        uso.IMPORTE = detalleMed.CON_PAGA
-
-      }
 
     }
+
+
 
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
@@ -1546,42 +1557,56 @@ const Emision = () => {
   const importeOrden = () => {
 
 
-    if (priUso === 0) {
+    if (detalleMed.COD_PRES === 'C_NJE') {
 
-      if (socio.GRUPO === 55 || socio.GRUPO === 66) {
+      let importe = ""
 
-        const importe = 0
+      importe = detalleMed.CON_PAGA
+
+      return importe
+
+    } else {
+
+      if (priUso === 0) {
+
+        if (socio.GRUPO === 55 || socio.GRUPO === 66) {
+
+          const importe = 0
+
+          return importe
+
+        } else {
+
+          const importe = 550
+
+          return importe
+
+        }
+
+      } else if (priUso === 1) {
+
+        const importe = 750
 
         return importe
 
-      } else {
+      } else if (priUso === 2) {
 
-        const importe = 550
+        const importe = 950
+
+        return importe
+
+
+      } else if (priUso > 2) {
+
+        const importe = detalleMed.CON_PAGA
 
         return importe
 
       }
 
-    } else if (priUso === 1) {
-
-      const importe = 750
-
-      return importe
-
-    } else if (priUso === 2) {
-
-      const importe = 950
-
-      return importe
-
-
-    } else if (priUso > 2) {
-
-      const importe = detalleMed.CON_PAGA
-
-      return importe
-
     }
+
+
   }
 
   // ----------------------------------------------
