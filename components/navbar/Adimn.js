@@ -242,6 +242,27 @@ const Adimn = () => {
               data-toggle="dropdown"
               className="  dropdown-toggle dropdown-item text-dark"
             >
+              Contratos
+            </a>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  href="/gestion/contratos/nuevo"
+                  className="dropdown-item text-dark"
+                >
+                  Generar Contrato
+                </a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li className="dropdown-submenu">
+            <a
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              className="  dropdown-toggle dropdown-item text-dark"
+            >
               Caja
             </a>
             <ul className="dropdown-menu">
