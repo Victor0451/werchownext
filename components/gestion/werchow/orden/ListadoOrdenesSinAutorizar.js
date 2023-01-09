@@ -8,7 +8,8 @@ const ListadoOrdenesSinAutorizar = ({
     detalleOrdenPago,
     autorizarOrden,
     user,
-    traerAchivos
+    traerAchivos,
+
 
 }) => {
 
@@ -106,11 +107,14 @@ const ListadoOrdenesSinAutorizar = ({
 
                                     Cell: (row) => (
                                         <div>
-                                            {row.original.autorizado === 0 ?
+                                            {row.original.autorizado === 0 && row.original.estado === 1 ?
                                                 ("Pendiente")
-                                                : row.original.autorizado === 1 ?
+                                                : row.original.autorizado === 1 && row.original.estado === 1 ?
                                                     ("Autorizada")
-                                                    : null}
+                                                    :
+                                                    row.original.estado === 0 ?
+                                                        ("Anulada")
+                                                        : null}
                                         </div>
                                     ),
                                 },

@@ -12,6 +12,7 @@ import ModalImpresion from "../../../../components/gestion/werchow/orden/ModalIm
 import ModalSubirArchivo from "../../../../components/gestion/werchow/orden/ModalSubirArchivo";
 import { registrarHistoria } from '../../../../utils/funciones'
 import ModalLegajoOrden from "../../../../components/gestion/werchow/orden/ModalLegajoOrden";
+import { confirmAlert } from 'react-confirm-alert';
 
 
 const estadoordenes = () => {
@@ -194,15 +195,71 @@ const estadoordenes = () => {
 
     }
 
+    const anularOrden = async (id, norden) => {
+
+        await confirmAlert({
+            title: 'ATENCION',
+            message: '¿Seguro quieres anular la orden?',
+            buttons: [
+                {
+                    label: 'Si',
+                    onClick: () => {
+
+                        axios.put(`${ip}api/sgi/ordenpago/anularorden/${id}`)
+                            .then(res => {
+
+                                if (res.status === 200) {
+
+                                    toastr.success("La orden fue marcada como pagada")
+
+                                    let accion = `Se anulo la orden de pago ID: ${norden}, por el usuario: ${user}`
+
+                                    registrarHistoria(accion, user)
+
+
+                                    setTimeout(() => {
+
+                                        traerOrdenes(user, perfil)
+
+                                    }, 500);
+
+                                }
+
+                            }).catch(error => {
+                                console.log(error)
+
+                                toastr.error("Ocurrio un error al marcar la orden")
+                            })
+
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
+
+
+
+    }
+
     const getTrProps = (state, rowInfo, instance) => {
         if (rowInfo) {
             return {
                 style: {
-                    "background-color": rowInfo.original.pagado === 0 ? "pink"
-                        : rowInfo.original.pagado === 1 ? "#90EE90"
-                            : null,
+                    "background-color": rowInfo.original.estado === 0 ? "red"
+                        : rowInfo.original.pagado === 0 ? "pink"
+                            : rowInfo.original.pagado === 1 ? "#90EE90"
+
+                                : null
+                    ,
+                    "color": rowInfo.original.estado === 0 ? "white"
+                        : null
 
                 },
+
+
             };
         }
         return {};
@@ -242,6 +299,7 @@ const estadoordenes = () => {
                 traerAchivos={traerAchivos}
                 getTrProps={getTrProps}
                 updatePagadas={updatePagadas}
+                anularOrden={anularOrden}
             />
 
             <ModalDetalleOrden

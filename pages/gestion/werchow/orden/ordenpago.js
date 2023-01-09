@@ -258,7 +258,8 @@ const OrdenPago = () => {
       nfactura: "0",
       tipo_factura: "0",
       fecha_pago: "",
-      pagado: 0
+      pagado: 0,
+      estado: 1
 
     }
 
@@ -286,6 +287,10 @@ const OrdenPago = () => {
 
           mandarMail(orPag)
 
+          let accion = `Se registro orden de pago de consultas medicas ID: ${orPag.norden}, prestador: ${orPag.proveedor} - ${orPag.nombre}, por un monto de: ${orPag.total}`
+
+          registrarHistoria(accion, user)
+
         }
 
       } else if (f === "practica") {
@@ -309,6 +314,10 @@ const OrdenPago = () => {
           postOrdenMedicas(orPag)
 
           mandarMail(orPag)
+
+          let accion = `Se registro orden de pago de practicas medicas ID: ${orPag.norden}, prestador: ${orPag.proveedor} - ${orPag.nombre}, por un monto de: ${orPag.total}.`
+
+          registrarHistoria(accion, user)
 
 
         }
@@ -353,6 +362,10 @@ const OrdenPago = () => {
         postOrdenContable(orPag)
 
         mandarMail(orPag)
+
+        let accion = `Se registro orden de pago de contable ID: ${orPag.norden}, prestador: ${orPag.proveedor} - ${orPag.nombre}, por un monto de: ${orPag.total}.`
+
+        registrarHistoria(accion, user)
 
       }
 

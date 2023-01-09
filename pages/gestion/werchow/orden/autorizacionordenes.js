@@ -16,7 +16,7 @@ const autorizacionordenes = () => {
     const [user, guardarUsuario] = useState(null)
     const [listado, guardarListado] = useState([])
     const [listDetalle, guardarListDetalle] = useState([])
-    const [archivos, guardarArchivos] = useState([]);    
+    const [archivos, guardarArchivos] = useState([]);
     const [archi, guardarArchi] = useState(null);
 
     const eliminarArchivos = async (id) => {
@@ -125,6 +125,7 @@ const autorizacionordenes = () => {
             })
 
     }
+
 
     let token = jsCookie.get("token");
 

@@ -9,7 +9,8 @@ const ListadoEstadoOrdenes = ({
     guardarOrde,
     traerAchivos,
     getTrProps,
-    updatePagadas
+    updatePagadas,
+    anularOrden
 }) => {
 
     if (listado.length === 0) return <div className='container border border-dark alert alert-info text-center text-uppercase mt-4 mb-4'>No hay ordenes registradas</div>
@@ -27,9 +28,9 @@ const ListadoEstadoOrdenes = ({
 
 
             <div className='alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase'>
-                Las ordenes de pago que no esten pagadas, saldran en color rojo. Por lo contrario, se pondran en color verde.
+                Las ordenes de pago que no esten pagadas, saldran en color rosado. Por lo contrario, se pondran en color verde.
                 Para marcalas como pagadas, primero deben estar autorizadas. De esta manera aparecera un boton verde con un visto,
-                al cual haciendole click se tildara como pagada.
+                al cual haciendole click se tildara como pagada. Las ordenes que aparezcan en rojo con letras, estan anuladas.
             </div>
 
             <div
@@ -122,11 +123,14 @@ const ListadoEstadoOrdenes = ({
 
                                     Cell: (row) => (
                                         <div>
-                                            {row.original.autorizado === 0 ?
+                                            {row.original.autorizado === 0 && row.original.estado === 1 ?
                                                 ("Pendiente")
-                                                : row.original.autorizado === 1 ?
+                                                : row.original.autorizado === 1 && row.original.estado === 1 ?
                                                     ("Autorizada")
-                                                    : null}
+                                                    :
+                                                    row.original.estado === 0 ?
+                                                        ("Anulada")
+                                                        : null}
                                         </div>
                                     ),
                                 },
@@ -208,6 +212,16 @@ const ListadoEstadoOrdenes = ({
                                                 <i className="fa fa-folder-open-o" aria-hidden="true"></i>
 
                                             </button>
+
+                                            {row.original.autorizado === 0 && row.original.estado === 1 ? (
+                                                <button
+                                                    className="btn btn-danger btn-sm ml-1"
+                                                    onClick={() => { anularOrden(row.original.idorden, row.original.norden) }}
+                                                >
+                                                    <i className="fa fa-trash" aria-hidden="true"></i>
+
+                                                </button>
+                                            ) : null}
 
 
                                         </div>
