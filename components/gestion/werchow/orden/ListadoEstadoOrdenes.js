@@ -216,7 +216,7 @@ const ListadoEstadoOrdenes = ({
                                             {row.original.autorizado === 0 && row.original.estado === 1 ? (
                                                 <button
                                                     className="btn btn-danger btn-sm ml-1"
-                                                    onClick={() => { anularOrden(row.original.idorden, row.original.norden) }}
+                                                    onClick={() => { anularOrden(row.original.idorden, row.original.norden, row.original.tipo_orden) }}
                                                 >
                                                     <i className="fa fa-trash" aria-hidden="true"></i>
 

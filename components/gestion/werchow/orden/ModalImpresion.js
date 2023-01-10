@@ -147,39 +147,50 @@ const ModalImpresion = ({
                                 </div>
 
 
-                                {orde.autorizado === 1 ? (
+                                {
+                                    orde.estado === 0 ?
 
-                                    <>
-                                        <div className='col-md-3 mt-4'>
-                                            <label>
-                                                <u>
-                                                    Autorizada por:
-                                                </u>
-                                            </label>
+                                        (
+                                            <div className='col-md-12 mt-4'>
+                                                <div className='alert alert-danger mt-4 mb-4 border border-dark text-center text-uppercase'>
+                                                    Esta orden esta anulada, sin validez. 
+                                                </div>
+                                            </div>
+                                        )
 
-                                            <input type={"text"} className='form-control' value={orde.operador_autorizacion} />
-                                        </div>
+                                        : orde.autorizado === 1 ? (
+
+                                            <>
+                                                <div className='col-md-3 mt-4'>
+                                                    <label>
+                                                        <u>
+                                                            Autorizada por:
+                                                        </u>
+                                                    </label>
+
+                                                    <input type={"text"} className='form-control' value={orde.operador_autorizacion} />
+                                                </div>
 
 
-                                        <div className='col-md-3 mt-4'>
-                                            <label>
-                                                <u>
-                                                    Fecha de Autorizacion:
-                                                </u>
-                                            </label>
+                                                <div className='col-md-3 mt-4'>
+                                                    <label>
+                                                        <u>
+                                                            Fecha de Autorizacion:
+                                                        </u>
+                                                    </label>
 
-                                            <input type={"text"} className='form-control' value={moment(orde.fecha_autorizacion).format('DD/MM/YYYY')} />
-                                        </div>
-                                    </>
-                                ) : orde.autorizado === 0 ? (
+                                                    <input type={"text"} className='form-control' value={moment(orde.fecha_autorizacion).format('DD/MM/YYYY')} />
+                                                </div>
+                                            </>
+                                        ) : orde.autorizado === 0 ? (
 
-                                    <div className='col-md-12 mt-4'>
-                                        <div className='alert alert-info mt-4 mb-4 border border-dark text-center text-uppercase'>
-                                            Esta orden esta pendiente de autorizacion, por ende no tiene validez para realizar el pago.
-                                        </div>
-                                    </div>
+                                            <div className='col-md-12 mt-4'>
+                                                <div className='alert alert-info mt-4 mb-4 border border-dark text-center text-uppercase'>
+                                                    Esta orden esta pendiente de autorizacion, por ende no tiene validez para realizar el pago.
+                                                </div>
+                                            </div>
 
-                                ) : null}
+                                        ) : null}
 
 
                                 <div className='col-md-12 mt-4'>

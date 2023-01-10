@@ -249,7 +249,7 @@ const OrdenPago = () => {
       proveedor: codPres,
       nombre: nomPres,
       cuit_cuil: "",
-      total: totales(listadoCheck, "co"),
+      total: totales(listadoCheck, "li"),
       operador_carga: user,
       norden: norden,
       observacion: "",
@@ -482,6 +482,18 @@ const OrdenPago = () => {
         total += parseFloat(arr[i].IMPORTE)
 
       }
+
+      return total.toFixed(2)
+
+    } else if (f === "li") {
+
+      for (let i = 0; i < arr.length; i++) {
+
+        total += parseFloat(arr[i].LIQUIDAR)
+
+      }
+
+
 
       return total.toFixed(2)
 

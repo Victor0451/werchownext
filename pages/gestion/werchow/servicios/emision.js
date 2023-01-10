@@ -712,6 +712,7 @@ const Emision = () => {
       HORA: moment().format('HH:mm'),
       SERVICIO: "ORDE",
       IMPORTE: detalleMed.MAX_DESC,
+      IMP_LIQ: detalleMed.CON_PAGA,
       VALOR: 0,
       PUESTO: "",
       PRESTADO: detalleMed.COD_PRES,
@@ -723,7 +724,7 @@ const Emision = () => {
     }
 
 
-    if (detalleMed.COD_PRES === 'C_NJE') {
+    if (detalleMed.COD_PRES === 'C_NJE' || detalleMed.COD_PRES === 'C_OVI' || detalleMed.COD_PRES === 'C_OR1') {
 
       uso.IMPORTE = detalleMed.CON_PAGA
 
@@ -968,6 +969,7 @@ const Emision = () => {
       HORA: moment().format('HH:mm'),
       SERVICIO: `P${detalleMed.SERVICIO}`,
       IMPORTE: calcularTotalPracticas(pracSocio),
+      IMP_LIQ: calcularTotalPracticas(pracSocio),
       VALOR: 0,
       PUESTO: "",
       PRESTADO: detalleMed.COD_PRES,
@@ -1180,6 +1182,7 @@ const Emision = () => {
       VALOR: parseFloat(descuentoRef.current.value),
       SERVICIO: `FARM`,
       IMPORTE: 0,
+      IMP_LIQ: 0,
       PUESTO: "",
       PRESTADO: farmaciaRef.current.value,
       OPERADOR: user.codigo,
@@ -1305,6 +1308,7 @@ const Emision = () => {
       VALOR: 0,
       SERVICIO: `ENFE`,
       IMPORTE: 0,
+      IMP_LIQ: 0,
       PUESTO: "",
       PRESTADO: detEnf.COD_PRES,
       OPERADOR: user.codigo,
@@ -1557,7 +1561,7 @@ const Emision = () => {
   const importeOrden = () => {
 
 
-    if (detalleMed.COD_PRES === 'C_NJE') {
+    if (detalleMed.COD_PRES === 'C_NJE' || detalleMed.COD_PRES === 'C_OVI') {
 
       let importe = ""
 
@@ -1565,7 +1569,17 @@ const Emision = () => {
 
       return importe
 
-    } else {
+    } else if (detalleMed.COD_PRES === 'C_OR1') {
+
+      let importe = ""
+
+      importe = detalleMed.CON_PAGA - (detalleMed.CON_PAGA * 0.10)
+
+      return importe
+
+    }
+
+    else {
 
       if (priUso === 0) {
 

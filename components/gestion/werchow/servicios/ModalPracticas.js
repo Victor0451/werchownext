@@ -195,8 +195,13 @@ const ModalPractica = ({
                 </div>
 
                 {socio.GRUPO === 66 || socio.GRUPO === 55 && nFisio >= 0 && nFisio < 8 ? (
-                  <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
-                    Total Practicas: 100% Bonificadas
+                  <div>
+                    <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                      Total Practicas: ${calcularTotalPracticas(pracSocio)}
+                    </div>
+                    <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">
+                      Este socio dispone de {8 - nFisio} sesiones de fisioterapia bonificadas al 100%.
+                    </div>
                   </div>
                 ) : socio.GRUPO === 66 || socio.GRUPO === 55 && nFisio === 8 ? (
                   <div className=" mt-4 border border-dark alert alert-info text-center text-uppercase">

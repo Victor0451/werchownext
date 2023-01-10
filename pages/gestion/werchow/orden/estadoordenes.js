@@ -25,6 +25,7 @@ const estadoordenes = () => {
     const [archivos, guardarArchivos] = useState([]);
     const [error, guardarError] = useState(null);
     const [archi, guardarArchi] = useState(null);
+    const [listOr, guardarListOrd] = useState(null)
 
     const eliminarArchivos = async (id) => {
 
@@ -195,7 +196,51 @@ const estadoordenes = () => {
 
     }
 
-    const anularOrden = async (id, norden) => {
+    const desCheckUsos = async (norden) => {
+
+        await axios.get(`${ip}api/sgi/ordenpago/detalleorden`,
+            {
+                params: {
+                    id: norden
+                }
+            })
+            .then(res => {
+
+                guardarListOrd(res.data)
+
+                if (res.data.length > 0) {
+
+                    let arr = res.data
+
+                    for (let i = 0; i < arr.length; i++) {
+
+
+                        axios.put(`${ip}api/sgi/ordenpago/deschekusos/${arr[i].nconsulta}`)
+
+                        axios.put(`${ip}api/sgi/ordenpago/deschekusosfa/${arr[i].nconsulta}`)
+
+
+                    }
+
+                }
+
+
+            })
+            .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al traer las ordenes", "ATENCION")
+            })
+
+
+
+
+
+
+
+    }
+
+    const anularOrden = async (id, norden, tipOr) => {
+
 
         await confirmAlert({
             title: 'ATENCION',
@@ -205,31 +250,68 @@ const estadoordenes = () => {
                     label: 'Si',
                     onClick: () => {
 
-                        axios.put(`${ip}api/sgi/ordenpago/anularorden/${id}`)
-                            .then(res => {
+                        if (tipOr === 'Contable') {
 
-                                if (res.status === 200) {
+                            axios.put(`${ip}api/sgi/ordenpago/anularorden/${id}`)
+                                .then(res => {
 
-                                    toastr.success("La orden fue marcada como pagada")
+                                    if (res.status === 200) {
 
-                                    let accion = `Se anulo la orden de pago ID: ${norden}, por el usuario: ${user}`
+                                        toastr.success("La orden fue marcada como pagada")
 
-                                    registrarHistoria(accion, user)
+                                        let accion = `Se anulo la orden de pago ID: ${norden}, por el usuario: ${user}`
+
+                                        registrarHistoria(accion, user)
 
 
-                                    setTimeout(() => {
+                                        setTimeout(() => {
 
-                                        traerOrdenes(user, perfil)
+                                            traerOrdenes(user, perfil)
 
-                                    }, 500);
+                                        }, 500);
 
-                                }
+                                    }
 
-                            }).catch(error => {
-                                console.log(error)
+                                }).catch(error => {
+                                    console.log(error)
 
-                                toastr.error("Ocurrio un error al marcar la orden")
-                            })
+                                    toastr.error("Ocurrio un error al marcar la orden")
+                                })
+
+                        } else if (tipOr === 'Ordenes Medica' || tipOr === 'Practicas Medica') {
+
+                            axios.put(`${ip}api/sgi/ordenpago/anularorden/${id}`)
+                                .then(res => {
+
+                                    if (res.status === 200) {
+
+                                        toastr.success("La orden fue marcada como pagada")
+
+                                        let accion = `Se anulo la orden de pago ID: ${norden}, por el usuario: ${user}`
+
+                                        registrarHistoria(accion, user)
+
+                                        desCheckUsos(norden)
+
+                                        setTimeout(() => {
+
+                                            traerOrdenes(user, perfil)
+
+                                        }, 500);
+
+                                    }
+
+                                }).catch(error => {
+                                    console.log(error)
+
+                                    toastr.error("Ocurrio un error al marcar la orden")
+                                })
+
+
+
+                        }
+
+
 
                     }
                 },
