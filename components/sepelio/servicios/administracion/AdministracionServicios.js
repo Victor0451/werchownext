@@ -4,7 +4,7 @@ import ListadoServiciosSinImpactar from "./ListadosServiciosSinImapctar";
 const AdministracionServicios = ({ listado, actualizar }) => {
   if (!listado)
     return (
-      <div className="alert alert-info text-center text-uppercase mt-4">
+      <div className="container border border-dark alert alert-info text-center text-uppercase mt-4">
         Todos los servicios estan impactados
       </div>
     );

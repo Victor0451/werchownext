@@ -121,6 +121,9 @@ const seguimientoplan = () => {
 
                         traerPlan()
 
+                        let accion = `Se registro cobranza de cuota del plan ID: ${plan.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}, por un total de ${pago.pag}`
+
+                        registrarHistoria(accion, user)
 
                         if (plan.total > plan.pagado) {
 
@@ -214,6 +217,19 @@ const seguimientoplan = () => {
 
     }
 
+    const imprimir = () => {
+        let contenido = document.getElementById("orden").innerHTML;
+        let contenidoOrg = document.body.innerHTML;
+
+        document.body.innerHTML = contenido;
+
+        window.print();
+
+        document.body.innerHTML = contenidoOrg;
+
+        window.location.replace('/gestion/werchow/servicios/seguimientoplan');
+    };
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
@@ -265,6 +281,7 @@ const seguimientoplan = () => {
                 <ModalReciboPagoVisita
                     plan={plan}
                     datVisi={datVisi}
+                    imprimir={imprimir}
                 />
             ) : null}
 
