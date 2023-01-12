@@ -18,12 +18,15 @@ const Emision = () => {
   let descuentoRef = React.createRef();
   let especialidadRef = React.createRef();
   let especialidadRefP = React.createRef();
+  let especialidadRefPl = React.createRef();
   let sucursalRef = React.createRef();
   let sucursalRefP = React.createRef();
   let sucursalRefE = React.createRef();
+  let sucursalRefPl = React.createRef();
   let medicoRef = React.createRef();
   let medicoRefP = React.createRef();
   let medicoRefE = React.createRef();
+  let medicoRefPl = React.createRef();
   let prestacionRefE = React.createRef();
   let cantidadRefE = React.createRef();
   let cantidadRefP = React.createRef();
@@ -52,6 +55,7 @@ const Emision = () => {
   const [priUso, guardarPriUso] = useState(0);
   const [nFisio, guardarNFisio] = useState(0);
   const [isj, guardarISJ] = useState(false)
+  const [planOrto, guardarPlanOrto] = useState(null)
 
 
 
@@ -1382,6 +1386,126 @@ const Emision = () => {
 
   // -------------------------------------------------
 
+
+  // PLANES ORTODONCIA
+
+  const traerPlanesOrto = async () => {
+
+    await axios.get(`${ip}api/sgi/servicios/planesorto`)
+      .then(res => {
+
+        guardarPlanOrto(res.data)
+
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el plan", "ATENCION")
+      })
+
+  }
+
+  const registrarPlanOrto = async () => {
+
+
+    const plan = {
+
+      contrato: socio.CONTRATO,
+      dni: socio.NRO_DOC,
+      socio: `${socio.APELLIDOS}, ${socio.NOMBRES}`,
+      fecha: moment().format('YYYY-MM-DD'),
+      total: planOrto.total,
+      pagado: planOrto.pago_inicial,
+      saldo: parseFloat(planOrto.total) - parseFloat(planOrto.pago_inicial),
+      estado: 1,
+      prestador: detalleMed.COD_PRES,
+      prestador_nombre: detalleMed.NOMBRE,
+      operador: user
+
+    }
+
+
+    await axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
+      .then(res => {
+
+        if (res.status === 200) {
+
+          toastr.success("Plan registrado correctamente", "ATENCION")
+
+          regPlanVisitas(res.data.idplansocio, plan.saldo)
+
+          let accion = `Se registro plan de ortodoncia ID: ${res.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
+
+          registrarHistoria(accion, user)
+
+          setTimeout(() => {
+
+            Router.push({
+              pathname: '/gestion/werchow/servicios/reciboplan',
+              query: {
+                id: res.data.idplansocio
+              },
+
+            });
+
+          }, 1000);
+
+
+        }
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+      })
+
+
+
+  }
+
+  const regPlanVisitas = async (plan, saldo) => {
+
+    let visi = {
+
+      idplan: plan,
+      nvisita: '',
+      pago: 0,
+      fecha: moment().format('YYYY-MM-DD'),
+      pagado: 0,
+      operador: user
+
+    }
+
+
+    for (let i = 1; i < planOrto.visitas; i++) {
+
+      if (i <= 3) {
+
+        visi.nvisita = i;
+        visi.pago = saldo / 3
+        visi.fecha = moment().add(i, "months").format('YYYY-MM-DD')
+
+      } else if (i > 3) {
+
+        visi.nvisita = i;
+        visi.pago = 0
+        visi.fecha = moment().add(i, "months").format('YYYY-MM-DD')
+
+      }
+
+
+
+      await axios.post(`${ip}api/sgi/servicios/nuevoplanvisita`, visi)
+
+    }
+
+
+  }
+
+
+  // ----------------------------------------------
+
+
   // FUNCIONES GENERALES
 
   const push = (url, p1, p2, p3, flag) => {
@@ -1494,6 +1618,23 @@ const Emision = () => {
           toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
         })
 
+    } else if (f === 'Pl' && especialidadRefPl.current.value !== null) {
+
+      await axios.get(`${ip}api/sgi/servicios/traermedporsuc`,
+        {
+          params: {
+            suc: sucursalRefPl.current.value,
+            esp: especialidadRefPl.current.value
+          }
+        })
+        .then(res => {
+          guardarMedicos(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
+
     }
   }
 
@@ -1536,6 +1677,19 @@ const Emision = () => {
           guardarDetalleEnfer(res.data)
 
           traerPractEnfer()
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer el listado de Especialidades", "ATENCION")
+        })
+    } else if (f === 'Pl' && medicoRefPl.current.value !== null) {
+
+
+      await axios.get(`${ip}api/sgi/servicios/traerdetallemedico/${medicoRefPl.current.value}`)
+        .then(res => {
+
+          guardarDetalleMed(res.data)
 
         })
         .catch(error => {
@@ -1628,6 +1782,9 @@ const Emision = () => {
 
 
 
+
+
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -1644,6 +1801,7 @@ const Emision = () => {
       traerSucursales()
       traerEspecialidades()
       traerFarmacias()
+      traerPlanesOrto()
 
     }
   }, []);
@@ -1685,10 +1843,13 @@ const Emision = () => {
               descuentoRef={descuentoRef}
               especialidadRef={especialidadRef}
               especialidadRefP={especialidadRefP}
+              especialidadRefPl={especialidadRefPl}
               sucursalRef={sucursalRef}
               sucursalRefP={sucursalRefP}
+              sucursalRefPl={sucursalRefPl}
               medicoRef={medicoRef}
               medicoRefP={medicoRefP}
+              medicoRefPl={medicoRefPl}
               traerDetalleMedSelec={traerDetalleMedSelec}
               detalleMed={detalleMed}
               sucursales={sucursales}
@@ -1722,6 +1883,8 @@ const Emision = () => {
               isj={isj}
               importeOrden={importeOrden}
               verificarUso={verificarUso}
+              planOrto={planOrto}
+              registrarPlanOrto={registrarPlanOrto}
             />
           ) : null}
         </>

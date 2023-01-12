@@ -160,6 +160,15 @@ export default class Gerencia extends Component {
                     Gestion de Turnos Medicos
                   </a>
                 </li>
+                <hr />
+                <li>
+                  <a
+                    href="/gestion/werchow/servicios/seguimientoplan"
+                    className="dropdown-item text-dark"
+                  >
+                    Seguimiento Plan Ortodoncia
+                  </a>
+                </li>
               </ul>
             </li>
 

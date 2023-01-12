@@ -3,6 +3,7 @@ import ModalConsulta from "./ModalConsulta";
 import ModalEnfermeria from "./ModalEnfermeria";
 import ModalFarmacia from "./ModalFarmacia";
 import ModalPractica from "./ModalPracticas";
+import ModalPlanOrtodoncia from './ModalPlanOrtodoncia'
 
 const OpcionesServicios = ({
   socio,
@@ -15,10 +16,13 @@ const OpcionesServicios = ({
   descuentoRef,
   especialidadRef,
   especialidadRefP,
+  especialidadRefPl,
   sucursalRef,
   sucursalRefP,
+  sucursalRefPl,
   medicoRef,
   medicoRefP,
+  medicoRefPl,
   traerDetalleMedSelec,
   detalleMed,
   registrarOrdenUsos,
@@ -47,7 +51,9 @@ const OpcionesServicios = ({
   selector,
   isj,
   importeOrden,
-  verificarUso
+  verificarUso,
+  planOrto,
+  registrarPlanOrto
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -116,20 +122,20 @@ const OpcionesServicios = ({
             </div>
           </div>
         </div>
-        {/*
+
         <div className="col mb-4 ">
           <div className="card border border-dark">
-            <img src="/img/emision/reintegro.jpg" className="card-img-top" alt="..." />
+            <img src="/img/emision/ortodoncia.png" className="card-img-top" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Reintegros</h5>
-              <p className="card-text">Emitir Reintegro</p>
+              <h5 className="card-title">Plan de Ortodoncia</h5>
+              {/* <p className="card-text">Registro y seguimiento de los planes de ortodocina</p> */}
               <button className="btn btn-primary btn-sm rounded"
-                data-toggle="modal" data-target="#modalFarmacia"
+                data-toggle="modal" data-target="#modalPlanOrtodoncia"
               >Generar</button>
             </div>
           </div>
-        </div> 
-        */}
+        </div>
+
       </div>
 
 
@@ -203,6 +209,31 @@ const OpcionesServicios = ({
         registrarEnfermeriaUso={registrarEnfermeriaUso}
         priUso={priUso}
       />
+
+      <ModalPlanOrtodoncia
+        socio={socio}
+        sucursales={sucursales}
+        espec={espec}
+        medicos={medicos}
+        especialidadRefPl={especialidadRefPl}
+        sucursalRefPl={sucursalRefPl}
+        medicoRefPl={medicoRefPl}
+        traerMedicosPorSuc={traerMedicosPorSuc}
+        traerDetalleMedSelec={traerDetalleMedSelec}
+        detalleMed={detalleMed}
+        practicas={practicas}
+        agregarPractica={agregarPractica}
+        pracSocio={pracSocio}
+        eliminarPracticaPrecargado={eliminarPracticaPrecargado}
+        calcularTotalPracticas={calcularTotalPracticas}
+        registrarPracticaUso={registrarPracticaUso}
+        cantidadRefP={cantidadRefP}
+        priUso={priUso}
+        nFisio={nFisio}
+        planOrto={planOrto}
+        registrarPlanOrto={registrarPlanOrto}
+      />
+
 
       {/* --------------------------- */}
 
