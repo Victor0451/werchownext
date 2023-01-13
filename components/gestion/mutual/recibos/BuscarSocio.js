@@ -18,8 +18,8 @@ const BuscarSocio = ({
   SeleccionarM,
   emp,
   eventSelected,
-          visitas,
-          detVisi,
+  visitas,
+  detVisi,
 
 }) => {
   return (
@@ -68,9 +68,9 @@ const BuscarSocio = ({
         </div>
 
         <Calendario
-      eventSelected={eventSelected}
-      visitas={visitas}
-      detVisi={detVisi}
+          eventSelected={eventSelected}
+          visitas={visitas}
+          detVisi={detVisi}
         />
 
       </div>

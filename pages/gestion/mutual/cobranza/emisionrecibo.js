@@ -22,7 +22,7 @@ const emisionrecibo = () => {
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
   const [pagosB, guardarPagosB] = useState(null);
-  const [allPagos, guardarAllPagos] = useState(null);
+  const [allPagos, guardarAllPagos] = useState([]);
   const [adhs, guardarAdhs] = useState(null);
   const [cuofija, guardarCuoFija] = useState(null);
   const [errores, guardarErrores] = useState(null);
@@ -911,7 +911,7 @@ const emisionrecibo = () => {
 
   return (
     <Layout>
-      {flag === false ? (
+      {/* {flag === false ? (
         <BuscarSocio
           ficha={ficha}
           contratoRef={contratoRef}
@@ -933,27 +933,29 @@ const emisionrecibo = () => {
       ) : flag === true ? (
         <>
           {ficha ? (
-            <EmitirRecibo
-              ficha={ficha}
-              pagos={pagos}
-              pagosB={pagosB}
-              allPagos={allPagos}
-              adhs={adhs}
-              nupagos={nupagos}
-              mesRef={mesRef}
-              anoRef={anoRef}
-              importeRef={importeRef}
-              preCargarPago={preCargarPago}
-              eliminarPagoPrecargado={eliminarPagoPrecargado}
-              cuofija={cuofija}
-              totalPagosPrecargados={totalPagosPrecargados}
-              registrarPago={registrarPago}
-              cuoInt={cuoInt}
-              cuo={cuo}
-            />
+            <>
+            </>
+            // <EmitirRecibo
+            //   ficha={ficha}
+            //   pagos={pagos}
+            //   pagosB={pagosB}
+            //   allPagos={allPagos}
+            //   adhs={adhs}
+            //   nupagos={nupagos}
+            //   mesRef={mesRef}
+            //   anoRef={anoRef}
+            //   importeRef={importeRef}
+            //   preCargarPago={preCargarPago}
+            //   eliminarPagoPrecargado={eliminarPagoPrecargado}
+            //   cuofija={cuofija}
+            //   totalPagosPrecargados={totalPagosPrecargados}
+            //   registrarPago={registrarPago}
+            //   cuoInt={cuoInt}
+            //   cuo={cuo}
+            // />
           ) : null}
         </>
-      ) : null}
+      ) : null} */}
     </Layout>
   );
 };
