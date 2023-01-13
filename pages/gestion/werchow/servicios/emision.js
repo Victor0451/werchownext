@@ -10,6 +10,7 @@ import BuscarSocio from "../../../../components/gestion/mutual/recibos/BuscarSoc
 import EmitirServicio from "../../../../components/gestion/werchow/servicios/EmitirServicio";
 import { registrarHistoria } from '../../../../utils/funciones'
 
+
 const Emision = () => {
   let contratoRef = React.createRef();
   let dniRef = React.createRef();
@@ -56,6 +57,9 @@ const Emision = () => {
   const [nFisio, guardarNFisio] = useState(0);
   const [isj, guardarISJ] = useState(false)
   const [planOrto, guardarPlanOrto] = useState(null)
+  const [visitas, guardarVisitas] = useState([])
+  const [detVisi, guardarDetVisi] = useState(null);
+
 
 
 
@@ -1505,6 +1509,53 @@ const Emision = () => {
 
   // ----------------------------------------------
 
+  // MODAL CALENDARIO
+
+  const traerVisitas = async () => {
+    await axios
+      .get(` ${ip}api/sgi/servicios/traervisitas`)
+      .then((res) => {
+        let evs = res.data;
+
+        let arr = [];
+
+        for (let i = 0; i < evs.length; i++) {
+          let evarr = {
+            title: evs[i].title,
+            allDay: evs[i].allDay,
+            start: new Date(evs[i].start),
+            end: new Date(evs[i].end),
+            nvisita: evs[i].nvisita,
+            pago: evs[i].pago
+          };
+
+          if (evarr.allDay === 1) {
+            evarr.allDay = true;
+          } else if (evarr.allDay === 0) {
+            evarr.allDay = false;
+          }
+
+          arr.push(evarr);
+
+          guardarVisitas(arr);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const eventSelected = (eventInfo) => {
+    guardarDetVisi(eventInfo)
+
+    let myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    myModal.show()
+
+  }
+
+  // ----------------------------------------------
+
+
 
   // FUNCIONES GENERALES
 
@@ -1802,6 +1853,7 @@ const Emision = () => {
       traerEspecialidades()
       traerFarmacias()
       traerPlanesOrto()
+      traerVisitas()
 
     }
   }, []);
@@ -1828,6 +1880,9 @@ const Emision = () => {
           listado={listado}
           Seleccionar={Seleccionar}
           SeleccionarM={SeleccionarM}
+          eventSelected={eventSelected}
+          visitas={visitas}
+          detVisi={detVisi}
         />
       ) : flag === true ? (
         <>
@@ -1889,6 +1944,9 @@ const Emision = () => {
           ) : null}
         </>
       ) : null}
+
+
+
     </Layout>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import Calendario from "../../werchow/servicios/Calendario";
 import ListadoSocios from "./ListadoSocios";
 
 const BuscarSocio = ({
@@ -16,6 +17,9 @@ const BuscarSocio = ({
   Seleccionar,
   SeleccionarM,
   emp,
+  eventSelected,
+          visitas,
+          detVisi,
 
 }) => {
   return (
@@ -38,6 +42,37 @@ const BuscarSocio = ({
           ) : null}
 
         </div>
+      </div>
+
+      <div className="border border-dark mt-4 mb-4 p-2">
+        <div className="row d-flex justify-content-center">
+
+          <div className="col-md-6">
+            <h4>
+              <u>
+                Calendario de visitas - PLan Ortodoncia
+              </u>
+            </h4>
+          </div>
+
+          <div className="col-md-4">
+            <button
+              className="btn btn-block btn-primary mt-1"
+              data-toggle="collapse"
+              data-target="#collapseWidthExample"
+            >
+              Ver Turnos
+            </button>
+          </div>
+
+        </div>
+
+        <Calendario
+      eventSelected={eventSelected}
+      visitas={visitas}
+      detVisi={detVisi}
+        />
+
       </div>
 
       <div className="mt-4 border border-dark p-4 ">
