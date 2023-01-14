@@ -257,7 +257,7 @@ const estadoordenes = () => {
 
                                     if (res.status === 200) {
 
-                                        toastr.success("La orden fue marcada como pagada")
+                                        toastr.success("La orden de pago y su contenido fue anulada con exito", "ATENCION")
 
                                         let accion = `Se anulo la orden de pago ID: ${norden}, por el usuario: ${user}`
 
