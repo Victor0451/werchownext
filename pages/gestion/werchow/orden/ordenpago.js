@@ -285,7 +285,7 @@ const OrdenPago = () => {
 
           postOrdenMedicas(orPag)
 
-          mandarMail(orPag)
+        //  mandarMail(orPag)
 
         }
 
@@ -309,7 +309,7 @@ const OrdenPago = () => {
 
           postOrdenMedicas(orPag)
 
-          mandarMail(orPag)
+         // mandarMail(orPag)
 
         }
 
@@ -352,7 +352,7 @@ const OrdenPago = () => {
 
         postOrdenContable(orPag)
 
-        mandarMail(orPag)
+       // mandarMail(orPag)
 
       }
 
