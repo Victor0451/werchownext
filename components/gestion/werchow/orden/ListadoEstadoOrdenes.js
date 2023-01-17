@@ -10,7 +10,8 @@ const ListadoEstadoOrdenes = ({
     traerAchivos,
     getTrProps,
     updatePagadas,
-    anularOrden
+    anularOrden,
+    mandarMail
 }) => {
 
     if (listado.length === 0) return <div className='container border border-dark alert alert-info text-center text-uppercase mt-4 mb-4'>No hay ordenes registradas</div>
@@ -179,6 +180,8 @@ const ListadoEstadoOrdenes = ({
                                                 </button>
                                             ) : null}
 
+
+
                                             <button
                                                 className="btn btn-secondary btn-sm "
                                                 data-toggle="modal"
@@ -190,6 +193,14 @@ const ListadoEstadoOrdenes = ({
                                                 }}
                                             >
                                                 <i className="fa fa-print" aria-hidden="true"></i>
+
+                                            </button>
+
+                                            <button
+                                                className="btn btn-dark ml-1 btn-sm "
+                                                onClick={() => mandarMail(row.original)}
+                                            >
+                                                <i className="fa fa-envelope" aria-hidden="true"></i>
 
                                             </button>
 
