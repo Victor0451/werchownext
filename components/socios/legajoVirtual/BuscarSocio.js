@@ -2,6 +2,7 @@ import React from "react";
 import Legajo from "../../../components/socios/ficha/Legajo";
 import LegajoArchivos from "../../../components/socios/legajoVirtual/LegajoArchivos";
 import FormSubirArchivo from "../../../components/socios/legajoVirtual/FormSubirArchivo";
+import GastoLuto from "../../layout/GastoLuto";
 
 const BuscarSocio = ({
   contratoRef,
@@ -18,7 +19,7 @@ const BuscarSocio = ({
   ficha,
 }) => {
   return (
-    <div className="container list alert alert-dark border border-primary mt-4">
+    <div className="container list alert alert-dark border border-dark mt-4">
       <h1 className="mt-4 mb-4">
         <strong>
           <u>Subir Archivos Al Legajo Virtual</u>
@@ -178,6 +179,15 @@ const BuscarSocio = ({
                       <u>Legajo Virtual</u>
                     </strong>
                   </h2>
+
+                  {ficha ? (
+                    <GastoLuto
+                      plan={`${ficha.PLAN}${ficha.SUB_PLAN}`}
+                      alta={ficha.ALTA}
+                      cantadh={0}
+
+                    />
+                  ) : null}
 
                   <Legajo ficha={ficha} />
 

@@ -3,6 +3,8 @@ import React from 'react'
 import AdhPrint from './AdhPrint'
 import Legajo from './Legajo'
 import PagosPrint from './PagosPrint'
+import GastoLuto from "../../layout/GastoLuto";
+
 
 const ModalLegajoPrint = ({
     imprimir,
@@ -40,6 +42,15 @@ const ModalLegajoPrint = ({
                         </button>
                     </div>
                     <div className="modal-body ">
+
+                        {ficha ? (
+                            <GastoLuto
+                                plan={`${ficha.PLAN}${ficha.SUB_PLAN}`}
+                                alta={ficha.ALTA}
+                                cantadh={0}
+
+                            />
+                        ) : null}
 
                         {baja === true ? (
                             <div className="alert alert-danger text-center text-uppercase border border-dark mb-4">

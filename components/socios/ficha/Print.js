@@ -24,6 +24,9 @@ const Print = ({
         </strong>
       </h1>
       <div className="mt-4 border border-dark p-4 ">
+
+   
+
         <form>
           <h2 className=" mb-4">
             <strong>

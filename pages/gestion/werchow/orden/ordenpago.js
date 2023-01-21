@@ -379,7 +379,7 @@ const OrdenPago = () => {
               nconsulta: listadoCheck[i].ORDEN,
               sucursal: listadoCheck[i].SUC,
               prestador: listadoCheck[i].COD_PRES,
-              importe: listadoCheck[i].IMPORTE,
+              importe: listadoCheck[i].LIQUIDAR,
               operador_carga: user,
               fecha: moment().format('YYYY-MM-DD')
 
