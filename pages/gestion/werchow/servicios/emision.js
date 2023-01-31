@@ -1766,7 +1766,7 @@ const Emision = () => {
   const importeOrden = () => {
 
 
-    if (detalleMed.COD_PRES === 'C_NJE' || detalleMed.COD_PRES === 'C_OVI') {
+    if (detalleMed.COD_PRES === 'C_NJE' || detalleMed.COD_PRES === 'C_OVI' || detalleMed.COD_PRES === 'C_OR1') {
 
       let importe = ""
 
@@ -1774,15 +1774,16 @@ const Emision = () => {
 
       return importe
 
-    } else if (detalleMed.COD_PRES === 'C_OR1') {
+    } 
+    // else if (detalleMed.COD_PRES === 'C_OR1') {
 
-      let importe = ""
+    //   let importe = ""
 
-      importe = detalleMed.CON_PAGA - (detalleMed.CON_PAGA * 0.10)
+    //   importe = detalleMed.CON_PAGA - (detalleMed.CON_PAGA * 0.10)
 
-      return importe
+    //   return importe
 
-    }
+    // }
 
     else {
 
