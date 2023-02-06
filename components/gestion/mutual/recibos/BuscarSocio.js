@@ -204,7 +204,7 @@ const BuscarSocio = ({
                 <button
                   className="btn btn-block btn-primary"
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#listSocio"
                   onClick={() => listSocios()}
 
                 >
@@ -215,7 +215,7 @@ const BuscarSocio = ({
                 <button
                   className="btn btn-block btn-primary"
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#listSocio"
                   onClick={() => listSociosM()}
 
                 >

@@ -5,6 +5,7 @@ import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
 import Router from "next/router";
+import { confirmAlert } from 'react-confirm-alert'; // Import
 import { ip } from "../../../../config/config";
 import BuscarSocio from "../../../../components/gestion/mutual/recibos/BuscarSocio";
 import EmitirServicio from "../../../../components/gestion/werchow/servicios/EmitirServicio";
@@ -47,7 +48,7 @@ const Emision = () => {
   const [nOrden, guardarNorden] = useState(null)
   const [practicas, guardarPracticas] = useState(null)
   const [pracSocio, guardarPracSocio] = useState([])
-  const [listado, guardarListSocios] = useState(null);
+  const [listado, guardarListSocios] = useState([]);
   const [farmacias, guardarFarmacias] = useState(null);
   const [descFarma, guardarDescFarma] = useState(null);
   const [enfer, guadrarEnfer] = useState(null);
@@ -111,12 +112,33 @@ const Emision = () => {
               ficha[0].GRUPO === 3777 ||
               ficha[0].GRUPO === 3888 ||
               ficha[0].GRUPO === 3999 ||
-              ficha[0].GRUPO === 4004
+              ficha[0].GRUPO === 4004 ||
+              ficha[0].GRUPO === 8500
             ) {
               toastr.warning(
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
                 "ATENCION"
               );
+
+              confirmAlert({
+                title: 'ATENCION',
+                message: `El socio ${ficha[0].CONTRATO} - ${ficha[0].APELLIDOS}, ${ficha[0].NOMBRES} esta en estado moroso, por tal motivo todos sus servicios estan en dados de baja.`,
+                buttons: [
+                  {
+                    label: 'OK',
+                    onClick: () => {
+
+                      Router.reload()
+
+                    }
+                  },
+                  // {
+                  //   label: 'No',
+                  //   onClick: () => alert('Click No')
+                  // }
+                ]
+              });
+
             } else if (
               ficha[0].GRUPO === 3400 ||
               ficha[0].GRUPO === 3600 ||
@@ -201,6 +223,25 @@ const Emision = () => {
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
                 "ATENCION"
               );
+
+              confirmAlert({
+                title: 'ATENCION',
+                message: `El socio ${ficha[0].CONTRATO} - ${ficha[0].APELLIDOS}, ${ficha[0].NOMBRES} esta en estado moroso, por tal motivo todos sus servicios estan en dados de baja.`,
+                buttons: [
+                  {
+                    label: 'OK',
+                    onClick: () => {
+
+                      Router.reload()
+
+                    }
+                  },
+                  // {
+                  //   label: 'No',
+                  //   onClick: () => alert('Click No')
+                  // }
+                ]
+              });
             } else if (
               ficha[0].GRUPO === 3400 ||
               ficha[0].GRUPO === 3600 ||
@@ -271,12 +312,32 @@ const Emision = () => {
               ficha[0].GRUPO === 3777 ||
               ficha[0].GRUPO === 3888 ||
               ficha[0].GRUPO === 3999 ||
-              ficha[0].GRUPO === 4004
+              ficha[0].GRUPO === 4004 ||
+              ficha[0].GRUPO === 8500
             ) {
               toastr.warning(
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
                 "ATENCION"
               );
+
+              confirmAlert({
+                title: 'ATENCION',
+                message: `El socio ${ficha[0].CONTRATO} - ${ficha[0].APELLIDOS}, ${ficha[0].NOMBRES} esta en estado moroso, por tal motivo todos sus servicios estan en dados de baja.`,
+                buttons: [
+                  {
+                    label: 'OK',
+                    onClick: () => {
+
+                      Router.reload()
+
+                    }
+                  },
+                  // {
+                  //   label: 'No',
+                  //   onClick: () => alert('Click No')
+                  // }
+                ]
+              });
             } else if (
               ficha[0].GRUPO === 3400 ||
               ficha[0].GRUPO === 3600 ||
@@ -359,6 +420,25 @@ const Emision = () => {
                 "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
                 "ATENCION"
               );
+
+              confirmAlert({
+                title: 'ATENCION',
+                message: `El socio ${ficha[0].CONTRATO} - ${ficha[0].APELLIDOS}, ${ficha[0].NOMBRES} esta en estado moroso, por tal motivo todos sus servicios estan en dados de baja.`,
+                buttons: [
+                  {
+                    label: 'OK',
+                    onClick: () => {
+
+                      Router.reload()
+
+                    }
+                  },
+                  // {
+                  //   label: 'No',
+                  //   onClick: () => alert('Click No')
+                  // }
+                ]
+              });
             } else if (
               ficha[0].GRUPO === 3400 ||
               ficha[0].GRUPO === 3600 ||
@@ -465,6 +545,7 @@ const Emision = () => {
   const listSocios = async () => {
     await axios.get(`${ip}api/werchow/maestro/titulares`)
       .then(res => {
+
         guardarListSocios(res.data[0])
       })
       .catch(error => {
@@ -1429,39 +1510,88 @@ const Emision = () => {
     }
 
 
-    await axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
+    await axios.get(`${ip}api/sgi/servicios/traerplansocio/${plan.contrato}`)
       .then(res => {
 
-        if (res.status === 200) {
+        if (!res.data) {
 
-          toastr.success("Plan registrado correctamente", "ATENCION")
+          axios.get(`${ip}api/sgi/servicios/traerplandni/${plan.dni}`)
+            .then(res1 => {
 
-          regPlanVisitas(res.data.idplansocio, plan.saldo)
+              if (res1.data.length === 0) {
 
-          let accion = `Se registro plan de ortodoncia ID: ${res.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
+                axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
+                  .then(res2 => {
 
-          registrarHistoria(accion, user)
+                    if (res2.status === 200) {
 
-          setTimeout(() => {
+                      toastr.success("Plan registrado correctamente", "ATENCION")
 
-            Router.push({
-              pathname: '/gestion/werchow/servicios/reciboplan',
-              query: {
-                id: res.data.idplansocio
+                      regPlanVisitas(res2.data.idplansocio, plan.saldo)
+
+                      let accion = `Se registro plan de ortodoncia ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
+
+                      registrarHistoria(accion, user)
+
+                      setTimeout(() => {
+
+                        Router.push({
+                          pathname: '/gestion/werchow/servicios/reciboplan',
+                          query: {
+                            id: res2.data.idplansocio
+                          },
+
+                        });
+
+                      }, 1000);
+
+
+                    }
+
+                  })
+                  .catch(error => {
+                    console.log(error)
+                    toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+                  })
+
+
+
+              }
+
+            }).catch(error => {
+              console.log(error)
+              toastr.error("Ocurrio un error", "ATENCION")
+            })
+
+        } else if (res.data) {
+
+          toastr.warning("El socio actualmente posee plan registrado", "ATENCION")
+
+          confirmAlert({
+            title: 'ATENCION',
+            message: `El socio ${plan.contrato} - ${plan.socio}, actualmente posee un plan registrado y vigente.`,
+            buttons: [
+              {
+                label: 'OK',
+                onClick: () => { }
               },
-
-            });
-
-          }, 1000);
-
+              // {
+              //   label: 'No',
+              //   onClick: () => alert('Click No')
+              // }
+            ]
+          });
 
         }
 
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log(error)
-        toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+        toastr.error("Ocurrio un error", "ATENCION")
       })
+
+
+
+
 
 
 
@@ -1774,7 +1904,7 @@ const Emision = () => {
 
       return importe
 
-    } 
+    }
     // else if (detalleMed.COD_PRES === 'C_OR1') {
 
     //   let importe = ""
@@ -1860,8 +1990,7 @@ const Emision = () => {
   }, []);
 
 
-
-
+  
   return (
     <Layout>
       {flag === false ? (
