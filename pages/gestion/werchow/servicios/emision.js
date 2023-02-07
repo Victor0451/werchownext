@@ -812,13 +812,7 @@ const Emision = () => {
       NUSOS: (priUso + 1)
     }
 
-
-    if (
-      detalleMed.COD_PRES === 'C_NJE' ||
-      detalleMed.COD_PRES === 'C_OVI' ||
-      detalleMed.COD_PRES === 'C_OR1' ||
-      detalleMed.COD_PRES === 'C_MIN'
-    ) {
+    if (detalleMed.PROMO === 0) {
 
       uso.IMPORTE = detalleMed.CON_PAGA
 
@@ -1901,12 +1895,7 @@ const Emision = () => {
   const importeOrden = () => {
 
 
-    if (
-      detalleMed.COD_PRES === 'C_NJE' ||
-      detalleMed.COD_PRES === 'C_OVI' ||
-      detalleMed.COD_PRES === 'C_OR1' ||
-      detalleMed.COD_PRES === 'C_MIN'
-    ) {
+    if (detalleMed.PROMO === 0) {
 
       let importe = ""
 
@@ -1914,18 +1903,7 @@ const Emision = () => {
 
       return importe
 
-    }
-    // else if (detalleMed.COD_PRES === 'C_OR1') {
-
-    //   let importe = ""
-
-    //   importe = detalleMed.CON_PAGA - (detalleMed.CON_PAGA * 0.10)
-
-    //   return importe
-
-    // }
-
-    else {
+    } else if (detalleMed.PROMO === 1) {
 
       if (priUso === 0) {
 
