@@ -17,7 +17,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
         <ul className="dropdown-menu">
 
           {
-            usuario === "pjerez" ? (
+            usuario === "pjerez" || usuario === "ladorno" ? (
               <>
                 <li className="dropdown-submenu">
                   <a
@@ -43,7 +43,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
                         href="/gestion/werchow/servicios/cajapato"
                         className="dropdown-item text-dark"
                       >
-                        Caja Otero
+                        Caja
                       </a>
                     </li>
                     <hr />

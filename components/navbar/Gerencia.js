@@ -896,6 +896,18 @@ export default class Gerencia extends Component {
                     Ingresar Servicio
                   </a>
                 </li>
+
+                <hr />
+
+                <li>
+                  <a
+                    href="/sepelio/servicios/simulador"
+                    className="dropdown-item text-dark"
+                  >
+                    Simulador
+                  </a>
+                </li>
+
                 <hr />
 
                 <li>

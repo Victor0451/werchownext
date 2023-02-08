@@ -1070,6 +1070,14 @@ const Emision = () => {
 
     }
 
+
+    if (user === 'ladorno') {
+
+      uso.SUC = 'C'
+
+    }
+
+
     if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66 || socio.GRUPO === 55) {
 
       if (nFisio >= 0 && nFisio <= 8) {
@@ -1144,6 +1152,12 @@ const Emision = () => {
         OPE_ANU: 0,
         COD_PRAC: pracSocio[i].CODIGOS,
         DESCRIP: pracSocio[i].DESCRIP,
+
+      }
+
+      if (user === 'ladorno') {
+
+        practi.SUC_PRA = 'C'
 
       }
 
@@ -1726,7 +1740,17 @@ const Emision = () => {
           if (!res.data) {
             guardarNorden(1)
           } else {
-            guardarNorden(`O-${res.data.iduso + 1}`)
+
+            if (user === 'pjerez') {
+
+              guardarNorden(`O-${res.data.iduso + 1}`)
+
+            } else if (user === 'ladorno') {
+
+              guardarNorden(`C-${res.data.iduso + 1}`)
+
+            }
+
           }
         }, 500);
 
@@ -1948,11 +1972,6 @@ const Emision = () => {
   }
 
   // ----------------------------------------------
-
-
-
-
-
 
 
   let token = jsCookie.get("token");

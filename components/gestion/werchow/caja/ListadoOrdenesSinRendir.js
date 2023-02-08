@@ -56,7 +56,7 @@ const ListadoOrdenesSinRendir = ({
                                     <div>
                                         <button
                                             className="btn btn-success btn-sm"
-                                            onClick={() => traerOrdenesPorDia(row.original.FECHA)}
+                                            onClick={() => traerOrdenesPorDia(row.original.FECHA, row.original.SUC)}
                                         >
                                             <i
                                                 className="fa fa-arrow-left"

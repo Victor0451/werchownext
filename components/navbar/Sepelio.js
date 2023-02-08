@@ -455,6 +455,17 @@ export default class Sepelio extends Component {
 
                 <li>
                   <a
+                    href="/sepelio/servicios/simulador"
+                    className="dropdown-item text-dark"
+                  >
+                    Simulador
+                  </a>
+                </li>
+
+                <hr />
+
+                <li>
+                  <a
                     href="/sepelio/servicios/gastoluto/listado"
                     className="dropdown-item text-dark"
                   >

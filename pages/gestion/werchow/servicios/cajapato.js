@@ -30,10 +30,12 @@ const CajaPato = () => {
     const [flag, guardarFlag] = useState(false);
 
 
-    const traerOrdenesSinRendir = async () => {
+    const traerOrdenesSinRendir = async (suc) => {
 
-        await axios.get(`${ip}api/sgi/servicios/ordenessinrendir`)
+
+        await axios.get(`${ip}api/sgi/servicios/ordenessinrendir/${suc}`)
             .then(res => {
+
                 guardarOrdenes(res.data)
             })
             .catch(error => {
@@ -43,8 +45,12 @@ const CajaPato = () => {
 
     }
 
-    const traerOrdenesPorDia = async (fecha) => {
-        await axios.get(`${ip}api/sgi/servicios/ordenespordia/${fecha}`)
+    const traerOrdenesPorDia = async (fecha, suc) => {
+        await axios.get(`${ip}api/sgi/servicios/ordenespordia/${fecha}`, {
+            params: {
+                suc: suc
+            }
+        })
             .then(res => {
 
                 let ing = []
@@ -66,6 +72,7 @@ const CajaPato = () => {
                 toastr.error("Ocurrio un error al traer las ordenes por dia", "ATENCION")
             })
     }
+
 
     const regEgreso = () => {
 
@@ -305,9 +312,19 @@ const CajaPato = () => {
             if (usuario) {
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
+
+                if (userData.usuario === 'pjerez') {
+
+                    traerOrdenesSinRendir('O')
+
+                } else if (userData.usuario === 'ladorno') {
+
+                    traerOrdenesSinRendir('C')
+
+                }
             }
 
-            traerOrdenesSinRendir()
+
             chekCaja()
         }
     }, []);

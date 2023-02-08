@@ -942,6 +942,17 @@ const Adimn = () => {
                   Ingresar Servicio
                 </a>
               </li>
+              
+              <hr />
+
+              <li>
+                <a
+                  href="/sepelio/servicios/simulador"
+                  className="dropdown-item text-dark"
+                >
+                  Simulador
+                </a>
+              </li>
 
               <hr />
 
