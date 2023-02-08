@@ -1,7 +1,7 @@
 import React from "react";
 import { ip } from "../../config/config";
 
-const Recuperadoras = ({ usuario, perfil }) => {
+const Recuperadoras = ({ usuario, perfil, medicos }) => {
   return (
     <ul className="navbar-nav">
 
@@ -17,7 +17,7 @@ const Recuperadoras = ({ usuario, perfil }) => {
         <ul className="dropdown-menu">
 
           {
-            usuario === "pjerez" || usuario === "ladorno" ? (
+            medicos === 1 ? (
               <>
                 <li className="dropdown-submenu">
                   <a

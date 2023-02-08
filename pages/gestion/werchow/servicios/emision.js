@@ -37,6 +37,7 @@ const Emision = () => {
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
   const [user, guardarUsuario] = useState(null);
+  const [usuc, guardarUsuc] = useState(null);
   const [socio, guardarSocio] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
@@ -787,7 +788,7 @@ const Emision = () => {
   const registrarOrdenUsos = async () => {
 
     const uso = {
-      SUC: "O",
+      SUC: usuc,
       ORDEN: nOrden,
       CONTRATO: socio.CONTRATO,
       NRO_ADH: socio.ADHERENTES,
@@ -809,7 +810,8 @@ const Emision = () => {
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
-      NUSOS: (priUso + 1)
+      NUSOS: (priUso + 1),
+      OPERADOR: user
     }
 
     if (detalleMed.PROMO === 0) {
@@ -907,11 +909,12 @@ const Emision = () => {
       COD_PRES: detalleMed.COD_PRES,
       IMPORTE: detalleMed.PRECIO_99,
       ANULADO: 0,
-      OPERADOR: 55,
+      OPERADOR: user,
       OPE_ANU: 0,
       DIAGNOSTIC: "",
       ATENCION: 0,
       NRO_DNI: socio.NRO_DOC,
+      SUC: usuc
 
     }
 
@@ -1043,7 +1046,7 @@ const Emision = () => {
   const registrarPracticaUso = async () => {
 
     const uso = {
-      SUC: "O",
+      SUC: usuc,
       ORDEN: nOrden,
       CONTRATO: socio.CONTRATO,
       NRO_ADH: socio.ADHERENTES,
@@ -1065,15 +1068,8 @@ const Emision = () => {
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
-      NUSOS: (priUso + 1)
-
-
-    }
-
-
-    if (user === 'ladorno') {
-
-      uso.SUC = 'C'
+      NUSOS: (priUso + 1),
+      OPERADOR: user
 
     }
 
@@ -1138,7 +1134,7 @@ const Emision = () => {
 
       const practi = {
 
-        SUC_PRA: "O",
+        SUC_PRA: usuc,
         CONTRATO: socio.CONTRATO,
         NRO_DNI: socio.NRO_DOC,
         FECHA: moment().format('YYYY-MM-DD'),
@@ -1148,18 +1144,14 @@ const Emision = () => {
         CANT_PRA: pracSocio[i].CANTIDAD,
         IMPORTE: pracSocio[i].IMPORTE,
         ANULADO: 0,
-        OPERADOR: user.codigo,
+        OPERADOR: user,
         OPE_ANU: 0,
         COD_PRAC: pracSocio[i].CODIGOS,
         DESCRIP: pracSocio[i].DESCRIP,
 
       }
 
-      if (user === 'ladorno') {
 
-        practi.SUC_PRA = 'C'
-
-      }
 
       if (detalleMed.SERVICIO === 'FIS' && socio.GRUPO === 66 || socio.GRUPO === 55) {
 
@@ -1269,7 +1261,7 @@ const Emision = () => {
   const registrarFarmaciaUso = async () => {
 
     const uso = {
-      SUC: "O",
+      SUC: usuc,
       ORDEN: nOrden,
       CONTRATO: socio.CONTRATO,
       NRO_ADH: socio.ADHERENTES,
@@ -1287,7 +1279,7 @@ const Emision = () => {
       IMP_LIQ: 0,
       PUESTO: "",
       PRESTADO: farmaciaRef.current.value,
-      OPERADOR: user.codigo,
+      OPERADOR: user,
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
@@ -1330,12 +1322,13 @@ const Emision = () => {
       MODO: `${descuentoRef.current.value}%`,
       IMPORTE: 0,
       ANULADO: 0,
-      OPERADOR: user.codigo,
+      OPERADOR: user,
       OPE_ANU: 0,
       FEC_USO: moment().format('YYYY-MM-DD'),
       CAN_MEDI: 2,
       MATRICULA: 0,
-      HABILITA: 1
+      HABILITA: 1,
+      SUC: usuc
 
     }
 
@@ -1395,7 +1388,7 @@ const Emision = () => {
   const registrarEnfermeriaUso = async () => {
 
     const uso = {
-      SUC: "O",
+      SUC: usuc,
       ORDEN: nOrden,
       CONTRATO: socio.CONTRATO,
       NRO_ADH: socio.ADHERENTES,
@@ -1413,7 +1406,7 @@ const Emision = () => {
       IMP_LIQ: 0,
       PUESTO: "",
       PRESTADO: detEnf.COD_PRES,
-      OPERADOR: user.codigo,
+      OPERADOR: user,
       EMPRESA: "W",
       RENDIDO: 0,
       ANULADO: 0,
@@ -1446,7 +1439,7 @@ const Emision = () => {
 
     const enfer = {
 
-
+      SUC: usuc,
       CONTRATO: socio.CONTRATO,
       FECHA: moment().format('YYYY-MM-DD'),
       HORA: moment().format('HH:mm'),
@@ -1456,7 +1449,7 @@ const Emision = () => {
       ANULADO: 0,
       PRACTICA: prestacionRefE.current.value,
       CANTIDAD: cantidadRefE.current.value,
-      OPERADOR: user.codigo,
+      OPERADOR: user,
       OPE_ANU: 0,
       NRO_DNI: socio.NRO_DOC,
 
@@ -1518,7 +1511,8 @@ const Emision = () => {
       estado: 1,
       prestador: detalleMed.COD_PRES,
       prestador_nombre: detalleMed.NOMBRE,
-      operador: user
+      operador: user,
+      sucursal: usuc
 
     }
 
@@ -1733,6 +1727,9 @@ const Emision = () => {
   };
 
   const traerNOrden = async () => {
+
+    console.log(usuc)
+
     await axios.get(`${ip}api/sgi/servicios/norden`)
       .then(res => {
 
@@ -1741,15 +1738,7 @@ const Emision = () => {
             guardarNorden(1)
           } else {
 
-            if (user === 'pjerez') {
-
-              guardarNorden(`O-${res.data.iduso + 1}`)
-
-            } else if (user === 'ladorno') {
-
-              guardarNorden(`C-${res.data.iduso + 1}`)
-
-            }
+            guardarNorden(`${usuc}-${res.data.iduso + 1}`)
 
           }
         }, 500);
@@ -1985,6 +1974,8 @@ const Emision = () => {
       if (usuario) {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.usuario);
+        guardarUsuc(userData.sucursal)
+
       }
 
       traerSucursales()

@@ -22,6 +22,7 @@ const CajaPato = () => {
 
 
     const [user, guardarUsuario] = useState(null);
+    const [usuc, guardarUsuc] = useState(null);
     const [ordenes, guardarOrdenes] = useState(null);
     const [ingresos, guardarIngresos] = useState([]);
     const [egresos, guardarEgresos] = useState([])
@@ -30,10 +31,16 @@ const CajaPato = () => {
     const [flag, guardarFlag] = useState(false);
 
 
-    const traerOrdenesSinRendir = async (suc) => {
+    const traerOrdenesSinRendir = async (user, suc) => {
 
 
-        await axios.get(`${ip}api/sgi/servicios/ordenessinrendir/${suc}`)
+        await axios.get(`${ip}api/sgi/servicios/ordenessinrendir`, {
+            params: {
+                suc: suc,
+                user: user
+
+            }
+        })
             .then(res => {
 
                 guardarOrdenes(res.data)
@@ -45,10 +52,12 @@ const CajaPato = () => {
 
     }
 
-    const traerOrdenesPorDia = async (fecha, suc) => {
-        await axios.get(`${ip}api/sgi/servicios/ordenespordia/${fecha}`, {
+    const traerOrdenesPorDia = async (fecha) => {
+        await axios.get(`${ip}api/sgi/servicios/ordenespordia`, {
             params: {
-                suc: suc
+                suc: usuc,
+                fecha: fecha,
+                user: user
             }
         })
             .then(res => {
@@ -158,7 +167,7 @@ const CajaPato = () => {
             let totE = 0
 
             let caja = {
-                SUCURSAL: 'O',
+                SUCURSAL: usuc,
                 PUESTO: 30,
                 CODIGO: 0,
                 MOVIM: '',
@@ -174,7 +183,7 @@ const CajaPato = () => {
                 FEC_COMP: '',
                 HORA: moment().format('HH:mm'),
                 ORIGEN: '',
-                OPERADOR: user.codigo,
+                OPERADOR: user,
                 ASIENTO: 0,
                 EXENTO: '',
                 CANT_AFIL: 0,
@@ -283,11 +292,16 @@ const CajaPato = () => {
             })
     }
 
-    const chekCaja = async () => {
+    const chekCaja = async (user) => {
 
         let fecha = moment().format('YYYY-MM-DD')
 
-        await axios.get(`${ip}api/sgi/servicios/chekcaja/${fecha}`)
+        await axios.get(`${ip}api/sgi/servicios/chekcaja`, {
+            params: {
+                fecha: fecha,
+                user: user
+            }
+        })
             .then(res => {
 
                 if (res.data.length > 0) {
@@ -310,22 +324,18 @@ const CajaPato = () => {
             let usuario = jsCookie.get("usuario");
 
             if (usuario) {
+                
                 let userData = JSON.parse(usuario);
                 guardarUsuario(userData.usuario);
+                guardarUsuc(userData.sucursal)
 
-                if (userData.usuario === 'pjerez') {
+                traerOrdenesSinRendir(userData.usuario, userData.sucursal)
 
-                    traerOrdenesSinRendir('O')
+                chekCaja(userData.usuario)
 
-                } else if (userData.usuario === 'ladorno') {
 
-                    traerOrdenesSinRendir('C')
-
-                }
             }
 
-
-            chekCaja()
         }
     }, []);
 
