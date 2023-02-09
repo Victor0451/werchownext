@@ -63,22 +63,33 @@ const Emision = () => {
   const [detVisi, guardarDetVisi] = useState(null);
 
 
-
-
-
-
   // FUNCIONES SOCIO
 
-  const buscarTitular = async (e) => {
-    e.preventDefault();
+  const buscarTitular = async (hc) => {
 
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
 
-    if (contratoRef.current.value !== "") {
-      let contrato = contratoRef.current.value;
+    let contrato = ""
+
+    if (hc) {
+
+      contrato = hc
+
+    } else {
+
+      contrato = contratoRef.current.value;
+
+    }
+
+
+    if (contrato === "") {
+
+      guardarErrores("Debes Ingresar Un Numero De Contrato");
+
+    } else {
 
       await axios
         .get(`${ip}api/werchow/maestro/titular/${contrato}`)
@@ -96,7 +107,10 @@ const Emision = () => {
 
             guardarFlag(true);
 
-            traerNOrden()
+            setInterval(() => {
+              traerNOrden()
+
+            }, 1000);
 
             let ficha = res.data[0];
 
@@ -169,9 +183,6 @@ const Emision = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (contratoRef.current.value === "") {
-      const errores = "Debes Ingresar Un Numero De Contrato";
-      guardarErrores(errores);
     }
   };
 
@@ -199,7 +210,10 @@ const Emision = () => {
           } else {
             guardarFlag(true);
 
-            traerNOrden()
+            setInterval(() => {
+              traerNOrden()
+
+            }, 1000);
 
             let ficha = res.data[0];
 
@@ -272,16 +286,31 @@ const Emision = () => {
     }
   };
 
-  const buscarTitularM = async (e) => {
-    e.preventDefault();
+  const buscarTitularM = async (hc) => {
 
     guardarFicha(null);
     guardarErrores(null);
     guardarPagos(null);
     guardarAdhs(null);
 
-    if (contratoRef.current.value !== "") {
-      let contrato = contratoRef.current.value;
+    let contrato = ""
+
+    if (hc) {
+
+      contrato = hc
+
+    } else {
+
+      contrato = contratoRef.current.value;
+
+    }
+
+
+    if (contrato === "") {
+
+      guardarErrores("Debes Ingresar Un Numero De Contrato");
+
+    } else {
 
       await axios
         .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
@@ -296,7 +325,10 @@ const Emision = () => {
           } else {
             guardarFlag(true);
 
-            traerNOrden()
+            setInterval(() => {
+              traerNOrden()
+
+            }, 1000);
 
             let ficha = res.data[0];
 
@@ -368,10 +400,9 @@ const Emision = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (contratoRef.current.value === "") {
-      const errores = "Debes Ingresar Un Numero De Contrato";
-      guardarErrores(errores);
+
     }
+
   };
 
   const buscarTitularDniM = async (e) => {
@@ -398,7 +429,10 @@ const Emision = () => {
           } else {
             guardarFlag(true);
 
-            traerNOrden()
+            setInterval(() => {
+              traerNOrden()
+
+            }, 1000);
 
             let ficha = res.data[0];
 
@@ -568,159 +602,14 @@ const Emision = () => {
 
   const Seleccionar = async (contrato) => {
 
-    guardarFicha(null);
-    guardarErrores(null);
-    guardarPagos(null);
-    guardarAdhs(null);
+    buscarTitular(contrato)
 
-    await axios
-      .get(`${ip}api/werchow/maestro/titular/${contrato}`)
-      .then((res) => {
-        if (res.data[0].length === 0) {
-          toastr.error(
-            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-            "ATENCION"
-          );
-          const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-          guardarErrores(errores);
-        } else {
-          guardarFlag(true);
-
-          traerNOrden()
-
-          let ficha = res.data[0];
-
-          guardarFicha(ficha);
-
-          traerAdhs(ficha[0].CONTRATO);
-
-          if (
-            ficha[0].GRUPO === 1001 ||
-            ficha[0].GRUPO === 1005 ||
-            ficha[0].GRUPO === 1006 ||
-            ficha[0].GRUPO === 3444 ||
-            ficha[0].GRUPO === 3666 ||
-            ficha[0].GRUPO === 3777 ||
-            ficha[0].GRUPO === 3888 ||
-            ficha[0].GRUPO === 3999 ||
-            ficha[0].GRUPO === 4004 ||
-            ficha[0].GRUPO === 7777 ||
-            ficha[0].GRUPO === 8500
-          ) {
-            toastr.warning(
-              "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
-              "ATENCION"
-            );
-            traerPagosBco(ficha[0].CONTRATO)
-
-          } else if (
-            ficha[0].GRUPO === 3400 ||
-            ficha[0].GRUPO === 3600 ||
-            ficha[0].GRUPO === 3700 ||
-            ficha[0].GRUPO === 3800 ||
-            ficha[0].GRUPO === 3900 ||
-            ficha[0].GRUPO === 4000
-          ) {
-            toastr.warning(
-              `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
-              "ATENCION"
-            );
-          } else if (
-            ficha[0].GRUPO >= 5000
-          ) {
-            toastr.warning(
-              `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
-              "ATENCION"
-            );
-            traerPagosBco(ficha[0].CONTRATO)
-          } else {
-            traerPagos(ficha[0].CONTRATO)
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toastr.error("Ocurrio un error al seleccionar y traer los datos del socio", "ATENCION")
-      });
   }
 
   const SeleccionarM = async (contrato) => {
 
-    guardarFicha(null);
-    guardarErrores(null);
-    guardarPagos(null);
-    guardarAdhs(null);
+    buscarTitularM(contrato)
 
-    await axios
-      .get(`${ip}api/werchow/maestro/titularm/${contrato}`)
-      .then((res) => {
-        if (res.data[0].length === 0) {
-          toastr.error(
-            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-            "ATENCION"
-          );
-          const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-          guardarErrores(errores);
-        } else {
-          guardarFlag(true);
-
-          traerNOrden()
-
-          let ficha = res.data[0];
-
-          guardarFicha(ficha);
-
-          traerAdhsM(ficha[0].CONTRATO);
-
-          if (
-            ficha[0].GRUPO === 1001 ||
-            ficha[0].GRUPO === 1005 ||
-            ficha[0].GRUPO === 1006 ||
-            ficha[0].GRUPO === 3444 ||
-            ficha[0].GRUPO === 3666 ||
-            ficha[0].GRUPO === 3777 ||
-            ficha[0].GRUPO === 3888 ||
-            ficha[0].GRUPO === 3999 ||
-            ficha[0].GRUPO === 4004 ||
-            ficha[0].GRUPO === 7777 ||
-            ficha[0].GRUPO === 8500
-          ) {
-            toastr.warning(
-              "¡¡CUIDADO!!, El socio pertenece a un grupo moroso",
-              "ATENCION"
-            );
-          } else if (
-            ficha[0].GRUPO === 3400 ||
-            ficha[0].GRUPO === 3600 ||
-            ficha[0].GRUPO === 3700 ||
-            ficha[0].GRUPO === 3800 ||
-            ficha[0].GRUPO === 3900 ||
-            ficha[0].GRUPO === 4000
-          ) {
-            toastr.warning(
-              `El socio usa tarjeta como medio de pago - grupo ${ficha.grupo}`,
-              "ATENCION"
-            );
-            traerPagosBcoM(ficha[0].CONTRATO);
-
-          } else if (
-            ficha[0].GRUPO >= 5000
-
-          ) {
-            toastr.warning(
-              `El socio usa debito banco macro como medio de pago - grupo ${ficha.grupo}`,
-              "ATENCION"
-            );
-            traerPagosBcoM(ficha[0].CONTRATO);
-          } else {
-            traerPagosM(ficha[0].CONTRATO);
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toastr.error("Ocurrio un error al seleccionar y traer los datos del socio", "ATENCION")
-      });
   }
 
   const contarFisios = async (contrato) => {
@@ -1728,21 +1617,22 @@ const Emision = () => {
 
   const traerNOrden = async () => {
 
-    console.log(usuc)
 
     await axios.get(`${ip}api/sgi/servicios/norden`)
       .then(res => {
 
         setTimeout(() => {
+
           if (!res.data) {
+
             guardarNorden(1)
+
           } else {
 
             guardarNorden(`${usuc}-${res.data.iduso + 1}`)
 
           }
         }, 500);
-
 
       })
       .catch(error => {
@@ -1983,6 +1873,9 @@ const Emision = () => {
       traerFarmacias()
       traerPlanesOrto()
       traerVisitas()
+
+
+
 
     }
   }, []);

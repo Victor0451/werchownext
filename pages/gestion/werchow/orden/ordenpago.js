@@ -82,9 +82,6 @@ const OrdenPago = () => {
           guardarNOrden(`${res.data.idorden + 1}/${moment().format('YYYY')}`)
 
         }
-
-
-
       })
 
       .catch(error => {
@@ -537,10 +534,14 @@ const OrdenPago = () => {
         guardarUsuario(userData.usuario);
       }
 
-      nOrden()
+      setInterval(() => {
+
+        nOrden()
+
+      }, 1000);
+
       traerMedicos()
       traerTipoFac()
-
     }
   }, []);
 

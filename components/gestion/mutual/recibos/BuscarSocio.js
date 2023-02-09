@@ -111,7 +111,10 @@ const BuscarSocio = ({
               <div className="form-group col-md-2 mt-4">
                 <button
                   className="btn btn-block btn-primary"
-                  onClick={buscarTitular}
+                  onClick={(e => {
+                    e.preventDefault()
+                    buscarTitular()
+                  })}
                 >
                   Werchow
                 </button>
@@ -119,7 +122,10 @@ const BuscarSocio = ({
               <div className="form-group col-md-2 mt-4">
                 <button
                   className="btn btn-block btn-primary"
-                  onClick={buscarTitularM}
+                  onClick={(e => {
+                    e.preventDefault()
+                    buscarTitularM()
+                  })}
                 >
                   Mutual
                 </button>
