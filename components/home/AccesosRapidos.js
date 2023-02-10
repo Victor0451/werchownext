@@ -144,6 +144,22 @@ const AccesosRapidos = ({ user }) => {
 
                 </div>
               </div>
+
+              <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
+                <div className="card-header">Simulador</div>
+                <div className="card-body">
+                  <a
+                    className="btn btn-primary btn-block "
+                    href="/sepelio/servicios/simulador"
+                  >
+                    Simulador Valor Traslado
+                  </a>
+                  <p className="card-text mt-2">
+                    Este es un acceso rapido al simulador de valores por traslado.
+                  </p>
+
+                </div>
+              </div>
             </>
           ) : null}
         </div>

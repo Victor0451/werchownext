@@ -1373,7 +1373,7 @@ const Emision = () => {
 
     await axios.get(`${ip}api/sgi/servicios/planesorto`)
       .then(res => {
-
+        console.log(res.data)
         guardarPlanOrto(res.data)
 
 
@@ -1423,7 +1423,7 @@ const Emision = () => {
 
                       toastr.success("Plan registrado correctamente", "ATENCION")
 
-                      regPlanVisitas(res2.data.idplansocio, plan.saldo)
+                      regPlanVisitas(res2.data.idplansocio, plan.saldo, planOrto.cuotas)
 
                       let accion = `Se registro plan de ortodoncia ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
 
@@ -1493,7 +1493,7 @@ const Emision = () => {
 
   }
 
-  const regPlanVisitas = async (plan, saldo) => {
+  const regPlanVisitas = async (plan, saldo, cuotas) => {
 
     let visi = {
 
@@ -1509,13 +1509,13 @@ const Emision = () => {
 
     for (let i = 1; i < planOrto.visitas; i++) {
 
-      if (i <= 3) {
+      if (i <= cuotas) {
 
         visi.nvisita = i;
-        visi.pago = saldo / 3
+        visi.pago = saldo / cuotas
         visi.fecha = moment().add(i, "months").format('YYYY-MM-DD')
 
-      } else if (i > 3) {
+      } else if (i > cuotas) {
 
         visi.nvisita = i;
         visi.pago = 0

@@ -23,20 +23,16 @@ export default function validarAltaServicio(valores) {
     errores.parentesco = "El parentesco es obligatorio";
   }
 
-  // if (!valores.fechainhumacion) {
-  //   errores.fechainhumacion = "La fecha de inhumacion es obligatorio";
-  // }
-
-  // if (!valores.horainhumacion) {
-  //   errores.horainhumacion = "La hora de inhumacion es obligatorio";
-  // }
-
   if (!valores.cementerio) {
     errores.cementerio = "Este campo es obligatorio";
   }
 
   if (!valores.dni_solicitante) {
     errores.dni_solicitante = "El DNI del solicitante es obligatorio";
+  }
+
+  if (!valores.domicilio_solicitante) {
+    errores.domicilio_solicitante = "El domicilio del solicitante es obligatorio";
   }
 
   if (!valores.altura) {

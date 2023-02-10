@@ -30,6 +30,7 @@ const STATE_INICIAL = {
   solicitado: "",
   parentesco: "",
   dni_solicitante: "",
+  domicilio_solicitante: "",
   importe: ""
 };
 
@@ -65,6 +66,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
     solicitado,
     parentesco,
     dni_solicitante,
+    domicilio_solicitante,
     importe
   } = valores;
 
@@ -98,6 +100,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
       cremacion: crem,
       liquidado: 0,
       importe: importe,
+      domicilio_solicitante: domicilio_solicitante,
       donacion: don
     };
 
@@ -118,7 +121,7 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
             let accion = `Se registro un nuevo servicio particular ID: ${res.data.idservicio}, extinto: ${servicio.apellido}, ${servicio.nombre}, DNI: ${servicio.dni}, ataud: ${servicio.idataud}, cremacion: ${servicio.cremacion}, donacion: ${servicio.donacion}.`
 
             registrarHistoria(accion, usuario)
-            console.log("ok")
+
             Router.push({
               pathname: "/sepelio/servicios/impresion",
               query: { id: servicio.dni },
@@ -799,6 +802,28 @@ const FormAltaServicioPart = ({ nuevoServicio, empresaRef, usuario }) => {
                 </div>
               )}
             </div>
+            <div className="col-md-8 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Domicilio del Solicitante:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Domicilio del Solicitante"
+                name="domicilio_solicitante"
+                defaultValue={domicilio_solicitante}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.domicilio_solicitante && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.domicilio_solicitante}
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
         <hr />

@@ -29,6 +29,7 @@ const STATE_INICIAL = {
   solicitado: "",
   parentesco: "",
   dni_solicitante: "",
+  domicilio_solicitante: "",
 };
 
 const FormAltaServicio = ({
@@ -78,6 +79,7 @@ const FormAltaServicio = ({
     solicitado,
     parentesco,
     dni_solicitante,
+    domicilio_solicitante,
   } = valores;
 
   const postServicio = async (servicio) => {
@@ -164,6 +166,7 @@ const FormAltaServicio = ({
       operador: usuario,
       idataud: idataudRef.current.value,
       dni_solicitante: dni_solicitante,
+      domicilio_solicitante: domicilio_solicitante,
       cremacion: crem,
       liquidado: 0,
       donacion: don
@@ -929,6 +932,29 @@ const FormAltaServicio = ({
                 </div>
               )}
             </div>
+
+            <div className="col-md-8 mt-4 mb-4">
+              <label>
+                <strong>
+                  <u>Domicilio del Solicitante:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Domicilio del Solicitante"
+                name="domicilio_solicitante"
+                defaultValue={domicilio_solicitante}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errores.domicilio_solicitante && (
+                <div className="alert alert-danger text-center p-2 mt-2">
+                  {errores.domicilio_solicitante}
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
 

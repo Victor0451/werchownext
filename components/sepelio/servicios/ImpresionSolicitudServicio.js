@@ -408,6 +408,21 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
                 readOnly
               />
             </div>
+            <div className="col-md-4 mt-2">
+              <label>
+                <strong>
+                  <u>DNI:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Solicitado Por"
+                name="solicitado"
+                defaultValue={servicio.dni_solicitante}
+                readOnly
+              />
+            </div>
             <div className="form-group col-md-4 mt-2">
               <label>
                 <strong>
@@ -418,12 +433,28 @@ const ImpresionSolicitudServicio = ({ servicio, ataud }) => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Solicitado Por"
+                placeholder="DNI Solicitante"
                 name="solicitado"
                 defaultValue={servicio.parentesco}
                 readOnly
               />
             </div>
+            <div className="col-md-8 mt-2">
+              <label>
+                <strong>
+                  <u>Domicilio:</u>
+                </strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Domicilio Solicitante"
+                name="solicitado"
+                defaultValue={servicio.domicilio_solicitante}
+                readOnly
+              />
+            </div>
+
           </div>
         </div>
         <hr />

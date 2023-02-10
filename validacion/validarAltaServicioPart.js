@@ -40,6 +40,10 @@ export default function validarAltaServicio(valores) {
     errores.dni_solicitante = "El DNI del solicitante es obligatorio";
   }
 
+  if (!valores.domicilio_solicitante) {
+    errores.domicilio_solicitante = "El domicilio del solicitante es obligatorio";
+  }
+
   if (!valores.solicitado) {
     errores.solicitado = "El solicitante es obligatorio";
   }
