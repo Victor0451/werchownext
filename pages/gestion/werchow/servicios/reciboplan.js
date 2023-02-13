@@ -72,9 +72,13 @@ const reciboplan = () => {
     return (
         <Layout>
 
-            <ImpReciboPlan
-                planSocio={planSocio}
-            />
+            <div id="orden">
+                
+                <ImpReciboPlan
+                    planSocio={planSocio}
+                />
+
+            </div>
 
             <div className=" container list mt-4 border border-dark p-4">
                 <h3>
@@ -86,7 +90,7 @@ const reciboplan = () => {
                     <div className="col-md-12 d-flex justify-content-center">
                         <button
                             className=" btn btn-primary "
-                            onClick={imprimir}
+                            onClick={() => imprimir()}
                         >
                             Imprimir
                         </button>

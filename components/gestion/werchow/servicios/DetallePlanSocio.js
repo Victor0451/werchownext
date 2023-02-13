@@ -13,10 +13,22 @@ const DetallePlanSocio = ({
     return (
         <div className='container border border-dark list p-4 mt-4'>
 
-            <h4>
-                <u>Detalle Plan Socio</u>: {plan.contrato} - {plan.socio}
-            </h4>
+            <div className="row">
 
+                <div className="col-md-8">
+                    <h4>
+                        <u>Detalle Plan Socio</u>: {plan.contrato} - {plan.socio}
+                    </h4>
+                </div>
+
+                <div className="col-md-4">
+                    <a href={`/gestion/werchow/servicios/reciboplan?id=${plan.idplansocio}`} target={"_blank"} className="btn btn-primary btn-block">
+                        Imprimir Recibo Activacion
+                    </a>
+
+                </div>
+
+            </div>
 
             <div className="row d-flex justify-content-center mt-4 mb-4 border border-dark p-4"  >
                 <div className="col-md-4" id="frmpag" hidden>

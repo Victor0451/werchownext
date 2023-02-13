@@ -11,7 +11,7 @@ const ImpReciboPlan = ({
     if (!planSocio) return <Spinner />
 
     return (
-        <div className=' p-4 borderImp list'>
+        <div  className=' p-4 borderImp list'>
 
             <div className='mt-4 borderImp p-4 row'>
 
