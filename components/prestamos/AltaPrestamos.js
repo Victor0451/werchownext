@@ -50,7 +50,7 @@ const AltaPrestamos = ({
         if (res.data.length !== 0) {
           const prestamos = res.data;
           guardarPrestamos(prestamos);
-          console.log(res.data.length);
+
         }
       })
       .catch((error) => {

@@ -13,9 +13,9 @@ const Orden = () => {
     const [orden, guardarOrden] = useState(null)
     const [socio, guardarSocio] = useState(null)
     const [medico, guardarMedico] = useState(null)
-    const [practicas, guardarPracticas] = useState(null)
-    const [farmacia, guardarFarmacia] = useState(null)
-    const [enfermeria, guardarEnfermeria] = useState(null)
+    const [practicas, guardarPracticas] = useState([])
+    const [farmacia, guardarFarmacia] = useState([])
+    const [enfermeria, guardarEnfermeria] = useState([])
 
 
 
@@ -161,6 +161,7 @@ const Orden = () => {
 
         await axios.get(`${ip}api/sgi/servicios/traerenfermeria/${orden}`)
             .then(res => {
+                console.log(res.data)
                 guardarEnfermeria(res.data)
             })
             .catch(error => {

@@ -56,7 +56,8 @@ const EmitirServicio = ({
   importeOrden,
   verificarUso,
   planOrto,
-  registrarPlanOrto
+  registrarPlanOrto,
+  arancel
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -368,6 +369,7 @@ const EmitirServicio = ({
           verificarUso={verificarUso}
           planOrto={planOrto}
           registrarPlanOrto={registrarPlanOrto}
+          arancel={arancel}
         />
       )}
     </div>

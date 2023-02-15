@@ -10,6 +10,7 @@ import { ip } from '../../config/config'
 import useValidacion from "../../hooks/useValidacion";
 import validarAltaPrestamo from "../../validacion/validarAltaPrestamo";
 import { registrarHistoria } from '../../utils/funciones'
+import { confirmAlert } from 'react-confirm-alert';
 
 const STATE_INICIAL = {
   contrato: "",
@@ -42,6 +43,8 @@ const nuevoprestamo = () => {
   const [capital, guardarCapital] = useState(null);
   const [renovapres, guardarRenovaprest] = useState(null);
   const [capiPrest, guardarCapiPrest] = useState(null);
+  const [capiNoAut, guardarCapiNoAut] = useState(1);
+
 
   const handleChanges = (value, flag) => {
     // guardarCapital(null);
@@ -52,8 +55,40 @@ const nuevoprestamo = () => {
       const cuotas = value.value;
       guardarCuotas(cuotas);
     } else if (flag === "capital") {
+
+      if (value.autorizacion === 0) {
+
+        confirmAlert({
+          title: 'ATENCION',
+          message: 'Este capital requiere de una autorizacion por parte de la gerencia.',
+          buttons: [
+            {
+              label: 'Ok',
+              onClick: () => {
+
+                guardarCapiNoAut(0)
+
+              }
+            },
+            // {
+            //   label: 'No',
+            //   onClick: () => alert('Click No')
+            // }
+          ]
+        });
+
+        guardarCapiNoAut(0)
+
+
+      } else {
+
+        guardarCapiNoAut(0)
+
+      }
+
       const capital = value.value;
       guardarCapital(capital);
+
     } else if (flag === "renova") {
       const renovapres = value.value;
       guardarRenovaprest(renovapres);
@@ -88,6 +123,7 @@ const nuevoprestamo = () => {
       estado: "PENDIENTE",
       codptmleg: `${contrato}-${moment().format("YYYY-MM-DD")}`,
       ptm_afi: `${apellidoRef.current.value}, ${nombreRef.current.value}`,
+      capinoaut: capiNoAut
     };
 
 
@@ -110,9 +146,9 @@ const nuevoprestamo = () => {
         );
 
         setTimeout(() => {
-          // Router.push("/prestamos/imprimircaratula");
+          Router.replace("/prestamos/imprimircaratula");
 
-          //   window.location.replace("/prestamos/imprimircaratula");
+          // window.location.replace("/prestamos/imprimircaratula");
 
           postPrest(prestamo)
 
@@ -125,9 +161,14 @@ const nuevoprestamo = () => {
           "Atencion"
         );
 
-        //window.location.replace("/prestamos/imprimircaratula");
+        setTimeout(() => {
+          Router.replace("/prestamos/imprimircaratula");
 
-        postPrest(prestamo)
+          // window.location.replace("/prestamos/imprimircaratula");
+
+          postPrest(prestamo)
+
+        }, 500);
       }
 
 
@@ -172,6 +213,8 @@ const nuevoprestamo = () => {
   }
 
   let usuario = jsCookie.get("usuario");
+
+
 
   return (
     <Layout>

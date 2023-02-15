@@ -13,6 +13,7 @@ const ModalEnfermeria = ({
   prestacionRefE,
   cantidadRefE,
   registrarEnfermeriaUso,
+  arancel
 }) => {
 
   return (
@@ -129,72 +130,86 @@ const ModalEnfermeria = ({
                       <input type="text" className="form-control" value={detEnf.DIRECCION} />
                     </div>
 
+
+
+                    {!practEnfer ? (
+                      <div className="alert alert-info border border-dark col-md-4 text-center text-uppercase">No hay prestacion registrada</div>
+                    ) :
+                      (
+                        <div className="col-md-4 mt-4">
+                          <label>
+                            Prestacion:
+                          </label>
+
+                          <select className="custom-select" ref={prestacionRefE}>
+                            <option selected value="no">Selecciona una opcion</option>
+                            {practEnfer.map((s, index) => (
+                              <option key={index} value={s.idpractica}>{s.practica}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                    <div className="col-md-4 mt-4">
+                      <label>
+                        Cantidad:
+                      </label>
+
+                      <select className="custom-select" ref={cantidadRefE} >
+                        <option selected value="no">Selecciona una opcion</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+
+                      </select>
+
+                    </div>
+
                     <div className="col-md-12 d-flex justify-content-end mt-4">
                       <div className="mt-4 alert alert-info text-center text-uppercase border border-dark">
-                        <u>Coseguro</u>: ${detEnf.MAX_DESC}
+
+                        {
+                          detEnf.COD_PRES === 'E_NOE' ? (
+                            <>
+                              <u>Coseguro</u>: ${arancel}
+                            </>
+                          ) : (
+                            <>
+                              <u>Coseguro</u>: ${detEnf.MAX_DESC}
+                            </>
+                          )
+                        }
+
+
                       </div>
                     </div>
 
                   </div>
-                </div>
 
-                <hr className="mt-4 mb-4" />
 
-                <div className="row border border-dark list p-4">
-
-                  {!practEnfer ? (
-                    <div className="alert alert-info border border-dark col-md-4 text-center text-uppercase">No hay prestacion registrada</div>
-                  ) :
-                    (
-                      <div className="col-md-4">
-                        <label>
-                          Prestacion:
-                        </label>
-
-                        <select className="custom-select" ref={prestacionRefE}>
-                          <option selected value="no">Selecciona una opcion</option>
-                          {practEnfer.map((s, index) => (
-                            <option key={index} value={s.idpractica}>{s.practica}</option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
-
-                  <div className="col-md-4">
-                    <label>
-                      Cantidad:
-                    </label>
-
-                    <select className="custom-select" ref={cantidadRefE} >
-                      <option selected value="no">Selecciona una opcion</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-
-                    </select>
-
+                  <div className="alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase">
+                    El valor del coseguro esta determinado por la cantidad de usos y el domicilio del socio.
                   </div>
 
-
                 </div>
-
 
               </>
             ) : null}
 
           </div>
+
           <div className="modal-footer">
             <button
               type="button"

@@ -11,6 +11,7 @@ const TablaPrestamosPrendientes = ({
   capconint,
   aprobarPrestamos,
   codigo,
+  getTrProps
 }) => {
   return (
     <div className="container border border-dark list mt-4 p-4">
@@ -52,13 +53,22 @@ const TablaPrestamosPrendientes = ({
           </div>
         </div>
       </div>
+
       <hr />
+
+      <div className="alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase">
+        Los prestamos que salgan en rojo, son realizados con capitales que aun no estan autorizados a prestar. Por ende, deben ser evaluados por la gerencia.
+      </div>
+
+      <hr />
+
 
       <div className="list border border-dark">
         <ReactTable
           data={data}
           filterable
           defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+          getTrProps={getTrProps}
           columns={[
             {
               Header: "Prestamos",

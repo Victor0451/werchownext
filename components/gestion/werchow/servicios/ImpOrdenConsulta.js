@@ -91,19 +91,20 @@ const ImpOrdenConsulta = ({
                         </strong>
                     </div>
 
-                    {practicas ? (
+                    {practicas.length > 0 ? (
                         <div className='mt-2 col-md-12'>
                             <strong>
                                 <u>Coseguro</u>: $ {calcularTotalPracticas(practicas)}
                             </strong>
                         </div>
-                    ) : (
-                        <div className='mt-2 col-md-12'>
-                            <strong>
-                                <u>Coseguro</u>: $ {orden.IMPORTE}
-                            </strong>
-                        </div>
-                    )}
+                    ) : enfermeria.length > 0 ?
+                        (
+                            <div className='mt-2 col-md-12'>
+                                <strong>
+                                    <u>Coseguro</u>: $ {enfermeria[0].IMPORTE}
+                                </strong>
+                            </div>
+                        ) : null}
 
 
 
@@ -133,7 +134,7 @@ const ImpOrdenConsulta = ({
 
                     <div className="d-flex justify-content-between border-bottom text-center descr">
                         <div className="col-4 ">{socio.NRO_DOC}</div>
-                        {farmacia ? (
+                        {farmacia.length > 0 ? (
                             <div className="col-4"> {farmacia[0].MODO} - HASTA DOS (2) MEDICAMENTOS</div>
                         ) : null}
 
@@ -159,11 +160,15 @@ const ImpOrdenConsulta = ({
 
                     <div className="d-flex justify-content-between border-bottom text-center descr">
                         <div className="col-4 ">{socio.NRO_DOC}</div>
-                        {enfermeria ? (
-                            <div className="col-4"> {enfermeria[0].practica}</div>
+                        {enfermeria.length > 0 ? (
+                            <>
+                                <div className="col-4"> {enfermeria[0].practica}</div>
+
+                                <div className="col-4">{enfermeria[0].NOMBRE}</div>
+                            </>
                         ) : null}
 
-                        <div className="col-4">{enfermeria[0].NOMBRE}</div>
+
 
 
                     </div>
@@ -214,7 +219,7 @@ const ImpOrdenConsulta = ({
 
 
                     {
-                        practicas ? (
+                        practicas.length > 0 ? (
 
                             <>
                                 <h4 className="mt-4 mb-4">
@@ -254,7 +259,9 @@ const ImpOrdenConsulta = ({
                                 ))}
 
                                 <div className=' mt-4 border border-dark alert alert-info text-center text-uppercase'>
+
                                     $ {calcularTotalPracticas(practicas)}
+
                                 </div>
 
                             </>
@@ -263,8 +270,6 @@ const ImpOrdenConsulta = ({
                 </>
 
             )}
-
-
 
 
             <div className='row mt-4 col-md-4'>

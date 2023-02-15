@@ -100,6 +100,23 @@ const aprobarprestamos = () => {
       });
   };
 
+  const getTrProps = (state, rowInfo, instance) => {
+    if (rowInfo) {
+      return {
+        style: {
+          "background-color": rowInfo.original.capinoaut === 0 ? "red"
+            : null
+          ,
+          "color": rowInfo.original.capinoaut === 0 ? "white"
+            : null
+
+        },
+
+
+      };
+    }
+    return {};
+  };
 
 
   return (
@@ -115,6 +132,7 @@ const aprobarprestamos = () => {
             capconint={capconint}
             aprobarPrestamos={aprobarPrestamos}
             codigo={user.codigo}
+            getTrProps={getTrProps}
           />
         ) : (
           <>

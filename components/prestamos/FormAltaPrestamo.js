@@ -465,7 +465,7 @@ const FormAltaPrestamo = ({
                       <FormSubirArchivo contrato={ficha.CONTRATO} />
                       <hr />
 
-                      <div className="form-group col-md-12">
+                      <div className="form-group col-md-12 mt-4">
                         <button
                           className="btn btn-primary btn-block"
                         //onClick={this.cargarPrestamos}
@@ -475,7 +475,7 @@ const FormAltaPrestamo = ({
                       </div>
                     </div>
 
-                    <div className="row mt-2 d-flex justify-content-center alert alert-info text-center text-uppercase">
+                    <div className=" mt-4 alert alert-info text-center text-uppercase border border-dark">
                       {" "}
                       EL Sub. Cont. Familiar EMPEZARA A DEBITARSE EN{"   "}
                       <strong>
@@ -494,15 +494,7 @@ const FormAltaPrestamo = ({
             </div>
           </div>
         </div>
-        {/* <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-dismiss="modal"
-          >
-            Cerrar
-          </button>
-        </div> */}
+      
       </form>
     </div>
   );

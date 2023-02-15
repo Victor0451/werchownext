@@ -53,7 +53,8 @@ const OpcionesServicios = ({
   importeOrden,
   verificarUso,
   planOrto,
-  registrarPlanOrto
+  registrarPlanOrto,
+  arancel
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -208,6 +209,7 @@ const OpcionesServicios = ({
         cantidadRefE={cantidadRefE}
         registrarEnfermeriaUso={registrarEnfermeriaUso}
         priUso={priUso}
+        arancel={arancel}
       />
 
       <ModalPlanOrtodoncia

@@ -61,6 +61,7 @@ const Emision = () => {
   const [planOrto, guardarPlanOrto] = useState(null)
   const [visitas, guardarVisitas] = useState([])
   const [detVisi, guardarDetVisi] = useState(null);
+  const [arancel, guardarArancel] = useState(0);
 
 
   // FUNCIONES SOCIO
@@ -117,6 +118,8 @@ const Emision = () => {
             guardarFicha(ficha);
 
             traerAdhs(ficha[0].CONTRATO);
+
+            arancelEnfDomi(ficha[0].CONTRATO)
 
             if (
               ficha[0].GRUPO === 1001 ||
@@ -220,6 +223,9 @@ const Emision = () => {
             guardarFicha(ficha);
 
             traerAdhs(ficha[0].CONTRATO);
+
+            arancelEnfDomi(ficha[0].CONTRATO)
+
 
             if (
               ficha[0].GRUPO === 1001 ||
@@ -741,7 +747,7 @@ const Emision = () => {
           uso.IMPORTE = 950 - 350
 
         } else {
-
+          0
           uso.IMPORTE = 950
 
         }
@@ -1303,6 +1309,14 @@ const Emision = () => {
 
     }
 
+    if (detEnf.COD_PRES === 'E_NOE') {
+
+      uso.IMPORTE = arancel
+
+    }
+
+
+
     await axios.post(`${ip}api/sgi/servicios/regusos`, uso)
       .then(res => {
         if (res.status === 200) {
@@ -1344,6 +1358,13 @@ const Emision = () => {
 
     }
 
+
+    if (detEnf.COD_PRES === 'E_NOE') {
+
+      enfer.IMPORTE = arancel
+
+    }
+
     await axios.post(`${ip}api/sgi/servicios/regenfermeria`, enfer)
       .then(res => {
         if (res.status === 200) {
@@ -1364,6 +1385,45 @@ const Emision = () => {
 
   }
 
+  const arancelEnfDomi = async (contrato) => {
+
+    await axios.get(`${ip}api/sgi/servicios/arancelenfdomi/${contrato}`)
+      .then(res => {
+
+        if (res.data.length > 0) {
+
+          if (priUso === 0) {
+
+            guardarArancel(400)
+
+          } else {
+
+            guardarArancel(600)
+
+          }
+
+        } else {
+
+          if (priUso === 0) {
+
+            guardarArancel(600)
+
+          } else {
+
+            guardarArancel(800)
+
+          }
+        }
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al determinar el arancel", "ATENCNION")
+      })
+
+
+  }
+
   // -------------------------------------------------
 
 
@@ -1373,9 +1433,8 @@ const Emision = () => {
 
     await axios.get(`${ip}api/sgi/servicios/planesorto`)
       .then(res => {
-        console.log(res.data)
-        guardarPlanOrto(res.data)
 
+        guardarPlanOrto(res.data)
 
       })
       .catch(error => {
@@ -1806,6 +1865,8 @@ const Emision = () => {
 
       return importe
 
+
+
     } else if (detalleMed.PROMO === 1) {
 
       if (priUso === 0) {
@@ -1961,6 +2022,7 @@ const Emision = () => {
               verificarUso={verificarUso}
               planOrto={planOrto}
               registrarPlanOrto={registrarPlanOrto}
+              arancel={arancel}
             />
           ) : null}
         </>
