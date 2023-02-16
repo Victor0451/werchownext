@@ -104,7 +104,13 @@ const ImpOrdenConsulta = ({
                                     <u>Coseguro</u>: $ {enfermeria[0].IMPORTE}
                                 </strong>
                             </div>
-                        ) : null}
+                        ) : (
+                            <div className='mt-2 col-md-12'>
+                                <strong>
+                                    <u>Coseguro</u>: $ {orden.IMPORTE}
+                                </strong>
+                            </div>
+                        )}
 
 
 
