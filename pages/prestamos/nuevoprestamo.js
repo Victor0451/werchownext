@@ -82,7 +82,7 @@ const nuevoprestamo = () => {
 
       } else {
 
-        guardarCapiNoAut(0)
+        guardarCapiNoAut(1)
 
       }
 
@@ -146,9 +146,9 @@ const nuevoprestamo = () => {
         );
 
         setTimeout(() => {
-          Router.replace("/prestamos/imprimircaratula");
+          //   Router.replace("/prestamos/imprimircaratula");
 
-          // window.location.replace("/prestamos/imprimircaratula");
+          window.location.replace("/prestamos/imprimircaratula");
 
           postPrest(prestamo)
 
@@ -162,9 +162,9 @@ const nuevoprestamo = () => {
         );
 
         setTimeout(() => {
-          Router.replace("/prestamos/imprimircaratula");
+          // Router.replace("/prestamos/imprimircaratula");
 
-          // window.location.replace("/prestamos/imprimircaratula");
+          window.location.replace("/prestamos/imprimircaratula");
 
           postPrest(prestamo)
 
