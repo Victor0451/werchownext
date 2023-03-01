@@ -2,7 +2,7 @@ import React from "react";
 
 const Ruleta = ({ fn }) => {
   return (
-    <div>
+    <div id="ruleta">
       <img
         className="ruleta"
         width="400"
