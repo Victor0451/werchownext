@@ -27,7 +27,7 @@ const FormNuevoMensaje = ({
 
 
     return (
-        <div className='container border border-dark p-4 mt-4 list'>
+        <div className=' border border-dark p-4 mt-4 list'>
 
             <h2>
                 <strong>

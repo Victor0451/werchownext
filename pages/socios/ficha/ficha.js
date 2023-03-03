@@ -763,7 +763,7 @@ const ficha = () => {
             </div>
             <div className="modal-body ">
 
-              <div id="solicitud" className="mt-4 container border border-dark p-4">
+              <div id="solicitud" className="mt-4  border border-dark p-4">
 
                 {baja === true ? (
                   <div className="alert alert-danger text-center text-uppercase border border-dark mb-4">

@@ -7,7 +7,7 @@ const ListadoServiciosSinImpactar = ({ listado }) => {
   if (!listado) return <Spinner />;
 
   return (
-    <div className="container border border-dark list mt-4 p-4">
+    <div className=" border border-dark list mt-4 p-4">
       <div className="row  mb-4 border border-dark p-4">
         <div className="col-md-6">
           <h4 className="">

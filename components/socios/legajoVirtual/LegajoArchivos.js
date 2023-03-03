@@ -6,13 +6,13 @@ const LegajoArchivos = ({ archivos, empresa }) => {
 
   if (!archivos)
     return (
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+      <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         No Hay Archivos
       </div>
     );
 
   return (
-    <div className="container list border border-dark p-4">
+    <div className=" list border border-dark p-4">
       <h2 className="mb-4">
         <strong>
           <u>Archivos</u>

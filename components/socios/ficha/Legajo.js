@@ -5,13 +5,13 @@ import AdhPrint from "./AdhPrint";
 const Legajo = ({ ficha, empresa }) => {
   if (!ficha)
     return (
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+      <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         EL SOCIO NO EXISTE O ESTA DADO DE BAJA
       </div>
     );
 
   return (
-    <div className="mt-4 container list border border-dark p-4">
+    <div className="mt-4  list border border-dark p-4">
       <div className="row d-felx justify-content-between p-2">
         <h2 className=" mt-3 mb-4 text-center">
           <strong>

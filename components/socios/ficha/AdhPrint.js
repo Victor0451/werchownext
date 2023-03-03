@@ -5,13 +5,13 @@ const AdhPrint = ({ adhs }) => {
 
   if (!adhs || adhs.length === 0)
     return (
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+      <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         El socio no posee adherentes
       </div>
     );
 
   return (
-    <div className="mt-4 container list p-4 border border-dark">
+    <div className="mt-4  list p-4 border border-dark">
       <h2 className="mt-2 mb-2">
         <strong>
           <u>Adherentes</u>

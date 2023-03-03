@@ -5,14 +5,14 @@ const PagosPrint = ({ pagos, ficha, empresa }) => {
   if (!pagos || pagos.length === 0)
     return (
 
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+      <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         EL SOCIO NO REGISTRA PAGOS
       </div>
 
     );
 
   return (
-    <div className="mt-4 container list p-4 border border-dark">
+    <div className="mt-4  list p-4 border border-dark">
       <div className="row d-felx justify-content-between p-2">
         <h2 className="  mb-4 text-center">
           <strong>

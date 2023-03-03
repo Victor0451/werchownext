@@ -173,7 +173,7 @@ const BuscarSocio = ({
             </div>
             <div class="modal-body">
               {ficha !== null ? (
-                <div className="container mt-4  border border-dark p-4">
+                <div className=" mt-4  border border-dark p-4">
                   <h2 className=" mb-4">
                     <strong>
                       <u>Legajo Virtual</u>
@@ -191,11 +191,11 @@ const BuscarSocio = ({
 
                   <Legajo ficha={ficha} />
 
-                  <hr className="container mt-4 mb-4" />
+                  <hr className=" mt-4 mb-4" />
 
                   <LegajoArchivos archivos={archivos} empresa={empresa} />
 
-                  <hr className="container mt-4 mb-4" />
+                  <hr className=" mt-4 mb-4" />
 
                   <FormSubirArchivo contrato={contrato} empresa={empresa} />
                 </div>

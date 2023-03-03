@@ -7,7 +7,7 @@ const Pagos = ({ pagos }) => {
   if (!pagos) {
     return (
 
-      <div className="container mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
+      <div className=" mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase border border-dark">
         EL SOCIO NO REGISTRA PAGOS
       </div>
 
@@ -15,7 +15,7 @@ const Pagos = ({ pagos }) => {
   }
 
   return (
-    <div className="container border border-dark list ">
+    <div className=" border border-dark list p-3">
       <h2 className="mt-4 mb-4">
         <strong>
           <u>Pagos Realizados</u>

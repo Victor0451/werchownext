@@ -19,15 +19,15 @@ const rehabilitacion = () => {
   const [error, guardarError] = useState(null);
 
   const handlechange = () => {
-    
+
     let cuotas = parseInt(vigenciaRef.current.value);
-    
+
     if (cuotas === "") {
-    
+
       document.getElementById("btn").hidden = true;
 
     } else if (cuotas === 1) {
-      
+
       guardarCuotas(cuotas)
 
       let carencia = cuotas * 15;
@@ -88,8 +88,6 @@ const rehabilitacion = () => {
 
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
-      console.log(contrato);
-
       await axios
         .get(
           `${ip}api/sgi/socios/consultarficha/${contrato}`
@@ -110,8 +108,12 @@ const rehabilitacion = () => {
             res.data.GRUPO === 8888
 
           ) {
-            guardarFicha(ficha);
-            guardarEmpresa("W");
+            toastr.info(
+              "EL SOCIO ESTA EN GRUPO DE MORA",
+              "ATENCION"
+            );
+            const nomoro = "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO";
+            guardarNoMoro(nomoro);
           } else if (
             res.data.GRUPO !== 1001 ||
             res.data.GRUPO !== 3444 ||
@@ -121,20 +123,17 @@ const rehabilitacion = () => {
             res.data.GRUPO !== 3999 ||
             res.data.GRUPO !== 4004
           ) {
-            toastr.warning(
-              "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO",
+            toastr.info(
+              "EL SOCIO ESTA NO ESTA GRUPO DE MORA",
               "ATENCION"
             );
             const nomoro = "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO";
             guardarNoMoro(nomoro);
-            toastr.error(
-              "EL NUMERO DE FICHA NO ES MOROSO O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-          } else if (res.DATA === null) {
-            const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-            guardarErrores(errores);
+
           }
+
+          guardarFicha(ficha);
+          guardarEmpresa("W");
         })
         .catch((error) => {
           console.log(error);
@@ -160,8 +159,6 @@ const rehabilitacion = () => {
 
     if (contratoRef.current.value !== "") {
       let contrato = contratoRef.current.value;
-      console.log(contrato);
-
       await axios
         .get(
           `${ip}api/sgi/socios/consultarficham/${contrato}`
@@ -180,11 +177,14 @@ const rehabilitacion = () => {
             res.data.GRUPO === 7777 ||
             res.data.GRUPO === 8500 ||
             res.data.GRUPO === 8888
+
           ) {
-
-            guardarFicha(ficha);
-            guardarEmpresa("M");
-
+            toastr.info(
+              "EL SOCIO ESTA EN GRUPO DE MORA",
+              "ATENCION"
+            );
+            const nomoro = "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO";
+            guardarNoMoro(nomoro);
           } else if (
             res.data.GRUPO !== 1001 ||
             res.data.GRUPO !== 3444 ||
@@ -193,23 +193,17 @@ const rehabilitacion = () => {
             res.data.GRUPO !== 3888 ||
             res.data.GRUPO !== 3999 ||
             res.data.GRUPO !== 4004
-
           ) {
-            toastr.warning(
-              "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO",
+            toastr.info(
+              "EL SOCIO ESTA NO ESTA GRUPO DE MORA",
               "ATENCION"
             );
             const nomoro = "EL NUMERO DE FICHA NO PERTENECE A UN MOROSO";
             guardarNoMoro(nomoro);
-            toastr.error(
-              "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-              "ATENCION"
-            );
-          } else if (res.DATA === null) {
-            const errores =
-              "EL NUMERO DE FICHA NO ES MOROSO O ESTA DADA DE BAJA";
-            guardarErrores(errores);
           }
+
+          guardarFicha(ficha);
+          guardarEmpresa("M");
         })
         .catch((error) => {
           console.log(error);

@@ -14,7 +14,7 @@ const GastoLuto = ({
 
 
                         <div
-                            className="mt-4 alert alert-info alert-dismissible border border-dark fade show container"
+                            className="mt-4 alert alert-info alert-dismissible border border-dark fade show "
                             role="alert"
                         >
                             <h3 className="alert-heading mb-4">

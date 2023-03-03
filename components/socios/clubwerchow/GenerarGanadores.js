@@ -69,8 +69,8 @@ const GenerarGanadores = ({
   };
 
   return (
-    <div className="container list mt-4">
-      <div className="row border border-dark  p-4">
+    <div className="container border border-dark list mt-4">
+      <div className="row   p-4">
         <div className="col-12">
           <h2 className="text-center mb-4">
             <strong>

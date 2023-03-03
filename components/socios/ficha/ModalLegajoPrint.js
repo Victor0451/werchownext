@@ -80,7 +80,7 @@ const ModalLegajoPrint = ({
                         ) : null
                         }
 
-                        <div id="solicitud" className="mt-4 container p-4 border border-dark">
+                        <div id="solicitud" className="mt-4  p-4 border border-dark">
                             <div>
                                 <div className='d-flex justify-content-end'>
                                     <button

@@ -22,7 +22,7 @@ const FormAcciones = ({
   let cuoSinBonf = caso.cuota * 1.10
 
   return (
-    <div className="container list">
+    <div className=" list">
       <div className="border border-dark p-4">
         {caso.edad >= 65 ? (
           <div className="row">

@@ -27,7 +27,7 @@ const ListadoMensajesEnviados = ({
     };
 
     return (
-        <div className='container border border-dark mt-4 p-4 list'>
+        <div className=' border border-dark mt-4 p-4 list'>
 
             <div className='row'>
 
