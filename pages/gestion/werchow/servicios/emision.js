@@ -13,6 +13,7 @@ import { registrarHistoria } from '../../../../utils/funciones'
 
 
 const Emision = () => {
+
   let contratoRef = React.createRef();
   let dniRef = React.createRef();
   let farmaciaRef = React.createRef();
@@ -33,6 +34,13 @@ const Emision = () => {
   let cantidadRefE = React.createRef();
   let cantidadRefP = React.createRef();
 
+  // ADH PROVI
+
+  let nacimientoRef = React.createRef()
+  let nombreRef = React.createRef()
+  let apellidoRef = React.createRef()
+  let nroDocRef = React.createRef()
+
 
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
@@ -41,7 +49,7 @@ const Emision = () => {
   const [socio, guardarSocio] = useState(null);
   const [ficha, guardarFicha] = useState(null);
   const [pagos, guardarPagos] = useState(null);
-  const [adhs, guardarAdhs] = useState(null);
+  const [adhs, guardarAdhs] = useState([]);
   const [sucursales, guardarSucursales] = useState(null);
   const [espec, guardarEspec] = useState(null);
   const [medicos, guardarMedicos] = useState(null);
@@ -62,6 +70,8 @@ const Emision = () => {
   const [visitas, guardarVisitas] = useState([])
   const [detVisi, guardarDetVisi] = useState(null);
   const [arancel, guardarArancel] = useState(0);
+  const [habilita, guardarHabilita] = useState(false)
+  const [infoAdh, guardarInfoAdh] = useState([])
 
 
   // FUNCIONES SOCIO
@@ -559,7 +569,11 @@ const Emision = () => {
     await axios
       .get(`${ip}api/werchow/maestro/adherentes/${contrato}`)
       .then((res) => {
+
         guardarAdhs(res.data[0]);
+
+        traerAdhProvi(contrato, res.data[0])
+
       })
       .catch((error) => {
         console.log(error);
@@ -570,7 +584,11 @@ const Emision = () => {
     await axios
       .get(`${ip}api/werchow/maestro/adherentesm/${contrato}`)
       .then((res) => {
+
         guardarAdhs(res.data[0]);
+
+        traerAdhProvi(contrato, res.data[0])
+
       })
       .catch((error) => {
         console.log(error);
@@ -670,6 +688,160 @@ const Emision = () => {
           toastr.error("Ocurrio un error al verificar el uso", "ATENCION")
         })
     }
+
+  }
+
+  const regAdhProvi = async () => {
+
+    const adh = {
+
+      CONTRATO: ficha[0].CONTRATO,
+      NRO_DOC: nroDocRef.current.value,
+      PLAN: `${ficha[0].PLAN}${ficha[0].SUB_PLAN}`,
+      APELLIDOS: apellidoRef.current.value,
+      NOMBRES: nombreRef.current.value,
+      NACIMIENTO: nacimientoRef.current.value,
+      EMPRESA: ficha[0].EMPRESA,
+      ESTADO: 1
+
+    }
+
+    if (adh.NRO_DOC === "") {
+
+      toastr.warning("Debes ingresar un DNI", "ATENCION")
+
+    } else if (adh.NACIMIENTO === "") {
+
+      toastr.warning("Debes ingresar una fecha de nacimiento", "ATENCION")
+
+    } else if (adh.APELLIDOS === "") {
+
+      toastr.warning("Debes ingresar un apellido", "ATENCION")
+
+    } else if (adh.NOMBRES === "") {
+
+      toastr.warning("Debes ingresar un nombre", "ATENCION")
+
+    } else {
+
+      await axios.post(`${ip}api/sgi/servicios/regadhprovi`, adh)
+        .then(res => {
+
+          if (res.status === 200) {
+
+            toastr.success("Adhrente registrado con exito", "ATENCION")
+
+            if (adh.EMPRESA === "W") {
+
+              traerAdhs(adh.CONTRATO)
+
+            } else if (adh.EMPRESA === "M") {
+
+              traerAdhsM(adh.CONTRATO)
+
+            }
+
+          }
+
+        })
+        .catch(error => {
+
+          console.log(error)
+          toastr.error("Ocurrio un error al registrar al adherente", "ATENCION")
+
+        })
+
+
+    }
+
+
+  }
+
+  const checkAdhProvi = async () => {
+
+    guardarInfoAdh([])
+    guardarHabilita(false)
+
+    let dni = nroDocRef.current.value
+
+    if (ficha[0].EMPRESA === "W") {
+
+      await axios.get(`${ip}api/werchow/maestro/adherente/${dni}`)
+        .then(res => {
+
+          if (res.data[0].length > 0) {
+
+            toastr.warning("El adherente ya esta cargado provisoriamente", "ATENCION")
+
+            guardarInfoAdh(res.data[0])
+
+
+          } else if (res.data[0].length === 0) {
+
+            toastr.info("El DNI ingresado no esta registrado, puede cargar provisoriamente al adherente", "ATENCION")
+
+            guardarHabilita(true)
+
+          }
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al checkear el adherente", "ATENCION")
+        })
+
+
+    } else if (ficha[0].EMPRESA === "M") {
+
+
+      await axios.get(`${ip}api/werchow/maestro/adherentem/${dni}`)
+        .then(res => {
+
+          if (res.data[0].length > 0) {
+
+            toastr.warning("El adherente ya esta cargado provisoriamente", "ATENCION")
+
+            guardarInfoAdh(res.data[0])
+
+          } else if (res.data[0].length === 0) {
+
+            toastr.info("El DNI ingresado no esta registrado, puede cargar provisoriamente al adherente", "ATENCION")
+
+            guardarHabilita(true)
+
+          }
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al checkear el adherente", "ATENCION")
+        })
+
+
+    }
+
+
+
+  }
+
+  const traerAdhProvi = async (contrato, ad) => {
+
+    await axios.get(`${ip}api/sgi/servicios/traeradhprovi/${contrato}`)
+      .then(res => {
+
+        if (res.data.length > 0) {
+
+          let adAll = ad.concat(res.data)
+
+          guardarAdhs(adAll)
+
+
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer a los adherentes provisorios", "ATENCION")
+      })
 
   }
 
@@ -2023,6 +2195,14 @@ const Emision = () => {
               planOrto={planOrto}
               registrarPlanOrto={registrarPlanOrto}
               arancel={arancel}
+              nacimientoRef={nacimientoRef}
+              nombreRef={nombreRef}
+              apellidoRef={apellidoRef}
+              nroDocRef={nroDocRef}
+              regAdhProvi={regAdhProvi}
+              checkAdhProvi={checkAdhProvi}
+              habilita={habilita}
+              infoAdh={infoAdh}
             />
           ) : null}
         </>

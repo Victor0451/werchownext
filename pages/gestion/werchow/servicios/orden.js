@@ -62,7 +62,25 @@ const Orden = () => {
                                                         guardarSocio(resAM.data[0][0])
 
                                                     } else if (!resAM.data[0][0]) {
-                                                        toastr.warning("No se encuentra el beneficiario", "ATENCION")
+
+                                                        axios.get(`${ip}api/sgi/servicios/traeradhprovidni/${dni}`)
+                                                            .then(resAP => {
+
+                                                                if (resAP.data.length > 0) {
+
+                                                                    guardarSocio(resAP.data[0])
+
+                                                                } else {
+
+                                                                    toastr.warning("No se encuentra el beneficiario", "ATENCION")
+
+                                                                }
+
+                                                            }).catch(error => {
+                                                                console.log(error)
+                                                                toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                                            })
+
                                                     }
                                                 })
                                                 .catch(error => {

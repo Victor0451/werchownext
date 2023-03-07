@@ -3,6 +3,7 @@ import Spinner from "../../../layout/Spinner";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import OpcionesServicios from "./OpcionesServicios";
+import ModalAdhProvi from "./ModalAdhProvi";
 
 const EmitirServicio = ({
   pagos,
@@ -57,7 +58,15 @@ const EmitirServicio = ({
   verificarUso,
   planOrto,
   registrarPlanOrto,
-  arancel
+  arancel,
+  nacimientoRef,
+  nombreRef,
+  apellidoRef,
+  nroDocRef,
+  regAdhProvi,
+  checkAdhProvi,
+  habilita,
+  infoAdh
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -223,11 +232,24 @@ const EmitirServicio = ({
           </div>
 
           <div className="col-md-6">
-            <h4 className="mb-4 text-center">
-              <strong>
-                <u>Adherentes Registrados</u>
-              </strong>
-            </h4>
+
+            <div className="row">
+              <div className="col-md-7">
+                <h4 className="mb-4 text-center">
+                  <strong>
+                    <u>Adherentes Registrados</u>
+                  </strong>
+                </h4>
+              </div>
+
+              <div className="col-md-5">
+                <button className="btn btn-primary"
+                  data-toggle="modal" data-target="#ModalAdhProvi"
+                >
+                  Agregar Adh
+                </button>
+              </div>
+            </div>
 
             {adhs ? (
               <div className="list">
@@ -320,58 +342,72 @@ const EmitirServicio = ({
           Debes seleccionar un socio
         </div>
       ) : (
-        <OpcionesServicios
-          socio={socio}
-          farmaciaRef={farmaciaRef}
-          modalidadRef={modalidadRef}
-          descuentoRef={descuentoRef}
-          especialidadRef={especialidadRef}
-          especialidadRefP={especialidadRefP}
-          especialidadRefPl={especialidadRefPl}
-          sucursalRef={sucursalRef}
-          sucursalRefP={sucursalRefP}
-          sucursalRefPl={sucursalRefPl}
-          sucursales={sucursales}
-          espec={espec}
-          medicos={medicos}
-          traerMedicosPorSuc={traerMedicosPorSuc}
-          medicoRef={medicoRef}
-          medicoRefP={medicoRefP}
-          medicoRefPl={medicoRefPl}
-          traerDetalleMedSelec={traerDetalleMedSelec}
-          detalleMed={detalleMed}
-          registrarOrdenUsos={registrarOrdenUsos}
-          practicas={practicas}
-          agregarPractica={agregarPractica}
-          pracSocio={pracSocio}
-          eliminarPracticaPrecargado={eliminarPracticaPrecargado}
-          calcularTotalPracticas={calcularTotalPracticas}
-          registrarPracticaUso={registrarPracticaUso}
-          farmacias={farmacias}
-          gestionDescuento={gestionDescuento}
-          descFarma={descFarma}
-          registrarFarmaciaUso={registrarFarmaciaUso}
-          enfer={enfer}
-          sucursalRefE={sucursalRefE}
-          traerEnfer={traerEnfer}
-          detEnf={detEnf}
-          medicoRefE={medicoRefE}
-          practEnfer={practEnfer}
-          prestacionRefE={prestacionRefE}
-          cantidadRefE={cantidadRefE}
-          registrarEnfermeriaUso={registrarEnfermeriaUso}
-          cantidadRefP={cantidadRefP}
-          priUso={priUso}
-          nFisio={nFisio}
-          selector={selector}
-          isj={isj}
-          importeOrden={importeOrden}
-          verificarUso={verificarUso}
-          planOrto={planOrto}
-          registrarPlanOrto={registrarPlanOrto}
-          arancel={arancel}
-        />
+        <>
+          <OpcionesServicios
+            socio={socio}
+            farmaciaRef={farmaciaRef}
+            modalidadRef={modalidadRef}
+            descuentoRef={descuentoRef}
+            especialidadRef={especialidadRef}
+            especialidadRefP={especialidadRefP}
+            especialidadRefPl={especialidadRefPl}
+            sucursalRef={sucursalRef}
+            sucursalRefP={sucursalRefP}
+            sucursalRefPl={sucursalRefPl}
+            sucursales={sucursales}
+            espec={espec}
+            medicos={medicos}
+            traerMedicosPorSuc={traerMedicosPorSuc}
+            medicoRef={medicoRef}
+            medicoRefP={medicoRefP}
+            medicoRefPl={medicoRefPl}
+            traerDetalleMedSelec={traerDetalleMedSelec}
+            detalleMed={detalleMed}
+            registrarOrdenUsos={registrarOrdenUsos}
+            practicas={practicas}
+            agregarPractica={agregarPractica}
+            pracSocio={pracSocio}
+            eliminarPracticaPrecargado={eliminarPracticaPrecargado}
+            calcularTotalPracticas={calcularTotalPracticas}
+            registrarPracticaUso={registrarPracticaUso}
+            farmacias={farmacias}
+            gestionDescuento={gestionDescuento}
+            descFarma={descFarma}
+            registrarFarmaciaUso={registrarFarmaciaUso}
+            enfer={enfer}
+            sucursalRefE={sucursalRefE}
+            traerEnfer={traerEnfer}
+            detEnf={detEnf}
+            medicoRefE={medicoRefE}
+            practEnfer={practEnfer}
+            prestacionRefE={prestacionRefE}
+            cantidadRefE={cantidadRefE}
+            registrarEnfermeriaUso={registrarEnfermeriaUso}
+            cantidadRefP={cantidadRefP}
+            priUso={priUso}
+            nFisio={nFisio}
+            selector={selector}
+            isj={isj}
+            importeOrden={importeOrden}
+            verificarUso={verificarUso}
+            planOrto={planOrto}
+            registrarPlanOrto={registrarPlanOrto}
+            arancel={arancel}
+          />
+
+        </>
       )}
+
+      <ModalAdhProvi
+        nacimientoRef={nacimientoRef}
+        nombreRef={nombreRef}
+        apellidoRef={apellidoRef}
+        nroDocRef={nroDocRef}
+        regAdhProvi={regAdhProvi}
+        checkAdhProvi={checkAdhProvi}
+        habilita={habilita}
+        infoAdh={infoAdh}
+      />
     </div>
   );
 };
