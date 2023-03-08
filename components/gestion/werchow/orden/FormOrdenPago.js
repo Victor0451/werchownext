@@ -2,6 +2,7 @@ import React from 'react'
 import FormOrdenContable from './FormOrdenContable'
 import FormOrdenMedica from './FormOrdenMedica'
 import FormOrdenPractica from './FormOrdenPracticas'
+import ModalBuscarOrden from './ModalBuscarOrden'
 
 const FormOrdenPago = ({
     medicos,
@@ -23,18 +24,42 @@ const FormOrdenPago = ({
     generarOrdenPago,
     errores,
     tipoFac,
-    guardarFlag
+    guardarFlag,
+    orden,
+    buscarOrden,
+    ordFabianRef,
+    ordOteroRef,
 }) => {
     return (
         <div className='container mt-4 border border-dark p-4 list'>
 
-            <h2>
-                <strong>
-                    <u>
-                        Orden de Pago
-                    </u>
-                </strong>
-            </h2>
+            <div className='row'>
+
+                <div className='col-md-8'>
+                    <h2>
+                        <strong>
+                            <u>
+                                Orden de Pago
+                            </u>
+                        </strong>
+                    </h2>
+
+                </div>
+
+                <div className='col-md-4'>
+
+                    <button
+                        className='btn btn-primary btn-block'
+                        data-toggle="modal"
+                        data-target="#ModalBuscarOrden"
+                    >
+                        Buscar Orden Medica
+                    </button>
+
+                </div>
+
+            </div>
+
 
 
             {errores ? (
@@ -149,7 +174,12 @@ const FormOrdenPago = ({
             </div>
 
 
-
+            <ModalBuscarOrden
+                orden={orden}
+                buscarOrden={buscarOrden}
+                ordFabianRef={ordFabianRef}
+                ordOteroRef={ordOteroRef}
+            />
 
         </div>
     )

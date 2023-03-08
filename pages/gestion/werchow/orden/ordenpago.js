@@ -26,6 +26,9 @@ const OrdenPago = () => {
   let nfacturaContRef = React.createRef()
   let observacionContRef = React.createRef()
   let totalContRef = React.createRef()
+  let ordOteroRef = React.createRef()
+  let ordFabianRef = React.createRef()
+
 
 
   const [user, guardarUsuario] = useState(null)
@@ -39,6 +42,7 @@ const OrdenPago = () => {
   const [priUso, guardarPriUso] = useState(0);
   const [tipoFac, guardarTipoFac] = useState(null)
   const [flag, guardarFlag] = useState("")
+  const [orden, guardarOrden] = useState([])
 
 
   const traerTipoFac = async () => {
@@ -519,6 +523,79 @@ const OrdenPago = () => {
   }
 
 
+  const buscarOrden = async (f) => {
+
+    guardarOrden([])
+
+    if (f === 'O') {
+
+      let ord = ordOteroRef.current.value
+
+      if (ord === "") {
+
+        toastr.warning("Debes ingresar el numero de orden", "ATENCION")
+
+      } else {
+
+        await axios.get(`${ip}api/sgi/servicios/buscarordenotero/${ord}`)
+          .then(res => {
+
+            if (res.data.length > 0) {
+
+              guardarOrden(res.data)
+
+            } else if (res.data.length === 0) {
+
+              toastr.info("La orden que estas buscando no se encuentra registrada", "ATENCION")
+
+            }
+
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al buscar la orden", "ATENCION")
+          })
+
+      }
+
+
+    } else if (f === 'F') {
+
+      let ord = ordFabianRef.current.value
+
+      if (ord === "") {
+
+        toastr.warning("Debes ingresar el numero de orden", "ATENCION")
+
+      } else {
+
+        await axios.get(`${ip}api/sgi/servicios/buscarordenfabian/${ord}`)
+          .then(res => {
+
+            if (res.data.length > 0) {
+
+              guardarOrden(res.data)
+
+            } else if (res.data.length === 0) {
+
+              toastr.info("La orden que estas buscando no se encuentra registrada", "ATENCION")
+
+            }
+
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al buscar la orden", "ATENCION")
+          })
+
+      }
+
+    }
+
+
+  }
+
+
   let token = jsCookie.get("token");
 
   useEffect(() => {
@@ -571,6 +648,10 @@ const OrdenPago = () => {
         errores={errores}
         tipoFac={tipoFac}
         guardarFlag={guardarFlag}
+        orden={orden}
+        buscarOrden={buscarOrden}
+        ordFabianRef={ordFabianRef}
+        ordOteroRef={ordOteroRef}
       />
 
 
