@@ -6,8 +6,12 @@ const ModalBuscarOrden = ({
     buscarOrden,
     ordFabianRef,
     ordOteroRef,
-
+    levantarOrden,
+    impLiqRef,
+    modifImporte
 }) => {
+
+
 
     return (
         <div className="modal fade" id="ModalBuscarOrden" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,7 +96,7 @@ const ModalBuscarOrden = ({
                                     </u>
                                 </h4>
 
-                                <table className="table mt-4">
+                                <table className="table table-responsive mt-4">
                                     <thead className="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
@@ -100,11 +104,14 @@ const ModalBuscarOrden = ({
                                             <th scope="col">Orden</th>
                                             <th scope="col">HC</th>
                                             <th scope="col">DNI</th>
+                                            <th scope="col">Prestador</th>
+                                            <th scope="col">Servicio</th>
                                             <th scope="col">Importe</th>
                                             <th scope="col">Anulado</th>
                                             <th scope="col">Liquidado</th>
                                             <th scope="col">N° Orden Pago</th>
                                             <th scope="col">Fecha Orden Pago</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,10 +123,20 @@ const ModalBuscarOrden = ({
                                                     <td>{o.ORDEN}</td>
                                                     <td>{o.CONTRATO}</td>
                                                     <td>{o.NRO_DOC}</td>
-                                                    <td>{o.IMPORTE}</td>
+                                                    <td>{o.PRESTADO}</td>
+                                                    <td>{o.SERVICIO}</td>
+                                                    <td className='input-group input-group-sm'>
+                                                        <input
+                                                            type={"number"}
+                                                            className="form-control"
+                                                            defaultValue={o.IMP_LIQ}
+                                                            ref={impLiqRef}
+                                                        />
+
+                                                    </td>
                                                     <td>
                                                         {
-                                                            !o.ANULADO ?
+                                                            !o.ANULADO || o.ANULADO === 'FALSO' ?
                                                                 (<>No</>) :
                                                                 (<>Si</>)
                                                         }
@@ -143,6 +160,21 @@ const ModalBuscarOrden = ({
                                                                 (<>No Registra</>) :
                                                                 (<>{moment(o.FECHA_CONTROL).format('DD/MM/YYYY')}</>)
                                                         }
+                                                    </td>
+
+                                                    <td>
+                                                        {!o.CONTROL ? (
+                                                            <>
+                                                                <button className='btn btn-success btn-sm'>
+                                                                    <i className="fa fa-check" aria-hidden="true" onClick={() => levantarOrden(o.SUC, o.ORDEN)}></i>
+                                                                </button>
+                                                                <button className='btn btn-warning btn-sm ml-1' onClick={() => modifImporte(o.SUC, o.ORDEN)}>
+                                                                    <i className="fa fa-pencil" aria-hidden="true" ></i>
+                                                                </button>
+                                                            </>
+                                                        ) : null}
+
+
                                                     </td>
 
                                                 </tr>

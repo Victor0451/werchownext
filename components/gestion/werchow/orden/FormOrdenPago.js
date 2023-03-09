@@ -29,6 +29,9 @@ const FormOrdenPago = ({
     buscarOrden,
     ordFabianRef,
     ordOteroRef,
+    levantarOrden,
+    impLiqRef,
+    modifImporte
 }) => {
     return (
         <div className='container mt-4 border border-dark p-4 list'>
@@ -179,6 +182,9 @@ const FormOrdenPago = ({
                 buscarOrden={buscarOrden}
                 ordFabianRef={ordFabianRef}
                 ordOteroRef={ordOteroRef}
+                levantarOrden={levantarOrden}
+                impLiqRef={impLiqRef}
+                modifImporte={modifImporte}
             />
 
         </div>

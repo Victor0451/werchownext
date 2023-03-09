@@ -9,6 +9,7 @@ import { ip } from '../../../../config/config'
 import { registrarHistoria } from "../../../../utils/funciones";
 import FormOrdenPago from "../../../../components/gestion/werchow/orden/FormOrdenPago";
 import GeneracionOrden from "../../../../components/gestion/werchow/orden/GeneracionOrden";
+import { confirmAlert } from 'react-confirm-alert'
 
 const OrdenPago = () => {
 
@@ -28,6 +29,7 @@ const OrdenPago = () => {
   let totalContRef = React.createRef()
   let ordOteroRef = React.createRef()
   let ordFabianRef = React.createRef()
+  let impLiqRef = React.createRef()
 
 
 
@@ -522,7 +524,6 @@ const OrdenPago = () => {
 
   }
 
-
   const buscarOrden = async (f) => {
 
     guardarOrden([])
@@ -595,6 +596,151 @@ const OrdenPago = () => {
 
   }
 
+  const levantarOrden = async (f, orden) => {
+
+
+    // await confirmAlert({
+    //   title: 'ATENCION',
+    //   message: '¿Seguro quieres levantar orden medica?',
+    //   buttons: [
+    //     {
+    //       label: 'Si',
+    //       onClick: () => {
+    //         if (f === 'O') {
+
+    //           axios.put(`${ip}api/sgi/servicios/aprobarordenotero/${orden}`)
+    //             .then(res => {
+    //               if (res.status === 200) {
+    //                 toastr.success("Orden levantada", "ATENCION")
+    //               }
+    //             })
+    //             .catch(error => {
+    //               console.log(error)
+    //               toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+    //             })
+
+    //         } else if (f !== 'O') {
+
+    //           axios.put(`${ip}api/sgi/servicios/aprobarordenfabian/${orden}`)
+    //             .then(res => {
+
+    //               if (res.status === 200) {
+    //                 toastr.success("Orden levantada", "ATENCION")
+    //               }
+    //             })
+    //             .catch(error => {
+    //               console.log(error)
+    //               toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+    //             })
+    //         }
+    //       }
+    //     },
+    //     {
+    //       label: 'No',
+    //       onClick: () => { }
+    //     }
+
+    //   ],
+
+    //   overlayClassName: "overlay-custom-class-name"
+    // });
+
+
+    if (window.confirm("Seguro quieres levantar la orden medica?")) {
+
+      if (f === 'O') {
+
+        await axios.put(`${ip}api/sgi/servicios/aprobarordenotero/${orden}`)
+          .then(res => {
+            if (res.status === 200) {
+              toastr.success("Orden levantada", "ATENCION")
+
+              let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
+
+              registrarHistoria(accion, user)
+
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+          })
+
+      } else if (f !== 'O') {
+
+        await axios.put(`${ip}api/sgi/servicios/aprobarordenfabian/${orden}`)
+          .then(res => {
+
+            if (res.status === 200) {
+              toastr.success("Orden levantada", "ATENCION")
+
+              let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
+
+              registrarHistoria(accion, user)
+
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+          })
+      }
+
+    }
+
+  }
+
+  const modifImporte = async (f, orden) => {
+
+
+
+    if (window.confirm("Seguro quieres modificar el importe de la orden medica?")) {
+
+      let datos = {
+        imp: impLiqRef.current.value,
+        orden: orden
+      }
+
+      if (f === 'O') {
+
+        await axios.put(`${ip}api/sgi/servicios/cambiarimporteordenotero`, datos)
+          .then(res => {
+            if (res.status === 200) {
+              toastr.success("Importe actualizado", "ATENCION")
+
+              let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
+
+              registrarHistoria(accion, user)
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+          })
+
+      } else if (f !== 'O') {
+
+        await axios.put(`${ip}api/sgi/servicios/cambiarimporteordenfabian`, datos)
+          .then(res => {
+
+            if (res.status === 200) {
+              toastr.success("Importe actualizado", "ATENCION")
+
+              let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
+
+              registrarHistoria(accion, user)
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+          })
+      }
+
+    }
+
+  }
+
 
   let token = jsCookie.get("token");
 
@@ -652,6 +798,9 @@ const OrdenPago = () => {
         buscarOrden={buscarOrden}
         ordFabianRef={ordFabianRef}
         ordOteroRef={ordOteroRef}
+        levantarOrden={levantarOrden}
+        impLiqRef={impLiqRef}
+        modifImporte={modifImporte}
       />
 
 
