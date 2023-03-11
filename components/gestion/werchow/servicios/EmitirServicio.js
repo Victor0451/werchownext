@@ -66,7 +66,9 @@ const EmitirServicio = ({
   regAdhProvi,
   checkAdhProvi,
   habilita,
-  infoAdh
+  infoAdh,
+  planImp,
+  registrarPlanImp
 }) => {
   if (!ficha) return <Spinner />;
 
@@ -393,6 +395,8 @@ const EmitirServicio = ({
             planOrto={planOrto}
             registrarPlanOrto={registrarPlanOrto}
             arancel={arancel}
+            planImp={planImp}
+            registrarPlanImp={registrarPlanImp}
           />
 
         </>

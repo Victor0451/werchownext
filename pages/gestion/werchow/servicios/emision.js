@@ -67,6 +67,7 @@ const Emision = () => {
   const [nFisio, guardarNFisio] = useState(0);
   const [isj, guardarISJ] = useState(false)
   const [planOrto, guardarPlanOrto] = useState(null)
+  const [planImp, guardarPlanImp] = useState(null)
   const [visitas, guardarVisitas] = useState([])
   const [detVisi, guardarDetVisi] = useState(null);
   const [arancel, guardarArancel] = useState(0);
@@ -1616,6 +1617,21 @@ const Emision = () => {
 
   }
 
+  const traerPlanesImp = async () => {
+
+    await axios.get(`${ip}api/sgi/servicios/planesimp`)
+      .then(res => {
+
+        guardarPlanImp(res.data)
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el plan", "ATENCION")
+      })
+
+  }
+
   const registrarPlanOrto = async () => {
 
 
@@ -1632,67 +1648,55 @@ const Emision = () => {
       prestador: detalleMed.COD_PRES,
       prestador_nombre: detalleMed.NOMBRE,
       operador: user,
-      sucursal: usuc
+      sucursal: usuc,
+      plan: 'ORTO'
 
     }
 
 
-    await axios.get(`${ip}api/sgi/servicios/traerplansocio/${plan.contrato}`)
-      .then(res => {
 
-        if (!res.data) {
+    await axios.get(`${ip}api/sgi/servicios/traerplandni/${plan.dni}`)
+      .then(res1 => {
+        console.log(res1.data.dni, plan.dni)
+        if (!res1.data || res1.data.dni !== plan.dni) {
 
-          axios.get(`${ip}api/sgi/servicios/traerplandni/${plan.dni}`)
-            .then(res1 => {
+          axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
+            .then(res2 => {
 
-              if (res1.data.length === 0) {
+              if (res2.status === 200) {
 
-                axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
-                  .then(res2 => {
+                toastr.success("Plan registrado correctamente", "ATENCION")
 
-                    if (res2.status === 200) {
+                regPlanVisitas(res2.data.idplansocio, plan.saldo, planOrto.cuotas, 'IMP', planOrto.visitas)
 
-                      toastr.success("Plan registrado correctamente", "ATENCION")
+                let accion = `Se registro plan implante dental ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
 
-                      regPlanVisitas(res2.data.idplansocio, plan.saldo, planOrto.cuotas)
+                registrarHistoria(accion, user)
 
-                      let accion = `Se registro plan de ortodoncia ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
+                setTimeout(() => {
 
-                      registrarHistoria(accion, user)
+                  Router.push({
+                    pathname: '/gestion/werchow/servicios/reciboplan',
+                    query: {
+                      id: res2.data.idplansocio
+                    },
 
-                      setTimeout(() => {
+                  });
 
-                        Router.push({
-                          pathname: '/gestion/werchow/servicios/reciboplan',
-                          query: {
-                            id: res2.data.idplansocio
-                          },
-
-                        });
-
-                      }, 1000);
-
-
-                    }
-
-                  })
-                  .catch(error => {
-                    console.log(error)
-                    toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
-                  })
-
+                }, 1000);
 
 
               }
 
-            }).catch(error => {
+            })
+            .catch(error => {
               console.log(error)
-              toastr.error("Ocurrio un error", "ATENCION")
+              toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
             })
 
-        } else if (res.data) {
+        } else if (res1.data && res1.data.dni === plan.dni) {
 
-          toastr.warning("El socio actualmente posee plan registrado", "ATENCION")
+          toastr.warning("El socio actualmente posee plan de ortodoncia registrado, consultar con gerencia", "ATENCION")
 
           confirmAlert({
             title: 'ATENCION',
@@ -1711,12 +1715,11 @@ const Emision = () => {
 
         }
 
-      }).catch(error => {
-        console.log(error)
-        toastr.error("Ocurrio un error", "ATENCION")
       })
-
-
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+      })
 
 
 
@@ -1724,7 +1727,96 @@ const Emision = () => {
 
   }
 
-  const regPlanVisitas = async (plan, saldo, cuotas) => {
+  const registrarPlanImp = async () => {
+
+
+    const plan = {
+
+      contrato: socio.CONTRATO,
+      dni: socio.NRO_DOC,
+      socio: `${socio.APELLIDOS}, ${socio.NOMBRES}`,
+      fecha: moment().format('YYYY-MM-DD'),
+      total: planImp.total,
+      pagado: planImp.pago_inicial,
+      saldo: parseFloat(planImp.total) - parseFloat(planImp.pago_inicial),
+      estado: 1,
+      prestador: detalleMed.COD_PRES,
+      prestador_nombre: detalleMed.NOMBRE,
+      operador: user,
+      sucursal: usuc,
+      plan: 'IMP'
+
+    }
+
+    await axios.get(`${ip}api/sgi/servicios/traerplandni/${plan.dni}`)
+      .then(res1 => {
+        console.log(res1.data.dni, plan.dni)
+        if (!res1.data || res1.data.dni !== plan.dni) {
+
+          axios.post(`${ip}api/sgi/servicios/nuevoplanorto`, plan)
+            .then(res2 => {
+
+              if (res2.status === 200) {
+
+                toastr.success("Plan registrado correctamente", "ATENCION")
+
+                regPlanVisitas(res2.data.idplansocio, plan.saldo, planImp.cuotas, 'IMP', planImp.visitas)
+
+                let accion = `Se registro plan implante dental ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
+
+                registrarHistoria(accion, user)
+
+                setTimeout(() => {
+
+                  Router.push({
+                    pathname: '/gestion/werchow/servicios/reciboplan',
+                    query: {
+                      id: res2.data.idplansocio
+                    },
+
+                  });
+
+                }, 1000);
+
+
+              }
+
+            })
+            .catch(error => {
+              console.log(error)
+              toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+            })
+
+        } else if (res1.data && res1.data.dni === plan.dni) {
+
+          toastr.warning("El socio actualmente posee plan de implante dental registrado, consultar con gerencia", "ATENCION")
+
+          confirmAlert({
+            title: 'ATENCION',
+            message: `El socio ${plan.contrato} - ${plan.socio}, actualmente posee un plan registrado y vigente.`,
+            buttons: [
+              {
+                label: 'OK',
+                onClick: () => { }
+              },
+              // {
+              //   label: 'No',
+              //   onClick: () => alert('Click No')
+              // }
+            ]
+          });
+
+        }
+
+      })
+      .catch(error => {
+        console.log(error)
+        toastr.error("Ocurrio un error al registrar el plan", "ATENCION")
+      })
+
+  }
+
+  const regPlanVisitas = async (plan, saldo, cuotas, tiPla, visitas) => {
 
     let visi = {
 
@@ -1733,12 +1825,13 @@ const Emision = () => {
       pago: 0,
       fecha: moment().format('YYYY-MM-DD'),
       pagado: 0,
-      operador: user
+      operador: user,
+      plan: tiPla
 
     }
 
 
-    for (let i = 1; i < planOrto.visitas; i++) {
+    for (let i = 1; i < visitas; i++) {
 
       if (i <= cuotas) {
 
@@ -2105,6 +2198,7 @@ const Emision = () => {
       traerEspecialidades()
       traerFarmacias()
       traerPlanesOrto()
+      traerPlanesImp()
       traerVisitas()
 
 
@@ -2203,6 +2297,8 @@ const Emision = () => {
               checkAdhProvi={checkAdhProvi}
               habilita={habilita}
               infoAdh={infoAdh}
+              planImp={planImp}
+              registrarPlanImp={registrarPlanImp}
             />
           ) : null}
         </>

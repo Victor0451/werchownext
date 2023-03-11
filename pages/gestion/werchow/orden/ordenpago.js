@@ -599,145 +599,132 @@ const OrdenPago = () => {
   const levantarOrden = async (f, orden) => {
 
 
-    // await confirmAlert({
-    //   title: 'ATENCION',
-    //   message: '¿Seguro quieres levantar orden medica?',
-    //   buttons: [
-    //     {
-    //       label: 'Si',
-    //       onClick: () => {
-    //         if (f === 'O') {
+    await confirmAlert({
+      title: 'ATENCION',
+      message: '¿Seguro quieres levantar orden medica?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
 
-    //           axios.put(`${ip}api/sgi/servicios/aprobarordenotero/${orden}`)
-    //             .then(res => {
-    //               if (res.status === 200) {
-    //                 toastr.success("Orden levantada", "ATENCION")
-    //               }
-    //             })
-    //             .catch(error => {
-    //               console.log(error)
-    //               toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-    //             })
+            if (f === 'O') {
 
-    //         } else if (f !== 'O') {
-
-    //           axios.put(`${ip}api/sgi/servicios/aprobarordenfabian/${orden}`)
-    //             .then(res => {
-
-    //               if (res.status === 200) {
-    //                 toastr.success("Orden levantada", "ATENCION")
-    //               }
-    //             })
-    //             .catch(error => {
-    //               console.log(error)
-    //               toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-    //             })
-    //         }
-    //       }
-    //     },
-    //     {
-    //       label: 'No',
-    //       onClick: () => { }
-    //     }
-
-    //   ],
-
-    //   overlayClassName: "overlay-custom-class-name"
-    // });
-
-
-    if (window.confirm("Seguro quieres levantar la orden medica?")) {
-
-      if (f === 'O') {
-
-        await axios.put(`${ip}api/sgi/servicios/aprobarordenotero/${orden}`)
-          .then(res => {
-            if (res.status === 200) {
-              toastr.success("Orden levantada", "ATENCION")
-
-              let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
-
-              registrarHistoria(accion, user)
-
+               axios.put(`${ip}api/sgi/servicios/aprobarordenotero/${orden}`)
+                .then(res => {
+                  if (res.status === 200) {
+                    toastr.success("Orden levantada", "ATENCION")
+      
+                    let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
+      
+                    registrarHistoria(accion, user)
+      
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                  toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+                })
+      
+            } else if (f !== 'O') {
+      
+               axios.put(`${ip}api/sgi/servicios/aprobarordenfabian/${orden}`)
+                .then(res => {
+                  if (res.status === 200) {
+                    toastr.success("Orden levantada", "ATENCION")
+      
+                    let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
+      
+                    registrarHistoria(accion, user)
+      
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                  toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+                })
             }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-          })
+      
+ 
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
 
-      } else if (f !== 'O') {
+      ],
 
-        await axios.put(`${ip}api/sgi/servicios/aprobarordenfabian/${orden}`)
-          .then(res => {
+      overlayClassName: "overlay-custom-class-name"
+    });
 
-            if (res.status === 200) {
-              toastr.success("Orden levantada", "ATENCION")
-
-              let accion = `Modificacion en el estado de la orden N° ${orden}: ANULADO ---> ACTIVO.`
-
-              registrarHistoria(accion, user)
-
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-          })
-      }
-
-    }
+    
 
   }
 
   const modifImporte = async (f, orden) => {
 
+    await confirmAlert({
+      title: 'ATENCION',
+      message: '¿Seguro quieres modificar el importe de la orden medica?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
 
-
-    if (window.confirm("Seguro quieres modificar el importe de la orden medica?")) {
-
-      let datos = {
-        imp: impLiqRef.current.value,
-        orden: orden
-      }
-
-      if (f === 'O') {
-
-        await axios.put(`${ip}api/sgi/servicios/cambiarimporteordenotero`, datos)
-          .then(res => {
-            if (res.status === 200) {
-              toastr.success("Importe actualizado", "ATENCION")
-
-              let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
-
-              registrarHistoria(accion, user)
+            let datos = {
+              imp: impLiqRef.current.value,
+              orden: orden
             }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-          })
-
-      } else if (f !== 'O') {
-
-        await axios.put(`${ip}api/sgi/servicios/cambiarimporteordenfabian`, datos)
-          .then(res => {
-
-            if (res.status === 200) {
-              toastr.success("Importe actualizado", "ATENCION")
-
-              let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
-
-              registrarHistoria(accion, user)
+      
+            if (f === 'O') {
+      
+               axios.put(`${ip}api/sgi/servicios/cambiarimporteordenotero`, datos)
+                .then(res => {
+                  if (res.status === 200) {
+                    toastr.success("Importe actualizado", "ATENCION")
+      
+                    let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
+      
+                    registrarHistoria(accion, user)
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                  toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+                })
+      
+            } else if (f !== 'O') {
+      
+               axios.put(`${ip}api/sgi/servicios/cambiarimporteordenfabian`, datos)
+                .then(res => {
+                  console.log(res.data)
+      
+                  if (res.status === 200) {
+                    toastr.success("Importe actualizado", "ATENCION")
+      
+                    let accion = `Modificacion en el importe  de la orden N° ${orden}: Nuevo valor $${datos.imp}.`
+      
+                    registrarHistoria(accion, user)
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                  toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
+                })
             }
-          })
-          .catch(error => {
-            console.log(error)
-            toastr.error("Ocurrio un error al levantar la orden", "ATENCION")
-          })
-      }
+      
+ 
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
 
-    }
+      ],
+
+      overlayClassName: "overlay-custom-class-name"
+    });
 
   }
 

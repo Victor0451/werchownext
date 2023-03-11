@@ -3,7 +3,7 @@ import ModalConsulta from "./ModalConsulta";
 import ModalEnfermeria from "./ModalEnfermeria";
 import ModalFarmacia from "./ModalFarmacia";
 import ModalPractica from "./ModalPracticas";
-import ModalPlanOrtodoncia from './ModalPlanOrtodoncia'
+import ModalPlanOdontologico from './ModalPlanOdontologico'
 
 const OpcionesServicios = ({
   socio,
@@ -54,7 +54,9 @@ const OpcionesServicios = ({
   verificarUso,
   planOrto,
   registrarPlanOrto,
-  arancel
+  arancel,
+  planImp,
+  registrarPlanImp
 }) => {
   return (
     <div className="mt-4 border border-dark p-4">
@@ -128,8 +130,8 @@ const OpcionesServicios = ({
           <div className="card border border-dark">
             <img src="/img/emision/ortodoncia.png" className="card-img-top" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Plan de Ortodoncia</h5>
-              {/* <p className="card-text">Registro y seguimiento de los planes de ortodocina</p> */}
+              <h5 className="card-title">Plan Odontologicos</h5>
+              <p className="card-text">Registro de planes de ortodoncia e implantes dentales</p>
               <button className="btn btn-primary btn-sm rounded"
                 data-toggle="modal" data-target="#modalPlanOrtodoncia"
               >Generar</button>
@@ -212,7 +214,7 @@ const OpcionesServicios = ({
         arancel={arancel}
       />
 
-      <ModalPlanOrtodoncia
+      <ModalPlanOdontologico
         socio={socio}
         sucursales={sucursales}
         espec={espec}
@@ -234,8 +236,9 @@ const OpcionesServicios = ({
         nFisio={nFisio}
         planOrto={planOrto}
         registrarPlanOrto={registrarPlanOrto}
+        planImp={planImp}
+        registrarPlanImp={registrarPlanImp}
       />
-
 
       {/* --------------------------- */}
 

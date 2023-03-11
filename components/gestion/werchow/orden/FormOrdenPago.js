@@ -2,7 +2,7 @@ import React from 'react'
 import FormOrdenContable from './FormOrdenContable'
 import FormOrdenMedica from './FormOrdenMedica'
 import FormOrdenPractica from './FormOrdenPracticas'
-import ModalBuscarOrden from './ModalBuscarOrden'
+import FormBuscarOrden from './FormBuscarOrden'
 
 const FormOrdenPago = ({
     medicos,
@@ -53,8 +53,7 @@ const FormOrdenPago = ({
 
                     <button
                         className='btn btn-primary btn-block'
-                        data-toggle="modal"
-                        data-target="#ModalBuscarOrden"
+                        data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
                     >
                         Buscar Orden Medica
                     </button>
@@ -63,6 +62,16 @@ const FormOrdenPago = ({
 
             </div>
 
+
+            <FormBuscarOrden
+                orden={orden}
+                buscarOrden={buscarOrden}
+                ordFabianRef={ordFabianRef}
+                ordOteroRef={ordOteroRef}
+                levantarOrden={levantarOrden}
+                impLiqRef={impLiqRef}
+                modifImporte={modifImporte}
+            />
 
 
             {errores ? (
@@ -177,15 +186,7 @@ const FormOrdenPago = ({
             </div>
 
 
-            <ModalBuscarOrden
-                orden={orden}
-                buscarOrden={buscarOrden}
-                ordFabianRef={ordFabianRef}
-                ordOteroRef={ordOteroRef}
-                levantarOrden={levantarOrden}
-                impLiqRef={impLiqRef}
-                modifImporte={modifImporte}
-            />
+
 
         </div>
     )
