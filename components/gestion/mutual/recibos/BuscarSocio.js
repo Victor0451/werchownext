@@ -1,5 +1,6 @@
 import React from "react";
 import Calendario from "../../werchow/servicios/Calendario";
+import TurnosMedicosDelDia from "../../werchow/servicios/TurnosMedicosDelDia";
 import ListadoSocios from "./ListadoSocios";
 
 const BuscarSocio = ({
@@ -20,7 +21,7 @@ const BuscarSocio = ({
   eventSelected,
   visitas,
   detVisi,
-
+  listTurno
 }) => {
   return (
     <div className="container border border-dark list mt-4 p-4">
@@ -72,6 +73,33 @@ const BuscarSocio = ({
           visitas={visitas}
           detVisi={detVisi}
         />
+
+      </div>
+
+      <div className="border border-dark mt-4 mb-4 p-2">
+        <div className="row d-flex justify-content-center">
+
+          <div className="col-md-6">
+            <h4>
+              <u>
+                Turnos Medicos del Dia
+              </u>
+            </h4>
+          </div>
+
+          <div className="col-md-4">
+            <button
+              className="btn btn-block btn-primary mt-1"
+              data-toggle="collapse"
+              data-target="#collapseTurnosMedicos"
+            >
+              Ver Turnos
+            </button>
+          </div>
+          <TurnosMedicosDelDia 
+          listTurno={listTurno}
+          />
+        </div>
 
       </div>
 

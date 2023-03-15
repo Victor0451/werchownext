@@ -13,6 +13,7 @@ const FormControlOrdenes = ({
     hastaRef2,
     desdeRef3,
     hastaRef3,
+    servicioRef,
 
 }) => {
     return (
@@ -255,6 +256,21 @@ const FormControlOrdenes = ({
 
                                     </div>
 
+                                    <div className='col-md-4'>
+
+                                        <label>
+                                            Servicio Medico
+                                        </label>
+
+                                        <select className="form-control" defaultValue={"no"} ref={servicioRef} >
+
+                                            <option value={"no"}>Eligue una opcion...</option>
+                                            <option value={'ORDE'}>Ordenes Medicas</option>
+                                            <option value={'P'}>Practicas Medicas</option>
+
+                                        </select>
+
+                                    </div>
 
 
                                     <div className='col-md-4 mt-2'>
@@ -286,6 +302,7 @@ const FormControlOrdenes = ({
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>

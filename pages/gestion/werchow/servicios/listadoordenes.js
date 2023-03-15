@@ -13,6 +13,7 @@ import { confirmAlert } from 'react-confirm-alert';
 const listadoordenes = () => {
 
   const [user, guardarUsuario] = useState(null);
+  const [perfil, guardarPerfil] = useState(null);
   const [listado, guardarListado] = useState(null);
 
 
@@ -28,24 +29,44 @@ const listadoordenes = () => {
       if (usuario) {
         let userData = JSON.parse(usuario);
         guardarUsuario(userData.usuario);
+        guardarPerfil(userData.perfil)
+        traerOrdenesEmitidas(userData.perfil, userData.usuario)
+
       }
 
-      traerOrdenesEmitidas()
 
     }
   }, []);
 
-  const traerOrdenesEmitidas = async () => {
+  const traerOrdenesEmitidas = async (perfil, usu) => {
 
-    await axios.get(`${ip}api/sgi/servicios/traerordenesemitidas`)
-      .then(res => {
-        guardarListado(res.data)
-        //toastr.success("Se trajeron las ordenes con exito", "ATENCION")
-      })
-      .catch(error => {
-        console.log(error)
-        toastr.error("Ocurrio un error al traer las ordenes", "ATENCION")
-      })
+    if (perfil === 1 || perfil === 3) {
+
+      await axios.get(`${ip}api/sgi/servicios/traerordenesemitidas`)
+        .then(res => {
+          guardarListado(res.data)
+          //toastr.success("Se trajeron las ordenes con exito", "ATENCION")
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer las ordenes", "ATENCION")
+        })
+
+    } else {
+
+      await axios.get(`${ip}api/sgi/servicios/traerordenesemitidasusuario/${usu}`)
+        .then(res => {
+          guardarListado(res.data)
+          //toastr.success("Se trajeron las ordenes con exito", "ATENCION")
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al traer las ordenes", "ATENCION")
+        })
+
+    }
+
+
 
   }
 
@@ -194,6 +215,8 @@ const listadoordenes = () => {
         listado={listado}
         generarImpresion={generarImpresion}
         anularOrdenes={anularOrdenes}
+        user={user}
+        perfil={perfil}
       />
 
     </Layout>

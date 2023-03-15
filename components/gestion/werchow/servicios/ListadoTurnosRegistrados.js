@@ -100,6 +100,15 @@ const ListadoTurnosRegistrados = ({
                             columns: [
 
                                 {
+                                    Header: "Turno",
+                                    id: "turno",
+                                    accessor: (d) => d.turno,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["turno"] }),
+                                    filterAll: true,
+                                    width: 150
+                                },
+                                {
                                     Header: "Fecha",
                                     id: "fecha",
                                     accessor: (d) => moment(d.fecha).format('DD/MM/YYYY'),

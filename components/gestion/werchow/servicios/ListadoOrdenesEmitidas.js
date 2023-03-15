@@ -7,7 +7,9 @@ import moment from "moment";
 const ListadoOrdenesEmitidas = ({
     listado,
     generarImpresion,
-    anularOrdenes
+    anularOrdenes,
+    perfil,
+    user
 }) => {
 
 
@@ -19,9 +21,19 @@ const ListadoOrdenesEmitidas = ({
 
             <h2 className="mb-4">
                 <strong>
-                    <u>
-                        Listado de ordenes emitidas
-                    </u>
+                    {
+                        perfil === 1 || perfil === 3 ? (
+                            <u>
+                                Listado de ordenes emitidas por todos los usuarios
+                            </u>
+                        ) : perfil !== 1 || perfil !== 3 ? (
+                            <>
+                                <u>
+                                    Listado de ordenes emitidas por
+                                </u>: {user}
+                            </>
+                        ) : null
+                    }
                 </strong>
             </h2>
 
@@ -172,7 +184,7 @@ const ListadoOrdenesEmitidas = ({
                     ]
                     }
 
-                    defaultPageSize={10}
+                    defaultPageSize={20}
                     className="-striped -highlight"
                 />
             </div>

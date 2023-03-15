@@ -33,35 +33,17 @@ const ListadoControlUsosPorPrestador = ({
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
                     columns={[
                         {
-                            Header: "Practicas",
+                            Header: "Servicios Medicas",
                             columns: [
 
                                 {
                                     Header: "Sucursal",
+                                    id: "SUC",
+                                    accessor: (d) => d.SUC,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["SUC"] }),
                                     filterAll: true,
-                                    width: 120,
-                                    Cell: (row) => (
-                                        <div>
-                                            {
-                                                row.original.SUC === 'O' ?
-                                                    (<div>Otero</div>) :
-                                                    row.original.SUC === 'W' ?
-                                                        (<div>Casa Central</div>) :
-                                                        row.original.SUC === 'R' ?
-                                                            (<div>Perico</div>) :
-                                                            row.original.SUC === 'L' ?
-                                                                (<div>Palpala</div>) :
-                                                                row.original.SUC === 'P' ?
-                                                                    (<div>San Pedro</div>) :
-                                                                    row.original.SUC === 'C' ?
-                                                                        (<div>El Carmen</div>) :
-                                                                        null
 
-                                            }
-                                        </div>
-                                    ),
                                 },
 
                                 {
@@ -72,6 +54,27 @@ const ListadoControlUsosPorPrestador = ({
                                         matchSorter(rows, filter.value, { keys: ["NOMBRE"] }),
                                     filterAll: true,
 
+                                },
+
+                                {
+                                    Header: "Promocion",
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["PROMO"] }),
+                                    filterAll: true,
+                                    width: 120,
+                                    Cell: (row) => (
+                                        <div>
+                                            {!row.original.PROMO || row.original.PROMO === 'NO' ? (
+                                                <>
+                                                    NO
+                                                </>
+                                            ) : row.original.PROMO && row.original.PROMO === 'SI' ? (
+                                                <>
+                                                    SI
+                                                </>
+                                            ) : null}
+                                        </div>
+                                    ),
                                 },
 
                                 {
@@ -86,10 +89,20 @@ const ListadoControlUsosPorPrestador = ({
 
                                 {
                                     Header: "Importe",
-                                    id: "IMPORTE",
-                                    accessor: (d) => d.IMPORTE,
+                                    id: "TOTAL",
+                                    accessor: (d) => d.TOTAL,
                                     filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["IMPORTE"] }),
+                                        matchSorter(rows, filter.value, { keys: ["TOTAL"] }),
+                                    filterAll: true,
+
+                                },
+
+                                {
+                                    Header: "Valor Promedio",
+                                    id: "VALPROM",
+                                    accessor: (d) => d.VALPROM,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["VALPROM"] }),
                                     filterAll: true,
 
                                 }

@@ -33,36 +33,17 @@ const ListadoControlConsultasMedicos = ({
                     defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
                     columns={[
                         {
-                            Header: "Practicas",
+                            Header: "Servicios Medicas",
                             columns: [
 
                                 {
                                     Header: "Sucursal",
                                     id: "SUC",
+                                    accessor: (d) => d.SUC,
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["SUC"] }),
                                     filterAll: true,
-                                    width: 120,
-                                    Cell: (row) => (
-                                        <div>
-                                            {
-                                                row.original.SUC === 'O' ?
-                                                    (<div>Otero</div>) :
-                                                    row.original.SUC === 'W' ?
-                                                        (<div>Casa Central</div>) :
-                                                        row.original.SUC === 'R' ?
-                                                            (<div>Perico</div>) :
-                                                            row.original.SUC === 'L' ?
-                                                                (<div>Palpala</div>) :
-                                                                row.original.SUC === 'P' ?
-                                                                    (<div>San Pedro</div>) :
-                                                                    row.original.SUC === 'C' ?
-                                                                        (<div>El Carmen</div>) :
-                                                                        null
 
-                                            }
-                                        </div>
-                                    ),
                                 },
 
                                 {

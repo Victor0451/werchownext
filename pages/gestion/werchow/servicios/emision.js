@@ -73,6 +73,7 @@ const Emision = () => {
   const [arancel, guardarArancel] = useState(0);
   const [habilita, guardarHabilita] = useState(false)
   const [infoAdh, guardarInfoAdh] = useState([])
+  const [listTurno, guardarListTurno] = useState([])
 
 
   // FUNCIONES SOCIO
@@ -2176,6 +2177,30 @@ const Emision = () => {
 
   }
 
+
+  const traerTurnosDelDia = async () => {
+
+    await axios.get(`${ip}api/sgi/servicios/turnosdeldia`)
+      .then(res => {
+        if (res.data.length > 0) {
+
+          guardarListTurno(res.data)
+
+        } else if (res.data.length === 0) {
+
+          toastr.info("No hay turnos registrados para el dia de hoy", "ATENCION")
+
+        }
+      })
+      .catch(error => {
+
+        console.log(error)
+        toastr.error("Ocurrio un error al traer el listado de turnos", "ATENCION")
+
+      })
+
+  }
+
   // ----------------------------------------------
 
 
@@ -2200,6 +2225,7 @@ const Emision = () => {
       traerPlanesOrto()
       traerPlanesImp()
       traerVisitas()
+      traerTurnosDelDia()
 
 
 
@@ -2231,6 +2257,7 @@ const Emision = () => {
           eventSelected={eventSelected}
           visitas={visitas}
           detVisi={detVisi}
+          listTurno={listTurno}
         />
       ) : flag === true ? (
         <>

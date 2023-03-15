@@ -20,6 +20,9 @@ const Control = () => {
     let hastaRef2 = React.createRef()
     let desdeRef3 = React.createRef()
     let hastaRef3 = React.createRef()
+    let desdeRef4 = React.createRef()
+    let hastaRef4 = React.createRef()
+    let servicioRef = React.createRef()
     let medicoRef = React.createRef()
 
     const [user, guardarUsuario] = useState(null);
@@ -36,10 +39,13 @@ const Control = () => {
 
     const traerListado = async () => {
 
+  
         guardarListado(null)
         guardarListado2(null)
+        guardarListado3(null)
         guardarListadoFa(null)
         guardarListadoFa2(null)
+        guardarListadoFa3(null)
 
         let desde = desdeRef.current.value
         let hasta = hastaRef.current.value
@@ -237,6 +243,7 @@ const Control = () => {
 
         let desde = desdeRef3.current.value
         let hasta = hastaRef3.current.value
+        let servicio = servicioRef.current.value
 
         if (desde === "" || hasta === "") {
 
@@ -246,11 +253,16 @@ const Control = () => {
 
             guardarErrores("El campo DESDE no puede ser mayor que el campo HASTA")
 
+        } else if (servicio === "no") {
+
+            guardarErrores("debes elegir el tipo de servicio medico")
+
         } else {
 
             let rango = {
                 desde: desde,
-                hasta: hasta
+                hasta: hasta,
+                servicio: servicio
             }
 
             guardarRango(rango)
@@ -259,12 +271,13 @@ const Control = () => {
 
                 params: {
                     desde: desde,
-                    hasta: hasta
+                    hasta: hasta,
+                    servicio: servicio
                 }
 
             })
                 .then(res => {
-
+                    
                     if (res.data.length > 0) {
 
                         guardarListado3(res.data)
@@ -290,14 +303,15 @@ const Control = () => {
 
                 params: {
                     desde: desde,
-                    hasta: hasta
+                    hasta: hasta,
+                    servicio: servicio
                 }
 
             })
                 .then(res => {
 
                     if (res.data.length > 0) {
-
+                        console.log(res.data)
                         guardarListadoFa3(res.data)
 
                         toastr.success("Listado encontrado", "ATENCION")
@@ -439,6 +453,9 @@ const Control = () => {
                 hastaRef2={hastaRef2}
                 desdeRef3={desdeRef3}
                 hastaRef3={hastaRef3}
+                desdeRef4={desdeRef4}
+                hastaRef4={hastaRef4}
+                servicioRef={servicioRef}
             />
 
 

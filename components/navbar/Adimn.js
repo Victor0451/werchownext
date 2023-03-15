@@ -313,6 +313,18 @@ const Adimn = () => {
                   Listado ordenes
                 </a>
               </li>
+              <hr />
+              <li>
+                <a href="/gestion/werchow/orden/auditoria" className="dropdown-item text-dark">
+                  Auditoria
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a href="/gestion/werchow/orden/reportes" className="dropdown-item text-dark">
+                  Reportes
+                </a>
+              </li>
             </ul>
           </li>
           <hr />
@@ -942,7 +954,7 @@ const Adimn = () => {
                   Ingresar Servicio
                 </a>
               </li>
-              
+
               <hr />
 
               <li>
