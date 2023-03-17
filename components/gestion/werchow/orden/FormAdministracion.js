@@ -21,19 +21,31 @@ const FormAdministracion = ({
     detOrde,
     modifImporteOrden,
     impModRef,
-    calcTotalOrden
+    calcTotalOrden,
+    ordenesSinPuntear
 }) => {
     return (
         <div className='container mt-4 p-4 border border-dark list'>
 
-            <h2>
-                <strong>
-                    <u>
-                        Administracion de ordenes de pago
-                    </u>
-                </strong>
-            </h2>
+            <div className='row'>
 
+                <div className='col-md-10'>
+                    <h2>
+                        <strong>
+                            <u>
+                                Auditorias: ordenes de pago
+                            </u>
+                        </strong>
+                    </h2>
+                </div>
+
+                <div className='col-md-2'>
+                    <button className='btn btn-success ' onClick={() => { ordenesSinPuntear() }}>
+                        Actualizar Listados
+                    </button>
+                </div>
+
+            </div>
 
             <div className='border border-dark p-4 mt-4'>
 
@@ -134,6 +146,7 @@ const FormAdministracion = ({
                         <button className='btn btn-primary mt-4' onClick={() => { repunteoOrdenes('O') }}>
                             Repuntear Usos
                         </button>
+
                     </div>
 
 

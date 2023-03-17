@@ -7,6 +7,8 @@ import toastr from "toastr";
 import Router from "next/router";
 import { ip } from '../../../../config/config'
 import FormAdministracion from "../../../../components/gestion/werchow/orden/FormAdministracion";
+import { confirmAlert } from "react-confirm-alert";
+import { registrarHistoria } from '../../../../utils/funciones'
 
 const auditoria = () => {
 
@@ -360,7 +362,7 @@ const auditoria = () => {
 
         await axios.put(`${ip}api/sgi/servicios/modificarimporteordenesot`, datos)
             .then(res => {
-
+                
                 if (res.status === 200) {
 
                     toastr.success("Orden de pago modificada usos otero", "ATENCION")
@@ -502,6 +504,7 @@ const auditoria = () => {
                 modifImporteOrden={modifImporteOrden}
                 impModRef={impModRef}
                 calcTotalOrden={calcTotalOrden}
+                ordenesSinPuntear={ordenesSinPuntear}
             />
         </Layout>
     )

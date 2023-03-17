@@ -1668,7 +1668,7 @@ const Emision = () => {
 
                 toastr.success("Plan registrado correctamente", "ATENCION")
 
-                regPlanVisitas(res2.data.idplansocio, plan.saldo, planOrto.cuotas, 'IMP', planOrto.visitas)
+                regPlanVisitas(res2.data.idplansocio, plan.saldo, planOrto.cuotas, 'ORTO', planOrto.visitas)
 
                 let accion = `Se registro plan implante dental ID: ${res2.data.idplansocio}, para el socio: ${plan.contrato} - ${plan.socio}, dni: ${plan.dni}. Con un monto de ${plan.total}`
 
