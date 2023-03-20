@@ -215,13 +215,12 @@ export default class Gerencia extends Component {
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    href="/campanas/estadosocio"
+                    href="/campanas/campanastemp"
                     className="dropdown-item text-dark"
                   >
-                    Asignar Campañas
+                    Campañas temporales
                   </a>
                 </li>
-
                 <hr />
                 <li className="dropdown-submenu">
                   <a
@@ -471,57 +470,6 @@ export default class Gerencia extends Component {
               >
                 Liquidacion Medicos
               </a>
-            </li>
-          </ul>
-        </li>
-
-        <li className="nav-item dropdown ">
-          <a
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            className="nav-link dropdown-toggle"
-          >
-            Campañas
-          </a>
-          <ul className="dropdown-menu">
-            <li>
-              <a
-                href="/campanas/resultado_campana"
-                className="dropdown-item text-dark"
-              >
-                Resultado Campañas Activas
-              </a>
-            </li>
-            <hr />
-            <li className="dropdown-submenu">
-              <a
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                className="  dropdown-toggle dropdown-item text-dark"
-              >
-                Datos En Campo
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    href="/campanas/datos/nuevo"
-                    className="dropdown-item text-dark"
-                  >
-                    Cargar
-                  </a>
-                </li>
-                <hr />
-                <li>
-                  <a
-                    href="/campanas/datos/listado"
-                    className="dropdown-item text-dark"
-                  >
-                    Listado De Datos
-                  </a>
-                </li>
-              </ul>
             </li>
           </ul>
         </li>

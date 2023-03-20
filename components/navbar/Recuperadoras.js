@@ -213,6 +213,16 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
 
         <ul className="dropdown-menu">
           <li>
+            <a
+              href="/campanas/campanastemp"
+              className="dropdown-item text-dark"
+            >
+              Campañas temporales
+            </a>
+          </li>
+
+          <hr />
+          <li>
             <a href="/campanas/campanas" className="dropdown-item text-dark">
               Casos Asignados
             </a>

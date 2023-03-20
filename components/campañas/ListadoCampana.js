@@ -1,5 +1,6 @@
 import React from "react";
 import ReactTable from "react-table";
+import matchSorter from "match-sorter";
 
 const ListadoCampana = ({ listado }) => {
   let data = Object.values(listado);
