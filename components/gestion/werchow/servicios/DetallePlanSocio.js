@@ -43,10 +43,18 @@ const DetallePlanSocio = ({
                 </div>
 
                 <div className="col-md-8">
+                    {
+                        plan.plan === 'ORTO' ? (
+                            <div className="alert alert-info border border-dark text-center text-uppercase">
+                                <strong><u>Plan Ortodoncia</u></strong>: Al haber terminado el plan de pagos del kit, ahora el monto a ingresar es el acordado por el/la DR/A.
+                            </div>
+                        ) : plan.plan === 'IMP' ? (
+                            <div className="alert alert-info border border-dark text-center text-uppercase">
+                                <strong><u>Plan Implante Dental</u></strong>: Una vez cancelado el pago del implante, consultar con el/la DR/A los pasos a seguir.
+                            </div>
+                        ) : null
+                    }
 
-                    <div className="alert alert-info border border-dark text-center text-uppercase">
-                        Al haber terminado el plan de pagos del kit, ahora el monto a ingresar es el acordado por el DR/A
-                    </div>
 
                 </div>
             </div>

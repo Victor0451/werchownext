@@ -166,7 +166,7 @@ export default class Gerencia extends Component {
                     href="/gestion/werchow/servicios/seguimientoplan"
                     className="dropdown-item text-dark"
                   >
-                    Seguimiento Plan Ortodoncia
+                    Seguimiento Planes Odontologicos
                   </a>
                 </li>
               </ul>

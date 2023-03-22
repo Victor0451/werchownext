@@ -397,7 +397,7 @@ const Adimn = () => {
                   href="/gestion/werchow/servicios/seguimientoplan"
                   className="dropdown-item text-dark"
                 >
-                  Seguimiento Plan Ortodoncia
+                  Seguimiento Planes Odontologicos
                 </a>
               </li>
             </ul>

@@ -24,9 +24,14 @@ const seguimientoplan = () => {
     const [datVisi, guardarVisita] = useState([])
 
 
-    const traerPlanVisi = async (id) => {
+    const traerPlanVisi = async (id, plan) => {
 
-        await axios.get(`${ip}api/sgi/servicios/traerplanvisit/${id}`)
+        await axios.get(`${ip}api/sgi/servicios/traerplanvisit/${id}`,
+            {
+                params: {
+                    plan: plan
+                }
+            })
             .then(res => {
 
                 if (res.data.length === 0) {
@@ -60,6 +65,7 @@ const seguimientoplan = () => {
 
         } else {
 
+
             await axios.get(`${ip}api/sgi/servicios/traerplansocio/${socio}`)
                 .then(res => {
 
@@ -78,7 +84,7 @@ const seguimientoplan = () => {
 
                                     guardarPlan(res1.data)
 
-                                    traerPlanVisi(res1.data.idplansocio)
+                                    traerPlanVisi(res1.data.idplansocio, res1.data.plan)
                                 }
 
                             }).catch(error => {
@@ -90,7 +96,7 @@ const seguimientoplan = () => {
 
                         guardarPlan(res.data)
 
-                        traerPlanVisi(res.data.idplansocio)
+                        traerPlanVisi(res.data.idplansocio, res.data.plan)
 
                     }
 

@@ -10,7 +10,9 @@ const BuscarPlanOrtodoncia = ({
         <div className='container border border-dark p-4 mt-4 list'>
 
             <h2>
-                Buscar Plan de Ortodoncia
+                <u>
+                    Buscar Plan de Ortodoncia
+                </u>
             </h2>
 
             <div className='row border border-dark p-4 mt-4 d-flex justify-content-center' >
