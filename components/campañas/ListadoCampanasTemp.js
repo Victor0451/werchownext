@@ -31,7 +31,7 @@ const ListadoCampanasTemp = ({
                     <div className="card-header" id="headingOne">
                         <h2 className="mb-0">
                             <button className="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Casos Asignados
+                                <u> Casos Asignados </u>: {listado.length}
                             </button>
                         </h2>
                     </div>
@@ -156,7 +156,7 @@ const ListadoCampanasTemp = ({
                     <div className="card-header" id="headingTwo">
                         <h2 className="mb-0">
                             <button className="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Casos Trabajados
+                                <u> Casos Trabajados </u>: {listadoTrab.length}
                             </button>
                         </h2>
                     </div>

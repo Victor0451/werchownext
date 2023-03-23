@@ -7,6 +7,7 @@ import { ip } from "../../config/config";
 import toastr from "toastr";
 import ListadoCampanasTemp from "../../components/campañas/ListadoCampanasTemp";
 import ModalAccionesTemp from "../../components/campañas/ModalAccionesTemp"
+import moment from "moment";
 
 const TampanasTemp = () => {
 
@@ -60,6 +61,7 @@ const TampanasTemp = () => {
         const datos = {
 
             observacion: observacionRef.current.value,
+            fecha_observacion: moment().format('YYYY-MM-DD'),
             idcaso: id
 
         }
