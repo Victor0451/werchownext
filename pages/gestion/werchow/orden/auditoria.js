@@ -289,7 +289,6 @@ const auditoria = () => {
 
                             axios.put(`${ip}api/sgi/servicios/cambiarimporteordenfabian`, datos)
                                 .then(res => {
-                                    console.log(res.data)
 
                                     if (res.status === 200) {
                                         toastr.success("Importe actualizado", "ATENCION")
@@ -318,6 +317,71 @@ const auditoria = () => {
             overlayClassName: "overlay-custom-class-name"
         });
 
+    }
+
+    const modifControlUso = async (f, id) => {
+
+        await confirmAlert({
+            title: 'ATENCION',
+            message: '¿Seguro quieres depuntear el Uso?',
+            buttons: [
+                {
+                    label: 'Si',
+                    onClick: () => {
+
+                        const datos = {
+                            id: id
+                        }
+
+                        if (f === 'O') {
+
+                            axios.put(`${ip}api/sgi/servicios/modifcontroluso`, datos)
+                                .then(res => {
+                                    if (res.status === 200) {
+                                        toastr.success("Orden Despunteada", "ATENCION")
+
+                                        let accion = `Uso OTERO id ${datos.id} fue despunteado.`
+
+                                        registrarHistoria(accion, user)
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    toastr.error("Ocurrio un error al despuntear la orden", "ATENCION")
+                                })
+
+                        } else if (f !== 'O') {
+
+                            axios.put(`${ip}api/sgi/servicios/modifcontrolusofa`, datos)
+                                .then(res => {
+
+                                    if (res.status === 200) {
+                                        
+                                        toastr.success("Orden Despunteada", "ATENCION")
+
+                                        let accion = `Uso FABIAN id ${datos.id} fue despunteado.`
+
+                                        registrarHistoria(accion, user)
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    toastr.error("Ocurrio un error al despuntear la orden", "ATENCION")
+                                })
+                        }
+
+
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+
+            ],
+
+            overlayClassName: "overlay-custom-class-name"
+        });
     }
 
     const traerDetalleOrdenPago = async () => {
@@ -362,7 +426,7 @@ const auditoria = () => {
 
         await axios.put(`${ip}api/sgi/servicios/modificarimporteordenesot`, datos)
             .then(res => {
-                
+
                 if (res.status === 200) {
 
                     toastr.success("Orden de pago modificada usos otero", "ATENCION")
@@ -463,6 +527,65 @@ const auditoria = () => {
 
     }
 
+    const actImpLiq = async (f) => {
+
+        if (f === 'ORDE') {
+
+            await axios.put(`${ip}api/sgi/ordenpago/impliqorden`)
+                .then(res => {
+
+                    if (res.status === 200) {
+
+                        toastr.success("Importe de ordenes actualizada", "ATENCION")
+
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    toastr.error("Ocurrio un error al actualizar el importe", "ATENCION")
+                })
+
+        } else if (f === 'PRAC') {
+
+            await axios.put(`${ip}api/sgi/ordenpago/impliqprac`)
+                .then(res => {
+
+                    if (res.status === 200) {
+
+                        toastr.success("Importe de practicas actualizada", "ATENCION")
+
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    toastr.error("Ocurrio un error al actualizar el importe", "ATENCION")
+                })
+
+        } else if (f === 'SINVAL') {
+
+            await axios.put(`${ip}api/sgi/ordenpago/impliqsinval`)
+                .then(res => {
+
+                    if (res.status === 200) {
+
+                        toastr.success("Importe de usos sin valor actualizada", "ATENCION")
+
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    toastr.error("Ocurrio un error al actualizar el importe", "ATENCION")
+                })
+
+        }
+
+    }
+
+   
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
@@ -505,6 +628,9 @@ const auditoria = () => {
                 impModRef={impModRef}
                 calcTotalOrden={calcTotalOrden}
                 ordenesSinPuntear={ordenesSinPuntear}
+                actImpLiq={actImpLiq}
+                modifControlUso={modifControlUso}
+                user={user}
             />
         </Layout>
     )

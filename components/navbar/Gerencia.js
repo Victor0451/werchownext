@@ -498,10 +498,15 @@ export default class Gerencia extends Component {
                 href="/prestamos/nuevoprestamo"
                 className="dropdown-item text-dark"
               >
-                Nuevo Sub. Cont. Familiar
+                Nuevo Sub. Cont. Familiar Policias
               </a>
             </li>
-
+            <hr />
+            <li>
+              <a href="/prestamos/nuevoprestamoempleados" className="dropdown-item text-dark">
+                Nuevo Sub. Cont. Familiar Empleados
+              </a>
+            </li>
             <hr />
             <li className="dropdown-submenu">
               <a
@@ -540,7 +545,16 @@ export default class Gerencia extends Component {
                 href="/prestamos/aprobarprestamos"
                 className="dropdown-item text-dark"
               >
-                Aprobar Sub. Cont. Familiar
+                Aprobar Sub. Cont. Familiar Policias
+              </a>
+            </li>
+            <hr />
+            <li>
+              <a
+                href="/prestamos/listadoprestamosempleados"
+                className="dropdown-item text-dark"
+              >
+                Aprobar Sub. Cont. Familiar Empleados
               </a>
             </li>
 

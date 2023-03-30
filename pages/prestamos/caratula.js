@@ -6,6 +6,7 @@ import Layout from "../../components/layout/Layout";
 import Router from "next/router";
 import JsCookie from "js-cookie";
 import { ip } from '../../config/config'
+import moment from "moment";
 
 const caratula = () => {
   let componentRef = React.createRef();
@@ -148,7 +149,7 @@ const caratula = () => {
               </div>
               <div className="col-md-8 mt-2 border">
                 {" "}
-                <strong>{prestamos.ptm_fechasol}</strong>
+                <strong>{moment(prestamos.ptm_fechasol).format('DD/MM/YYYY')}</strong>
               </div>{" "}
               <div className="col-md-4 mt-2 border">
                 <strong>

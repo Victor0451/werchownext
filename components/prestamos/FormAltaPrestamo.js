@@ -444,7 +444,7 @@ const FormAltaPrestamo = ({
                         <label>
                           <strong>
                             {" "}
-                            <u> Ronovacion: </u>
+                            <u> Renovacion: </u>
                           </strong>
                         </label>
                         <RenovaSelect
