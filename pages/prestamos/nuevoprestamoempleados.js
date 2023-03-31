@@ -9,6 +9,7 @@ import { ip } from "../../config/config";
 import { FormPrestamoEmpleados } from "../../components/prestamos/FormPrestamoEmpleados";
 import { tpemp } from "../../utils/variables";
 import { confirmAlert } from 'react-confirm-alert';
+import { registrarHistoria } from "../../utils/funciones";
 
 
 
@@ -150,7 +151,6 @@ const NuevoPrestamoEmpleados = () => {
 
     const registrarPrestamo = async () => {
 
-
         await confirmAlert({
             title: 'ATENCION',
             message: '¿Seguro quieres registrar el subsidio?',
@@ -175,11 +175,16 @@ const NuevoPrestamoEmpleados = () => {
 
                         axios.post(`${ip}api/sgi/prestamos/nuevoprestamoempleado`, prest)
                             .then(res => {
-                                console.log(res.data)
 
                                 if (res.status === 200) {
 
                                     toastr.success("Subsidio confeccionado correctamente", "ATENCION")
+
+                                    planPagos(prest, res.data.idprestamo)
+
+                                    let accion = `Se registro el prestamo ${res.data.idprestamo}, del empleado ${prest.empleado} por un capital de ${prest.capital} en ${prest.plan_cuotas} cuotas.`
+
+                                    registrarHistoria(accion, user.usuario)
 
                                     setTimeout(() => {
 
@@ -206,6 +211,32 @@ const NuevoPrestamoEmpleados = () => {
                 }
             ]
         });
+
+
+    }
+
+    const planPagos = async (pres, id) => {
+
+        let plan = {
+
+            idprestamo: id,
+            cuota: '',
+            importe: pres.cuota_mensual,
+            fecha_cobro: moment().format('YYYY-MM-DD'),
+            estado: 0,
+
+        }
+
+
+        for (let i = 1; i <= pres.plan_cuotas; i++) {
+
+
+            plan.cuota = i;
+            plan.fecha_cobro = moment().add(i, "months").format('YYYY-MM-DD')
+
+            await axios.post(`${ip}api/sgi/prestamos/plancobro`, plan)
+
+        }
 
 
     }

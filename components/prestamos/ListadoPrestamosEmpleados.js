@@ -2,6 +2,7 @@ import React from "react";
 import matchSorter from "match-sorter";
 import ReactTable from "react-table";
 import Link from "next/link";
+import moment from "moment";
 
 
 const ListadoPrestamosEmpleados = ({
@@ -15,12 +16,34 @@ const ListadoPrestamosEmpleados = ({
         <div className="mt-4 list container border border-dark p-4">
             <hr className="mt-4 mb-4" />
 
+
             <div className=" border border-dark p-4">
-                <h2 className="mb-4">
-                    <strong>
-                        <u>Listado de Subsidios Registrados</u>
-                    </strong>
-                </h2>
+
+                <div className="row">
+
+                    <div className="col-md-8">
+                        <h2 className="mb-4">
+                            <strong>
+                                <u>Listado de Subsidios Registrados</u>
+                            </strong>
+                        </h2>
+                    </div>
+
+                    <div className="col-md-4">
+                        <Link
+                            href={{
+                                pathname: "/prestamos/nuevoprestamoempleados"
+                            }}
+                        >
+                            <button className="btn btn-primary btn-block">
+                                Nuevo Sub. Cont. Familiar
+                            </button>
+                        </Link>
+
+                    </div>
+
+                </div>
+
             </div>
 
             <hr />
@@ -45,7 +68,7 @@ const ListadoPrestamosEmpleados = ({
                                 {
                                     Header: "Fecha De Solicitud",
                                     id: "fecha_solicitud",
-                                    accessor: (d) => d.fecha_solicitud,
+                                    accessor: (d) => moment(d.fecha_solicitud).format('DD/MM/YYYY'),
                                     filterMethod: (filter, rows) =>
                                         matchSorter(rows, filter.value, { keys: ["fecha_solicitud"] }),
                                     filterAll: true,
@@ -134,7 +157,7 @@ const ListadoPrestamosEmpleados = ({
                                                     <i className="fa fa-print" aria-hidden="true"></i>
                                                 </button>
                                             </Link>
-                                            {user.perfil === 1 || user.perfil === 3 ? (
+                                            {user.usuario === 'vlongo' || user.usuario === 'rquispe' || user.usuario === 'isantiago' || user.usuario === 'joaquini' ? (
                                                 <>
                                                     <button
                                                         className="btn btn-success btn-sm mr-1"
@@ -150,6 +173,37 @@ const ListadoPrestamosEmpleados = ({
                                                     </button>
                                                 </>
                                             ) : null}
+
+
+                                            {
+                                                row.original.estado === 'APROBADO' ? (
+
+                                                    <>
+                                                        {
+                                                            user.perfil === 1 || user.perfil === 3 ? (
+                                                                <Link
+                                                                    href={{
+                                                                        pathname: "/prestamos/cobroprestamosempleados",
+                                                                        query: {
+                                                                            id: row.original.idprestamo,
+                                                                        },
+                                                                    }}
+
+                                                                >
+                                                                    <a
+                                                                        className="btn btn-secondary btn-sm mr-1"
+                                                                        target="_blank"
+                                                                    >
+                                                                        <i className="fa fa-money" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </Link>
+
+                                                            ) : null
+                                                        }
+                                                    </>
+
+                                                ) : null
+                                            }
                                         </div>
                                     ),
                                 },
