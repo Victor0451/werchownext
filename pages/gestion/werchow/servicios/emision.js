@@ -41,6 +41,8 @@ const Emision = () => {
   let apellidoRef = React.createRef()
   let nroDocRef = React.createRef()
 
+  let codNoSocioRef = React.createRef()
+
 
   const [errores, guardarErrores] = useState(null);
   const [flag, guardarFlag] = useState(false);
@@ -2177,7 +2179,6 @@ const Emision = () => {
 
   }
 
-
   const traerTurnosDelDia = async () => {
 
     await axios.get(`${ip}api/sgi/servicios/turnosdeldia`)
@@ -2198,6 +2199,50 @@ const Emision = () => {
         toastr.error("Ocurrio un error al traer el listado de turnos", "ATENCION")
 
       })
+
+  }
+
+  const consultarCodigo = async () => {
+
+    let codNoSoc = codNoSocioRef.current.value
+
+    if (codNoSoc === "") {
+
+      toastr.warning("Debes ingresar el codigo que te facilita el paciente", "ATENCION")
+
+    } else {
+
+
+      await axios.get(`${ip}api/sgi/servicios/verifcodnosoc/${codNoSoc}`)
+        .then(res => {
+
+          if (res.data) {
+
+            if (res.data.estado === 1) {
+
+              toastr.success("CHI", "ATENCION")
+
+            } else if (res.data.estado === 0) {
+
+              toastr.info("El codigo generado, ya fue utilizado.", "ATENCION")
+
+            }
+
+          } else {
+
+            toastr.warning("El codigo ingresado no existe o esta mal tipeado", "ATENCION")
+
+          }
+
+        })
+        .catch(error => {
+          console.log(error)
+          toastr.error("Ocurrio un error al verificar el codigo", "ATENCION")
+
+        })
+
+    }
+
 
   }
 
@@ -2258,6 +2303,8 @@ const Emision = () => {
           visitas={visitas}
           detVisi={detVisi}
           listTurno={listTurno}
+          codNoSocioRef={codNoSocioRef}
+          consultarCodigo={consultarCodigo}
         />
       ) : flag === true ? (
         <>

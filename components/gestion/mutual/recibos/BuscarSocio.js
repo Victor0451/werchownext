@@ -21,7 +21,9 @@ const BuscarSocio = ({
   eventSelected,
   visitas,
   detVisi,
-  listTurno
+  listTurno,
+  codNoSocioRef,
+  consultarCodigo
 }) => {
   return (
     <div className="container border border-dark list mt-4 p-4">
@@ -96,9 +98,45 @@ const BuscarSocio = ({
               Ver Turnos
             </button>
           </div>
-          <TurnosMedicosDelDia 
-          listTurno={listTurno}
+          <TurnosMedicosDelDia
+            listTurno={listTurno}
           />
+        </div>
+
+      </div>
+
+      <div className="border border-dark mt-4 mb-4 p-2">
+        <div className="row d-flex justify-content-center">
+
+          <div className="col-md-4">
+            <h4>
+              <u>
+                Codigos de Consultas Gratuitas
+              </u>
+            </h4>
+          </div>
+
+          <div className="col-md-3">
+
+            <label>
+              <u>
+                Ingresa el codigo
+              </u>
+            </label>
+
+            <input type={"number"} className="form-control" ref={codNoSocioRef} />
+
+          </div>
+
+          <div className="col-md-3">
+            <button
+              className="btn btn-block btn-primary mt-4 "
+              onClick={consultarCodigo}
+            >
+              Generar Consulta
+            </button>
+          </div>
+
         </div>
 
       </div>
