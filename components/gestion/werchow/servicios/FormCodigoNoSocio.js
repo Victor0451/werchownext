@@ -59,11 +59,11 @@ const FormCodigoNoSocio = ({
 
                         <label>
                             <u>
-                                Telefono
+                                Celular
                             </u>
                         </label>
 
-                        <input type="number" className="form-control" ref={telefonoRef} />
+                        <input type="text" className="form-control" ref={telefonoRef} defaultValue="388-15" />
 
                     </div>
 
@@ -76,7 +76,7 @@ const FormCodigoNoSocio = ({
                             </u>
                         </label>
 
-                        <input type="mail" className="form-control" ref={mailRef} />
+                        <input type="mail" className="form-control" ref={mailRef} placeholder="Ej: usuario@mail.com" />
 
                     </div>
 

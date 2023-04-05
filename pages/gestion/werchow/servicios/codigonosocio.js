@@ -28,6 +28,10 @@ const CodigoNoSocio = () => {
 
         guardarErrores(null)
 
+        let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+
+
         if (noSocioRef.current.value === "") {
 
             guardarErrores("Debes ingresar tu apellido y nombre")
@@ -50,70 +54,90 @@ const CodigoNoSocio = () => {
 
         } else {
 
+            if (emailRegex.test(mailRef.current.value)) {
+
+                let noSoc = {
+
+                    nosocio: noSocioRef.current.value,
+                    dni: dniRef.current.value,
+                    telefono: telefonoRef.current.value,
+                    mail: mailRef.current.value,
+                    obra_soc: obraSocRef.current.value,
+                    fecha: moment().format('YYYY-MM-DD'),
+                    codigo: Math.round(Math.random() * 999999),
+                    estado: 1
+
+                }
 
 
-            let noSoc = {
+                await axios.get(`${ip}api/sgi/servicios/verificarnosocio/${noSoc.dni}`)
+                    .then(res => {
 
-                nosocio: noSocioRef.current.value,
-                dni: dniRef.current.value,
-                telefono: telefonoRef.current.value,
-                mail: mailRef.current.value,
-                obra_soc: obraSocRef.current.value,
-                fecha: moment().format('YYYY-MM-DD'),
-                codigo: Math.round(Math.random() * 999999)
+                        if (res.data) {
 
+                            toastr.info("Usted ya solicito este benefico, en caso de tener interes por este u otro servicio de la empresa, puede acercarce a nuestras sucursales y solictar mas informacion para su afiliacion. Muchas gracias.", "ATENCION")
+
+                        } else {
+
+                            axios.post(`${ip}api/sgi/servicios/regnosocio`, noSoc)
+                                .then(res1 => {
+
+                                    if (res1.status === 200) {
+
+                                        toastr.success("Sus datos fueron registrados con exito", "ATENCION")
+
+                                        guardarRegistro(res1.data)
+
+                                        mandarMail(noSoc)
+                                    }
+
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    toastr.error("Ocurrio un error al registrar sus datos", "ATENCION")
+
+                                })
+
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        toastr.error("Ocurrio un error al verificar su existencia", "ATENCION")
+
+                    })
+
+            } else {
+
+                guardarErrores("Debes ingresar una direccion de mail valida")
             }
 
 
-            await axios.get(`${ip}api/sgi/servicios/verificarnosocio/${noSoc.dni}`)
-                .then(res => {
-
-                    if (res.data) {
-
-                        toastr.info("Usted ya solicito este benefico, en caso de tener interes por este u otro servicio de la empresa, puede acercarce a nuestras sucursales y solictar mas informacion para su afiliacion. Muchas gracias.", "ATENCION")
-
-                    } else {
-
-                        axios.post(`${ip}api/sgi/servicios/regnosocio`, noSoc)
-                            .then(res1 => {
-
-                                if (res1.status === 200) {
-
-                                    toastr.success("Sus datos fueron registrados con exito", "ATENCION")
-
-                                    guardarRegistro(res1.data)
-                                }
-
-                            })
-                            .catch(error => {
-                                console.log(error)
-                                toastr.error("Ocurrio un error al registrar sus datos", "ATENCION")
-
-                            })
-
-                    }
-
-                })
-                .catch(error => {
-                    console.log(error)
-                    toastr.error("Ocurrio un error al verificar su existencia", "ATENCION")
-
-                })
 
         }
     }
 
-    const imprimir = () => {
-        let contenido = document.getElementById("orden").innerHTML;
-        let contenidoOrg = document.body.innerHTML;
 
-        document.body.innerHTML = contenido;
-
-        window.print();
-
-        document.body.innerHTML = contenidoOrg;
-
-        window.location.replace('/gestion/werchow/servicios/codigonosocio');
+    const mandarMail = (array) => {
+        fetch("/api/mail/sgi/codigonosocio", {
+            method: "POST",
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(array),
+        })
+            .then((res) => {
+                if (res.status === 200) {
+                    toastr.info(
+                        "Se envio un email con el codigo generado para presentar en clinica otero",
+                        "ATENCION"
+                    );
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -134,7 +158,6 @@ const CodigoNoSocio = () => {
 
                     <ImprimirCodigoNoSocio
                         registro={registro}
-                        imprimir={imprimir}
                     />
 
                 )

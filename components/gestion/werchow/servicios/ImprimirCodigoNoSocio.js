@@ -2,14 +2,12 @@ import React from 'react'
 
 const ImprimirCodigoNoSocio = ({
     registro,
-    imprimir
+    
 }) => {
     return (
-        <div className='containerImp border border-dark list p-4 mt-4 mb-4 col-md-6'>
+        <div className='container border border-dark list p-4 mt-4 mb-4 col-md-6'>
 
-
-
-            <div className='borderImp p-4 mt-4 ' id='orden'>
+            <div className='border border-dark p-4 mt-4 ' id='orden'>
 
                 <div className="col-md-12 d-flex justify-content-center">
 
@@ -25,55 +23,86 @@ const ImprimirCodigoNoSocio = ({
                     </strong>
                 </h4>
 
-                <div className='row'>
+                <div className='border border-dark mt-4 p-4 list'>
 
-                    <div className='col-md-8 mt-4'>
+                    <div className='row '>
 
-                        <label>
-                            <u>
-                                Apellido y Nombre
-                            </u>
-                        </label>
+                        <div className='col-md-4 mt-4'>
+                            <label>
+                                <strong>
+                                    <u>
+                                        Solicitante:
+                                    </u>
+                                </strong>
+                            </label>
 
-                        <input type="text" className="form-control" defaultValue={registro.nosocio} />
+                            {""} {registro.nosocio}
 
+                        </div>
+
+                        <div className='col-md-4 mt-4'>
+                            <label>
+                                <strong>
+                                    <u>
+                                        DNI:
+                                    </u>
+                                </strong>
+                            </label>
+
+                            {" "} {registro.dni}
+
+                        </div>
+
+                        <div className='col-md-4 mt-4'>
+                            <label>
+                                <strong>
+                                    <u>
+                                        Telefono:
+                                    </u>
+                                </strong>
+                            </label>
+
+                            {" "} {registro.telefono}
+
+                        </div>
+
+                        <div className='col-md-4 mt-4'>
+                            <label>
+                                <strong>
+                                    <u>
+                                        mail:
+                                    </u>
+                                </strong>
+                            </label>
+
+                            {" "} {registro.mail}
+
+                        </div>
+
+                        <div className='col-md-12 mt-4'>
+                            <label>
+                                <strong>
+                                    <u>
+                                        Codigo:
+                                    </u>
+                                </strong>
+                            </label>
+
+                            {""} {registro.codigo}
+
+                        </div>
                     </div>
-
-                    <div className='col-md-4 mt-4'>
-
-                        <label>
-                            <u>
-                                DNI
-                            </u>
-                        </label>
-
-                        <input type="number" className="form-control" defaultValue={registro.dni} />
-
-                    </div>
-
-                    <div className='col-md-4 mt-4'>
-
-                        <label>
-                            <u>
-                                Codigo
-                            </u>
-                        </label>
-
-                        <input type="number" className="form-control" defaultValue={registro.codigo} />
-
-                    </div>
-
                 </div>
 
             </div>
 
-            <div className='col-md-12 mt-4 d-flex justify-content-end'>
+            <div className='col-md-12 mt-4 '>
 
-                <button className='btn btn-success'
-                    onClick={imprimir}
-                >
-                    Descargar
-                </button>
+                <div className='alert alert-info border border-dark mt-4 mb-4 text-center text-uppercase'>
+
+                    El comprobante generado, fue enviado al mail ingresado. Para poder usar este beneficio, presenta el recibido generado en clinica otero.
+
+                </div>
 
             </div>
 

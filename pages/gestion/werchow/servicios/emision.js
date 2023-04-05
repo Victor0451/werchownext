@@ -2220,7 +2220,14 @@ const Emision = () => {
 
             if (res.data.estado === 1) {
 
-              toastr.success("CHI", "ATENCION")
+              toastr.success("Codigo valido, puedes generar la orden medica", "ATENCION")
+
+              Router.push({
+                pathname: '/gestion/werchow/servicios/emisionnosocio',
+                query: {
+                  dni: res.data.dni
+                }
+              })
 
             } else if (res.data.estado === 0) {
 
