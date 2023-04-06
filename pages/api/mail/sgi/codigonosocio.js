@@ -7,7 +7,7 @@ export default async function sendMail(req, res) {
         from: "werchowsgi@gmail.com",
         to: `${req.body.mail}`,
         cc: ["vmlongo@werchow.com"],
-        subject: `Codigo Para Consulta Con Descuento - GRUPO WERCHOW`,
+        subject: `Codigo Para Descuento - GRUPO WERCHOW`,
         html: `
 
     <html>
@@ -17,24 +17,44 @@ export default async function sendMail(req, res) {
     </head>
     <body>
 
-    <h2>
+    <h2 style="text-align: center" >
         <strong>
-            <u>
-                Comprobante Codigo Para Consulta Con Descuento
-            </u>
+            Codigo Para Descuento*
         </strong>
     </h2>
 
     </br>
+   
+    <h1 style="text-align: center">                    
+    <strong>
+        <u>
+        ${req.body.codigo}       
+         </u> 
+    </strong>
+    </h1>
+    
+    </br>
+    </br>    
+
+    <p>
+
+    <strong>
+    Presenta este codigo en la clinica otero para poder obtener una consulta medica con descuento para cualquier prestador medico.
+    </strong>
+    </p>
+
 
     <div>
-        <p>
-            <strong>
-                <u>
-                    Solicitante
-                </strong>
-            </u>: ${req.body.nosocio}
-        </p> 
+        
+        
+
+    <p>
+       <strong>
+            <u>
+                Solicitante
+            </strong>
+        </u>: ${req.body.nosocio}
+    </p> 
     
     <p>
         <strong>
@@ -51,21 +71,14 @@ export default async function sendMail(req, res) {
         </strong>
             </u> : ${moment(req.body.fecha).format("DD/MM/YYYY")}
     </p> 
-
-    <p>    
-        <u>
-            <strong>
-                CODIGO
-            </strong>
-         </u>: ${req.body.codigo}
-    </p>        
     
     </div>
+
     
     <p>
-        <strong>
-             Presenta este codigo en la clinica otero para poder obtener una consulta medica con descuento para cualquier prestador medico.
-        </strong>
+        
+    *Descuento para ser utilizado por única vez, con médicos en convenio con Grupo Werchow.
+        
     </p>
 
     <p>

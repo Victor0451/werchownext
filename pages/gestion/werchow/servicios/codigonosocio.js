@@ -109,7 +109,7 @@ const CodigoNoSocio = () => {
 
             } else {
 
-                guardarErrores("Debes ingresar una direccion de mail valida")
+                guardarErrores("Debes ingresar una direccion de mail valida, vefirica que al principio y/o final de la direccion no existan espacios")
             }
 
 
