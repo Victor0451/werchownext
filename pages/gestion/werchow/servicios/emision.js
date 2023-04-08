@@ -899,7 +899,7 @@ const Emision = () => {
 
         } else {
 
-          uso.IMPORTE = 550
+          uso.IMPORTE = 750
 
         }
 
@@ -907,28 +907,15 @@ const Emision = () => {
 
         if (isj === true) {
 
-          uso.IMPORTE = 750 - 350
-
-        } else {
-
-          uso.IMPORTE = 750
-
-        }
-
-      } else if (priUso === 2) {
-
-
-        if (isj === true) {
-
           uso.IMPORTE = 950 - 350
 
         } else {
-          0
+
           uso.IMPORTE = 950
 
         }
 
-      } else if (priUso > 2) {
+      } else if (priUso >= 2) {
 
         if (isj === true) {
 
@@ -2147,7 +2134,7 @@ const Emision = () => {
 
         } else {
 
-          const importe = 550
+          const importe = 750
 
           return importe
 
@@ -2155,18 +2142,11 @@ const Emision = () => {
 
       } else if (priUso === 1) {
 
-        const importe = 750
-
-        return importe
-
-      } else if (priUso === 2) {
-
         const importe = 950
 
         return importe
 
-
-      } else if (priUso > 2) {
+      } else if (priUso >= 2) {
 
         const importe = detalleMed.CON_PAGA
 
