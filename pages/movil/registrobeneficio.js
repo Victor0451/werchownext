@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../components/layout/Layout";
+import Layout from "../../components/layout/Layout";
 import axios from "axios";
 import Router, { useRouter } from "next/router";
 import toastr from "toastr";
-import { ip } from "../../../config/config";
+import { ip } from "../../config/config";
 import jsCookie from "js-cookie";
-import FormRegistroBeneficio from "../../../components/socios/clubwerchow/FormRegistroBeneficio";
+import FormRegistroBeneficio from "../../components/socios/clubwerchow/FormRegistroBeneficio";
 import moment from "moment";
 import { v4 as uuidv4 } from 'uuid';
 

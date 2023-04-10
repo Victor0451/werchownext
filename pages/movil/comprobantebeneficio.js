@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../components/layout/Layout";
+import Layout from "../../components/layout/Layout";
 import axios from "axios";
 import { useRouter } from "next/router";
 import toastr from "toastr";
-import { ip } from "../../../config/config";
+import { ip } from "../../config/config";
 import jsCookie from "js-cookie";
 import moment from "moment";
-import FormComprobanteBeneficio from "../../../components/socios/clubwerchow/FormComprobanteBeneficio";
+import FormComprobanteBeneficio from "../../components/socios/clubwerchow/FormComprobanteBeneficio";
 
 
 const comprobantebeneficio = () => {
