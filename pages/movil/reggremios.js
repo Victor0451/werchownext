@@ -4,14 +4,14 @@ import moment from "moment-timezone";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import toastr from "toastr";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import { ip } from "../../config/config";
 import { registrarHistoria } from '../../utils/funciones'
-import FormCodigoNoSocio from "../../components/movil/FormCodigoNoSocio";
-import ImprimirCodigoNoSocio from "../../components/movil/ImprimirCodigoNoSocio";
+import FormRegGremios from "../../components/movil/FormRegGremios";
 
-const CodigoNoSocio = () => {
+
+const RegGremios = () => {
 
     let noSocioRef = React.createRef()
     let dniRef = React.createRef()
@@ -22,7 +22,7 @@ const CodigoNoSocio = () => {
     const [errores, guardarErrores] = useState(null)
     const [registro, guardarRegistro] = useState(null)
 
-
+    let router = useRouter()
 
     const registrarNoSocio = async () => {
 
@@ -66,7 +66,12 @@ const CodigoNoSocio = () => {
                     fecha: moment().format('YYYY-MM-DD'),
                     codigo: Math.round(Math.random() * 999999),
                     estado: 1,
-                    gremio: "NO"
+                    gremio: ""
+
+                }
+
+                if (router.query.f) {
+                    noSoc.gremio = router.query.f
                 }
 
 
@@ -89,6 +94,8 @@ const CodigoNoSocio = () => {
                                         guardarRegistro(res1.data)
 
                                         mandarMail(noSoc)
+
+                                        Router.push('/movil/infogremios')
                                     }
 
                                 })
@@ -119,7 +126,7 @@ const CodigoNoSocio = () => {
 
 
     const mandarMail = (array) => {
-        fetch("/api/mail/sgi/codigonosocio", {
+        fetch("/api/mail/sgi/codigogremios", {
             method: "POST",
             headers: {
                 Accept: "application/json, text/plain, */*",
@@ -130,7 +137,7 @@ const CodigoNoSocio = () => {
             .then((res) => {
                 if (res.status === 200) {
                     toastr.info(
-                        "Se envio un email con el codigo generado para presentar en clinica otero",
+                        "Se envio un email con el codigo generado con el cual estas participando del sorteo",
                         "ATENCION"
                     );
                 }
@@ -140,12 +147,13 @@ const CodigoNoSocio = () => {
             });
     };
 
+
     return (
         <Layout f={"nonav"}>
 
             {
                 !registro ? (
-                    <FormCodigoNoSocio
+                    <FormRegGremios
                         registrarNoSocio={registrarNoSocio}
                         noSocioRef={noSocioRef}
                         dniRef={dniRef}
@@ -156,9 +164,8 @@ const CodigoNoSocio = () => {
                     />
                 ) : (
 
-                    <ImprimirCodigoNoSocio
-                        registro={registro}
-                    />
+                    <>
+                    </>
 
                 )
             }
@@ -170,4 +177,4 @@ const CodigoNoSocio = () => {
     )
 }
 
-export default CodigoNoSocio
+export default RegGremios

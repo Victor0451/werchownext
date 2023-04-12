@@ -7,7 +7,7 @@ export default async function sendMail(req, res) {
         from: "werchowsgi@gmail.com",
         to: `${req.body.mail}`,
         cc: ["vmlongo@werchow.com"],
-        subject: `Codigo Para Descuento - GRUPO WERCHOW`,
+        subject: `Codigo Para Sorteo - GRUPO WERCHOW`,
         html: `
 
     <html>
@@ -19,7 +19,7 @@ export default async function sendMail(req, res) {
 
     <h2 style="text-align: center" >
         <strong>
-            Codigo Para Descuento*
+            Codigo Para Sorteo*
         </strong>
     </h2>
 
@@ -39,7 +39,7 @@ export default async function sendMail(req, res) {
     <p>
 
     <strong>
-    Presenta este código en recepción para obtener un descuento en Consultorios Otero.
+    Guarda este código para participar del sorteo.
     </strong>
     </p>
 
@@ -77,7 +77,7 @@ export default async function sendMail(req, res) {
     
     <p>
         
-    *Descuento para ser utilizado por única vez, con médicos en convenio con Grupo Werchow.
+    *Codigo para ser utilizado por única vez, para titulares del gremio.
         
     </p>
 

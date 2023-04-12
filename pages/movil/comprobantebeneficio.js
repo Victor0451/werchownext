@@ -6,7 +6,7 @@ import toastr from "toastr";
 import { ip } from "../../config/config";
 import jsCookie from "js-cookie";
 import moment from "moment";
-import FormComprobanteBeneficio from "../../components/socios/clubwerchow/FormComprobanteBeneficio";
+import FormComprobanteBeneficio from "../../components/movil/FormComprobanteBeneficio";
 
 
 const comprobantebeneficio = () => {
