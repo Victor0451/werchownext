@@ -8,6 +8,8 @@ const FormRegGremios = ({
     telefonoRef,
     obraSocRef,
     errores,
+    Router,
+    g
 }) => {
     return (
         <div className='list container border border-dark p-4 mt-4 mb-4'>
@@ -105,7 +107,20 @@ const FormRegGremios = ({
                         ) : null
                     }
 
-                    <div className='col-md-12 mt-4 d-flex justify-content-end'>
+                    <div className='col-md-12 mt-4 d-flex justify-content-between'>
+
+                        <button className='btn btn-secondary '
+                            onClick={() => Router.push({
+                                pathname: '/movil/infogremios',
+                                query: {
+                                    f: 0,
+                                    g: g
+                                }
+
+                            })}
+                        >
+                            Mas Info
+                        </button>
 
                         <button className='btn btn-primary '
                             onClick={registrarNoSocio}

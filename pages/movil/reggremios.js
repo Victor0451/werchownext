@@ -95,7 +95,14 @@ const RegGremios = () => {
 
                                         mandarMail(noSoc)
 
-                                        Router.push('/movil/infogremios')
+                                        Router.push({
+                                            pathname: '/movil/infogremios',
+                                            query: {
+                                                f: 1,
+                                                g: router.query.f
+                                            }
+
+                                        })
                                     }
 
                                 })
@@ -151,26 +158,18 @@ const RegGremios = () => {
     return (
         <Layout f={"nonav"}>
 
-            {
-                !registro ? (
-                    <FormRegGremios
-                        registrarNoSocio={registrarNoSocio}
-                        noSocioRef={noSocioRef}
-                        dniRef={dniRef}
-                        mailRef={mailRef}
-                        telefonoRef={telefonoRef}
-                        obraSocRef={obraSocRef}
-                        errores={errores}
-                    />
-                ) : (
 
-                    <>
-                    </>
-
-                )
-            }
-
-
+            <FormRegGremios
+                registrarNoSocio={registrarNoSocio}
+                noSocioRef={noSocioRef}
+                dniRef={dniRef}
+                mailRef={mailRef}
+                telefonoRef={telefonoRef}
+                obraSocRef={obraSocRef}
+                errores={errores}
+                Router={Router}
+                g={router.query.f}
+            />
 
 
         </Layout>
