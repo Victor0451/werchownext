@@ -27,6 +27,9 @@ const auditoria = () => {
 
     const ordenesSinPuntear = async () => {
 
+        guardarListFa([])
+        guardarListOtero([])
+
         await axios.get(`${ip}api/sgi/servicios/ordenessinpuntearotero`)
             .then(res => {
 
@@ -356,7 +359,7 @@ const auditoria = () => {
                                 .then(res => {
 
                                     if (res.status === 200) {
-                                        
+
                                         toastr.success("Orden Despunteada", "ATENCION")
 
                                         let accion = `Uso FABIAN id ${datos.id} fue despunteado.`
@@ -584,7 +587,72 @@ const auditoria = () => {
 
     }
 
-   
+    const eliminarOrden = async (f, id, orden) => {
+
+        await confirmAlert({
+            title: 'ATENCION',
+            message: '¿Seguro quieres eliminar el Uso duplicado?',
+            buttons: [
+                {
+                    label: 'Si',
+                    onClick: () => {
+
+                        if (f === 'O') {
+
+                            axios.delete(`${ip}api/sgi/servicios/eliminarordendupliotero/${id}`)
+                                .then(res => {
+
+                                    if (res.status === 200) {
+
+                                        toastr.success("La orden duplicada se elimino con exito", "ATENCION")
+
+                                        let accion = `Uso OTERO id ${id}, N° orden ${orden} que estaba duplicado, fue eliminado.`
+
+                                        registrarHistoria(accion, user)
+                                    }
+
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    toastr.error("Ocurrio un error al eliminar la orden duplicada", "ATENCION")
+                                })
+
+                        } else if (f !== 'O') {
+
+                            axios.delete(`${ip}api/sgi/servicios/eliminarordenduplifa/${id}`)
+                                .then(res => {
+
+                                    if (res.status === 200) {
+
+                                        toastr.success("La orden duplicada se elimino con exito", "ATENCION")
+
+                                        let accion = `Uso FABIAN id ${id}, N° orden ${orden} que estaba duplicado, fue eliminado.`
+
+                                        registrarHistoria(accion, user)
+                                    }
+
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                    toastr.error("Ocurrio un error al eliminar la orden duplicada", "ATENCION")
+                                })
+                        }
+
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+
+            ],
+
+            overlayClassName: "overlay-custom-class-name"
+        });
+
+
+    }
+
 
     let token = jsCookie.get("token");
 
@@ -631,6 +699,7 @@ const auditoria = () => {
                 actImpLiq={actImpLiq}
                 modifControlUso={modifControlUso}
                 user={user}
+                eliminarOrden={eliminarOrden}
             />
         </Layout>
     )

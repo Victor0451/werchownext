@@ -25,7 +25,8 @@ const FormAdministracion = ({
     ordenesSinPuntear,
     actImpLiq,
     modifControlUso,
-    user
+    user,
+    eliminarOrden
 }) => {
     return (
         <div className='container mt-4 p-4 border border-dark list'>
@@ -36,8 +37,8 @@ const FormAdministracion = ({
                     <h2>
                         <strong>
                             <u>
-                                Auditorias: ordenes de pago
-                            </u>
+                                Auditorias
+                            </u>: Ordenes de Pago
                         </strong>
                     </h2>
                 </div>
@@ -92,7 +93,7 @@ const FormAdministracion = ({
                             <strong>
                                 <u>
                                     Usos Otero Liquidados Sin Puntear
-                                </u>
+                                </u>: {listOtero.length}
                             </strong>
                         </h4>
 
@@ -191,7 +192,7 @@ const FormAdministracion = ({
                             <strong>
                                 <u>
                                     Usos Fabian Liquidados Sin Puntear
-                                </u>
+                                </u>: {listFa.length}
                             </strong>
                         </h4>
 
@@ -525,25 +526,32 @@ const FormAdministracion = ({
                                                     Header: "Acciones",
                                                     id: "acciones",
                                                     filterAll: true,
+                                                    width:200,
 
                                                     Cell: (row) => (
                                                         <div>
-                                                            <>
-                                                                <button className='btn btn-success btn-sm'>
-                                                                    <i className="fa fa-check" aria-hidden="true" onClick={() => levantarOrden(row.original.SUC, row.original.iduso)}></i>
-                                                                </button>
-                                                                <button className='btn btn-warning btn-sm ml-1' onClick={() => modifImporte(row.original.SUC, row.original.iduso)}>
-                                                                    <i className="fa fa-pencil" aria-hidden="true" ></i>
-                                                                </button>
-                                                                {
-                                                                    user === 'vlongo' || user === 'rquispe' ? (
-                                                                        <button className='btn btn-danger btn-sm ml-1' onClick={() => modifControlUso(row.original.SUC, row.original.iduso)}>
+
+                                                            <button className='btn btn-success btn-sm'>
+                                                                <i className="fa fa-check" aria-hidden="true" onClick={() => levantarOrden(row.original.SUC, row.original.iduso)}></i>
+                                                            </button>
+                                                            <button className='btn btn-warning btn-sm ml-1' onClick={() => modifImporte(row.original.SUC, row.original.iduso)}>
+                                                                <i className="fa fa-pencil" aria-hidden="true" ></i>
+                                                            </button>
+                                                            {
+                                                                user === 'vlongo' || user === 'rquispe' ? (
+                                                                    <>
+                                                                        <button className='btn btn-secondary btn-sm ml-1' onClick={() => modifControlUso(row.original.SUC, row.original.iduso)}>
                                                                             <i className="fa fa-unlock" aria-hidden="true" ></i>
                                                                         </button>
-                                                                    ) : null
-                                                                }
 
-                                                            </>
+                                                                        <button className='btn btn-danger btn-sm ml-1' onClick={() => eliminarOrden(row.original.SUC, row.original.iduso)}>
+                                                                            <i className="fa fa-trash" aria-hidden="true" ></i>
+                                                                        </button>
+                                                                    </>
+                                                                ) : null
+                                                            }
+
+
                                                         </div>
                                                     ),
                                                 },
