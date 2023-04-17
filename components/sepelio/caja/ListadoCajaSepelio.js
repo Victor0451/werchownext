@@ -7,13 +7,6 @@ import moment from "moment";
 import ReactTable from "react-table";
 
 const ListadoCajaSepelio = ({ cajas }) => {
-  const selcaso = (row) => {
-    if (ataud) {
-      guardarAtaud(null);
-    } else {
-      guardarAtaud(row.original);
-    }
-  };
 
   if (!cajas)
     return (
@@ -22,7 +15,7 @@ const ListadoCajaSepelio = ({ cajas }) => {
       </div>
     );
   return (
-    <div className="container mt-4 border border-dark list">
+    <div className="container mt-4 border border-dark list p-4">
       <h4 className="mt-4 mb-4">
         <strong>
           <u>Cajas De Sepelio</u>
@@ -189,7 +182,7 @@ const ListadoCajaSepelio = ({ cajas }) => {
               ],
             },
           ]}
-          defaultPageSize={10}
+          defaultPageSize={20}
           className="-striped -highlight"
         />
       </div>

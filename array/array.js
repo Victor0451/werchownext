@@ -484,8 +484,7 @@ export const operadoressep = [
 
 export const operadorescamp = [
   { value: "mgalian", label: "Maria Galian" },
-  { value: "ggimenez", label: "Gisela Gimenez" },
-  { value: "vfidao", label: "Valeria Fidao" },
+  { value: "ladorno", label: "Lucia Adorno" },
   { value: "mcarrizo", label: "Marisa Carrizo" },
   { value: "vgorosito", label: "Vanesa Gorosito" },
   { value: "sjuarez", label: "Silvia Juarez" },

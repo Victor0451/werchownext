@@ -7,13 +7,13 @@ import Spinner from "../../layout/Spinner";
 
 const ListadoCajaGastosCargados = ({
   listado,
-  eliminarGastos,
+  deleteGastos,
 }) => {
 
   if (!listado) return <Spinner />
 
   return (
-    <div className="container list mt-4 border border-dark">
+    <div className="list mt-4 border border-dark">
 
       <ReactTable
         data={listado}
@@ -91,27 +91,30 @@ const ListadoCajaGastosCargados = ({
                 filterAll: true,
               },
 
-              // {
-              //   Header: "Acciones",
+              {
+                Header: "Acciones",
 
-              //   Cell: (row) => (
-              //     <>
-              //       <button
-              //         className="btn btn-danger btn-sm mr-1"
-              //         data-toggle="tooltip"
-              //         data-placement="top"
-              //         title="Eliminar Gastos"
-              //         onClick={() => eliminarGastos(row.index)}
-              //       >
-              //         <i className="fa fa-trash" aria-hidden="true"></i>
-              //       </button>
-              //     </>
-              //   ),
-              // },
+                Cell: (row) => (
+                  <>
+                    <button
+                      className="btn btn-danger btn-sm mr-1"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      data-dismiss="modal"
+                      title="Eliminar Gastos"
+                      onClick={() =>
+                        deleteGastos(row.original)
+                      }
+                    >
+                      <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </>
+                ),
+              },
             ],
           },
         ]}
-        defaultPageSize={10}
+        defaultPageSize={20}
         className="-striped -highlight"
       />
     </div>

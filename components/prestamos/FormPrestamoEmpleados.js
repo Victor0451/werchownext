@@ -108,6 +108,7 @@ export const FormPrestamoEmpleados = ({
                             <option value={10}>10</option>
                             <option value={12}>12</option>
                             <option value={18}>18</option>
+                            <option value={24}>24</option>
 
                         </select>
 

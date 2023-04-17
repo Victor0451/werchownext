@@ -2,13 +2,13 @@ import React from "react";
 
 const RedirectToLogin = () => {
   return (
-    <div className="container d-flex justify-content-center ">
-      <div className=" border border-dark p-4 mt-4 mb-4 list ">
+    <div className="container border border-dark p-4 d-flex justify-content-center list mt-4 ">
+      <div className="  mt-4 mb-4  ">
         <h1 className="text-center">
           <strong>
-            <u>
-              No estas logueado, debes iniciar session para acceder al sistema
-            </u>
+
+            No estas logueado, debes iniciar session para acceder al sistema
+
           </strong>
         </h1>
 

@@ -346,16 +346,103 @@ const gastoscaja = () => {
     await axios
       .get(`${ip}api/sepelio/cajasepelio/listadogastos/${id}`)
       .then((res) => {
+
         guardarListGastos(res.data);
-        console.log(res.data);
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const deleteGastos = async (row) => {
+    console.log(row)
+    await confirmAlert({
+      title: 'ATENCION',
+      message: '¿Seguro quieres eliminar permanentemente el gasto registrado?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
+
+            axios.delete(`${ip}api/sepelio/cajasepelio/eliminargasto/${row.idgastos}`)
+              .then(res => {
+
+                if (res.status === 200) {
+
+                  traerGastos(row.idcaja)
+
+
+                  const valores = {
+                    gastos: caja.gastos - row.total,
+                    totalcaja: caja.totalcaja + row.total,
+                  };
+
+                  //                   axios
+                  //                     .put(`${ip}api/sepelio/cajasepelio/updatetotales/${row.idcaja}`, valores)
+                  //                     .then((res1) => {
+
+                  //                       if(res1.status === 200){
+
+                  // toastr.info()
+
+                  //                       }
+
+                  //                     })
+                  //                     .catch((error) => {
+                  //                       console.log(error);
+                  //                     });
+
+                }
+
+              })
+              .catch(error => {
+                console.log(error)
+                toastr.error("Ocurrio un error al eliminar el gasto", "ATENCION")
+              })
+
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
+
+      ],
+
+      overlayClassName: "overlay-custom-class-name"
+    });
+
+
+  }
+
+
   return (
     <Layout>
+
+      {caja ? (
+
+        <ListadoCajaGastos
+          caja={caja}
+          gastos={gastos}
+          dataToggle={"modal"}
+          dataTarget={"#exampleModal"}
+          dataToggle1={"modal"}
+          dataTarget1={"#gastoscargados"}
+          acGast={acGast}
+          totCaja={totCaja}
+          regGasto={regGasto}
+          cerrarCaja={cerrarCaja}
+          eliminarGastos={eliminarGastos}
+        />
+
+      ) : (
+        <Spinner />
+      )}
+
+
+      {/* MODAL NUEVO GASTO */}
+
       <div
         className="modal fade"
         id="exampleModal"
@@ -413,6 +500,11 @@ const gastoscaja = () => {
         </div>
       </div>
 
+      {/* ------------------------------------------- */}
+
+
+      {/* MODAL LISTADO GASTOS REGISTRADOS */}
+
       <div
         className="modal fade"
         id="gastoscargados"
@@ -436,7 +528,12 @@ const gastoscaja = () => {
               </button>
             </div>
             <div className="modal-body">
-              <ListadoCajaGastosCargados listado={listgastos} />
+
+              <ListadoCajaGastosCargados
+                listado={listgastos}
+                deleteGastos={deleteGastos}
+              />
+
             </div>
             <div className="modal-footer">
               <button
@@ -450,24 +547,9 @@ const gastoscaja = () => {
           </div>
         </div>
       </div>
+      {/* ------------------------------------------- */}
 
-      {caja ? (
-        <ListadoCajaGastos
-          caja={caja}
-          gastos={gastos}
-          dataToggle={"modal"}
-          dataTarget={"#exampleModal"}
-          dataToggle1={"modal"}
-          dataTarget1={"#gastoscargados"}
-          acGast={acGast}
-          totCaja={totCaja}
-          regGasto={regGasto}
-          cerrarCaja={cerrarCaja}
-          eliminarGastos={eliminarGastos}
-        />
-      ) : (
-        <Spinner />
-      )}
+
     </Layout>
   );
 };

@@ -17,7 +17,7 @@ const ListadoServicioGastos = ({
 
   return (
     <div className="container border border-dark list mt-4 p-4">
-      <div className="list border border-dark ">
+      <div className="border border-dark p-4">
         <ReactTable
           data={listado}
           filterable
@@ -99,7 +99,6 @@ const ListadoServicioGastos = ({
 
                       <button
                         className="btn btn-sm btn-warning border mr-1"
-                        data-toggle="tooltip"
                         data-placement="top"
                         data-toggle={datatoggle}
                         data-target={datatarget}
@@ -126,7 +125,7 @@ const ListadoServicioGastos = ({
               ],
             },
           ]}
-          defaultPageSize={10}
+          defaultPageSize={20}
           className="-striped -highlight"
         />
       </div>

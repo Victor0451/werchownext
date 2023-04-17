@@ -18,7 +18,8 @@ const ListadoCajaGastos = ({
   eliminarGastos,
 }) => {
   return (
-    <div className="container mt-4 border border-dark list">
+    <div className="container mt-4 border border-dark list p-4">
+
       {caja.estado === 1 ? (
         <div className="mt-4  alert alert-success col-md-12 d-flex justify-content-between border border-dark p-2">
           <div className="col-md-5 mt-2">
@@ -46,7 +47,7 @@ const ListadoCajaGastos = ({
           </h3>
         </div>
         <div className="col-md-6">
-          <h3 className="mt-4 mb-4 alert alert-info">
+          <h3 className="mt-4 mb-4 alert alert-info border border-dark">
             <strong>
               <u>Monto Habilitado</u>: $ {caja.monto}
             </strong>{" "}
@@ -54,13 +55,13 @@ const ListadoCajaGastos = ({
         </div>
         <div className="col-md-6">
           {!acGast ? (
-            <h3 className="mt-4 mb-4 alert alert-warning">
+            <h3 className="mt-4 mb-4 alert alert-warning border border-dark">
               <strong>
                 <u>Gastos</u>: $ 0
               </strong>{" "}
             </h3>
           ) : (
-            <h3 className="mt-4 mb-4 alert alert-warning">
+            <h3 className="mt-4 mb-4 alert alert-warning border border-dark">
               <strong>
                 <u>Gastos</u>: $ {acGast}
               </strong>{" "}
@@ -69,13 +70,13 @@ const ListadoCajaGastos = ({
         </div>
         <div className="col-md-12 text-center">
           {!totCaja ? (
-            <h3 className="mt-4 mb-4 alert alert-success">
+            <h3 className="mt-4 mb-4 alert alert-success border border-dark">
               <strong>
                 <u>Saldo Restante</u>: $ {caja.totalcaja}
               </strong>{" "}
             </h3>
           ) : totCaja <= 500 ? (
-            <h3 className="mt-4 mb-4 alert alert-danger">
+            <h3 className="mt-4 mb-4 alert alert-danger border border-dark">
               <strong>
                 <u>Saldo Restante</u>: $ {totCaja} - ATENCION!, el saldo
                 disponible esta por terminarse.
@@ -108,7 +109,7 @@ const ListadoCajaGastos = ({
               data-target={dataTarget1}
             >
               Ver Gastos Cargados
-          </button>
+            </button>
           </div>
           <div>
             <button
@@ -118,7 +119,7 @@ const ListadoCajaGastos = ({
               data-target={dataTarget}
             >
               Generar Gasto
-          </button>
+            </button>
           </div>
           <div>
             <button
@@ -127,12 +128,12 @@ const ListadoCajaGastos = ({
               onClick={regGasto}
             >
               Guardar Gastos
-          </button>
+            </button>
           </div>
           <div>
             <a className="btn btn-danger btn-sm mr-1" href="/sepelio/caja/listado">
               Cancelar
-          </a>
+            </a>
           </div>
 
         </div>

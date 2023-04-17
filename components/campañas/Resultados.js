@@ -25,8 +25,8 @@ const Resultados = ({
   let componentRef = useRef();
 
   return (
-    <div className="container ">
-      <div className="mt-4 border border-dark list p-4">
+    <div className="container list p-4 border border-dark mt-4 ">
+      <div className="mt-4 border border-dark  p-4">
         <h2 className="mt-4 mb-4">
           <strong>
             <u>Estadisticas de campañas Werchow</u>
@@ -79,7 +79,7 @@ const Resultados = ({
               operador={operador}
             />
             <hr className="mt-4 mb-4" />
-            <div className=" border border-dark alert alert-primary p-4">
+            <div className=" border border-dark p-4">
               <h3 className="text-center mb-4 font-weight-bold">Opciones</h3>
               <div className="row d-flex justify-content-center">
                 <ReactToPrint

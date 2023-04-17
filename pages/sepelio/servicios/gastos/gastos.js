@@ -321,7 +321,8 @@ const gastos = () => {
                   </div>
                 </div>
               </div>
-              <ListadoServicioGastos listado={gastos}
+              <ListadoServicioGastos
+                listado={gastos}
                 datatoggle="modal"
                 datatarget="#editarGasto"
                 getRow={getRow}
