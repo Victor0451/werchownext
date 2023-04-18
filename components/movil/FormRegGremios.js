@@ -100,7 +100,7 @@ const FormRegGremios = ({
                             ref={obraSocRef}
                             onChange={handleChange}
                         >
-                            <option selected value="no">
+                            <option value="no">
                                 Elige una Opcion
                             </option>
 

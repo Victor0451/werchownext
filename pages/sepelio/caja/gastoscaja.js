@@ -48,18 +48,23 @@ const gastoscaja = () => {
 
   const router = useRouter();
 
+  if (router.query.id) {
+
+    jsCookie.set("idcaja", router.query.id)
+
+  }
+
   useEffect(() => {
     if (!token) {
       Router.push("/redirect");
     } else {
-      let id = router.query.id;
 
-      infoCaja(id);
+      infoCaja();
       traerOperador();
       listadoProveedores();
       listadoConceptos();
       servicioCombo();
-      traerGastos(id);
+      traerGastos();
 
       let usuario = jsCookie.get("usuario");
 
@@ -103,9 +108,10 @@ const gastoscaja = () => {
       });
   };
 
-  const infoCaja = async (id) => {
+  const infoCaja = async () => {
+
     await axios
-      .get(`${ip}api/sepelio/cajasepelio/caja/${id}`)
+      .get(`${ip}api/sepelio/cajasepelio/caja/${jsCookie.get("idcaja")}`)
       .then((res) => {
         guardarCaja(res.data);
 
@@ -154,7 +160,14 @@ const gastoscaja = () => {
     await axios
       .put(`${ip}api/sepelio/cajasepelio/updatetotales/${id}`, valores)
       .then((res) => {
-        console.log(res);
+
+        if (res.status === 200) {
+
+          infoCaja()
+          traerGastos()
+
+        }
+
       })
       .catch((error) => {
         console.log(error);
@@ -344,7 +357,7 @@ const gastoscaja = () => {
 
   const traerGastos = async (id) => {
     await axios
-      .get(`${ip}api/sepelio/cajasepelio/listadogastos/${id}`)
+      .get(`${ip}api/sepelio/cajasepelio/listadogastos/${jsCookie.get("idcaja")}`)
       .then((res) => {
 
         guardarListGastos(res.data);
@@ -356,7 +369,7 @@ const gastoscaja = () => {
   };
 
   const deleteGastos = async (row) => {
-    
+
     await confirmAlert({
       title: 'ATENCION',
       message: '¿Seguro quieres eliminar permanentemente el gasto registrado?',
@@ -378,20 +391,33 @@ const gastoscaja = () => {
                     totalcaja: caja.totalcaja + row.total,
                   };
 
-                  //                   axios
-                  //                     .put(`${ip}api/sepelio/cajasepelio/updatetotales/${row.idcaja}`, valores)
-                  //                     .then((res1) => {
+                  axios
+                    .put(`${ip}api/sepelio/cajasepelio/updatetotales/${row.idcaja}`, valores)
+                    .then((res1) => {
 
-                  //                       if(res1.status === 200){
+                      if (res1.status === 200) {
 
-                  // toastr.info()
+                        toastr.info("Se reajustaron y actualizaron los valores de la caja", "ATENCION")
 
-                  //                       }
+                        if (res.status === 200) {
 
-                  //                     })
-                  //                     .catch((error) => {
-                  //                       console.log(error);
-                  //                     });
+                          infoCaja()
+                          traerGastos()
+
+                          let accion = `Se elimino el gasto ${row.idgastos} - ${row.concepto}, factura: ${row.tipofactura} N°: ${row.nfactura} por un monto de $${row.total} de la caja de sepelio ID: ${row.idcaja}`
+
+                          registrarHistoria(accion, user)
+
+                        }
+
+
+
+                      }
+
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
 
                 }
 

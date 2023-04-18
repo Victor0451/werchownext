@@ -18,10 +18,11 @@ const CodigoNoSocio = () => {
     let mailRef = React.createRef()
     let telefonoRef = React.createRef()
     let obraSocRef = React.createRef()
+    let otraOSRef = React.createRef()
 
     const [errores, guardarErrores] = useState(null)
     const [registro, guardarRegistro] = useState(null)
-
+    const [otroCamp, guardarOrtoCamp] = useState(false)
 
 
     const registrarNoSocio = async () => {
@@ -48,7 +49,7 @@ const CodigoNoSocio = () => {
 
             guardarErrores("Debes ingresar una direccion de mail")
 
-        } else if (obraSocRef.current.value === "") {
+        } else if (obraSocRef.current.value === "no") {
 
             guardarErrores("Debes ingresar tu obra social, en caso de no tener una ingresa 'NO TENGO'")
 
@@ -63,12 +64,22 @@ const CodigoNoSocio = () => {
                     telefono: telefonoRef.current.value,
                     mail: mailRef.current.value,
                     obra_soc: obraSocRef.current.value,
+                    otra_os: "",
                     fecha: moment().format('YYYY-MM-DD'),
                     codigo: Math.round(Math.random() * 999999),
                     estado: 1,
                     gremio: "NO"
                 }
 
+                if (otroCamp === true) {
+
+                    noSoc.otra_os = otraOSRef.current.value
+
+                } else if (otroCamp === false) {
+
+                    noSoc.otra_os = "----"
+
+                }
 
                 await axios.get(`${ip}api/sgi/servicios/verificarnosocio/${noSoc.dni}`)
                     .then(res => {
@@ -117,7 +128,6 @@ const CodigoNoSocio = () => {
         }
     }
 
-
     const mandarMail = (array) => {
         fetch("/api/mail/sgi/codigonosocio", {
             method: "POST",
@@ -140,6 +150,22 @@ const CodigoNoSocio = () => {
             });
     };
 
+    const handleChange = () => {
+
+        let os = obraSocRef.current.value
+
+        if (os === "OTRA") {
+
+            guardarOrtoCamp(true)
+
+        } else {
+
+            guardarOrtoCamp(false)
+
+        }
+
+    }
+
     return (
         <Layout f={"nonav"}>
 
@@ -152,7 +178,10 @@ const CodigoNoSocio = () => {
                         mailRef={mailRef}
                         telefonoRef={telefonoRef}
                         obraSocRef={obraSocRef}
+                        otraOSRef={otraOSRef}
                         errores={errores}
+                        handleChange={handleChange}
+                        otroCamp={otroCamp}
                     />
                 ) : (
 

@@ -91,26 +91,26 @@ const ListadoCajaGastosCargados = ({
                 filterAll: true,
               },
 
-              // {
-              //   Header: "Acciones",
+              {
+                Header: "Acciones",
 
-              //   Cell: (row) => (
-              //     <>
-              //       <button
-              //         className="btn btn-danger btn-sm mr-1"
-              //         data-toggle="tooltip"
-              //         data-placement="top"
-              //         data-dismiss="modal"
-              //         title="Eliminar Gastos"
-              //         onClick={() =>
-              //           deleteGastos(row.original)
-              //         }
-              //       >
-              //         <i className="fa fa-trash" aria-hidden="true"></i>
-              //       </button>
-              //     </>
-              //   ),
-              // },
+                Cell: (row) => (
+                  <>
+                    <button
+                      className="btn btn-danger btn-sm mr-1"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      data-dismiss="modal"
+                      title="Eliminar Gastos"
+                      onClick={() =>
+                        deleteGastos(row.original)
+                      }
+                    >
+                      <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </>
+                ),
+              },
             ],
           },
         ]}

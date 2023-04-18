@@ -7,7 +7,10 @@ const FormCodigoNoSocio = ({
     mailRef,
     telefonoRef,
     obraSocRef,
+    otraOSRef,
     errores,
+    handleChange,
+    otroCamp,
 }) => {
     return (
         <div className='list container border border-dark p-4 mt-4 mb-4'>
@@ -89,7 +92,42 @@ const FormCodigoNoSocio = ({
                             </u>
                         </label>
 
-                        <input type="text" className="form-control" ref={obraSocRef} />
+                        <select
+                            className="custom-select"
+                            defaultValue={"no"}
+                            ref={obraSocRef}
+                            onChange={handleChange}
+                        >
+                            <option value="no">
+                                Elige una Opcion
+                            </option>
+
+                            <option value="ISJ">ISJ</option>
+                            <option value="OSDE">OSDE</option>
+                            <option value="PAMI">PAMI</option>
+                            <option value="IOSFA">IOSFA</option>
+                            <option value="AYE">A Y E ( agua y energía)</option>
+                            <option value="SANCOR">SANCOR</option>
+                            <option value="SWISS MEDICAL">SWISS MEDICAL</option>
+                            <option value="BRAMED">BRAMED</option>
+                            <option value="OSPE">OSPE</option>
+                            <option value="OSPEDYC">OSPEDYC</option>
+                            <option value="OSAM">OSAM</option>
+                            <option value="OSECAC">OSECAC </option>
+                            <option value="SALUD JUJUY">SALUD JUJUY</option>
+                            <option value="PODER JUDICIAL">PODER JUDICIAL</option>
+                            <option value="OTRA">OTRA</option>
+                            <option value="NO TENGO">NO TENGO</option>
+
+                        </select>
+
+                        {
+                            otroCamp === true ? (
+
+                                <input type="text" className="form-control mt-4" placeholder='Ingresa tu obra social' ref={otraOSRef} />
+
+                            ) : null
+                        }
 
                     </div>
 
