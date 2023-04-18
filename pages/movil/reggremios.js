@@ -18,9 +18,11 @@ const RegGremios = () => {
     let mailRef = React.createRef()
     let telefonoRef = React.createRef()
     let obraSocRef = React.createRef()
+    let otraOSRef = React.createRef()
 
     const [errores, guardarErrores] = useState(null)
     const [registro, guardarRegistro] = useState(null)
+    const [otroCamp, guardarOrtoCamp] = useState(false)
 
     let router = useRouter()
 
@@ -48,7 +50,7 @@ const RegGremios = () => {
 
             guardarErrores("Debes ingresar una direccion de mail")
 
-        } else if (obraSocRef.current.value === "") {
+        } else if (obraSocRef.current.value === "no") {
 
             guardarErrores("Debes ingresar tu obra social, en caso de no tener una ingresa 'NO TENGO'")
 
@@ -63,6 +65,7 @@ const RegGremios = () => {
                     telefono: telefonoRef.current.value,
                     mail: mailRef.current.value,
                     obra_soc: obraSocRef.current.value,
+                    otra_os: "",
                     fecha: moment().format('YYYY-MM-DD'),
                     codigo: Math.round(Math.random() * 999999),
                     estado: 1,
@@ -72,6 +75,16 @@ const RegGremios = () => {
 
                 if (router.query.f) {
                     noSoc.gremio = router.query.f
+                }
+
+                if (otroCamp === true) {
+
+                    noSoc.otra_os = otraOSRef.current.value
+
+                } else if (otroCamp === false) {
+
+                    noSoc.otra_os = "----"
+
                 }
 
 
@@ -154,6 +167,22 @@ const RegGremios = () => {
             });
     };
 
+    const handleChange = () => {
+
+        let os = obraSocRef.current.value
+
+        if (os === "OTRA") {
+
+            guardarOrtoCamp(true)
+
+        } else {
+
+            guardarOrtoCamp(false)
+
+        }
+
+    }
+
 
     return (
         <Layout f={"nonav"}>
@@ -166,9 +195,12 @@ const RegGremios = () => {
                 mailRef={mailRef}
                 telefonoRef={telefonoRef}
                 obraSocRef={obraSocRef}
+                otraOSRef={otraOSRef}
                 errores={errores}
                 Router={Router}
                 g={router.query.f}
+                handleChange={handleChange}
+                otroCamp={otroCamp}
             />
 
 

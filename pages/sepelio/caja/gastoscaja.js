@@ -356,7 +356,7 @@ const gastoscaja = () => {
   };
 
   const deleteGastos = async (row) => {
-    console.log(row)
+    
     await confirmAlert({
       title: 'ATENCION',
       message: '¿Seguro quieres eliminar permanentemente el gasto registrado?',

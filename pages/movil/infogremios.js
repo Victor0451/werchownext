@@ -46,9 +46,7 @@ const infogremios = () => {
 
                         guardarRegistro(res.data)
 
-                        console.log(res.data)
-
-                        //guardarLog(true)
+                        guardarLog(true)
 
                         toastr.info(`Felicidades ${res.data.nosocio}, ya estas registrado y participando por el sorteo.`, "ATENCION")
 
