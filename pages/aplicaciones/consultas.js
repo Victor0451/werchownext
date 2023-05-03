@@ -11,6 +11,7 @@ import FormConsultas from "../../components/aplicaciones/FormConsultas";
 const Consultas = () => {
 
     const [consul, guardarConsul] = useState("")
+    const [key, guardarKey] = useState("")
     const [espe, guardarEspe] = useState(false)
 
     let consultaRef = React.createRef()
@@ -39,7 +40,7 @@ const Consultas = () => {
         guardarEspe(true)
 
         const configuration = new Configuration({
-            apiKey: "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",
+            apiKey: `${key}`,
         });
         const openai = new OpenAIApi(configuration);
 
@@ -65,11 +66,27 @@ const Consultas = () => {
 
     }
 
+    const traerKey = async () => {
+
+        await axios.get(`${ip}api/sgi/aplicaciones/traerkey`)
+            .then(res => {
+                guardarKey(res.data.key)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
+
     let token = jsCookie.get("token");
 
     useEffect(() => {
         if (!token) {
             Router.push("/redirect");
+        } else {
+
+            traerKey()
+
         }
     }, []);
 
