@@ -89,6 +89,26 @@ const ListadoCajaSepelio = ({ turnos, datatoggle, datatarget, getId }) => {
                                 },
 
                                 {
+                                    Header: "Motivo",
+                                    id: "motivo",
+                                    accessor: (d) => d.motivo,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["motivo"] }),
+                                    filterAll: true,
+
+                                },
+
+                                {
+                                    Header: "Detalle",
+                                    id: "detalle",
+                                    accessor: (d) => d.detalle,
+                                    filterMethod: (filter, rows) =>
+                                        matchSorter(rows, filter.value, { keys: ["detalle"] }),
+                                    filterAll: true,
+
+                                },
+
+                                {
                                     Header: "Estado",
                                     id: "estado",
                                     accessor: (d) => d.estado,
@@ -117,8 +137,8 @@ const ListadoCajaSepelio = ({ turnos, datatoggle, datatarget, getId }) => {
                                                     <button
                                                         href=""
                                                         className="btn btn-success btn-sm mr-1"
-                                                        data-toggle="tooltip"
                                                         data-toggle={datatoggle}
+
                                                         data-target={datatarget}
                                                         data-placement="top"
                                                         title="Atender Turno"
@@ -127,25 +147,7 @@ const ListadoCajaSepelio = ({ turnos, datatoggle, datatarget, getId }) => {
                                                         <i className="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 </>
-                                            ) : (
-                                                <Link
-                                                // href={{
-                                                //     pathname: "/sepelio/caja/imprimir",
-                                                //     query: {
-                                                //         id: row.original.idcaja,
-                                                //     },
-                                                // }}
-                                                >
-                                                    <button
-                                                        className="btn btn-sm btn-primary mr-1"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="Imprimir Solicitud"
-                                                    >
-                                                        <i className="fa fa-print" aria-hidden="true"></i>
-                                                    </button>
-                                                </Link>
-                                            )}
+                                            ) : null}
                                         </>
                                     ),
                                 },

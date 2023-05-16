@@ -1,15 +1,25 @@
 import React from 'react'
 import moment from 'moment'
 
-const FormTurno = ({ buscarTitular, buscarTitularM, dniRef, telefonoRef, movilRef, motivoRef, errores, ficha, registrarTurno }) => {
+const FormTurno = ({
+    traerSocio,
+    dniRef,
+    telefonoRef,
+    movilRef,
+    motivoRef,
+    errores,
+    ficha,
+    registrarTurno,
+    motivos,
+    detalleRef
+}) => {
 
-    
     return (
         <div className="mt-4 container border border-dark list p-4">
             <h2>
                 <strong>
                     <u>
-                        Solicitud de Turnos para Gestion de Bajas
+                        Solicitud de Turnos para Gestion de Tramites
                     </u>
                 </strong>
             </h2>
@@ -39,21 +49,14 @@ const FormTurno = ({ buscarTitular, buscarTitularM, dniRef, telefonoRef, movilRe
                     <div className="form-group col-md-4 mt-4">
                         <button
                             className="btn btn-block btn-primary"
-                            onClick={buscarTitular}
+                            onClick={traerSocio}
                         >
-                            WERCHOW
-              </button>
+                            Buscar
+                        </button>
                     </div>{" "}
-                    <div className="form-group col-md-4 mt-4">
-                        <button
-                            className="btn btn-block btn-primary"
-                            onClick={buscarTitularM}
-                        >
-                            MUTUAL
-              </button>
-                    </div>
+
                     {errores && (
-                        <div className="mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
+                        <div className="mt-4 mb-4 form-group border border-dark alert alert-danger col-md-12 text-center text-uppercase">
                             {errores}
                         </div>
                     )}
@@ -75,7 +78,7 @@ const FormTurno = ({ buscarTitular, buscarTitularM, dniRef, telefonoRef, movilRe
                                 <strong>
                                     <u>
                                         Datos del Socio
-                            </u>
+                                    </u>
                                 </strong>
                             </h2>
                         </div>
@@ -184,14 +187,46 @@ const FormTurno = ({ buscarTitular, buscarTitularM, dniRef, telefonoRef, movilRe
 
                         </div>
 
-                        <div className="mt-4 col-md-12">
+
+                    </div>
+
+                    <div className="mt-4 row border border-dark p-4">
+
+
+                        {motivos && motivos.length > 0 ? (
+                            <div className="mt-4 col-md-4">
+                                <label>
+                                    <strong>Motivos</strong>
+                                </label>
+
+                                <select className="custom-select" ref={motivoRef}>
+                                    <option value="no" >Selecciona una opcion</option>
+                                    {motivos.map((m, index) => (
+                                        <option key={index} value={m.label}>{m.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        ) : (
+                            <div className="col-md-4 alert alert-info  border border-dark text-center text-uppercase">
+                                No hay motivos registrados
+                            </div>
+                        )}
+
+                        <div className="mt-4 col-md-8">
                             <label>
-                                <strong>Motivo</strong>
+                                <strong>Detalle</strong>
                             </label>
-                            <textarea rows="3" className="form-control" ref={motivoRef} />
+                            <textarea rows="3" className="form-control" ref={detalleRef} />
 
                         </div>
+
                     </div>
+
+                    {errores && (
+                        <div className="mt-4 mb-4 form-group border border-dark alert alert-danger col-md-12 text-center text-uppercase">
+                            {errores}
+                        </div>
+                    )}
 
                     <div className="row mt-4 border border-dark p-4">
 
@@ -203,7 +238,7 @@ const FormTurno = ({ buscarTitular, buscarTitularM, dniRef, telefonoRef, movilRe
                         <div className="col-md-6">
                             <a href='/socios/turnobajas/listado' className="btn btn-block btn-danger">
                                 Cancelar
-                                </a>
+                            </a>
                         </div>
                     </div>
 

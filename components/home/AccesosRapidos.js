@@ -16,6 +16,37 @@ const AccesosRapidos = ({ user }) => {
         <div className="row mt-4 border border-dark p-4 d-flex justify-content-center">
 
           <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
+            <div className="card-header">Reg. Turnos</div>
+            <div className="card-body">
+              <a
+                className="btn btn-primary btn-block "
+                href="/socios/turnobajas/turno"
+              >
+                Registrar Turnos para Atencion
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido a la seccion que te permite recepcionar el pedido de los socios
+                y organizarlo por turnos para su atencion
+              </p>
+            </div>
+          </div>{" "}
+
+          <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1  mb-3 ">
+            <div className="card-header">Listado de Turnos</div>
+            <div className="card-body">
+              <a
+                className="btn btn-primary btn-block "
+                href="/socios/turnobajas/listado"
+              >
+                Listado de Turnos Agendados
+              </a>
+              <p className="card-text mt-2">
+                Este es un acceso rapido a la seccion que te permite visualizar y resgistrar la respuesta de los turnos registrados
+              </p>
+            </div>
+          </div>{" "}
+
+          <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1 mb-3 ">
             <div className="card-header">Ficha Del Socio</div>
             <div className="card-body">
               <a
