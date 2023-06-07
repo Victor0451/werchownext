@@ -16,6 +16,21 @@ const AccesosRapidos = ({ user }) => {
         <div className="row mt-4 border border-dark p-4 d-flex justify-content-center">
 
           <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
+            <div className="card-header">Certificados</div>
+            <div className="card-body">
+              <a
+                className="btn btn-primary btn-block "
+                href="/socios/solicitudes/certificado"
+              >
+                Certificados Est. Policia
+              </a>
+              <p className="card-text mt-2">
+                Generacion de certificados para estudiantes de policia.
+              </p>
+            </div>
+          </div>{" "}
+
+          <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
             <div className="card-header">Reg. Turnos</div>
             <div className="card-body">
               <a

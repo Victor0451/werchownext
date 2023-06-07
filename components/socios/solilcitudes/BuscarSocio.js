@@ -2,8 +2,8 @@ import React from 'react'
 
 const BuscarSocio = ({ contratoRef, buscarTitular, buscarTitularM, errores, nomoro }) => {
     return (
-        <div className="container">
-            <form className="mt-4 border border-dark p-4 list">
+        <div className="container border border-dark list mt-4">
+            <form className="mt-4  p-4 ">
                 <h2 className=" mb-4">
                     <strong>
                         <u>Buscar Socio </u>
@@ -38,7 +38,7 @@ const BuscarSocio = ({ contratoRef, buscarTitular, buscarTitularM, errores, nomo
                                 onClick={buscarTitular}
                             >
                                 WERCHOW
-              </button>
+                            </button>
                         </div>{" "}
                         <div className="form-group col-md-4 mt-4">
                             <button
@@ -46,7 +46,7 @@ const BuscarSocio = ({ contratoRef, buscarTitular, buscarTitularM, errores, nomo
                                 onClick={buscarTitularM}
                             >
                                 MUTUAL
-              </button>
+                            </button>
                         </div>
                         {errores && (
                             <div className="mt-2 form-group alert alert-danger col-md-12 text-center text-uppercase">
