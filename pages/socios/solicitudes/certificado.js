@@ -157,7 +157,13 @@ export default function Certificado() {
 
         document.body.innerHTML = contenidoOrg;
 
-        window.location.reload();
+        registrarCert()
+
+        setTimeout(() => {
+
+            window.location.reload();
+
+        }, 1000);
     };
 
     const registrarCert = async () => {
@@ -238,7 +244,6 @@ export default function Certificado() {
                                     <button className="btn btn-sm btn-block btn-primary"
                                         onClick={() => {
                                             imprimir()
-                                            registrarCert()
                                         }}
                                     >Imprimir</button>
                                 </div>
