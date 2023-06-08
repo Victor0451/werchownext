@@ -8,6 +8,7 @@ import Link from "next/link";
 import BuscarSocio from "../../../components/socios/solilcitudes/BuscarSocio";
 import { ip } from '../../../config/config'
 import { FormSolicitudEst } from "../../../components/socios/solilcitudes/FormSolicitudEst";
+import { FormSolicitudEstPDF } from "../../../components/socios/solilcitudes/FormSolicitudEstPDF";
 
 export default function Certificado() {
 
@@ -147,8 +148,10 @@ export default function Certificado() {
             });
     };
 
-    const imprimir = () => {
-        let contenido = document.getElementById("solicitud").innerHTML;
+    const imprimir = (div) => {
+        console.log(div)
+
+        let contenido = document.getElementById(`${div}`).innerHTML;
         let contenidoOrg = document.body.innerHTML;
 
         document.body.innerHTML = contenido;
@@ -239,22 +242,36 @@ export default function Certificado() {
                                     </u>
                                 </strong>
                             </h2>
-                            <div className="mt-4 row">
-                                <div className="col-md-6">
-                                    <button className="btn btn-sm btn-block btn-primary"
+                            <div className="mt-4 row ">
+                                <div className="col-md-4">
+                                    <button className="btn btn-sm  btn-primary"
                                         onClick={() => {
-                                            imprimir()
+                                            imprimir("solicitud")
                                         }}
-                                    >Imprimir</button>
+                                    >Imprimir PRE IMPRESO</button>
                                 </div>
 
-                                <div className="col-md-6">
-                                    <a href="/socios/solicitudes/ingreso" className="btn btn-sm btn-block btn-danger">Cancelar</a>
+                                <div className="col-md-4">
+                                    <button className="btn btn-sm  btn-primary"
+                                        onClick={() => {
+                                            imprimir("solicitudpdf")
+                                        }}
+                                    >Imprimir PDF</button>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <a href="/socios/solicitudes/ingreso" className="btn btn-sm  btn-danger">Cancelar</a>
                                 </div>
                             </div>
                         </div>
                         <div id='solicitud' className="print-soli">
                             <FormSolicitudEst
+                                ficha={ficha}
+                                ncert={ncert}
+                            />
+                        </div>
+                        <div id='solicitudpdf' className="print-soli">
+                            <FormSolicitudEstPDF
                                 ficha={ficha}
                                 ncert={ncert}
                             />
