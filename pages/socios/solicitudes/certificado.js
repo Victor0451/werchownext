@@ -17,8 +17,6 @@ export default function Certificado() {
     const [ficha, guardarFicha] = useState(null)
     const [errores, guardarErrores] = useState(null)
     const [ncert, guardarNcert] = useState(0)
-    const [empresa, guardarEmpresa] = useState(null)
-    const [adhs, guardarAdhs] = useState(null)
     const [user, guardarUser] = useState(null)
 
 
@@ -43,110 +41,105 @@ export default function Certificado() {
         }
     }, []);
 
-    const buscarTitular = async (e) => {
-        e.preventDefault();
+    const traerSocio = async () => {
 
-        guardarFicha(null);
-        guardarErrores(null);
-        guardarAdhs(null);
+        let dni = contratoRef.current.value
 
-        if (contratoRef.current.value !== "") {
-            let contrato = contratoRef.current.value;
+        if (dni === "") {
 
-            await axios
-                .get(
-                    `${ip}api/werchow/maestro/titular/${contrato}`
-                )
-                .then((res) => {
-                    let ficha = res.data[0][0];
-                    guardarFicha(ficha);
+            guardarErrores("Debes ingresar el DNI")
 
-                    if (ficha === "undefined") {
-                        toastr.error(
-                            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-                            "ATENCION"
-                        );
-                        const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-                        guardarErrores(errores);
-                    }
-                    traerAdhs(ficha.CONTRATO);
-                    guardarEmpresa("W");
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        } else if (contratoRef.current.value === "") {
-            const errores = "Debes Ingresar Un Numero De Contrato";
-            guardarErrores(errores);
-        }
-    };
-
-    const buscarTitularM = async (e) => {
-        e.preventDefault();
-
-
-        guardarFicha(null);
-        guardarErrores(null);
-        guardarAdhs(null);
-
-        if (contratoRef.current.value !== "") {
-            let contrato = contratoRef.current.value;
+        } else {
 
             await axios
-                .get(
-                    `${ip}api/werchow/maestro/titularm/${contrato}`
-                )
+                .get(`${ip}api/werchow/maestro/titulardni/${dni}`)
                 .then((res) => {
-                    let ficha = res.data[0][0];
-                    guardarFicha(ficha);
+
+                    if (res.data[0][0]) {
+
+                        guardarFicha(res.data[0][0])
+
+                    } else if (!res.data[0][0]) {
+
+                        axios
+                            .get(`${ip}api/werchow/maestro/titulardnim/${dni}`)
+                            .then(resM => {
+
+                                if (resM.data[0][0]) {
+
+                                    guardarFicha(resM.data[0][0])
+
+                                } else if (!resM.data[0][0]) {
+
+                                    axios
+                                        .get(`${ip}api/werchow/maestro/adherente/${dni}`)
+                                        .then(resA => {
+
+                                            if (resA.data[0][0]) {
+
+                                                guardarFicha(resA.data[0][0])
+
+                                            } else if (!resA.data[0][0]) {
+
+                                                axios
+                                                    .get(`${ip}api/werchow/maestro/adherentem/${dni}`)
+                                                    .then(resAM => {
+
+                                                        if (resAM.data[0][0]) {
+
+                                                            guardarFicha(resAM.data[0][0])
+
+                                                        } else if (!resAM.data[0][0]) {
+
+                                                            axios.get(`${ip}api/sgi/servicios/traeradhprovidni/${dni}`)
+                                                                .then(resAP => {
+
+                                                                    if (resAP.data.length > 0) {
+
+                                                                        guardarFicha(resAP.data[0])
+
+                                                                    } else {
+
+                                                                        toastr.warning("No se encuentra el beneficiario", "ATENCION")
+
+                                                                    }
+
+                                                                }).catch(error => {
+                                                                    console.log(error)
+                                                                    toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                                                })
+
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.log(error)
+                                                        toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                                    })
+
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.log(error)
+                                            toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                                        })
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                            })
 
 
-                    if (ficha === "undefined") {
-                        toastr.error(
-                            "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA",
-                            "ATENCION"
-                        );
-                        const errores = "EL NUMERO DE FICHA NO EXISTE O ESTA DADA DE BAJA";
-                        guardarErrores(errores);
+
                     }
-
-                    guardarEmpresa("M");
-                    traerAdhsM(ficha.CONTRATO);
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
-        } else if (contratoRef.current.value === "") {
-            const errores = "Debes Ingresar Un Numero De Contrato";
-            guardarErrores(errores);
+                .catch(error => {
+                    console.log(error)
+                    toastr.error("Ocurrio un error al traer al socio", "ATENCION")
+                })
+
         }
-    };
-
-    const traerAdhs = async (contrato) => {
-        await axios
-            .get(
-                `${ip}api/werchow/adherent/adherentestitsoli/${contrato}`
-            )
-            .then((res) => {
-                guardarAdhs(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const traerAdhsM = async (contrato) => {
-        await axios
-            .get(
-                `${ip}api/mutual/adherent/adherentestit/${contrato}`
-            )
-            .then((res) => {
-                guardarAdhs(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+    }
 
     const imprimir = (div) => {
         console.log(div)
@@ -223,17 +216,34 @@ export default function Certificado() {
     }
 
 
+
+
     return (
         <Layout>
 
             {ficha ? null : (
-                <BuscarSocio buscarTitular={buscarTitular} buscarTitularM={buscarTitularM} contratoRef={contratoRef} errores={errores} />
+                <BuscarSocio
+                    traerSocio={traerSocio}
+                    contratoRef={contratoRef}
+                    errores={errores}
+                />
             )}
 
             {!ficha ? null
-                : ficha.GRUPO === 6 || ficha.GRUPO === 66 ? (
+                : (
 
                     <>
+
+                        {
+                            ficha.GRUPO !== 6 || ficha.GRUPO !== 66 ? (
+
+                                <div className="mt-4 mb-4 alert alert-info border border-dark container text-center text-uppercase">
+                                    La ficha del solicitante no pertenece a un grupo de POLICIA o ESTUDIANTE DE POLICIA. Verifica su estado.
+                                </div>
+
+                            ) : null
+                        }
+
                         <div className="mt-4 container p-4 list border border-dark ">
                             <h2>
                                 <strong>
@@ -260,7 +270,7 @@ export default function Certificado() {
                                 </div>
 
                                 <div className="col-md-4">
-                                    <a href="/socios/solicitudes/ingreso" className="btn btn-sm  btn-danger">Cancelar</a>
+                                    <a href="/socios/solicitudes/certificado" className="btn btn-sm  btn-danger">Cancelar</a>
                                 </div>
                             </div>
                         </div>
@@ -278,11 +288,6 @@ export default function Certificado() {
                         </div>
                     </>
 
-                ) : (
-
-                    <div className="border border-dark alert alert-info text-center text-uppercase mt-4 mb-4">
-                        El socio ingresado no es un estudiante de policia
-                    </div>
                 )}
 
 
