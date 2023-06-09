@@ -45,7 +45,7 @@ export const FormSolicitudEst = ({
                     </p>
                 </div>
 
-                <div className='col-md-12 '>
+                {/* <div className='col-md-12 '>
                     <p>
                         <font size="3">
                             <strong>
@@ -53,7 +53,7 @@ export const FormSolicitudEst = ({
                             </strong>
                         </font>
                     </p>
-                </div>
+                </div> */}
 
                 <div className='col-md-12 text-center mt-4'>
                     <p>

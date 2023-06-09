@@ -55,7 +55,7 @@ export const FormSolicitudEstPDF = ({
                     </p>
                 </div>
 
-                <div className='col-md-12 '>
+                {/* <div className='col-md-12 '>
                     <p>
                         <font size="3">
                             <strong>
@@ -63,7 +63,7 @@ export const FormSolicitudEstPDF = ({
                             </strong>
                         </font>
                     </p>
-                </div>
+                </div> */}
 
                 <div className='col-md-12 text-center mt-4'>
                     <p>

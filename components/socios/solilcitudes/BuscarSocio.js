@@ -27,7 +27,7 @@ const BuscarSocio = ({ contratoRef, traerSocio, errores, nomoro }) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Ficha"
+                                placeholder="DNI"
                                 name="contrato"
                                 ref={contratoRef}
                             />

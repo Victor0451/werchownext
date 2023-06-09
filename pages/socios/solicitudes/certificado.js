@@ -100,7 +100,7 @@ export default function Certificado() {
 
                                                                     } else {
 
-                                                                        toastr.warning("No se encuentra el beneficiario", "ATENCION")
+                                                                        toastr.warning("El DNI ingresado no se encontra registrado.", "ATENCION")
 
                                                                     }
 
