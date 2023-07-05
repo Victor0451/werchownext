@@ -899,7 +899,7 @@ const Emision = () => {
 
         } else {
 
-          uso.IMPORTE = 750
+          uso.IMPORTE = 950
 
         }
 
@@ -907,11 +907,11 @@ const Emision = () => {
 
         if (isj === true) {
 
-          uso.IMPORTE = 950 - 350
+          uso.IMPORTE = 1500 - 350
 
         } else {
 
-          uso.IMPORTE = 950
+          uso.IMPORTE = 1500
 
         }
 
@@ -2134,7 +2134,7 @@ const Emision = () => {
 
         } else {
 
-          const importe = 750
+          const importe = 950
 
           return importe
 
@@ -2142,7 +2142,7 @@ const Emision = () => {
 
       } else if (priUso === 1) {
 
-        const importe = 950
+        const importe = 1500
 
         return importe
 
