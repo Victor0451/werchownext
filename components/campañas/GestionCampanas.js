@@ -3,8 +3,9 @@ import Link from "next/link";
 import jsCookies from "js-cookie";
 import Router from "next/router";
 import Campana from "./Campana";
+import moment from "moment";
 
-const GestionCampanas = () => {
+const GestionCampanas = ({ asignado, trabajado }) => {
   let usuario = jsCookies.get("usuario");
 
   const [operadorNom, guardarOperador] = useState(null);
@@ -19,9 +20,48 @@ const GestionCampanas = () => {
     }
   });
 
-  return (
+  const porcenTab = (a, t) => {
+    let resultado = 0;
 
+    if (t === 0) {
+      return resultado;
+    } else if (t > 0) {
+      resultado = (t * 100) / a;
+      return resultado.toFixed(2);
+    }
+  };
+
+  return (
     <div className="container list p-4 mt-4 mb-4 border border-dark">
+      <div className="alert alert-info text-center  border border-dark mt-4 mb-4">
+        <h4 className="alert-heading">Estadistica General de Campañas</h4>
+        <ul className="list-group">
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Total de Casos Asignados:
+            <span className="badge badge-primary badge-pill">{asignado}</span>
+          </li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Total de Casos Trabajados:
+            <span className="badge badge-primary badge-pill">{trabajado}</span>
+          </li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Progreso de Trabajo:
+            <span className="badge badge-primary badge-pill">
+              {porcenTab(asignado, trabajado)}%
+            </span>
+          </li>
+        </ul>
+        <hr />
+        <p className="mb-0">
+          Estadistica sobre el trabajo realizado en los casos de campañas
+          pertenecientes al periodo: {moment().format("MM")}/
+          {moment().format("YYYY")}.
+        </p>
+        <p className="mb-0">
+          El progreso de trabajo, cuenta para la liquidacion del bono.
+        </p>
+      </div>
+
       <nav>
         <div className="nav nav-tabs " id="nav-tab" role="tablist">
           <a
@@ -60,20 +100,17 @@ const GestionCampanas = () => {
         </div>
       </nav>
       <div className="mt-4 tab-content" id="nav-tabContent">
-
         <div
           className="tab-pane fade show active"
           id="nav-home"
           role="tabpanel"
           aria-labelledby="nav-home-tab"
         >
-
           <div className="list p-4 border border-dark">
             <h3 className="mt-2 mb-4 text-center">
               <u>GESTION DE CAMPAÑAS WERCHOW</u>
             </h3>
             <div className="row">
-
               <Campana
                 titulo="ATRASADOS 1 CUOTA"
                 camp="Atrasados"
@@ -129,7 +166,6 @@ const GestionCampanas = () => {
                 empresa="werchow"
                 operador={operadorNom}
               />
-
             </div>
           </div>
         </div>
@@ -172,7 +208,6 @@ const GestionCampanas = () => {
                 operador={operadorNom}
               />
 
-
               <Campana
                 titulo="BLANQUEOS"
                 camp="Blanqueo"
@@ -193,7 +228,6 @@ const GestionCampanas = () => {
           </div> */}
       </div>
     </div>
-
   );
 };
 

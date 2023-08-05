@@ -26,19 +26,28 @@ export default class Gerencia extends Component {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/gestion/sucursales/caja/nueva" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/sucursales/caja/nueva"
+                    className="dropdown-item text-dark"
+                  >
                     Registrar Caja
                   </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/gestion/sucursales/caja/listado" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/sucursales/caja/listado"
+                    className="dropdown-item text-dark"
+                  >
                     Listado de Cajas
                   </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/gestion/sucursales/caja/acumulado" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/sucursales/caja/acumulado"
+                    className="dropdown-item text-dark"
+                  >
                     Generar Acumulado
                   </a>
                 </li>
@@ -77,19 +86,28 @@ export default class Gerencia extends Component {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/werchow/orden/ordenpago"
+                    className="dropdown-item text-dark"
+                  >
                     Generar Orden
                   </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/gestion/werchow/orden/autorizacionordenes" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/werchow/orden/autorizacionordenes"
+                    className="dropdown-item text-dark"
+                  >
                     Autorizar Orden
                   </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/werchow/orden/estadoordenes"
+                    className="dropdown-item text-dark"
+                  >
                     Listado ordenes
                   </a>
                 </li>
@@ -240,6 +258,15 @@ export default class Gerencia extends Component {
                         Resultados Campañas Activas
                       </a>
                     </li>
+                    <hr />
+                    <li>
+                      <a
+                        href="/campanas/progreso"
+                        className="dropdown-item text-dark"
+                      >
+                        Progreso de Trabajo en Campañas
+                      </a>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -284,7 +311,6 @@ export default class Gerencia extends Component {
                 </li>
               </ul>
             </li>
-
           </ul>
         </li>
         <li className="nav-item dropdown ">
@@ -503,7 +529,10 @@ export default class Gerencia extends Component {
             </li>
             <hr />
             <li>
-              <a href="/prestamos/nuevoprestamoempleados" className="dropdown-item text-dark">
+              <a
+                href="/prestamos/nuevoprestamoempleados"
+                className="dropdown-item text-dark"
+              >
                 Nuevo Sub. Cont. Familiar Empleados
               </a>
             </li>

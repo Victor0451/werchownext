@@ -91,6 +91,15 @@ const Adimn = () => {
                       Resultados Campañas Activas
                     </a>
                   </li>
+                  <hr />
+                  <li>
+                    <a
+                      href="/campanas/progreso"
+                      className="dropdown-item text-dark"
+                    >
+                      Progreso de Trabajo en Campañas
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -267,19 +276,28 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/gestion/sucursales/caja/nueva" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/nueva"
+                  className="dropdown-item text-dark"
+                >
                   Registrar Caja
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/sucursales/caja/listado" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/listado"
+                  className="dropdown-item text-dark"
+                >
                   Listado de Cajas
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/sucursales/caja/acumulado" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/acumulado"
+                  className="dropdown-item text-dark"
+                >
                   Generar Acumulado
                 </a>
               </li>
@@ -297,31 +315,46 @@ const Adimn = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/ordenpago"
+                  className="dropdown-item text-dark"
+                >
                   Generar Orden
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/orden/autorizacionordenes" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/autorizacionordenes"
+                  className="dropdown-item text-dark"
+                >
                   Autorizar Orden
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/estadoordenes"
+                  className="dropdown-item text-dark"
+                >
                   Listado ordenes
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/orden/auditoria" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/auditoria"
+                  className="dropdown-item text-dark"
+                >
                   Auditoria
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/orden/reportes" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/reportes"
+                  className="dropdown-item text-dark"
+                >
                   Reportes
                 </a>
               </li>
@@ -451,7 +484,6 @@ const Adimn = () => {
               </li>
             </ul>
           </li>
-
         </ul>
       </li>
 
@@ -676,7 +708,10 @@ const Adimn = () => {
           </li>
           <hr />
           <li>
-            <a href="/prestamos/nuevoprestamoempleados" className="dropdown-item text-dark">
+            <a
+              href="/prestamos/nuevoprestamoempleados"
+              className="dropdown-item text-dark"
+            >
               Nuevo Sub. Cont. Familiar Empleados
             </a>
           </li>
@@ -1446,10 +1481,7 @@ const Adimn = () => {
 
           <hr />
           <li>
-            <a
-              href="/socios/carnet/emitir"
-              className="dropdown-item text-dark"
-            >
+            <a href="/socios/carnet/emitir" className="dropdown-item text-dark">
               Emitir Carnet
             </a>
           </li>
