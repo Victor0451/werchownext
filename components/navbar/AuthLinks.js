@@ -20,7 +20,7 @@ const AuthLinks = ({ userData, msj, events }) => {
           />
         ) : userData.perfil === 3 ? (
           <Gerencia />
-        ) : userData.perfil === 5 || userData.perfil === 4 ? (
+        ) : userData.perfil === 5 ? (
           <Ventas />
         ) : userData.perfil === 4 ? (
           <Sepelio />

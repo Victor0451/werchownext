@@ -68,13 +68,19 @@ export default class Sepelio extends Component {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/werchow/orden/ordenpago"
+                    className="dropdown-item text-dark"
+                  >
                     Generar Orden
                   </a>
                 </li>
                 <hr />
                 <li>
-                  <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                  <a
+                    href="/gestion/werchow/orden/estadoordenes"
+                    className="dropdown-item text-dark"
+                  >
                     Listado ordenes
                   </a>
                 </li>
@@ -660,6 +666,58 @@ export default class Sepelio extends Component {
                 className="dropdown-item text-dark"
               >
                 Tareas Programadas
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li className="nav-item dropdown ">
+          <a
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            className="nav-link dropdown-toggle"
+          >
+            Ventas
+          </a>
+          <ul className="dropdown-menu">
+            <li className="dropdown-submenu">
+              <a
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                className="  dropdown-toggle dropdown-item text-dark"
+              >
+                Venta de Novells
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    href="/ventas/ventaplan/novell"
+                    className="dropdown-item text-dark"
+                  >
+                    Venta
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a
+                    href="/ventas/ventaplan/listadonovell"
+                    className="dropdown-item text-dark"
+                  >
+                    Listado
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <hr />
+            <li>
+              <a
+                href="/ventas/precioplan/precios"
+                className="dropdown-item text-dark"
+              >
+                Planes Vigentes
               </a>
             </li>
           </ul>
