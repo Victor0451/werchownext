@@ -165,7 +165,7 @@ const ListadoOrdenesSinAutorizar = ({
                                                 (
                                                     <button
                                                         className="btn btn-success btn-sm ml-1"
-                                                        onClick={() => autorizarOrden(row.original.norden)}
+                                                        onClick={() => autorizarOrden(row.original.idorden)}
                                                     >
                                                         <i className="fa fa-check-circle-o" aria-hidden="true"></i>
                                                     </button>
