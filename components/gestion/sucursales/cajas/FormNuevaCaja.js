@@ -74,7 +74,7 @@ const FormNuevaCaja = ({
                 {" "}
                 Elige una Opcion{" "}
               </option>
-              <option value="W">Werchow S.R.L.</option>
+              <option value="WSRL">Werchow S.R.L.</option>
               <option value="WSA">Werchow S.A.</option>
               <option value="M">Mutual San Valentin</option>
             </select>
