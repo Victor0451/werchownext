@@ -327,11 +327,11 @@ export const gastoLuto = (plan, alta, cantadh) => {
 
     if (anti <= 3) {
 
-        return 15000
+        return 22000
 
     } else if (anti > 3) {
 
-        return 20000
+        return 28000
 
     }
 
