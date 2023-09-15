@@ -10,6 +10,7 @@ import ExportarPadron from "../../components/liquidacion/orgamerica/ExportarPadr
 import { ip } from "../../config/config";
 import toastr from "toastr";
 import { registrarHistoria } from "../../utils/funciones";
+import Router from "next/router";
 
 const orgamerica = () => {
   let componentRef = useRef();
@@ -104,10 +105,9 @@ const orgamerica = () => {
         if (res.status === 200) {
           toastr.info("Se registro la liquidacion en el historial", "ATENCION");
 
-          let accion = `Se registro liquidacion ID: ${res.data.idliquidacion} de Org. America del periodo: ${historial.mes}/${historial.ano}.`
+          let accion = `Se registro liquidacion ID: ${res.data.idliquidacion} de Org. America del periodo: ${historial.mes}/${historial.ano}.`;
 
-          registrarHistoria(accion, user.usuario)
-
+          registrarHistoria(accion, user.usuario);
         }
         setTimeout(() => {
           verificarLiquidacion();
@@ -189,7 +189,10 @@ const orgamerica = () => {
                 </div>
               )}
 
-              <div className="print-efect border border-dark p-4 " ref={componentRef}>
+              <div
+                className="print-efect border border-dark p-4 "
+                ref={componentRef}
+              >
                 <h3 className="">
                   <strong>
                     <u>
@@ -201,9 +204,7 @@ const orgamerica = () => {
 
                 <ListadoPagos listado={pagos} totales={totales} />
 
-
                 <hr className="mt-4 mb-4 border border-dark" />
-
 
                 <div className="border border-dark p-4">
                   <h3 className="text-center mb-4 font-weight-bold">
@@ -232,11 +233,9 @@ const orgamerica = () => {
                   </div>
                 </div>
               </div>
-
             </>
           )}
         </div>
-
       )}
     </Layout>
   );

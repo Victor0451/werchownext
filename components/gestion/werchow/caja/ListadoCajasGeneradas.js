@@ -5,108 +5,134 @@ import Spinner from "../../../layout/Spinner";
 import moment from "moment";
 
 const ListadoCajasGeneradas = ({
-    listado,
-    traerMovimientos
+  listado,
+  traerMovimientos,
+  traerListadoControl,
 }) => {
+  if (!listado) return <Spinner />;
 
+  return (
+    <div className="container list border border-dark mt-4 p-4">
+      <h2>
+        <strong>
+          <u>Listado de Cajas Generadas</u>
+        </strong>
+      </h2>
 
-    if (!listado) return <Spinner />;
+      <div className="border border-dark p-1 mt-4">
+        <ReactTable
+          data={listado}
+          filterable
+          defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
+          columns={[
+            {
+              Header: "Cajas",
+              columns: [
+                {
+                  Header: "#",
+                  filterAll: false,
+                  width: 50,
+                  Cell: (row) => <div>{row.index + 1}</div>,
+                },
+                {
+                  Header: "Fecha Caja",
+                  id: "FECHA",
+                  accessor: (d) => moment(d.FECHA).format("DD/MM/YYYY"),
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["FECHA"] }),
+                  filterAll: true,
+                },
+                {
+                  Header: "Ingresos",
+                  id: "Ingresos",
+                  filterAll: true,
 
-    return (
-        <div className="container list border border-dark mt-4 p-4">
+                  Cell: (row) => (
+                    <div>
+                      {row.original.INGRESOS === null ? (
+                        <>0</>
+                      ) : (
+                        <>{row.original.INGRESOS}</>
+                      )}
+                    </div>
+                  ),
+                },
 
-            <h2>
-                <strong>
-                    <u>
-                        Listado de Cajas Generadas
-                    </u>
-                </strong>
-            </h2>
+                {
+                  Header: "Egresos",
+                  id: "Egresos",
+                  filterAll: true,
 
-            <div className="border border-dark p-1 mt-4">
-                <ReactTable
-                    data={listado}
-                    filterable
-                    defaultFilterMethod={(filter, row) => row[filter.id] === filter.value}
-                    columns={[
-                        {
-                            Header: "Cajas",
-                            columns: [
+                  Cell: (row) => (
+                    <div>
+                      {row.original.EGRESOS === null ? (
+                        <>0</>
+                      ) : (
+                        <>{row.original.EGRESOS}</>
+                      )}
+                    </div>
+                  ),
+                },
 
-                                {
-                                    Header: "#",
-                                    filterAll: false,
-                                    width: 50,
-                                    Cell: (row) => <div>{row.index + 1}</div>,
-                                },
-                                {
-                                    Header: "Fecha Caja",
-                                    id: "FECHA",
-                                    accessor: (d) => moment(d.FECHA).format('DD/MM/YYYY'),
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["FECHA"] }),
-                                    filterAll: true,
+                {
+                  Header: "Valores a Depositar",
+                  id: "Valores a Depositar",
+                  filterAll: true,
 
-                                },
-                                {
-                                    Header: "Ingresos",
-                                    id: "INGRESOS",
-                                    accessor: (d) => d.INGRESOS,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["INGRESOS"] }),
-                                    filterAll: true,
-                                },
+                  Cell: (row) => (
+                    <div>
+                      {row.original.VAL_DEPOSIT === null ? (
+                        <>0</>
+                      ) : (
+                        <>{row.original.VAL_DEPOSIT}</>
+                      )}
+                    </div>
+                  ),
+                },
 
-                                {
-                                    Header: "Egresos",
-                                    id: "EGRESOS",
-                                    accessor: (d) => d.EGRESOS,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["EGRESOS"] }),
-                                    filterAll: true,
-                                },
+                {
+                  Header: "OPERADOR",
+                  id: "OPERADOR",
+                  accessor: (d) => d.OPERADOR,
+                  filterMethod: (filter, rows) =>
+                    matchSorter(rows, filter.value, { keys: ["OPERADOR"] }),
+                  filterAll: true,
+                },
 
-                                {
-                                    Header: "Valores a Depositar",
-                                    id: "VAL_DEPOSIT",
-                                    accessor: (d) => d.VAL_DEPOSIT,
-                                    filterMethod: (filter, rows) =>
-                                        matchSorter(rows, filter.value, { keys: ["VAL_DEPOSIT"] }),
-                                    filterAll: true,
-                                },
+                {
+                  Header: "Acciones",
+                  id: "acciones",
+                  filterAll: true,
 
-                                {
-                                    Header: "Acciones",
-                                    id: "acciones",
-                                    filterAll: true,
+                  Cell: (row) => (
+                    <div>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => {
+                          traerMovimientos(row.original.FECHA);
+                          traerListadoControl(
+                            row.original.FECHA,
+                            row.original.OPERADOR
+                          );
+                        }}
+                        data-toggle="modal"
+                        data-target="#modalImprimirCaja"
+                      >
+                        <i className="fa fa-arrow-left" aria-hidden="true"></i>{" "}
+                        Imprimir
+                      </button>
+                    </div>
+                  ),
+                },
+              ],
+            },
+          ]}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+      </div>
+    </div>
+  );
+};
 
-                                    Cell: (row) => (
-                                        <div>
-                                            <button
-                                                className="btn btn-primary btn-sm"
-                                                onClick={() => traerMovimientos(row.original.FECHA)}
-                                                data-toggle="modal"
-                                                data-target="#modalImprimirCaja"
-                                            >
-                                                <i
-                                                    className="fa fa-arrow-left"
-                                                    aria-hidden="true"
-                                                ></i> Imprimir
-                                            </button>
-                                        </div>
-                                    ),
-                                },
-                            ],
-                        },
-
-                    ]}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                />
-            </div>
-        </div>
-    )
-}
-
-export default ListadoCajasGeneradas
-
+export default ListadoCajasGeneradas;
