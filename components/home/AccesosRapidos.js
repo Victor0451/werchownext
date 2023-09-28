@@ -6,17 +6,32 @@ const AccesosRapidos = ({ user }) => {
   return (
     <>
       <div className="container p-4 border border-dark list">
-
         <h2>
-          <u>
-            Accesos Directos
-          </u>
+          <u>Accesos Directos</u>
         </h2>
 
         <div className="row mt-4 border border-dark p-4 d-flex justify-content-center">
-
           <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
-            <div className="card-header">Certificados</div>
+            <div className="card-header">
+              <strong>Servicios Medios: Emision de ordenes y practicas</strong>
+            </div>
+            <div className="card-body">
+              <a
+                className="btn btn-primary btn-block "
+                href="http://190.231.67.172:3002/"
+                target="_blank"
+              >
+                Abrir Sistema
+              </a>
+              <p className="card-text mt-2">
+                Generacion de ordenes de consulta y practicas medicas.
+              </p>
+            </div>
+          </div>
+          <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1  mb-3 ">
+            <div className="card-header">
+              <strong>Certificados</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -29,9 +44,10 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>{" "}
-
-          <div className="card col-md-3 text-dark bg-ligth border border-dark   mb-3 ">
-            <div className="card-header">Reg. Turnos</div>
+          <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1  mb-3 ">
+            <div className="card-header">
+              <strong>Reg. Turnos </strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -40,14 +56,16 @@ const AccesosRapidos = ({ user }) => {
                 Registrar Turnos para Atencion
               </a>
               <p className="card-text mt-2">
-                Este es un acceso rapido a la seccion que te permite recepcionar el pedido de los socios
-                y organizarlo por turnos para su atencion
+                Este es un acceso rapido a la seccion que te permite recepcionar
+                el pedido de los socios y organizarlo por turnos para su
+                atencion
               </p>
             </div>
           </div>{" "}
-
           <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1  mb-3 ">
-            <div className="card-header">Listado de Turnos</div>
+            <div className="card-header">
+              <strong>Listado de Turnos</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -56,13 +74,16 @@ const AccesosRapidos = ({ user }) => {
                 Listado de Turnos Agendados
               </a>
               <p className="card-text mt-2">
-                Este es un acceso rapido a la seccion que te permite visualizar y resgistrar la respuesta de los turnos registrados
+                Este es un acceso rapido a la seccion que te permite visualizar
+                y resgistrar la respuesta de los turnos registrados
               </p>
             </div>
           </div>{" "}
-
           <div className="card col-md-3 text-dark bg-ligth border border-dark ml-1 mb-3 ">
-            <div className="card-header">Ficha Del Socio</div>
+            <div className="card-header">
+              {" "}
+              <strong> Ficha Del Socio</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -76,9 +97,10 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>{" "}
-
           <div className="card col-md-3 text-dark bg-light border border-dark  ml-1 mb-3">
-            <div className="card-header">Subir Archivos</div>
+            <div className="card-header">
+              <strong>Subir Archivos</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -92,9 +114,10 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-
           <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
-            <div className="card-header">Prints</div>
+            <div className="card-header">
+              <strong>Prints</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -108,9 +131,11 @@ const AccesosRapidos = ({ user }) => {
               </p>
             </div>
           </div>
-
           <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
-            <div className="card-header">Tareas Prog. Sucursales</div>
+            <div className="card-header">
+              {" "}
+              <strong> Tareas Prog. Sucursales</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -119,13 +144,15 @@ const AccesosRapidos = ({ user }) => {
                 Tareas de Sucursales
               </a>
               <p className="card-text mt-2">
-                Este es un acceso rapido al calendario de tareas registradas por las distintas sucursales
+                Este es un acceso rapido al calendario de tareas registradas por
+                las distintas sucursales
               </p>
             </div>
           </div>
-
           <div className="card col-md-3 text-dark bg-light border border-dark   mb-3 ml-1">
-            <div className="card-header">Tareas Prog. Sepelio</div>
+            <div className="card-header">
+              <strong>Tareas Prog. Sepelio</strong>
+            </div>
             <div className="card-body">
               <a
                 className="btn btn-primary btn-block "
@@ -134,17 +161,17 @@ const AccesosRapidos = ({ user }) => {
                 Tareas de Sepelio
               </a>
               <p className="card-text mt-2">
-                Este es un acceso rapido al calendario de tareas registradas por el depto de sepelio
+                Este es un acceso rapido al calendario de tareas registradas por
+                el depto de sepelio
               </p>
             </div>
           </div>
-
-
           {user === 4 ? (
             <>
-
               <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1 ">
-                <div className="card-header">Nuevo Servicio</div>
+                <div className="card-header">
+                  <strong>Nuevo Servicio</strong>
+                </div>
                 <div className="card-body">
                   <a
                     className="btn btn-primary btn-block "
@@ -158,9 +185,10 @@ const AccesosRapidos = ({ user }) => {
                   </p>
                 </div>
               </div>{" "}
-
               <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
-                <div className="card-header">Nueva Caja de Sepelio</div>
+                <div className="card-header">
+                  <strong> Nueva Caja de Sepelio</strong>
+                </div>
                 <div className="card-body">
                   <a
                     className="btn btn-primary btn-block "
@@ -173,9 +201,10 @@ const AccesosRapidos = ({ user }) => {
                   </p>
                 </div>
               </div>
-
               <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
-                <div className="card-header">Stock Ataudes</div>
+                <div className="card-header">
+                  <strong>Stock Ataudes</strong>
+                </div>
                 <div className="card-body">
                   <a
                     className="btn btn-primary btn-block "
@@ -187,12 +216,12 @@ const AccesosRapidos = ({ user }) => {
                     Este es un acceso rapido al Stock de ataudes para poder ver
                     y gestinar la exitencia de los mismos.
                   </p>
-
                 </div>
               </div>
-
               <div className="card col-md-3 text-dark bg-ligth border border-dark mb-3 ml-1">
-                <div className="card-header">Simulador</div>
+                <div className="card-header">
+                  <strong>Simulador</strong>
+                </div>
                 <div className="card-body">
                   <a
                     className="btn btn-primary btn-block "
@@ -201,9 +230,9 @@ const AccesosRapidos = ({ user }) => {
                     Simulador Valor Traslado
                   </a>
                   <p className="card-text mt-2">
-                    Este es un acceso rapido al simulador de valores por traslado.
+                    Este es un acceso rapido al simulador de valores por
+                    traslado.
                   </p>
-
                 </div>
               </div>
             </>

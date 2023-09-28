@@ -4,7 +4,6 @@ import { ip } from "../../config/config";
 const Recuperadoras = ({ usuario, perfil, medicos }) => {
   return (
     <ul className="navbar-nav">
-
       <li className="nav-item dropdown ">
         <a
           href="#"
@@ -15,71 +14,18 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
           Gestion
         </a>
         <ul className="dropdown-menu">
-
-          {
-            medicos === 1 ? (
-              <>
-                <li className="dropdown-submenu">
-                  <a
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                    className="  dropdown-toggle dropdown-item text-dark"
-                  >
-                    Servicios
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/emision"
-                        className="dropdown-item text-dark"
-                      >
-                        Emision de Ordenes
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/cajapato"
-                        className="dropdown-item text-dark"
-                      >
-                        Caja
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/gestionturnos"
-                        className="dropdown-item text-dark"
-                      >
-                        Gestion de Turnos Medicos
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/listadoordenes"
-                        className="dropdown-item text-dark"
-                      >
-                        Listado de Ordenes Emitidas
-                      </a>
-                    </li>
-                    <hr />
-                    <li>
-                      <a
-                        href="/gestion/werchow/servicios/seguimientoplan"
-                        className="dropdown-item text-dark"
-                      >
-                        Seguimiento Planes Odontologicos
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <hr />
-              </>
-
-            ) : null
-          }
+          {medicos === 1 ? (
+            <>
+              <a
+                href="http://190.231.67.172:3002/"
+                target="_blank"
+                className="dropdown-item text-dark"
+              >
+                Servicios Medicos
+              </a>
+              <hr />
+            </>
+          ) : null}
 
           <li className="dropdown-submenu">
             <a
@@ -92,13 +38,19 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/gestion/werchow/orden/ordenpago" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/ordenpago"
+                  className="dropdown-item text-dark"
+                >
                   Generar Orden
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/werchow/orden/estadoordenes" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/werchow/orden/estadoordenes"
+                  className="dropdown-item text-dark"
+                >
                   Listado ordenes
                 </a>
               </li>
@@ -116,19 +68,28 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="/gestion/sucursales/caja/nueva" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/nueva"
+                  className="dropdown-item text-dark"
+                >
                   Registrar Caja
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/sucursales/caja/listado" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/listado"
+                  className="dropdown-item text-dark"
+                >
                   Listado de Cajas
                 </a>
               </li>
               <hr />
               <li>
-                <a href="/gestion/sucursales/caja/acumulado" className="dropdown-item text-dark">
+                <a
+                  href="/gestion/sucursales/caja/acumulado"
+                  className="dropdown-item text-dark"
+                >
                   Generar Acumulado
                 </a>
               </li>
@@ -197,7 +158,6 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
               </li>
             </ul>
           </li>
-
         </ul>
       </li>
 
@@ -343,11 +303,9 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
         </ul>
       </li>
 
-
-
       {usuario === "mcarrizo" ||
-        usuario === "sjuarez" ||
-        usuario === "vgorosito" ? (
+      usuario === "sjuarez" ||
+      usuario === "vgorosito" ? (
         <li className="nav-item dropdown ">
           <a
             href="#"
@@ -684,10 +642,7 @@ const Recuperadoras = ({ usuario, perfil, medicos }) => {
 
           <hr />
           <li>
-            <a
-              href="/socios/carnet/emitir"
-              className="dropdown-item text-dark"
-            >
+            <a href="/socios/carnet/emitir" className="dropdown-item text-dark">
               Emitir Carnet
             </a>
           </li>

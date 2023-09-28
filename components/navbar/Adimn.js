@@ -361,80 +361,13 @@ const Adimn = () => {
             </ul>
           </li>
           <hr />
-          <li className="dropdown-submenu">
-            <a
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              className="  dropdown-toggle dropdown-item text-dark"
-            >
-              Servicios
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/emision"
-                  className="dropdown-item text-dark"
-                >
-                  Emision de Ordenes
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/listadoordenes"
-                  className="dropdown-item text-dark"
-                >
-                  Listado de Ordenes Emitidas
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/control"
-                  className="dropdown-item text-dark"
-                >
-                  Listado de Control
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/caja"
-                  className="dropdown-item text-dark"
-                >
-                  Caja Otero
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/listadocajas"
-                  className="dropdown-item text-dark"
-                >
-                  Listado de Cajas Generadas
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/gestionturnos"
-                  className="dropdown-item text-dark"
-                >
-                  Gestion de Turnos Medicos
-                </a>
-              </li>
-              <hr />
-              <li>
-                <a
-                  href="/gestion/werchow/servicios/seguimientoplan"
-                  className="dropdown-item text-dark"
-                >
-                  Seguimiento Planes Odontologicos
-                </a>
-              </li>
-            </ul>
-          </li>
+          <a
+            href="http://190.231.67.172:3002/"
+            target="_blank"
+            className="dropdown-item text-dark"
+          >
+            Servicios Medicos
+          </a>
           <hr />
           <li>
             <a
