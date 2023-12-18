@@ -43,12 +43,12 @@ export default async function sendMail(req, res) {
   const mailData = {
     from: "werchowsgi@gmail.com",
     to: `vmlongo@werchow.com`,
-    // cc: [
-    //   "otero464@gmail.com",
-    //   "grhumanos45@yahoo.com.ar",
-    //   "santiagoiriarte@werchow.com",
-    //   "contadoramoreno@werchow.com",
-    // ],
+    cc: [
+      "otero464@gmail.com",
+      "grhumanos45@yahoo.com.ar",
+      "santiagoiriarte@werchow.com",
+      "contadoramoreno@werchow.com",
+    ],
     subject: `Listado de Prestamos Pendientes. - WERCHOW SGI`,
     html: `
 
