@@ -27,7 +27,7 @@ const FormCodigoNoSocio = ({
                 <h4>
                     <strong>
                         <u>
-                            Generar Descuento en Consulta Medica
+                           Sorteos Agosto/Septiembre
                         </u>
                     </strong>
                 </h4>

@@ -321,7 +321,7 @@ const ficha = () => {
 
             guardarBaja(false)
 
-            traerArchivosM(fichaB.CONTRATO)
+            traerArchivosM(ficha.CONTRATO)
 
             cantAdhM(ficha.CONTRATO)
 
@@ -361,9 +361,7 @@ const ficha = () => {
           let ficha = res.data[0][0];
           console.log(ficha)
 
-          if (!ficha) {
-
-            console.log("dentro")
+          if (!ficha) {            
 
             axios
               .get(`${ip}api/werchow/maestro/titularbajadni/${dni}`)
